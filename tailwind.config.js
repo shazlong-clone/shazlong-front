@@ -8,7 +8,11 @@ module.exports = {
       white: '#fff',
       gray: '#262626',
       balck: '#000',
+      cyan: '#3591a6',
     },
   },
   plugins: [],
+  corePlugins: {
+    preflight: false,
+  },
 };

@@ -2,7 +2,7 @@ import React from 'react';
 import shazlongLogo from '../assets/images/shezlong-logo.svg';
 function NavBar() {
   return (
-    <div className='items-center border-b-[1px] border-gray/10 px-4 py-3 lg:px-20'>
+    <div className='items-center border-b-[1px] border-gray/10 px-4 py-3 lg:px-20 bg-white'>
       <div className='max-w-6xl flex justify-between items-center m-auto'>
         <section>
           <img src={shazlongLogo} alt='logo' className='w-[160px]' />
