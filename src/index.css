@@ -15,6 +15,7 @@
   margin: auto;
   padding: 0px 20px;
   background: transparent;
+  overflow: hidden;
 }
 
 .bg-hero {
@@ -103,11 +104,11 @@
   list-style: none;
   text-align: center;
 }
-.rs-rate-xs .rs-rate-character{
+.rs-rate-xs .rs-rate-character {
   width: 5px;
   font-size: 15px;
 }
 
-.slick-initialized .slick-slide{
-  border: 8px solid rgba(244,244,244);
+.slick-initialized .slick-slide {
+  border: 8px solid rgba(244, 244, 244);
 }

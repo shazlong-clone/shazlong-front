@@ -18,7 +18,7 @@ function Sponsors(props) {
     return (
       <div
         className={clsx(
-          'text-gray/80 text-3xl top-[50%] absolute left-[-30px] translate-y-[-40%] cursor-pointer'
+          'text-gray/80 text-3xl top-[50%] absolute left-[-20px] z-50 translate-y-[-40%] cursor-pointer'
         )}
         onClick={onClick}
       >
