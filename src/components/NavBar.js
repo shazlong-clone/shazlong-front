@@ -8,7 +8,7 @@ function NavBar() {
           <img src={shazlongLogo} alt='logo' className='w-[160px]' />
         </section>
         <section className='hidden md:block'>
-          <ul className='flex gap-5 text-gray/75 cursor-pointer'>
+          <ul className='flex gap-5 text-gray/75 cursor-pointer list-none'>
             <li className='hover:text-green'>Therapists List</li>
             <li className='hover:text-green'>Psychometer</li>
             <li className='hover:text-green'>Blog</li>

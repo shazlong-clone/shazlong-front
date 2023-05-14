@@ -23,7 +23,7 @@ function Diseases() {
   return (
     <div>
       <Header>We Connect You With Licensed Therapists</Header>
-      <p className='text-center text-cyan/90 text-sm my-2'>
+      <p className='text-center text-cyan/90 text-sm'>
         Select the speciality that fits your need.
       </p>
       <section className='flex flex-wrap gap-5'>

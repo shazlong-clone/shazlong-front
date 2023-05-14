@@ -1,8 +1,15 @@
-@import url('./main.css');
+@import url('./assets/css/main.css');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+@import url('./assets/css/slick.min.css');
+:root {
+  --green: #3bb54a;
+  --white: #fff;
+  --gray: #262626;
+  --balck: #000;
+  --cyan: #3591a6;
+}
 .container {
   width: 100%;
   margin: auto;
@@ -42,4 +49,57 @@
   .container {
     max-width: 1250px;
   }
+}
+.slick-dots li button {
+  font-size: 0;
+  line-height: 0;
+  display: block;
+  width: 20px;
+  height: 20px;
+  padding: 0px;
+  cursor: pointer;
+  color: transparent;
+  border: 0;
+  outline: 0;
+  background: 0 0;
+  position: relative;
+}
+.slick-dots li button:before {
+  font-size: 16px;
+  line-height: 16px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: auto;
+  height: auto;
+  content: '•';
+  text-align: center;
+  opacity: 0.25;
+  color: var(--gray);
+  transform: translate(-50%, -50%);
+}
+.slick-dots li button:hover:before,
+.slick-dots li button:focus:before {
+  opacity: 0.5;
+}
+.slick-dots li.slick-active button:before {
+  color: var(--green);
+  opacity: 1;
+}
+
+.slick-dots li {
+  position: relative;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin: 0px 0px;
+  padding: 0;
+  cursor: pointer;
+}
+.slick-dots {
+  bottom: -3rem;
+  width: 100%;
+  margin: 0;
+  list-style: none;
+  text-align: center;
 }
