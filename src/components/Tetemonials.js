@@ -48,7 +48,7 @@ function SampleNextArrow(props) {
   return (
     <div
       className={clsx(
-        'text-green text-3xl top-[50%] absolute right-[-0px] xl:right-[-30px] translate-y-[-40%] cursor-pointer'
+        'text-green text-3xl top-[50%] absolute right-[-30px] translate-y-[-40%] cursor-pointer'
       )}
       onClick={onClick}
     >
@@ -62,7 +62,7 @@ function SamplePrevArrow(props) {
   return (
     <div
       className={clsx(
-        'text-green text-3xl top-[50%] absolute left-[-0px] xl:left-[-30px] translate-y-[-40%] cursor-pointer z-[10000]'
+        'text-green text-3xl top-[50%] absolute left-[-30px] translate-y-[-40%] cursor-pointer z-[10000]'
       )}
       onClick={onClick}
     >

@@ -6,6 +6,8 @@ import Tetemonials from './Tetemonials';
 import Sponsors from './Sponsors';
 import Benfits from './Benfits';
 import OurTherapist from './OurTherapist';
+import Media from './Media';
+import Phone from './Phone';
 function Info(props) {
   return (
     <div className='bg-gray/5 py-16'>
@@ -19,6 +21,10 @@ function Info(props) {
       </div>
       <div>
         <OurTherapist />
+      </div>
+      <div className='container'>
+        <Media />
+        <Phone />
       </div>
     </div>
   );

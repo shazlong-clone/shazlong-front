@@ -18,6 +18,19 @@ function Sponsors(props) {
     return (
       <div
         className={clsx(
+          'text-gray/80 text-3xl top-[50%] absolute left-[-20px] z-50 translate-y-[-40%] cursor-pointer hidden'
+        )}
+        onClick={onClick}
+      >
+        <MdOutlineArrowBackIosNew />
+      </div>
+    );
+  }
+  function SampleNextArrow(props) {
+    const { onClick } = props;
+    return (
+      <div
+        className={clsx(
           'text-gray/80 text-3xl top-[50%] absolute left-[-20px] z-50 translate-y-[-40%] cursor-pointer'
         )}
         onClick={onClick}
@@ -33,7 +46,7 @@ function Sponsors(props) {
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 2000,
-    nextArrow: '',
+    nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
     responsive: [
       {
