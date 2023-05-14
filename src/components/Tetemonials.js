@@ -1,15 +1,48 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Header from './Header';
 import Slider from 'react-slick';
 import clsx from 'clsx';
+import { Rate } from 'rsuite';
+
 import {
   BsFillArrowRightCircleFill,
   BsFillArrowLeftCircleFill,
 } from 'react-icons/bs';
-import { GiPlainCircle } from 'react-icons/gi';
+import {FaQuoteLeft} from 'react-icons/fa'
 
+const data = [
+  {
+    to:'Mohamed Rashad',
+    stars:4.5,
+    time: 'a Day ago',
+    message: " I feel better after every session, the doctor is really helpful and understanding  "
+  },
+  {
+    to:'Saeed Khaled',
+    stars:4.5,
+    time: '2 Days ago',
+    message: "  first session, it was good 🤍   "
+  },
+  {
+    to:'Saeed Khaled',
+    stars:4.5,
+    time: '2 Days ago',
+    message: "  first session, it was good 🤍   "
+  },
+  {
+    to:'Saeed Khaled',
+    stars:4.5,
+    time: '2 Days ago',
+    message: "  first session, it was good 🤍   "
+  },
+  {
+    to:'Saeed Khaled',
+    stars:4.5,
+    time: '2 Days ago',
+    message: "  first session, it was good 🤍   "
+  }
+]
 function SampleNextArrow(props) {
-  const [activeSlider, setActiveSlider] = useState(0);
   const { onClick } = props;
   return (
     <div
@@ -37,39 +70,68 @@ function SamplePrevArrow(props) {
   );
 }
 
-function Tetemonials(props) {
+function Tetemonials() {
   const settings = {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 5,
+    slidesToShow: 1,
     slidesToScroll: 1,
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
+    responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          dots: true,
+          infinite: true,
+          speed: 500,
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          nextArrow: <SampleNextArrow />,
+          prevArrow: <SamplePrevArrow />,
+        }
+      },
+      {
+        breakpoint: 1024,
+        settings: {
+          dots: true,
+          infinite: true,
+          speed: 500,
+          slidesToShow: 3,
+          slidesToScroll: 1,
+          nextArrow: <SampleNextArrow />,
+          prevArrow: <SamplePrevArrow />,
+        }
+      }
+    ]
   };
   return (
     <div>
       <Header>What Our Clients Are Saying</Header>
-      <div className='bg-white rounded-lg p-4'>
+      <div>
         <Slider {...settings}>
-          <div>
-            <h3>1</h3>
-          </div>
-          <div>
-            <h3>2</h3>
-          </div>
-          <div>
-            <h3>3</h3>
-          </div>
-          <div>
-            <h3>4</h3>
-          </div>
-          <div>
-            <h3>5</h3>
-          </div>
-          <div>
-            <h3>6</h3>
-          </div>
+          {
+            data?.map((el,i) => {
+              return <div className='bg-white rounded-lg p-6 shadow-md'>
+                <article className='flex justify-between mb-5'>
+                  <section className='flex gap-3 items-center'>
+                    <div className='text-3xl text-cyan/20 flex justify-center items-center'>
+                      <FaQuoteLeft />
+                    </div>
+                    <div>
+                      <div>To <a className='text-green cursor-pointer' href='/'>{el?.to}</a></div>
+                      <div>
+                        <Rate defaultValue={3.5} size="xs"  readOnly />
+                      </div>
+                    </div>
+                  </section>
+                  <section className='text-gray/60 font-light word-'>aday ago</section>
+                </article>
+                <article>{el?.message}</article>
+              </div>
+            } )
+          }
         </Slider>
       </div>
     </div>

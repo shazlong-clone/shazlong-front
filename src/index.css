@@ -103,3 +103,11 @@
   list-style: none;
   text-align: center;
 }
+.rs-rate-xs .rs-rate-character{
+  width: 5px;
+  font-size: 15px;
+}
+
+.slick-initialized .slick-slide{
+  border: 8px solid rgba(244,244,244);
+}
