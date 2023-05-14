@@ -75,33 +75,24 @@ function Tetemonials() {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 1,
+    slidesToShow: 3,
     slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 2000,
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
     responsive: [
       {
-        breakpoint: 768,
+        breakpoint: 1024,
         settings: {
-          dots: true,
-          infinite: true,
-          speed: 500,
           slidesToShow: 2,
-          slidesToScroll: 1,
-          nextArrow: <SampleNextArrow />,
-          prevArrow: <SamplePrevArrow />,
+
         }
       },
       {
-        breakpoint: 1024,
+        breakpoint: 600,
         settings: {
-          dots: true,
-          infinite: true,
-          speed: 500,
-          slidesToShow: 3,
-          slidesToScroll: 1,
-          nextArrow: <SampleNextArrow />,
-          prevArrow: <SamplePrevArrow />,
+          slidesToShow: 1,
         }
       }
     ]

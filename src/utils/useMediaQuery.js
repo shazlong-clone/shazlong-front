@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 const sizes = {
+  xs: '480px',
   sm: '640px',
   md: '768px',
   lg: '1024px',
