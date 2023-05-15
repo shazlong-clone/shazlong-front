@@ -8,6 +8,7 @@ import Benfits from './Benfits';
 import OurTherapist from './OurTherapist';
 import Media from './Media';
 import Phone from './Phone';
+import I18Next from './I18Next'
 function Info(props) {
   return (
     <div className='bg-gray/5 py-16'>

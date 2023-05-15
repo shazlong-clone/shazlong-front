@@ -1,0 +1,10 @@
+{
+    "part1": "تعلم الترجمة",
+    "interpolation": "عملية الدمج تمت {{counter}}",
+    "x":"طالب",
+    "x_other": "طلاب",
+    "date": "تاريخ اليوم هو  {{date, DATE_HUGE}}",
+    "date_morning": "صباح الخير انه الصباح{{date, DATE_HUGE}} | نتمي للك يوما طيبا",
+    "date_afternoon": "انه وقت الظهيرة {{date, DATE_HUGE}}",
+    "date_evening": "مساء الخير {{date, DATE_HUGE}}"
+}

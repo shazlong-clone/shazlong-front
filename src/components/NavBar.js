@@ -1,6 +1,11 @@
 import React from 'react';
 import shazlongLogo from '../assets/images/shezlong-logo.svg';
+import {lngs}  from '../assets/constants/index';
+import Cookies from 'js-cookie';
+import clsx from 'clsx';
+import { useTranslation } from 'react-i18next';
 function NavBar() {
+  const {t ,i18n } = useTranslation();
   return (
     <div className='items-center border-b-[1px] border-gray/10 px-4 py-3 lg:px-20 bg-white'>
       <div className='max-w-6xl flex justify-between items-center m-auto'>
@@ -15,9 +20,13 @@ function NavBar() {
           </ul>
         </section>
         <section className='flex gap-2 items-center lg:gap-5'>
-          <article className='text-gray/75 cursor-pointer hover:underline'>
-            العربية
-          </article>
+          {
+           Object.keys(lngs)?.map((el) => {
+            return <article onClick={()=> i18n.changeLanguage(el)}  className={clsx('text-gray/75 cursor-pointer w-[10px] hover:underline', Cookies.get('i18next') === el ? 'hidden' :'' )}>
+            {lngs[el]?.nativeName}
+            </article>
+           })
+          }
           <article className='text-green border border-green py-1 px-4 rounded-xl cursor-pointer lg:px-10 lg:py-2'>
             Sign In
           </article>

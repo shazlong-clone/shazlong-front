@@ -1,0 +1,9 @@
+{
+    "part1": "Learn Trans",
+    "interpolation": "InterPolatio zn Done {{counter}}",
+    "key_one": "item",
+    "key_other": "items",
+    "date_morning": "Good morning! Today is {{date, DATE_HUGE}} | Have a nice day!",
+    "date_afternoon": "Good afternoon! It s {{date, DATE_HUGE}}",
+    "date_evening": "Good evening! Today was the {{date, DATE_HUGE}}"
+}
