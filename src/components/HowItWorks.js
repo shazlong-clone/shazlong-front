@@ -27,9 +27,9 @@ function HowItWorks() {
     <div>
       <Header>How It is Works</Header>
       <section className='flex flex-col lg:flex-row gap-y-5 bg-white rounded-lg p-5 flex-wrap justify-center lg:gap-x-12'>
-        {data?.map((el, i, arr) => {
+        {data?.map((el) => {
           return (
-            <article className={clsx('flex gap-x-5 lg:w-[46%]')}>
+            <article key={el?.title} className={clsx('flex gap-x-5 lg:w-[46%]')}>
               <img src={el?.img} alt={el?.title} />
               <div>
                 <h5 className='text-cyan/95 mb-2'>{el?.title}</h5>

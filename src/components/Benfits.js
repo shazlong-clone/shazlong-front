@@ -27,9 +27,9 @@ function Benfits(props) {
       <Header>Our Members Benefit From</Header>
       <div>
         <section className='lg:flex gap-5'>
-          {benfits?.map((el, i) => {
+          {benfits?.map((el) => {
             return (
-              <div className='bg-white my-12 rounded-2xl p-6 shadow-xl lg:flex-[1_1_30%]'>
+              <div key={el?.titile} className='bg-white my-12 rounded-2xl p-6 shadow-xl lg:flex-[1_1_30%]'>
                 <article
                   key={el?.titile}
                   className='flex justify-between relative'

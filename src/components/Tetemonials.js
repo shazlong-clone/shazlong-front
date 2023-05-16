@@ -102,9 +102,9 @@ function Tetemonials() {
       <Header>What Our Clients Are Saying</Header>
       <div className='px-3'>
         <Slider {...settings}>
-          {data?.map((el, i) => {
+          {data?.map((el) => {
             return (
-              <div className='bg-white rounded-lg p-6 shadow-md'>
+              <div key={el?.message} className='bg-white rounded-lg p-6 shadow-md'>
                 <article className='flex justify-between mb-5'>
                   <section className='flex gap-3 items-center'>
                     <div className='text-3xl text-cyan/20 flex justify-center items-center'>

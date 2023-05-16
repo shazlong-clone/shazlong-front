@@ -67,6 +67,7 @@ function Media() {
           {media?.map((el, i) => {
             return (
               <img
+                key={Math.random()}
                 src={el}
                 alt='sponsor'
                 className='h-[100px] lg:h-[150px] object-scale-down grayscale hover:grayscale-0 duration-300'

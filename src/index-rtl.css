@@ -21,9 +21,6 @@
 .bg-hero {
   background-image: url('/public/img/hero-mobile.svg');
 }
-.bg-hero-rtl{
-  background-image: url('/public/img/hero-rtl.svg');
-}
 @media (min-width: 576px) {
   .container {
     max-width: 540px;
@@ -65,7 +62,7 @@
   color: transparent;
   border: 0;
   outline: 0;
-  background: 0 0;
+  background: 100% 0;
   position: relative;
 }
 .slick-dots li button:before {
@@ -73,14 +70,14 @@
   line-height: 16px;
   position: absolute;
   top: 50%;
-  left: 50%;
+  right: 50%;
   width: auto;
   height: auto;
   content: '•';
   text-align: center;
   opacity: 0.25;
   color: var(--gray);
-  transform: translate(-50%, -50%);
+  transform: translate(50%, -50%);
 }
 .slick-dots li button:hover:before,
 .slick-dots li button:focus:before {

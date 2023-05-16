@@ -45,6 +45,7 @@ function App() {
         <div className="Footer">
           <div>{t('date', { date: new Date() })}</div>
         </div>
+        
         <div>{t('date', { date: new Date(), context: getGreetingTime() })}</div>
       </header>
     </div>

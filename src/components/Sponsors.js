@@ -61,9 +61,10 @@ function Sponsors(props) {
     <div className='mt-20'>
       <Header>We have been trusted by</Header>
       <Slider {...settings}>
-        {sponsors?.map((el, i) => {
+        {sponsors?.map((el,i) => {
           return (
             <img
+              key={i}
               src={el}
               alt='sponsor'
               className='h-[100px] lg:h-[150px] object-scale-down'

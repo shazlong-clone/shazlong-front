@@ -1,8 +1,14 @@
+import clsx from 'clsx';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 function Hero() {
+  const {i18n} = useTranslation(); 
+  const currLang = i18n.resolvedLanguage;
+
   return (
-    <div className='py-10 bg-no-repeat bg-right-bottom bg-[length:68%] md:bg-[length:60%] lg:bg-[length:65%] bg-hero'>
+    <div className=
+    {clsx('py-10 bg-no-repeat bg-[length:68%] md:bg-[length:60%] lg:bg-[length:65%]', currLang === 'ar' ? 'bg-hero-rtl bg-left-bottom' : 'bg-hero bg-right-bottom')}>
       <div className='container'>
         <div className='max-w-[400px] lg:max-w-[600px]'>
           <p className='font-light text-sm'>YOU TALK WE HELP</p>

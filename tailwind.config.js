@@ -11,7 +11,7 @@ module.exports = {
       cyan: '#3591a6',
     },
   },
-  plugins: [],
+  plugins: [ require('tailwindcss-rtl')],
   corePlugins: {
     preflight: false,
   },
