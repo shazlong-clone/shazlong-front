@@ -1,8 +1,14 @@
+/* fonts */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Tajawal:wght@200;300;400;500;700;800;900&display=swap');
+/* rsuit */
 @import url('./assets/css/main.css');
+/* taiwind */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+/* slick slider css */
 @import url('./assets/css/slick.min.css');
+/* my css */
 :root {
   --green: #3bb54a;
   --white: #fff;
@@ -10,6 +16,7 @@
   --balck: #000;
   --cyan: #3591a6;
 }
+
 .container {
   width: 100%;
   margin: auto;

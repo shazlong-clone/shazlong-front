@@ -4,18 +4,12 @@ import shazlongLogoAr from '../assets/images/shezlong-logo-ar.svg';
 import {lngs}  from '../assets/constants/index';
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
+import applyRtlCssStyles from '../utils/applyRtlCssStyles';
 function NavBar() {
   const {t ,i18n } = useTranslation();
   const currLang = i18n.resolvedLanguage;
   useEffect(() =>{
-      document.body.dir = lngs[currLang]?.dir;
-      const root =  document.getElementById("root")
-      if (currLang === 'ar'){
-        root.style.fontSize = '16px'
-      }else{
-        root.style.fontSize = '14px'
-      }
-
+    applyRtlCssStyles(currLang)
   },[currLang])
   return (
     <div className='items-center border-b-[1px] border-gray/10 px-4 py-3 lg:px-20 bg-white'>
