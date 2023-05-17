@@ -32,10 +32,10 @@ function NavBar() {
             </article>
            })
           }
-          <article className='text-green border border-green py-1 px-4 rounded-xl cursor-pointer lg:px-10 lg:py-2'>
+          <article className='text-green border border-green py-1 px-4 rounded-xl cursor-pointer  lg:py-2'>
             {t('Sign_In')}
           </article>
-          <article className='text-white bg-green py-1 px-4 rounded-xl cursor-pointer lg:px-10 lg:py-2'>
+          <article className='text-white bg-green py-1 px-4 rounded-xl cursor-pointer  lg:py-2'>
             {t('Sign_Up')}
           </article>
         </section>
