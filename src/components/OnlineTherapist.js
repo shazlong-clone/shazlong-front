@@ -56,7 +56,7 @@ function OnlineTherapist() {
           </p>
         </article>
         <article>
-          <button className='border block rounded-lg border-cyan/90 hover:border-cyan bg-white text-cyan/90 hover:text-cyan transition-all text-sm lg:text-xl px-10 py-2 w-[250px] m-auto'>
+          <button className='border block rounded-lg border-cyan/90 hover:border-cyan bg-white text-cyan/90 hover:text-cyan transition-all text-sm lg:text-md px-10 py-2 w-[250px] m-auto'>
             {t('Learn_More')}
           </button>
         </article>

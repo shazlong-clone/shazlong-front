@@ -8,8 +8,12 @@ import Benfits from './Benfits';
 import OurTherapist from './OurTherapist';
 import Media from './Media';
 import Phone from './Phone';
-import I18Next from './I18Next'
+import Help from './Help';
+import useMediaQuery from '../utils/useMediaQuery';
+import clsx from 'clsx';
 function Info(props) {
+  const lg = useMediaQuery('lg');
+
   return (
     <div className='bg-gray/5 py-16'>
       <div className='container'>
@@ -26,6 +30,9 @@ function Info(props) {
       <div className='container'>
         <Media />
         <Phone />
+      </div>
+      <div className={clsx(!lg && 'container')}>
+        <Help />
       </div>
     </div>
   );
