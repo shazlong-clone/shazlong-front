@@ -1,14 +1,21 @@
 import clsx from 'clsx';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import Button from './Button';
 
 function Hero() {
-  const {t, i18n} = useTranslation(); 
+  const { t, i18n } = useTranslation();
   const currLang = i18n.resolvedLanguage;
 
   return (
-    <div className=
-    {clsx('py-10 bg-no-repeat bg-[length:68%] md:bg-[length:60%] lg:bg-[length:65%]', currLang === 'ar' ? 'bg-hero-rtl bg-left-bottom' : 'bg-hero bg-right-bottom')}>
+    <div
+      className={clsx(
+        'py-10 bg-no-repeat bg-[length:68%] md:bg-[length:60%] lg:bg-[length:65%]',
+        currLang === 'ar'
+          ? 'bg-hero-rtl bg-left-bottom'
+          : 'bg-hero bg-right-bottom'
+      )}
+    >
       <div className='container'>
         <div className='max-w-[400px] lg:max-w-[600px]'>
           <p className='font-light text-sm'>{t('Pre_Hero_Title')}</p>
@@ -20,18 +27,20 @@ function Hero() {
             <span className='font-light'>{t('_Anytime_Anywhere')}</span>
           </h2>
           <p className='text-gray/60 md:text-xl w-[400px]'>
-            {
-              t('Shazlong_Number1')
-            }
+            {t('Shazlong_Number1')}
           </p>
         </div>
         <section className='mt-16 mb-5 flex flex-col gap-4 md:mb-32'>
-          <button className='bg-cyan/90 hover:bg-cyan transition-all text-white py-2 px-10 rounded-lg text-sm lg:text-xl w-[250px] lg:w-[400px]'>
-            {t('Explore_Our_Therapists')}
-          </button>
-          <button className='border rounded-lg border-cyan/90 hover:border-cyan bg-white text-cyan/90 hover:text-cyan transition-all text-sm lg:text-xl px-10 py-2 w-[250px] lg:w-[400px]'>
-            {t('Get_Matched')}
-          </button>
+          <Button>
+            <div className='text-sm lg:text-xl w-[250px] lg:w-[400px] py-2 px-10'>
+              {t('Explore_Our_Therapists')}
+            </div>
+          </Button>
+          <Button type='gohst'>
+            <div className='text-sm lg:text-xl px-10 py-2 w-[250px] lg:w-[400px]'>
+              {t('Get_Matched')}
+            </div>
+          </Button>
         </section>
       </div>
     </div>

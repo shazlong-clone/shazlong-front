@@ -28,8 +28,12 @@ function Phone() {
             our app today
           </p>
           <article className='flex gap-4 my-5'>
-            <img src={GooglePlay} alt='GooglePlay' className='w-[40%]' />
-            <img src={Apple} alt='Apple' className='w-[40%]' />
+            <img
+              src={GooglePlay}
+              alt='GooglePlay'
+              className='w-[40%] md:w-[30%]'
+            />
+            <img src={Apple} alt='Apple' className='w-[40%] md:w-[30%]' />
           </article>
         </section>
       </div>

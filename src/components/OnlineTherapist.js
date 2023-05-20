@@ -4,7 +4,8 @@ import doc2 from '../assets/images/doc2.webp';
 import doc3 from '../assets/images/doc3.jpg';
 import { AvatarGroup, Avatar } from 'rsuite';
 import useMediaQuery from '../utils/useMediaQuery';
-import {useTranslation} from 'react-i18next'
+import { useTranslation } from 'react-i18next';
+import Button from './Button';
 const users = [
   {
     avatar: doc1,
@@ -22,8 +23,8 @@ const users = [
 const max = 3;
 
 function OnlineTherapist() {
-  const {t} = useTranslation();
-  
+  const { t } = useTranslation();
+
   return (
     <div className='bg-white p-5 rounded-3xl xl:p-8'>
       <h1 className='text-gray/90 text-xl md:mb-6 lg:mb-10 lg:text-3xl'>
@@ -52,13 +53,15 @@ function OnlineTherapist() {
         <article>
           <p className='text-gray/60 font-light text-center my-4 lg:text-xl xl:my-8'>
             <span className='inline-block w-3 h-3 bg-green rounded-full mr-5'></span>
-            {t('Online_Therapist', {count: 3} )}
+            {t('Online_Therapist', { count: 3 })}
           </p>
         </article>
         <article>
-          <button className='border block rounded-lg border-cyan/90 hover:border-cyan bg-white text-cyan/90 hover:text-cyan transition-all text-sm lg:text-md px-10 py-2 w-[250px] m-auto'>
-            {t('Learn_More')}
-          </button>
+          <Button type='gohst'>
+            <div className='lg:text-md px-10 py-2 w-[250px] m-auto'>
+              {t('Learn_More')}
+            </div>
+          </Button>
         </article>
       </section>
     </div>

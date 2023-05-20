@@ -31,7 +31,7 @@ function Info(props) {
         <Media />
         <Phone />
       </div>
-      <div className={clsx(!lg && 'container')}>
+      <div className={clsx(!lg && 'container', 'lg:bg-cyan/20')}>
         <Help />
       </div>
     </div>
