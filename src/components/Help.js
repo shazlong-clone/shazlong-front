@@ -13,7 +13,7 @@ function Help() {
   const lg = useMediaQuery('lg');
   return (
     <div className={clsx('p-4 bg-white rounded-lg lg:p-10', lg && 'container')}>
-      <h3 className='lg:text-center text-gray/80 text-[20px] lg:text-[30px] lg:mb-9'>
+      <h3 className='lg:text-center text-gray/80 text-[20px] lg:text-[30px] lg:mb-9  border border-cyan'>
         Still need help?
       </h3>
       <div className='flex'>

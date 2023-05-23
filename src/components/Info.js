@@ -11,6 +11,7 @@ import Phone from './Phone';
 import Help from './Help';
 import useMediaQuery from '../utils/useMediaQuery';
 import clsx from 'clsx';
+import Footer from './Footer';
 function Info(props) {
   const lg = useMediaQuery('lg');
 
@@ -33,6 +34,9 @@ function Info(props) {
       </div>
       <div className={clsx(!lg && 'container', 'lg:bg-cyan/20')}>
         <Help />
+      </div>
+      <div>
+        <Footer />
       </div>
     </div>
   );

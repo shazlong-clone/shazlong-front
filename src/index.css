@@ -28,7 +28,7 @@
 .bg-hero {
   background-image: url('/public/img/hero-mobile.svg');
 }
-.bg-hero-rtl{
+.bg-hero-rtl {
   background-image: url('/public/img/hero-rtl.svg');
 }
 @media (min-width: 576px) {

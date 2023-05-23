@@ -11,11 +11,7 @@ module.exports = {
       cyan: '#3591a6',
     },
   },
-  plugins: [
-    require("tailwindcss/nesting"),
-    require("tailwindcss"),
-    require("autoprefixer"),
-  ],
+  plugins: [],
   corePlugins: {
     preflight: false,
   },
