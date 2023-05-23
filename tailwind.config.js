@@ -11,7 +11,11 @@ module.exports = {
       cyan: '#3591a6',
     },
   },
-  plugins: [ require('tailwindcss-rtl')],
+  plugins: [
+    require("tailwindcss/nesting"),
+    require("tailwindcss"),
+    require("autoprefixer"),
+  ],
   corePlugins: {
     preflight: false,
   },
