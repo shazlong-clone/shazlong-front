@@ -16,7 +16,7 @@ function Help() {
       <h3 className='lg:text-center text-gray/80 text-[20px] lg:text-[30px] lg:mb-9  border border-cyan'>
         Still need help?
       </h3>
-      <div className='flex'>
+      <div className='lg:flex'>
         <section className='lg:flex-[1_1_50%]'>
           <h5 className='text-[13px] font-normal lg:font-bold lg:text-[20px] lg:mb-10'>
             Our customer support team is always here to answer your non-clinical

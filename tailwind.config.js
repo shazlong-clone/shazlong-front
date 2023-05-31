@@ -11,7 +11,9 @@ module.exports = {
       cyan: '#3591a6',
     },
   },
-  plugins: [],
+  plugins: [
+
+  ],
   corePlugins: {
     preflight: false,
   },

@@ -12,11 +12,12 @@ import Help from './Help';
 import useMediaQuery from '../utils/useMediaQuery';
 import clsx from 'clsx';
 import Footer from './Footer';
+import FooterMenu from './FooterMenu';
 function Info(props) {
   const lg = useMediaQuery('lg');
 
   return (
-    <div className='bg-gray/5 py-16'>
+    <div className='bg-gray/5 py-16 pb-16'>
       <div className='container'>
         <OnlineTherapist />
         <Diseases />
@@ -35,8 +36,9 @@ function Info(props) {
       <div className={clsx(!lg && 'container', 'lg:bg-cyan/20')}>
         <Help />
       </div>
-      <div>
+      <div className='relative'>
         <Footer />
+        <FooterMenu />
       </div>
     </div>
   );
