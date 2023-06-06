@@ -2,6 +2,8 @@ import React from 'react';
 import shezlongLogoLight from '../assets/images/shezlong-logo-light.svg';
 import ssl from '../assets/images/secure-ssl.svg';
 import ismho from '../assets/images/ismho-grey.webp';
+import SVLogoFill from '../assets/images/SVLogoFill.svg';
+
 function Footer() {
   return (
     <div className='bg-gray/90 text-white py-16 mt-20 lg:mt-0 md:px-10 md:py-16'>
@@ -51,6 +53,11 @@ function Footer() {
             </div>
           </article>
         </section>
+      </div>
+      <div className='text-center m-7'>
+        © {new Date().getFullYear()} <img className='w-[30px] text-cyan' src={SVLogoFill} alt='d' /> . All Rights Reserved
+        <br />
+        Designed by Saeed Khaled
       </div>
     </div>
   );

@@ -14,11 +14,11 @@ function FooterMenu() {
     { id: 5, title: 'More', icon: <FiMoreHorizontal /> }
   ];
   return (
-    <div className='bg-white fixed w-full bottom-0 right-0 text-gray p-2'>
+    <div className='bg-white fixed w-full bottom-0 right-0 text-gray p-2 cursor-pointer'>
       <article className='flex gap-4 text-center justify-between'>
         {footerMenu?.map((el) => {
           return (
-            <section key={el?.id}>
+            <section key={el?.id} className='pointer hover:text-cyan/90 transition-all text-center'>
               <i className='text-xl'>{el.icon}</i>
               <div className='text-sm'>{el?.title}</div>
             </section>

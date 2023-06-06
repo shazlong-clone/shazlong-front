@@ -15,7 +15,7 @@ function NavBar() {
     <div className='items-center border-b-[1px] border-gray/10 px-4 py-3 lg:px-20 bg-white'>
       <div className='max-w-6xl flex justify-between items-center m-auto'>
         <section>
-          <img src={currLang === 'ar' ? shazlongLogoAr : shazlongLogo} alt='logo' className='w-[160px]' />
+          <img src={currLang === 'ar' ? shazlongLogoAr : shazlongLogo} alt='logo' className='md:w-[160px] w-[100px]' />
         </section>
         <section className='hidden md:block'>
           <ul className='flex gap-5 text-gray/75 cursor-pointer list-none'>
@@ -32,10 +32,10 @@ function NavBar() {
             </article>
            })
           }
-          <article className='text-green border border-green py-1 px-4 rounded-xl cursor-pointer  lg:py-2'>
+          <article className='text-green border border-green py-1 px-4 rounded-xl cursor-pointer  lg:py-2 text-sm lg:text-base'>
             {t('Sign_In')}
           </article>
-          <article className='text-white bg-green py-1 px-4 rounded-xl cursor-pointer  lg:py-2'>
+          <article className='text-white bg-green py-1 px-4 rounded-xl cursor-pointer  lg:py-2 text-sm lg:text-base'>
             {t('Sign_Up')}
           </article>
         </section>

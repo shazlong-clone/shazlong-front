@@ -122,3 +122,7 @@
 .slick-initialized .slick-slide {
   border: 8px solid rgba(244, 244, 244);
 }
+
+img, svg, video, canvas, audio, iframe, embed, object{
+  display: inline;
+}
