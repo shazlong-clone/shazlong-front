@@ -5,7 +5,7 @@ import doc3 from '../assets/images/doc3.jpg';
 import { AvatarGroup, Avatar } from 'rsuite';
 import useMediaQuery from '../utils/useMediaQuery';
 import { useTranslation } from 'react-i18next';
-import Button from './Button';
+import {Button} from 'rsuite';
 const users = [
   {
     avatar: doc1,
@@ -57,11 +57,7 @@ function OnlineTherapist() {
           </p>
         </article>
         <article>
-          <Button type='gohst'>
-            <div className='lg:text-md px-10 py-2 w-[250px] m-auto'>
-              {t('Learn_More')}
-            </div>
-          </Button>
+          <Button appearance='ghost' className='w-[250px]'>{t('Learn_More')}</Button>
         </article>
       </section>
     </div>

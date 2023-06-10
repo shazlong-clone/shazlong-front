@@ -55,9 +55,11 @@ function Footer() {
         </section>
       </div>
       <div className='text-center m-7'>
-        © {new Date().getFullYear()} <img className='w-[30px] text-cyan' src={SVLogoFill} alt='d' /> . All Rights Reserved
+        <a href='https://saeedkhal.github.io/saeed-khaled-portfolio/' className='text-white hover:text-white underline'>
+        Copyright © {new Date().getFullYear()} <img className='w-[30px] text-cyan' src={SVLogoFill} alt='d' /> Saeed Khaled
         <br />
-        Designed by Saeed Khaled
+        
+        </a>
       </div>
     </div>
   );

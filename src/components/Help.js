@@ -4,9 +4,9 @@ import agent2 from '../assets/images/agent2.webp';
 import agent3 from '../assets/images/agent3.webp';
 import agent4 from '../assets/images/agent4.webp';
 import needHelp from '../assets/images/need-help.svg';
-import Button from './Button';
 import clsx from 'clsx';
 import useMediaQuery from '../utils/useMediaQuery';
+import { Button } from 'rsuite';
 
 const agents = [agent1, agent2, agent3, agent4];
 function Help() {
@@ -40,9 +40,7 @@ function Help() {
               })}
             </article>
             <article className='flex justify-center lg:justify-start mt-5'>
-              <Button>
-                <div className='py-2 px-5'>Chat with Support Team</div>
-              </Button>
+              <Button appearance='primary'>Chat with Support Team</Button>
             </article>
           </div>
         </section>

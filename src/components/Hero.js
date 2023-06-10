@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import Button from './Button';
+import { Button } from 'rsuite';
 
 function Hero() {
   const { t, i18n } = useTranslation();
@@ -31,16 +31,8 @@ function Hero() {
           </p>
         </div>
         <section className='mt-16 mb-5 flex flex-col gap-4 md:mb-32'>
-          <Button>
-            <div className='text-sm lg:text-xl w-[250px] lg:w-[400px] py-2 px-10'>
-              {t('Explore_Our_Therapists')}
-            </div>
-          </Button>
-          <Button type='gohst'>
-            <div className='text-sm lg:text-xl px-10 py-2 w-[250px] lg:w-[400px]'>
-              {t('Get_Matched')}
-            </div>
-          </Button>
+          <Button appearance='primary' className='w-[250px] lg:w-[400px]'>{t('Explore_Our_Therapists')}</Button>
+          <Button appearance='ghost' className='w-[250px] lg:w-[400px]'>{t('Explore_Our_Therapists')}</Button>
         </section>
       </div>
     </div>

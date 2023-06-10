@@ -30,7 +30,7 @@ function HowItWorks() {
         {data?.map((el) => {
           return (
             <article key={el?.title} className={clsx('flex gap-x-5 lg:w-[46%]')}>
-              <img src={el?.img} alt={el?.title} />
+              <img src={el?.img} alt={el?.title} className='h-[80px]' />
               <div>
                 <h5 className='text-cyan/95 mb-2'>{el?.title}</h5>
                 <p className='text-gray/80'>{el?.body}</p>

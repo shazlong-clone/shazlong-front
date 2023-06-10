@@ -10,19 +10,15 @@
 @import url('./assets/css/slick.min.css');
 /* my css */
 :root {
-  --green: #3bb54a;
-  --white: #fff;
-  --gray: #262626;
-  --balck: #000;
-  --cyan: #3591a6;
+  --green: theme(colors.green);
+  --gray: theme(colors.gray);
+  --cyan: theme(colors.cyan);
+  --white: theme(colors.white);
+  --black: theme(colors.balck);
 }
 
 .container {
-  width: 100%;
-  margin: auto;
-  padding: 0px 20px;
-  background: transparent;
-  overflow: hidden;
+  @apply m-auto px-5 bg-opacity-0 overflow-hidden
 }
 
 .bg-hero {
@@ -31,36 +27,13 @@
 .bg-hero-rtl {
   background-image: url('/public/img/hero-rtl.svg');
 }
-@media (min-width: 576px) {
-  .container {
-    max-width: 540px;
-  }
-}
-
-@media (min-width: 768px) {
-  .container {
-    max-width: 720px;
-  }
-}
-@media (min-width: 992px) {
-  .container {
-    max-width: 960px;
-  }
-}
 
 @media (min-width: 1200px) {
-  .container {
-    max-width: 1140px;
-  }
   .bg-hero {
     background-image: url('/public/img/hero.svg');
   }
 }
-@media (min-width: 1400px) {
-  .container {
-    max-width: 1250px;
-  }
-}
+
 .slick-dots li button {
   font-size: 0;
   line-height: 0;
