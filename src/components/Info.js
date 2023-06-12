@@ -17,7 +17,7 @@ function Info(props) {
   const lg = useMediaQuery('lg');
 
   return (
-    <div className='bg-gray/5 py-16 pb-16'>
+    <div className='bg-gray/5 pt-16 pb-16 md:pb-0'>
       <div className='container'>
         <OnlineTherapist />
         <Diseases />
