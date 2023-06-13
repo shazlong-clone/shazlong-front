@@ -6,7 +6,7 @@ import SVLogoFill from '../assets/images/SVLogoFill.svg';
 
 function Footer() {
   return (
-    <div className='bg-gray/90 text-white py-10 mt-20 lg:mt-0 md:px-10 md:py-16'>
+    <div className='bg-gray/90 text-white py-10 mt-20 lg:mt-0 md:px-10 md:py-16 py-10'>
       <div className='container'>
         <section className='lg:flex lg:gap-10'>
           <article className='text-center lg:text-start mb-5 lg:mb-0 border-b border-t-0 border-r-0 border-l-0 border-b-white border-solid lg:flex-[1_1_50%] lg:border-b-0 '>
@@ -54,11 +54,10 @@ function Footer() {
           </article>
         </section>
       </div>
-      <div className='text-center m-7'>
+      <div className='text-center'>
         <a href='https://saeedkhal.github.io/saeed-khaled-portfolio/' className='text-white hover:text-white underline'>
         Copyright © {new Date().getFullYear()} <img className='w-[30px] text-cyan' src={SVLogoFill} alt='d' /> Saeed Khaled
         <br />
-        
         </a>
       </div>
     </div>

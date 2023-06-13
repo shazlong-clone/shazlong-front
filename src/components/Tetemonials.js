@@ -62,7 +62,7 @@ function SamplePrevArrow(props) {
   return (
     <div
       className={clsx(
-        'text-green text-3xl top-[50%] absolute left-[-30px] translate-y-[-40%] cursor-pointer z-[10000]'
+        'text-green text-3xl top-[50%] absolute left-[-30px] translate-y-[-40%] cursor-pointer z-[5]'
       )}
       onClick={onClick}
     >
