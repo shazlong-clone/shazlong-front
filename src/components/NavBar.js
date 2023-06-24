@@ -10,7 +10,7 @@ function NavBar() {
   const currLang = i18n.resolvedLanguage;
   useEffect(() =>{
     applyRtlCssStyles(currLang)
-  },[currLang])
+  },[currLang]);
   return (
     <div className='items-center border-b-[1px] border-gray/10 px-4 py-3 lg:px-20 bg-white'>
       <div className='max-w-6xl flex justify-between items-center m-auto'>

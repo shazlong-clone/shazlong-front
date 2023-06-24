@@ -9,6 +9,7 @@
 /* slick slider css */
 @import url('./assets/css/slick.min.css');
 /* my css */
+
 :root {
   --green: theme(colors.green);
   --gray: theme(colors.gray);

@@ -25,6 +25,8 @@ i18n
     backend:{
       loadPath: '/locales/{{lng}}/translation.json',
     }
+
+
     
   });
   i18n.services.formatter.add('DATE_HUGE', (value, lng, options) => {

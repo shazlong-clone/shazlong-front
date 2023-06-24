@@ -1,6 +1,7 @@
 import React from 'react';
 import { CiFaceSmile } from 'react-icons/ci';
 import Header from './Header';
+import { useTranslation } from 'react-i18next';
 const diseases = [
   {
     name: 'Depressed',
@@ -20,9 +21,11 @@ const diseases = [
   },
 ];
 function Diseases() {
+  const { t, i18n } = useTranslation();
+  const currentLang = i18n.resolvedLanguage;
   return (
     <div>
-      <Header>We Connect You With Licensed Therapists</Header>
+      <Header>{t('We_Connect_You_With_Licensed_Therapists')}</Header>
       <p className='text-center text-cyan/90 text-sm'>
         Select the speciality that fits your need.
       </p>

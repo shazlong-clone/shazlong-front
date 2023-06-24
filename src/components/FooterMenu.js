@@ -4,7 +4,7 @@ import { BiVideoPlus } from 'react-icons/bi';
 import { MdSupportAgent } from 'react-icons/md';
 import { RiPsychotherapyLine } from 'react-icons/ri';
 import { FiMoreHorizontal } from 'react-icons/fi';
-import { Button, Drawer } from 'rsuite';
+import { Drawer } from 'rsuite';
 
 function FooterMenu() {
 
@@ -40,7 +40,7 @@ function FooterMenu() {
           <Drawer.Title className='text-center text-2xl text-cyan'>More</Drawer.Title>
         </Drawer.Header>
           <Drawer.Body>
-
+            <div></div>
           </Drawer.Body>
         </Drawer>
     </div>
