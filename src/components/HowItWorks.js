@@ -33,7 +33,7 @@ function HowItWorks() {
               <img src={el?.img} alt={el?.title} className='h-[80px]' />
               <div>
                 <h5 className='text-cyan/95 mb-2'>{el?.title}</h5>
-                <p className='text-gray/80'>{el?.body}</p>
+                <p className='text-gray/80 text-sm lg:text-base'>{el?.body}</p>
               </div>
             </article>
           );

@@ -1,5 +1,5 @@
 {
-    "Sign_Up":"الاشتراك",
+    "Sign_Up":"انشاء حساب",
     "Sign_In":"تسجيل الدخول",
     "Therapists_List":"الاطباء",
     "Psychometer":"مقياس الصحة",
@@ -14,6 +14,6 @@
     "Online_Therapist_Online_Header":"اذا كنت تريد التحدث فنحن هنا",
     "Learn_More":"تعلم المزيد",
     "Online_Therapist":"{{count}} معالج متصل الان يمكنك التواصل معهم",
-    "We_Connect_You_With_Licensed_Therapists":"معنا ستتواصل مع معالجين معتمدين"
-
+    "We_Connect_You_With_Licensed_Therapists":"معنا ستتواصل مع معالجين معتمدين",
+    "Contact":"تواصل"
 }

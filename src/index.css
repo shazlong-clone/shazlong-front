@@ -100,3 +100,7 @@
 img, svg, video, canvas, audio, iframe, embed, object{
   display: inline;
 }
+
+.drawer-body .rs-drawer-body {
+  padding: 0px;
+}

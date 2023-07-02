@@ -1,14 +1,33 @@
 import React from 'react';
-import { HiUserGroup } from 'react-icons/hi';
+import { GrGroup } from 'react-icons/gr';
 import { BiVideoPlus } from 'react-icons/bi';
 import { MdSupportAgent } from 'react-icons/md';
 import { RiPsychotherapyLine } from 'react-icons/ri';
 import { FiMoreHorizontal } from 'react-icons/fi';
+import { AiOutlineHome } from 'react-icons/ai';
+import { BiTestTube } from 'react-icons/bi';
+import { FaBlog } from 'react-icons/fa';
+
 import { Drawer } from 'rsuite';
 
+const menu = [
+  {
+    name: 'Home',
+    icon: <AiOutlineHome />
+  },
+  {
+    name: 'Test',
+    icon: <BiTestTube />
+  },
+  {
+    name: 'Blog',
+    icon: <FaBlog />
+  }
+
+]
 function FooterMenu() {
 
-  const Menu = ({title, icon}) =>{
+  const Menu = ({ title, icon }) => {
     return <section className='pointer hover:text-cyan/90 transition-all text-center'>
       <i className='text-2xl'>{icon}</i>
       <div className='text-[13px]'>{title}</div>
@@ -17,32 +36,46 @@ function FooterMenu() {
   const [open, setOpen] = React.useState(false);
 
   return (
-    <div className=' bg-white md:hidden w-full bottom-0 right-0 fixed text-gray cursor-pointer'>
+    <div className=' bg-white md:hidden w-full bottom-0 right-0 fixed text-gray cursor-pointer z-50'>
       <article className='flex gap-4 text-center justify-between py-3 px-4'>
         <div>
-          <Menu title='Therapists'  icon = {<HiUserGroup />} />
+          <Menu title='Therapists' icon={<GrGroup />} />
         </div>
         <div>
-          <Menu title='Online'  icon = {<BiVideoPlus />} />
+          <Menu title='Online' icon={<BiVideoPlus />} />
         </div>
         <div>
-          <Menu title='My Therapy'  icon = {<RiPsychotherapyLine />} />
+          <Menu title='My Therapy' icon={<RiPsychotherapyLine />} />
         </div>
         <div>
-          <Menu title='Support'  icon = {<MdSupportAgent />} />
+          <Menu title='Support' icon={<MdSupportAgent />} />
         </div>
-        <div onClick={()=> setOpen(true)}>
-          <Menu title='More'  icon = {<FiMoreHorizontal />} />
+        <div onClick={() => setOpen(true)}>
+          <Menu title='More' icon={<FiMoreHorizontal />} />
         </div>
       </article>
-        <Drawer size='full' placement='left' open={open} onClose={() => setOpen(false)}>
+      <Drawer size='full' placement='left' open={open} onClose={() => setOpen(false)} className='bg-gray'>
         <Drawer.Header>
           <Drawer.Title className='text-center text-2xl text-cyan'>More</Drawer.Title>
         </Drawer.Header>
-          <Drawer.Body>
-            <div></div>
-          </Drawer.Body>
-        </Drawer>
+        <Drawer.Body className='p-0'>
+          <div>
+            {menu?.map(el => {
+              return <a href='/' className='text-gray active:underline-none'>
+              <section className='flex items-center gap-3 py-3 px-2'>
+                <i className='text-2xl'>
+                  {el?.icon}
+                </i>
+                <span className='text-xl'>
+                  {el?.name}
+                </span>
+              </section>
+                <hr className='m-0' />
+              </a>
+            })}
+          </div>
+        </Drawer.Body>
+      </Drawer>
     </div>
   );
 }

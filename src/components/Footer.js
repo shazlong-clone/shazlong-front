@@ -62,7 +62,7 @@ function Footer() {
                 </button>
               </section>
                 <div className='mt-5'>
-                    if you have an account
+                    if you have an account {' '}
                     <a href='/' className='text-white hover:text-white underline'>Sign in</a>
                   </div>
             </div>

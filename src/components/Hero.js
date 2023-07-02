@@ -31,8 +31,8 @@ function Hero() {
           </p>
         </div>
         <section className='mt-16 mb-5 flex flex-col gap-4 md:mb-32'>
-          <Button appearance='primary' className='w-[250px] lg:w-[400px]'>{t('Explore_Our_Therapists')}</Button>
-          <Button appearance='ghost' className='w-[250px] lg:w-[400px]'>{t('Explore_Our_Therapists')}</Button>
+          <Button appearance='primary' className='w-[140px] lg:w-[400px]'>{t('Explore_Our_Therapists')}</Button>
+          <Button appearance='ghost' className='w-[140px] lg:w-[400px]'>{t('Contact')}</Button>
         </section>
       </div>
     </div>
