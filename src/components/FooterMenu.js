@@ -9,6 +9,7 @@ import { BiTestTube } from 'react-icons/bi';
 import { FaBlog } from 'react-icons/fa';
 
 import { Drawer } from 'rsuite';
+import { Link } from 'react-router-dom';
 
 const menu = [
   {
@@ -21,16 +22,18 @@ const menu = [
   },
   {
     name: 'Blog',
-    icon: <FaBlog />
+    icon: <FaBlog />,
   }
 
 ]
 function FooterMenu() {
 
-  const Menu = ({ title, icon }) => {
+  const Menu = ({ title, icon,link }) => {
     return <section className='pointer hover:text-cyan/90 transition-all text-center'>
       <i className='text-2xl'>{icon}</i>
-      <div className='text-[13px]'>{title}</div>
+      <Link to={link} className='text-gray'>
+        <div className='text-[13px]'>{title}</div>
+      </Link>
     </section>
   }
   const [open, setOpen] = React.useState(false);
@@ -39,7 +42,7 @@ function FooterMenu() {
     <div className=' bg-white md:hidden w-full bottom-0 right-0 fixed text-gray cursor-pointer z-50'>
       <article className='flex gap-4 text-center justify-between py-3 px-4'>
         <div>
-          <Menu title='Therapists' icon={<GrGroup />} />
+          <Menu title='Therapists' link='/therapists' icon={<GrGroup />} />
         </div>
         <div>
           <Menu title='Online' icon={<BiVideoPlus />} />

@@ -21,8 +21,7 @@ const diseases = [
   },
 ];
 function Diseases() {
-  const { t, i18n } = useTranslation();
-  const currentLang = i18n.resolvedLanguage;
+  const { t } = useTranslation();
   return (
     <div>
       <Header>{t('We_Connect_You_With_Licensed_Therapists')}</Header>

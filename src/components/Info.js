@@ -12,7 +12,6 @@ import Help from './Help';
 import useMediaQuery from '../utils/useMediaQuery';
 import clsx from 'clsx';
 import Footer from './Footer';
-import FooterMenu from './FooterMenu';
 function Info(props) {
   const lg = useMediaQuery('lg');
 
@@ -39,7 +38,6 @@ function Info(props) {
       <div className='relative'>
         <Footer />
       </div>
-        <FooterMenu />
     </div>
   );
 }

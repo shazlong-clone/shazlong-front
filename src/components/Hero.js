@@ -10,7 +10,7 @@ function Hero() {
   return (
     <div
       className={clsx(
-        'py-10 bg-no-repeat bg-[length:68%] md:bg-[length:60%] lg:bg-[length:65%]',
+        'py-5 bg-no-repeat bg-[length:68%] md:bg-[length:60%] lg:bg-[length:65%]',
         currLang === 'ar'
           ? 'bg-hero-rtl bg-left-bottom'
           : 'bg-hero bg-right-bottom'
@@ -31,8 +31,8 @@ function Hero() {
           </p>
         </div>
         <section className='mt-16 mb-5 flex flex-col gap-4 md:mb-32'>
-          <Button appearance='primary' className='w-[140px] lg:w-[400px]'>{t('Explore_Our_Therapists')}</Button>
-          <Button appearance='ghost' className='w-[140px] lg:w-[400px]'>{t('Contact')}</Button>
+          <Button appearance='primary' className='w-[200px] lg:w-[400px]'>{t('Explore_Our_Therapists')}</Button>
+          <Button appearance='ghost' className='w-[200px] lg:w-[400px]'>{t('Contact')}</Button>
         </section>
       </div>
     </div>
