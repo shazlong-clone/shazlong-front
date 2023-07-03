@@ -40,7 +40,7 @@ function FooterMenu() {
 
   return (
     <div className=' bg-white md:hidden w-full bottom-0 right-0 fixed text-gray cursor-pointer z-50'>
-      <article className='flex gap-4 text-center justify-between py-3 px-4'>
+      <article className='flex gap-4 text-center justify-between py-3 px-4 shadow-2xl'>
         <div>
           <Menu title='Therapists' link='/therapists' icon={<GrGroup />} />
         </div>
