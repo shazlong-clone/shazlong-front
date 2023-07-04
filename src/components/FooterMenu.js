@@ -64,7 +64,7 @@ function FooterMenu() {
         <Drawer.Body className='p-0'>
           <div>
             {menu?.map(el => {
-              return <a href='/' className='text-gray active:underline-none'>
+              return <a key={Math.random()} href='/' className='text-gray active:underline-none'>
               <section className='flex items-center gap-3 py-3 px-2'>
                 <i className='text-2xl'>
                   {el?.icon}

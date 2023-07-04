@@ -12,7 +12,7 @@ function NavBar() {
     applyRtlCssStyles(currLang)
   },[currLang]);
   return (
-    <div className='container items-center border-b-[1px] border-gray/10 px-4 py-3 pt-6 bg-white'>
+    <div className='container items-center border-b-[1px] border-gray/10 px-4 py-5 bg-white'>
       <div className='flex justify-between items-center m-auto'>
         <section>
           <img src={currLang === 'ar' ? shazlongLogoAr : shazlongLogo} alt='logo' className='md:w-[160px] w-[100px]' />

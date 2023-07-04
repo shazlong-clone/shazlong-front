@@ -32,7 +32,7 @@ function Help() {
                 return (
                   <img
                     className='w-[50px] lg:w-[75px]'
-                    key={i}
+                    key={Math.random()}
                     src={agent}
                     alt='img'
                   />

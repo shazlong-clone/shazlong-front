@@ -64,7 +64,7 @@ function Sponsors(props) {
         {sponsors?.map((el,i) => {
           return (
             <img
-              key={i}
+              key={Math.random()}
               src={el}
               alt='sponsor'
               className='h-[100px] lg:h-[150px] object-scale-down'
