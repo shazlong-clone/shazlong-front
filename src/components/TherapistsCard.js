@@ -8,7 +8,7 @@ import { GiCash } from 'react-icons/gi';
 function TherapistsCard(props) {
     return (
         <>
-        {Array(5)
+          {Array(5)
         .fill('')
         ?.map((el) => {
           return (
