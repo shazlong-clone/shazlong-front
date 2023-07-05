@@ -1,21 +1,18 @@
 import React from 'react';
-import { Avatar, Badge, Button, Col, Grid, Rate, Row, Stack } from 'rsuite';
+import { Avatar, Badge, Button, Rate } from 'rsuite';
 
 
 import { BsPersonSquare } from 'react-icons/bs';
 import { GiAlarmClock } from 'react-icons/gi';
 import { GiCash } from 'react-icons/gi';
-import useMediaQuery from '../utils/useMediaQuery';
 function TherapistsCard(props) {
     return (
       <>
-      <Grid fluid>
-        <Row>
+        <main className='lg:grid lg:grid-cols-[1fr_1fr] lg:gap-2'>
           {Array(5)
         .fill('')
         ?.map((el) => {
           return (
-            <Col xs={24} lg={12} className='px-0 lg:px-[5px]'>
               <section key={Math.random()} className='bg-white rounded-3xl mt-3 p-6 text-sm lg:mb-5 lg:mt-0'>
                 <div className='flex gap-5'>
                   <Badge color='green'>
@@ -71,11 +68,9 @@ function TherapistsCard(props) {
                   <Button  appearance='primary'>Book Now</Button>
                 </div>
               </section>
-              </Col>
           );
         })}
-        </Row>
-        </Grid>
+        </main>
         </>
     );
 }
