@@ -5,7 +5,7 @@ import { lngs } from '../assets/constants/index';
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import applyRtlCssStyles from '../utils/applyRtlCssStyles';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 function NavBar() {
   const { t, i18n } = useTranslation();
   const currLang = i18n.resolvedLanguage;
@@ -31,14 +31,16 @@ function NavBar() {
     <div className='container items-center border-b-[1px] border-gray/10 px-4 py-5 bg-white'>
       <div className='flex justify-between items-center m-auto'>
         <section>
+          <Link to='/'>
           <img
             src={currLang === 'ar' ? shazlongLogoAr : shazlongLogo}
             alt='logo'
             className='md:w-[160px] w-[100px]'
-          />
+            />
+          </Link>
         </section>
         <section className='hidden md:block'>
-          <ul className='flex gap-5 text-gray/75 cursor-pointer list-none'>
+          <ul className='flex gap-5 text-gray/75 cursor-pointer list-none mb-0 px-0'>
             {
               nav?.map(({to, name}, i) => {
                 return <li key={Math.random()} onClick={() =>setActiveTabe(i)}>

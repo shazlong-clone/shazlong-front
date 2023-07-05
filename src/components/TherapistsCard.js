@@ -1,18 +1,22 @@
 import React from 'react';
-import { Avatar, Badge, Button, Rate, Stack } from 'rsuite';
+import { Avatar, Badge, Button, Col, Grid, Rate, Row, Stack } from 'rsuite';
 
 
 import { BsPersonSquare } from 'react-icons/bs';
 import { GiAlarmClock } from 'react-icons/gi';
 import { GiCash } from 'react-icons/gi';
+import useMediaQuery from '../utils/useMediaQuery';
 function TherapistsCard(props) {
     return (
-        <>
+      <>
+      <Grid fluid>
+        <Row>
           {Array(5)
         .fill('')
         ?.map((el) => {
           return (
-              <section key={Math.random()} className='bg-white rounded-3xl mt-3 p-6 text-sm'>
+            <Col xs={24} lg={12} className='px-0 lg:px-[5px]'>
+              <section key={Math.random()} className='bg-white rounded-3xl mt-3 p-6 text-sm lg:mb-5 lg:mt-0'>
                 <div className='flex gap-5'>
                   <Badge color='green'>
                     <Avatar
@@ -62,13 +66,16 @@ function TherapistsCard(props) {
                   </span>
                   <span>/ 60 mins </span>
                 </div>
-                <Stack justifyContent='space-around' className='mt-5'>
-                  <Button>View Profile</Button>
-                  <Button appearance='primary'>Book Now</Button>
-                </Stack>
+                <div className='mt-5 flex justify-around lg:justify-start lg:gap-3'>
+                  <Button >View Profile</Button>
+                  <Button  appearance='primary'>Book Now</Button>
+                </div>
               </section>
+              </Col>
           );
         })}
+        </Row>
+        </Grid>
         </>
     );
 }
