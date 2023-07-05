@@ -19,7 +19,7 @@
 }
 
 .container {
-  @apply m-auto px-5 bg-opacity-0 overflow-hidden
+  @apply m-auto px-5 bg-opacity-0
 }
 
 .bg-hero {
@@ -104,3 +104,14 @@ img, svg, video, canvas, audio, iframe, embed, object{
 .drawer-body .rs-drawer-body {
   padding: 0px;
 }
+
+
+.slider-custom .rs-tooltip{
+  opacity: 1;
+}
+.slider-custom .rs-tooltip{
+  display: block;
+    top: -30px;
+
+}
+

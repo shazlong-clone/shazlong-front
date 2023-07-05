@@ -8,7 +8,7 @@ import { GiCash } from 'react-icons/gi';
 function TherapistsCard(props) {
     return (
         <>
-                  {Array(5)
+        {Array(5)
         .fill('')
         ?.map((el) => {
           return (
@@ -27,7 +27,7 @@ function TherapistsCard(props) {
                     <div className='flex justify-between text-xs my-1 text-cyan'>
                       <section>Psychiatrist</section>
                       <section>
-                        <BsPersonSquare /> <span>25+</span>{' '}
+                        <BsPersonSquare /> <span>25+</span>
                         <span>Sessions</span>
                       </section>
                     </div>
@@ -55,12 +55,11 @@ function TherapistsCard(props) {
                   <i className='text-xl text-cyan flex items-center'>
                     <GiCash />
                   </i>
-                  <span className='text-cyan font-bold'> EGP 450 </span>{' '}
+                  <span className='text-cyan font-bold'> EGP 450 </span>
                   <span>/ 30 mins </span>
                   <span className='text-cyan font-bold'>
-                    {' '}
-                    EGP 900{' '}
-                  </span>{' '}
+                    EGP 900
+                  </span>
                   <span>/ 60 mins </span>
                 </div>
                 <Stack justifyContent='space-around' className='mt-5'>

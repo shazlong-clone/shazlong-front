@@ -26,7 +26,7 @@ function Hero() {
             </span>
             <span className='font-light'>{t('_Anytime_Anywhere')}</span>
           </h2>
-          <p className='text-gray/60 md:text-xl w-[400px]'>
+          <p className='text-gray/60 md:text-xl'>
             {t('Shazlong_Number1')}
           </p>
         </div>

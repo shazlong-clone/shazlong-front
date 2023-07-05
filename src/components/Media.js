@@ -19,7 +19,7 @@ function Media() {
     return (
       <div
         className={clsx(
-          'text-gray/80 text-4xl top-[50%] absolute right-[-50px] z-50 translate-y-[-40%] cursor-pointer'
+          'text-gray/80 text-4xl top-[50%] absolute right-[-40px] z-50 translate-y-[-40%] cursor-pointer'
         )}
         onClick={onClick}
       >
@@ -32,7 +32,7 @@ function Media() {
     return (
       <div
         className={clsx(
-          'text-gray/80 text-4xl top-[50%] absolute left-[-50px] z-50 translate-y-[-40%] cursor-pointer'
+          'text-gray/80 text-4xl top-[50%] absolute left-[-40px] z-50 translate-y-[-40%] cursor-pointer'
         )}
         onClick={onClick}
       >
