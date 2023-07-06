@@ -9,6 +9,8 @@ import { BiTestTube } from 'react-icons/bi';
 import { FaBlog } from 'react-icons/fa';
 
 import { Drawer } from 'rsuite';
+import Footer from './Footer'
+
 import { NavLink } from 'react-router-dom';
 import clsx from 'clsx';
 
@@ -50,6 +52,10 @@ function FooterMenu() {
     }
   },[open]);
   return (
+    <>
+          <div className='relative'>
+        <Footer />
+      </div>
     <div className=' bg-white md:hidden w-full bottom-0 right-0 fixed text-gray cursor-pointer z-50'>
       <article className='flex gap-4 text-center justify-between py-3 px-4 shadow-2xl'>
         <div>
@@ -101,6 +107,7 @@ function FooterMenu() {
         </Drawer.Body>
       </Drawer>
     </div>
+            </>
   );
 }
 

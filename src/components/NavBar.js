@@ -12,7 +12,7 @@ function NavBar() {
   useEffect(() => {
     applyRtlCssStyles(currLang);
   }, [currLang]);
-  const [activeTabe, setActiveTabe]= useState(0);
+
   const nav = [
     {
       name: t('Therapists_List'),
@@ -43,10 +43,10 @@ function NavBar() {
           <ul className='flex gap-5 text-gray/75 cursor-pointer list-none mb-0 px-0'>
             {
               nav?.map(({to, name}, i) => {
-                return <li key={Math.random()} onClick={() =>setActiveTabe(i)}>
+                return <li key={Math.random()}>
                 <NavLink
                   to={to}
-                  className={clsx('hover:text-green hover:no-underline', activeTabe === i  ?  'text-green' : 'text-gray')}
+                  className='hover:text-green hover:no-underline focus:no-underline active:text-green focus:text-green  text-gray'
                 >
                   {name}
                 </NavLink>

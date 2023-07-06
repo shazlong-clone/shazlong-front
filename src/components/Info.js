@@ -9,11 +9,8 @@ import OurTherapist from './OurTherapist';
 import Media from './Media';
 import Phone from './Phone';
 import Help from './Help';
-import useMediaQuery from '../utils/useMediaQuery';
-import clsx from 'clsx';
-import Footer from './Footer';
+
 function Info(props) {
-  const lg = useMediaQuery('lg');
 
   return (
     <div className='bg-gray/5 pt-16 md:pb-0'>
@@ -32,12 +29,10 @@ function Info(props) {
         <Media />
         <Phone />
       </div>
-      <div className={clsx(!lg && 'container', 'lg:bg-cyan/20')}>
+      <div className= 'container lg:max-w-full lg:px-0  lg:py-0 py-10'>
         <Help />
       </div>
-      <div className='relative'>
-        <Footer />
-      </div>
+
     </div>
   );
 }

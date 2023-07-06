@@ -11,7 +11,7 @@ import { filterMenu } from '../costansts/index';
 function Therapists() {
   return (
     <main className='bg-cyan/5'>
-      <div className='container py-4 min-h-[calc(100vh-74px)]'>
+      <div className='container py-4 min-h-[100vh]'>
         <section className='flex justify-between items-center lg:mb-10 mt-5'>
           <h3>
             <Link to='/' className='flex items-center text-gray'>

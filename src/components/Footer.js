@@ -6,9 +6,9 @@ import SVLogoFill from '../assets/images/SVLogoFill.svg';
 
 function Footer() {
   return (
-    <div className='bg-gray/90 text-white py-10 mt-20 lg:mt-0 md:px-10 md:py-16'>
+    <div className='bg-gray/90 text-white py-10  md:px-10 md:py-16'>
       <div className='container'>
-        <section className='lg:flex lg:gap-10'>
+        <section className='lg:grid grid-cols-[8fr_1px_10fr] lg:gap-16'>
           <article className='
             text-center lg:text-start mb-5
             lg:mb-0 border-b border-t-0 border-r-0 
