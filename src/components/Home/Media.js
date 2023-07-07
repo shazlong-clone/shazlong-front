@@ -1,5 +1,5 @@
 import React from 'react';
-import Header from '../SharedComponents/Header';
+import Header from '../Shared/Header';
 import media1 from '../../assets/images/media1.webp';
 import media2 from '../../assets/images/media2.webp';
 import media3 from '../../assets/images/media3.webp';

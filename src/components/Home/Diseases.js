@@ -1,6 +1,6 @@
 import React from 'react';
 import { CiFaceSmile } from 'react-icons/ci';
-import Header from '../SharedComponents/Header';
+import Header from '../Shared/Header';
 import { useTranslation } from 'react-i18next';
 const diseases = [
   {

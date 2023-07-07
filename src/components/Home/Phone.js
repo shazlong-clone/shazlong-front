@@ -1,5 +1,5 @@
 import React from 'react';
-import Header from '../SharedComponents/Header';
+import Header from '../Shared/Header';
 import DawnloadApp from '../../assets/images/download-app-new.webp';
 import GooglePlay from '../../assets/images/google-play.svg';
 import Apple from '../../assets/images/app-store.svg';

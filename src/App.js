@@ -1,13 +1,13 @@
 import { Routes, Route } from 'react-router-dom';
-import NavBar from './components/SharedComponents/NavBar';
-import FooterMenu from './components/SharedComponents/FooterMenu';
+import NavBar from './components/Shared/NavBar';
+import FooterMenu from './components/Shared/FooterMenu';
 import { Suspense, lazy } from 'react';
 import { Loader } from 'rsuite';
-import ErrorBoundary from './components/SharedComponents/ErrorBoundary';
+import ErrorBoundary from './components/Shared/ErrorBoundary';
 const Home = lazy(() => import('./pages/Home'));
 const ThearpistProfile = lazy(() => import('./pages/ThearpistProfile'));
 const Therapists = lazy(() => import('./pages/Therapists'));
-const Test = lazy(() => import('./components/SharedComponents/Test'));
+const Test = lazy(() => import('./components/Shared/Test'));
 
 const Loading = () => {
   return <Loader size='lg' backdrop content='loading...' vertical />;

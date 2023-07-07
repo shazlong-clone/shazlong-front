@@ -1,5 +1,5 @@
 import React from 'react';
-import Header from '../SharedComponents/Header';
+import Header from '../Shared/Header';
 import sponsor1 from '../../assets/images/sponsor1.webp';
 import sponsor2 from '../../assets/images/sponsor2.webp';
 import sponsor3 from '../../assets/images/sponsor3.webp';

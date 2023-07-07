@@ -1,5 +1,5 @@
 import React from 'react';
-import Header from '../SharedComponents/Header';
+import Header from '../Shared/Header';
 import benfit1 from '../../assets/images/benfit1.png';
 import benfit2 from '../../assets/images/benfit2.png';
 import benfit3 from '../../assets/images/benfit3.png';

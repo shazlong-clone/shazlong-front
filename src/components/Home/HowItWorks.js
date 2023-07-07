@@ -1,5 +1,5 @@
 import React from 'react';
-import Header from '../SharedComponents/Header';
+import Header from '../Shared/Header';
 import HIW1 from '../../assets/images/how-it-works-1.png';
 import HIW2 from '../../assets/images/how-it-works-2.png';
 import HIW3 from '../../assets/images/how-it-works-3.png';

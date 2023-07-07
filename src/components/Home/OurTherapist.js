@@ -1,5 +1,5 @@
 import React from 'react';
-import Header from '../SharedComponents/Header';
+import Header from '../Shared/Header';
 import therapist from '../../assets/images/therapist.png';
 function OurTherapist(props) {
   return (
