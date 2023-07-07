@@ -17,7 +17,7 @@ function Phone() {
         <img
           src={DawnloadApp}
           alt='dawnload-app'
-          className='w-full lg:w-[50%] md:w-[70%] m-auto block lg:h-[300px]'
+          className='w-full lg:w-[50%] md:w-[70%] m-auto block lg:h-[376px]'
         />
         <section>
           <h2 className='hidden lg:block lg:text-cyan/90'>
