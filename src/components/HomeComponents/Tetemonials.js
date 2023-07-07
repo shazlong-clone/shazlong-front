@@ -1,5 +1,5 @@
 import React from 'react';
-import Header from './Header';
+import Header from '../SharedComponents/Header';
 import Slider from 'react-slick';
 import clsx from 'clsx';
 import { Rate } from 'rsuite';

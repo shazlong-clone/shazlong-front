@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import shazlongLogo from '../assets/images/shezlong-logo.svg';
-import shazlongLogoAr from '../assets/images/shezlong-logo-ar.svg';
-import { lngs } from '../assets/constants/index';
+import React, { useEffect } from 'react';
+import shazlongLogo from '../../assets/images/shezlong-logo.svg';
+import shazlongLogoAr from '../../assets/images/shezlong-logo-ar.svg';
+import { lngs } from '../../assets/constants/index';
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
-import applyRtlCssStyles from '../utils/applyRtlCssStyles';
+import applyRtlCssStyles from '../../utils/applyRtlCssStyles';
 import { Link, NavLink } from 'react-router-dom';
 function NavBar() {
   const { t, i18n } = useTranslation();

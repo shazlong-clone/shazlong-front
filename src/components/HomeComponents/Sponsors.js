@@ -1,10 +1,10 @@
 import React from 'react';
-import Header from './Header';
-import sponsor1 from '../assets/images/sponsor1.webp';
-import sponsor2 from '../assets/images/sponsor2.webp';
-import sponsor3 from '../assets/images/sponsor3.webp';
-import sponsor4 from '../assets/images/sponsor4.webp';
-import sponsor5 from '../assets/images/sponsor5.webp';
+import Header from '../SharedComponents/Header';
+import sponsor1 from '../../assets/images/sponsor1.webp';
+import sponsor2 from '../../assets/images/sponsor2.webp';
+import sponsor3 from '../../assets/images/sponsor3.webp';
+import sponsor4 from '../../assets/images/sponsor4.webp';
+import sponsor5 from '../../assets/images/sponsor5.webp';
 import { MdOutlineArrowBackIosNew } from 'react-icons/md';
 import clsx from 'clsx';
 import Slider from 'react-slick';

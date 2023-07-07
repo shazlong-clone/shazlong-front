@@ -5,24 +5,27 @@ import { Avatar, Badge, Button, Rate } from 'rsuite';
 import { BsPersonSquare } from 'react-icons/bs';
 import { GiAlarmClock } from 'react-icons/gi';
 import { GiCash } from 'react-icons/gi';
+import { Link } from 'react-router-dom';
 function TherapistsCard(props) {
     return (
       <>
         <main className='lg:grid lg:grid-cols-[1fr_1fr] lg:gap-2'>
           {Array(5)
-        .fill('')
+        .fill({id:1})
         ?.map((el) => {
           return (
               <section key={Math.random()} className='bg-white rounded-3xl mt-3 p-6 text-sm lg:mb-5 lg:mt-0'>
                 <div className='flex gap-5'>
-                  <Badge color='green'>
+                  <Link to={`/thearpist-profile/${el?.id}`}>
+                    <Badge color='green'>
                     <Avatar
                       size='lg'
                       circle={true}
                       src='https://scontent.shezlong.com/therapist_profile_pictures/47164-f77d757bedb7b0f4ae9ecc5da5069600.webp'
                       alt='@superman66'
-                    />
-                  </Badge>
+                      />
+                    </Badge>
+                  </Link>
                   <article className='grow'>
                     <p>Mohamed Abdelwareth</p>
                     <div className='flex justify-between text-xs my-1 text-cyan'>

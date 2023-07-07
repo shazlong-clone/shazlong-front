@@ -1,9 +1,9 @@
 import React from 'react';
-import agent1 from '../assets/images/agent1.webp';
-import agent2 from '../assets/images/agent2.webp';
-import agent3 from '../assets/images/agent3.webp';
-import agent4 from '../assets/images/agent4.webp';
-import needHelp from '../assets/images/need-help.svg';
+import agent1 from '../../assets/images/agent1.webp';
+import agent2 from '../../assets/images/agent2.webp';
+import agent3 from '../../assets/images/agent3.webp';
+import agent4 from '../../assets/images/agent4.webp';
+import needHelp from '../../assets/images/need-help.svg';
 import clsx from 'clsx';
 import { Button } from 'rsuite';
 

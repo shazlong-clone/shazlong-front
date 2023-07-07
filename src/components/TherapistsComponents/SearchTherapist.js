@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Button, Divider, Drawer } from 'rsuite';
 import { MdFilterList } from 'react-icons/md';
 import { TbArrowsSort } from 'react-icons/tb';
-import {filterMenu} from '../costansts/index'
+import {filterMenu} from '../../costansts/index'
 import FilterForm from './FilterForm';
 function SearchTherapist(props) {
   const [open, setOpen] = useState(false);

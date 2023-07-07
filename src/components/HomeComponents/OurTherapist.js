@@ -1,6 +1,6 @@
 import React from 'react';
-import Header from './Header';
-import therapist from '../assets/images/therapist.png';
+import Header from '../SharedComponents/Header';
+import therapist from '../../assets/images/therapist.png';
 function OurTherapist(props) {
   return (
     <div>

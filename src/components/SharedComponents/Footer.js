@@ -1,8 +1,8 @@
 import React from 'react';
-import shezlongLogoLight from '../assets/images/shezlong-logo-light.svg';
-import ssl from '../assets/images/secure-ssl.svg';
-import ismho from '../assets/images/ismho-grey.webp';
-import SVLogoFill from '../assets/images/SVLogoFill.svg';
+import shezlongLogoLight from '../../assets/images/shezlong-logo-light.svg';
+import ssl from '../../assets/images/secure-ssl.svg';
+import ismho from '../../assets/images/ismho-grey.webp';
+import SVLogoFill from '../../assets/images/SVLogoFill.svg';
 
 function Footer() {
   return (

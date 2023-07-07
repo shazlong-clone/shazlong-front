@@ -1,8 +1,8 @@
 import React from 'react';
-import Header from './Header';
-import DawnloadApp from '../assets/images/download-app-new.webp';
-import GooglePlay from '../assets/images/google-play.svg';
-import Apple from '../assets/images/app-store.svg';
+import Header from '../SharedComponents/Header';
+import DawnloadApp from '../../assets/images/download-app-new.webp';
+import GooglePlay from '../../assets/images/google-play.svg';
+import Apple from '../../assets/images/app-store.svg';
 function Phone() {
   return (
     <div>

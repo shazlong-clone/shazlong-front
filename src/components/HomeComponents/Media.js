@@ -1,11 +1,11 @@
 import React from 'react';
-import Header from './Header';
-import media1 from '../assets/images/media1.webp';
-import media2 from '../assets/images/media2.webp';
-import media3 from '../assets/images/media3.webp';
-import media4 from '../assets/images/media4.webp';
-import media5 from '../assets/images/media5.webp';
-import media6 from '../assets/images/media6.webp';
+import Header from '../SharedComponents/Header';
+import media1 from '../../assets/images/media1.webp';
+import media2 from '../../assets/images/media2.webp';
+import media3 from '../../assets/images/media3.webp';
+import media4 from '../../assets/images/media4.webp';
+import media5 from '../../assets/images/media5.webp';
+import media6 from '../../assets/images/media6.webp';
 import clsx from 'clsx';
 import {
   MdOutlineKeyboardArrowLeft,

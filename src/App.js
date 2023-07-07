@@ -1,12 +1,13 @@
 import { Routes, Route } from 'react-router-dom';
-import NavBar from './components/NavBar';
-import FooterMenu from './components/FooterMenu';
+import NavBar from './components/SharedComponents/NavBar';
+import FooterMenu from './components/SharedComponents/FooterMenu';
 import { Suspense, lazy } from 'react';
 import { Loader } from 'rsuite';
-import ErrorBoundary from './components/ErrorBoundary';
+import ErrorBoundary from './components/SharedComponents/ErrorBoundary';
 const Home = lazy(() => import('./pages/Home'));
+const ThearpistProfile = lazy(() => import('./pages/ThearpistProfile'));
 const Therapists = lazy(() => import('./pages/Therapists'));
-const Test = lazy(() => import('./components/Test'));
+const Test = lazy(() => import('./components/SharedComponents/Test'));
 
 const Loading = () => {
   return <Loader size='lg' backdrop content='loading...' vertical />;
@@ -20,6 +21,7 @@ function App() {
           <Routes>
             <Route exact path='/' element={<Home />} />
             <Route exact path='/therapists' element={<Therapists />} />
+            <Route exact path='/thearpist-profile/:id' element={<ThearpistProfile />} />
             <Route exact path='/test' element={<Test />} />
           </Routes>
           <ErrorBoundary>

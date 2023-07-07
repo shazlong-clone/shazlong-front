@@ -1,9 +1,9 @@
 import React from 'react';
-import doc1 from '../assets/images/doc1.webp';
-import doc2 from '../assets/images/doc2.webp';
-import doc3 from '../assets/images/doc3.jpg';
+import doc1 from '../../assets/images/doc1.webp';
+import doc2 from '../../assets/images/doc2.webp';
+import doc3 from '../../assets/images/doc3.jpg';
 import { AvatarGroup, Avatar } from 'rsuite';
-import useMediaQuery from '../utils/useMediaQuery';
+import useMediaQuery from '../../utils/useMediaQuery';
 import { useTranslation } from 'react-i18next';
 import {Button} from 'rsuite';
 const users = [

@@ -102,8 +102,8 @@ function FooterMenu() {
                     className='text-gray active:underline-none'
                   >
                     <section className='flex items-center gap-3 py-3 px-2'>
-                      <i className='text-2xl'>{el?.icon}</i>
-                      <span className='text-xl'>{el?.name}</span>
+                      <i className='text-2xl flex items-center'>{el?.icon}</i>
+                      <span className='text-xl font-extralight'>{el?.name}</span>
                     </section>
                     <hr className='m-0' />
                   </a>

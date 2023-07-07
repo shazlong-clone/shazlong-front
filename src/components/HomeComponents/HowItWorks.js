@@ -1,8 +1,8 @@
 import React from 'react';
-import Header from './Header';
-import HIW1 from '../assets/images/how-it-works-1.png';
-import HIW2 from '../assets/images/how-it-works-2.png';
-import HIW3 from '../assets/images/how-it-works-3.png';
+import Header from '../SharedComponents/Header';
+import HIW1 from '../../assets/images/how-it-works-1.png';
+import HIW2 from '../../assets/images/how-it-works-2.png';
+import HIW3 from '../../assets/images/how-it-works-3.png';
 import clsx from 'clsx';
 
 function HowItWorks() {

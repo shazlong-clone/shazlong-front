@@ -3,9 +3,9 @@ import { BsArrowLeftCircle } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 import { Input, InputGroup, InputPicker } from 'rsuite';
 import SearchIcon from '@rsuite/icons/Search';
-import SearchTherapist from '../components/SearchTherapist';
-import TherapistsCard from '../components/TherapistsCard';
-import FilterForm from '../components/FilterForm';
+import SearchTherapist from '../components/TherapistsComponents/SearchTherapist';
+import TherapistsCard from '../components/TherapistsComponents/TherapistsCard';
+import FilterForm from '../components/TherapistsComponents/FilterForm';
 import { filterMenu } from '../costansts/index';
 
 function Therapists() {
