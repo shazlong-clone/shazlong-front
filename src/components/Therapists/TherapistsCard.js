@@ -1,11 +1,12 @@
 import React from 'react';
 import { Avatar, Badge, Button, Rate } from 'rsuite';
 
-
 import { BsPersonSquare } from 'react-icons/bs';
 import { GiAlarmClock } from 'react-icons/gi';
 import { GiCash } from 'react-icons/gi';
 import { Link } from 'react-router-dom';
+import therapist from '../../assets/images/therapist.webp';
+
 function TherapistsCard(props) {
     return (
       <>
@@ -21,7 +22,7 @@ function TherapistsCard(props) {
                     <Avatar
                       size='lg'
                       circle={true}
-                      src='https://scontent.shezlong.com/therapist_profile_pictures/47164-f77d757bedb7b0f4ae9ecc5da5069600.webp'
+                      src={therapist}
                       alt='@superman66'
                       />
                     </Badge>

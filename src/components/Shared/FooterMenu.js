@@ -51,6 +51,7 @@ function FooterMenu() {
     if (!open && activeTabe === 4) {
       setActiveTabe(null);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open]);
   return (
     <>

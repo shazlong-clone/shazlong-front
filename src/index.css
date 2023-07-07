@@ -111,6 +111,6 @@ img, svg, video, canvas, audio, iframe, embed, object{
 }
 .slider-custom .rs-tooltip{
   display: block;
-    top: -30px;
-
+  top: -30px;
 }
+

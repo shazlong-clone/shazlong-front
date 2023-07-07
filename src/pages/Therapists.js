@@ -1,26 +1,19 @@
 import React from 'react';
-import { BsArrowLeftCircle } from 'react-icons/bs';
-import { Link } from 'react-router-dom';
 import { Input, InputGroup, InputPicker } from 'rsuite';
 import SearchIcon from '@rsuite/icons/Search';
-import SearchTherapist from '../components/TherapistsComponents/SearchTherapist';
-import TherapistsCard from '../components/TherapistsComponents/TherapistsCard';
-import FilterForm from '../components/TherapistsComponents/FilterForm';
+import SearchTherapist from '../components/Therapists/SearchTherapist';
+import TherapistsCard from '../components/Therapists/TherapistsCard';
+import FilterForm from '../components/Therapists/FilterForm';
 import { filterMenu } from '../costansts/index';
+import InternalHeader from '../components/Shared/InternalHeader';
 
 function Therapists() {
   return (
     <main className='bg-cyan/5'>
       <div className='container py-4 min-h-[100vh]'>
-        <section className='flex justify-between items-center lg:mb-10 mt-5'>
-          <h3>
-            <Link to='/' className='flex items-center text-gray'>
-              <BsArrowLeftCircle />
-            </Link>
-          </h3>
-          <h3>Therapist List</h3>
-          <h3>&nbsp; &nbsp;</h3>
-        </section>
+        <InternalHeader to='/'>
+          Therapist List
+        </InternalHeader>
         <section className='mt-3'>
           <div className='grid grid-cols-1 lg:grid-cols-[2.1fr_1fr] gap-2'>
             <section>
