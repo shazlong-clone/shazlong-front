@@ -24,9 +24,7 @@ function App() {
             <Route exact path='/thearpist-profile/:id' element={<ThearpistProfile />} />
             <Route exact path='/test' element={<Test />} />
           </Routes>
-          <ErrorBoundary>
             <FooterMenu />
-          </ErrorBoundary>
         </div>
       </ErrorBoundary>
     </Suspense>

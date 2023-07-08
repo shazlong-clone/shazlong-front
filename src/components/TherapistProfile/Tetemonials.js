@@ -9,26 +9,14 @@ import {
   BsFillArrowLeftCircleFill,
 } from 'react-icons/bs';
 import { FaQuoteLeft } from 'react-icons/fa';
+import Card from '../Shared/Card';
 
 const data = [
   {
     to: 'Mohamed Rashad',
     stars: 4.5,
     time: 'a Day ago',
-    message:
-      ' I feel better after every session, the doctor is really helpful and understanding  ',
-  },
-  {
-    to: 'Saeed Khaled',
-    stars: 4.5,
-    time: '2 Days ago',
-    message: '  first session, it was good 🤍   ',
-  },
-  {
-    to: 'Saeed Khaled',
-    stars: 4.5,
-    time: '2 Days ago',
-    message: '  first session, it was good 🤍   ',
+    message: '  Thanks Dr. Basmaaaaaa 🥰  ',
   },
   {
     to: 'Saeed Khaled',
@@ -76,62 +64,38 @@ function Tetemonials() {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 3,
+    slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 2000,
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 2,
-        },
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 1,
-        },
-      },
-    ],
   };
   return (
-    <div className='home-testimonial'>
-      <Header>What Our Clients Are Saying</Header>
-      <div className='px-3'>
+    <div className='therapist-profile'>
+      <Card className='pb-12 mb-5'>
+        <section className='text-3xl text-cyan/20'>
+          <FaQuoteLeft />
+        </section>
         <Slider {...settings}>
           {data?.map((el) => {
             return (
-              <div key={el?.message} className='bg-white rounded-lg p-6 shadow-md'>
-                <article className='flex justify-between mb-5'>
-                  <section className='flex gap-3 items-center'>
-                    <div className='text-3xl text-cyan/20 flex justify-center items-center'>
-                      <FaQuoteLeft />
-                    </div>
-                    <div>
-                      <div>
-                        To{' '}
-                        <a className='text-green cursor-pointer' href='/'>
-                          {el?.to}
-                        </a>
-                      </div>
-                      <div>
-                        <Rate defaultValue={3.5} size='xs' readOnly />
-                      </div>
-                    </div>
-                  </section>
-                  <section className='text-gray/60 font-light word-'>
+              <div key={el?.message}>
+                <section>{el?.message}</section>
+                <section className='flex justify-between items-center mt-5'>
+                  <article>
+                    <span>sae...</span>{' '}
+                    <Rate size='xs' defaultValue={3} readOnly />
+                  </article>
+                  <article className='text-gray/60 font-light'>
                     aday ago
-                  </section>
-                </article>
-                <article>{el?.message}</article>
+                  </article>
+                </section>
               </div>
             );
           })}
         </Slider>
-      </div>
+      </Card>
     </div>
   );
 }

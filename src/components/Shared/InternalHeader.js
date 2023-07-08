@@ -1,10 +1,10 @@
 import React from 'react';
 import { BsArrowLeftCircle } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
-
-function InternalHeader(props) {
+import { twMerge } from 'tailwind-merge'; 
+function InternalHeader({className, ...props}) {
     return (
-        <section className='flex justify-between items-center lg:mb-10 my-2'>
+        <section className={twMerge('flex justify-between items-center lg:mb-10 my-2', className) }>
         <h3>
           <Link to={props?.link || '/'} className='flex items-center text-gray'>
             <BsArrowLeftCircle />

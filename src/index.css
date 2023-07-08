@@ -35,7 +35,7 @@
   }
 }
 
-.slick-dots li button {
+.home-testimonial .slick-dots li button {
   font-size: 0;
   line-height: 0;
   display: block;
@@ -49,7 +49,7 @@
   background: 0 0;
   position: relative;
 }
-.slick-dots li button:before {
+.home-testimonial .slick-dots li button:before {
   font-size: 16px;
   line-height: 16px;
   position: absolute;
@@ -63,16 +63,16 @@
   color: var(--gray);
   transform: translate(-50%, -50%);
 }
-.slick-dots li button:hover:before,
-.slick-dots li button:focus:before {
+.home-testimonial .slick-dots li button:hover:before,
+.home-testimonial .slick-dots li button:focus:before {
   opacity: 0.5;
 }
-.slick-dots li.slick-active button:before {
+.home-testimonial .slick-dots li.slick-active button:before {
   color: var(--green);
   opacity: 1;
 }
 
-.slick-dots li {
+.home-testimonial .slick-dots li {
   position: relative;
   display: inline-block;
   width: 20px;
@@ -81,21 +81,22 @@
   padding: 0;
   cursor: pointer;
 }
-.slick-dots {
+.home-testimonial .slick-dots {
   bottom: -3rem;
   width: 100%;
   margin: 0;
   list-style: none;
   text-align: center;
 }
+.home-testimonial .slick-initialized .slick-slide {
+  border: 8px solid rgba(244, 244, 244);
+}
 .rs-rate-xs .rs-rate-character {
   width: 5px;
   font-size: 15px;
 }
 
-.slick-initialized .slick-slide {
-  border: 8px solid rgba(244, 244, 244);
-}
+
 
 img, svg, video, canvas, audio, iframe, embed, object{
   display: inline;
@@ -114,3 +115,56 @@ img, svg, video, canvas, audio, iframe, embed, object{
   top: -30px;
 }
 
+
+.therapist-profile .slick-dots{
+  bottom: -31px;
+}
+.therapist-profile .slick-dots li {
+  margin: 0;
+  padding: 0;
+}
+.therapist-profile .slick-dots li button:before {
+  font-size: 16px;
+  line-height: 16px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 10px;
+  height: 10px;
+  background:var(--gray) ;
+  content: ' ';
+  border-radius: 10px;
+  text-align: center;
+  opacity: 0.25;
+  transform: translate(-50%, -50%);
+}
+
+.therapist-profile .slick-dots li button:hover:before,
+.therapist-profile .slick-dots li button:focus:before {
+  opacity: 0.5;
+}
+
+.therapist-profile  .slick-dots li.slick-active button:before {
+  background:var(--green) ;
+  opacity: 1;
+  width: 20px;
+}
+.therapist-profile .slick-initialized .slick-slide {
+  border: 8px solid white;
+}
+
+.slider-skills .rs-slider-handle::before{
+  display: none;
+}
+.slider-skills .rs-slider-progress-bar {
+  border-radius: 6px;
+  background: var(--gray);
+  opacity: 0.9;
+}
+
+.slider-skills .rs-slider-bar {
+  height: 10px;
+}
+.slider-skills  .rs-slider-progress-bar{
+  height: 10px;
+}
