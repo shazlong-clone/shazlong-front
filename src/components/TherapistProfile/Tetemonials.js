@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Slider from 'react-slick';
 import clsx from 'clsx';
 import { Button, Rate } from 'rsuite';
@@ -59,6 +59,7 @@ function SamplePrevArrow(props) {
 }
 
 function Tetemonials() {
+  const [viewMoreClicked, setViewMoreClicked] = useState(false);
   const settings = {
     dots: true,
     infinite: true,
@@ -72,7 +73,7 @@ function Tetemonials() {
   };
   return (
     <div className='therapist-profile'>
-      <Card className='pb-12'>
+      <Card className={clsx('pb-12', viewMoreClicked && 'hidden')}>
         <section className='text-3xl text-cyan/20'>
           <FaQuoteLeft />
         </section>
@@ -95,13 +96,15 @@ function Tetemonials() {
           })}
         </Slider>
       </Card>
-      <section className='text-center mb-5'>
+      <section
+        className={clsx('text-center', !viewMoreClicked && 'hidden')}
+      >
         <Card className='text-start'>
           <h5 className='text-center'>Reviews</h5>
           {data?.map((el) => {
             return (
-              <div key={el?.message} className='mx-5 py-2'>
-                 <Rate size='xs' defaultValue={3} readOnly />
+              <div key={el?.message} className='py-2'>
+                <Rate size='xs' defaultValue={3} readOnly />
                 <section>{el?.message}</section>
                 <section className='flex justify-between items-center'>
                   <article>
@@ -116,7 +119,15 @@ function Tetemonials() {
             );
           })}
         </Card>
-        <Button appearance='link'>view more review</Button>
+      </section>
+      <section className='text-center mb-6'>
+        <Button
+          className='no-underline active:no-underline focus:no-underline'
+          onClick={()=>setViewMoreClicked(true)}
+          appearance='link'
+        >
+          view more review
+        </Button>
       </section>
     </div>
   );
