@@ -18,7 +18,7 @@ function Intersts(props) {
           return (
             <span
               key={Math.random()}
-              className='bg-green/20 mb-2 text-xs font-bold px-3 py-1 rounded-3xl text-green inline-block'
+              className='bg-green/10 mb-2 text-xs font-bold px-3 py-1 rounded-3xl text-green/60 inline-block'
             >
               {el}
             </span>
