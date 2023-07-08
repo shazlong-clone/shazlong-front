@@ -1,7 +1,7 @@
 import React from 'react';
 import Slider from 'react-slick';
 import clsx from 'clsx';
-import { Rate } from 'rsuite';
+import { Button, Rate } from 'rsuite';
 
 import {
   BsFillArrowRightCircleFill,
@@ -72,7 +72,7 @@ function Tetemonials() {
   };
   return (
     <div className='therapist-profile'>
-      <Card className='pb-12 mb-5'>
+      <Card className='pb-12'>
         <section className='text-3xl text-cyan/20'>
           <FaQuoteLeft />
         </section>
@@ -95,6 +95,29 @@ function Tetemonials() {
           })}
         </Slider>
       </Card>
+      <section className='text-center mb-5'>
+        <Card className='text-start'>
+          <h5 className='text-center'>Reviews</h5>
+          {data?.map((el) => {
+            return (
+              <div key={el?.message} className='mx-5 py-2'>
+                 <Rate size='xs' defaultValue={3} readOnly />
+                <section>{el?.message}</section>
+                <section className='flex justify-between items-center'>
+                  <article>
+                    <span>sae...</span>{' '}
+                  </article>
+                  <article className='text-gray/60 font-light'>
+                    aday ago
+                  </article>
+                </section>
+                <hr className='m-0' />
+              </div>
+            );
+          })}
+        </Card>
+        <Button appearance='link'>view more review</Button>
+      </section>
     </div>
   );
 }

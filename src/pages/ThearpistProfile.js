@@ -14,12 +14,13 @@ function ThearpistProfile() {
         <section className='lg:grid lg:grid-cols-2 lg:gap-6'>
           <article>
             <Profile />
+            <Booking className='lg:hidden' />
             <Intersts />
             <SkillsReview />
             <Tetemonials />
             <Experience />
           </article>
-          <article>
+          <article className='hidden lg:block'>
             <Booking />
           </article>
         </section>

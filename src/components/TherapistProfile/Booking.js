@@ -10,21 +10,20 @@ import { twMerge } from 'tailwind-merge';
 import { RxDotFilled } from 'react-icons/rx';
 import { doctorSlots } from './data';
 import { Button, Input, Modal } from 'rsuite';
-function Booking() {
+function Booking({className, ...props}) {
   const [open, setOpen] = React.useState(false);
   const [timeZons, setTimeZons] = useState({
-    fullTimeZons:[],
-    searchedTimeZon:[]
+    fullTimeZons: [],
+    searchedTimeZon: [],
   });
   const getTimeZons = async () => {
     const res = await fetch('/timrzons.json');
     const resJosn = await res.json();
     setTimeZons({
-      fullTimeZons:resJosn,
-      searchedTimeZon:resJosn
+      fullTimeZons: resJosn,
+      searchedTimeZon: resJosn,
     });
   };
-
 
   const settings = {
     dots: false,
@@ -40,7 +39,7 @@ function Booking() {
       {
         breakpoint: 1556,
         settings: {
-          slidesToShow: 5
+          slidesToShow: 5,
         },
       },
       {
@@ -60,7 +59,7 @@ function Booking() {
         settings: {
           slidesToShow: 3,
         },
-      }
+      },
     ],
   };
 
@@ -94,29 +93,29 @@ function Booking() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const handeSearch = (value) =>{
-    const {fullTimeZons} = timeZons;
-    if (!value && !value.trim()){
+  const handeSearch = (value) => {
+    const { fullTimeZons } = timeZons;
+    if (!value && !value.trim()) {
       setTimeZons({
         ...timeZons,
-        searchedTimeZon:fullTimeZons
+        searchedTimeZon: fullTimeZons,
       });
-    }else{
-      const filtered = fullTimeZons?.filter(el =>{
+    } else {
+      const filtered = fullTimeZons?.filter((el) => {
         return el?.city?.toLowerCase()?.includes(value);
       });
       setTimeZons({
         ...timeZons,
-        searchedTimeZon:filtered
-      })
+        searchedTimeZon: filtered,
+      });
     }
-  }
+  };
   useEffect(() => {
     getTimeZons();
   }, []);
 
   return (
-    <Card className='lg:px-10'>
+    <Card {...props} className={twMerge('lg:px-10', className)}>
       <h5 className='text-center mb-4'>Book Session</h5>
       <Slider {...settings}>
         {doctorSlots.map((el, i) => {
@@ -170,31 +169,34 @@ function Booking() {
       </section>
       <hr />
       <p>
-        All Times Are Africa/Cairo <Button appearance='link' onClick={handleOpen}>Change</Button>{' '}
+        All Times Are Africa/Cairo{' '}
+        <Button appearance='link' onClick={handleOpen}>
+          Change
+        </Button>{' '}
       </p>
-      <Modal
-        size='lg'
-        keyboard={false}
-        open={open}
-        onClose={handleClose}
-      >
+      <Modal size='lg' keyboard={false} open={open} onClose={handleClose}>
         <Modal.Header>
-          <Modal.Title>Change Time Zone <hr /></Modal.Title>
+          <Modal.Title>
+            Change Time Zone <hr />
+          </Modal.Title>
         </Modal.Header>
-
         <Modal.Body className='text-center mt-0 py-2'>
-          <Input onChange={handeSearch} className='w-[300px] mx-auto mb-10' placeholder='search' />
+          <Input
+            onChange={handeSearch}
+            className='w-[300px] mx-auto mb-10'
+            placeholder='search'
+          />
           <section className='grid grid-cols-[1fr] md:grid-cols-[1fr_1fr] xl:lg:grid-cols-[1fr_1fr_1fr] text-start text-base font-normal'>
-            {
-              timeZons?.searchedTimeZon?.map(el => {
-                return <article>
+            {timeZons?.searchedTimeZon?.map((el) => {
+              return (
+                <article>
                   <span className='cursor-pointer'>
                     <span>{el?.city}</span>
                     <span>{el?.date}</span>
                   </span>
                 </article>
-              })
-            }
+              );
+            })}
           </section>
         </Modal.Body>
       </Modal>
