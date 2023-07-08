@@ -80,7 +80,7 @@ function Profile(props) {
       </section>
       <section className='flex justify-center gap-2 mt-5 lg:text-start'>
         <Review />
-        <Button appearance='primary' size={lg ? 'lg' : ''}>Book</Button>
+        <Button appearance='primary' size={lg ? 'lg' : 'md'}>Book</Button>
       </section>
       </Card>
   );

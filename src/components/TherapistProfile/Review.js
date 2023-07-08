@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import {
   Button,
   Form,
@@ -21,12 +21,9 @@ function Review() {
     <Input block={true} {...props} as='textarea' ref={ref} />
   ));
   let ref = useRef();
-  useEffect(()=>{
-    console.log(ref.current)
-  },[ref]);
   return (
     <>
-      <Button onClick={handleOpen} appearance='ghost' size={lg ? 'lg' : ''}>
+      <Button onClick={handleOpen} appearance='ghost' size={lg ? 'lg' : 'md'}>
         Write Review
       </Button>
       <Modal open={open} onClose={handleClose}>

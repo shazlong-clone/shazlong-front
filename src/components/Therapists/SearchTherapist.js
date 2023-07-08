@@ -54,12 +54,12 @@ function SearchTherapist(props) {
           <ul className='list-none pl-0 text-center'>
             {filterMenu?.map((el) => {
               return (
-                <>
+                <div key={Math.random()}>
                   <li className='px-3'>
                     {el?.label}
                   </li>
                   <Divider className='my-3' />
-                </>
+                </div>
               );
             })}
             <li className='text-red-700'>Rest</li>

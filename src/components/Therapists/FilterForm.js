@@ -139,7 +139,7 @@ function FilterForm(props) {
           <Button appearance='primary' type='submit'>
             Submit
           </Button>
-          <Button appearance='gohst' type='rest'>
+          <Button appearance='ghost' type='reset'>
             Cancel
           </Button>
         </ButtonToolbar>

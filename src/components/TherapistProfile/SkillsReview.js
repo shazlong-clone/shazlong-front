@@ -39,7 +39,7 @@ function SkillsReview(props) {
       <section className='grid'>
         {
             sliderSkills?.map(el => {
-                return <article className='grid grid-cols-[1fr_30px] mt-2'>
+                return <article key={Math.random()} className='grid grid-cols-[1fr_30px] mt-2'>
                 <span>
                   <h6 className='text-xs'>{el?.name}</h6>
                   <div className='flex justify-between items-center gap-2'>

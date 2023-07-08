@@ -19,7 +19,7 @@ function Footer() {
               className='w-[50%] md:w-[40%] mb-4 lg:w-[60%]'
               alt='logo-light'
             />
-            <p className='text-center my-5 text-[18px] lg:text-start'>
+            <p className='text-center my-5 text-[16px] lg:text-start'>
               Shezlong is number one in online Arabic psychotherapy worldwide
             </p>
             <div className='flex gap-4 items-center justify-center mb-10'>
@@ -28,7 +28,7 @@ function Footer() {
             </div>
           </article>
           <article className='w-[1px] bg-white'></article>
-          <article className='md:flex-[1_1_50%]'>
+          <article className='md:flex-[1_1_50%] text-sm'>
             <div className='flex justify-between'>
               <section>
                 <h4 className='mb-4 font-bold'>Shezlong</h4>

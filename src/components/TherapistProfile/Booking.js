@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Card from '../Shared/Card';
 import Slider from 'react-slick';
 import {
@@ -8,101 +8,62 @@ import {
 import clsx from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import { RxDotFilled } from 'react-icons/rx';
+import { doctorSlots } from './data';
+import { Button, Input, Modal } from 'rsuite';
 function Booking() {
+  const [open, setOpen] = React.useState(false);
+  const [timeZons, setTimeZons] = useState({
+    fullTimeZons:[],
+    searchedTimeZon:[]
+  });
+  const getTimeZons = async () => {
+    const res = await fetch('/timrzons.json');
+    const resJosn = await res.json();
+    setTimeZons({
+      fullTimeZons:resJosn,
+      searchedTimeZon:resJosn
+    });
+  };
+
+
   const settings = {
     dots: false,
     infinite: false,
     speed: 500,
-    slidesToShow: 3,
+    slidesToShow: 7,
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 2000,
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
+    responsive: [
+      {
+        breakpoint: 1556,
+        settings: {
+          slidesToShow: 5
+        },
+      },
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 5,
+        },
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 4,
+        },
+      },
+      {
+        breakpoint: 640,
+        settings: {
+          slidesToShow: 3,
+        },
+      }
+    ],
   };
 
-  const doctorSlots = [
-    {
-      date: 'Sat 08',
-      slots: [
-        {
-          h: '02:00 PM',
-          isBooked: true,
-          isSelected: false,
-        },
-        {
-          h: '02:00 PM',
-          isBooked: false,
-          isSelected: true,
-        },
-        {
-          h: '02:00 PM',
-          isBooked: true,
-          isSelected: false,
-        },
-        {
-          h: '02:00 PM',
-          isBooked: false,
-          isSelected: false,
-        },
-        {
-          h: '02:00 PM',
-          isBooked: true,
-          isSelected: true,
-        },
-      ],
-    },
-    {
-      date: 'Sat 08',
-      slots: [
-        {
-          h: '02:00 PM',
-          isBooked: false,
-          isSelected: false,
-        },
-        {
-          h: '02:00 PM',
-          isBooked: false,
-          isSelected: true,
-        },
-        {
-          h: '02:00 PM',
-          isBooked: true,
-          isSelected: false,
-        },
-        {
-          h: '02:00 PM',
-          isBooked: true,
-          isSelected: false,
-        },
-        {
-          h: '02:00 PM',
-          isBooked: true,
-          isSelected: false,
-        },
-        {
-          h: '02:00 PM',
-          isBooked: true,
-          isSelected: true,
-        },
-      ],
-    },
-    {
-      date: 'Sat 08',
-      slots: [
-        {
-          h: '02:00 PM',
-          isBooked: false,
-          isSelected: false,
-        },
-        {
-          h: '02:00 PM',
-          isBooked: true,
-          isSelected: false,
-        },
-      ],
-    },
-  ];
   function SampleNextArrow(props) {
     const { onClick } = props;
     return (
@@ -130,8 +91,32 @@ function Booking() {
       </div>
     );
   }
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  const handeSearch = (value) =>{
+    const {fullTimeZons} = timeZons;
+    if (!value && !value.trim()){
+      setTimeZons({
+        ...timeZons,
+        searchedTimeZon:fullTimeZons
+      });
+    }else{
+      const filtered = fullTimeZons?.filter(el =>{
+        return el?.city?.toLowerCase()?.includes(value);
+      });
+      setTimeZons({
+        ...timeZons,
+        searchedTimeZon:filtered
+      })
+    }
+  }
+  useEffect(() => {
+    getTimeZons();
+  }, []);
+
   return (
-    <Card>
+    <Card className='lg:px-10'>
       <h5 className='text-center mb-4'>Book Session</h5>
       <Slider {...settings}>
         {doctorSlots.map((el, i) => {
@@ -146,7 +131,7 @@ function Booking() {
               <section className='grid my-2 gap-2'>
                 {el?.slots.map((slot) => {
                   return (
-                    <aside>
+                    <aside key={Math.random()}>
                       <span
                         className={twMerge(
                           clsx(
@@ -183,6 +168,36 @@ function Booking() {
           <span>Reserved</span>
         </article>
       </section>
+      <hr />
+      <p>
+        All Times Are Africa/Cairo <Button appearance='link' onClick={handleOpen}>Change</Button>{' '}
+      </p>
+      <Modal
+        size='lg'
+        keyboard={false}
+        open={open}
+        onClose={handleClose}
+      >
+        <Modal.Header>
+          <Modal.Title>Change Time Zone <hr /></Modal.Title>
+        </Modal.Header>
+
+        <Modal.Body className='text-center mt-0 py-2'>
+          <Input onChange={handeSearch} className='w-[300px] mx-auto mb-10' placeholder='search' />
+          <section className='grid grid-cols-[1fr] md:grid-cols-[1fr_1fr] xl:lg:grid-cols-[1fr_1fr_1fr] text-start text-base font-normal'>
+            {
+              timeZons?.searchedTimeZon?.map(el => {
+                return <article>
+                  <span className='cursor-pointer'>
+                    <span>{el?.city}</span>
+                    <span>{el?.date}</span>
+                  </span>
+                </article>
+              })
+            }
+          </section>
+        </Modal.Body>
+      </Modal>
     </Card>
   );
 }

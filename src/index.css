@@ -8,6 +8,8 @@
 @tailwind utilities;
 /* slick slider css */
 @import url('./assets/css/slick.min.css');
+/* scroll */
+@import url('./assets/css/scroll.css');;
 /* my css */
 
 :root {

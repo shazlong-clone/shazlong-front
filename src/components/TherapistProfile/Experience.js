@@ -38,11 +38,11 @@ function Experience(props) {
     <div className='mb-16'>
       {experience?.map((el) => {
         return (
-          <Card className='text-sm grid gap-3'>
+          <Card className='text-sm grid gap-3' key={Math.random()}>
             <p className='text-cyan pb-3'>Certificates</p>
             {el?.data.map((item) => {
                 return (
-                  <div>
+                  <div key={Math.random()}>
                     <section className='flex gap-3'>
                       <article className='w-3 lg:w-1 rounded-md bg-cyan'></article>
                       <article>

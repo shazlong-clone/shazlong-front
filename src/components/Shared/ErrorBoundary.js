@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { Button } from 'rsuite';
 
 class ErrorBoundary extends React.Component {
