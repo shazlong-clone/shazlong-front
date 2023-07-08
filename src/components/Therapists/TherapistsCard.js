@@ -68,7 +68,9 @@ function TherapistsCard(props) {
                   <span>/ 60 mins </span>
                 </div>
                 <div className='mt-5 flex justify-around lg:justify-start lg:gap-3'>
-                  <Button >View Profile</Button>
+                  <Link to={`/thearpist-profile/${el?.id}`}>
+                    <Button>View Profile</Button>
+                  </Link>
                   <Button  appearance='primary'>Book Now</Button>
                 </div>
               </section>
