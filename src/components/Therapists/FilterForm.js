@@ -42,12 +42,14 @@ function FilterForm(props) {
       }));
   return (
     <div className='lg:bg-white lg:p-5 lg:rounded-3xl'>
+      <h3 className='text-center'>Filter</h3>
+      <hr />
       <Form fluid>
         <Form.Group>
           <Form.ControlLabel className='font-bold text-lg text-cyan'>
             Availability
           </Form.ControlLabel>
-          <Form.Control name='availability' inline accepter={CheckboxGroup}>
+          <Form.Control name='availability' accepter={CheckboxGroup}>
             <Checkbox value='Today'>Today</Checkbox>
             <Checkbox value='Now'>Now</Checkbox>
             <Checkbox value='This_Week'>This Week</Checkbox>

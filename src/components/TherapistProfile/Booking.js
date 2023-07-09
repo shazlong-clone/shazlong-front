@@ -10,7 +10,8 @@ import { twMerge } from 'tailwind-merge';
 import { RxDotFilled } from 'react-icons/rx';
 import { doctorSlots } from './data';
 import { Button, Input, Modal, Tag } from 'rsuite';
-function Booking({ className, ...props }) {
+import { Link } from 'react-router-dom';
+function Booking({ className,setBounceBg ,bouncebg, ...props }) {
   const [open, setOpen] = React.useState(false);
   const [timeZons, setTimeZons] = useState({
     fullTimeZons: [],
@@ -113,10 +114,15 @@ function Booking({ className, ...props }) {
   useEffect(() => {
     getTimeZons();
   }, []);
+  useEffect(()=>{
+    setTimeout(()=>{
+      setBounceBg(false)
+    },1000)
+  },[bouncebg])
 
   return (
-    <div  {...props} className={className}>
-      <Card className={twMerge('lg:px-10')}>
+    <div  {...props} id='checkout' >
+      <Card className={twMerge('lg:px-10',bouncebg && 'bouncebg')}>
         <h5 className='text-center mb-4'>Book Session</h5>
         <Slider {...settings}>
           {doctorSlots.map((el, i) => {
@@ -173,7 +179,7 @@ function Booking({ className, ...props }) {
           All Times Are Africa/Cairo{' '}
           <Button appearance='link' onClick={handleOpen}>
             Change
-          </Button>{' '}
+          </Button>
         </p>
         <Modal size='lg' keyboard={false} open={open} onClose={handleClose}>
           <Modal.Header>
@@ -210,13 +216,15 @@ function Booking({ className, ...props }) {
             </span>
             <span>Selected Slots</span>
           </article>
-          <Tag size='lg' closable className='mb-2 bg-gray/10 '>saeed</Tag>
-          <Tag size='lg' closable className='mb-2 bg-gray/10 '>saeed</Tag>
-          <Tag size='lg' closable className='mb-2 bg-gray/10 '>saeed</Tag>
+          <Tag closable className='mb-2 bg-gray/10 '>saeed</Tag>
+          <Tag closable className='mb-2 bg-gray/10 '>saeed</Tag>
+          <Tag closable className='mb-2 bg-gray/10 '>saeed</Tag>
 
         </section>
         <section  className='text-center'>
-          <Button appearance='primary' className='block w-full'>Book</Button>
+          <Link to='/checkout/5/5' className='hover:no-underline active:not-underline'>
+            <Button appearance='primary' className='block w-full'>Book</Button>
+          </Link>
         </section>
       </Card>
     </div>

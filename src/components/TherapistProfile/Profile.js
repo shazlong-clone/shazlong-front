@@ -8,7 +8,7 @@ import { RiPsychotherapyLine } from 'react-icons/ri';
 import Card from '../Shared/Card';
 import useMediaQuery from '../../utils/useMediaQuery'
 import Review from './Review';
-function Profile(props) {
+function Profile({setBounceBg}) {
   const interstes = [
     'Mood disorders (depression)',
     'Anxiety disorders and obsessions',
@@ -39,8 +39,7 @@ function Profile(props) {
           return (
             <span
               key={Math.random()}
-              className='bg-green/10 mb-2 text-xs font-bold px-3 py-1 rounded-3xl text-green/60 inline-block'
-            >
+              className='bg-green/10 mb-2 text-xs font-bold px-3 py-1 rounded-3xl text-green/60 inline-block'>
               {el}
             </span>
           );
@@ -72,15 +71,17 @@ function Profile(props) {
           <li className='flex items-center gap-1'>
             <span className='text-cyan flex items-center gap-3'>
               <i className='flex items-center text-lg'>{<RiPsychotherapyLine />}</i>
-              <aside className='text-lg'>Nub of Sessions:</aside>
+              <aside className='text-lg'>Num of Sessions:</aside>
             </span>
             <aside className='text-xs lg:text-base font-bold'>1000+ session</aside>
           </li>
         </ul>
       </section>
-      <section className='flex justify-center gap-2 mt-5 lg:text-start'>
+      <section className='flex lg:block justify-center gap-2 mt-5 lg:text-start'>
         <Review />
-        <Button appearance='primary' size={lg ? 'lg' : 'md'}>Book</Button>
+        <a href='#checkout' className='lg:hidden'>
+          <Button onClick={()=>setBounceBg(true)} appearance='primary' size={lg ? 'lg' : 'md'}>Book</Button>
+        </a>
       </section>
       </Card>
   );

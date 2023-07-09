@@ -23,7 +23,7 @@ function Review() {
   let ref = useRef();
   return (
     <>
-      <Button onClick={handleOpen} appearance='ghost' size={lg ? 'lg' : 'md'}>
+      <Button block={lg ? true : false} onClick={handleOpen} appearance='ghost' size={lg ? 'lg' : 'md'}>
         Write Review
       </Button>
       <Modal open={open} onClose={handleClose}>

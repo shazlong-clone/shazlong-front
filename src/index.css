@@ -20,6 +20,10 @@
   --black: theme(colors.balck);
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 .container {
   @apply m-auto px-5 bg-opacity-0
 }
@@ -132,4 +136,19 @@ img, svg, video, canvas, audio, iframe, embed, object{
 }
 .slider-skills  .rs-slider-progress-bar{
   height: 10px;
+}
+
+
+@keyframes scroll{
+  0%   {@apply bg-slate-200}
+  25%  {@apply bg-slate-100}
+  50%  {@apply bg-slate-50}
+  100% {@apply bg-white}
+}
+
+.bouncebg {
+  animation-name: scroll;
+  animation-duration: 2s;
+  animation-fill-mode: backwards;
+  animation-iteration-count: 1;
 }
