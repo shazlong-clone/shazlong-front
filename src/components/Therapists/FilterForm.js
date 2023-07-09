@@ -6,6 +6,7 @@ import {
     CheckboxGroup,
     FlexboxGrid,
     Form,
+    InputPicker,
     RangeSlider,
     Rate,
     SelectPicker,
@@ -55,8 +56,7 @@ function FilterForm(props) {
 
         <Form.Group>
           <Form.ControlLabel className='font-bold text-lg text-cyan mb-3'>
-            {' '}
-            Specific date or range{' '}
+            Specific date or range
           </Form.ControlLabel>
           <Form.Control
             name='date'
@@ -75,7 +75,7 @@ function FilterForm(props) {
             palcement='bottomStart'
             menuMaxHeight={200}
             name='selectPicker'
-            accepter={SelectPicker}
+            accepter={InputPicker}
             data={selectData}
             block
           />

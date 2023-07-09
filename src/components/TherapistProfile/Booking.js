@@ -116,6 +116,7 @@ function Booking({className, ...props}) {
 
   return (
     <Card {...props} className={twMerge('lg:px-10', className)}>
+      
       <h5 className='text-center mb-4'>Book Session</h5>
       <Slider {...settings}>
         {doctorSlots.map((el, i) => {
