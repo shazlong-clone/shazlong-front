@@ -118,43 +118,6 @@ img, svg, video, canvas, audio, iframe, embed, object{
 }
 
 
-.therapist-profile .slick-dots{
-  bottom: -31px;
-}
-.therapist-profile .slick-dots li {
-  margin: 0;
-  padding: 0;
-}
-.therapist-profile .slick-dots li button:before {
-  font-size: 16px;
-  line-height: 16px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 10px;
-  height: 10px;
-  background:var(--gray) ;
-  content: ' ';
-  border-radius: 10px;
-  text-align: center;
-  opacity: 0.25;
-  transform: translate(-50%, -50%);
-}
-
-.therapist-profile .slick-dots li button:hover:before,
-.therapist-profile .slick-dots li button:focus:before {
-  opacity: 0.5;
-}
-
-.therapist-profile  .slick-dots li.slick-active button:before {
-  background:var(--green) ;
-  opacity: 1;
-  width: 20px;
-}
-.therapist-profile .slick-initialized .slick-slide {
-  border: 8px solid white;
-}
-
 .slider-skills .rs-slider-handle::before{
   display: none;
 }

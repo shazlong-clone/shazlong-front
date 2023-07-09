@@ -1,13 +1,7 @@
-import React, { useState } from 'react';
-import Slider from 'react-slick';
-import clsx from 'clsx';
+import React from 'react';
+
 import { Button, Rate } from 'rsuite';
 
-import {
-  BsFillArrowRightCircleFill,
-  BsFillArrowLeftCircleFill,
-} from 'react-icons/bs';
-import { FaQuoteLeft } from 'react-icons/fa';
 import Card from '../Shared/Card';
 
 const data = [
@@ -30,75 +24,11 @@ const data = [
     message: '  first session, it was good 🤍   ',
   },
 ];
-function SampleNextArrow(props) {
-  const { onClick } = props;
-  return (
-    <div
-      className={clsx(
-        'text-green text-3xl top-[50%] absolute right-[-30px] translate-y-[-40%] cursor-pointer'
-      )}
-      onClick={onClick}
-    >
-      <BsFillArrowRightCircleFill />
-    </div>
-  );
-}
-
-function SamplePrevArrow(props) {
-  const { onClick } = props;
-  return (
-    <div
-      className={clsx(
-        'text-green text-3xl top-[50%] absolute left-[-30px] translate-y-[-40%] cursor-pointer z-[5]'
-      )}
-      onClick={onClick}
-    >
-      <BsFillArrowLeftCircleFill />
-    </div>
-  );
-}
 
 function Tetemonials() {
-  const [viewMoreClicked, setViewMoreClicked] = useState(false);
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 2000,
-    nextArrow: <SampleNextArrow />,
-    prevArrow: <SamplePrevArrow />,
-  };
   return (
-    <div className='therapist-profile'>
-      <Card className={clsx('pb-12', viewMoreClicked && 'hidden')}>
-        <section className='text-3xl text-cyan/20'>
-          <FaQuoteLeft />
-        </section>
-        <Slider {...settings}>
-          {data?.map((el) => {
-            return (
-              <div key={el?.message}>
-                <section>{el?.message}</section>
-                <section className='flex justify-between items-center mt-5'>
-                  <article>
-                    <span>sae...</span>{' '}
-                    <Rate size='xs' defaultValue={3} readOnly />
-                  </article>
-                  <article className='text-gray/60 font-light'>
-                    aday ago
-                  </article>
-                </section>
-              </div>
-            );
-          })}
-        </Slider>
-      </Card>
-      <section
-        className={clsx('text-center', !viewMoreClicked && 'hidden')}
-      >
+    <div>
+      <section className='text-center'>
         <Card className='text-start'>
           <h5 className='text-center'>Reviews</h5>
           {data?.map((el) => {
@@ -118,16 +48,15 @@ function Tetemonials() {
               </div>
             );
           })}
+          <section className='text-center'>
+            <Button
+              className='no-underline active:no-underline focus:no-underline'
+              appearance='link'
+            >
+              view more review
+            </Button>
+          </section>
         </Card>
-      </section>
-      <section className='text-center mb-6'>
-        <Button
-          className='no-underline active:no-underline focus:no-underline'
-          onClick={()=>setViewMoreClicked(true)}
-          appearance='link'
-        >
-          view more review
-        </Button>
       </section>
     </div>
   );

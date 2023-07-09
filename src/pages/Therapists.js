@@ -15,7 +15,7 @@ function Therapists() {
           Therapist List
         </InternalHeader>
         <section className='mt-3'>
-          <div className='grid grid-cols-1 lg:grid-cols-[2.1fr_1fr] gap-2'>
+          <div className='grid grid-cols-1 lg:grid-cols-[2.6fr_1.5fr] gap-2'>
             <section>
               <InputGroup size='lg' inside className='mb-10'>
                 <Input placeholder='Search by Therapist Name' />
@@ -36,7 +36,7 @@ function Therapists() {
         <section className='flex justify-between gap-3 lg:hidden'>
           <SearchTherapist />
         </section>
-        <section className='grid lg:grid-cols-[1fr_2fr] gap-10'>
+        <section className='grid lg:grid-cols-[1fr_3fr] gap-10'>
           <article className='hidden lg:block'>
             <FilterForm />
           </article>
