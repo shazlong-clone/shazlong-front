@@ -210,9 +210,9 @@ function Booking({ className, ...props }) {
             </span>
             <span>Selected Slots</span>
           </article>
-          <Tag color='green' size='lg' closable className='mb-2'>saeed</Tag>
-          <Tag color='green' size='lg' closable className='mb-2'>saeed</Tag>
-          <Tag color='green' size='lg' closable className='mb-2'>saeed</Tag>
+          <Tag size='lg' closable className='mb-2 bg-gray/10 '>saeed</Tag>
+          <Tag size='lg' closable className='mb-2 bg-gray/10 '>saeed</Tag>
+          <Tag size='lg' closable className='mb-2 bg-gray/10 '>saeed</Tag>
 
         </section>
         <section  className='text-center'>
