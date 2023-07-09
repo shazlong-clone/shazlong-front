@@ -9,8 +9,8 @@ import clsx from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import { RxDotFilled } from 'react-icons/rx';
 import { doctorSlots } from './data';
-import { Button, Input, Modal } from 'rsuite';
-function Booking({className, ...props}) {
+import { Button, Input, Modal, Tag } from 'rsuite';
+function Booking({ className, ...props }) {
   const [open, setOpen] = React.useState(false);
   const [timeZons, setTimeZons] = useState({
     fullTimeZons: [],
@@ -115,93 +115,111 @@ function Booking({className, ...props}) {
   }, []);
 
   return (
-    <Card {...props} className={twMerge('lg:px-10', className)}>
-      
-      <h5 className='text-center mb-4'>Book Session</h5>
-      <Slider {...settings}>
-        {doctorSlots.map((el, i) => {
-          return (
-            <div
-              key={Math.random()}
-              className='bg-cyan/5 border border-solid border-white text-center rounded-lg'
-            >
-              <section className='text-white bg-cyan rounded-t-lg py-1 font-bold'>
-                Sat 08
-              </section>
-              <section className='grid my-2 gap-2'>
-                {el?.slots.map((slot) => {
-                  return (
-                    <aside key={Math.random()}>
-                      <span
-                        className={twMerge(
-                          clsx(
-                            'bg-gray/10 p-1 text-xs font-[600] rounded-md px-2 cursor-pointer',
-                            slot?.isBooked
-                              ? 'border border-solid border-red-400 text-red-400 bg-red-50 line-through'
-                              : slot?.isSelected
-                              ? 'border border-solid border-green text-green bg-green/10'
-                              : ''
-                          )
-                        )}
-                      >
-                        {slot?.h}
-                      </span>
-                    </aside>
-                  );
-                })}
-              </section>
-            </div>
-          );
-        })}
-      </Slider>
-      <section className='flex text-center gap-4 text-xs justify-center mt-5'>
-        <article className='flex items-center'>
-          <RxDotFilled className='text-gray/25 text-2xl flex items-center' />
-          <span>Available</span>
-        </article>
-        <article className='flex items-center'>
-          <RxDotFilled className='text-green text-2xl flex items-center' />
-          <span>Seleced</span>
-        </article>
-        <article className='flex items-center'>
-          <RxDotFilled className='text-red-500 text-2xl flex items-center' />
-          <span>Reserved</span>
-        </article>
-      </section>
-      <hr />
-      <p>
-        All Times Are Africa/Cairo{' '}
-        <Button appearance='link' onClick={handleOpen}>
-          Change
-        </Button>{' '}
-      </p>
-      <Modal size='lg' keyboard={false} open={open} onClose={handleClose}>
-        <Modal.Header>
-          <Modal.Title>
-            Change Time Zone <hr />
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body className='text-center mt-0 py-2'>
-          <Input
-            onChange={handeSearch}
-            className='w-[300px] mx-auto mb-10'
-            placeholder='search'
-          />
-          <section className='grid grid-cols-[1fr] md:grid-cols-[1fr_1fr] xl:lg:grid-cols-[1fr_1fr_1fr] text-start text-base font-normal'>
-            {timeZons?.searchedTimeZon?.map((el) => {
-              return (
-                <article>
-                  <span className='cursor-pointer'>
-                    <span>{el?.city}</span>
-                    <span>{el?.date}</span>
-                  </span>
-                </article>
-              );
-            })}
-          </section>
-        </Modal.Body>
-      </Modal>
-    </Card>
+    <div  {...props} className={className}>
+      <Card className={twMerge('lg:px-10')}>
+        <h5 className='text-center mb-4'>Book Session</h5>
+        <Slider {...settings}>
+          {doctorSlots.map((el, i) => {
+            return (
+              <div
+                key={Math.random()}
+                className='bg-cyan/5 border border-solid border-white text-center rounded-lg'
+              >
+                <section className='text-white bg-cyan rounded-t-lg py-1 font-bold'>
+                  Sat 08
+                </section>
+                <section className='grid my-2 gap-2'>
+                  {el?.slots.map((slot) => {
+                    return (
+                      <aside key={Math.random()}>
+                        <span
+                          className={twMerge(
+                            clsx(
+                              'bg-gray/10 p-1 text-xs font-[600] rounded-md px-2 cursor-pointer',
+                              slot?.isBooked
+                                ? 'border border-solid border-red-400 text-red-400 bg-red-50 line-through'
+                                : slot?.isSelected
+                                ? 'border border-solid border-green text-green bg-green/10'
+                                : ''
+                            )
+                          )}
+                        >
+                          {slot?.h}
+                        </span>
+                      </aside>
+                    );
+                  })}
+                </section>
+              </div>
+            );
+          })}
+        </Slider>
+        <section className='flex text-center gap-4 text-xs justify-center mt-5'>
+          <article className='flex items-center'>
+            <RxDotFilled className='text-gray/25 text-2xl flex items-center' />
+            <span>Available</span>
+          </article>
+          <article className='flex items-center'>
+            <RxDotFilled className='text-green text-2xl flex items-center' />
+            <span>Seleced</span>
+          </article>
+          <article className='flex items-center'>
+            <RxDotFilled className='text-red-500 text-2xl flex items-center' />
+            <span>Reserved</span>
+          </article>
+        </section>
+        <hr />
+        <p>
+          All Times Are Africa/Cairo{' '}
+          <Button appearance='link' onClick={handleOpen}>
+            Change
+          </Button>{' '}
+        </p>
+        <Modal size='lg' keyboard={false} open={open} onClose={handleClose}>
+          <Modal.Header>
+            <Modal.Title>
+              Change Time Zone <hr />
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body className='text-center mt-0 py-2'>
+            <Input
+              onChange={handeSearch}
+              className='w-[300px] mx-auto mb-10'
+              placeholder='search'
+            />
+            <section className='grid grid-cols-[1fr] md:grid-cols-[1fr_1fr] xl:lg:grid-cols-[1fr_1fr_1fr] text-start text-base font-normal'>
+              {timeZons?.searchedTimeZon?.map((el) => {
+                return (
+                  <article>
+                    <span className='cursor-pointer'>
+                      <span>{el?.city}</span>
+                      <span>{el?.date}</span>
+                    </span>
+                  </article>
+                );
+              })}
+            </section>
+          </Modal.Body>
+        </Modal>
+      </Card>
+      <Card>
+        <section className='mb-2'>
+          <article className='flex justify-center gap-3 items-center mb-5'>
+            <span className=' bg-cyan rounded-full p-3 w-10 h-10 flex justify-center items-center text-white'>
+              2
+            </span>
+            <span>Selected Slots</span>
+          </article>
+          <Tag color='green' size='lg' closable className='mb-2'>saeed</Tag>
+          <Tag color='green' size='lg' closable className='mb-2'>saeed</Tag>
+          <Tag color='green' size='lg' closable className='mb-2'>saeed</Tag>
+
+        </section>
+        <section  className='text-center'>
+          <Button appearance='primary' className='block w-full'>Book</Button>
+        </section>
+      </Card>
+    </div>
   );
 }
 
