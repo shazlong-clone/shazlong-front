@@ -41,7 +41,7 @@ function FooterMenu() {
           className={clsx(activeTabe === id ? 'text-cyan' : 'text-gray')}
         >
           <i className='text-2xl'>{icon}</i>
-          <div className='text-[13px]'>{title}</div>
+          <div className='text-[12px]'>{title}</div>
         </NavLink>
       </section>
     );

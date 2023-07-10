@@ -71,7 +71,7 @@ function Profile({setBounceBg}) {
           <li className='flex items-center gap-1'>
             <span className='text-cyan flex items-center gap-3'>
               <i className='flex items-center text-lg'>{<RiPsychotherapyLine />}</i>
-              <aside className='text-lg'>Num of Sessions:</aside>
+              <aside className='text-lg' id='checkout'>Num of Sessions:</aside>
             </span>
             <aside className='text-xs lg:text-base font-bold'>1000+ session</aside>
           </li>

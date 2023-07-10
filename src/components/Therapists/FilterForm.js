@@ -42,8 +42,8 @@ function FilterForm(props) {
       }));
   return (
     <div className='lg:bg-white lg:p-5 lg:rounded-3xl'>
-      <h3 className='text-center'>Filter</h3>
-      <hr />
+      <h3 className='text-center hidden lg:block'>Filter</h3>
+      <hr className='hidden lg:block' />
       <Form fluid>
         <Form.Group>
           <Form.ControlLabel className='font-bold text-lg text-cyan'>

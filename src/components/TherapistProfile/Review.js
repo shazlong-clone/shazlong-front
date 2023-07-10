@@ -28,11 +28,11 @@ function Review() {
       </Button>
       <Modal open={open} onClose={handleClose}>
         <Modal.Header>
-          <Modal.Title className='text-cyan text-3xl'>
+          <Modal.Title className='text-cyan text-3xl text-center lg:text-start'>
             Write a review
           </Modal.Title>
         </Modal.Header>
-        <Modal.Body className='lg:px-10 py-5'>
+        <Modal.Body className='lg:px-10 py-5 px-4'>
           <h6 className='text-lg text-center'>
             Your opinion matters, tell us about your experience with
           </h6>

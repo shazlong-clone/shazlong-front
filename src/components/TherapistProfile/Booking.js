@@ -121,7 +121,7 @@ function Booking({ className,setBounceBg ,bouncebg, ...props }) {
   },[bouncebg])
 
   return (
-    <div  {...props} id='checkout' >
+    <div  {...props}  >
       <Card className={twMerge('lg:px-10',bouncebg && 'bouncebg')}>
         <h5 className='text-center mb-4'>Book Session</h5>
         <Slider {...settings}>

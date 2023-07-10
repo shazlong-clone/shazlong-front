@@ -26,7 +26,7 @@ function SearchTherapist(props) {
       </Button>
       <Drawer
         open={open}
-        size='xs'
+        size='full'
         backdrop='static'
         onClose={() => setOpen(false)}
       >
