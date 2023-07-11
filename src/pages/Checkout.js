@@ -8,7 +8,7 @@ import { GiCash } from 'react-icons/gi';
 import { Link } from 'react-router-dom';
 import { RadioTile, RadioTileGroup } from 'rsuite';
 import { Icon } from '@rsuite/icons';
-import { VscLock, VscWorkspaceTrusted, VscRepo } from 'react-icons/vsc';
+import { VscWorkspaceTrusted, VscRepo } from 'react-icons/vsc';
 import visa_new from '../assets/images/visa_new.png';
 import master_card_new from '../assets/images/master_card_new.svg';
 function Checkout() {
