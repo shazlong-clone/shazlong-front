@@ -9,7 +9,7 @@
 /* slick slider css */
 @import url('./assets/css/slick.min.css');
 /* scroll */
-@import url('./assets/css/scroll.css');;
+@import url('./assets/css/scroll.css');
 /* my css */
 
 :root {
@@ -25,7 +25,7 @@ html {
 }
 
 .container {
-  @apply m-auto px-5 bg-opacity-0
+  @apply m-auto px-5 bg-opacity-0;
 }
 
 .bg-hero {
@@ -102,9 +102,14 @@ html {
   font-size: 15px;
 }
 
-
-
-img, svg, video, canvas, audio, iframe, embed, object{
+img,
+svg,
+video,
+canvas,
+audio,
+iframe,
+embed,
+object {
   display: inline;
 }
 
@@ -112,17 +117,15 @@ img, svg, video, canvas, audio, iframe, embed, object{
   padding: 0px;
 }
 
-
-.slider-custom .rs-tooltip{
+.slider-custom .rs-tooltip {
   opacity: 1;
 }
-.slider-custom .rs-tooltip{
+.slider-custom .rs-tooltip {
   display: block;
   top: -30px;
 }
 
-
-.slider-skills .rs-slider-handle::before{
+.slider-skills .rs-slider-handle::before {
   display: none;
 }
 .slider-skills .rs-slider-progress-bar {
@@ -134,16 +137,23 @@ img, svg, video, canvas, audio, iframe, embed, object{
 .slider-skills .rs-slider-bar {
   height: 10px;
 }
-.slider-skills  .rs-slider-progress-bar{
+.slider-skills .rs-slider-progress-bar {
   height: 10px;
 }
 
-
-@keyframes scroll{
-  0%   {@apply bg-slate-200}
-  25%  {@apply bg-slate-100}
-  50%  {@apply bg-slate-50}
-  100% {@apply bg-white}
+@keyframes scroll {
+  0% {
+    @apply bg-slate-200;
+  }
+  25% {
+    @apply bg-slate-100;
+  }
+  50% {
+    @apply bg-slate-50;
+  }
+  100% {
+    @apply bg-white;
+  }
 }
 
 .bouncebg {
@@ -151,4 +161,12 @@ img, svg, video, canvas, audio, iframe, embed, object{
   animation-duration: 5s;
   animation-fill-mode: backwards;
   animation-iteration-count: 1;
+}
+
+.check-meth .rs-stack-item {
+  justify-content: space-between;
+}
+
+.check-meth .rs-radio-tile-label {
+  margin-top: 10px;
 }

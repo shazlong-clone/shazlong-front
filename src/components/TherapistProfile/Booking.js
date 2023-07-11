@@ -11,7 +11,7 @@ import { RxDotFilled } from 'react-icons/rx';
 import { doctorSlots } from './data';
 import { Button, Input, Modal, Tag } from 'rsuite';
 import { Link } from 'react-router-dom';
-function Booking({ className,setBounceBg ,bouncebg, ...props }) {
+function Booking({ className, setBounceBg, bouncebg, ...props }) {
   const [open, setOpen] = React.useState(false);
   const [timeZons, setTimeZons] = useState({
     fullTimeZons: [],
@@ -114,15 +114,16 @@ function Booking({ className,setBounceBg ,bouncebg, ...props }) {
   useEffect(() => {
     getTimeZons();
   }, []);
-  useEffect(()=>{
-    setTimeout(()=>{
-      setBounceBg(false)
-    },1000)
-  },[bouncebg])
+  useEffect(() => {
+    setTimeout(() => {
+      setBounceBg(false);
+    }, 1000);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [bouncebg]);
 
   return (
-    <div  {...props}  >
-      <Card className={twMerge('lg:px-10',bouncebg && 'bouncebg')}>
+    <div {...props}>
+      <Card className={twMerge('lg:px-10', bouncebg && 'bouncebg')}>
         <h5 className='text-center mb-4'>Book Session</h5>
         <Slider {...settings}>
           {doctorSlots.map((el, i) => {
@@ -216,14 +217,24 @@ function Booking({ className,setBounceBg ,bouncebg, ...props }) {
             </span>
             <span>Selected Slots</span>
           </article>
-          <Tag closable className='mb-2 bg-gray/10 '>saeed</Tag>
-          <Tag closable className='mb-2 bg-gray/10 '>saeed</Tag>
-          <Tag closable className='mb-2 bg-gray/10 '>saeed</Tag>
-
+          <Tag closable className='mb-2 bg-gray/10 '>
+            saeed
+          </Tag>
+          <Tag closable className='mb-2 bg-gray/10 '>
+            saeed
+          </Tag>
+          <Tag closable className='mb-2 bg-gray/10 '>
+            saeed
+          </Tag>
         </section>
-        <section  className='text-center'>
-          <Link to='/checkout/5/5' className='hover:no-underline active:not-underline'>
-            <Button appearance='primary' className='block w-full'>Book</Button>
+        <section className='text-center'>
+          <Link
+            to='/checkout/5/5'
+            className='hover:no-underline active:not-underline'
+          >
+            <Button appearance='primary' className='block w-full'>
+              Book
+            </Button>
           </Link>
         </section>
       </Card>

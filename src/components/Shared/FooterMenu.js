@@ -11,7 +11,7 @@ import { FaBlog } from 'react-icons/fa';
 import { Drawer } from 'rsuite';
 import Footer from './Footer';
 
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import clsx from 'clsx';
 
 const menu = [
@@ -97,17 +97,18 @@ function FooterMenu() {
             <div>
               {menu?.map((el) => {
                 return (
-                  <a
+                  <Link
                     key={Math.random()}
-                    href='/'
-                    className='text-gray active:underline-none'
+                    to='/'
+                    className='text-gray active:underline-none active:on-underline focus:no-underline'
+                    onClick={()=> setOpen(false)}
                   >
                     <section className='flex items-center gap-3 py-3 px-2'>
                       <i className='text-2xl flex items-center'>{el?.icon}</i>
                       <span className='text-xl font-extralight'>{el?.name}</span>
                     </section>
                     <hr className='m-0' />
-                  </a>
+                  </Link>
                 );
               })}
             </div>

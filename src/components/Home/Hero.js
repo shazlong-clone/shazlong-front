@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 import { Button } from 'rsuite';
 
 function Hero() {
@@ -31,7 +32,9 @@ function Hero() {
           </p>
         </div>
         <section className='mt-16 mb-5 flex flex-col gap-4 md:mb-32'>
-          <Button appearance='primary' className='w-[200px] lg:w-[400px]'>{t('Explore_Our_Therapists')}</Button>
+          <Link to='/therapists'>
+            <Button appearance='primary' className='w-[200px] lg:w-[400px]'>{t('Explore_Our_Therapists')}</Button>
+          </Link>
           <Button appearance='ghost' className='w-[200px] lg:w-[400px]'>{t('Contact')}</Button>
         </section>
       </div>
