@@ -96,7 +96,7 @@ function Checkout() {
           </section>
         </Card>
         <Card className='mt-8 radio-card'>
-          <h5 className='mb-3 mb-6 text-gray/80 text-center'>Payment Method</h5>
+          <h5 className='mb-6 text-gray/80 text-center'>Payment Method</h5>
           <RadioTileGroup
             defaultValue='private'
             aria-label='Visibility Level'
