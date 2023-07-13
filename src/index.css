@@ -170,3 +170,7 @@ object {
 .check-meth .rs-radio-tile-label {
   margin-top: 10px;
 }
+
+.radio-card .rs-radio-tile {
+  margin-right: 0 !important;
+}

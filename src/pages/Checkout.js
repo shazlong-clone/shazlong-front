@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import InternalHeader from '../components/Shared/InternalHeader';
-import { Avatar } from 'rsuite';
+import { Avatar, Button, Divider, Input } from 'rsuite';
 import therapist from '../assets/images/therapist.webp';
 import Card from '../components/Shared/Card';
 import { LuAlarmClock } from 'react-icons/lu';
@@ -13,6 +13,10 @@ import we from '../assets/images/we_icon.svg';
 import orange from '../assets/images/orange_icon.svg';
 import etisalat_icon from '../assets/images/etisalat_icon.svg';
 import fawry from '../assets/images/fawry.png';
+import vodafon from '../assets/images/Vodafone_icon.png';
+import { RiArrowDownSLine, RiArrowUpSLine } from 'react-icons/ri';
+import clsx from 'clsx';
+
 const instruction = [
   ' 1- Internet speed must not be not less than 2 MB/s. ',
   ' 2- The session room opens 10 minutes before your session start time. ',
@@ -24,6 +28,7 @@ const instruction = [
   ' 8- If you are reserving the session from Egypt, you cannot access the session room from elsewhere. Reservations made from Egypt are paid in Egyptian pounds, while reservations made from elsewhere are paid in U.S. dollars. If the session is paid in a non-matching currency, it cannot be refunded. ',
 ];
 function Checkout() {
+  const [openCpllapse, setOpenCpllapse] = useState(false);
   return (
     <main className='bg-cyan/5 py-5'>
       <div className='container'>
@@ -63,6 +68,14 @@ function Checkout() {
                 );
               })}
           </section>
+          <section>
+            <h5 className='my-3 text-gray/80 text-center'>coupon</h5>
+            <article className='flex gap-2'>
+            <Input placeholder="coupon" />
+              <Button appearance='primary'>Apply</Button>
+            </article>
+            <Divider />
+          </section>
           <section className='mt-3 grid gap-2 capitalize'>
             <article className='flex justify-between'>
               <span>subtotal</span>
@@ -82,7 +95,8 @@ function Checkout() {
             </article>
           </section>
         </Card>
-        <Card className='mt-8'>
+        <Card className='mt-8 radio-card'>
+          <h5 className='mb-3 mb-6 text-gray/80 text-center'>Payment Method</h5>
           <RadioTileGroup
             defaultValue='private'
             aria-label='Visibility Level'
@@ -101,10 +115,12 @@ function Checkout() {
             ></RadioTile>
             <RadioTile
               icon={
-                <div className='flex gap-1'>
+                <div className='flex gap-1 items-center'>
+                  <img className='w-6 h-6' src={vodafon} alt='vodafon' />
                   <img src={we} alt='we' />
                   <img src={orange} alt='orange' />
                   <img src={etisalat_icon} alt='etisalat_icon' />
+                  
                 </div>
               }
               label='Vodavon Cash'
@@ -119,17 +135,20 @@ function Checkout() {
               className='h-[70px]'
             />
           </RadioTileGroup>
+          <Button block className='font-[500]' appearance='primary'>Continue{' '}<span className='font-bold'>353</span></Button>
         </Card>
         <Card>
-          <h4>
+          <h5 className='grid grid-cols-[1fr_auto] items-center mb-5' onClick={()=> setOpenCpllapse(!openCpllapse)}>
             <span>How to get the best session experience? </span>
-            <span>collape</span>
-          </h4>
-          <ul className='px-0 list-none grid gap-2 text-sm'>
+            <span>{openCpllapse ?  <RiArrowDownSLine /> : <RiArrowUpSLine />  } </span>
+          </h5>
+          <div>
+          <ul className={clsx('px-0 list-none grid gap-2 text-sm', !openCpllapse && 'hidden h-0')}>
             {instruction?.map((el) => {
               return <li className='font-[500]'>{el}</li>;
             })}
           </ul>
+            </div>
         </Card>
       </div>
     </main>
