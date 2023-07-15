@@ -26,7 +26,7 @@ import { Link } from 'react-router-dom';
         <main className='bg-gray/5 py-3'>
             <div className='container'>
                 <InternalHeader>My Therapy</InternalHeader>
-                <Card className='px-0 rounded-none border border-solid border-gray/20'>
+                <Card className='px-0 rounded-none border border-solid border-gray/20 mt-10'>
                     <section className='text-center'>
                         <img src={therapits} alt='therapits' className='w-[100px] h-[100px] rounded-full' />
                         <h5 className='mt-2'>John Doe</h5>
@@ -54,7 +54,9 @@ import { Link } from 'react-router-dom';
                                 <Steps.Item title="Payment" description=" Choose your payment method among 3 different payment methods " />
                                 <Steps.Item title={<Link to='/therapists'>Start your session</Link>} description=" Talk to your therapist online privately " />
                             </Steps>
-                            <Button appearance='primary' className='mt-3' block>Book Your First Session</Button>
+                            <Link to='/therapists'>
+                                <Button appearance='primary' className='mt-3' block>Book Your First Session</Button>
+                            </Link>
                         </Card>
                     </section>
                 </Card>
