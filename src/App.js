@@ -9,6 +9,9 @@ const ThearpistProfile = lazy(() => import('./pages/ThearpistProfile'));
 const Therapists = lazy(() => import('./pages/Therapists'));
 const Checkout = lazy(() => import('./pages/Checkout'));
 const Error = lazy(() => import('./pages/Error'));
+const Instructions = lazy(() => import('./pages/Instructions'));
+const Online = lazy(() => import('./pages/Online'));
+const MyTherapy = lazy(() => import('./pages/MyTherapy'));
 
 
 const Test = lazy(() => import('./components/Shared/Test'));
@@ -27,6 +30,9 @@ function App() {
             <Route exact path='/therapists' element={<Therapists />} />
             <Route exact path='/thearpist-profile/:id' element={<ThearpistProfile />} />
             <Route exact path='/checkout/:doctorId/:slotId' element={<Checkout />} />
+            <Route exact path='/instructions' element={<Instructions />} />
+            <Route exact path='/online' element={<Online />} />
+            <Route exact path='/my-therapy' element={<MyTherapy />} />
             <Route exact path='/test' element={<Test />} />
             <Route exact path='*' element={<Error />} />
           </Routes>

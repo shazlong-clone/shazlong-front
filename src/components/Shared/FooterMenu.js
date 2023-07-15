@@ -69,10 +69,18 @@ function FooterMenu() {
             />
           </div>
           <div>
-            <Menu title='Online' id={1} icon={<BiVideoPlus />} />
+            <Menu 
+              title='Online' 
+              id={1} 
+              link='/online'
+              icon={<BiVideoPlus />} />
           </div>
           <div>
-            <Menu title='My Therapy' id={2} icon={<RiPsychotherapyLine />} />
+            <Menu 
+              title='My Therapy' 
+              id={2} 
+              link='/my-therapy'
+              icon={<RiPsychotherapyLine />} />
           </div>
           <div>
             <Menu title='Support' id={3} icon={<MdSupportAgent />} />

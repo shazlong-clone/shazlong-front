@@ -16,7 +16,7 @@ import fawry from '../assets/images/fawry.png';
 import vodafon from '../assets/images/Vodafone_icon.png';
 import { RiArrowDownSLine, RiArrowUpSLine } from 'react-icons/ri';
 import clsx from 'clsx';
-
+import useMediaQuery from '../utils/useMediaQuery';
 const instruction = [
   ' 1- Internet speed must not be not less than 2 MB/s. ',
   ' 2- The session room opens 10 minutes before your session start time. ',
@@ -29,20 +29,21 @@ const instruction = [
 ];
 function Checkout() {
   const [openCpllapse, setOpenCpllapse] = useState(false);
+  const lg = useMediaQuery('lg')
   return (
     <main className='bg-cyan/5 py-5'>
       <div className='container'>
         <InternalHeader to='/'>Check Out</InternalHeader>
       </div>
-      <div className='container'>
+      <div className='container grid gap-5 lg:grid-cols-2 items-start'>
         <Card className='mb-0'>
-          <section className='flex gap-2'>
+          <section className='flex gap-2 items-center lg:gap-5'>
             <Link to='/thearpist-profile/1'>
-              <Avatar circle src={therapist} alt='img' />
+              <Avatar size={lg ? 'lg' : 'md'} circle src={therapist} alt='img' />
             </Link>
             <aside>
               <div className='capitalize font-medium'>wassim Asgrf</div>
-              <div className='text-cyan text-xs'>psychologist</div>
+              <div className='text-cyan text-xs lg:text-base'>psychologist</div>
             </aside>
           </section>
           <section className='my-4'>
@@ -95,7 +96,7 @@ function Checkout() {
             </article>
           </section>
         </Card>
-        <Card className='mt-8 radio-card'>
+        <Card className='radio-card my-0'>
           <h5 className='mb-6 text-gray/80 text-center'>Payment Method</h5>
           <RadioTileGroup
             defaultValue='private'
@@ -135,15 +136,15 @@ function Checkout() {
               className='h-[70px]'
             />
           </RadioTileGroup>
-          <Button block className='font-[500]' appearance='primary'>Continue{' '}<span className='font-bold'>353</span></Button>
+          <Button block className='font-[500] mt-3' appearance='primary'>Continue{' '}<span className='font-bold'>353</span></Button>
         </Card>
         <Card>
           <h5 className='grid grid-cols-[1fr_auto] items-center mb-5' onClick={()=> setOpenCpllapse(!openCpllapse)}>
-            <span>How to get the best session experience? </span>
+            <span>How to get the best session experience?</span>
             <span>{openCpllapse ?  <RiArrowDownSLine /> : <RiArrowUpSLine />  } </span>
           </h5>
           <div>
-          <ul className={clsx('px-0 list-none grid gap-2 text-sm', !openCpllapse && 'hidden h-0')}>
+          <ul className={clsx('px-0 list-none grid gap-2 text-sm lg:text-base', !openCpllapse && 'hidden h-0')}>
             {instruction?.map((el) => {
               return <li className='font-[500]'>{el}</li>;
             })}
