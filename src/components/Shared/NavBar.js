@@ -6,11 +6,12 @@ import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import applyRtlCssStyles from '../../utils/applyRtlCssStyles';
 import { Link, NavLink } from 'react-router-dom';
-import { Avatar, Drawer } from 'rsuite';
+import { Drawer, Popover } from 'rsuite';
 import { BsPersonBadgeFill, BsPersonCircle } from 'react-icons/bs';
 import { AiOutlineCaretDown } from 'react-icons/ai';
 import { GoSignOut } from 'react-icons/go';
 import therapist from '../../assets/images/therapist.webp';
+import useMediaQuery from '../../utils/useMediaQuery'
 
 function NavBar() {
   const [open,setOpen] = useState(false);
@@ -19,6 +20,7 @@ function NavBar() {
   useEffect(() => {
     applyRtlCssStyles(currLang);
   }, [currLang]);
+  const lg = useMediaQuery('lg')
 
   const nav = [
     {
@@ -88,29 +90,36 @@ function NavBar() {
             <section onClick={()=>setOpen(true)} className={clsx(open && 'text-cyan', 'flex items-center')}>
               <BsPersonCircle className='text-xl' /> 
               <AiOutlineCaretDown className='text-xs' />
+              <Popover title="Title" visible>
+                <p>This is a default Popover </p>
+                <p>Content</p>
+              </Popover>
             </section>
-          <Drawer placement='bottom' size='md' open={open} onClose={() => setOpen(false)}>
-            <Drawer.Body className='px-0 close-right'>
-              <ul className='mt-[50px] list-none px-0'>
-                <li className='px-5 flex gap-3 items-center'>
-                  <img  src={therapist} alt='therapist' className='rounded-full w-[50px]' /> 
-                  <span className='text-lg italic font-[100]'>John Doe</span>
-                </li>
-                <hr />
-                <li className='px-5'>
-                  <Link to='/' className='text-inherit flex items-center gap-2'>
-                    <BsPersonBadgeFill className='text-3xl' /> 
-                    <span className='text-lg'>Your Profile</span>
-                  </Link>
-                </li>
-                <hr />
-                <li className='text-red-600 flex items-center justify-center gap-2'>
-                  <GoSignOut  className='text-3xl' />
-                  <span className='text-lg'>Sign Out</span>
-                </li>
-              </ul>
-            </Drawer.Body>
-          </Drawer>
+            {
+               lg ? '' :  
+               <Drawer placement='bottom' size='md' open={open} onClose={() => setOpen(false)}>
+                <Drawer.Body className='px-0 close-right'>
+                  <ul className='mt-[50px] list-none px-0'>
+                    <li className='px-5 flex gap-3 items-center'>
+                      <img  src={therapist} alt='therapist' className='rounded-full w-[50px]' /> 
+                      <span className='text-lg italic font-[100]'>John Doe</span>
+                    </li>
+                    <hr />
+                    <li className='px-5'>
+                      <Link to='/' className='text-inherit inline-flex items-center gap-2 hover:no-underline'>
+                        <BsPersonBadgeFill className='text-3xl' /> 
+                        <span className='text-lg'>Your Profile</span>
+                      </Link>
+                    </li>
+                    <hr />
+                    <li className='text-red-600 flex items-center justify-center gap-2'>
+                      <GoSignOut  className='text-3xl' />
+                      <span className='text-lg'>Sign Out</span>
+                    </li>
+                  </ul>
+                </Drawer.Body>
+              </Drawer>
+              }
           </article>
         </section>
       </div>
