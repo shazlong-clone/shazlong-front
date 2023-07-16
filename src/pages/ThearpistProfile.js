@@ -16,7 +16,9 @@ function ThearpistProfile() {
         <section className='lg:grid lg:grid-cols-2 lg:gap-6'>
           <article>
             <Profile setBounceBg={setBounceBg} />
-            <Booking setBounceBg={setBounceBg} bouncebg={bouncebg} className='lg:hidden' />
+            <div className='lg:hidden'>
+              <Booking setBounceBg={setBounceBg} bouncebg={bouncebg} />
+            </div>
             <Intersts />
             <SkillsReview />
             <Tetemonials />

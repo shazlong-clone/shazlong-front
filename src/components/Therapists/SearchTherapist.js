@@ -51,7 +51,7 @@ function SearchTherapist(props) {
           </Drawer.Title>
         </Drawer.Header>
         <Drawer.Body className='px-[0px] py-3'>
-          <ul className='list-none pl-0 text-center'>
+          <ul className='list-none px-0 text-center'>
             {filterMenu?.map((el) => {
               return (
                 <div key={Math.random()}>

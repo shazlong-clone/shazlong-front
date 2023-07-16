@@ -137,7 +137,7 @@ function FilterForm(props) {
             label='Level'
           />
         </Form.Group>
-        <ButtonToolbar>
+        <ButtonToolbar className='flex justify-center'>
           <Button appearance='primary' type='submit'>
             Submit
           </Button>
