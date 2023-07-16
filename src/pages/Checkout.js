@@ -21,7 +21,11 @@ const instruction = [
   ' 1- Internet speed must not be not less than 2 MB/s. ',
   ' 2- The session room opens 10 minutes before your session start time. ',
   ' 3- If you face any difficulties before or during the session, both sides should contact the support team (the blue circle at the bottom) directly. ',
-  <>4- If you cancel the session 6 hours or less before the session start time, a fee will be deducted from your paid amount. If you do not attend the session, then none of the fees will be refunded. Please read our cancellation and refund policy for more information click <Link to='/instructions'>here</Link> .</>,
+  <>
+    4- If you cancel the session 6 hours or less before the session start time, a fee will be deducted from your paid
+    amount. If you do not attend the session, then none of the fees will be refunded. Please read our cancellation and
+    refund policy for more information click <Link to='/instructions'>here</Link> .
+  </>,
   ' 5- For the session room, we recommend using a desktop computer or a laptop. If you are using a mobile device, please beware that only Safari is supported on Apple devices and we recommend Google Chrome on Android devices. It is also important for iOS devices to have the latest updates. ',
   ' 6- You can cancel or reschedule sessions only a limited number of times monthly. ',
   ' 7- Please make sure to attend your session from a quiet and an appropriate place. ',
@@ -29,7 +33,7 @@ const instruction = [
 ];
 function Checkout() {
   const [openCpllapse, setOpenCpllapse] = useState(false);
-  const lg = useMediaQuery('lg')
+  const lg = useMediaQuery('lg');
   return (
     <main className='bg-cyan/5 py-5'>
       <div className='container'>
@@ -51,15 +55,10 @@ function Checkout() {
               .fill('')
               ?.map((el) => {
                 return (
-                  <Card
-                    key={Math.random()}
-                    className=' bg-gray/5 rounded-lg p-2 mb-0 mt-2 grid gap-2'
-                  >
+                  <Card key={Math.random()} className=' bg-gray/5 rounded-lg p-2 mb-0 mt-2 grid gap-2'>
                     <article className='flex gap-2 items-center'>
                       <LuAlarmClock className='text-xl text-cyan' />
-                      <aside className='text-sm'>
-                        Today Jul 10 (1:00 PM : 2:00 PM)
-                      </aside>
+                      <aside className='text-sm'>Today Jul 10 (1:00 PM : 2:00 PM)</aside>
                     </article>
                     <article className='flex gap-2 items-center'>
                       <GiCash className='text-xl text-cyan' />
@@ -72,7 +71,7 @@ function Checkout() {
           <section>
             <h5 className='my-3 text-gray/80 text-center'>coupon</h5>
             <article className='flex gap-2'>
-            <Input placeholder="coupon" />
+              <Input placeholder='coupon' />
               <Button appearance='primary'>Apply</Button>
             </article>
             <Divider />
@@ -98,11 +97,7 @@ function Checkout() {
         </Card>
         <Card className='radio-card my-0'>
           <h5 className='mb-6 text-gray/80 text-center'>Payment Method</h5>
-          <RadioTileGroup
-            defaultValue='private'
-            aria-label='Visibility Level'
-            className='check-meth'
-          >
+          <RadioTileGroup defaultValue='private' aria-label='Visibility Level' className='check-meth'>
             <RadioTile
               icon={
                 <div>
@@ -121,7 +116,6 @@ function Checkout() {
                   <img src={we} alt='we' />
                   <img src={orange} alt='orange' />
                   <img src={etisalat_icon} alt='etisalat_icon' />
-                  
                 </div>
               }
               label='Vodavon Cash'
@@ -136,20 +130,22 @@ function Checkout() {
               className='h-[70px]'
             />
           </RadioTileGroup>
-          <Button block className='font-[500] mt-3' appearance='primary'>Continue{' '}<span className='font-bold'>353</span></Button>
+          <Button block className='font-[500] mt-3' appearance='primary'>
+            Continue <span className='font-bold'>353</span>
+          </Button>
         </Card>
         <Card>
-          <h5 className='grid grid-cols-[1fr_auto] items-center mb-5' onClick={()=> setOpenCpllapse(!openCpllapse)}>
+          <h5 className='grid grid-cols-[1fr_auto] items-center mb-5' onClick={() => setOpenCpllapse(!openCpllapse)}>
             <span>How to get the best session experience?</span>
-            <span>{openCpllapse ?  <RiArrowDownSLine /> : <RiArrowUpSLine />  } </span>
+            <span>{openCpllapse ? <RiArrowDownSLine /> : <RiArrowUpSLine />} </span>
           </h5>
           <div>
-          <ul className={clsx('px-0 list-none grid gap-2 text-sm lg:text-base', !openCpllapse && 'hidden h-0')}>
-            {instruction?.map((el) => {
-              return <li className='font-[500]'>{el}</li>;
-            })}
-          </ul>
-            </div>
+            <ul className={clsx('px-0 list-none grid gap-2 text-sm lg:text-base', !openCpllapse && 'hidden h-0')}>
+              {instruction?.map((el) => {
+                return <li className='font-[500]'>{el}</li>;
+              })}
+            </ul>
+          </div>
         </Card>
       </div>
     </main>

@@ -16,12 +16,7 @@ function Sponsors(props) {
   function SamplePrevArrow(props) {
     const { onClick } = props;
     return (
-      <div
-        className={clsx(
-          'text-gray/80 text-3xl top-[50%] absolute left-[-20px] z-50 translate-y-[-40%] cursor-pointer hidden'
-        )}
-        onClick={onClick}
-      >
+      <div className={clsx('text-gray/80 text-3xl top-[50%] absolute left-[-20px] z-50 translate-y-[-40%] cursor-pointer hidden')} onClick={onClick}>
         <MdOutlineArrowBackIosNew />
       </div>
     );
@@ -29,12 +24,7 @@ function Sponsors(props) {
   function SampleNextArrow(props) {
     const { onClick } = props;
     return (
-      <div
-        className={clsx(
-          'text-gray/80 text-3xl top-[50%] absolute left-[-20px] z-50 translate-y-[-40%] cursor-pointer'
-        )}
-        onClick={onClick}
-      >
+      <div className={clsx('text-gray/80 text-3xl top-[50%] absolute left-[-20px] z-50 translate-y-[-40%] cursor-pointer')} onClick={onClick}>
         <MdOutlineArrowBackIosNew />
       </div>
     );
@@ -61,15 +51,8 @@ function Sponsors(props) {
     <div className='mt-20'>
       <Header>We have been trusted by</Header>
       <Slider {...settings}>
-        {sponsors?.map((el,i) => {
-          return (
-            <img
-              key={Math.random()}
-              src={el}
-              alt='sponsor'
-              className='h-[100px] lg:h-[150px] object-scale-down'
-            />
-          );
+        {sponsors?.map((el, i) => {
+          return <img key={Math.random()} src={el} alt='sponsor' className='h-[100px] lg:h-[150px] object-scale-down' />;
         })}
       </Slider>
     </div>

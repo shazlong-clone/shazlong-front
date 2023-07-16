@@ -7,10 +7,7 @@ import media4 from '../../assets/images/media4.webp';
 import media5 from '../../assets/images/media5.webp';
 import media6 from '../../assets/images/media6.webp';
 import clsx from 'clsx';
-import {
-  MdOutlineKeyboardArrowLeft,
-  MdOutlineKeyboardArrowRight,
-} from 'react-icons/md';
+import { MdOutlineKeyboardArrowLeft, MdOutlineKeyboardArrowRight } from 'react-icons/md';
 import Slider from 'react-slick';
 function Media() {
   const media = [media1, media2, media6, media5, media3, media4];
@@ -18,9 +15,7 @@ function Media() {
     const { onClick } = props;
     return (
       <div
-        className={clsx(
-          'text-gray/80 text-4xl top-[50%] absolute right-[-40px] z-50 translate-y-[-40%] cursor-pointer'
-        )}
+        className={clsx('text-gray/80 text-4xl top-[50%] absolute right-[-40px] z-50 translate-y-[-40%] cursor-pointer')}
         onClick={onClick}
       >
         <MdOutlineKeyboardArrowRight />
@@ -31,9 +26,7 @@ function Media() {
     const { onClick } = props;
     return (
       <div
-        className={clsx(
-          'text-gray/80 text-4xl top-[50%] absolute left-[-40px] z-50 translate-y-[-40%] cursor-pointer'
-        )}
+        className={clsx('text-gray/80 text-4xl top-[50%] absolute left-[-40px] z-50 translate-y-[-40%] cursor-pointer')}
         onClick={onClick}
       >
         <MdOutlineKeyboardArrowLeft />
@@ -60,7 +53,7 @@ function Media() {
     ],
   };
   return (
-    <div className='mt-20 px-7'>
+    <div className="mt-20 px-7">
       <Header>Our Media Coverage</Header>
       <div>
         <Slider {...settings}>
@@ -69,8 +62,8 @@ function Media() {
               <img
                 key={Math.random()}
                 src={el}
-                alt='sponsor'
-                className='h-[100px] lg:h-[150px] object-scale-down grayscale hover:grayscale-0 duration-300'
+                alt="sponsor"
+                className="h-[100px] lg:h-[150px] object-scale-down grayscale hover:grayscale-0 duration-300"
               />
             );
           })}
