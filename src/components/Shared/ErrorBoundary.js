@@ -22,13 +22,13 @@ class ErrorBoundary extends React.Component {
     if (this.state.hasError) {
       // You can render any custom fallback UI
       return (
-        <h1 className='text-center flex justify-center items-center h-[100vh]'>
+        <h1 className="text-center flex justify-center items-center h-[100vh]">
           <div>
             Something went wrong.
             <br /> Tray Again Later
             <br />
-            <a href='/'>
-              <Button appearance='primary' >Back Home</Button>
+            <a href="/">
+              <Button appearance="primary">Back Home</Button>
             </a>
           </div>
         </h1>

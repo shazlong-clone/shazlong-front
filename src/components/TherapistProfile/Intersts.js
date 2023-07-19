@@ -11,14 +11,14 @@ function Intersts(props) {
     'Psychotic',
   ];
   return (
-    <Card className='mb-5'>
-      <h5 className='text-cyan font-normal mb-3'>Intersts</h5>
-      <section className='flex gap-1 flex-wrap'>
+    <Card className="mb-5">
+      <h5 className="text-cyan font-normal mb-3">Intersts</h5>
+      <section className="flex gap-1 flex-wrap">
         {interstes?.map((el) => {
           return (
             <span
               key={Math.random()}
-              className='bg-green/10 mb-2 text-xs font-bold px-3 py-1 rounded-3xl text-green/60 inline-block'
+              className="bg-green/10 mb-2 text-xs font-bold px-3 py-1 rounded-3xl text-green/60 inline-block"
             >
               {el}
             </span>

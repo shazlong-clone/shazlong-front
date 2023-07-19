@@ -1435,7 +1435,10 @@ tbody.rs-anim-collapse.rs-anim-in {
   position: relative;
   height: 0;
   overflow: hidden;
-  transition: height 0.35s ease, width 0.35s ease, visibility 0.35s ease;
+  transition:
+    height 0.35s ease,
+    width 0.35s ease,
+    visibility 0.35s ease;
 }
 .rs-auto-complete-menu {
   margin-bottom: 6px;
@@ -1665,7 +1668,9 @@ tbody.rs-anim-collapse.rs-anim-in {
   vertical-align: middle;
   cursor: pointer;
   white-space: nowrap;
-  transition: color 0.15s ease-out, background-color 0.15s ease-out;
+  transition:
+    color 0.15s ease-out,
+    background-color 0.15s ease-out;
   border: var(--rs-btn-default-border, none);
   user-select: none;
   text-decoration: none;
@@ -2658,7 +2663,9 @@ tbody.rs-anim-collapse.rs-anim-in {
 .rs-calendar-panel.rs-calendar-compact .rs-calendar-month-dropdown-scroll {
   height: 344px;
 }
-.rs-calendar-panel:not(.rs-calendar-compact) .rs-calendar-table-row:not(.rs-calendar-table-header-row) .rs-calendar-table-cell-content {
+.rs-calendar-panel:not(.rs-calendar-compact)
+  .rs-calendar-table-row:not(.rs-calendar-table-header-row)
+  .rs-calendar-table-cell-content {
   width: 100%;
   height: 100px;
   overflow: hidden;
@@ -2930,42 +2937,90 @@ tbody.rs-anim-collapse.rs-anim-in {
   text-decoration: line-through;
   cursor: not-allowed;
 }
-.rs-calendar-table-cell-disabled.rs-calendar-table-cell-is-today.rs-calendar-table-cell-selected .rs-calendar-table-cell-content:hover,
-.rs-calendar-table-cell-disabled.rs-calendar-table-cell-is-today.rs-calendar-table-cell-selected .rs-calendar-table-header-cell-content:hover,
-.rs-calendar-table-cell-disabled.rs-calendar-table-cell-is-today.rs-calendar-table-header-cell-selected .rs-calendar-table-cell-content:hover,
-.rs-calendar-table-cell-disabled.rs-calendar-table-cell-is-today.rs-calendar-table-header-cell-selected .rs-calendar-table-header-cell-content:hover,
-.rs-calendar-table-cell-disabled.rs-calendar-table-header-cell-is-today.rs-calendar-table-cell-selected .rs-calendar-table-cell-content:hover,
-.rs-calendar-table-cell-disabled.rs-calendar-table-header-cell-is-today.rs-calendar-table-cell-selected .rs-calendar-table-header-cell-content:hover,
-.rs-calendar-table-cell-disabled.rs-calendar-table-header-cell-is-today.rs-calendar-table-header-cell-selected .rs-calendar-table-cell-content:hover,
-.rs-calendar-table-cell-disabled.rs-calendar-table-header-cell-is-today.rs-calendar-table-header-cell-selected .rs-calendar-table-header-cell-content:hover,
-.rs-calendar-table-header-cell-disabled.rs-calendar-table-cell-is-today.rs-calendar-table-cell-selected .rs-calendar-table-cell-content:hover,
-.rs-calendar-table-header-cell-disabled.rs-calendar-table-cell-is-today.rs-calendar-table-cell-selected .rs-calendar-table-header-cell-content:hover,
-.rs-calendar-table-header-cell-disabled.rs-calendar-table-cell-is-today.rs-calendar-table-header-cell-selected .rs-calendar-table-cell-content:hover,
-.rs-calendar-table-header-cell-disabled.rs-calendar-table-cell-is-today.rs-calendar-table-header-cell-selected .rs-calendar-table-header-cell-content:hover,
-.rs-calendar-table-header-cell-disabled.rs-calendar-table-header-cell-is-today.rs-calendar-table-cell-selected .rs-calendar-table-cell-content:hover,
-.rs-calendar-table-header-cell-disabled.rs-calendar-table-header-cell-is-today.rs-calendar-table-cell-selected .rs-calendar-table-header-cell-content:hover,
-.rs-calendar-table-header-cell-disabled.rs-calendar-table-header-cell-is-today.rs-calendar-table-header-cell-selected .rs-calendar-table-cell-content:hover,
-.rs-calendar-table-header-cell-disabled.rs-calendar-table-header-cell-is-today.rs-calendar-table-header-cell-selected .rs-calendar-table-header-cell-content:hover {
+.rs-calendar-table-cell-disabled.rs-calendar-table-cell-is-today.rs-calendar-table-cell-selected
+  .rs-calendar-table-cell-content:hover,
+.rs-calendar-table-cell-disabled.rs-calendar-table-cell-is-today.rs-calendar-table-cell-selected
+  .rs-calendar-table-header-cell-content:hover,
+.rs-calendar-table-cell-disabled.rs-calendar-table-cell-is-today.rs-calendar-table-header-cell-selected
+  .rs-calendar-table-cell-content:hover,
+.rs-calendar-table-cell-disabled.rs-calendar-table-cell-is-today.rs-calendar-table-header-cell-selected
+  .rs-calendar-table-header-cell-content:hover,
+.rs-calendar-table-cell-disabled.rs-calendar-table-header-cell-is-today.rs-calendar-table-cell-selected
+  .rs-calendar-table-cell-content:hover,
+.rs-calendar-table-cell-disabled.rs-calendar-table-header-cell-is-today.rs-calendar-table-cell-selected
+  .rs-calendar-table-header-cell-content:hover,
+.rs-calendar-table-cell-disabled.rs-calendar-table-header-cell-is-today.rs-calendar-table-header-cell-selected
+  .rs-calendar-table-cell-content:hover,
+.rs-calendar-table-cell-disabled.rs-calendar-table-header-cell-is-today.rs-calendar-table-header-cell-selected
+  .rs-calendar-table-header-cell-content:hover,
+.rs-calendar-table-header-cell-disabled.rs-calendar-table-cell-is-today.rs-calendar-table-cell-selected
+  .rs-calendar-table-cell-content:hover,
+.rs-calendar-table-header-cell-disabled.rs-calendar-table-cell-is-today.rs-calendar-table-cell-selected
+  .rs-calendar-table-header-cell-content:hover,
+.rs-calendar-table-header-cell-disabled.rs-calendar-table-cell-is-today.rs-calendar-table-header-cell-selected
+  .rs-calendar-table-cell-content:hover,
+.rs-calendar-table-header-cell-disabled.rs-calendar-table-cell-is-today.rs-calendar-table-header-cell-selected
+  .rs-calendar-table-header-cell-content:hover,
+.rs-calendar-table-header-cell-disabled.rs-calendar-table-header-cell-is-today.rs-calendar-table-cell-selected
+  .rs-calendar-table-cell-content:hover,
+.rs-calendar-table-header-cell-disabled.rs-calendar-table-header-cell-is-today.rs-calendar-table-cell-selected
+  .rs-calendar-table-header-cell-content:hover,
+.rs-calendar-table-header-cell-disabled.rs-calendar-table-header-cell-is-today.rs-calendar-table-header-cell-selected
+  .rs-calendar-table-cell-content:hover,
+.rs-calendar-table-header-cell-disabled.rs-calendar-table-header-cell-is-today.rs-calendar-table-header-cell-selected
+  .rs-calendar-table-header-cell-content:hover {
   color: var(--rs-calendar-date-selected-text);
   background-color: var(--rs-bg-active);
   box-shadow: none;
 }
-.rs-theme-high-contrast .rs-calendar-table-cell-disabled.rs-calendar-table-cell-is-today.rs-calendar-table-cell-selected .rs-calendar-table-cell-content:hover,
-.rs-theme-high-contrast .rs-calendar-table-cell-disabled.rs-calendar-table-cell-is-today.rs-calendar-table-cell-selected .rs-calendar-table-header-cell-content:hover,
-.rs-theme-high-contrast .rs-calendar-table-cell-disabled.rs-calendar-table-cell-is-today.rs-calendar-table-header-cell-selected .rs-calendar-table-cell-content:hover,
-.rs-theme-high-contrast .rs-calendar-table-cell-disabled.rs-calendar-table-cell-is-today.rs-calendar-table-header-cell-selected .rs-calendar-table-header-cell-content:hover,
-.rs-theme-high-contrast .rs-calendar-table-cell-disabled.rs-calendar-table-header-cell-is-today.rs-calendar-table-cell-selected .rs-calendar-table-cell-content:hover,
-.rs-theme-high-contrast .rs-calendar-table-cell-disabled.rs-calendar-table-header-cell-is-today.rs-calendar-table-cell-selected .rs-calendar-table-header-cell-content:hover,
-.rs-theme-high-contrast .rs-calendar-table-cell-disabled.rs-calendar-table-header-cell-is-today.rs-calendar-table-header-cell-selected .rs-calendar-table-cell-content:hover,
-.rs-theme-high-contrast .rs-calendar-table-cell-disabled.rs-calendar-table-header-cell-is-today.rs-calendar-table-header-cell-selected .rs-calendar-table-header-cell-content:hover,
-.rs-theme-high-contrast .rs-calendar-table-header-cell-disabled.rs-calendar-table-cell-is-today.rs-calendar-table-cell-selected .rs-calendar-table-cell-content:hover,
-.rs-theme-high-contrast .rs-calendar-table-header-cell-disabled.rs-calendar-table-cell-is-today.rs-calendar-table-cell-selected .rs-calendar-table-header-cell-content:hover,
-.rs-theme-high-contrast .rs-calendar-table-header-cell-disabled.rs-calendar-table-cell-is-today.rs-calendar-table-header-cell-selected .rs-calendar-table-cell-content:hover,
-.rs-theme-high-contrast .rs-calendar-table-header-cell-disabled.rs-calendar-table-cell-is-today.rs-calendar-table-header-cell-selected .rs-calendar-table-header-cell-content:hover,
-.rs-theme-high-contrast .rs-calendar-table-header-cell-disabled.rs-calendar-table-header-cell-is-today.rs-calendar-table-cell-selected .rs-calendar-table-cell-content:hover,
-.rs-theme-high-contrast .rs-calendar-table-header-cell-disabled.rs-calendar-table-header-cell-is-today.rs-calendar-table-cell-selected .rs-calendar-table-header-cell-content:hover,
-.rs-theme-high-contrast .rs-calendar-table-header-cell-disabled.rs-calendar-table-header-cell-is-today.rs-calendar-table-header-cell-selected .rs-calendar-table-cell-content:hover,
-.rs-theme-high-contrast .rs-calendar-table-header-cell-disabled.rs-calendar-table-header-cell-is-today.rs-calendar-table-header-cell-selected .rs-calendar-table-header-cell-content:hover {
+.rs-theme-high-contrast
+  .rs-calendar-table-cell-disabled.rs-calendar-table-cell-is-today.rs-calendar-table-cell-selected
+  .rs-calendar-table-cell-content:hover,
+.rs-theme-high-contrast
+  .rs-calendar-table-cell-disabled.rs-calendar-table-cell-is-today.rs-calendar-table-cell-selected
+  .rs-calendar-table-header-cell-content:hover,
+.rs-theme-high-contrast
+  .rs-calendar-table-cell-disabled.rs-calendar-table-cell-is-today.rs-calendar-table-header-cell-selected
+  .rs-calendar-table-cell-content:hover,
+.rs-theme-high-contrast
+  .rs-calendar-table-cell-disabled.rs-calendar-table-cell-is-today.rs-calendar-table-header-cell-selected
+  .rs-calendar-table-header-cell-content:hover,
+.rs-theme-high-contrast
+  .rs-calendar-table-cell-disabled.rs-calendar-table-header-cell-is-today.rs-calendar-table-cell-selected
+  .rs-calendar-table-cell-content:hover,
+.rs-theme-high-contrast
+  .rs-calendar-table-cell-disabled.rs-calendar-table-header-cell-is-today.rs-calendar-table-cell-selected
+  .rs-calendar-table-header-cell-content:hover,
+.rs-theme-high-contrast
+  .rs-calendar-table-cell-disabled.rs-calendar-table-header-cell-is-today.rs-calendar-table-header-cell-selected
+  .rs-calendar-table-cell-content:hover,
+.rs-theme-high-contrast
+  .rs-calendar-table-cell-disabled.rs-calendar-table-header-cell-is-today.rs-calendar-table-header-cell-selected
+  .rs-calendar-table-header-cell-content:hover,
+.rs-theme-high-contrast
+  .rs-calendar-table-header-cell-disabled.rs-calendar-table-cell-is-today.rs-calendar-table-cell-selected
+  .rs-calendar-table-cell-content:hover,
+.rs-theme-high-contrast
+  .rs-calendar-table-header-cell-disabled.rs-calendar-table-cell-is-today.rs-calendar-table-cell-selected
+  .rs-calendar-table-header-cell-content:hover,
+.rs-theme-high-contrast
+  .rs-calendar-table-header-cell-disabled.rs-calendar-table-cell-is-today.rs-calendar-table-header-cell-selected
+  .rs-calendar-table-cell-content:hover,
+.rs-theme-high-contrast
+  .rs-calendar-table-header-cell-disabled.rs-calendar-table-cell-is-today.rs-calendar-table-header-cell-selected
+  .rs-calendar-table-header-cell-content:hover,
+.rs-theme-high-contrast
+  .rs-calendar-table-header-cell-disabled.rs-calendar-table-header-cell-is-today.rs-calendar-table-cell-selected
+  .rs-calendar-table-cell-content:hover,
+.rs-theme-high-contrast
+  .rs-calendar-table-header-cell-disabled.rs-calendar-table-header-cell-is-today.rs-calendar-table-cell-selected
+  .rs-calendar-table-header-cell-content:hover,
+.rs-theme-high-contrast
+  .rs-calendar-table-header-cell-disabled.rs-calendar-table-header-cell-is-today.rs-calendar-table-header-cell-selected
+  .rs-calendar-table-cell-content:hover,
+.rs-theme-high-contrast
+  .rs-calendar-table-header-cell-disabled.rs-calendar-table-header-cell-is-today.rs-calendar-table-header-cell-selected
+  .rs-calendar-table-header-cell-content:hover {
   text-decoration: underline;
 }
 .rs-calendar-table-cell-disabled.rs-calendar-table-cell-selected .rs-calendar-table-cell-content,
@@ -3077,7 +3132,7 @@ tbody.rs-anim-collapse.rs-anim-in {
 .rs-calendar-month-dropdown-cell {
   display: inline-block;
   float: left;
-  width: calc((100% - 1px * 12 ) / 6);
+  width: calc((100% - 1px * 12) / 6);
   margin: 1px;
   text-align: center;
   vertical-align: middle;
@@ -3211,7 +3266,10 @@ tbody.rs-anim-collapse.rs-anim-in {
   color: var(--rs-listbox-option-hover-text);
   text-decoration: underline;
 }
-.rs-theme-high-contrast .rs-theme-high-contrast .rs-theme-high-contrast .rs-calendar-time-dropdown-cell.rs-calendar-time-dropdown-cell-active:hover {
+.rs-theme-high-contrast
+  .rs-theme-high-contrast
+  .rs-theme-high-contrast
+  .rs-calendar-time-dropdown-cell.rs-calendar-time-dropdown-cell-active:hover {
   outline-offset: 2px;
 }
 .rs-calendar-time-dropdown-cell.rs-calendar-time-dropdown-cell-disabled {
@@ -3613,7 +3671,9 @@ tbody.rs-anim-collapse.rs-anim-in {
 .rs-checkbox-wrapper .rs-checkbox-inner::after {
   opacity: 0;
   transform: rotate(45deg) scale(0);
-  transition: opacity 0.2s ease-in, transform 0.2s cubic-bezier(0.12, 0.4, 0.29, 1.46);
+  transition:
+    opacity 0.2s ease-in,
+    transform 0.2s cubic-bezier(0.12, 0.4, 0.29, 1.46);
 }
 .rs-theme-high-contrast .rs-checkbox-wrapper .rs-checkbox-inner::after {
   transition: none;
@@ -3666,7 +3726,9 @@ tbody.rs-anim-collapse.rs-anim-in {
   transform: scale(1);
   opacity: 0.7;
   visibility: hidden;
-  transition: transform 0.2s linear, opacity 0.2s linear;
+  transition:
+    transform 0.2s linear,
+    opacity 0.2s linear;
 }
 .rs-theme-high-contrast .rs-checkbox-wrapper::before {
   transition: none;
@@ -3686,7 +3748,10 @@ tbody.rs-anim-collapse.rs-anim-in {
   border: 1px solid var(--rs-checkbox-border);
   background-color: transparent;
   border-radius: 3px;
-  transition: background 0.2s linear, border 0.2s linear, box-shadow 0.2s linear;
+  transition:
+    background 0.2s linear,
+    border 0.2s linear,
+    box-shadow 0.2s linear;
 }
 .rs-theme-high-contrast .rs-checkbox-wrapper .rs-checkbox-inner::before {
   transition: none;
@@ -3981,7 +4046,11 @@ label:hover .rs-checkbox-wrapper .rs-checkbox-inner::before {
   background-color: var(--rs-calendar-cell-selected-hover-bg);
   color: var(--rs-calendar-date-selected-text);
 }
-.rs-theme-high-contrast .rs-picker-menu .rs-calendar .rs-calendar-month-dropdown-cell-active .rs-calendar-month-dropdown-cell-content:hover {
+.rs-theme-high-contrast
+  .rs-picker-menu
+  .rs-calendar
+  .rs-calendar-month-dropdown-cell-active
+  .rs-calendar-month-dropdown-cell-content:hover {
   color: var(--rs-calendar-date-selected-text);
 }
 .rs-picker-menu .rs-calendar .rs-calendar-table-header-row .rs-calendar-table-cell-content {
@@ -4004,7 +4073,12 @@ label:hover .rs-checkbox-wrapper .rs-checkbox-inner::before {
   color: var(--rs-listbox-option-hover-text);
   text-decoration: underline;
 }
-.rs-theme-high-contrast .rs-theme-high-contrast .rs-picker-menu .rs-calendar .rs-calendar-table-cell:hover .rs-calendar-table-cell-content {
+.rs-theme-high-contrast
+  .rs-theme-high-contrast
+  .rs-picker-menu
+  .rs-calendar
+  .rs-calendar-table-cell:hover
+  .rs-calendar-table-cell-content {
   outline-offset: 2px;
 }
 .rs-picker-menu .rs-calendar .rs-calendar-table-cell-selected:hover .rs-calendar-table-cell-content {
@@ -5020,7 +5094,7 @@ label:hover .rs-checkbox-wrapper .rs-checkbox-inner::before {
   background-color: var(--rs-form-errormessage-bg);
   border: 1px solid var(--rs-form-errormessage-border);
   border-radius: 6px;
-  filter: drop-shadow(0 0 6px rgba(0,0,0,.1));
+  filter: drop-shadow(0 0 6px rgba(0, 0, 0, 0.1));
   z-index: 5;
   color: var(--rs-form-errormessage-text);
   font-size: 12px;
@@ -7090,7 +7164,9 @@ label:hover .rs-checkbox-wrapper .rs-checkbox-inner::before {
   top: 0;
   display: block;
   background-color: var(--rs-iconbtn-addon);
-  transition: color 0.15s ease-out, background-color 0.15s ease-out;
+  transition:
+    color 0.15s ease-out,
+    background-color 0.15s ease-out;
 }
 .rs-btn-icon-with-text:hover > .rs-icon,
 .rs-btn-icon-with-text:focus > .rs-icon {
@@ -7939,7 +8015,9 @@ textarea.rs-picker-search-input {
 }
 .rs-list {
   position: relative;
-  box-shadow: 0 1px 0 var(--rs-list-border), 0 -1px 0 var(--rs-list-border);
+  box-shadow:
+    0 1px 0 var(--rs-list-border),
+    0 -1px 0 var(--rs-list-border);
   overflow-x: hidden;
   overflow-y: auto;
 }
@@ -7981,7 +8059,9 @@ textarea.rs-picker-search-input {
 /* stylelint-disable-next-line */
 .rs-list-item {
   background-color: var(--rs-list-bg);
-  box-shadow: 0 -1px 0 var(--rs-list-border), 0 1px 0 var(--rs-list-border);
+  box-shadow:
+    0 -1px 0 var(--rs-list-border),
+    0 1px 0 var(--rs-list-border);
 }
 .rs-list-item-helper {
   position: absolute;
@@ -8600,7 +8680,9 @@ textarea.rs-picker-search-input {
 .rs-nav-tabs .rs-nav-item {
   overflow: hidden;
   position: relative;
-  transition: color 0.15s ease-out, background-color 0.15s ease-out;
+  transition:
+    color 0.15s ease-out,
+    background-color 0.15s ease-out;
 }
 @media not all and (min-resolution: 0.001dpcm) {
   .rs-nav-default .rs-nav-item,
@@ -8614,7 +8696,9 @@ textarea.rs-picker-search-input {
   padding: 8px 12px;
   cursor: pointer;
   color: var(--rs-navs-text);
-  transition: color 0.15s ease-out, background-color 0.15s ease-out;
+  transition:
+    color 0.15s ease-out,
+    background-color 0.15s ease-out;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -9032,7 +9116,9 @@ textarea.rs-picker-search-input {
   animation-fill-mode: forwards;
   border-radius: 6px;
   background: var(--rs-bg-overlay);
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.12), 0 0 10px rgba(0, 0, 0, 0.06);
+  box-shadow:
+    0 4px 4px rgba(0, 0, 0, 0.12),
+    0 0 10px rgba(0, 0, 0, 0.06);
   overflow: hidden;
 }
 .rs-notification:not(.rs-toast-fade-exited) ~ .rs-notification {
@@ -9332,7 +9418,9 @@ textarea.rs-picker-search-input {
   text-align: center;
   vertical-align: middle;
   white-space: nowrap;
-  transition: color 0.15s ease-out, background-color 0.15s ease-out;
+  transition:
+    color 0.15s ease-out,
+    background-color 0.15s ease-out;
   border: var(--rs-btn-default-border, none);
   color: var(--rs-btn-default-text);
   background-color: var(--rs-btn-default-bg);
@@ -9606,7 +9694,9 @@ textarea.rs-picker-search-input {
 }
 .rs-panel-collapsible > .rs-panel-header {
   cursor: pointer;
-  transition: background-color 0.3s linear, border-radius 0.3s linear;
+  transition:
+    background-color 0.3s linear,
+    border-radius 0.3s linear;
   position: relative;
 }
 .rs-panel-collapsible > .rs-panel-header > .rs-icon {
@@ -9709,7 +9799,9 @@ textarea.rs-picker-search-input {
   vertical-align: middle;
   cursor: pointer;
   white-space: nowrap;
-  transition: color 0.15s ease-out, background-color 0.15s ease-out;
+  transition:
+    color 0.15s ease-out,
+    background-color 0.15s ease-out;
   border: var(--rs-btn-default-border, none);
   user-select: none;
   text-decoration: none;
@@ -10728,11 +10820,15 @@ textarea.rs-picker-menu .rs-picker-search-bar .rs-picker-search-bar-input {
   box-shadow: var(--rs-popover-shadow);
 }
 .rs-popover.rs-anim-fade {
-  transition: opacity 0.1s linear, transform 0.1s ease-out;
+  transition:
+    opacity 0.1s linear,
+    transform 0.1s ease-out;
 }
 .rs-popover.rs-anim-in {
   opacity: 1;
-  transition: opacity 0.15s linear, transform 0.15s ease-in;
+  transition:
+    opacity 0.15s linear,
+    transform 0.15s ease-in;
 }
 .rs-theme-high-contrast .rs-popover {
   border: 1px solid var(--rs-border-primary);
@@ -11037,7 +11133,10 @@ textarea.rs-picker-menu .rs-picker-search-bar .rs-picker-search-bar-input {
 }
 .rs-progress-circle .rs-progress-stroke {
   stroke: var(--rs-progress-bar);
-  transition: stroke-dashoffset 0.3s ease, stroke-dasharray 0.2s ease-in-out, stroke 0.3s;
+  transition:
+    stroke-dashoffset 0.3s ease,
+    stroke-dasharray 0.2s ease-in-out,
+    stroke 0.3s;
 }
 .rs-progress-circle-success .rs-progress-circle-info {
   color: var(--rs-progress-bar-success);
@@ -11248,7 +11347,9 @@ textarea.rs-picker-menu .rs-picker-search-bar .rs-picker-search-bar-input {
   transform: scale(1);
   opacity: 0.7;
   visibility: hidden;
-  transition: transform 0.2s linear, opacity 0.2s linear;
+  transition:
+    transform 0.2s linear,
+    opacity 0.2s linear;
 }
 .rs-theme-high-contrast .rs-radio-wrapper::before {
   transition: none;
@@ -11268,7 +11369,10 @@ textarea.rs-picker-menu .rs-picker-search-bar .rs-picker-search-bar-input {
   border: 1px solid var(--rs-radio-border);
   background-color: transparent;
   border-radius: 50%;
-  transition: background 0.2s linear, border 0.2s linear, box-shadow 0.2s linear;
+  transition:
+    background 0.2s linear,
+    border 0.2s linear,
+    box-shadow 0.2s linear;
 }
 .rs-theme-high-contrast .rs-radio-inner::before {
   transition: none;
@@ -11299,7 +11403,9 @@ textarea.rs-picker-menu .rs-picker-search-bar .rs-picker-search-bar-input {
   border-radius: 50%;
   opacity: 0;
   transform: scale(0);
-  transition: opacity 0.2s ease-in, transform 0.2s cubic-bezier(0.12, 0.4, 0.29, 1.46);
+  transition:
+    opacity 0.2s ease-in,
+    transform 0.2s cubic-bezier(0.12, 0.4, 0.29, 1.46);
 }
 .rs-theme-high-contrast .rs-radio-inner::after {
   transition: none;
@@ -11439,7 +11545,9 @@ textarea.rs-picker-menu .rs-picker-search-bar .rs-picker-search-bar-input {
   transition: 0s;
 }
 .rs-ripple-rippling {
-  transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1), opacity 1s cubic-bezier(0.4, 0, 0.2, 1);
+  transition:
+    transform 0.55s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 1s cubic-bezier(0.4, 0, 0.2, 1);
   transform: scale(1);
   opacity: 0;
 }
@@ -11546,7 +11654,9 @@ textarea.rs-picker-menu .rs-picker-search-bar .rs-picker-search-bar-input {
   padding-left: 26px;
 }
 .rs-sidebar-collapse {
-  transition: flex 0.15s ease-in, width 0.15s ease-in;
+  transition:
+    flex 0.15s ease-in,
+    width 0.15s ease-in;
   min-width: 0;
 }
 .rs-sidenav {
@@ -11564,7 +11674,9 @@ textarea.rs-picker-menu .rs-picker-search-bar .rs-picker-search-bar-input {
 .rs-sidenav-nav .rs-dropdown-item,
 .rs-sidenav-nav .rs-dropdown-item-toggle {
   padding: 15px 20px;
-  transition: color 0.15s ease-out, background-color 0.15s ease-out;
+  transition:
+    color 0.15s ease-out,
+    background-color 0.15s ease-out;
   border-radius: 0;
   color: inherit;
 }
@@ -11782,18 +11894,32 @@ textarea.rs-picker-menu .rs-picker-search-bar .rs-picker-search-bar-input {
   outline-offset: -3px;
   z-index: 2;
 }
-.rs-theme-high-contrast .rs-sidenav-collapse-in .rs-dropdown-item:focus-visible.rs-dropdown-item-submenu > .rs-dropdown-item-toggle,
+.rs-theme-high-contrast
+  .rs-sidenav-collapse-in
+  .rs-dropdown-item:focus-visible.rs-dropdown-item-submenu
+  > .rs-dropdown-item-toggle,
 .rs-theme-high-contrast .rs-sidenav-collapse-in .rs-dropdown-item-focus.rs-dropdown-item-submenu > .rs-dropdown-item-toggle {
   outline-offset: 2px;
 }
-.rs-theme-high-contrast .rs-sidenav-collapse-in .rs-dropdown-item:focus-visible.rs-dropdown-item-submenu > .rs-dropdown-item-toggle,
+.rs-theme-high-contrast
+  .rs-sidenav-collapse-in
+  .rs-dropdown-item:focus-visible.rs-dropdown-item-submenu
+  > .rs-dropdown-item-toggle,
 .rs-theme-high-contrast .rs-sidenav-collapse-in .rs-dropdown-item-focus.rs-dropdown-item-submenu > .rs-dropdown-item-toggle {
   outline: 3px solid var(--rs-color-focus-ring);
   outline-offset: -3px;
   outline-width: 2px;
 }
-.rs-theme-high-contrast .rs-theme-high-contrast .rs-sidenav-collapse-in .rs-dropdown-item:focus-visible.rs-dropdown-item-submenu > .rs-dropdown-item-toggle,
-.rs-theme-high-contrast .rs-theme-high-contrast .rs-sidenav-collapse-in .rs-dropdown-item-focus.rs-dropdown-item-submenu > .rs-dropdown-item-toggle {
+.rs-theme-high-contrast
+  .rs-theme-high-contrast
+  .rs-sidenav-collapse-in
+  .rs-dropdown-item:focus-visible.rs-dropdown-item-submenu
+  > .rs-dropdown-item-toggle,
+.rs-theme-high-contrast
+  .rs-theme-high-contrast
+  .rs-sidenav-collapse-in
+  .rs-dropdown-item-focus.rs-dropdown-item-submenu
+  > .rs-dropdown-item-toggle {
   outline-offset: 2px;
 }
 .rs-sidenav-collapse-in .rs-dropdown-item:not(.rs-dropdown-item-submenu),
@@ -11877,10 +12003,20 @@ textarea.rs-picker-menu .rs-picker-search-bar .rs-picker-search-bar-input {
 .rs-sidenav-collapse-in .rs-dropdown-item-submenu > .rs-dropdown-menu .rs-dropdown-item-toggle {
   padding-left: 65px;
 }
-.rs-sidenav-collapse-in .rs-dropdown-item-submenu > .rs-dropdown-menu > .rs-dropdown-item.rs-dropdown-item-with-icon > .rs-dropdown-item-content > .rs-dropdown-item-menu-icon {
+.rs-sidenav-collapse-in
+  .rs-dropdown-item-submenu
+  > .rs-dropdown-menu
+  > .rs-dropdown-item.rs-dropdown-item-with-icon
+  > .rs-dropdown-item-content
+  > .rs-dropdown-item-menu-icon {
   left: 65px;
 }
-.rs-sidenav-collapse-in .rs-dropdown-item-submenu > .rs-dropdown-menu > .rs-dropdown-item.rs-dropdown-item-with-icon > .rs-dropdown-item-content > .rs-dropdown-menu-toggle {
+.rs-sidenav-collapse-in
+  .rs-dropdown-item-submenu
+  > .rs-dropdown-menu
+  > .rs-dropdown-item.rs-dropdown-item-with-icon
+  > .rs-dropdown-item-content
+  > .rs-dropdown-menu-toggle {
   padding-left: 85px;
 }
 .rs-sidenav-collapse-out .rs-sidenav-item,
@@ -12207,7 +12343,10 @@ textarea.rs-picker-menu .rs-picker-search-bar .rs-picker-search-bar-input {
   margin-left: -6px;
   cursor: pointer;
   /* stylelint-disable */
-  transition: box-shadow 0.15s ease-in-out, background-color 0.15s ease-in-out, transform 0.15s ease-in-out;
+  transition:
+    box-shadow 0.15s ease-in-out,
+    background-color 0.15s ease-in-out,
+    transform 0.15s ease-in-out;
   /* stylelint-enable */
 }
 .rs-slider-handle:hover::before,
@@ -12845,7 +12984,9 @@ textarea.rs-picker-menu .rs-picker-search-bar .rs-picker-search-bar-input {
 .rs-table-scrollbar {
   background-color: var(--rs-table-scrollbar-track);
   position: absolute;
-  transition: background 0.1s linear, transform 0.1s linear;
+  transition:
+    background 0.1s linear,
+    transform 0.1s linear;
   opacity: 0.6;
   z-index: 1;
 }
@@ -13254,7 +13395,9 @@ textarea.rs-picker-menu .rs-picker-search-bar .rs-picker-search-bar-input {
   background-color: var(--rs-toggle-bg);
   color: var(--rs-toggle-thumb);
   cursor: pointer;
-  transition: background-color 0.15s ease-out, width 0.15s ease-out;
+  transition:
+    background-color 0.15s ease-out,
+    width 0.15s ease-out;
   user-select: none;
 }
 .rs-theme-high-contrast .rs-toggle-presentation {
@@ -13268,7 +13411,9 @@ textarea.rs-picker-menu .rs-picker-search-bar .rs-picker-search-bar-input {
   outline-offset: 2px;
 }
 .rs-theme-high-contrast .rs-toggle-input:focus-visible + .rs-toggle-presentation {
-  box-shadow: inset 0 0 0 1px var(--rs-toggle-thumb), var(--rs-state-focus-shadow);
+  box-shadow:
+    inset 0 0 0 1px var(--rs-toggle-thumb),
+    var(--rs-state-focus-shadow);
 }
 .rs-toggle-presentation:hover {
   background-color: var(--rs-toggle-hover-bg);
@@ -13278,7 +13423,10 @@ textarea.rs-picker-menu .rs-picker-search-bar .rs-picker-search-bar-input {
   cursor: pointer;
   position: absolute;
   background-color: currentColor;
-  transition: left 0.15s ease-out, margin-left 0.15s ease-out, width 0.15s ease-out;
+  transition:
+    left 0.15s ease-out,
+    margin-left 0.15s ease-out,
+    width 0.15s ease-out;
 }
 .rs-theme-high-contrast .rs-toggle-presentation::after {
   transition: none;
@@ -13313,7 +13461,10 @@ textarea.rs-picker-menu .rs-picker-search-bar .rs-picker-search-bar-input {
 }
 .rs-toggle-loader {
   position: absolute;
-  transition: left 0.15s ease-out, margin-left 0.15s ease-out, width 0.15s ease-out;
+  transition:
+    left 0.15s ease-out,
+    margin-left 0.15s ease-out,
+    width 0.15s ease-out;
 }
 .rs-toggle-loader .rs-loader-spin::before {
   border-color: var(--rs-toggle-loader-ring);
@@ -13498,11 +13649,15 @@ textarea.rs-picker-menu .rs-picker-search-bar .rs-picker-search-bar-input {
   overflow-wrap: break-word;
 }
 .rs-tooltip.rs-anim-fade {
-  transition: opacity 0.1s linear, transform 0.1s ease-out;
+  transition:
+    opacity 0.1s linear,
+    transform 0.1s ease-out;
 }
 .rs-tooltip.rs-anim-in {
   opacity: 1;
-  transition: opacity 0.15s linear, transform 0.15s ease-in;
+  transition:
+    opacity 0.15s linear,
+    transform 0.15s ease-in;
 }
 .rs-tooltip-arrow::before,
 .rs-tooltip-arrow::after {
@@ -14083,7 +14238,9 @@ textarea.rs-picker-menu .rs-picker-search-bar .rs-picker-search-bar-input {
   vertical-align: middle;
   cursor: pointer;
   white-space: nowrap;
-  transition: color 0.15s ease-out, background-color 0.15s ease-out;
+  transition:
+    color 0.15s ease-out,
+    background-color 0.15s ease-out;
   border: var(--rs-btn-default-border, none);
   user-select: none;
   text-decoration: none;
@@ -14525,7 +14682,9 @@ textarea.rs-picker-menu .rs-picker-search-bar .rs-picker-search-bar-input {
   background: var(--rs-uploader-dnd-bg);
   border: 1px dashed var(--rs-uploader-dnd-border);
 }
-.rs-uploader-draggable .rs-uploader-trigger.rs-uploader-trigger-customize:not(.rs-uploader-trigger-disabled) .rs-uploader-trigger-btn:hover,
+.rs-uploader-draggable
+  .rs-uploader-trigger.rs-uploader-trigger-customize:not(.rs-uploader-trigger-disabled)
+  .rs-uploader-trigger-btn:hover,
 .rs-uploader-draggable .rs-uploader-trigger-drag-over .rs-uploader-trigger-btn.rs-uploader-trigger-customize {
   border-color: var(--rs-uploader-dnd-hover-border);
 }

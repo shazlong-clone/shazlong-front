@@ -12,8 +12,8 @@ import Help from './Help';
 
 function Info(props) {
   return (
-    <div className='bg-gray/5 pt-16 md:pb-0'>
-      <div className='container'>
+    <div className="bg-gray/5 pt-16 md:pb-0">
+      <div className="container">
         <OnlineTherapist />
         <Diseases />
         <HowItWorks />
@@ -24,11 +24,11 @@ function Info(props) {
       <div>
         <OurTherapist />
       </div>
-      <div className='container'>
+      <div className="container">
         <Media />
         <Phone />
       </div>
-      <div className='container lg:max-w-full lg:px-0  lg:py-0 py-10'>
+      <div className="container lg:max-w-full lg:px-0  lg:py-0 py-10">
         <Help />
       </div>
     </div>

@@ -28,31 +28,26 @@ const data = [
 function Tetemonials() {
   return (
     <div>
-      <section className='text-center'>
-        <Card className='text-start'>
-          <h5 className='text-center'>Reviews</h5>
+      <section className="text-center">
+        <Card className="text-start">
+          <h5 className="text-center">Reviews</h5>
           {data?.map((el) => {
             return (
-              <div key={el?.message} className='py-2'>
-                <Rate size='xs' defaultValue={3} readOnly />
+              <div key={el?.message} className="py-2">
+                <Rate size="xs" defaultValue={3} readOnly />
                 <section>{el?.message}</section>
-                <section className='flex justify-between items-center'>
+                <section className="flex justify-between items-center">
                   <article>
                     <span>sae...</span>{' '}
                   </article>
-                  <article className='text-gray/60 font-light'>
-                    aday ago
-                  </article>
+                  <article className="text-gray/60 font-light">aday ago</article>
                 </section>
-                <hr className='m-0' />
+                <hr className="m-0" />
               </div>
             );
           })}
-          <section className='text-center'>
-            <Button
-              className='no-underline active:no-underline focus:no-underline'
-              appearance='link'
-            >
+          <section className="text-center">
+            <Button className="no-underline active:no-underline focus:no-underline" appearance="link">
               view more review
             </Button>
           </section>

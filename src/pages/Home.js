@@ -5,8 +5,8 @@ import Info from '../components/Home/Info';
 function Home(props) {
   return (
     <div>
-        <Hero />
-        <Info />
+      <Hero />
+      <Info />
     </div>
   );
 }

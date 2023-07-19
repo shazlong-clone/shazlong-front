@@ -26,9 +26,9 @@ function OnlineTherapist() {
   const { t } = useTranslation();
 
   return (
-    <div className='bg-white p-5 rounded-3xl xl:p-8'>
-      <h1 className='text-gray/90 text-xl md:mb-6 lg:mb-10 lg:text-3xl mb-6'>{t('Online_Therapist_Online_Header')}</h1>
-      <section className='flex flex-col lg:flex-row items-center gap-3 justify-between'>
+    <div className="bg-white p-5 rounded-3xl xl:p-8">
+      <h1 className="text-gray/90 text-xl md:mb-6 lg:mb-10 lg:text-3xl mb-6">{t('Online_Therapist_Online_Header')}</h1>
+      <section className="flex flex-col lg:flex-row items-center gap-3 justify-between">
         <AvatarGroup stack size={useMediaQuery('lg') ? 'lg' : 'md'}>
           {users
             .filter((user, i) => i < max)
@@ -44,13 +44,13 @@ function OnlineTherapist() {
           )}
         </AvatarGroup>
         <article>
-          <p className='text-gray/60 font-light text-center my-4 lg:text-xl xl:my-8'>
-            <span className='inline-block w-3 h-3 bg-green rounded-full mx-5'></span>
+          <p className="text-gray/60 font-light text-center my-4 lg:text-xl xl:my-8">
+            <span className="inline-block w-3 h-3 bg-green rounded-full mx-5"></span>
             {t('Online_Therapist', { count: 3 })}
           </p>
         </article>
         <article>
-          <Button appearance='ghost' className='w-[250px]'>
+          <Button appearance="ghost" className="w-[250px]">
             {t('Learn_More')}
           </Button>
         </article>

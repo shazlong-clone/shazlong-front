@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Card from '../Shared/Card';
 import Slider from 'react-slick';
-import {
-  BsFillArrowRightCircleFill,
-  BsFillArrowLeftCircleFill,
-} from 'react-icons/bs';
+import { BsFillArrowRightCircleFill, BsFillArrowLeftCircleFill } from 'react-icons/bs';
 import clsx from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import { RxDotFilled } from 'react-icons/rx';
@@ -68,9 +65,7 @@ function Booking({ className, setBounceBg, bouncebg, ...props }) {
     const { onClick } = props;
     return (
       <div
-        className={clsx(
-          'text-cyan text-3xl top-[50%] absolute right-[-30px] translate-y-[-40%] cursor-pointer'
-        )}
+        className={clsx('text-cyan text-3xl top-[50%] absolute right-[-30px] translate-y-[-40%] cursor-pointer')}
         onClick={onClick}
       >
         <BsFillArrowRightCircleFill />
@@ -82,9 +77,7 @@ function Booking({ className, setBounceBg, bouncebg, ...props }) {
     const { onClick } = props;
     return (
       <div
-        className={clsx(
-          'text-cyan text-3xl top-[50%] absolute left-[-30px] translate-y-[-40%] cursor-pointer z-[5]'
-        )}
+        className={clsx('text-cyan text-3xl top-[50%] absolute left-[-30px] translate-y-[-40%] cursor-pointer z-[5]')}
         onClick={onClick}
       >
         <BsFillArrowLeftCircleFill />
@@ -124,18 +117,13 @@ function Booking({ className, setBounceBg, bouncebg, ...props }) {
   return (
     <div {...props}>
       <Card className={twMerge('lg:px-10', bouncebg && 'bouncebg')}>
-        <h5 className='text-center mb-4'>Book Session</h5>
+        <h5 className="text-center mb-4">Book Session</h5>
         <Slider {...settings}>
           {doctorSlots.map((el, i) => {
             return (
-              <div
-                key={Math.random()}
-                className='bg-cyan/5 border border-solid border-white text-center rounded-lg'
-              >
-                <section className='text-white bg-cyan rounded-t-lg py-1 font-bold'>
-                  Sat 08
-                </section>
-                <section className='grid my-2 gap-2'>
+              <div key={Math.random()} className="bg-cyan/5 border border-solid border-white text-center rounded-lg">
+                <section className="text-white bg-cyan rounded-t-lg py-1 font-bold">Sat 08</section>
+                <section className="grid my-2 gap-2">
                   {el?.slots.map((slot) => {
                     return (
                       <aside key={Math.random()}>
@@ -147,8 +135,8 @@ function Booking({ className, setBounceBg, bouncebg, ...props }) {
                                 ? 'border border-solid border-red-400 text-red-400 bg-red-50 line-through'
                                 : slot?.isSelected
                                 ? 'border border-solid border-green text-green bg-green/10'
-                                : ''
-                            )
+                                : '',
+                            ),
                           )}
                         >
                           {slot?.h}
@@ -161,44 +149,40 @@ function Booking({ className, setBounceBg, bouncebg, ...props }) {
             );
           })}
         </Slider>
-        <section className='flex text-center gap-4 text-xs justify-center mt-5'>
-          <article className='flex items-center'>
-            <RxDotFilled className='text-gray/25 text-2xl flex items-center' />
+        <section className="flex text-center gap-4 text-xs justify-center mt-5">
+          <article className="flex items-center">
+            <RxDotFilled className="text-gray/25 text-2xl flex items-center" />
             <span>Available</span>
           </article>
-          <article className='flex items-center'>
-            <RxDotFilled className='text-green text-2xl flex items-center' />
+          <article className="flex items-center">
+            <RxDotFilled className="text-green text-2xl flex items-center" />
             <span>Seleced</span>
           </article>
-          <article className='flex items-center'>
-            <RxDotFilled className='text-red-500 text-2xl flex items-center' />
+          <article className="flex items-center">
+            <RxDotFilled className="text-red-500 text-2xl flex items-center" />
             <span>Reserved</span>
           </article>
         </section>
         <hr />
         <p>
           All Times Are Africa/Cairo{' '}
-          <Button appearance='link' onClick={handleOpen}>
+          <Button appearance="link" onClick={handleOpen}>
             Change
           </Button>
         </p>
-        <Modal size='lg' keyboard={false} open={open} onClose={handleClose}>
+        <Modal size="lg" keyboard={false} open={open} onClose={handleClose}>
           <Modal.Header>
             <Modal.Title>
               Change Time Zone <hr />
             </Modal.Title>
           </Modal.Header>
-          <Modal.Body className='text-center mt-0 py-2'>
-            <Input
-              onChange={handeSearch}
-              className='w-[300px] mx-auto mb-10'
-              placeholder='search'
-            />
-            <section className='grid grid-cols-[1fr] md:grid-cols-[1fr_1fr] xl:lg:grid-cols-[1fr_1fr_1fr] text-start text-base font-normal'>
+          <Modal.Body className="text-center mt-0 py-2">
+            <Input onChange={handeSearch} className="w-[300px] mx-auto mb-10" placeholder="search" />
+            <section className="grid grid-cols-[1fr] md:grid-cols-[1fr_1fr] xl:lg:grid-cols-[1fr_1fr_1fr] text-start text-base font-normal">
               {timeZons?.searchedTimeZon?.map((el) => {
                 return (
                   <article>
-                    <span className='cursor-pointer'>
+                    <span className="cursor-pointer">
                       <span>{el?.city}</span>
                       <span>{el?.date}</span>
                     </span>
@@ -210,29 +194,24 @@ function Booking({ className, setBounceBg, bouncebg, ...props }) {
         </Modal>
       </Card>
       <Card>
-        <section className='mb-2'>
-          <article className='flex justify-center gap-3 items-center mb-5'>
-            <span className=' bg-cyan rounded-full p-3 w-10 h-10 flex justify-center items-center text-white'>
-              2
-            </span>
+        <section className="mb-2">
+          <article className="flex justify-center gap-3 items-center mb-5">
+            <span className=" bg-cyan rounded-full p-3 w-10 h-10 flex justify-center items-center text-white">2</span>
             <span>Selected Slots</span>
           </article>
-          <Tag closable className='mb-2 bg-gray/10 '>
+          <Tag closable className="mb-2 bg-gray/10 ">
             saeed
           </Tag>
-          <Tag closable className='mb-2 bg-gray/10 '>
+          <Tag closable className="mb-2 bg-gray/10 ">
             saeed
           </Tag>
-          <Tag closable className='mb-2 bg-gray/10 '>
+          <Tag closable className="mb-2 bg-gray/10 ">
             saeed
           </Tag>
         </section>
-        <section className='text-center'>
-          <Link
-            to='/checkout/5/5'
-            className='hover:no-underline active:not-underline'
-          >
-            <Button appearance='primary' className='block w-full'>
+        <section className="text-center">
+          <Link to="/checkout/5/5" className="hover:no-underline active:not-underline">
+            <Button appearance="primary" className="block w-full">
               Book
             </Button>
           </Link>

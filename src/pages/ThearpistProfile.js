@@ -5,18 +5,20 @@ import Intersts from '../components/TherapistProfile/Intersts.js';
 import Tetemonials from '../components/TherapistProfile/Tetemonials.js';
 import SkillsReview from '../components/TherapistProfile/SkillsReview.js';
 import Experience from '../components/TherapistProfile/Experience.js';
-import Booking  from '../components/TherapistProfile/Booking.js'
+import Booking from '../components/TherapistProfile/Booking.js';
 function ThearpistProfile() {
-  const [bouncebg , setBounceBg] = useState(false)
-
+  const [bouncebg, setBounceBg] = useState(false);
+  const x = 'ddd';
   return (
-    <main className='bg-gray/5'>
-      <div className='container overflow-auto'>
-        <InternalHeader className='lg:mt-10' link='/therapists'>TherapistProfile</InternalHeader>
-        <section className='lg:grid lg:grid-cols-2 lg:gap-6'>
+    <main className="bg-gray/5">
+      <div className="container overflow-auto">
+        <InternalHeader className="lg:mt-10" link="/therapists">
+          TherapistProfile
+        </InternalHeader>
+        <section className="lg:grid lg:grid-cols-2 lg:gap-6">
           <article>
             <Profile setBounceBg={setBounceBg} />
-            <div className='lg:hidden'>
+            <div className="lg:hidden">
               <Booking setBounceBg={setBounceBg} bouncebg={bouncebg} />
             </div>
             <Intersts />
@@ -24,7 +26,7 @@ function ThearpistProfile() {
             <Tetemonials />
             <Experience />
           </article>
-          <article className='hidden lg:block'>
+          <article className="hidden lg:block">
             <Booking setBounceBg={setBounceBg} bouncebg={bouncebg} />
           </article>
         </section>
