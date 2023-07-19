@@ -8,7 +8,6 @@ import Experience from '../components/TherapistProfile/Experience.js';
 import Booking from '../components/TherapistProfile/Booking.js';
 function ThearpistProfile() {
   const [bouncebg, setBounceBg] = useState(false);
-  const x = 'ddd';
   return (
     <main className="bg-gray/5">
       <div className="container overflow-auto">

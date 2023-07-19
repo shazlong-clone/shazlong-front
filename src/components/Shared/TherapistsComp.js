@@ -5,7 +5,7 @@ import SearchTherapist from '../Therapists/SearchTherapist';
 import TherapistsCard from '../Therapists/TherapistsCard';
 import FilterForm from '../Therapists/FilterForm';
 import { filterMenu } from '../../costansts/index';
-function TherapistsComp(props) {
+function TherapistsComp() {
   return (
     <>
       <section className="mt-3">
