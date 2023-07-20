@@ -1,7 +1,7 @@
 import React from 'react';
 import Card from '../Shared/Card.js';
 
-function Intersts(props) {
+function Intersts() {
   const interstes = [
     'Mood disorders (depression)',
     'Anxiety disorders and obsessions',

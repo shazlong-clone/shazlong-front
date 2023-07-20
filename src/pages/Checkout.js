@@ -53,7 +53,7 @@ function Checkout() {
           <section className="my-4">
             {Array(2)
               .fill('')
-              ?.map((el) => {
+              ?.map(() => {
                 return (
                   <Card key={Math.random()} className=" bg-gray/5 rounded-lg p-2 mb-0 mt-2 grid gap-2">
                     <article className="flex gap-2 items-center">
@@ -142,7 +142,11 @@ function Checkout() {
           <div>
             <ul className={clsx('px-0 list-none grid gap-2 text-sm lg:text-base', !openCpllapse && 'hidden h-0')}>
               {instruction?.map((el) => {
-                return <li className="font-[500]">{el}</li>;
+                return (
+                  <li key={Math.random()} className="font-[500]">
+                    {el}
+                  </li>
+                );
               })}
             </ul>
           </div>

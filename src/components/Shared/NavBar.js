@@ -6,9 +6,8 @@ import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import applyRtlCssStyles from '../../utils/applyRtlCssStyles';
 import { Link, NavLink } from 'react-router-dom';
-import { Button, Drawer, Popover, Whisper } from 'rsuite';
-import { BsPersonBadgeFill, BsPersonCircle } from 'react-icons/bs';
-import { AiOutlineCaretDown } from 'react-icons/ai';
+import { Drawer } from 'rsuite';
+import { BsPersonBadgeFill } from 'react-icons/bs';
 import { GoSignOut } from 'react-icons/go';
 import therapist from '../../assets/images/therapist.webp';
 import useMediaQuery from '../../utils/useMediaQuery';
@@ -77,14 +76,18 @@ function NavBar() {
               </article>
             );
           })}
-          {/* <article className='text-green border border-solid border-green py-1 px-2 rounded-3xl cursor-pointer  lg:py-1 lg:px-5 text-sm rtl:text-[10px] lg:text-base'>
-            {t('Sign_In')}
+          <article className="text-green border border-solid border-green py-1 px-2 rounded-3xl cursor-pointer  lg:py-1 lg:px-5 text-sm rtl:text-[10px] lg:text-base">
+            <Link className="text-inherit hover:no-underline hover:text-inherit" to="/sign-in">
+              {t('Sign_In')}
+            </Link>
           </article>
-          <article className='text-white bg-green py-1 px-2 rounded-3xl cursor-pointer  lg:py-1 lg:px-5 text-sm rtl:text-[10px] lg:text-base flex rtl:pt-2'>
-            {t('Sign_Up')}
-          </article> */}
+          <article className="text-white bg-green py-1 px-2 rounded-3xl cursor-pointer  lg:py-1 lg:px-5 text-sm rtl:text-[10px] lg:text-base flex rtl:pt-2">
+            <Link className="text-inherit hover:no-underline hover:text-inherit" to="/sign-up">
+              {t('Sign_Up')}
+            </Link>
+          </article>
           <article>
-            <section className={clsx(open && 'text-cyan', 'flex items-center')}>
+            {/* <section className={clsx(open && 'text-cyan', 'flex items-center')}>
               <Whisper
                 trigger="click"
                 placement="bottom"
@@ -112,7 +115,7 @@ function NavBar() {
                   <AiOutlineCaretDown className="text-xs" />
                 </Button>
               </Whisper>
-            </section>
+            </section> */}
             {lg ? (
               ''
             ) : (

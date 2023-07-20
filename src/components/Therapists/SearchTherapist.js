@@ -4,7 +4,7 @@ import { MdFilterList } from 'react-icons/md';
 import { TbArrowsSort } from 'react-icons/tb';
 import { filterMenu } from '../../costansts/index';
 import FilterForm from './FilterForm';
-function SearchTherapist(props) {
+function SearchTherapist() {
   const [open, setOpen] = useState(false);
   const [filterOpen, setFilterOpen] = useState(false);
 

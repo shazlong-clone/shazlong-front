@@ -2,7 +2,7 @@ import React from 'react';
 import notFound from '../assets/images/undraw_page_not_found.svg';
 import { Button } from 'rsuite';
 import { Link } from 'react-router-dom';
-function Error(props) {
+function Error() {
   return (
     <div className="text-center">
       <img className="my-10 max-w-full" alt="not found" src={notFound} />

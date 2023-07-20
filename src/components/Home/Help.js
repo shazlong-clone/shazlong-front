@@ -24,7 +24,7 @@ function Help() {
             </p>
             <div>
               <article className="flex text-center mt-5 justify-center gap-3 lg:justify-start">
-                {agents?.map((agent, i) => {
+                {agents?.map((agent) => {
                   return <img className="w-[50px] lg:w-[75px]" key={Math.random()} src={agent} alt="img" />;
                 })}
               </article>

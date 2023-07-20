@@ -63,7 +63,7 @@ function MyTherapy() {
               </article>
             </section>
             <section className="py-5 px-5">
-              <h6 className="mb-2">Let's help you book your first session</h6>
+              <h6 className="mb-2">Let s help you book your first session</h6>
               <p>How to book your first session?</p>
               <Card className="rounded-none border border-solid border-gray/20 mt-5">
                 <Steps current={0} currentStatus="wait" vertical className="font-[500] text-xs">

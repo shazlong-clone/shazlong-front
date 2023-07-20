@@ -1,10 +1,7 @@
 import React from 'react';
 import Header from '../Shared/Header';
 import therapist from '../../assets/images/therapist.png';
-function OurTherapist(props) {
-  const saeed = 'sasdasd';
-  console.log('saeed');
-  localStorage.setItem('sae', 'dd');
+function OurTherapist() {
   return (
     <div>
       <div className="bg-cyan/20 py-1">

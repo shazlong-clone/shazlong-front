@@ -1,7 +1,7 @@
 import React from 'react';
 import Card from '../Shared/Card';
 
-function Experience(props) {
+function Experience() {
   const experience = [
     {
       title: 'Certificates',

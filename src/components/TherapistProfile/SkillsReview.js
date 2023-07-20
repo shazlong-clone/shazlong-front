@@ -2,7 +2,7 @@ import React from 'react';
 import Card from '../Shared/Card';
 import { Rate, Slider } from 'rsuite';
 import { AiFillStar } from 'react-icons/ai';
-function SkillsReview(props) {
+function SkillsReview() {
   const sliderSkills = [
     {
       name: 'Communication',

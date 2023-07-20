@@ -119,7 +119,7 @@ function Booking({ setBounceBg, bouncebg, ...props }) {
       <Card className={twMerge('lg:px-10', bouncebg && 'bouncebg')}>
         <h5 className="text-center mb-4">Book Session</h5>
         <Slider {...settings}>
-          {doctorSlots.map((el, i) => {
+          {doctorSlots.map((el) => {
             return (
               <div key={Math.random()} className="bg-cyan/5 border border-solid border-white text-center rounded-lg">
                 <section className="text-white bg-cyan rounded-t-lg py-1 font-bold">Sat 08</section>

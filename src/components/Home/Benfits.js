@@ -4,7 +4,7 @@ import benfit1 from '../../assets/images/benfit1.png';
 import benfit2 from '../../assets/images/benfit2.png';
 import benfit3 from '../../assets/images/benfit3.png';
 
-function Benfits(props) {
+function Benfits() {
   const benfits = [
     {
       titile: 'Save time and effort',

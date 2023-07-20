@@ -10,7 +10,7 @@ import Media from './Media';
 import Phone from './Phone';
 import Help from './Help';
 
-function Info(props) {
+function Info() {
   return (
     <div className="bg-gray/5 pt-16 md:pb-0">
       <div className="container">

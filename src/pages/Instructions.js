@@ -2,7 +2,7 @@ import React from 'react';
 import Card from '../components/Shared/Card';
 import { BsCheckCircle } from 'react-icons/bs';
 import InternalHeader from '../components/Shared/InternalHeader';
-function Instructions(props) {
+function Instructions() {
   const instuctions = [
     ' Clients have a limit of four cancellations per 30 days. ',
     ' Clients will get a full refund if they canceled the session 12 hours before the appointment. ',

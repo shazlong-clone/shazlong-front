@@ -9,7 +9,7 @@ import { MdOutlineArrowBackIosNew } from 'react-icons/md';
 import clsx from 'clsx';
 import Slider from 'react-slick';
 
-function Sponsors(props) {
+function Sponsors() {
   const sponsors = [sponsor1, sponsor2, sponsor3, sponsor4, sponsor5];
   //
 
@@ -57,7 +57,7 @@ function Sponsors(props) {
     <div className="mt-20">
       <Header>We have been trusted by</Header>
       <Slider {...settings}>
-        {sponsors?.map((el, i) => {
+        {sponsors?.map((el) => {
           return <img key={Math.random()} src={el} alt="sponsor" className="h-[100px] lg:h-[150px] object-scale-down" />;
         })}
       </Slider>

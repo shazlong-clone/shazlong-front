@@ -57,7 +57,7 @@ function Media() {
       <Header>Our Media Coverage</Header>
       <div>
         <Slider {...settings}>
-          {media?.map((el, i) => {
+          {media?.map((el) => {
             return (
               <img
                 key={Math.random()}
