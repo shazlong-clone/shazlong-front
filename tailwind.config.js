@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+// eslint-disable-next-line no-undef
 module.exports = {
   content: ['./src/**/*.{html,js}'],
   theme: {
@@ -11,12 +12,9 @@ module.exports = {
         cyan: '#3591a6',
       },
     },
-
   },
-  plugins: [
-
-  ],
+  plugins: [],
   corePlugins: {
     preflight: false,
-  }
+  },
 };

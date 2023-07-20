@@ -14,7 +14,7 @@ import {
 } from 'rsuite';
 import { DateRangePicker } from 'rsuite';
 import FlexboxGridItem from 'rsuite/esm/FlexboxGrid/FlexboxGridItem';
-function FilterForm(props) {
+function FilterForm() {
   const data = ['Eugenia', 'Bryan', 'Linda', 'Nancy', 'Lloyd', 'Alice', 'Julia', 'Albert'].map((item) => ({
     label: item,
     value: item,

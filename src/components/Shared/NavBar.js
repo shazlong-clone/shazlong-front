@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import shazlongLogo from '../../assets/images/shezlong-logo.svg';
 import shazlongLogoAr from '../../assets/images/shezlong-logo-ar.svg';
 import { lngs } from '../../assets/constants/index';
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
+import applyRtlCssStyles from '../../utils/applyRtlCssStyles';
 import { Link, NavLink } from 'react-router-dom';
 import { Button, Drawer, Popover, Whisper } from 'rsuite';
 import { BsPersonBadgeFill, BsPersonCircle } from 'react-icons/bs';
@@ -16,6 +17,9 @@ function NavBar() {
   const [open, setOpen] = useState(false);
   const { t, i18n } = useTranslation();
   const currLang = i18n.resolvedLanguage;
+  useEffect(() => {
+    applyRtlCssStyles(currLang);
+  }, [currLang]);
   const lg = useMediaQuery('lg');
 
   const nav = [
@@ -103,7 +107,7 @@ function NavBar() {
                   </Popover>
                 }
               >
-                <Button onClick={() => setOpen(true)}>
+                <Button onClick={() => setOpen(true)} appearance="subtle">
                   <BsPersonCircle className="text-xl" />
                   <AiOutlineCaretDown className="text-xs" />
                 </Button>

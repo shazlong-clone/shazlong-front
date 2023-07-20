@@ -178,3 +178,10 @@ object {
 .close-right .rs-drawer-body-close {
   left: calc(100% - 50px);
 }
+.sign-form .rs-picker-select-menu {
+  max-width: 10px !important;
+}
+
+.sign-form .rs-input-group-inside.rs-input-group-lg > .rs-input-group-btn > .rs-icon {
+  font-size: 35px;
+}

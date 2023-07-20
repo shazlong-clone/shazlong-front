@@ -8,7 +8,7 @@ import { RxDotFilled } from 'react-icons/rx';
 import { doctorSlots } from './data';
 import { Button, Input, Modal, Tag } from 'rsuite';
 import { Link } from 'react-router-dom';
-function Booking({ className, setBounceBg, bouncebg, ...props }) {
+function Booking({ setBounceBg, bouncebg, ...props }) {
   const [open, setOpen] = React.useState(false);
   const [timeZons, setTimeZons] = useState({
     fullTimeZons: [],
@@ -181,7 +181,7 @@ function Booking({ className, setBounceBg, bouncebg, ...props }) {
             <section className="grid grid-cols-[1fr] md:grid-cols-[1fr_1fr] xl:lg:grid-cols-[1fr_1fr_1fr] text-start text-base font-normal">
               {timeZons?.searchedTimeZon?.map((el) => {
                 return (
-                  <article>
+                  <article key={Math.random()}>
                     <span className="cursor-pointer">
                       <span>{el?.city}</span>
                       <span>{el?.date}</span>

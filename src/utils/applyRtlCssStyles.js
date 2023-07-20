@@ -7,8 +7,8 @@ const applyRtlCssStyles = (currLang) => {
     root.style.fontSize = '16px';
     root.style.fontFamily = 'Tajawal';
   } else {
-    document.documentElement.dir = 'ltr';
-    document.html.lang = 'en';
+    document.body.dir = 'ltr';
+    document.documentElement.lang = 'en';
     root.style.fontSize = '16px';
     root.style.fontFamily = 'Montserrat';
   }
