@@ -7,7 +7,7 @@ import { GiCash } from 'react-icons/gi';
 import { Link } from 'react-router-dom';
 import therapist from '../../assets/images/therapist.webp';
 
-function TherapistsCard(props) {
+function TherapistsCard() {
   return (
     <>
       <main className="lg:grid lg:grid-cols-[1fr_1fr] lg:gap-2">

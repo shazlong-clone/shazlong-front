@@ -1,19 +1,30 @@
 import React, { useEffect, useState } from 'react';
 import logo from '../../assets/images/shezlong-logo.svg';
-import { Button, ButtonToolbar, Checkbox, CheckboxGroup, Form, Input, InputGroup, InputPicker, Radio, RadioGroup } from 'rsuite';
+import {
+  Button,
+  ButtonToolbar,
+  Checkbox,
+  CheckboxGroup,
+  Form,
+  Input,
+  InputGroup,
+  InputPicker,
+  Radio,
+  RadioGroup,
+  Schema,
+} from 'rsuite';
 import EyeIcon from '@rsuite/icons/legacy/Eye';
 import EyeSlashIcon from '@rsuite/icons/legacy/EyeSlash';
 import clsx from 'clsx';
 import { Link } from 'react-router-dom';
 import { FaLock } from 'react-icons/fa';
-import undraw_sign_up from '../../assets/images/undraw_sign_up.svg';
 const { Group, HelpText, Control } = Form;
 function SignUpForm() {
   const [visible, setVisible] = useState(false);
   const [visibleConfirm, setVisibleConConfirm] = useState(false);
   const [countries, setCountries] = useState([]);
-
-  const selectData = countries?.map((item) => ({
+  const [countryCode, setCountryCode] = useState('+20');
+  const countriesData = countries?.map((item) => ({
     label: (
       <div key={item?.country_code} className="flex gap-1">
         <span className={clsx(item?.country_flag, 'min-w-[1.3em]')} />
@@ -24,6 +35,31 @@ function SignUpForm() {
     value: item?.country_code,
   }));
 
+  const model = Schema.Model({
+    user_name: Schema.Types.StringType().isRequired('This field is required.'),
+    email: Schema.Types.StringType().isEmail('Please enter a valid email address.'),
+    password: Schema.Types.StringType().isRequired('This field is required'),
+    password_confirm: Schema.Types.StringType().isRequired('This field is required'),
+    country: Schema.Types.StringType().isRequired('This field is required'),
+    phone: Schema.Types.NumberType().isRequired('This field is required'),
+    gender: Schema.Types.StringType().isRequired('This field is required'),
+    accept_licence: Schema.Types.StringType().isRequired('This field is required'),
+  });
+  const [formValue, setFormValues] = useState({
+    user_name: '',
+    email: '',
+    password: '',
+    password_confirm: '',
+    country: '+20',
+    phone: '',
+    gender: '',
+    accept_licence: '',
+  });
+  const onSubmit = (isValid) => {
+    console.log(formValue);
+    if (!isValid) return;
+    console.log('iam happy');
+  };
   useEffect(() => {
     fetch('/countries.json').then((res) => {
       res.json().then((resJosn) => {
@@ -35,71 +71,80 @@ function SignUpForm() {
   return (
     <main className="lg:px-0 lg:w-full">
       <div className="lg:grid lg:grid-cols-[1fr_1.5fr] items-start">
-        <section className="mb-5 mx-auto lg:max-w-sm py-10 lg:py-0 container">
+        <section className="mb-5 mx-auto lg:max-w-sm py-10 container">
           <div className="text-center">
-            <img width="70%" src={logo} alt="/" />
+            <Link to="/">
+              <img width="70%" src={logo} alt="/" />
+            </Link>
             <strong className="mt-8 block">All fields marked with * are required</strong>
           </div>
-          <Form fluid className="mt-5 sign-form">
+          <Form formValue={formValue} onChange={setFormValues} model={model} fluid className="mt-5 sign-form">
             <Group controlId="user_name">
               <Control size="lg" placeholder="User Name" name="user_name" block />
               <HelpText>You can use letters a-z, numbers and periods (- , _ , .)</HelpText>
             </Group>
             <Group controlId="email">
-              <Control size="lg" block placeholder="Email" name="email" type="email" />
+              <Control size="lg" block placeholder="Email" name="email" />
               <HelpText>*Email is required</HelpText>
             </Group>
             <Group controlId="password">
-              <Control size="lg" inside name="password" accepter={InputGroup}>
-                <Input placeholder="Password" type={visible ? 'text' : 'password'} />
+              <InputGroup>
+                <Control size="lg" inside name="password" placeholder="Password" type={visible ? 'text' : 'password'} />
                 <InputGroup.Button onClick={() => setVisible(!visible)}>
                   {visible ? <EyeIcon /> : <EyeSlashIcon />}
                 </InputGroup.Button>
-              </Control>
+              </InputGroup>
             </Group>
             <Group controlId="password_confirm">
-              <Control size="lg" inside name="password_confirm" accepter={InputGroup}>
-                <Input placeholder="Password Confirm" type={visibleConfirm ? 'text' : 'password'} />
+              <InputGroup accepter={InputGroup}>
+                <Control
+                  placeholder="Password Confirm"
+                  size="lg"
+                  name="password_confirm"
+                  inside
+                  type={visibleConfirm ? 'text' : 'password'}
+                />
                 <InputGroup.Button onClick={() => setVisibleConConfirm(!visibleConfirm)}>
                   {visibleConfirm ? <EyeIcon /> : <EyeSlashIcon />}
                 </InputGroup.Button>
-              </Control>
+              </InputGroup>
             </Group>
             <Group controlId="country">
               <Control
+                onSelect={setCountryCode}
                 placeholder="Country"
                 menuMaxHeight={300}
                 menuStyle={{ maxWidth: '10px' }}
                 block
                 name="country"
                 accepter={InputPicker}
-                data={selectData}
+                data={countriesData}
                 size="lg"
               />
             </Group>
-            <Group>
+            <Group controlId="phone">
               <Control name="phone" accepter={InputGroup}>
-                <InputGroup.Addon>+20</InputGroup.Addon>
-                <Input placeholder="Phone Number" type="number" size="lg" />
+                <InputGroup.Addon>{countryCode}</InputGroup.Addon>
+                <Input placeholder="Phone Number" size="lg" />
               </Control>
               <HelpText> * Please make sure you enter a valid phone number </HelpText>
             </Group>
-            <Group controlId="radioList">
+            <Group controlId="gender">
               <Control accepter={RadioGroup} name="gender" inline>
                 <Radio value="Male">Male</Radio>
                 <Radio value="Female">Female</Radio>
               </Control>
             </Group>
-            <Group>
+            <Group controlId="accept_licence">
               <Control accepter={CheckboxGroup}>
-                <Checkbox name="licence">
+                <Checkbox name="accept_licence">
                   I agree with the <Link> privacy policy</Link>{' '}
                 </Checkbox>
               </Control>
             </Group>
-            <Group>
+            <Group controlId="submit">
               <ButtonToolbar>
-                <Button appearance="primary" block={<FaLock />}>
+                <Button onClick={onSubmit} appearance="primary" type="submit" block={<FaLock />}>
                   <strong className="pb-[1px] mx-[2px]">Sign Up</strong>
                 </Button>
               </ButtonToolbar>
@@ -113,7 +158,7 @@ function SignUpForm() {
         </section>
         <section className="relative">
           <img
-            className="max-w-full w-full  lg:h-[100vh] object-cover backdrop-blur-sm"
+            className="max-w-full w-full  lg:h-full lg:max-h-[100vh] object-cover"
             src="https://www.shezlong.com/en/road-bg.a4abe39e13ffffee.jpg"
             alt="undraw_sign_up"
           />
