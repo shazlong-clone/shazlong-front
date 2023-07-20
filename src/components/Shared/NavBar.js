@@ -76,16 +76,16 @@ function NavBar() {
               </article>
             );
           })}
-          <article className="text-green border border-solid border-green py-1 px-2 rounded-3xl cursor-pointer  lg:py-1 lg:px-5 text-sm rtl:text-[10px] lg:text-base">
-            <Link className="text-inherit hover:no-underline hover:text-inherit" to="/sign-in">
+          <Link className="text-inherit hover:no-underline hover:text-inherit" to="/sign-in">
+            <article className="text-green border border-solid border-green py-1 px-2 rounded-3xl cursor-pointer  lg:py-1 lg:px-5 text-sm rtl:text-[10px] lg:text-base">
               {t('Sign_In')}
-            </Link>
-          </article>
-          <article className="text-white bg-green py-1 px-2 rounded-3xl cursor-pointer  lg:py-1 lg:px-5 text-sm rtl:text-[10px] lg:text-base flex rtl:pt-2">
-            <Link className="text-inherit hover:no-underline hover:text-inherit" to="/sign-up">
+            </article>
+          </Link>
+          <Link className="text-inherit hover:no-underline hover:text-inherit" to="/sign-up">
+            <article className="text-white bg-green py-1 px-2 rounded-3xl cursor-pointer  lg:py-1 lg:px-5 text-sm rtl:text-[10px] lg:text-base flex rtl:pt-2">
               {t('Sign_Up')}
-            </Link>
-          </article>
+            </article>
+          </Link>
           <article>
             {/* <section className={clsx(open && 'text-cyan', 'flex items-center')}>
               <Whisper
