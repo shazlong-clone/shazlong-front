@@ -2,7 +2,6 @@ import React from 'react';
 import { Suspense, lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import ErrorBoundary from './components/Shared/ErrorBoundary';
-import SignUp from './pages/SignUp';
 import LayOut from './components/Shared/LayOut';
 import Loading from './components/Shared/BackDropLoading';
 import LangWrapper from './components/Shared/LangWrapper';
@@ -14,6 +13,8 @@ const Error = lazy(() => import('./pages/Error'));
 const Instructions = lazy(() => import('./pages/Instructions'));
 const Online = lazy(() => import('./pages/Online'));
 const MyTherapy = lazy(() => import('./pages/MyTherapy'));
+const SignUp = lazy(() => import('./pages/SignUp'));
+const SignIn = lazy(() => import('./pages/SignIn'));
 const Test = lazy(() => import('./components/Shared/Test'));
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
         <LangWrapper>
           <Routes>
             <Route path="/sign-up" element={<SignUp />} />
+            <Route path="/sign-up" element={<SignIn />} />
             <Route path="/" element={<LayOut />}>
               <Route index element={<Home />} />
               <Route exact path="therapists" element={<Therapists />} />

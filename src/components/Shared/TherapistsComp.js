@@ -9,7 +9,7 @@ function TherapistsComp() {
   return (
     <>
       <section className="mt-3">
-        <div className="grid grid-cols-1 lg:grid-cols-[1.9fr_1fr] gap-2">
+        <div className="grid grid-cols-1 lg:grid-cols-[1.9fr_5px_1fr]">
           <section>
             <InputGroup size="lg" inside className="mb-10">
               <Input placeholder="Search by Therapist Name" />
@@ -18,8 +18,9 @@ function TherapistsComp() {
               </InputGroup.Button>
             </InputGroup>
           </section>
+          <section />
           <section className="hidden lg:block">
-            <InputPicker size="lg" block data={filterMenu} />
+            <InputPicker block size="lg" data={filterMenu} />
           </section>
         </div>
       </section>

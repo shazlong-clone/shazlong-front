@@ -1,5 +1,4 @@
 import React from 'react';
-import 'aos/dist/aos.css';
 import Image from './Image';
 import SignLogo from './SignLogo';
 import SignUpForm from './SignUpForm';

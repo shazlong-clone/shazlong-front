@@ -2,14 +2,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Tajawal:wght@200;300;400;500;700;800;900&display=swap');
 /* rsuit */
 @import url('./assets/css/main.css');
-/* taiwind */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 /* slick slider css */
 @import url('./assets/css/slick.min.css');
 /* scroll */
 @import url('./assets/css/scroll.css');
+/* taiwind */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* my css */
 
 :root {
@@ -178,10 +179,7 @@ object {
 .close-right .rs-drawer-body-close {
   left: calc(100% - 50px);
 }
-.sign-form .rs-picker-select-menu {
-  max-width: 10px !important;
-}
-
-.sign-form .rs-input-group-inside.rs-input-group-lg > .rs-input-group-btn > .rs-icon {
-  font-size: 35px;
+.sign-form .rs-input-group input.rs-input ~ .rs-input-group-addon,
+.rs-input-group .rs-form-control-wrapper ~ .rs-input-group-addon {
+  font-size: 25px;
 }

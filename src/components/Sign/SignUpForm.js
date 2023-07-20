@@ -1,17 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {
-  Button,
-  ButtonToolbar,
-  Checkbox,
-  CheckboxGroup,
-  Form,
-  Input,
-  InputGroup,
-  InputPicker,
-  Radio,
-  RadioGroup,
-  Schema,
-} from 'rsuite';
+import { Button, ButtonToolbar, Checkbox, Form, Input, InputGroup, InputPicker, Radio, RadioGroup, Schema } from 'rsuite';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import EyeIcon from '@rsuite/icons/legacy/Eye';
@@ -27,13 +15,13 @@ function SignUpForm() {
   const [countryCode, setCountryCode] = useState('+20');
   const countriesData = countries?.map((item) => ({
     label: (
-      <div key={item?.country_code} className="flex gap-1">
+      <div key={item?.id} className="flex gap-1">
         <span className={clsx(item?.country_flag, 'min-w-[1.3em]')} />
         <span>{item?.country_name}</span>
         <strong className="text-gray/25">{item?.country_code}</strong>
       </div>
     ),
-    value: item?.country_code,
+    value: item?.id,
   }));
 
   const model = Schema.Model({
@@ -51,7 +39,7 @@ function SignUpForm() {
     email: '',
     password: '',
     password_confirm: '',
-    country: '+20',
+    country_id: 2500,
     phone: '',
     gender: '',
     accept_licence: '',
@@ -71,16 +59,16 @@ function SignUpForm() {
     <>
       <Form formValue={formValue} onChange={setFormValues} model={model} fluid className="mt-5 sign-form">
         <Group controlId="user_name">
-          <Control size="lg" placeholder="User Name" name="user_name" block />
+          <Control size="lg" placeholder="User Name" name="user_name" block="true" />
           <HelpText>You can use letters a-z, numbers and periods (- , _ , .)</HelpText>
         </Group>
         <Group controlId="email">
-          <Control size="lg" block placeholder="Email" name="email" />
+          <Control size="lg" block="true" placeholder="Email" name="email" />
           <HelpText>*Email is required</HelpText>
         </Group>
         <Group controlId="password">
           <InputGroup>
-            <Control size="lg" inside name="password" placeholder="Password" type={visible ? 'text' : 'password'} />
+            <Control size="lg" name="password" placeholder="Password" type={visible ? 'text' : 'password'} />
             <InputGroup.Button onClick={() => setVisible(!visible)}>{visible ? <EyeIcon /> : <EyeSlashIcon />}</InputGroup.Button>
           </InputGroup>
         </Group>
@@ -90,7 +78,6 @@ function SignUpForm() {
               placeholder="Password Confirm"
               size="lg"
               name="password_confirm"
-              inside
               type={visibleConfirm ? 'text' : 'password'}
             />
             <InputGroup.Button onClick={() => setVisibleConConfirm(!visibleConfirm)}>
@@ -98,14 +85,16 @@ function SignUpForm() {
             </InputGroup.Button>
           </InputGroup>
         </Group>
-        <Group controlId="country">
+        <Group controlId="country_id">
           <Control
-            onSelect={setCountryCode}
+            onSelect={(id) => {
+              setCountryCode(countries?.find((el) => el?.id === id)?.country_code);
+            }}
             placeholder="Country"
             menuMaxHeight={300}
             menuStyle={{ maxWidth: '10px' }}
             block
-            name="country"
+            name="country_id"
             accepter={InputPicker}
             data={countriesData}
             size="lg"
@@ -125,15 +114,13 @@ function SignUpForm() {
           </Control>
         </Group>
         <Group controlId="accept_licence">
-          <Control accepter={CheckboxGroup}>
-            <Checkbox name="accept_licence">
-              I agree with the <Link> privacy policy</Link>{' '}
-            </Checkbox>
+          <Control accepter={Checkbox} name="accept_licence">
+            I agree with the <Link> privacy policy</Link>{' '}
           </Control>
         </Group>
         <Group controlId="submit">
           <ButtonToolbar>
-            <Button onClick={onSubmit} appearance="primary" type="submit" block={<FaLock />}>
+            <Button onClick={onSubmit} appearance="primary" type="submit" block startIcon={<FaLock />}>
               <strong className="pb-[1px] mx-[2px]">Sign Up</strong>
             </Button>
           </ButtonToolbar>
