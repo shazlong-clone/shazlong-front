@@ -7,7 +7,6 @@ import user1 from '../../assets/images/user-1.svg';
 import user2 from '../../assets/images/user-2.svg';
 import therapist1 from '../../assets/images/therapist-1.svg';
 import therapist2 from '../../assets/images/therapist-2.svg';
-import clsx from 'clsx';
 function SignInComp() {
   const [isUser, setIsUser] = useState(true);
   return (

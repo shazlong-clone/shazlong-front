@@ -5,7 +5,7 @@ import therapist from '../assets/images/therapist.webp';
 import Card from '../components/Shared/Card';
 import { LuAlarmClock } from 'react-icons/lu';
 import { GiCash } from 'react-icons/gi';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { RadioTile, RadioTileGroup } from 'rsuite';
 import visa_new from '../assets/images/visa_new.png';
 import master_card_new from '../assets/images/master_card_new.svg';
@@ -34,10 +34,12 @@ const instruction = [
 function Checkout() {
   const [openCpllapse, setOpenCpllapse] = useState(false);
   const lg = useMediaQuery('lg');
+  const { doctorId } = useParams();
+
   return (
     <main className="bg-cyan/5 py-5">
       <div className="container">
-        <InternalHeader to="/">Check Out</InternalHeader>
+        <InternalHeader link={`/thearpist-profile/${doctorId}`}>Check Out</InternalHeader>
       </div>
       <div className="container grid gap-5 lg:grid-cols-2 items-start">
         <Card className="mb-0">

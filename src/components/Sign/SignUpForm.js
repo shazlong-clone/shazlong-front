@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom';
 import { FaLock } from 'react-icons/fa';
 const { Group, HelpText, Control } = Form;
 function SignUpForm() {
+  const [acceptLicence, setAcceptLicence] = useState(false);
   const [visible, setVisible] = useState(false);
   const [visibleConfirm, setVisibleConConfirm] = useState(false);
   const [countries, setCountries] = useState([]);
@@ -32,7 +33,6 @@ function SignUpForm() {
     country: Schema.Types.StringType().isRequired('This field is required'),
     phone: Schema.Types.NumberType().isRequired('This field is required'),
     gender: Schema.Types.StringType().isRequired('This field is required'),
-    accept_licence: Schema.Types.StringType().isRequired('This field is required'),
   });
   const [formValue, setFormValues] = useState({
     user_name: '',
@@ -113,14 +113,20 @@ function SignUpForm() {
             <Radio value="Female">Female</Radio>
           </Control>
         </Group>
-        <Group controlId="accept_licence">
-          <Control accepter={Checkbox} name="accept_licence">
-            I agree with the <Link> privacy policy</Link>{' '}
+        <Group controlId="accept_licence" className="ml-[-10px]">
+          <Control
+            onChange={(val, checked) => {
+              setAcceptLicence(checked);
+            }}
+            accepter={Checkbox}
+            name="accept_licence"
+          >
+            I agree with the <Link to="/licence"> privacy policy</Link>
           </Control>
         </Group>
         <Group controlId="submit">
           <ButtonToolbar>
-            <Button onClick={onSubmit} appearance="primary" type="submit" block startIcon={<FaLock />}>
+            <Button disabled={!acceptLicence} onClick={onSubmit} appearance="primary" type="submit" block startIcon={<FaLock />}>
               <strong className="pb-[1px] mx-[2px]">Sign Up</strong>
             </Button>
           </ButtonToolbar>

@@ -61,7 +61,7 @@ function TherapistsCard() {
                   <span>/ 60 mins </span>
                 </div>
                 <div className="mt-5">
-                  <Link to={`/thearpist-profile/${el?.id}`} className="block">
+                  <Link to={`/thearpist-profile/${el?.id}`} className="block active:no-underline hover:no-underline">
                     <Button appearance="primary" block>
                       View Profile
                     </Button>

@@ -53,9 +53,9 @@ function SignUpForm() {
           setAcceptLicence(checked);
         }}
       >
-        I agree with the <Link> privacy policy</Link>{' '}
+        I agree with the <Link to="/licence"> privacy policy</Link>{' '}
       </Checkbox>
-      <div className="text-center mt-[-10px]">
+      <div className="text-center mt-5">
         <Link to="/sign-up" className="underline">
           Dont Have Account Sign Up
         </Link>
