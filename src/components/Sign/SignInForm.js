@@ -30,16 +30,20 @@ function SignUpForm() {
         <Group controlId="email">
           <Control size="lg" block="true" placeholder="Email" name="email" />
         </Group>
-        <Group controlId="password">
+        <Group controlId="password" className="mb-0">
           <InputGroup>
             <Control size="lg" name="password" placeholder="Password" type={visible ? 'text' : 'password'} />
             <InputGroup.Button onClick={() => setVisible(!visible)}>{visible ? <EyeIcon /> : <EyeSlashIcon />}</InputGroup.Button>
           </InputGroup>
+          <HelpText>
+            <Link to="/forgot-password">forgot password?</Link>
+          </HelpText>
         </Group>
+
         <Group controlId="submit">
           <ButtonToolbar>
             <Button onClick={onSubmit} appearance="primary" type="submit" block startIcon={<FaLock />}>
-              <strong className="pb-[1px] mx-[2px]">Sign Up</strong>
+              <strong className="pb-[1px] mx-[2px]">Sign In</strong>
             </Button>
           </ButtonToolbar>
         </Group>

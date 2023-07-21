@@ -18,7 +18,7 @@ function SignInComp() {
           <div className="mb-5 mt-2 text-center">
             <strong>Sign in as</strong>
           </div>
-          <article className="flex gap-5 justify-center">
+          <article className="flex gap-5 justify-center text-center">
             {isUser ? (
               <>
                 <div className="cursor-pointer">
