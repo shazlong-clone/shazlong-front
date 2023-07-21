@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, ButtonToolbar, Form, InputGroup, Schema } from 'rsuite';
+import { Button, ButtonToolbar, Checkbox, Form, InputGroup, Schema } from 'rsuite';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import EyeIcon from '@rsuite/icons/legacy/Eye';
@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 const { Group, HelpText, Control } = Form;
 function SignUpForm() {
   const [visible, setVisible] = useState(false);
-
+  const [acceptLiecence, setAcceptLicence] = useState(false);
   const model = Schema.Model({
     email: Schema.Types.StringType().isEmail('Please enter a valid email address.'),
     password: Schema.Types.StringType().isRequired('This field is required'),
@@ -42,17 +42,24 @@ function SignUpForm() {
 
         <Group controlId="submit">
           <ButtonToolbar>
-            <Button onClick={onSubmit} appearance="primary" type="submit" block startIcon={<FaLock />}>
+            <Button disabled={!acceptLiecence} onClick={onSubmit} appearance="primary" type="submit" block startIcon={<FaLock />}>
               <strong className="pb-[1px] mx-[2px]">Sign In</strong>
             </Button>
           </ButtonToolbar>
         </Group>
-        <div className="text-center mt-[-10px]">
-          <Link to="/sign-up" className="underline">
-            Dont Have Account Sign Up
-          </Link>
-        </div>
       </Form>
+      <Checkbox
+        onChange={(val, checked) => {
+          setAcceptLicence(checked);
+        }}
+      >
+        I agree with the <Link> privacy policy</Link>{' '}
+      </Checkbox>
+      <div className="text-center mt-[-10px]">
+        <Link to="/sign-up" className="underline">
+          Dont Have Account Sign Up
+        </Link>
+      </div>
     </>
   );
 }
