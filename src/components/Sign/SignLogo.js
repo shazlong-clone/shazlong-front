@@ -9,7 +9,6 @@ function SignLogo() {
         <Link to="/">
           <img width="70%" src={logo} alt="/" />
         </Link>
-        <strong className="mt-8 block">All fields marked with * are required</strong>
       </div>
     </>
   );

@@ -126,7 +126,7 @@ function SignUpForm() {
           </ButtonToolbar>
         </Group>
         <div className="text-center mt-[-10px]">
-          <Link to="sign-in" className="underline">
+          <Link to="/sign-in" className="underline">
             Sign in
           </Link>
         </div>

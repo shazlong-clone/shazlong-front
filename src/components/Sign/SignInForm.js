@@ -28,12 +28,11 @@ function SignUpForm() {
     <>
       <Form formValue={formValue} onChange={setFormValues} model={model} fluid className="mt-5 sign-form">
         <Group controlId="email">
-          <Control size="lg" block placeholder="Email" name="email" />
-          <HelpText>*Email is required</HelpText>
+          <Control size="lg" block="true" placeholder="Email" name="email" />
         </Group>
         <Group controlId="password">
           <InputGroup>
-            <Control size="lg" inside name="password" placeholder="Password" type={visible ? 'text' : 'password'} />
+            <Control size="lg" name="password" placeholder="Password" type={visible ? 'text' : 'password'} />
             <InputGroup.Button onClick={() => setVisible(!visible)}>{visible ? <EyeIcon /> : <EyeSlashIcon />}</InputGroup.Button>
           </InputGroup>
         </Group>
@@ -45,8 +44,8 @@ function SignUpForm() {
           </ButtonToolbar>
         </Group>
         <div className="text-center mt-[-10px]">
-          <Link to="sign-in" className="underline">
-            Sign in
+          <Link to="/sign-up" className="underline">
+            Dont Have Account Sign Up
           </Link>
         </div>
       </Form>
