@@ -17,6 +17,7 @@ const SignUp = lazy(() => import('./pages/SignUp'));
 const SignIn = lazy(() => import('./pages/SignIn'));
 const Test = lazy(() => import('./components/Shared/Test'));
 const Licence = lazy(() => import('./pages/Licence'));
+const Blog = lazy(() => import('./pages/Blog'));
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
               <Route exact path="online" element={<Online />} />
               <Route exact path="my-therapy" element={<MyTherapy />} />
               <Route exact path="licence" element={<Licence />} />
+              <Route exact path="blog" element={<Blog />} />
               <Route exact path="test" element={<Test />} />
               <Route exact path="*" element={<Error />} />
             </Route>

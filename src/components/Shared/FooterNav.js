@@ -15,14 +15,17 @@ const menu = [
   {
     name: 'Home',
     icon: <AiOutlineHome />,
+    link: '/',
   },
   {
     name: 'Test',
     icon: <BiTestTube />,
+    link: '/test',
   },
   {
     name: 'Blog',
     icon: <FaBlog />,
+    link: '/blog',
   },
 ];
 
@@ -76,7 +79,7 @@ function FooterNav() {
                 return (
                   <Link
                     key={Math.random()}
-                    to="/"
+                    to={el?.link}
                     className="text-gray active:underline-none active:on-underline focus:no-underline"
                     onClick={() => setOpen(false)}
                   >

@@ -32,7 +32,7 @@ function NavBar() {
     },
     {
       name: t('Blog'),
-      to: '/',
+      to: '/blog',
     },
   ];
 

@@ -20,10 +20,20 @@ module.exports = {
           '0%': { transform: 'rotate(180deg)' },
           '100%': { transform: 'rotate(0deg)' },
         },
+        scalldown: {
+          '0%': { transform: 'scale(1)' },
+          '100%': { transform: 'scale(0)' },
+        },
+        scallup: {
+          '0%': { transform: 'scale(0)' },
+          '100%': { transform: 'scale(1)' },
+        },
       },
       animation: {
         rclock: 'rclock 300ms 1 forwards',
         raclock: 'raclock 300ms 1 forwards',
+        scalldown: 'scalldown 300ms   1 forwards',
+        scallup: 'scallup  300ms  1 forwards',
       },
     },
   },
