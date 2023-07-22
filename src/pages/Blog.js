@@ -7,11 +7,13 @@ import ArrowDownLineIcon from '@rsuite/icons/ArrowDownLine';
 import clsx from 'clsx';
 import { Input, InputGroup } from 'rsuite';
 import SearchIcon from '@rsuite/icons/Search';
+import { FaFacebookF } from 'react-icons/fa';
+import { GrLinkedinOption } from 'react-icons/gr';
+import { FiInstagram } from 'react-icons/fi';
 
 function Blog() {
   const [show, setShow] = React.useState(false);
   const [open, setOpen] = React.useState(false);
-  const [searchText, setSearchText] = React.useState('');
 
   const onChange = () => setShow(!show);
   const searckList = ['Neuroscience(1)', 'Brain Science(2)', 'Psychotherapy(3)', 'COVID-19(6)', 'General Topics(9)'];
@@ -32,27 +34,36 @@ function Blog() {
   ));
   return (
     <main className="bg-gray/5 py-5">
-      <input
-        onChange={(e) => setSearchText(e.target.value)}
-        placeholder="Search.."
-        className="all-unset placeholder-gray placeholder-opacity-50 grow"
-      />
       <div className="container">
-        <InternalHeader>Blogs</InternalHeader>
+        <InternalHeader
+          icon={
+            <Button className="flex items-center text-xl font-bold text-gray p-4" block onClick={onChange}>
+              {
+                <>
+                  <AlignJustifyIcon className={clsx('absolute', !show ? 'animate-scallup' : 'animate-scalldown')} />
+                  <CloseIcon className={clsx('absolute', show ? 'animate-scallup' : 'animate-scalldown')} />
+                </>
+              }
+            </Button>
+          }
+        >
+          Blogs
+        </InternalHeader>
       </div>
-      <Button className="rounded-none flex items-center text-xl font-bold text-gray py-4" block onClick={onChange}>
-        {
-          <>
-            <AlignJustifyIcon className={clsx('absolute', !show ? 'animate-scallup' : 'animate-scalldown')} />
-            <CloseIcon className={clsx('absolute', show ? 'animate-scallup' : 'animate-scalldown')} />
-          </>
-        }
-      </Button>
+
       <div className="font-bold">
         <Animation.Collapse in={show}>
           {(props, ref) => (
             <main {...props} ref={ref}>
               <div className="text-gray bg-[#EFF8FC] px-4 py-5">
+                <section className="flex items-center justify-between text-xl gap-2 mb-5">
+                  <InputGroup>
+                    <Input placeholder="Search" />
+                    <InputGroup.Button>
+                      <SearchIcon />
+                    </InputGroup.Button>
+                  </InputGroup>
+                </section>
                 <section onClick={() => setOpen(!open)} className="flex justify-between cursor-pointer mb-5">
                   <span>Seciality </span>
                   <span>
@@ -60,13 +71,16 @@ function Blog() {
                   </span>
                 </section>
                 <Animation.Collapse in={open}>{(props, ref) => <Drop {...props} ref={ref} />}</Animation.Collapse>
-                <section className="flex items-center justify-between text-xl gap-2">
-                  <InputGroup>
-                    <Input placeholder="Search" />
-                    <InputGroup.Button>
-                      <SearchIcon />
-                    </InputGroup.Button>
-                  </InputGroup>
+                <section className="flex divide-y-0 divide-x divide-solid [&>a]:px-10 [&>a]:grow text-center mt-10 text-2xl">
+                  <a href="https://www.facebook.com/ShezlongApp/">
+                    <FaFacebookF />
+                  </a>
+                  <a href="https://www.linkedin.com/company/shezlong/?originalSubdomain=ae">
+                    <GrLinkedinOption />
+                  </a>
+                  <a href="https://www.linkedin.com/company/shezlong/?originalSubdomain=ae">
+                    <FiInstagram />
+                  </a>
                 </section>
               </div>
             </main>

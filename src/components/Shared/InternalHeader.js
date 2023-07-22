@@ -11,7 +11,7 @@ function InternalHeader({ className, ...props }) {
         </Link>
       </h3>
       <h3>{props?.children}</h3>
-      <h3>&nbsp; &nbsp;</h3>
+      {props.icon ? <h3>{props.icon}</h3> : <h3>&nbsp; &nbsp;</h3>}
     </section>
   );
 }
