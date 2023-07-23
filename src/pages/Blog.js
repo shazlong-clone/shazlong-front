@@ -7,24 +7,17 @@ import NewArticles from '../components/Blog/NewArticles';
 
 function Blog() {
   return (
-    <main className="bg-gray/5">
-      <section className="lg:hidden">
-        <SearchMobile />
-      </section>
-      <section className="hidden lg:block ">
-        <SearchDeskTop />
-      </section>
-      <section>
-        <FeaturedArticales />
-      </section>
-      <section>
-        <LatestArticles />
-      </section>
-      <section>
-        <NewArticles />
-      </section>
-      
-    </main>
+    <>
+    <section>
+    <FeaturedArticales />
+  </section>
+  <section>
+    <LatestArticles />
+  </section>
+  <section>
+    <NewArticles />
+  </section>
+    </>
   );
 }
 

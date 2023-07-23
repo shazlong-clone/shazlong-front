@@ -6,7 +6,7 @@ import { twMerge } from 'tailwind-merge';
 function BlogInfo({ className, ...rest }) {
   return (
     <>
-      <aside className={twMerge('flex gap-2 mt-2 text-sm font-[500]', className)} {...rest}>
+      <aside className={twMerge('flex gap-2 my-2 text-sm font-[500]', className)} {...rest}>
         <span>April 10, 2023</span>
         <span className="flex items-center">
           337 <AiFillEye className="text-xl" />

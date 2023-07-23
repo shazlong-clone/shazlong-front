@@ -3,6 +3,7 @@ import { Suspense, lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import ErrorBoundary from './components/Shared/ErrorBoundary';
 import LayOut from './components/Shared/LayOut';
+import BlogLayOut from './components/Shared/BlogLayout';
 import Loading from './components/Shared/BackDropLoading';
 import LangWrapper from './components/Shared/LangWrapper';
 const Home = lazy(() => import('./pages/Home'));
@@ -36,7 +37,9 @@ function App() {
               <Route exact path="online" element={<Online />} />
               <Route exact path="my-therapy" element={<MyTherapy />} />
               <Route exact path="licence" element={<Licence />} />
-              <Route exact path="blog" element={<Blog />} />
+              <Route exact path="blog" element={<BlogLayOut />}>
+                <Route index  element={<Blog />} />
+              </Route>
               <Route exact path="test" element={<Test />} />
               <Route exact path="*" element={<Error />} />
             </Route>
