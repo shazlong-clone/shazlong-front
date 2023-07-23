@@ -190,3 +190,26 @@ object {
   color: var(--gray);
   opacity: 0.5;
 }
+
+.slick-blog .slick-dots li button:before {
+  content: ' ';
+  @apply bg-white rounded-full border border-cyan border-solid w-[15px] h-[15px];
+}
+
+.slick-blog .slick-dots li.slick-active button:before {
+  @apply bg-cyan;
+}
+
+.slick-blog .slick-next:before,
+.slick-prev:before {
+  @apply hidden;
+}
+/* 
+.slick-blog .slick-initialized,
+.slick-blog .slick-slider {
+  overflow: hidden;
+} */
+.slick-blog .slick-slider {
+  width: 100%;
+  max-width: 720px;
+}
