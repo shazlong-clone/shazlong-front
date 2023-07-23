@@ -12,3 +12,5 @@ export const filterMenu = [
     value: '3',
   },
 ];
+
+export const searckList = ['Neuroscience(1)', 'Brain Science(2)', 'Psychotherapy(3)', 'COVID-19(6)', 'General Topics(9)'];

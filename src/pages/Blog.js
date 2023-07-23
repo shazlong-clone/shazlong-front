@@ -1,92 +1,20 @@
 import React from 'react';
-import InternalHeader from '../components/Shared/InternalHeader';
-import { Animation, Button } from 'rsuite';
-import AlignJustifyIcon from '@rsuite/icons/legacy/AlignJustify';
-import CloseIcon from '@rsuite/icons/Close';
-import ArrowDownLineIcon from '@rsuite/icons/ArrowDownLine';
-import clsx from 'clsx';
-import { Input, InputGroup } from 'rsuite';
-import SearchIcon from '@rsuite/icons/Search';
-import { FaFacebookF } from 'react-icons/fa';
-import { GrLinkedinOption } from 'react-icons/gr';
-import { FiInstagram } from 'react-icons/fi';
+import SearchMobile from '../components/Blog/SearchMobile';
+import SearchDeskTop from '../components/Blog/SearchDeskTop';
+import FeaturedArticales from '../components/Blog/FeaturedArticales';
 
 function Blog() {
-  const [show, setShow] = React.useState(false);
-  const [open, setOpen] = React.useState(false);
-
-  const onChange = () => setShow(!show);
-  const searckList = ['Neuroscience(1)', 'Brain Science(2)', 'Psychotherapy(3)', 'COVID-19(6)', 'General Topics(9)'];
-  const Drop = React.forwardRef((props, ref) => (
-    <div {...props} ref={ref}>
-      <div className="text-gray bg-[#EFF8FC]">
-        <ul className="list-none  font-[600] [&>li]:py-2 text-sm ">
-          {searckList?.map((el) => {
-            return (
-              <li className="cursor-pointer" key={Math.random()}>
-                {el}
-              </li>
-            );
-          })}
-        </ul>
-      </div>
-    </div>
-  ));
   return (
-    <main className="bg-gray/5 py-5">
-      <div className="container">
-        <InternalHeader
-          icon={
-            <Button className="flex items-center text-xl font-bold text-gray p-4" block onClick={onChange}>
-              {
-                <>
-                  <AlignJustifyIcon className={clsx('absolute', !show ? 'animate-scallup' : 'animate-scalldown')} />
-                  <CloseIcon className={clsx('absolute', show ? 'animate-scallup' : 'animate-scalldown')} />
-                </>
-              }
-            </Button>
-          }
-        >
-          Blogs
-        </InternalHeader>
-      </div>
-
-      <div className="font-bold">
-        <Animation.Collapse in={show}>
-          {(props, ref) => (
-            <main {...props} ref={ref}>
-              <div className="text-gray bg-[#EFF8FC] px-4 py-5">
-                <section className="flex items-center justify-between text-xl gap-2 mb-5">
-                  <InputGroup>
-                    <Input placeholder="Search" />
-                    <InputGroup.Button>
-                      <SearchIcon />
-                    </InputGroup.Button>
-                  </InputGroup>
-                </section>
-                <section onClick={() => setOpen(!open)} className="flex justify-between cursor-pointer mb-5">
-                  <span>Seciality </span>
-                  <span>
-                    <ArrowDownLineIcon className={clsx(open ? 'animate-rclock' : 'animate-raclock')} />
-                  </span>
-                </section>
-                <Animation.Collapse in={open}>{(props, ref) => <Drop {...props} ref={ref} />}</Animation.Collapse>
-                <section className="flex divide-y-0 divide-x divide-solid [&>a]:px-10 [&>a]:grow text-center mt-10 text-2xl">
-                  <a href="https://www.facebook.com/ShezlongApp/">
-                    <FaFacebookF />
-                  </a>
-                  <a href="https://www.linkedin.com/company/shezlong/?originalSubdomain=ae">
-                    <GrLinkedinOption />
-                  </a>
-                  <a href="https://www.linkedin.com/company/shezlong/?originalSubdomain=ae">
-                    <FiInstagram />
-                  </a>
-                </section>
-              </div>
-            </main>
-          )}
-        </Animation.Collapse>
-      </div>
+    <main className="bg-gray/5">
+      <section className="lg:hidden">
+        <SearchMobile />
+      </section>
+      <section className="hidden lg:block ">
+        <SearchDeskTop />
+      </section>
+      <section>
+        <FeaturedArticales />
+      </section>
     </main>
   );
 }
