@@ -24,10 +24,8 @@ function FeaturedArticales() {
   const [ref, hovering] = useHover();
 
   return (
-    <div className="pt-[59px] rounded-lg container pb-5 xl:grid xl:grid-cols-[1fr_405px] xl:gap-5 xl:mt-10">
-      <section
-        className="xl:grid group xl:grid-cols-2 xl:gap-5 rounded-lg bg-white mt-5 xl:mt-0 hover:shadow-md transition"
-      >
+    <div className="rounded-lg container pb-5 xl:grid xl:grid-cols-[1fr_405px] xl:gap-5 xl:mt-10">
+      <section className="xl:grid group xl:grid-cols-2 xl:gap-5 rounded-lg bg-white mt-5 xl:mt-0 hover:shadow-md transition">
         <article className="h-full relative">
           <Link ref={ref}>
             <img

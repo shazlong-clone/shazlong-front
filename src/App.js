@@ -18,6 +18,7 @@ const SignUp = lazy(() => import('./pages/SignUp'));
 const SignIn = lazy(() => import('./pages/SignIn'));
 const Test = lazy(() => import('./components/Shared/Test'));
 const Licence = lazy(() => import('./pages/Licence'));
+const Blogs = lazy(() => import('./pages/Blogs'));
 const Blog = lazy(() => import('./pages/Blog'));
 
 function App() {
@@ -38,7 +39,8 @@ function App() {
               <Route exact path="my-therapy" element={<MyTherapy />} />
               <Route exact path="licence" element={<Licence />} />
               <Route exact path="blog" element={<BlogLayOut />}>
-                <Route index  element={<Blog />} />
+                <Route index element={<Blogs />} />
+                <Route exact path=":id" element={<Blog />} />
               </Route>
               <Route exact path="test" element={<Test />} />
               <Route exact path="*" element={<Error />} />
