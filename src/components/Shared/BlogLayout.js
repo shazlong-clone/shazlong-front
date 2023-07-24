@@ -8,10 +8,10 @@ const BlogLayout = () => {
         <section className="lg:hidden">
           <SearchMobile />
         </section>
-        <section className="hidden lg:block ">
+        <section className="hidden lg:block">
           <SearchDeskTop />
         </section>
-        <section className="pt-[59px]">
+        <section className="xl:pt-[59px]">
           <Outlet />
         </section>
       </main>

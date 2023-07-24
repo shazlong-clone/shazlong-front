@@ -36,7 +36,7 @@ function FeaturedArticales() {
               alt="dd"
             />
             <div className="absolute bg-gray/50 top-0 left-0 w-full h-full text-white rounded-t-lg xl:rounded-l-lg xl:rounded-t-none overflow-hidden">
-              <span className="bg-white text-cyan rounded-3xl font-bold px-3 py-2 absolute left-3 top-3 text-sm">welness</span>
+              <span className="bg-white text-cyan rounded-3xl font-bold px-3 py-2 absolute left-3 top-3 text-sm">wellness</span>
               <div className="absolute bottom-0 left-0 p-2 xl:translate-y-[100%] group-hover:translate-y-[0%] transition">
                 <span className="text-sm">shred on:</span>
                 <p className="flex items-center gap-2">
@@ -68,7 +68,7 @@ function FeaturedArticales() {
           <BlogInfo />
         </article>
       </section>
-      <section className="slick-blog mt-10 xl:mt-0">
+      <section className="slick-blog slick-container mt-10 xl:mt-0">
         <Card className="pb-10 xl:mb-0 rounded-lg">
           <h3 className="text-center mb-3">Get Help</h3>
           <Slider {...settings}>

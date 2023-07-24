@@ -7,11 +7,11 @@ function BlogInfo({ className, ...rest }) {
   return (
     <>
       <aside className={twMerge('flex gap-2 my-2 text-sm font-[500]', className)} {...rest}>
-        <span>April 10, 2023</span>
-        <span className="flex items-center">
+        <span>April 10, 2023</span> 
+        <span className="flex items-center gap-1">
           337 <AiFillEye className="text-xl" />
         </span>
-        <span className="flex items-center">
+        <span className="flex items-center gap-1">
           5min <VscBook className="text-xl text-gray" />
         </span>
       </aside>
