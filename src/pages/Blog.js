@@ -9,6 +9,7 @@ import BlogHtml from '../components/Shared/BlogHtml';
 import Card from '../components/Shared/Card';
 import Slider from 'react-slick';
 import { GiCash } from 'react-icons/gi';
+import InternalHeader from '../components/Shared/InternalHeader';
 import { ButtonToolbar, Schema, Rate, Form, Button, Input, InputGroup } from 'rsuite';
 import { BsPlayFill } from 'react-icons/bs';
 const { Group, HelpText, Control, ControlLabel } = Form;
@@ -36,15 +37,16 @@ function Blog() {
   return (
     <main className="py-5">
       <div className="container">
-        <div className=" px-5 py-5">
-          <section className="xl:grid xl:grid-cols-2 gap-8 bg-white rounded-lg hover:shadow-lg transition">
+        <InternalHeader link="/blogs">Blog</InternalHeader>
+        <div className="py-5">
+          <section className="xl:grid xl:grid-cols-2 gap-8 bg-gray/5 rounded-lg shadow-lg transition">
             <article className="relative max-h-[350px]">
               <img
                 width="100%"
                 className="object-cover rounded-t-lg xl:rounded-r-none xl:rounded-l-lg max-h-[350px]"
                 src={blogimg}
               />
-              <span className=" text-cyan rounded-3xl font-bold px-3 py-2 absolute left-3 top-3 text-sm">wellness</span>
+              <span className=" text-cyan bg-white rounded-3xl font-bold px-3 py-2 absolute left-3 top-3 text-sm">wellness</span>
             </article>
             <article className="px-5  xl:px-10 py-2 text-gray/80 xl:relative">
               <aside>

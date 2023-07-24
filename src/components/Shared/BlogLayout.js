@@ -1,6 +1,6 @@
-import { Outlet } from 'react-router-dom';
 import SearchMobile from '../Blog/SearchMobile';
 import SearchDeskTop from '../Blog/SearchDeskTop';
+import Blogs from '../../pages/Blogs';
 const BlogLayout = () => {
   return (
     <>
@@ -12,7 +12,7 @@ const BlogLayout = () => {
           <SearchDeskTop />
         </section>
         <section className="xl:pt-[59px]">
-          <Outlet />
+          <Blogs />
         </section>
       </main>
     </>
