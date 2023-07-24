@@ -1,38 +1,35 @@
-import React, { Component } from 'react';
-import Slider from 'react-slick';
+import React from 'react';
+import { Form, ButtonToolbar, Button, Input } from 'rsuite';
 
-export default class SimpleSlider extends Component {
-  render() {
-    const settings = {
-      dots: true,
-      infinite: true,
-      speed: 500,
-      slidesToShow: 1,
-      slidesToScroll: 1,
-    };
-    return (
-      <div className="">
-        <Slider {...settings}>
-          <div>
-            <h3>1</h3>
-          </div>
-          <div>
-            <h3>2</h3>
-          </div>
-          <div>
-            <h3>3</h3>
-          </div>
-          <div>
-            <h3>4</h3>
-          </div>
-          <div>
-            <h3>5</h3>
-          </div>
-          <div>
-            <h3>6</h3>
-          </div>
-        </Slider>
-      </div>
-    );
-  }
-}
+const Textarea = React.forwardRef((props, ref) => <Input {...props} as="textarea" ref={ref} />);
+
+const App = () => (
+  <Form>
+    <Form.Group controlId="name">
+      <Form.ControlLabel>Username</Form.ControlLabel>
+      <Form.Control name="name" />
+      <Form.HelpText>Username is required</Form.HelpText>
+    </Form.Group>
+    <Form.Group controlId="email">
+      <Form.ControlLabel>Email</Form.ControlLabel>
+      <Form.Control name="email" type="email" />
+      <Form.HelpText tooltip>Email is required</Form.HelpText>
+    </Form.Group>
+    <Form.Group controlId="password">
+      <Form.ControlLabel>Password</Form.ControlLabel>
+      <Form.Control name="password" type="password" autoComplete="off" />
+    </Form.Group>
+    <Form.Group controlId="textarea">
+      <Form.ControlLabel>Textarea</Form.ControlLabel>
+      <Form.Control rows={5} name="textarea" accepter={Textarea} />
+    </Form.Group>
+    <Form.Group>
+      <ButtonToolbar>
+        <Button appearance="primary">Submit</Button>
+        <Button appearance="default">Cancel</Button>
+      </ButtonToolbar>
+    </Form.Group>
+  </Form>
+);
+
+export default App;
