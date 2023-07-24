@@ -28,7 +28,7 @@ function NavBar() {
     },
     {
       name: t('Psychometer'),
-      to: '/',
+      to: '/psychometer',
     },
     {
       name: t('Blog'),

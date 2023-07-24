@@ -1,9 +1,9 @@
 import React from 'react';
-import FeaturedArticales from '../components/Blog/FeaturedArticales';
-import LatestArticles from '../components/Blog/LatestArticles';
-import NewArticles from '../components/Blog/NewArticles';
-import SearchMobile from '../components/Blog/SearchMobile';
-import SearchDeskTop from '../components/Blog/SearchDeskTop';
+import FeaturedArticales from '../components/Blogs/FeaturedArticales';
+import LatestArticles from '../components/Blogs/LatestArticles';
+import NewArticles from '../components/Blogs/NewArticles';
+import SearchMobile from '../components/Blogs/SearchMobile';
+import SearchDeskTop from '../components/Blogs/SearchDeskTop';
 function Blogs() {
   return (
     <>

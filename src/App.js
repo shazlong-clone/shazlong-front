@@ -19,6 +19,7 @@ const Test = lazy(() => import('./components/Shared/Test'));
 const Licence = lazy(() => import('./pages/Licence'));
 const Blogs = lazy(() => import('./pages/Blogs'));
 const Blog = lazy(() => import('./pages/Blog'));
+const Psychometer = lazy(() => import('./pages/Psychometer'));
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
               <Route exact path="licence" element={<Licence />} />
               <Route exact path="blogs" element={<Blogs />} />
               <Route exact path="blog/:id" element={<Blog />} />
+              <Route exact path="psychometer" element={<Psychometer />} />
               <Route exact path="test" element={<Test />} />
               <Route exact path="*" element={<Error />} />
             </Route>
