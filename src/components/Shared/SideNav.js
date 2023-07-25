@@ -18,14 +18,14 @@ const menu = [
     link: '/',
   },
   {
-    name: 'Test',
+    name: 'Psychmeter',
     icon: <BiTestTube />,
-    link: '/test',
+    link: '/psychometer',
   },
   {
     name: 'Blog',
     icon: <FaBlog />,
-    link: '/blog',
+    link: '/blogs',
   },
 ];
 

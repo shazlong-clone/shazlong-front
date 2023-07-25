@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Footer from './Footer';
-import FooterNav from './FooterNav';
+import FooterNav from './SideNav';
 
 function FooterMenu() {
   return (

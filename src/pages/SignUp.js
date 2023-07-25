@@ -1,6 +1,6 @@
 import React from 'react';
 
-import FooterNav from '../components/Shared/FooterNav';
+import FooterNav from '../components/Shared/SideNav';
 import SignUpComp from '../components/Sign/SignUpComp';
 function SignUp() {
   return (
