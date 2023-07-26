@@ -2,22 +2,100 @@ import React from 'react';
 import InternalHeader from '../components/Shared/InternalHeader';
 import psychometer from '../assets/images/psychometer.png';
 import { AiOutlineCheckCircle } from 'react-icons/ai';
-import { Table } from 'rsuite';
+import { IconButton, Table } from 'rsuite';
+import CollaspedOutlineIcon from '@rsuite/icons/CollaspedOutline';
+import ExpandOutlineIcon from '@rsuite/icons/ExpandOutline';
+import useMediaQuery from '../utils/useMediaQuery';
+import DoctorsSlider from '../components/Shared/DoctorsSlider';
+
 const { Column, HeaderCell, Cell } = Table;
-const data = Array(10)
-  .fill('')
-  .map((el, i) => {
-    return {
-      id: i,
-      firstName: 'firstName' + i,
-      lastName: 'lastName' + i,
-      gender: 'gender' + i,
-      age: 'age' + i,
-      postcode: 'postcode' + i,
-      email: 'email' + i,
-    };
-  });
+const rowKey = 'title';
+const ExpandCell = ({ rowData, expandedRowKeys, onChange, ...props }) => (
+  <Cell {...props} style={{ padding: 5 }}>
+    <IconButton
+      appearance="subtle"
+      onClick={() => {
+        onChange(rowData);
+      }}
+      icon={expandedRowKeys.some((key) => key === rowData[rowKey]) ? <CollaspedOutlineIcon /> : <ExpandOutlineIcon />}
+    />
+  </Cell>
+);
+const data = [
+  {
+    title: 'Depression, Anxiety and stress scale',
+    description:
+      'This test is designed to measure your psychological state with\n            regards to the degree of depression, stress and anxiety. Please read\n            the test sentences and choose the best answer that fits you during\n            the last 2 weeks.\n            See More',
+    recomination: 'Every 2 weeks',
+    testPeriod: '1:30 Mins',
+  },
+  {
+    title: 'Anxiety scale',
+    description:
+      'This test is designed to measure your anxiety degree. Please read\n            the test sentences and choose the best answer that fits you during\n            the last 2 weeks.\n            See More',
+    recomination: 'Every 2 weeks',
+    testPeriod: '1:30 Mins',
+  },
+  {
+    title: 'Depression scale',
+    description:
+      'This test is designed to measure your depression degree. Please read\n            the test sentences and choose the best answer that fits you during\n            the last 2 weeks.\n            See More',
+    recomination: 'Every 2 weeks',
+    testPeriod: '1:30 Mins',
+  },
+  {
+    title: 'OCD scale',
+    description:
+      'Obsessions are unwelcome or distressing ideas, thoughts, images or\n            impulses that repeatedly enter your mind. They may seem to occur\n            against your will. They may be repugnant to you, are often\n            senseless, and may not fit your actual personality at all (for\n            example, the recurrent thought or impulse to harm to your children,\n            even though you never This test is designed to measure your\n            obsessive comupulsive symptoms. Obsessions are unwelcome or\n            distressing ideas, thoughts, images or impulses that repeatedly\n            enter your mind. They may seem to occur against your will. They may\n            be repugnant to you, are often senseless, and may not fit your\n            actual personality at all. Compulsions are behaviors or acts that\n            you feel driven to perform, even though you may recognize them as\n            senseless or excessive. At times, you may try to resist doing them,\n            but this may prove difficult. You may experience anxiety that does\n            not diminish until the behavior is completed. Please read the test\n            sentences and choose the best answer that fits you during the last 2\n            weeks. This test is designed to measure your obsessive comupulsive\n            symptoms. Obsessions are unwelcome or distressing ideas, thoughts,\n            images or impulses that repeatedly enter your mind. They may seem to\n            occur against your will. They may be repugnant to you, are often\n            senseless, and may not fit your actual personality at all.\n            Compulsions are behaviors or acts that you feel driven to perform,\n            even though you may recognize them as senseless or excessive. At\n            times, you may try to resist doing them, but this may prove\n            difficult. You may experience anxiety that does not diminish until\n            the behavior is completed. Please read the test sentences and choose\n            the best answer that fits you during the last 2 weeks.\n            See More',
+    recomination: 'Every 2 weeks',
+    testPeriod: '1:30 Mins',
+  },
+  {
+    title: 'PTSD',
+    description:
+      'This test assesses the psychological impact of stressful events\n            after its ends by few months. Below is a list of problems and\n            complaints that person sometimes have in response to stressful life\n            experiences. Please read each one carefully, choose the answer that\n            fits you mostly to indicate how much you have been bothered by that\n            problem in the last month\n            See More',
+    recomination: 'Every 2 weeks',
+    testPeriod: '1:30 Mins',
+  },
+  {
+    title: 'Adult ADHD Self-Report Scale',
+    description:
+      'Attention deficit hyperactivity disorder (ADHD) in adults is a\n            mental health related disorder and includes a set of persistent\n            problems, such as difficulty in attention, hyperactivity, and\n            impulsive behavior. Attention deficit disorder with hyperactivity in\n            adults may lead to unstable relationships, poor work or school\n            performance, decreased self-confidence, and other problems.\n            See More',
+    recomination: 'Every 2 weeks',
+    testPeriod: '1:30 Mins',
+  },
+];
+
 function Psychometer() {
+  const [expandedRowKeys, setExpandedRowKeys] = React.useState([]);
+
+  const renderRowExpanded = (rowData) => {
+    return (
+      <div className="px-5">
+        <h6 className="mb-2">Description:</h6>
+        <p className="text-gray/50 font-[500]">{rowData?.description}</p>
+      </div>
+    );
+  };
+  const handleExpanded = (rowData) => {
+    let open = false;
+    const nextExpandedRowKeys = [];
+
+    expandedRowKeys.forEach((key) => {
+      if (key === rowData[rowKey]) {
+        open = true;
+      } else {
+        nextExpandedRowKeys.push(key);
+      }
+    });
+
+    if (!open) {
+      nextExpandedRowKeys.push(rowData[rowKey]);
+    }
+
+    setExpandedRowKeys(nextExpandedRowKeys);
+  };
+  const lg = useMediaQuery('lg');
   return (
     <>
       <main className="bg-cyan text-white pt-5">
@@ -61,45 +139,43 @@ function Psychometer() {
           </section>
         </div>
       </main>
-      <main className="bg-gray/5">
+      <main className="bg-gray/5 py-10">
         <div className="container">
-          <section>
-            <Table autoHeight data={data}>
-              <Column fixed>
-                <HeaderCell>Id</HeaderCell>
-                <Cell dataKey="id" />
-              </Column>
-
-              <Column>
-                <HeaderCell>First Name</HeaderCell>
-                <Cell dataKey="firstName" />
-              </Column>
-
-              <Column>
-                <HeaderCell>Last Name</HeaderCell>
-                <Cell dataKey="lastName" />
-              </Column>
-
-              <Column>
-                <HeaderCell>Gender</HeaderCell>
-                <Cell dataKey="gender" />
-              </Column>
-
-              <Column>
-                <HeaderCell>Age</HeaderCell>
-                <Cell dataKey="age" />
-              </Column>
-
-              <Column>
-                <HeaderCell>Postcode</HeaderCell>
-                <Cell dataKey="postcode" />
-              </Column>
-              <Column>
-                <HeaderCell>Email</HeaderCell>
-                <Cell dataKey="email" />
-              </Column>
-            </Table>
-          </section>
+          <div className="xl:grid xl:grid-cols-[1fr_260px] xl:gap-3">
+            <section className="bg-white">
+              <Table
+                className="text-gray/90"
+                rowExpandedHeight={lg ? 200 : 200}
+                headerHeight={50}
+                rowHeight={70}
+                data={data}
+                autoHeight
+                rowKey={rowKey}
+                expandedRowKeys={expandedRowKeys}
+                renderRowExpanded={renderRowExpanded}
+              >
+                <Column width={70} align="center">
+                  <HeaderCell className="text-cyan text-xl font-[500]">#</HeaderCell>
+                  <ExpandCell expandedRowKeys={expandedRowKeys} onChange={handleExpanded} />
+                </Column>
+                <Column {...(lg ? { flexGrow: 1 } : { width: 320 })} fullText={true}>
+                  <HeaderCell className="text-cyan text-xl font-[500]">Title</HeaderCell>
+                  <Cell dataKey="title" />
+                </Column>
+                <Column {...(lg ? { flexGrow: 1 } : { width: 200 })} fullText={true}>
+                  <HeaderCell className="text-cyan text-xl font-[500]">Recomination</HeaderCell>
+                  <Cell dataKey="recomination" />
+                </Column>
+                <Column {...(lg ? { flexGrow: 1 } : { width: 150 })} fullText={true}>
+                  <HeaderCell className="text-cyan text-xl font-[500]">Test Period</HeaderCell>
+                  <Cell dataKey="testPeriod" />
+                </Column>
+              </Table>
+            </section>
+            <section>
+              <DoctorsSlider />
+            </section>
+          </div>
         </div>
       </main>
     </>
