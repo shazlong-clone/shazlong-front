@@ -7,6 +7,7 @@ import CollaspedOutlineIcon from '@rsuite/icons/CollaspedOutline';
 import ExpandOutlineIcon from '@rsuite/icons/ExpandOutline';
 import useMediaQuery from '../utils/useMediaQuery';
 import DoctorsSlider from '../components/Shared/DoctorsSlider';
+import { Link } from 'react-router-dom';
 
 const { Column, HeaderCell, Cell } = Table;
 const rowKey = 'title';
@@ -96,12 +97,18 @@ function Psychometer() {
     setExpandedRowKeys(nextExpandedRowKeys);
   };
   const lg = useMediaQuery('lg');
+
+  const TitleCell = ({ rowData, dataKey, ...props }) => (
+    <Cell {...props}>
+      <Link to="/psychotest/55">{rowData[dataKey]}</Link>
+    </Cell>
+  );
   return (
     <>
       <main className="bg-cyan text-white pt-5">
         <div className="container">
           <InternalHeader iconClassName="text-white">Psycho meter</InternalHeader>
-          <section className="font-[500] text-base pt-5 relative xl:grid xl:grid-cols-[1fr_250px] xl:gap-64 xl:items-end">
+          <section className="font-[500] text-base pt-5 relative xl:grid xl:grid-cols-[1fr_250px] xl:gap xl:items-end">
             <article className="xl:pt-5 xl:pb-10">
               <p className="xl:mb-5">
                 How much do I know about myself, do I suffer from depression or anxiety? , Should I visit a therapist, do I need
@@ -158,15 +165,15 @@ function Psychometer() {
                   <HeaderCell className="text-cyan text-xl font-[500]">#</HeaderCell>
                   <ExpandCell expandedRowKeys={expandedRowKeys} onChange={handleExpanded} />
                 </Column>
-                <Column {...(lg ? { flexGrow: 1 } : { width: 320 })} fullText={true}>
+                <Column {...(lg ? { flexGrow: 1 } : { width: 320 })}>
                   <HeaderCell className="text-cyan text-xl font-[500]">Title</HeaderCell>
-                  <Cell dataKey="title" />
+                  <TitleCell dataKey="title" />
                 </Column>
-                <Column {...(lg ? { flexGrow: 1 } : { width: 200 })} fullText={true}>
+                <Column {...(lg ? { flexGrow: 1 } : { width: 200 })}>
                   <HeaderCell className="text-cyan text-xl font-[500]">Recomination</HeaderCell>
                   <Cell dataKey="recomination" />
                 </Column>
-                <Column {...(lg ? { flexGrow: 1 } : { width: 150 })} fullText={true}>
+                <Column {...(lg ? { flexGrow: 1 } : { width: 150 })}>
                   <HeaderCell className="text-cyan text-xl font-[500]">Test Period</HeaderCell>
                   <Cell dataKey="testPeriod" />
                 </Column>

@@ -20,6 +20,7 @@ const Licence = lazy(() => import('./pages/Licence'));
 const Blogs = lazy(() => import('./pages/Blogs'));
 const Blog = lazy(() => import('./pages/Blog'));
 const Psychometer = lazy(() => import('./pages/Psychometer'));
+const Psychotest = lazy(() => import('./pages/Psychotest'));
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
               <Route exact path="blogs" element={<Blogs />} />
               <Route exact path="blog/:id" element={<Blog />} />
               <Route exact path="psychometer" element={<Psychometer />} />
+              <Route exact path="psychotest/:id" element={<Psychotest />} />
               <Route exact path="test" element={<Test />} />
               <Route exact path="*" element={<Error />} />
             </Route>

@@ -17,7 +17,7 @@ function DoctorsSlider() {
   };
   return (
     <>
-      <article className="slick-blog slick-container slick-articel mt-10 xl:mt-0 bg-cyan/30 border border-solid border-cyan p-5 pb-8 rounded-lg">
+      <article className="slick-blog slick-container slick-articel mt-10 xl:mt-0 bg-cyan/30 border border-solid border-cyan p-5  pb-8 rounded-lg">
         <Card className="xl:mb-0 rounded-lg">
           <h3 className="text-center mb-3">Get Help</h3>
           <Slider {...settings}>

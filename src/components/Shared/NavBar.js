@@ -39,13 +39,13 @@ function NavBar() {
   return (
     <div className="container items-center border-b-[1px] border-gray/10 px-4 py-5 bg-white">
       <div className="flex justify-between items-center m-auto">
-        <section>
+        <section className="lg:flex-[1_1_33%]">
           <Link to="/">
             <img src={currLang === 'ar' ? shazlongLogoAr : shazlongLogo} alt="logo" className="md:w-[160px] w-[100px]" />
           </Link>
         </section>
-        <section className="hidden md:block">
-          <ul className="flex gap-5 text-gray/75 cursor-pointer list-none mb-0 px-0">
+        <section className="hidden md:block  lg:flex-[1_1_33%]">
+          <ul className="flex gap-5 text-gray/75 cursor-pointer list-none mb-0 px-0 lg:justify-center">
             {nav?.map(({ to, name }) => {
               return (
                 <li key={Math.random()}>
@@ -60,7 +60,7 @@ function NavBar() {
             })}
           </ul>
         </section>
-        <section className="flex gap-2 items-center lg:gap-5">
+        <section className="flex gap-2 items-center lg:gap-5  lg:flex-[1_1_33%]  lg:justify-end">
           {Object.keys(lngs)?.map((el) => {
             return (
               <article
@@ -86,7 +86,7 @@ function NavBar() {
               {t('Sign_Up')}
             </article>
           </Link>
-          <article>
+          <article className="lg:hidden">
             {/* <section className={clsx(open && 'text-cyan', 'flex items-center')}>
               <Whisper
                 trigger="click"

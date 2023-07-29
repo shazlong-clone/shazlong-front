@@ -34,13 +34,13 @@ function SearchDeskTop() {
             </section>
           ) : (
             <section className="flex justify-between [&>article]:py-5">
-              <article className="flex items-center cursor-pointer" ref={ref}>
+              <article className="flex items-center cursor-pointer lg:flex-[1_1_33%]" ref={ref}>
                 <span>Expolore By Topics</span>
                 <span className="flex items-center">
                   <FiChevronDown />
                 </span>
               </article>
-              <article className="flex justify-center gap-10 items-center text-xl">
+              <article className="flex justify-center gap-10 items-center text-xl lg:flex-[1_1_33%]">
                 <a href="https://www.facebook.com/ShezlongApp/">
                   <FaFacebookF />
                 </a>
@@ -52,7 +52,7 @@ function SearchDeskTop() {
                 </a>
               </article>
               <article
-                className=" inline-flex justify-end items-center gap-2 cursor-pointer"
+                className=" inline-flex justify-end items-center gap-2 cursor-pointer lg:flex-[1_1_33%]"
                 onClick={() => {
                   setSearch(true);
                 }}
