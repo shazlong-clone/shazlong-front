@@ -100,7 +100,9 @@ function Psychometer() {
 
   const TitleCell = ({ rowData, dataKey, ...props }) => (
     <Cell {...props}>
-      <Link to="/psychotest/55">{rowData[dataKey]}</Link>
+      <Link to="/psychotest/55" className="hover:no-underline">
+        {rowData[dataKey]}
+      </Link>
     </Cell>
   );
   return (

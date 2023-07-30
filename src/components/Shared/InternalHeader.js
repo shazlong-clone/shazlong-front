@@ -10,7 +10,7 @@ function InternalHeader({ className, iconClassName, ...props }) {
           <BsArrowLeftCircle />
         </Link>
       </h3>
-      <h3>{props?.children}</h3>
+      <h3 className="capitalize">{props?.children}</h3>
       {props.icon ? <h3>{props.icon}</h3> : <h3>&nbsp; &nbsp;</h3>}
     </section>
   );

@@ -6,6 +6,8 @@
 @import url('./assets/css/slick.min.css');
 /* scroll */
 @import url('./assets/css/scroll.css');
+/* animate_css */
+@import url('./assets/css/animate_css.min.css');
 /* taiwind */
 @tailwind base;
 @tailwind components;
