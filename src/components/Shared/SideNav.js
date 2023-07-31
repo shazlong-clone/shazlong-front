@@ -1,16 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import { BiGroup } from 'react-icons/bi';
+import { BiGroup, BiMessageAltDetail } from 'react-icons/bi';
 import { BiVideoPlus } from 'react-icons/bi';
 import { MdSupportAgent } from 'react-icons/md';
 import { RiPsychotherapyLine } from 'react-icons/ri';
 import { FiMoreHorizontal } from 'react-icons/fi';
-import { Drawer } from 'rsuite';
-import { AiOutlineHome } from 'react-icons/ai';
+import { Avatar, AvatarGroup, Badge, Drawer } from 'rsuite';
+import { AiFillHome, AiOutlineHome } from 'react-icons/ai';
 import { BiTestTube } from 'react-icons/bi';
 import { FaBlog } from 'react-icons/fa';
 import { Link, NavLink } from 'react-router-dom';
 import clsx from 'clsx';
-
+import { CgClose } from 'react-icons/cg';
+import logo_white from '../../assets/images/logo_white.png';
+import cs1 from '../../assets/images/cs1.jpg';
+import cs2 from '../../assets/images/cs2.png';
+import cs3 from '../../assets/images/cs3.jpg';
+import Card from './Card';
 const menu = [
   {
     name: 'Home',
@@ -94,6 +99,52 @@ function FooterNav() {
             </div>
           </Drawer.Body>
         </Drawer>
+      </div>
+      <div className="fixed top-0 left-0 h-[100vh] w-full bg-white z-[51]">
+        <section className="text-white bg-cyan px-5 p-10">
+          <article className="flex justify-between items-center">
+            <img width="50px" height="50px" src={logo_white} alt="intercomcdn" />
+            <CgClose />
+          </article>
+          <article className="mt-10 mb-4">
+            <AvatarGroup stack>
+              <Avatar circle key={cs1} src={cs1} alt="cs1" />
+              <Avatar circle key={cs2} src={cs2} alt="cs2" />
+              <Avatar circle key={cs3} src={cs3} alt="cs3" />
+            </AvatarGroup>
+          </article>
+          <article>
+            <h4 className="text-white/60">Hi Saeed !</h4>
+            <h4>How We Can Help You</h4>
+          </article>
+        </section>
+        <section className="px-5 pt-1 pb-5 bg-gradient-to-b from-cyan to-white">
+          <Card className="text-gray rounded-[10px] py-4">
+            <aside>
+              <div>
+                <strong className="text-[14px]">Send Us a message</strong>
+                <p className="text-gray/60 text-[14px]">We typically reply in under a minute</p>
+              </div>
+              <div></div>
+            </aside>
+          </Card>
+        </section>
+        <section className="absolute bottom-0 py-6 shadow-[#00000024_0px_0px_25px] w-full border-t border-b-0 border-r-0 border-l-0  border-solid border-gray/5 flex justify-evenly text-3xl">
+          <aside className="grid text-center text-cyan">
+            <span className=" flex justify-center">
+              <AiFillHome />
+            </span>
+            <strong className="text-sm">Home</strong>
+          </aside>
+          <aside className="grid text-center">
+            <span className=" flex justify-center">
+              <Badge content={1}>
+                <BiMessageAltDetail />
+              </Badge>
+            </span>
+            <strong className="text-sm">messages</strong>
+          </aside>
+        </section>
       </div>
     </>
   );
