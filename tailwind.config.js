@@ -28,12 +28,22 @@ module.exports = {
           '0%': { transform: 'scale(0)' },
           '100%': { transform: 'scale(1)' },
         },
+        openchat: {
+          '0%': { transform: 'scale(0)' },
+          '100%': { transform: 'scale(1)' },
+        },
+        closechat: {
+          '0%': { transform: 'scale(1)' },
+          '100%': { transform: 'scale(0)' },
+        },
       },
       animation: {
         rclock: 'rclock 300ms 1 forwards',
         raclock: 'raclock 300ms 1 forwards',
         scalldown: 'scalldown 300ms   1 forwards',
         scallup: 'scallup  300ms  1 forwards',
+        openchat: 'openchat  300ms cubic-bezier(0, 0, 0.74, 1.29) 1 forwards',
+        closechat: 'closechat  300ms   1 forwards',
       },
     },
   },
