@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Avatar, AvatarGroup, Badge } from 'rsuite';
 import { IoMdSend } from 'react-icons/io';
 import { AiFillHome } from 'react-icons/ai';
-import { BiCross, BiMessageAltDetail } from 'react-icons/bi';
+import { BiMessageAltDetail } from 'react-icons/bi';
 import Card from './Card';
 import { CgClose } from 'react-icons/cg';
 import logo_white from '../../assets/images/logo_white.png';
@@ -12,13 +12,17 @@ import cs3 from '../../assets/images/cs3.jpg';
 import clsx from 'clsx';
 import { MdArrowBackIosNew } from 'react-icons/md';
 import { RxCross2 } from 'react-icons/rx';
+import { useDispatch, useSelector } from 'react-redux';
+import { closeChat } from '../../features/theme/themeSlice';
 function CustomerService() {
+  const dispatch = useDispatch();
   const [activeTabe, setActiveTabe] = useState(1);
+  const { isChatOpen } = useSelector((state) => state?.theme);
   return (
-    <div className="fixed top-0 left-0 h-[100vh] w-full bg-white z-[51]">
-      <aside className={clsx(activeTabe === 1) ? '' : 'hidden'}>
+    <div className={clsx('fixed top-0 left-0 h-[100vh] w-full bg-white z-[51]', isChatOpen ? 'block' : 'hidden')}>
+      <aside className={clsx(activeTabe === 1 ? 'block' : 'hidden')}>
         <section className="text-white bg-cyan px-5 p-10">
-          <article className="flex justify-between items-center">
+          <article onClick={() => dispatch(closeChat())} className="flex justify-between items-center">
             <img width="50px" height="50px" src={logo_white} alt="intercomcdn" />
             <CgClose />
           </article>
@@ -48,7 +52,7 @@ function CustomerService() {
           </Card>
         </section>
         <section className="absolute bottom-0 py-6 shadow-[#00000024_0px_0px_25px] w-full border-t border-b-0 border-r-0 border-l-0  border-solid border-gray/5 flex justify-evenly text-3xl">
-          <aside className="grid text-center text-cyan" onClick={() => setActiveTabe(1)}>
+          <aside onClick={() => setActiveTabe(1)} className="grid text-center text-cyan">
             <span className=" flex justify-center h-[30px]">
               <AiFillHome />
             </span>
@@ -64,7 +68,7 @@ function CustomerService() {
           </aside>
         </section>
       </aside>
-      <aside className={clsx(activeTabe === 2 ? '' : 'hidden')}>
+      <aside className={clsx(activeTabe === 2 ? 'block' : 'hidden')}>
         <section className="bg-cyan px-5 text-white">
           <article className="flex items-center justify-between">
             <MdArrowBackIosNew />

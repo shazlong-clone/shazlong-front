@@ -11,6 +11,8 @@ import { FaBlog } from 'react-icons/fa';
 import { Link, NavLink } from 'react-router-dom';
 import clsx from 'clsx';
 import CustomerService from './CustomerService';
+import { useDispatch } from 'react-redux';
+import { openChat, closeChate } from '../../features/theme/themeSlice';
 const menu = [
   {
     name: 'Home',
@@ -32,6 +34,8 @@ const menu = [
 function FooterNav() {
   const [activeTabe, setActiveTabe] = useState('/');
   const [open, setOpen] = React.useState(false);
+  const dispatch = useDispatch();
+
   useEffect(() => {
     if (!open && activeTabe === 4) {
       setActiveTabe(null);
@@ -61,7 +65,7 @@ function FooterNav() {
           <div>
             <Menu title="My Therapy" id={2} link="/my-therapy" icon={<RiPsychotherapyLine />} />
           </div>
-          <div>
+          <div onClick={() => dispatch(openChat())}>
             <Menu title="Support" id={3} icon={<MdSupportAgent />} />
           </div>
           <div onClick={() => setOpen(true)}>
