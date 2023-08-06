@@ -3,6 +3,7 @@ import shezlongLogoLight from '../../assets/images/shezlong-logo-light.svg';
 import ssl from '../../assets/images/secure-ssl.svg';
 import ismho from '../../assets/images/ismho-grey.webp';
 import SVLogoFill from '../../assets/images/SVLogoFill.svg';
+import { Link } from 'react-router-dom';
 
 function Footer() {
   return (
@@ -11,8 +12,7 @@ function Footer() {
         <section className="lg:grid grid-cols-[8fr_1px_10fr] lg:gap-16">
           <article
             className="
-            text-center lg:text-start mb-5
-            lg:mb-0 border-b border-t-0 border-r-0 
+            text-center lg:text-start mb-5 lg:mb-0 border-b border-t-0 border-r-0 
             border-l-0 border-b-white border-solid 
             lg:flex-[1_1_50%] lg:border-b-0 "
           >
@@ -43,24 +43,25 @@ function Footer() {
             <div className="text-center mt-10">
               <h2 className="text-3xl lg:text-xl lg:text-start lg:mb-5">Join us</h2>
               <section className="lg:flex items-center gap-2">
-                <button
-                  className="
-                  font-bold border mt-5 lg:mt-0 rounded-lg
-                 border-white text-white bg-opacity-0
-                bg-gray py-3 px-14 lg:px-0 md:block md:w-full"
-                >
-                  Join as a Client
-                </button>
+                <Link to="/sign-up" className="hover:no-underline active:no-underline">
+                  <button
+                    className="
+                  font-bold border mt-5 lg:mt-0 rounded-lg border-white text-white bg-opacity-0
+                  bg-gray py-3 px-14  md:block md:w-full"
+                  >
+                    Join as a Client
+                  </button>
+                </Link>
                 <div className="my-3">Or</div>
-                <button
-                  className="
-                  font-bold border rounded-lg
-                 border-white text-white 
-                 bg-opacity-0 bg-gray py-3 
-                 px-14 lg:px-0 md:block md:w-full"
-                >
-                  Join as a Therapist
-                </button>
+                <Link to="/join-us" className="hover:no-underline active:no-underline">
+                  <button
+                    className="
+                  font-bold border rounded-lg border-white text-white  bg-opacity-0
+                  bg-gray py-3  px-14  md:block md:w-full"
+                  >
+                    Join as a Therapist
+                  </button>
+                </Link>
               </section>
               <div className="mt-5">
                 if you have an account{' '}
@@ -74,7 +75,7 @@ function Footer() {
       </div>
       <div className="text-center mt-5">
         <a href="https://saeedkhal.github.io/saeed-khaled-portfolio/" className="text-white hover:text-white underline">
-          Copyright © {new Date().getFullYear()} <img className="w-[30px] text-cyan" src={SVLogoFill} alt="d" /> Saeed Khaled
+          Made By © {new Date().getFullYear()} <img className="w-[30px] text-cyan" src={SVLogoFill} alt="d" /> Saeed Khaled
           <br />
         </a>
       </div>
