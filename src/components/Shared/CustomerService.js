@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Avatar, AvatarGroup, Badge } from 'rsuite';
+import { Avatar, AvatarGroup, Badge, Button } from 'rsuite';
 import { IoMdSend } from 'react-icons/io';
 import { AiFillHome } from 'react-icons/ai';
 import { BiMessageAltDetail } from 'react-icons/bi';
@@ -12,17 +12,16 @@ import cs3 from '../../assets/images/cs3.jpg';
 import clsx from 'clsx';
 import { MdArrowBackIosNew } from 'react-icons/md';
 import { RxCross2 } from 'react-icons/rx';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { closeChat } from '../../features/theme/themeSlice';
 import shazlong from '../../assets/images/shazlong.png';
 import { Link } from 'react-router-dom';
 import EmojiDropdown from './EmojiDropdown';
 import { useMediaQuery } from '@uidotdev/usehooks';
 import therapist from '../../assets/images/therapist.webp';
-function CustomerService() {
+function CustomerService({ close }) {
   const dispatch = useDispatch();
   const [activeTabe, setActiveTabe] = useState(1);
-  const { isChatOpen } = useSelector((state) => state?.theme);
 
   const [message, setMessage] = useState('');
   const textAreaRef = useRef();
@@ -51,12 +50,16 @@ function CustomerService() {
 
   return (
     <>
-      <div className={clsx('fixed top-0 left-0 h-[100vh] w-full bg-white z-[51]', isChatOpen ? 'block' : 'hidden')}>
+      <div
+        className={clsx('fixed top-0 left-0 h-[100vh] w-full bg-white z-[51] lg:static lg:h-[60vh] lg:w-[400px] lg:rounded-md')}
+      >
         <aside className={clsx(activeTabe === 1 ? 'block' : 'hidden')}>
-          <section className="text-white bg-cyan px-5 p-10">
+          <section className="text-white bg-cyan px-5 p-10 lg:rounded-t-md xl:py-5">
             <article onClick={() => dispatch(closeChat())} className="flex justify-between items-center">
               <img width="50px" height="50px" src={logo_white} alt="intercomcdn" />
-              <CgClose />
+              <span onClick={close} className="text-xl cursor-pointer">
+                <CgClose />
+              </span>
             </article>
             <article className="mt-10 mb-4">
               <AvatarGroup stack>
@@ -77,20 +80,20 @@ function CustomerService() {
                   <strong className="text-[14px]">Send Us a message</strong>
                   <p className="text-gray/60 text-[14px]">We typically reply in under a minute</p>
                 </div>
-                <div className="text-cyan flex items-center">
+                <div className="text-cyan flex items-center text-xl cursor-pointer">
                   <IoMdSend />
                 </div>
               </aside>
             </Card>
           </section>
           <section className="absolute bottom-0 py-6 shadow-[#00000024_0px_0px_25px] w-full border-t border-b-0 border-r-0 border-l-0  border-solid border-gray/5 flex justify-evenly text-3xl">
-            <aside onClick={() => setActiveTabe(1)} className="grid text-center text-cyan">
+            <aside onClick={() => setActiveTabe(1)} className="grid cursor-pointer text-center text-cyan">
               <span className=" flex justify-center h-[30px]">
                 <AiFillHome />
               </span>
               <strong className="text-sm">Home</strong>
             </aside>
-            <aside className="grid text-center" onClick={() => setActiveTabe(2)}>
+            <aside className="grid cursor-pointer text-center" onClick={() => setActiveTabe(2)}>
               <span className="flex justify-center h-[30px]">
                 <Badge content={1}>
                   <BiMessageAltDetail />
@@ -109,14 +112,14 @@ function CustomerService() {
               : 'hidden',
           )}
         >
-          <section className="bg-cyan p-5 text-white">
-            <article className="flex items-center justify-between text-xl">
-              <span onClick={() => setActiveTabe(1)}>
+          <section className="bg-cyan p-5 text-white lg:rounded-t-md">
+            <article className="flex items-center justify-between text-xl ">
+              <span className="cursor-pointer" onClick={() => setActiveTabe(1)}>
                 <MdArrowBackIosNew />
               </span>
               <h4>Customer Suport</h4>
-              <span onClick={() => dispatch(closeChat())}>
-                <RxCross2 />
+              <span className="cursor-pointer" onClick={() => dispatch(closeChat())}>
+                <RxCross2 onClick={close} />
               </span>
             </article>
             <article className="text-center py-5">
@@ -130,7 +133,7 @@ function CustomerService() {
           {open && (
             <section className="px-5 py-2 mt-5">
               <Card className="shadow-md relative border border-solid border-gray/20 rounded-md">
-                <span className="absolute top-3 right-3" onClick={() => setOpen(false)}>
+                <span className="absolute top-3 right-3 cursor-pointer" onClick={() => setOpen(false)}>
                   <RxCross2 />
                 </span>
                 <article className="flex items-center gap-3">

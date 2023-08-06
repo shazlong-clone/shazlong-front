@@ -1,6 +1,8 @@
 import NavBar from './NavBar';
 import FooterMenu from './FooterMenu';
 import { Outlet } from 'react-router-dom';
+import CustomerServiceDeskTop from './CustomerServiceDeskTop';
+import CustomerServiceMobile from './CustomerServiceMobile';
 
 const LayOut = () => {
   return (
@@ -9,6 +11,12 @@ const LayOut = () => {
         <NavBar />
         <Outlet />
         <FooterMenu />
+      </div>
+      <div className="hidden lg:block">
+        <CustomerServiceDeskTop />
+      </div>
+      <div className="lg:hidden">
+        <CustomerServiceMobile />
       </div>
     </>
   );

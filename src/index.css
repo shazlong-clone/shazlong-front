@@ -231,3 +231,6 @@ a:active {
 .blog-content h6 {
   all: revert;
 }
+.customer-service-desktop .rs-popover {
+  padding: 0px;
+}

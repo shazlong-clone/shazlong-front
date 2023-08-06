@@ -10,7 +10,6 @@ import { BiTestTube } from 'react-icons/bi';
 import { FaBlog } from 'react-icons/fa';
 import { Link, NavLink } from 'react-router-dom';
 import clsx from 'clsx';
-import CustomerService from './CustomerService';
 import { useDispatch } from 'react-redux';
 import { openChat } from '../../features/theme/themeSlice';
 const menu = [
@@ -97,9 +96,6 @@ function FooterNav() {
             </div>
           </Drawer.Body>
         </Drawer>
-      </div>
-      <div>
-        <CustomerService />
       </div>
     </>
   );
