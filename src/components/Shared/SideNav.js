@@ -12,7 +12,7 @@ import { Link, NavLink } from 'react-router-dom';
 import clsx from 'clsx';
 import CustomerService from './CustomerService';
 import { useDispatch } from 'react-redux';
-import { openChat, closeChate } from '../../features/theme/themeSlice';
+import { openChat } from '../../features/theme/themeSlice';
 const menu = [
   {
     name: 'Home',
