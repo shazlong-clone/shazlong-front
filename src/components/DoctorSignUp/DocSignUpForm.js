@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, ButtonToolbar, Checkbox, Form, Input, InputGroup, InputPicker, Radio, RadioGroup, Schema } from 'rsuite';
+import { Button, ButtonToolbar, Checkbox, Form, InputGroup, InputPicker, Schema } from 'rsuite';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import EyeIcon from '@rsuite/icons/legacy/Eye';
@@ -28,18 +28,14 @@ function DocSignUpForm() {
     email: Schema.Types.StringType().isEmail('Please enter a valid email address.'),
     password: Schema.Types.StringType().isRequired('This field is required'),
     password_confirm: Schema.Types.StringType().isRequired('This field is required'),
-    country: Schema.Types.StringType().isRequired('This field is required'),
-    phone: Schema.Types.NumberType().isRequired('This field is required'),
-    gender: Schema.Types.StringType().isRequired('This field is required'),
+    country_id: Schema.Types.NumberType().isRequired('This field is required'),
   });
   const [formValue, setFormValues] = useState({
     user_name: '',
     email: '',
     password: '',
     password_confirm: '',
-    country_id: 2500,
-    phone: '',
-    gender: '',
+    country_id: '',
     accept_licence: '',
   });
   const onSubmit = (isValid) => {
@@ -57,35 +53,15 @@ function DocSignUpForm() {
     <>
       <Form formValue={formValue} onChange={setFormValues} model={model} fluid className="mt-5 sign-form">
         <Group controlId="user_name">
-          <Control size="lg" placeholder="User Name" name="user_name" block="true" />
+          <Control size="lg" placeholder="User Name *" name="user_name" block="true" />
           <HelpText>You can use letters a-z, numbers and periods (- , _ , .)</HelpText>
         </Group>
         <Group controlId="email">
-          <Control size="lg" block="true" placeholder="Email" name="email" />
-          <HelpText>*Email is required</HelpText>
-        </Group>
-        <Group controlId="password">
-          <InputGroup>
-            <Control size="lg" name="password" placeholder="Password" type={visible ? 'text' : 'password'} />
-            <InputGroup.Button onClick={() => setVisible(!visible)}>{visible ? <EyeIcon /> : <EyeSlashIcon />}</InputGroup.Button>
-          </InputGroup>
-        </Group>
-        <Group controlId="password_confirm">
-          <InputGroup accepter={InputGroup}>
-            <Control
-              placeholder="Password Confirm"
-              size="lg"
-              name="password_confirm"
-              type={visibleConfirm ? 'text' : 'password'}
-            />
-            <InputGroup.Button onClick={() => setVisibleConConfirm(!visibleConfirm)}>
-              {visibleConfirm ? <EyeIcon /> : <EyeSlashIcon />}
-            </InputGroup.Button>
-          </InputGroup>
+          <Control size="lg" block="true" placeholder="Email *" name="email" />
         </Group>
         <Group controlId="country_id">
           <Control
-            placeholder="Country"
+            placeholder="Country *"
             menuMaxHeight={300}
             menuStyle={{ maxWidth: '10px' }}
             block
@@ -95,6 +71,26 @@ function DocSignUpForm() {
             size="lg"
           />
         </Group>
+        <Group controlId="password">
+          <InputGroup>
+            <Control size="lg" name="password" placeholder="Password *" type={visible ? 'text' : 'password'} />
+            <InputGroup.Button onClick={() => setVisible(!visible)}>{visible ? <EyeIcon /> : <EyeSlashIcon />}</InputGroup.Button>
+          </InputGroup>
+        </Group>
+        <Group controlId="password_confirm">
+          <InputGroup accepter={InputGroup}>
+            <Control
+              placeholder="Password Confirm *"
+              size="lg"
+              name="password_confirm"
+              type={visibleConfirm ? 'text' : 'password'}
+            />
+            <InputGroup.Button onClick={() => setVisibleConConfirm(!visibleConfirm)}>
+              {visibleConfirm ? <EyeIcon /> : <EyeSlashIcon />}
+            </InputGroup.Button>
+          </InputGroup>
+        </Group>
+
         <Group controlId="accept_licence" className="ml-[-10px]">
           <Control
             onChange={(val, checked) => {

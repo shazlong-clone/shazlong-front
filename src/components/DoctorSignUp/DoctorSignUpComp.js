@@ -8,7 +8,8 @@ function SignUpComp() {
       <div className="lg:grid lg:grid-cols-[1fr_1.5fr] items-start">
         <section data-aos="fade-up" data-aos-duration="1000" className="mb-5 mx-auto lg:max-w-sm py-10 container">
           <SignLogo />
-          <strong className="mt-8 block">All fields marked with * are required</strong>
+          <strong className="mt-8 block text-cyan text-center">Registration Step 1/3</strong>
+          <strong className="mt-4 block">All fields marked with * are required</strong>
           <DocSignUpForm />
         </section>
         <section>
