@@ -22,6 +22,7 @@ const Blog = lazy(() => import('./pages/Blog'));
 const Psychometer = lazy(() => import('./pages/Psychometer'));
 const Psychotest = lazy(() => import('./pages/Psychotest'));
 const JoinUs = lazy(() => import('./pages/JoinUs'));
+const DoctorSignUp = lazy(() => import('./pages/DoctorSignUp'));
 
 function App() {
   return (
@@ -45,6 +46,7 @@ function App() {
               <Route exact path="psychometer" element={<Psychometer />} />
               <Route exact path="psychotest/:id" element={<Psychotest />} />
               <Route exact path="join-us" element={<JoinUs />} />
+              <Route exact path="doctor-signup" element={<DoctorSignUp />} />
 
               <Route exact path="test" element={<Test />} />
               <Route exact path="*" element={<Error />} />

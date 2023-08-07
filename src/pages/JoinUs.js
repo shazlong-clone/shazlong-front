@@ -8,12 +8,11 @@ import folder from '../assets/images/folder.png';
 import location from '../assets/images/location.png';
 import lock from '../assets/images/lock.png';
 import note from '../assets/images/note.png';
-import CreditCardIcon from '@rsuite/icons/legacy/CreditCard';
-import PlaneIcon from '@rsuite/icons/legacy/Plane';
-import TruckIcon from '@rsuite/icons/legacy/Truck';
-import UserIcon from '@rsuite/icons/legacy/User';
 import CheckIcon from '@rsuite/icons/legacy/Check';
-
+import CalendarIcon from '@rsuite/icons/Calendar';
+import UserBadgeIcon from '@rsuite/icons/UserBadge';
+import TextImageIcon from '@rsuite/icons/TextImage';
+import { GiClick } from 'react-icons/gi';
 const data = [
   {
     image_path: location,
@@ -23,7 +22,7 @@ const data = [
   {
     image_path: earth,
     header: 'Universal Therapy',
-    body: 'We serve clients from all over the world and you will get paid for both',
+    body: 'We serve clients from all over the world and you will get paid for both.',
   },
   {
     image_path: chat,
@@ -102,19 +101,19 @@ function JoinUs() {
               </article>
             </h4>
             <Timeline className="custom-timeline pb-10">
-              <Timeline.Item dot={<CreditCardIcon />}>
+              <Timeline.Item dot={<GiClick />}>
                 <strong>Registration</strong>
                 <p> Click on join Shezlong now. </p>
               </Timeline.Item>
-              <Timeline.Item dot={<PlaneIcon />}>
+              <Timeline.Item dot={<TextImageIcon />}>
                 <strong>CV</strong>
                 <p>upload your own C.V.</p>
               </Timeline.Item>
-              <Timeline.Item dot={<TruckIcon />}>
+              <Timeline.Item dot={<UserBadgeIcon />}>
                 <strong>Profile</strong>
                 <p> Complete your profile </p>
               </Timeline.Item>
-              <Timeline.Item dot={<UserIcon />}>
+              <Timeline.Item dot={<CalendarIcon />}>
                 <strong>Slots</strong>
                 <p> Add time slots to run sessions. </p>
               </Timeline.Item>
@@ -124,7 +123,7 @@ function JoinUs() {
               </Timeline.Item>
             </Timeline>
             <article className="text-center pb-24 lg:hidden">
-              <Link to="">
+              <Link to="/doctor-signup">
                 <Button appearance="primary" className="rounded-full font-bold">
                   Join Shezlong now
                 </Button>
