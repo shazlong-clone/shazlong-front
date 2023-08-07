@@ -32,6 +32,7 @@ function App() {
           <Routes>
             <Route path="/sign-up" element={<SignUp />} />
             <Route path="/sign-in" element={<SignIn />} />
+            <Route exact path="/doctor-signup" element={<DoctorSignUp />} />
             <Route path="/" element={<LayOut />}>
               <Route index element={<Home />} />
               <Route exact path="therapists" element={<Therapists />} />
@@ -46,8 +47,6 @@ function App() {
               <Route exact path="psychometer" element={<Psychometer />} />
               <Route exact path="psychotest/:id" element={<Psychotest />} />
               <Route exact path="join-us" element={<JoinUs />} />
-              <Route exact path="doctor-signup" element={<DoctorSignUp />} />
-
               <Route exact path="test" element={<Test />} />
               <Route exact path="*" element={<Error />} />
             </Route>

@@ -42,7 +42,7 @@ const data = [
   {
     image_path: note,
     header: 'Recorded Notes',
-    body: ' Securely keep notes and medical reports for your clients ',
+    body: ' Securely keep notes and medical reports for your clients. ',
   },
 ];
 function JoinUs() {
@@ -62,11 +62,11 @@ function JoinUs() {
       >
         <section className="h-[460px] bg-gradient-to-r from-cyan to-transparent text-white px-5 lg:px-16">
           <h3 className="pt-[50px]  lg:max-w-xl lg:text-4xl lg:mb-10">Join Shezlong now and make your own contribution</h3>
-          <p className="text-gray text-[16px] mb-12 lg:max-w-xl lg:text-xl lg:mb-20">
+          <p className="text-gray/70 lg:leading-9 text-[16px] mb-12 lg:max-w-xl lg:text-xl lg:mb-15">
             Enjoy practicing psychotherapy online; now you can communicate with thousands of customers from all over the world
             privately. Join us with other psychiatrists and psychologists worldwide.
           </p>
-          <Link to="doctor-sign-up">
+          <Link to="/doctor-signup">
             <Button className="rounded-full font-bold">Join Us As Therapist</Button>
           </Link>
         </section>
@@ -93,7 +93,7 @@ function JoinUs() {
               How to join Shezlong <br />
               therapists’ team ? <div className="w-[100px] h-[2px] mt-2 mb-10 bg-cyan " />
               <article className="pb-24 hidden lg:block">
-                <Link to="">
+                <Link to="/doctor-signup">
                   <Button appearance="primary" className="rounded-full font-bold">
                     Join Shezlong now
                   </Button>
