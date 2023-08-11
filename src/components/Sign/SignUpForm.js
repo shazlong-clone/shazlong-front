@@ -1,5 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import { Button, ButtonToolbar, Checkbox, Form, Input, InputGroup, InputPicker, Radio, RadioGroup, Schema } from 'rsuite';
+import {
+  Button,
+  ButtonToolbar,
+  Checkbox,
+  Form,
+  Input,
+  InputGroup,
+  InputPicker,
+  Loader,
+  Message,
+  Radio,
+  RadioGroup,
+  Schema,
+  useToaster,
+} from 'rsuite';
+
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import EyeIcon from '@rsuite/icons/legacy/Eye';
@@ -8,7 +23,12 @@ import clsx from 'clsx';
 import { Link } from 'react-router-dom';
 import { FaLock } from 'react-icons/fa';
 const { Group, HelpText, Control } = Form;
+import { signUp } from '../../features/auth/authSlice';
+import { useDispatch } from 'react-redux';
+
 function SignUpForm() {
+  const dispatch = useDispatch();
+  const toaster = useToaster();
   const [acceptLicence, setAcceptLicence] = useState(false);
   const [visible, setVisible] = useState(false);
   const [visibleConfirm, setVisibleConConfirm] = useState(false);
@@ -34,6 +54,18 @@ function SignUpForm() {
     phone: Schema.Types.NumberType().isRequired('This field is required'),
     gender: Schema.Types.StringType().isRequired('This field is required'),
   });
+  const [type, setType] = React.useState('info');
+  const [placement, setPlacement] = React.useState('topCenter');
+  const message = (
+    <Message showIcon type={type} closable>
+      {type}: The message appears on the {placement}.
+    </Message>
+  );
+  const loading = (
+    <Message showIcon type={type} closable>
+      {type}: loadin {placement}.
+    </Message>
+  );
   const [formValue, setFormValues] = useState({
     user_name: '',
     email: '',
@@ -44,7 +76,13 @@ function SignUpForm() {
     gender: '',
     accept_licence: '',
   });
-  const onSubmit = (isValid) => {
+  const onSubmit = async (isValid) => {
+    try {
+      const key = toaster.push(message);
+      const res = await dispatch(signUp({ email: 'email@x.com', password: 'sss' }));
+    } catch (err) {
+      return;
+    }
     if (!isValid) return;
   };
   useEffect(() => {
@@ -55,6 +93,7 @@ function SignUpForm() {
     });
     AOS.init();
   }, []);
+
   return (
     <>
       <Form formValue={formValue} onChange={setFormValues} model={model} fluid className="mt-5 sign-form">

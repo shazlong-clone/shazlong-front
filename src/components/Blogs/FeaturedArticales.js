@@ -55,12 +55,12 @@ function FeaturedArticales() {
           </Link>
         </article>
         <article className="xl:grid xl:grid-rows-[auto_1fr_auto] p-2">
-          <h3 className="leading-9 my-3">
+          <h3 className="leading-9 mt-3 lg:mb-5">
             <Link className={twMerge(clsx('text-gray/80 hover:no-underline', hovering && 'text-cyan hover:text-cyan'))}>
               How to Stay Healthy and Safe While Fasting During Ramadan:
             </Link>
           </h3>
-          <p className="font-medium text-sm text-gray/50">
+          <p className="font-medium text-sm text-gray/50 lg:text-[16px] lg:leading-7">
             Fasting during Ramadan can be a challenging experience, especially if you’re new to it. While fasting is an important
             part of the holy month and brings numerous blessings, it also has its risks. It’s important to stay healthy and safe
             while fasting as prolonged fasting…
