@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import Picker from '@emoji-mart/react';
 import data from '@emoji-mart/data';
 import { BsEmojiSmile } from 'react-icons/bs';
@@ -16,9 +16,6 @@ const EmojiDropdown = ({ onEmojiSelect }) => {
       <div className={clsx('absolute bottom-[60px] right-0', !showEmojiPicker && 'hidden')}>
         <Picker
           theme="dark"
-          onClickOutside={(s) => {
-            console.log('cloikec ouside');
-          }}
           onEmojiSelect={handleEmojiSelect}
           data={data}
           title="Pick your emoji"

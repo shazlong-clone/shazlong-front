@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Avatar, AvatarGroup, Badge, Button } from 'rsuite';
+import { Avatar, AvatarGroup, Badge } from 'rsuite';
 import { IoMdSend } from 'react-icons/io';
 import { AiFillHome } from 'react-icons/ai';
 import { BiMessageAltDetail } from 'react-icons/bi';

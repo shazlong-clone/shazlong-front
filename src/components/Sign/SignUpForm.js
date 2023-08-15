@@ -7,12 +7,9 @@ import {
   Input,
   InputGroup,
   InputPicker,
-  Loader,
-  Message,
   Radio,
   RadioGroup,
   Schema,
-  useToaster,
 } from 'rsuite';
 
 import AOS from 'aos';
@@ -28,7 +25,6 @@ import { useDispatch } from 'react-redux';
 
 function SignUpForm() {
   const dispatch = useDispatch();
-  const toaster = useToaster();
   const [acceptLicence, setAcceptLicence] = useState(false);
   const [visible, setVisible] = useState(false);
   const [visibleConfirm, setVisibleConConfirm] = useState(false);
@@ -54,18 +50,8 @@ function SignUpForm() {
     phone: Schema.Types.NumberType().isRequired('This field is required'),
     gender: Schema.Types.StringType().isRequired('This field is required'),
   });
-  const [type, setType] = React.useState('info');
-  const [placement, setPlacement] = React.useState('topCenter');
-  const message = (
-    <Message showIcon type={type} closable>
-      {type}: The message appears on the {placement}.
-    </Message>
-  );
-  const loading = (
-    <Message showIcon type={type} closable>
-      {type}: loadin {placement}.
-    </Message>
-  );
+
+
   const [formValue, setFormValues] = useState({
     user_name: '',
     email: '',
@@ -78,8 +64,7 @@ function SignUpForm() {
   });
   const onSubmit = async (isValid) => {
     try {
-      const key = toaster.push(message);
-      const res = await dispatch(signUp({ email: 'email@x.com', password: 'sss' }));
+       await dispatch(signUp({ email: 'email@x.com', password: 'sss' }));
     } catch (err) {
       return;
     }

@@ -53,7 +53,6 @@ const responseHandler = (response) => {
 };
 
 const errorHandler = (error) => {
-  console.log('Error ------- ', error?.response);
   if (error?.response?.status == 401 || error?.response?.status == 403) {
     responseHandler(error?.response);
   }
