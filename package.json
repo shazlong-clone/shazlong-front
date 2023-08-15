@@ -65,6 +65,11 @@
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^8.0.0",
+    "gulp-rename": "^2.0.0",
+    "gulp-rtlcss": "^2.0.0",
+    "gulp-sourcemaps": "^3.0.0",
     "postcss": "^8.4.23",
     "prettier": "3.0.0",
     "tailwindcss": "^3.3.2"

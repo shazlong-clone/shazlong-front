@@ -3,7 +3,7 @@
 /* rsuit */
 @import url('./assets/css/main.css');
 
-@import '~rsuite/dist/rsuite-rtl.min.css';
+/* @import '~rsuite/dist/rsuite-rtl.min.css'; */
 
 /* slick slider css */
 @import url('./assets/css/slick.min.css');
@@ -16,7 +16,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* my css */
+/* custom css */
 
 :root {
   --green: theme(colors.green);
