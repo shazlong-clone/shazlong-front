@@ -12,10 +12,13 @@ export const themeSlice = createSlice({
     closeChat: (state) => {
       state.isChatOpen = false;
     },
+    changeLang: (state, action) => {
+      state.locale = action.payload;
+    }
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { openChat, closeChat } = themeSlice.actions;
+export const { openChat, closeChat, changeLang } = themeSlice.actions;
 
 export default themeSlice.reducer;

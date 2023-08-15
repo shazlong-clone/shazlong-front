@@ -5,6 +5,7 @@ import ErrorBoundary from './components/Shared/ErrorBoundary';
 import LayOut from './components/Shared/LayOut';
 import Loading from './components/Shared/BackDropLoading';
 import LangWrapper from './components/Shared/LangWrapper';
+import { useSelector } from 'react-redux';
 const Home = lazy(() => import('./pages/Home'));
 const ThearpistProfile = lazy(() => import('./pages/ThearpistProfile'));
 const Therapists = lazy(() => import('./pages/Therapists'));
@@ -26,6 +27,19 @@ const DoctorSignUp = lazy(() => import('./pages/DoctorSignUp'));
 const VerifyEmailRegistration = lazy(() => import('./pages/VerifyEmailRegistration'));
 
 function App() {
+
+  const selectedLanguage = useSelector(state => state.locale); // Replace with your actual selector
+  let cssFileName = 'main.css'; // Default to English
+  if (selectedLanguage === 'ar') {
+    cssFileName = 'main-rtl.css'; // Change to Arabic if selected language is 'ar'
+  }
+  console.log('.sssssssssssssssssssssssssssssssssss')
+  // Dynamically import the CSS file
+  import(`./assets/css/${cssFileName}`).then(() => {
+    console.log(`Loaded ${cssFileName}`);
+  });
+
+
   return (
     <Suspense fallback={<Loading />}>
       <ErrorBoundary>
