@@ -5,7 +5,6 @@ import ErrorBoundary from './components/Shared/ErrorBoundary';
 import LayOut from './components/Shared/LayOut';
 import Loading from './components/Shared/BackDropLoading';
 import LangWrapper from './components/Shared/LangWrapper';
-import { useSelector } from 'react-redux';
 const Home = lazy(() => import('./pages/Home'));
 const ThearpistProfile = lazy(() => import('./pages/ThearpistProfile'));
 const Therapists = lazy(() => import('./pages/Therapists'));

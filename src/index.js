@@ -1,9 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
-import './assets/css/main.css';
-// import './assets/css/main-rtl.css';
 import 'flag-icons/css/flag-icons.css';
+import './index.css';
 import './i18n';
 
 import { BrowserRouter } from 'react-router-dom';
@@ -13,8 +12,8 @@ import { ThemeSwitcherProvider } from 'react-css-theme-switcher';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 const themes = {
-  ltr: './src/asstes/css/main.css',
-  rtl: './src/asstes/css/main-rtl.css',
+  ltr: '/css/main.css',
+  rtl: '/css/main-rtl.css',
 };
 
 root.render(

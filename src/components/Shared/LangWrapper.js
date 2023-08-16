@@ -6,7 +6,7 @@ import { changeLang } from '../../features/theme/themeSlice';
 import { useThemeSwitcher } from 'react-css-theme-switcher';
 
 function LangWrapper({ children }) {
-  const { switcher, themes, currentTheme, status } = useThemeSwitcher();
+  const { switcher, themes, status } = useThemeSwitcher();
   const { i18n } = useTranslation();
   const currLang = i18n.resolvedLanguage;
   const dispatch = useDispatch();
@@ -16,7 +16,6 @@ function LangWrapper({ children }) {
   useEffect(() => {
     applyRtlCssStyles(currLang);
     dispatch(changeLang(currLang));
-    console.log(currentTheme);
 
     toggleDarkMode();
   }, [currLang]);

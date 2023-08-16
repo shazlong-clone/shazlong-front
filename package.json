@@ -40,7 +40,7 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "gulp": "gulp all",
-    "rsuit-compile": "lessc ./src/assets/css/rsuit.less ./src/assets/css/rsuit.css"
+    "rsuit-compile": "lessc ./public/rsuit.less ./public/rsuit.css"
   },
   "eslintConfig": {
     "extends": [
