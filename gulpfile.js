@@ -34,3 +34,5 @@ gulp.task('sourcemap', () => {
       .pipe(gulp.dest('./src/assets/css'))
   );
 });
+
+gulp.task('all', gulp.series('styles', 'sourcemap'));
