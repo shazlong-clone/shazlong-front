@@ -25,8 +25,12 @@ gulp.task('styles', function () {
     .pipe(gulp.dest('./src/assets/css')); // Output RTL stylesheets.;
 });
 gulp.task('sourcemap', () => {
-  return gulp
-    .src('./src/assets/css/main.css')
-    .pipe(sourcemaps.init())
-    .pipe(sourcemaps.write('.').pipe(gulp.dest('./src/assets/css')));
+  return (
+    gulp
+      .src('./src/assets/css/main.css')
+      .pipe(sourcemaps.init())
+      // Perform other CSS processing here (e.g., autoprefixing, minification)
+      .pipe(sourcemaps.write('.'))
+      .pipe(gulp.dest('./src/assets/css'))
+  );
 });
