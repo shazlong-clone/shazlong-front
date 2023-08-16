@@ -20,7 +20,7 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <Provider store={store}>
-        <ThemeSwitcherProvider defaultTheme="ltr" themeMap={themes}>
+        <ThemeSwitcherProvider insertionPoint='inject-styles-here'  defaultTheme="ltr" themeMap={themes}>
           <App />
         </ThemeSwitcherProvider>
       </Provider>
