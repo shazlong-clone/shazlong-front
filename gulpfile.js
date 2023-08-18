@@ -24,6 +24,7 @@ gulp.task('styles', function () {
     .pipe(sourcemaps.write('.')) // Output source maps.
     .pipe(gulp.dest('./public/css')); // Output RTL stylesheets.;
 });
+
 gulp.task('sourcemap', () => {
   return (
     gulp
