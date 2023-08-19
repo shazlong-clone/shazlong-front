@@ -55,9 +55,9 @@ function Media() {
     ],
   };
   return (
-    <div className="mt-20 px-7">
+    <div className="mt-20 lg:mb-20 px-7">
       <Header>{t('Media_Coverage')}</Header>
-      <div>
+      <div className="lg:mt-16">
         <Slider {...settings}>
           {media?.map((el) => {
             return (
@@ -65,7 +65,7 @@ function Media() {
                 key={Math.random()}
                 src={el}
                 alt="sponsor"
-                className="h-[100px] lg:h-[150px] object-scale-down grayscale hover:grayscale-0 duration-300"
+                className="h-[100px] lg:h-[150px] object-scale-down grayscale hover:grayscale-0 duration-300 cursor-pointer"
               />
             );
           })}

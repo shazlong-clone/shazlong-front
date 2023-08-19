@@ -221,6 +221,7 @@ a:active {
 }
 .customer-service-desktop .rs-popover {
   padding: 0px;
+  @apply rtl:right-auto;
 }
 
 .custom-timeline {
