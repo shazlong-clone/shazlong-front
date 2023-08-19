@@ -248,3 +248,7 @@ a:active {
 .custom-timeline .rs-timeline-item-content {
   margin-left: 24px;
 }
+
+[dir='rtl'] .rs-btn{
+  font-size: 16px;
+}

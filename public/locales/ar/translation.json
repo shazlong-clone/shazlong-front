@@ -13,7 +13,12 @@
     "Get_Matched":"تواصل مع المعالج",
     "Online_Therapist_Online_Header":"اذا كنت تريد التحدث فنحن هنا",
     "Learn_More":"تعلم المزيد",
-    "Online_Therapist":"{{count}} معالج متصل الان يمكنك التواصل معهم",
+    "Online_Therapist_zero": "عفوًا، لا يوجد معالجون متصلون الآن",
+    "Online_Therapist_one": "معالج متصل الآن، يمكنك التواصل معه خلال 15 دقيقة",
+    "Online_Therapist_two": "معالجان متصلان الآن، يمكنك التواصل معهما الآن خلال 15 دقيقة",
+    "Online_Therapist_few": "{{count}} معالجون متصلون الآن، يمكنك التواصل معهم الآن خلال 15 دقيقة",
+    "Online_Therapist_many": "{{count}} معالج جاهزون للبدء الآن خلال 15 دقيقة",
+    "Online_Therapist_other": "{{count}} معالج جاهزون للبدء الآن خلال 15 دقيقة",    
     "We_Connect_You_With_Licensed_Therapists":"معنا ستتواصل مع معالجين معتمدين",
     "Contact":"تواصل"
 }
