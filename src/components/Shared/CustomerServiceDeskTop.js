@@ -2,7 +2,7 @@ import React from 'react';
 import { MdSupportAgent } from 'react-icons/md';
 import { Button, Popover, Whisper } from 'rsuite';
 import CustomerService from './CustomerService';
-import { t } from 'i18next';
+import { useTranslation } from 'react-i18next';
 
 const DefaultPopover = React.forwardRef(({ close, ...props }, ref) => {
   return (
@@ -14,6 +14,7 @@ const DefaultPopover = React.forwardRef(({ close, ...props }, ref) => {
   );
 });
 function CustomerServiceDeskTop() {
+  const { t } = useTranslation();
   const triggerRef = React.useRef();
   const close = () => triggerRef.current.close();
   return (
