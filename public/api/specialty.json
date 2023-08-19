@@ -1,0 +1,36 @@
+[
+  { "id": 1, "name": "All Specializations", "ar_name": "جميع التخصصات" },
+  { "id": 2, "name": "Child disorders", "ar_name": "مشاكل الأطفال" },
+  { "id": 3, "name": "Adolescence disorders", "ar_name": "مشاكل المراهقة" },
+  {
+    "id": 4,
+    "name": "Mood disorders (depression)",
+    "ar_name": "اضطرابات المزاج (الاكتئاب)"
+  },
+  { "id": 8, "name": "Addiction", "ar_name": "الإدمان" },
+  { "id": 9, "name": "Sexual disorders", "ar_name": "المشاكل الجنسية" },
+  { "id": 10, "name": "Eating disorders", "ar_name": "اضطرابات الأكل" },
+  { "id": 11, "name": "Old age disorders", "ar_name": "مشاكل الشيخوخة" },
+  {
+    "id": 12,
+    "name": "Psychosomatic disorders",
+    "ar_name": "اضطرابات النفس جسدية"
+  },
+  { "id": 13, "name": "Personality disorders", "ar_name": "اضطرابات الشخصية" },
+  {
+    "id": 14,
+    "name": "Relations/Family counseling",
+    "ar_name": "العلاقات / الإرشاد الأسري"
+  },
+  {
+    "id": 5,
+    "name": "Anxiety disorders and obsessions",
+    "ar_name": "القلق والوسواس"
+  },
+  {
+    "id": 6,
+    "name": "Marriage Counselling/Relationship Disorders",
+    "ar_name": "استشارات الزواج / مشاكل العلاقات"
+  },
+  { "id": 7, "name": "Psychotic disorders", "ar_name": "اضطرابات الفصام" }
+]

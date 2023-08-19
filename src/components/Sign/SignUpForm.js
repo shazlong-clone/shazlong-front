@@ -1,16 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {
-  Button,
-  ButtonToolbar,
-  Checkbox,
-  Form,
-  Input,
-  InputGroup,
-  InputPicker,
-  Radio,
-  RadioGroup,
-  Schema,
-} from 'rsuite';
+import { Button, ButtonToolbar, Checkbox, Form, Input, InputGroup, InputPicker, Radio, RadioGroup, Schema } from 'rsuite';
 
 import AOS from 'aos';
 import 'aos/dist/aos.css';
@@ -51,7 +40,6 @@ function SignUpForm() {
     gender: Schema.Types.StringType().isRequired('This field is required'),
   });
 
-
   const [formValue, setFormValues] = useState({
     user_name: '',
     email: '',
@@ -64,14 +52,14 @@ function SignUpForm() {
   });
   const onSubmit = async (isValid) => {
     try {
-       await dispatch(signUp({ email: 'email@x.com', password: 'sss' }));
+      await dispatch(signUp({ email: 'email@x.com', password: 'sss' }));
     } catch (err) {
       return;
     }
     if (!isValid) return;
   };
   useEffect(() => {
-    fetch('/countries.json').then((res) => {
+    fetch('/api/countries.json').then((res) => {
       res.json().then((resJosn) => {
         setCountries(resJosn);
       });

@@ -42,7 +42,7 @@ function DocSignUpForm() {
     if (!isValid) return;
   };
   useEffect(() => {
-    fetch('/countries.json').then((res) => {
+    fetch('/api/countries.json').then((res) => {
       res.json().then((resJosn) => {
         setCountries(resJosn);
       });

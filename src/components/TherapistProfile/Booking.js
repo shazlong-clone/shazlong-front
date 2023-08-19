@@ -15,7 +15,7 @@ function Booking({ setBounceBg, bouncebg, ...props }) {
     searchedTimeZon: [],
   });
   const getTimeZons = async () => {
-    const res = await fetch('/timrzons.json');
+    const res = await fetch('api/timrzons.json');
     const resJosn = await res.json();
     setTimeZons({
       fullTimeZons: resJosn,

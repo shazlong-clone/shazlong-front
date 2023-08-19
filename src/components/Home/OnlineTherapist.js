@@ -42,16 +42,18 @@ function OnlineTherapist() {
           {users.length <= max ? (
             ''
           ) : (
-            <Avatar className={users?.length > 0 ? 'd-none' : ''}  circle style={{ background: '#111', }}>
+            <Avatar className={users?.length > 0 ? 'd-none' : ''} circle style={{ background: '#111' }}>
               +{users.length - max}
             </Avatar>
           )}
         </AvatarGroup>
         <article>
-          <p className="text-gray/60 font-light text-center my-4 lg:text-xl xl:my-8">
-            {
-              users?.length > 0 ? <span className="inline-block w-3 h-3 bg-green rounded-full mx-5"></span> :  <span className="inline-block w-3 h-3 bg-red-500 rounded-full mx-5"></span> 
-            }
+          <p className="text-gray/60 font-bold text-center my-4 lg:text-xl xl:my-8">
+            {users?.length > 0 ? (
+              <span className="inline-block w-3 h-3 bg-green rounded-full mx-5"></span>
+            ) : (
+              <span className="inline-block w-3 h-3 bg-red-500 rounded-full mx-5"></span>
+            )}
             {t('Online_Therapist', { count: users?.length })}
           </p>
         </article>
