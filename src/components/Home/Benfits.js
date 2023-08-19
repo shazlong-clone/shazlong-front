@@ -3,28 +3,30 @@ import Header from '../Shared/Header';
 import benfit1 from '../../assets/images/benfit1.png';
 import benfit2 from '../../assets/images/benfit2.png';
 import benfit3 from '../../assets/images/benfit3.png';
+import { useTranslation } from 'react-i18next';
 
 function Benfits() {
+  const { t } = useTranslation();
   const benfits = [
     {
-      titile: 'Save time and effort',
-      body: 'Get your session online. No waiting lists, no transportation hassles',
+      titile: t('Save_Time_And_Effort'),
+      body: t('Save_Time_And_Effort_Body'),
       img: benfit1,
     },
     {
-      titile: 'Responsive team',
-      body: 'Our support team is available to help you take your first step and answer non-clinical',
+      titile: t('Responsive_Team'),
+      body: t('Responsive_Team_Body'),
       img: benfit2,
     },
     {
-      titile: 'Variety of options',
-      body: 'A large number of therapists in various specialties ready to help you with whatever you are facing.',
+      titile: t('Variety_Of_Options'),
+      body: t('Variety_Of_Options_Body'),
       img: benfit3,
     },
   ];
   return (
     <div>
-      <Header>Our Members Benefit From</Header>
+      <Header>{t('Benefit_From')}</Header>
       <div>
         <section className="lg:flex gap-5">
           {benfits?.map((el) => {

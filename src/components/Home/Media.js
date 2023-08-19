@@ -9,7 +9,9 @@ import media6 from '../../assets/images/media6.webp';
 import clsx from 'clsx';
 import { MdOutlineKeyboardArrowLeft, MdOutlineKeyboardArrowRight } from 'react-icons/md';
 import Slider from 'react-slick';
+import { useTranslation } from 'react-i18next';
 function Media() {
+  const { t } = useTranslation();
   const media = [media1, media2, media6, media5, media3, media4];
   function SamplePrevArrow(props) {
     const { onClick } = props;
@@ -54,7 +56,7 @@ function Media() {
   };
   return (
     <div className="mt-20 px-7">
-      <Header>Our Media Coverage</Header>
+      <Header>{t('Media_Coverage')}</Header>
       <div>
         <Slider {...settings}>
           {media?.map((el) => {

@@ -6,6 +6,7 @@ import { Rate } from 'rsuite';
 
 import { BsFillArrowRightCircleFill, BsFillArrowLeftCircleFill } from 'react-icons/bs';
 import { FaQuoteLeft } from 'react-icons/fa';
+import { useTranslation } from 'react-i18next';
 
 const data = [
   {
@@ -64,6 +65,7 @@ function SamplePrevArrow(props) {
 }
 
 function Tetemonials() {
+  const { t } = useTranslation();
   const settings = {
     dots: true,
     infinite: true,
@@ -91,7 +93,7 @@ function Tetemonials() {
   };
   return (
     <div className="home-testimonial">
-      <Header>What Our Clients Are Saying</Header>
+      <Header>{t('What_Our_Clients_Are_Saying')}</Header>
       <div className="px-3">
         <Slider {...settings}>
           {data?.map((el) => {

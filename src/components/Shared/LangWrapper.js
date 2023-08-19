@@ -20,10 +20,6 @@ function LangWrapper({ children }) {
     toggleDarkMode();
   }, [currLang]);
 
-  if (status === 'loading') {
-    return <div>Loading styles...</div>;
-  }
-
   return <>{children}</>;
 }
 
