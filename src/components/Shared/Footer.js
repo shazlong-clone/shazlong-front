@@ -1,5 +1,6 @@
 import React from 'react';
 import shezlongLogoLight from '../../assets/images/shezlong-logo-light.svg';
+import shezlongLogoLightAr from '../../assets/images/shezlong-logo-light-ar.svg';
 import ssl from '../../assets/images/secure-ssl.svg';
 import ismho from '../../assets/images/ismho-grey.webp';
 import SVLogoFill from '../../assets/images/SVLogoFill.svg';
@@ -7,7 +8,8 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 function Footer() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const locale = i18n.resolvedLanguage;
   return (
     <div className="bg-gray/90 text-white py-10  md:px-10 md:py-16">
       <div className="container">
@@ -18,7 +20,11 @@ function Footer() {
             border-l-0 border-b-white border-solid 
             lg:flex-[1_1_50%] lg:border-b-0 "
           >
-            <img src={shezlongLogoLight} className="w-[50%] md:w-[40%] mb-4 lg:w-[60%]" alt="logo-light" />
+            <img
+              src={locale === 'ar' ? shezlongLogoLightAr : shezlongLogoLight}
+              className="w-[50%] md:w-[40%] mb-4 lg:w-[60%]"
+              alt="logo-light"
+            />
             <p className="text-center my-5  lg:text-start lg:text-xl">{t('Shezlong_Is_Number_One')}</p>
             <div className="flex gap-4 items-center justify-center mb-10">
               <img src={ssl} className="h-[25px] border" alt="ssl" />
