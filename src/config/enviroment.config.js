@@ -44,17 +44,12 @@ const requestHandler = (request) => {
 };
 
 const responseHandler = (response) => {
-  if (response.status == 401 || response.status == 403) {
-    // window.location = '/auth/login';
-    // localStorage.removeItem(AUTH_TOKEN)
-    // dispatch(signOut());
-  }
   return response;
 };
 
 const errorHandler = (error) => {
-  if (error?.response?.status == 401 || error?.response?.status == 403) {
-    responseHandler(error?.response);
+  if (error.response) {
+    return error.response;
   }
   return Promise.reject(error);
 };

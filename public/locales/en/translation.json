@@ -56,5 +56,6 @@
   "Join_As_A_Therapist": "Join as a Therapist",
   "Have_Account": "if you have an account Sign in",
   "Made_By": "Made By © {{year}}",
-  "Saeed_Khaled": "Saeed Khaled"
+  "Saeed_Khaled": "Saeed Khaled",
+  "internal_server_error": "Internal server error"
 }

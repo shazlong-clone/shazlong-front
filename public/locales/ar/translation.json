@@ -59,5 +59,6 @@
   "Join_As_A_Therapist": "انضم كمعالج",
   "Have_Account": "لديك حساب بالفعل ؟",
   "Made_By": "{{year}} © تم الانشاء بواسطة ",
-  "Saeed_Khaled": "سعيد خالد"
+  "Saeed_Khaled": "سعيد خالد",
+  "internal_server_error": "عذرا حدث خطأ ما الرجاء المحاولة لاحقا"
 }

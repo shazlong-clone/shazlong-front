@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   Button,
   ButtonToolbar,
@@ -8,10 +8,14 @@ import {
   Input,
   InputGroup,
   InputPicker,
+  Message,
+  Panel,
   Radio,
   RadioGroup,
   Schema,
+  useToaster,
 } from 'rsuite';
+import { JSONTree } from 'react-json-tree';
 
 import AOS from 'aos';
 import 'aos/dist/aos.css';
@@ -24,8 +28,12 @@ const { Group, HelpText, Control } = Form;
 import { signUp } from '../../features/auth/authSlice';
 import { useDispatch } from 'react-redux';
 import moment from 'moment';
+import JSONView from '../Shared/JSONView';
+import { useTranslation } from 'react-i18next';
 
 function SignUpForm() {
+  const { t } = useTranslation();
+  const toaster = useToaster();
   const dispatch = useDispatch();
   const [acceptLicence, setAcceptLicence] = useState(false);
   const [visible, setVisible] = useState(false);
@@ -47,31 +55,61 @@ function SignUpForm() {
     name: Schema.Types.StringType().isRequired('This field is required.'),
     email: Schema.Types.StringType().isEmail('Please enter a valid email address.'),
     password: Schema.Types.StringType().isRequired('This field is required'),
-    password_confirm: Schema.Types.StringType().isRequired('This field is required'),
-    country: Schema.Types.StringType().isRequired('This field is required'),
-    phone: Schema.Types.NumberType().isRequired('This field is required'),
+    passwordConfirm: Schema.Types.StringType().isRequired('This field is required'),
+    countryId: Schema.Types.NumberType().isRequired('This field is required'),
+    phone: Schema.Types.StringType().isRequired('This field is required'),
     gender: Schema.Types.StringType().isRequired('This field is required'),
-    birthDate: Schema.Types.StringType().isRequired('This field is required'),
+    birthDate: Schema.Types.DateType().isRequired('This field is required'),
   });
 
   const [formValue, setFormValues] = useState({
     name: 'saeed',
-    email: '',
-    password: '',
-    passwordConfirm: '',
+    email: 'nnowyan@gmail.com',
+    password: '111111',
+    passwordConfirm: '111111',
     countryId: 2500,
-    phone: '',
-    gender: '',
-    birthDate: moment(),
+    phone: '1009649295',
+    gender: '1',
+    birthDate: new Date(),
+    role: 1,
   });
-  const onSubmit = async (isValid) => {
-    if (!isValid) return;
+  const formRef = useRef();
+
+  const [formError, setFormError] = React.useState({});
+  const handleSubmit = async () => {
     try {
-      await dispatch(signUp({ email: 'email@x.com', password: 'sss' }));
+      const res = await dispatch(signUp(formValue));
+      if (res?.status) {
+        toaster.push(
+          <Message closable showIcon type="success">
+            Singed Up{' '}
+          </Message>,
+          {
+            duration: 5000,
+          },
+        );
+      } else {
+        toaster.push(
+          <Message closable showIcon type="error">
+            {res?.payload?.message}
+          </Message>,
+          {
+            duration: 5000,
+          },
+        );
+      }
     } catch (err) {
-      return;
+      toaster.push(
+        <Message closable showIcon type="error">
+          {t('internal_server_error')}
+        </Message>,
+        {
+          duration: 5000,
+        },
+      );
     }
   };
+
   useEffect(() => {
     fetch('/api/countries.json').then((res) => {
       res.json().then((resJosn) => {
@@ -83,7 +121,15 @@ function SignUpForm() {
 
   return (
     <>
-      <Form formValue={formValue} onChange={setFormValues} model={model} fluid className="mt-5 sign-form">
+      <Form
+        ref={formRef}
+        onCheck={setFormError}
+        formValue={formValue}
+        onChange={setFormValues}
+        model={model}
+        fluid
+        className="mt-5 sign-form"
+      >
         <Group controlId="name">
           <Control size="lg" placeholder="User Name" name="name" block="true" />
           <HelpText>You can use letters a-z, numbers and periods (- , _ , .)</HelpText>
@@ -129,10 +175,10 @@ function SignUpForm() {
           <Control accepter={DatePicker} style={{ width: '100%' }} name="birthDate" block />
         </Group>
         <Group controlId="phone">
-          <Control name="phone" accepter={InputGroup}>
+          <InputGroup>
             <InputGroup.Addon>{countryCode}</InputGroup.Addon>
-            <Input placeholder="Phone Number" size="lg" />
-          </Control>
+            <Control name="phone" placeholder="Phone Number" size="lg" />
+          </InputGroup>
         </Group>
         <Group controlId="gender">
           <Control accepter={RadioGroup} name="gender" inline>
@@ -156,7 +202,14 @@ function SignUpForm() {
         </Group>
         <Group controlId="submit">
           <ButtonToolbar>
-            <Button disabled={!acceptLicence} onClick={onSubmit} appearance="primary" type="submit" block startIcon={<FaLock />}>
+            <Button
+              disabled={!acceptLicence}
+              onClick={handleSubmit}
+              appearance="primary"
+              type="submit"
+              block
+              startIcon={<FaLock />}
+            >
               <strong className="pb-[1px] mx-[2px]">Sign Up</strong>
             </Button>
           </ButtonToolbar>
@@ -167,6 +220,7 @@ function SignUpForm() {
           </Link>
         </div>
       </Form>
+      <JSONView formValue={formValue} formError={formError} />
     </>
   );
 }
