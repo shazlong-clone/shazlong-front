@@ -6,15 +6,13 @@ const Demo = () => {
   const [form] = useForm();
   const model = Schema.Model({
     name: StringType().isRequired('This field is required.'),
-    email: StringType()
-      .isEmail('Please enter a valid email address.')
-      .isRequired('This field is required.')
+    email: StringType().isEmail('Please enter a valid email address.').isRequired('This field is required.'),
   });
   return (
     <RCForm
       model={model}
       form={form}
-      onFinish={(values) => {
+      onFinish={() => {
         form.resetFields();
       }}
       initialValues={{

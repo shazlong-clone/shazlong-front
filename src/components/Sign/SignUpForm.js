@@ -5,33 +5,29 @@ import {
   Checkbox,
   DatePicker,
   Form,
-  Input,
   InputGroup,
   InputPicker,
   Message,
-  Panel,
   Radio,
   RadioGroup,
   Schema,
   useToaster,
 } from 'rsuite';
-import { JSONTree } from 'react-json-tree';
 
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import EyeIcon from '@rsuite/icons/legacy/Eye';
 import EyeSlashIcon from '@rsuite/icons/legacy/EyeSlash';
 import clsx from 'clsx';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FaLock } from 'react-icons/fa';
 const { Group, HelpText, Control } = Form;
 import { signUp } from '../../features/auth/authSlice';
 import { useDispatch } from 'react-redux';
-import moment from 'moment';
-import JSONView from '../Shared/JSONView';
 import { useTranslation } from 'react-i18next';
 
 function SignUpForm() {
+  const navigate = useNavigate();
   const { t } = useTranslation();
   const toaster = useToaster();
   const dispatch = useDispatch();
@@ -39,6 +35,7 @@ function SignUpForm() {
   const [visible, setVisible] = useState(false);
   const [visibleConfirm, setVisibleConConfirm] = useState(false);
   const [countries, setCountries] = useState([]);
+  const [loading, setLoading] = useState(false);
   const [countryCode, setCountryCode] = useState('+20');
   const countriesData = countries?.map((item) => ({
     label: (
@@ -52,42 +49,59 @@ function SignUpForm() {
   }));
 
   const model = Schema.Model({
-    name: Schema.Types.StringType().isRequired('This field is required.'),
-    email: Schema.Types.StringType().isEmail('Please enter a valid email address.'),
-    password: Schema.Types.StringType().isRequired('This field is required'),
-    passwordConfirm: Schema.Types.StringType().isRequired('This field is required'),
-    countryId: Schema.Types.NumberType().isRequired('This field is required'),
-    phone: Schema.Types.StringType().isRequired('This field is required'),
-    gender: Schema.Types.StringType().isRequired('This field is required'),
-    birthDate: Schema.Types.DateType().isRequired('This field is required'),
+    name: Schema.Types.StringType().isRequired(t('required')),
+    email: Schema.Types.StringType().isRequired().isEmail('not_vaid_email', true),
+    password: Schema.Types.StringType().isRequired(t('required')),
+    passwordConfirm: Schema.Types.StringType().isRequired(t('required')),
+    countryId: Schema.Types.NumberType().isRequired(t('required')),
+    phone: Schema.Types.StringType().isRequired(t('required')),
+    gender: Schema.Types.StringType().isRequired(t('required')),
+    birthDate: Schema.Types.DateType().isRequired(t('required')),
   });
 
   const [formValue, setFormValues] = useState({
-    name: 'saeed',
-    email: 'nnowyan@gmail.com',
-    password: '111111',
-    passwordConfirm: '111111',
+    name: '',
+    email: '',
+    password: '',
+    passwordConfirm: '',
     countryId: 2500,
-    phone: '1009649295',
-    gender: '1',
+    phone: '',
+    gender: '',
     birthDate: new Date(),
     role: 1,
   });
   const formRef = useRef();
 
-  const [formError, setFormError] = React.useState({});
   const handleSubmit = async () => {
+    if (!formRef.current.check()) return;
+    if (formValue?.password !== formValue.passwordConfirm) {
+      return toaster.push(
+        <Message closable showIcon type="error">
+          {t('password_passwordconfirm_ne')}
+        </Message>,
+        {
+          duration: 5000,
+        },
+      );
+    }
     try {
-      const res = await dispatch(signUp(formValue));
-      if (res?.status) {
+      setLoading(true);
+      const params = {
+        ...formValue,
+        phone: `${countryCode}${formValue?.phone}`,
+      };
+      const res = await dispatch(signUp(params));
+      if (res?.payload?.status) {
+        localStorage.setItem('token', res.payload.token);
         toaster.push(
           <Message closable showIcon type="success">
-            Singed Up{' '}
+            {t('signed_up_success')}
           </Message>,
           {
             duration: 5000,
           },
         );
+        navigate('/');
       } else {
         toaster.push(
           <Message closable showIcon type="error">
@@ -107,6 +121,8 @@ function SignUpForm() {
           duration: 5000,
         },
       );
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -121,15 +137,7 @@ function SignUpForm() {
 
   return (
     <>
-      <Form
-        ref={formRef}
-        onCheck={setFormError}
-        formValue={formValue}
-        onChange={setFormValues}
-        model={model}
-        fluid
-        className="mt-5 sign-form"
-      >
+      <Form ref={formRef} formValue={formValue} onChange={setFormValues} model={model} fluid className="mt-5 sign-form">
         <Group controlId="name">
           <Control size="lg" placeholder="User Name" name="name" block="true" />
           <HelpText>You can use letters a-z, numbers and periods (- , _ , .)</HelpText>
@@ -203,11 +211,12 @@ function SignUpForm() {
         <Group controlId="submit">
           <ButtonToolbar>
             <Button
-              disabled={!acceptLicence}
+              disabled={!acceptLicence || loading}
               onClick={handleSubmit}
               appearance="primary"
               type="submit"
               block
+              loading={loading}
               startIcon={<FaLock />}
             >
               <strong className="pb-[1px] mx-[2px]">Sign Up</strong>
@@ -220,7 +229,10 @@ function SignUpForm() {
           </Link>
         </div>
       </Form>
-      <JSONView formValue={formValue} formError={formError} />
+      {
+        // eslint-disable-next-line no-undef
+        // process.env.NODE_ENV === 'development' ? <JSONView formValue={formValue} formError={formError} /> : ''
+      }
     </>
   );
 }
