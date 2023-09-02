@@ -1,35 +1,49 @@
-import React from 'react';
-import { Form, ButtonToolbar, Button, Input } from 'rsuite';
+import RCForm, { Field, useForm } from 'rc-field-form';
+import { Col, Form, Grid, Input, Row, Schema } from 'rsuite';
+const { StringType } = Schema.Types;
 
-const Textarea = React.forwardRef((props, ref) => <Input {...props} as="textarea" ref={ref} />);
+const Demo = () => {
+  const [form] = useForm();
+  const model = Schema.Model({
+    name: StringType().isRequired('This field is required.'),
+    email: StringType()
+      .isEmail('Please enter a valid email address.')
+      .isRequired('This field is required.')
+  });
+  return (
+    <RCForm
+      model={model}
+      form={form}
+      onFinish={(values) => {
+        form.resetFields();
+      }}
+      initialValues={{
+        username: 'saeed',
+        password: 12345,
+      }}
+    >
+      <Grid fluid className="mb-5">
+        <Row>
+          <Col xs={8}>
+            <Field name="username">
+              <Form.HelpText>This field is required</Form.HelpText>
+              <Input placeholder="Default username" />
+            </Field>
+          </Col>
+          <Col xs={8}>
+            <Field name="password">
+              <Form.HelpText>this is Help Text</Form.HelpText>
+              <Input placeholder="Default username" />
+            </Field>
+          </Col>
+          <Col>
+            <Form.HelpText>this is Help Text</Form.HelpText>
+            <button>Submit</button>
+          </Col>
+        </Row>
+      </Grid>
+    </RCForm>
+  );
+};
 
-const App = () => (
-  <Form>
-    <Form.Group controlId="name">
-      <Form.ControlLabel>Username</Form.ControlLabel>
-      <Form.Control name="name" />
-      <Form.HelpText>Username is required</Form.HelpText>
-    </Form.Group>
-    <Form.Group controlId="email">
-      <Form.ControlLabel>Email</Form.ControlLabel>
-      <Form.Control name="email" type="email" />
-      <Form.HelpText tooltip>Email is required</Form.HelpText>
-    </Form.Group>
-    <Form.Group controlId="password">
-      <Form.ControlLabel>Password</Form.ControlLabel>
-      <Form.Control name="password" type="password" autoComplete="off" />
-    </Form.Group>
-    <Form.Group controlId="textarea">
-      <Form.ControlLabel>Textarea</Form.ControlLabel>
-      <Form.Control rows={5} name="textarea" accepter={Textarea} />
-    </Form.Group>
-    <Form.Group>
-      <ButtonToolbar>
-        <Button appearance="primary">Submit</Button>
-        <Button appearance="default">Cancel</Button>
-      </ButtonToolbar>
-    </Form.Group>
-  </Form>
-);
-
-export default App;
+export default Demo;
