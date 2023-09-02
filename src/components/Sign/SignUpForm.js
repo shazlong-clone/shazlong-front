@@ -1,5 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { Button, ButtonToolbar, Checkbox, Form, Input, InputGroup, InputPicker, Radio, RadioGroup, Schema } from 'rsuite';
+import {
+  Button,
+  ButtonToolbar,
+  Checkbox,
+  DatePicker,
+  Form,
+  Input,
+  InputGroup,
+  InputPicker,
+  Radio,
+  RadioGroup,
+  Schema,
+} from 'rsuite';
 
 import AOS from 'aos';
 import 'aos/dist/aos.css';
@@ -11,6 +23,7 @@ import { FaLock } from 'react-icons/fa';
 const { Group, HelpText, Control } = Form;
 import { signUp } from '../../features/auth/authSlice';
 import { useDispatch } from 'react-redux';
+import moment from 'moment';
 
 function SignUpForm() {
   const dispatch = useDispatch();
@@ -31,32 +44,33 @@ function SignUpForm() {
   }));
 
   const model = Schema.Model({
-    user_name: Schema.Types.StringType().isRequired('This field is required.'),
+    name: Schema.Types.StringType().isRequired('This field is required.'),
     email: Schema.Types.StringType().isEmail('Please enter a valid email address.'),
     password: Schema.Types.StringType().isRequired('This field is required'),
     password_confirm: Schema.Types.StringType().isRequired('This field is required'),
     country: Schema.Types.StringType().isRequired('This field is required'),
     phone: Schema.Types.NumberType().isRequired('This field is required'),
     gender: Schema.Types.StringType().isRequired('This field is required'),
+    birthDate: Schema.Types.StringType().isRequired('This field is required'),
   });
 
   const [formValue, setFormValues] = useState({
-    user_name: '',
+    name: 'saeed',
     email: '',
     password: '',
-    password_confirm: '',
-    country_id: 2500,
+    passwordConfirm: '',
+    countryId: 2500,
     phone: '',
     gender: '',
-    accept_licence: '',
+    birthDate: moment(),
   });
   const onSubmit = async (isValid) => {
+    if (!isValid) return;
     try {
       await dispatch(signUp({ email: 'email@x.com', password: 'sss' }));
     } catch (err) {
       return;
     }
-    if (!isValid) return;
   };
   useEffect(() => {
     fetch('/api/countries.json').then((res) => {
@@ -70,13 +84,12 @@ function SignUpForm() {
   return (
     <>
       <Form formValue={formValue} onChange={setFormValues} model={model} fluid className="mt-5 sign-form">
-        <Group controlId="user_name">
-          <Control size="lg" placeholder="User Name" name="user_name" block="true" />
+        <Group controlId="name">
+          <Control size="lg" placeholder="User Name" name="name" block="true" />
           <HelpText>You can use letters a-z, numbers and periods (- , _ , .)</HelpText>
         </Group>
         <Group controlId="email">
           <Control size="lg" block="true" placeholder="Email" name="email" />
-          <HelpText>*Email is required</HelpText>
         </Group>
         <Group controlId="password">
           <InputGroup>
@@ -84,12 +97,12 @@ function SignUpForm() {
             <InputGroup.Button onClick={() => setVisible(!visible)}>{visible ? <EyeIcon /> : <EyeSlashIcon />}</InputGroup.Button>
           </InputGroup>
         </Group>
-        <Group controlId="password_confirm">
+        <Group controlId="passwordConfirm">
           <InputGroup accepter={InputGroup}>
             <Control
               placeholder="Password Confirm"
               size="lg"
-              name="password_confirm"
+              name="passwordConfirm"
               type={visibleConfirm ? 'text' : 'password'}
             />
             <InputGroup.Button onClick={() => setVisibleConConfirm(!visibleConfirm)}>
@@ -97,7 +110,7 @@ function SignUpForm() {
             </InputGroup.Button>
           </InputGroup>
         </Group>
-        <Group controlId="country_id">
+        <Group controlId="countryId">
           <Control
             onSelect={(id) => {
               setCountryCode(countries?.find((el) => el?.id === id)?.country_code);
@@ -106,34 +119,39 @@ function SignUpForm() {
             menuMaxHeight={300}
             menuStyle={{ maxWidth: '10px' }}
             block
-            name="country_id"
+            name="countryId"
             accepter={InputPicker}
             data={countriesData}
             size="lg"
           />
+        </Group>
+        <Group controlId="birthDate">
+          <Control accepter={DatePicker} style={{ width: '100%' }} name="birthDate" block />
         </Group>
         <Group controlId="phone">
           <Control name="phone" accepter={InputGroup}>
             <InputGroup.Addon>{countryCode}</InputGroup.Addon>
             <Input placeholder="Phone Number" size="lg" />
           </Control>
-          <HelpText> * Please make sure you enter a valid phone number </HelpText>
         </Group>
         <Group controlId="gender">
           <Control accepter={RadioGroup} name="gender" inline>
-            <Radio value="Male">Male</Radio>
-            <Radio value="Female">Female</Radio>
+            <Radio value="1">Male</Radio>
+            <Radio value="2">Female</Radio>
           </Control>
         </Group>
-        <Group controlId="accept_licence" className="ml-[-10px]">
+        <Group controlId="acceptLicence" className="ml-[-10px]">
           <Control
             onChange={(val, checked) => {
               setAcceptLicence(checked);
             }}
             accepter={Checkbox}
-            name="accept_licence"
+            name="acceptLicence"
           >
-            I agree with the <Link to="/licence"> privacy policy</Link>
+            I agree with the
+            <Link to="/licence" className="underline">
+              privacy policy
+            </Link>
           </Control>
         </Group>
         <Group controlId="submit">
