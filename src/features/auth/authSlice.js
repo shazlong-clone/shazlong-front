@@ -11,7 +11,7 @@ export const signUp = createAsyncThunk('signUp', async (params) => {
 });
 
 export const signInUser = createAsyncThunk('signIn', async (params) => {
-  const res = await service.post('/api/v1/users/signin', params);
+  const res = await service.post('/api/v1/users/login', params);
   return res.data;
 });
 

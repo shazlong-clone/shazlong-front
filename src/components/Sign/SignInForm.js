@@ -39,7 +39,7 @@ function SignUpForm() {
           </Message>,
           { duration: 5000 },
         );
-        navigate.navigate('/');
+        navigate('/');
       } else {
         toaster.push(
           <Message type="error" closable showIcon>

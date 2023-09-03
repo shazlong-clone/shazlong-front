@@ -64,5 +64,6 @@
   "required": "الحقل مطلوب",
   "password_passwordconfirm_ne": "كلمة السر غير متطابقة ",
   "not_vaid_email": "بريد الكتروني غير صالح",
-  "signed_up_success": "مرحبا بك في شزلونج"
+  "signed_up_success": "مرحبا بك في شزلونج",
+  "sign_in_successfuly": "تم تسجيل الدخول بنجاح"
 }
