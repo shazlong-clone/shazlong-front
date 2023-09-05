@@ -1,17 +1,31 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Card from '../components/Shared/Card';
-import therapist from '../assets/images/therapist.webp';
 import { useDispatch, useSelector } from 'react-redux';
-import { AiFillCamera } from 'react-icons/ai';
 import clsx from 'clsx';
-import { Button, ButtonToolbar, DatePicker, Form, InputGroup, InputPicker, Radio, RadioGroup, useToaster, Message } from 'rsuite';
+import {
+  Button,
+  ButtonToolbar,
+  DatePicker,
+  Form,
+  InputGroup,
+  InputPicker,
+  Radio,
+  RadioGroup,
+  useToaster,
+  Message,
+  Uploader,
+  Loader,
+} from 'rsuite';
 import { useTranslation } from 'react-i18next';
 import { updateMe } from '../features/auth/authSlice';
+import CameraRetroIcon from '@rsuite/icons/legacy/CameraRetro';
+import { API_BASE_URL } from '../config/enviroment.config';
+import { LuEdit } from 'react-icons/lu';
 
 const { Group, HelpText, Control } = Form;
 
 function UserInfo() {
-  const [plainText, setPlainText] = useState(false);
+  const [plainText, setPlainText] = useState(true);
   const formRef = useRef();
   const { user = {} } = useSelector((state) => state?.auth);
   const [formValue, setFormValues] = useState({
@@ -104,16 +118,53 @@ function UserInfo() {
     }
   };
 
+  function previewFile(file, callback) {
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      callback(reader.result);
+    };
+    reader.readAsDataURL(file);
+  }
+  const { token } = useSelector((state) => state?.auth);
+  const [uploading, setUploading] = React.useState(false);
+
+  const [fileInfo, setFileInfo] = React.useState(user?.photo ?? null);
+  const props = {
+    name: 'photo',
+    fileListVisible: false,
+    listType: 'picture',
+    action: `${API_BASE_URL}/api/v1/users/uploadPhoto`,
+    headers: {
+      authorization: `Bearer ${token}`,
+    },
+    onUpload: (file) => {
+      setUploading(true);
+      previewFile(file.blobFile, (value) => {
+        setFileInfo(value);
+      });
+    },
+    onSuccess: (response) => {
+      setUploading(false);
+      toaster.push(<Message type="success">Uploaded successfully</Message>);
+    },
+    onError: () => {
+      setFileInfo(null);
+      setUploading(false);
+      toaster.push(<Message type="error">Upload failed</Message>);
+    },
+  };
   return (
     <main className="bg-cyan/10 py-5">
       <div className="container">
         <section className="lg:grid lg:grid-cols-[1fr_4fr] gap-5 items-start lg:mt-10">
           <Card className="rounded-none text-center">
-            <div className="relative inline-block p-2">
-              <img className="rounded-full w-[100px] h-[100px] border-2 border-solid border-cyan" src={therapist} />
-              <i className="absolute end-0 bottom-0 bg-white rounded-full p-2 translate-x-[-30%]">
-                <AiFillCamera className="flex items-center" />
-              </i>
+            <div className="relative inline-block p-2 ">
+              <Uploader {...props}>
+                <button style={{ width: 100, height: 100, borderRadius: '50%' }}>
+                  {uploading && <Loader backdrop center />}
+                  {fileInfo ? <img src={fileInfo} width="100%" height="100%" /> : <CameraRetroIcon />}
+                </button>
+              </Uploader>
             </div>
             <p className="mt-5 text-cyan capitalize">
               {user.name}
@@ -142,10 +193,10 @@ function UserInfo() {
                 payment info
               </div>
             </article>
-            <article className="p-5">
+            <article className="p-5 relative">
               {plainText ? (
-                <a className="cursor-pointer" onClick={() => setPlainText(false)}>
-                  Edit Profile
+                <a className="cursor-pointer absolute end-0 top-0 mt-5 mx-3" onClick={() => setPlainText(false)}>
+                  Edit Profile <LuEdit />
                 </a>
               ) : (
                 ''
@@ -157,19 +208,19 @@ function UserInfo() {
                 formValue={formValue}
                 onChange={setFormValues}
                 fluid
-                className="mt-5 sign-form"
+                className="sign-form"
               >
                 <Group controlId="name">
                   <Form.ControlLabel>Name </Form.ControlLabel>
                   <Control size="lg" placeholder="User Name" name="name" block="true" />
-                  <HelpText>You can use letters a-z, numbers and periods (- , _ , .)</HelpText>
+                  {!plainText ? <HelpText>You can use letters a-z, numbers and periods (- , _ , .)</HelpText> : ''}
                 </Group>
                 <Group controlId="email">
                   <Form.ControlLabel>Email </Form.ControlLabel>
                   <Control size="lg" block="true" placeholder="Email" name="email" />
                 </Group>
                 <Group controlId="countryId">
-                  <Form.ControlLabel>Country </Form.ControlLabel>
+                  <Form.ControlLabel>Country</Form.ControlLabel>
                   <Control
                     onSelect={(id) => {
                       setCountryCode(countries?.find((el) => el?.id === id)?.country_code);

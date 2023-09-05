@@ -6,9 +6,10 @@ import './index.css';
 import './i18n';
 import { BrowserRouter } from 'react-router-dom';
 import { store, persistor } from './app/store';
-import { Provider } from 'react-redux';
+import { Provider, useSelector } from 'react-redux';
 import { ThemeSwitcherProvider } from 'react-css-theme-switcher';
 import { PersistGate } from 'redux-persist/integration/react';
+import LocalizeRsuit from './components/Shared/LocalizeRsuit';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -23,7 +24,9 @@ root.render(
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <ThemeSwitcherProvider insertionPoint="inject-styles-here" defaultTheme="ltr" themeMap={themes}>
-            <App />
+            <LocalizeRsuit>
+              <App />
+            </LocalizeRsuit>
           </ThemeSwitcherProvider>
         </PersistGate>
       </Provider>

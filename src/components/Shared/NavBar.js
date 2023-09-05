@@ -9,7 +9,7 @@ import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { Button, Drawer, Popover, Whisper } from 'rsuite';
 import { BsPersonBadgeFill, BsPersonCircle } from 'react-icons/bs';
 import { GoSignOut } from 'react-icons/go';
-import therapist from '../../assets/images/therapist.webp';
+import personIcon from '../../assets/images/person-icon-blue-7563.png';
 import useMediaQuery from '../../utils/useMediaQuery';
 import { useDispatch, useSelector } from 'react-redux';
 import { getMe, signOut } from '../../features/auth/authSlice';
@@ -47,13 +47,14 @@ function NavBar() {
   const signOutHandler = () => {
     dispatch(signOut());
     close();
+    setOpen(false);
     navigate('/');
   };
   const speaker = (
-    <Popover className="p-0" style={!lg ? { display: 'none' } : {}}>
+    <Popover className="p-0 rtl:right-[1555.39px]" style={!lg ? { display: 'none' } : {}}>
       <ul className="p-0 list-none divide-y-[1px] divide-x-0 divide-solid divide-gray/10">
         <li className="px-3 flex items-center gap-2 py-2">
-          <img className="rounded-full" src={therapist} width="40px" height="40px" />
+          <img className="rounded-full" src={user?.photo ? user?.photo : personIcon} width="40px" height="40px" />
           <strong className="capitalize">{user?.name}</strong>
         </li>
         <li className="text-base px-3 py-2 cursor-pointer">
@@ -136,7 +137,7 @@ function NavBar() {
           )}
           <article className={clsx(!user?._id ? 'hidden' : '')}>
             <section className={clsx(open && 'text-cyan', 'flex items-center')}>
-              <Whisper ref={triggerRef} trigger="click" placement="bottom" speaker={speaker}>
+              <Whisper className="hidden" ref={triggerRef} trigger="click" placement="bottom" speaker={speaker}>
                 <Button onClick={() => setOpen(true)} appearance="subtle">
                   <BsPersonCircle className="text-xl" />
                   <AiOutlineCaretDown className="text-xs" />
@@ -150,20 +151,26 @@ function NavBar() {
                 <Drawer.Body className="px-0 close-right">
                   <ul className="mt-[30px] list-none px-0">
                     <li className="px-5 flex gap-3 items-center">
-                      <img src={therapist} alt="therapist" className="rounded-full w-[50px]" />
+                      <img src={user?.photo ? user?.photo : personIcon} alt="therapist" className="rounded-full w-[50px]" />
                       <span className="text-lg italic font-[100]">John Doe</span>
                     </li>
                     <hr />
                     <li className="px-5">
-                      <Link to="/" className="text-inherit inline-flex items-center gap-2 hover:no-underline">
+                      <Link
+                        onClick={() => setOpen(false)}
+                        to="/user-info"
+                        className="text-inherit inline-flex items-center gap-2 hover:no-underline"
+                      >
                         <BsPersonBadgeFill className="text-3xl" />
                         <span className="text-lg">Your Profile</span>
                       </Link>
                     </li>
                     <hr />
                     <li className="text-red-600 flex items-center justify-center gap-2">
-                      <GoSignOut className="text-3xl" />
-                      <span className="text-lg">Sign Out</span>
+                      <span className="text-lg cursor-pointer flex items-center gap-2" onClick={signOutHandler}>
+                        <GoSignOut className="text-3xl" />
+                        Sign Out
+                      </span>
                     </li>
                   </ul>
                 </Drawer.Body>
