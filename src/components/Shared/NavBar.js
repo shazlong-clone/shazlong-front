@@ -6,11 +6,14 @@ import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import applyRtlCssStyles from '../../utils/applyRtlCssStyles';
 import { Link, NavLink } from 'react-router-dom';
-import { Drawer } from 'rsuite';
-import { BsPersonBadgeFill } from 'react-icons/bs';
+import { Button, Drawer, Popover, Whisper } from 'rsuite';
+import { BsPersonBadgeFill, BsPersonCircle } from 'react-icons/bs';
 import { GoSignOut } from 'react-icons/go';
 import therapist from '../../assets/images/therapist.webp';
 import useMediaQuery from '../../utils/useMediaQuery';
+import { useDispatch, useSelector } from 'react-redux';
+import { getMe, signOut } from '../../features/auth/authSlice';
+import { AiOutlineCaretDown } from 'react-icons/ai';
 
 function NavBar() {
   const [open, setOpen] = useState(false);
@@ -35,9 +38,45 @@ function NavBar() {
       to: '/blogs',
     },
   ];
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state?.auth);
+  const triggerRef = React.useRef();
+  const close = () => triggerRef.current.close();
+
+  const signOutHandler = () => {
+    dispatch(signOut());
+    close();
+  };
+  const speaker = (
+    <Popover className="p-0" style={!lg ? { display: 'none' } : {}}>
+      <ul className="p-0 list-none divide-y-[1px] divide-x-0 divide-solid divide-gray/10">
+        <li className="px-3 flex items-center gap-2 py-2">
+          <img className="rounded-full" src={therapist} width="40px" height="40px" />
+          <strong className="capitalize">{user?.name}</strong>
+        </li>
+        <li className="text-base px-3 py-2 cursor-pointer">
+          <Link onClick={close} to="/user-info" className="no-underline hover:no-underline flex gap-2 items-center">
+            <BsPersonCircle />
+            <span className="capitalize">my Profile</span>
+          </Link>
+        </li>
+        <li
+          onClick={signOutHandler}
+          className="text-red-600 hover:text-red-500 text-base flex gap-2 items-center px-3 py-2 cursor-pointer"
+        >
+          <GoSignOut className="text-xl  items-center" />
+          <span className="pb-[1px]">Sign Out</span>
+        </li>
+      </ul>
+    </Popover>
+  );
+
+  useEffect(() => {
+    dispatch(getMe());
+  }, []);
 
   return (
-    <div className="container items-center border-b-[1px] border-gray/10 px-4 py-5 bg-white">
+    <div className="container items-center border-b-[1px] border-gray/10 px-4 py-3 bg-white">
       <div className="flex justify-between items-center m-auto">
         <section className="lg:flex-[1_1_33%]">
           <Link to="/">
@@ -76,46 +115,32 @@ function NavBar() {
               </article>
             );
           })}
-          <Link className="text-inherit hover:no-underline hover:text-inherit" to="/sign-in">
-            <article className="text-green border border-solid border-green py-1 px-2 rounded-3xl cursor-pointer  lg:py-1 lg:px-5 text-[12px] text-center  xl:text-base">
-              {t('Sign_In')}
-            </article>
-          </Link>
-          <Link className="text-inherit hover:no-underline hover:text-inherit" to="/sign-up">
-            <article className="text-white bg-green py-1 px-2 rounded-3xl cursor-pointer lg:py-1 lg:px-5 text-[12px] text-center  xl:text-base flex rtl:pt-2">
-              {t('Sign_Up')}
-            </article>
-          </Link>
-          <article className="lg:hidden">
-            {/* <section className={clsx(open && 'text-cyan', 'flex items-center')}>
-              <Whisper
-                trigger="click"
-                placement="bottom"
-                speaker={
-                  <Popover className="p-0" style={!lg ? { display: 'none' } : {}}>
-                    <ul className="p-0 list-none divide-y-[1px] divide-x-0 divide-solid divide-gray/10">
-                      <li className="px-3 flex items-center gap-2 py-2">
-                        <img className="rounded-full" src={therapist} width="40px" height="40px" />
-                        <strong className="capitalize">john Doe</strong>
-                      </li>
-                      <li className="text-base flex gap-2 items-center px-3 py-2 cursor-pointer">
-                        <BsPersonCircle />
-                        <span className="hover:text-gray capitalize">my Profile</span>
-                      </li>
-                      <li className="text-red-600 hover:text-red-500 text-base flex gap-2 items-center px-3 py-2 cursor-pointer">
-                        <GoSignOut className="text-xl  items-center" />
-                        <span className="pb-[1px]">Sign Out</span>
-                      </li>
-                    </ul>
-                  </Popover>
-                }
-              >
+
+          {!user?._id ? (
+            <>
+              <Link className="text-inherit hover:no-underline hover:text-inherit" to="/sign-in">
+                <article className="text-green border border-solid border-green py-1 px-2 rounded-3xl cursor-pointer  lg:py-1 lg:px-5 text-[12px] text-center  xl:text-base">
+                  {t('Sign_In')}
+                </article>
+              </Link>
+              <Link className="text-inherit hover:no-underline hover:text-inherit" to="/sign-up">
+                <article className="text-white bg-green py-1 px-2 rounded-3xl cursor-pointer lg:py-1 lg:px-5 text-[12px] text-center  xl:text-base flex rtl:pt-2">
+                  {t('Sign_Up')}
+                </article>
+              </Link>
+            </>
+          ) : (
+            ''
+          )}
+          <article className={clsx(!user?._id ? 'hidden' : '')}>
+            <section className={clsx(open && 'text-cyan', 'flex items-center')}>
+              <Whisper ref={triggerRef} trigger="click" placement="bottom" speaker={speaker}>
                 <Button onClick={() => setOpen(true)} appearance="subtle">
                   <BsPersonCircle className="text-xl" />
                   <AiOutlineCaretDown className="text-xs" />
                 </Button>
               </Whisper>
-            </section> */}
+            </section>
             {lg ? (
               ''
             ) : (

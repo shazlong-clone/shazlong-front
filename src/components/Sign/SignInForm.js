@@ -6,7 +6,6 @@ import EyeIcon from '@rsuite/icons/legacy/Eye';
 import EyeSlashIcon from '@rsuite/icons/legacy/EyeSlash';
 import { FaLock } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
-import JSONview from '../Shared/JSONView';
 import { useDispatch } from 'react-redux';
 import { signInUser } from '../../features/auth/authSlice';
 import { useTranslation } from 'react-i18next';
@@ -39,6 +38,7 @@ function SignUpForm() {
           </Message>,
           { duration: 5000 },
         );
+        localStorage.setItem('token', res.payload.token)
         navigate('/');
       } else {
         toaster.push(
@@ -49,7 +49,6 @@ function SignUpForm() {
         );
       }
     } catch (err) {
-      console.log(err);
       toaster.push(
         <Message closable showIcon type="error">
           {t('internal_server_error')}
@@ -66,12 +65,10 @@ function SignUpForm() {
     AOS.init();
   }, []);
   const formRef = useRef();
-  const [formError, setFormError] = useState();
   return (
     <>
       <Form
         ref={formRef}
-        onCheck={setFormError}
         formValue={formValue}
         onChange={setFormValues}
         model={model}
@@ -119,7 +116,6 @@ function SignUpForm() {
           Dont Have Account Sign Up
         </Link>
       </div>
-      <JSONview formValue={formValue} formError={formError} />
     </>
   );
 }

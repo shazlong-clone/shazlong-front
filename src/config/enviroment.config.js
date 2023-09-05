@@ -36,7 +36,7 @@ const requestHandler = (request) => {
   const token = localStorage.getItem(TOKEN);
   const locale = localStorage.getItem('i18nextLng');
   if (token) {
-    request.headers['TOKEN_PAYLOAD_KEY'] = token;
+    request.headers['authorization'] = `Bearer ${token}`;
   }
   request.headers['locale'] = locale;
 
