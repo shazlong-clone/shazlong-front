@@ -5,16 +5,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AiFillCamera } from 'react-icons/ai';
 import clsx from 'clsx';
 import { Button, ButtonToolbar, DatePicker, Form, InputGroup, InputPicker, Radio, RadioGroup, useToaster, Message } from 'rsuite';
-import EyeIcon from '@rsuite/icons/legacy/Eye';
-import EyeSlashIcon from '@rsuite/icons/legacy/EyeSlash';
 import { useTranslation } from 'react-i18next';
-import { Link, useNavigate } from 'react-router-dom';
 import { updateMe } from '../features/auth/authSlice';
-import { FaLock } from 'react-icons/fa';
 
 const { Group, HelpText, Control } = Form;
 
 function UserInfo() {
+  const [plainText, setPlainText] = useState(false);
   const formRef = useRef();
   const { user = {} } = useSelector((state) => state?.auth);
   const [formValue, setFormValues] = useState({
@@ -41,7 +38,6 @@ function UserInfo() {
 
   const { t } = useTranslation();
   const [countryCode, setCountryCode] = useState(user?.countryCode || '');
-  const navigate = useNavigate();
   const toaster = useToaster();
   const [loading, setLoading] = useState(false);
 
@@ -111,7 +107,7 @@ function UserInfo() {
   return (
     <main className="bg-cyan/10 py-5">
       <div className="container">
-        <section>
+        <section className="lg:grid lg:grid-cols-[1fr_4fr] gap-5 items-start lg:mt-10">
           <Card className="rounded-none text-center">
             <div className="relative inline-block p-2">
               <img className="rounded-full w-[100px] h-[100px] border-2 border-solid border-cyan" src={therapist} />
@@ -119,9 +115,13 @@ function UserInfo() {
                 <AiFillCamera className="flex items-center" />
               </i>
             </div>
-            <p className="mt-5 text-cyan capitalize">{user.name}</p>
+            <p className="mt-5 text-cyan capitalize">
+              {user.name}
+              <br />
+              <span className="text-gray">{user.role === 1 ? '(user)' : '(doctor)'}</span>
+            </p>
           </Card>
-          <Card className="rounded-none mt-5 p-0 pb-16">
+          <Card className="rounded-none mt-5 p-0 pb-16 lg:mt-0">
             <article className="flex">
               <div
                 onClick={() => setActiveTabe(1)}
@@ -143,7 +143,22 @@ function UserInfo() {
               </div>
             </article>
             <article className="p-5">
-              <Form ref={formRef} formValue={formValue} onChange={setFormValues} fluid className="mt-5 sign-form">
+              {plainText ? (
+                <a className="cursor-pointer" onClick={() => setPlainText(false)}>
+                  Edit Profile
+                </a>
+              ) : (
+                ''
+              )}
+
+              <Form
+                plaintext={plainText}
+                ref={formRef}
+                formValue={formValue}
+                onChange={setFormValues}
+                fluid
+                className="mt-5 sign-form"
+              >
                 <Group controlId="name">
                   <Form.ControlLabel>Name </Form.ControlLabel>
                   <Control size="lg" placeholder="User Name" name="name" block="true" />
@@ -175,10 +190,15 @@ function UserInfo() {
                 </Group>
                 <Group controlId="phone">
                   <Form.ControlLabel>Phone </Form.ControlLabel>
-                  <InputGroup>
-                    <InputGroup.Addon>{countryCode}</InputGroup.Addon>
+
+                  {plainText ? (
                     <Control name="phone" placeholder="Phone Number" size="lg" />
-                  </InputGroup>
+                  ) : (
+                    <InputGroup>
+                      <InputGroup.Addon>{countryCode}</InputGroup.Addon>
+                      <Control name="phone" placeholder="Phone Number" size="lg" />
+                    </InputGroup>
+                  )}
                 </Group>
                 <Group controlId="gender">
                   <Form.ControlLabel>Gender </Form.ControlLabel>
@@ -187,13 +207,19 @@ function UserInfo() {
                     <Radio value="2">Female</Radio>
                   </Control>
                 </Group>
-                <Group controlId="submit">
-                  <ButtonToolbar>
-                    <Button disabled={loading} onClick={handleSubmit} appearance="primary" type="submit" block loading={loading}>
-                      <strong className="pb-[1px] mx-[2px]">Update</strong>
-                    </Button>
-                  </ButtonToolbar>
-                </Group>
+
+                {plainText ? (
+                  ''
+                ) : (
+                  <Group controlId="submit">
+                    <ButtonToolbar>
+                      <Button disabled={loading} onClick={handleSubmit} appearance="primary" type="submit" loading={loading}>
+                        <strong className="pb-[1px] mx-[2px]">Update</strong>
+                      </Button>
+                      <Button onClick={() => setPlainText(true)}>Cancel</Button>
+                    </ButtonToolbar>
+                  </Group>
+                )}
               </Form>
             </article>
           </Card>
