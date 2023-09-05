@@ -62,5 +62,6 @@
   "password_passwordconfirm_ne": "password and password confirm not same",
   "not_vaid_email": "Not vaid email",
   "signed_up_success": "Welcome to Shazlong",
-  "sign_in_successfuly": "Sign in successfuly"
+  "sign_in_successfuly": "Sign in successfuly",
+  "update_successfuly": "Update successfuly"
 }

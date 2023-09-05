@@ -1,10 +1,26 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import themeSlice from '../features/theme/themeSlice';
 import authSlice from '../features/auth/authSlice';
+import storage from 'redux-persist/lib/storage';
+import { persistReducer, persistStore } from 'redux-persist';
+import thunk from 'redux-thunk';
+
+const persistConfig = {
+  key: 'shazlong',
+  storage,
+};
+const rootReducer = combineReducers({
+  theme: themeSlice,
+  auth: authSlice,
+});
+
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({
-  reducer: {
-    theme: themeSlice,
-    auth: authSlice,
-  },
+  reducer: persistedReducer,
+  // eslint-disable-next-line no-undef
+  devTools: process.env.NODE_ENV !== 'production',
+  middleware: [thunk],
 });
+
+export const persistor = persistStore(store);

@@ -5,6 +5,8 @@ import ErrorBoundary from './components/Shared/ErrorBoundary';
 import LayOut from './components/Shared/LayOut';
 import Loading from './components/Shared/BackDropLoading';
 import LangWrapper from './components/Shared/LangWrapper';
+import ProtectedRoute from './components/Shared/ProtectedRoute';
+
 const Home = lazy(() => import('./pages/Home'));
 const ThearpistProfile = lazy(() => import('./pages/ThearpistProfile'));
 const Therapists = lazy(() => import('./pages/Therapists'));
@@ -50,7 +52,9 @@ function App() {
               <Route exact path="psychometer" element={<Psychometer />} />
               <Route exact path="psychotest/:id" element={<Psychotest />} />
               <Route exact path="join-us" element={<JoinUs />} />
-              <Route exact path="user-info" element={<UserInfo />} />
+              <Route exact path="user-info" element={<ProtectedRoute />}>
+                <Route exact index element={<UserInfo />} />
+              </Route>
               <Route exact path="test" element={<Test />} />
               <Route exact path="*" element={<Error />} />
             </Route>

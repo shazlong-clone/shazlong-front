@@ -4,11 +4,12 @@ import App from './App';
 import 'flag-icons/css/flag-icons.css';
 import './index.css';
 import './i18n';
-
 import { BrowserRouter } from 'react-router-dom';
-import { store } from './app/store';
+import { store, persistor } from './app/store';
 import { Provider } from 'react-redux';
 import { ThemeSwitcherProvider } from 'react-css-theme-switcher';
+import { PersistGate } from 'redux-persist/integration/react';
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 const themes = {
@@ -20,9 +21,11 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <Provider store={store}>
-        <ThemeSwitcherProvider insertionPoint='inject-styles-here'  defaultTheme="ltr" themeMap={themes}>
-          <App />
-        </ThemeSwitcherProvider>
+        <PersistGate loading={null} persistor={persistor}>
+          <ThemeSwitcherProvider insertionPoint="inject-styles-here" defaultTheme="ltr" themeMap={themes}>
+            <App />
+          </ThemeSwitcherProvider>
+        </PersistGate>
       </Provider>
     </BrowserRouter>
   </React.StrictMode>,

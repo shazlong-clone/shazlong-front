@@ -4,40 +4,27 @@ import therapist from '../assets/images/therapist.webp';
 import { useDispatch, useSelector } from 'react-redux';
 import { AiFillCamera } from 'react-icons/ai';
 import clsx from 'clsx';
-import {
-  Button,
-  ButtonToolbar,
-  Schema,
-  DatePicker,
-  Form,
-  InputGroup,
-  InputPicker,
-  Radio,
-  RadioGroup,
-  useToaster,
-  Message,
-} from 'rsuite';
+import { Button, ButtonToolbar, DatePicker, Form, InputGroup, InputPicker, Radio, RadioGroup, useToaster, Message } from 'rsuite';
 import EyeIcon from '@rsuite/icons/legacy/Eye';
 import EyeSlashIcon from '@rsuite/icons/legacy/EyeSlash';
 import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
-import { signUp } from '../features/auth/authSlice';
+import { updateMe } from '../features/auth/authSlice';
 import { FaLock } from 'react-icons/fa';
 
 const { Group, HelpText, Control } = Form;
 
 function UserInfo() {
   const formRef = useRef();
+  const { user = {} } = useSelector((state) => state?.auth);
   const [formValue, setFormValues] = useState({
-    name: '',
-    email: '',
-    password: '',
-    passwordConfirm: '',
-    countryId: 2500,
-    phone: '',
-    gender: '',
-    birthDate: new Date(),
-    role: 1,
+    name: user?.name || '',
+    email: user?.email || '',
+    countryId: user?.countryId || '',
+    phone: user?.phone || '',
+    gender: user?.gender || '',
+    birthDate: new Date(user?.birthDate).getTime(),
+    countryCode: user?.countryCode,
   });
   const [countries, setCountries] = useState([]);
 
@@ -53,23 +40,11 @@ function UserInfo() {
   }));
 
   const { t } = useTranslation();
-  const [countryCode, setCountryCode] = useState('+20');
+  const [countryCode, setCountryCode] = useState(user?.countryCode || '');
   const navigate = useNavigate();
-
-  const model = Schema.Model({
-    name: Schema.Types.StringType().isRequired(t('required')),
-    email: Schema.Types.StringType().isRequired().isEmail('not_vaid_email', true),
-    password: Schema.Types.StringType().isRequired(t('required')),
-    passwordConfirm: Schema.Types.StringType().isRequired(t('required')),
-    countryId: Schema.Types.NumberType().isRequired(t('required')),
-    phone: Schema.Types.StringType().isRequired(t('required')),
-    gender: Schema.Types.StringType().isRequired(t('required')),
-    birthDate: Schema.Types.DateType().isRequired(t('required')),
-  });
   const toaster = useToaster();
   const [loading, setLoading] = useState(false);
 
-  const { user } = useSelector((state) => state?.auth);
   const [activeTabe, setActiveTabe] = useState(1);
   const dispatch = useDispatch();
 
@@ -97,20 +72,18 @@ function UserInfo() {
       setLoading(true);
       const params = {
         ...formValue,
-        phone: `${countryCode}${formValue?.phone}`,
+        countryCode,
       };
-      const res = await dispatch(signUp(params));
+      const res = await dispatch(updateMe(params));
       if (res?.payload?.status) {
-        localStorage.setItem('token', res.payload.token);
         toaster.push(
           <Message closable showIcon type="success">
-            {t('signed_up_success')}
+            {t('update_successfuly')}
           </Message>,
           {
             duration: 5000,
           },
         );
-        navigate('/');
       } else {
         toaster.push(
           <Message closable showIcon type="error">
@@ -148,12 +121,12 @@ function UserInfo() {
             </div>
             <p className="mt-5 text-cyan capitalize">{user.name}</p>
           </Card>
-          <Card className="rounded-none mt-5 p-0">
+          <Card className="rounded-none mt-5 p-0 pb-16">
             <article className="flex">
               <div
                 onClick={() => setActiveTabe(1)}
                 className={clsx(
-                  'grow px-5 py-4 capitalize border-solid border-t-0 border-r-0 border-l-0 font-semibold',
+                  'grow px-5 py-4 capitalize border-solid border-t-0 border-r-0 border-l-0 font-semibold cursor-pointer',
                   activeTabe === 1 ? 'border-b-2 border-cyan text-cyan' : 'border-b border-gray',
                 )}
               >
@@ -162,7 +135,7 @@ function UserInfo() {
               <div
                 onClick={() => setActiveTabe(2)}
                 className={clsx(
-                  'grow px-5 py-4 capitalize  border-solid border-t-0 border-r-0 border-l-0 font-semibold',
+                  'grow px-5 py-4 capitalize  border-solid border-t-0 border-r-0 border-l-0 font-semibold cursor-pointer',
                   activeTabe === 2 ? 'border-b-2 border-cyan text-cyan' : 'border-b border-gray',
                 )}
               >
@@ -170,18 +143,18 @@ function UserInfo() {
               </div>
             </article>
             <article className="p-5">
-              <Form ref={formRef} formValue={formValue} onChange={setFormValues} model={model} fluid className="mt-5 sign-form">
+              <Form ref={formRef} formValue={formValue} onChange={setFormValues} fluid className="mt-5 sign-form">
                 <Group controlId="name">
-                  <Form.ControlLabel>Name *</Form.ControlLabel>
+                  <Form.ControlLabel>Name </Form.ControlLabel>
                   <Control size="lg" placeholder="User Name" name="name" block="true" />
                   <HelpText>You can use letters a-z, numbers and periods (- , _ , .)</HelpText>
                 </Group>
                 <Group controlId="email">
-                  <Form.ControlLabel>Email *</Form.ControlLabel>
+                  <Form.ControlLabel>Email </Form.ControlLabel>
                   <Control size="lg" block="true" placeholder="Email" name="email" />
                 </Group>
                 <Group controlId="countryId">
-                  <Form.ControlLabel>Country *</Form.ControlLabel>
+                  <Form.ControlLabel>Country </Form.ControlLabel>
                   <Control
                     onSelect={(id) => {
                       setCountryCode(countries?.find((el) => el?.id === id)?.country_code);
@@ -197,18 +170,18 @@ function UserInfo() {
                   />
                 </Group>
                 <Group controlId="birthDate">
-                  <Form.ControlLabel>Birthe Date *</Form.ControlLabel>
+                  <Form.ControlLabel>Birthe Date </Form.ControlLabel>
                   <Control accepter={DatePicker} style={{ width: '100%' }} name="birthDate" block />
                 </Group>
                 <Group controlId="phone">
-                  <Form.ControlLabel>Phone *</Form.ControlLabel>
+                  <Form.ControlLabel>Phone </Form.ControlLabel>
                   <InputGroup>
                     <InputGroup.Addon>{countryCode}</InputGroup.Addon>
                     <Control name="phone" placeholder="Phone Number" size="lg" />
                   </InputGroup>
                 </Group>
                 <Group controlId="gender">
-                  <Form.ControlLabel>Gender *</Form.ControlLabel>
+                  <Form.ControlLabel>Gender </Form.ControlLabel>
                   <Control accepter={RadioGroup} name="gender" inline>
                     <Radio value="1">Male</Radio>
                     <Radio value="2">Female</Radio>
@@ -216,15 +189,7 @@ function UserInfo() {
                 </Group>
                 <Group controlId="submit">
                   <ButtonToolbar>
-                    <Button
-                      disabled={loading}
-                      onClick={handleSubmit}
-                      appearance="primary"
-                      type="submit"
-                      block
-                      loading={loading}
-                      startIcon={<FaLock />}
-                    >
+                    <Button disabled={loading} onClick={handleSubmit} appearance="primary" type="submit" block loading={loading}>
                       <strong className="pb-[1px] mx-[2px]">Update</strong>
                     </Button>
                   </ButtonToolbar>

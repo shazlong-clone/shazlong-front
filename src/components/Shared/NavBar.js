@@ -5,7 +5,7 @@ import { lngs } from '../../assets/constants/index';
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import applyRtlCssStyles from '../../utils/applyRtlCssStyles';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { Button, Drawer, Popover, Whisper } from 'rsuite';
 import { BsPersonBadgeFill, BsPersonCircle } from 'react-icons/bs';
 import { GoSignOut } from 'react-icons/go';
@@ -38,6 +38,7 @@ function NavBar() {
       to: '/blogs',
     },
   ];
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state?.auth);
   const triggerRef = React.useRef();
@@ -46,6 +47,7 @@ function NavBar() {
   const signOutHandler = () => {
     dispatch(signOut());
     close();
+    navigate('/');
   };
   const speaker = (
     <Popover className="p-0" style={!lg ? { display: 'none' } : {}}>

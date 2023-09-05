@@ -88,7 +88,7 @@ function SignUpForm() {
       setLoading(true);
       const params = {
         ...formValue,
-        phone: `${countryCode}${formValue?.phone}`,
+        countryCode: countryCode,
       };
       const res = await dispatch(signUp(params));
       if (res?.payload?.status) {
