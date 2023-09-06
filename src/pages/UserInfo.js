@@ -143,7 +143,7 @@ function UserInfo() {
         setFileInfo(value);
       });
     },
-    onSuccess: (response) => {
+    onSuccess: () => {
       setUploading(false);
       toaster.push(<Message type="success">Uploaded successfully</Message>);
     },
@@ -156,7 +156,7 @@ function UserInfo() {
   return (
     <main className="bg-cyan/10 py-5">
       <div className="container">
-        <section className="lg:grid lg:grid-cols-[1fr_4fr] gap-5 items-start lg:mt-10">
+        <section className="lg:grid lg:grid-cols-[1fr_4fr] gap-5 items-start lg:my-10">
           <Card className="rounded-none text-center">
             <div className="relative inline-block p-2 ">
               <Uploader {...props}>
