@@ -24,6 +24,7 @@ import { FaLock } from 'react-icons/fa';
 import { signUp } from '../../features/auth/authSlice';
 import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
+import { genders } from '../../assets/constants';
 
 const { Group, HelpText, Control } = Form;
 function SignUpForm() {
@@ -50,7 +51,7 @@ function SignUpForm() {
 
   const model = Schema.Model({
     name: Schema.Types.StringType().isRequired(t('required')),
-    email: Schema.Types.StringType().isRequired().isEmail('not_vaid_email', true),
+    email: Schema.Types.StringType().isRequired(t('required')).isEmail(t('not_vaid_email'), true),
     password: Schema.Types.StringType().isRequired(t('required')),
     passwordConfirm: Schema.Types.StringType().isRequired(t('required')),
     countryId: Schema.Types.NumberType().isRequired(t('required')),
@@ -140,21 +141,21 @@ function SignUpForm() {
       <Form ref={formRef} formValue={formValue} onChange={setFormValues} model={model} fluid className="mt-5 sign-form">
         <Group controlId="name">
           <Control size="lg" placeholder="User Name" name="name" block="true" />
-          <HelpText>You can use letters a-z, numbers and periods (- , _ , .)</HelpText>
+          <HelpText>{t('Name_Helper_Text')}</HelpText>
         </Group>
         <Group controlId="email">
-          <Control size="lg" block="true" placeholder="Email" name="email" />
+          <Control size="lg" block="true" placeholder={t('Email')} name="email" />
         </Group>
         <Group controlId="password">
           <InputGroup>
-            <Control size="lg" name="password" placeholder="Password" type={visible ? 'text' : 'password'} />
+            <Control size="lg" name="password" placeholder={t('Password')} type={visible ? 'text' : 'password'} />
             <InputGroup.Button onClick={() => setVisible(!visible)}>{visible ? <EyeIcon /> : <EyeSlashIcon />}</InputGroup.Button>
           </InputGroup>
         </Group>
         <Group controlId="passwordConfirm">
           <InputGroup accepter={InputGroup}>
             <Control
-              placeholder="Password Confirm"
+              placeholder={t('Password_Confirm')}
               size="lg"
               name="passwordConfirm"
               type={visibleConfirm ? 'text' : 'password'}
@@ -169,7 +170,7 @@ function SignUpForm() {
             onSelect={(id) => {
               setCountryCode(countries?.find((el) => el?.id === id)?.country_code);
             }}
-            placeholder="Country"
+            placeholder={t('Country')}
             menuMaxHeight={300}
             menuStyle={{ maxWidth: '10px' }}
             block
@@ -180,18 +181,23 @@ function SignUpForm() {
           />
         </Group>
         <Group controlId="birthDate">
-          <Control accepter={DatePicker} style={{ width: '100%' }} name="birthDate" block />
+          <Control placeholder={t('Birth_Date')} accepter={DatePicker} style={{ width: '100%' }} name="birthDate" block />
         </Group>
         <Group controlId="phone">
           <InputGroup>
             <InputGroup.Addon>{countryCode}</InputGroup.Addon>
-            <Control name="phone" placeholder="Phone Number" size="lg" />
+            <Control name="phone" placeholder={t('Phone')} size="lg" />
           </InputGroup>
         </Group>
         <Group controlId="gender">
           <Control accepter={RadioGroup} name="gender" inline>
-            <Radio value="1">Male</Radio>
-            <Radio value="2">Female</Radio>
+            {genders?.map((el) => {
+              return (
+                <Radio key={el?.id} value={el?.id}>
+                  {t(el?.name)}
+                </Radio>
+              );
+            })}
           </Control>
         </Group>
         <Group controlId="acceptLicence" className="ml-[-10px]">
@@ -202,9 +208,9 @@ function SignUpForm() {
             accepter={Checkbox}
             name="acceptLicence"
           >
-            I agree with the
+            {t('I_Agree_With_The')}
             <Link to="/licence" className="underline">
-              privacy policy
+              {t('Privacy_Policy')}
             </Link>
           </Control>
         </Group>
@@ -219,13 +225,13 @@ function SignUpForm() {
               loading={loading}
               startIcon={<FaLock />}
             >
-              <strong className="pb-[1px] mx-[2px]">Sign Up</strong>
+              <strong className="pb-[1px] mx-[2px]">{t('Sign_Up')}</strong>
             </Button>
           </ButtonToolbar>
         </Group>
         <div className="text-center mt-[-10px]">
           <Link to="/sign-in" className="underline">
-            Sign in
+            {t('Sign_In')}
           </Link>
         </div>
       </Form>

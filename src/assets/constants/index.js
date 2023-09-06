@@ -14,3 +14,8 @@ export const splitArrOfChunchN = (arr, len) => {
   }
   return newArr;
 };
+
+export const genders = [
+  { id: '1', name: 'Male' },
+  { id: '2', name: 'FeMale' },
+];

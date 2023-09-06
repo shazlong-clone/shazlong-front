@@ -16,8 +16,8 @@ function SignUpForm() {
   const [acceptLiecence, setAcceptLicence] = useState(false);
   const navigate = useNavigate();
   const model = Schema.Model({
-    email: Schema.Types.StringType().isEmail('Please enter a valid email address.'),
-    password: Schema.Types.StringType().isRequired('This field is required'),
+    email: Schema.Types.StringType().isRequired(t('required')).isEmail(t('not_vaid_email'), true),
+    password: Schema.Types.StringType().isRequired(t('required')),
   });
   const [formValue, setFormValues] = useState({
     email: '',
@@ -38,7 +38,7 @@ function SignUpForm() {
           </Message>,
           { duration: 5000 },
         );
-        localStorage.setItem('token', res.payload.token)
+        localStorage.setItem('token', res.payload.token);
         navigate('/');
       } else {
         toaster.push(
@@ -67,24 +67,17 @@ function SignUpForm() {
   const formRef = useRef();
   return (
     <>
-      <Form
-        ref={formRef}
-        formValue={formValue}
-        onChange={setFormValues}
-        model={model}
-        fluid
-        className="mt-5 sign-form"
-      >
+      <Form ref={formRef} formValue={formValue} onChange={setFormValues} model={model} fluid className="mt-5 sign-form">
         <Group controlId="email">
-          <Control size="lg" block="true" placeholder="Email" name="email" />
+          <Control size="lg" block="true" placeholder={t('Email')} name="email" />
         </Group>
         <Group controlId="password" className="mb-0">
           <InputGroup>
-            <Control size="lg" name="password" placeholder="Password" type={visible ? 'text' : 'password'} />
+            <Control size="lg" name="password" placeholder={t('Password')} type={visible ? 'text' : 'password'} />
             <InputGroup.Button onClick={() => setVisible(!visible)}>{visible ? <EyeIcon /> : <EyeSlashIcon />}</InputGroup.Button>
           </InputGroup>
           <HelpText>
-            <Link to="/forgot-password">forgot password?</Link>
+            <Link to="/forgot-password">{t('forgot_password')}</Link>
           </HelpText>
         </Group>
 
@@ -99,7 +92,7 @@ function SignUpForm() {
               block
               startIcon={<FaLock />}
             >
-              <strong className="pb-[1px] mx-[2px]">Sign In</strong>
+              <strong className="pb-[1px] mx-[2px]">{t('Sign_In')}</strong>
             </Button>
           </ButtonToolbar>
         </Group>
@@ -109,11 +102,15 @@ function SignUpForm() {
           setAcceptLicence(checked);
         }}
       >
-        I agree with the <Link to="/licence"> privacy policy</Link>{' '}
+        {t('I_Agree_With_The')}{' '}
+        <Link className="underline" to="/licence">
+          {t('Privacy_Policy')}
+        </Link>{' '}
       </Checkbox>
       <div className="text-center mt-5">
+        {t('Dont_Have_Account_Sign_Up')}
         <Link to="/sign-up" className="underline">
-          Dont Have Account Sign Up
+          {t('Here')}
         </Link>
       </div>
     </>

@@ -51,7 +51,7 @@ function NavBar() {
     navigate('/');
   };
   const speaker = (
-    <Popover className="p-0 rtl:right-[1555.39px]" style={!lg ? { display: 'none' } : {}}>
+    <Popover className="p-0" style={!lg ? { display: 'none' } : {}}>
       <ul className="p-0 list-none divide-y-[1px] divide-x-0 divide-solid divide-gray/10">
         <li className="px-3 flex items-center gap-2 py-2">
           <img className="rounded-full" src={user?.photo ? user?.photo : personIcon} width="40px" height="40px" />

@@ -15,7 +15,12 @@ import {
   Message,
   Uploader,
   Loader,
+  Grid,
+  Col,
+  Row,
+  FlexboxGrid,
 } from 'rsuite';
+import { genders } from '../assets/constants';
 import { useTranslation } from 'react-i18next';
 import { updateMe } from '../features/auth/authSlice';
 import CameraRetroIcon from '@rsuite/icons/legacy/CameraRetro';
@@ -28,7 +33,7 @@ function UserInfo() {
   const [plainText, setPlainText] = useState(true);
   const formRef = useRef();
   const { user = {} } = useSelector((state) => state?.auth);
-  const [formValue, setFormValues] = useState({
+  const initalFormValues = {
     name: user?.name || '',
     email: user?.email || '',
     countryId: user?.countryId || '',
@@ -36,7 +41,8 @@ function UserInfo() {
     gender: user?.gender || '',
     birthDate: new Date(user?.birthDate).getTime(),
     countryCode: user?.countryCode,
-  });
+  };
+  const [formValue, setFormValues] = useState(initalFormValues);
   const [countries, setCountries] = useState([]);
 
   const countriesData = countries?.map((item) => ({
@@ -156,125 +162,159 @@ function UserInfo() {
   return (
     <main className="bg-cyan/10 py-5">
       <div className="container">
-        <section className="lg:grid lg:grid-cols-[1fr_4fr] gap-5 items-start lg:my-10">
-          <Card className="rounded-none text-center">
-            <div className="relative inline-block p-2 ">
-              <Uploader {...props}>
-                <button style={{ width: 100, height: 100, borderRadius: '50%' }}>
-                  {uploading && <Loader backdrop center />}
-                  {fileInfo ? <img src={fileInfo} width="100%" height="100%" /> : <CameraRetroIcon />}
-                </button>
-              </Uploader>
-            </div>
-            <p className="mt-5 text-cyan capitalize">
-              {user.name}
-              <br />
-              <span className="text-gray">{user.role === 1 ? '(user)' : '(doctor)'}</span>
-            </p>
-          </Card>
-          <Card className="rounded-none mt-5 p-0 pb-16 lg:mt-0">
-            <article className="flex">
-              <div
-                onClick={() => setActiveTabe(1)}
-                className={clsx(
-                  'grow px-5 py-4 capitalize border-solid border-t-0 border-r-0 border-l-0 font-semibold cursor-pointer',
-                  activeTabe === 1 ? 'border-b-2 border-cyan text-cyan' : 'border-b border-gray',
-                )}
-              >
-                personal info
-              </div>
-              <div
-                onClick={() => setActiveTabe(2)}
-                className={clsx(
-                  'grow px-5 py-4 capitalize  border-solid border-t-0 border-r-0 border-l-0 font-semibold cursor-pointer',
-                  activeTabe === 2 ? 'border-b-2 border-cyan text-cyan' : 'border-b border-gray',
-                )}
-              >
-                payment info
-              </div>
-            </article>
-            <article className="p-5 relative">
-              {plainText ? (
-                <a className="cursor-pointer absolute end-0 top-0 mt-5 mx-3" onClick={() => setPlainText(false)}>
-                  Edit Profile <LuEdit />
-                </a>
-              ) : (
-                ''
-              )}
-
-              <Form
-                plaintext={plainText}
-                ref={formRef}
-                formValue={formValue}
-                onChange={setFormValues}
-                fluid
-                className="sign-form"
-              >
-                <Group controlId="name">
-                  <Form.ControlLabel>Name </Form.ControlLabel>
-                  <Control size="lg" placeholder="User Name" name="name" block="true" />
-                  {!plainText ? <HelpText>You can use letters a-z, numbers and periods (- , _ , .)</HelpText> : ''}
-                </Group>
-                <Group controlId="email">
-                  <Form.ControlLabel>Email </Form.ControlLabel>
-                  <Control size="lg" block="true" placeholder="Email" name="email" />
-                </Group>
-                <Group controlId="countryId">
-                  <Form.ControlLabel>Country</Form.ControlLabel>
-                  <Control
-                    onSelect={(id) => {
-                      setCountryCode(countries?.find((el) => el?.id === id)?.country_code);
-                    }}
-                    placeholder="Country"
-                    menuMaxHeight={300}
-                    menuStyle={{ maxWidth: '10px' }}
-                    block
-                    name="countryId"
-                    accepter={InputPicker}
-                    data={countriesData}
-                    size="lg"
-                  />
-                </Group>
-                <Group controlId="birthDate">
-                  <Form.ControlLabel>Birthe Date </Form.ControlLabel>
-                  <Control accepter={DatePicker} style={{ width: '100%' }} name="birthDate" block />
-                </Group>
-                <Group controlId="phone">
-                  <Form.ControlLabel>Phone </Form.ControlLabel>
-
+        <Grid className="lg:my-10">
+          <Row gutter={24}>
+            <Col xs={24} lg={8}>
+              <Card className="rounded-none text-center">
+                <div className="relative inline-block p-2">
+                  <Uploader {...props}>
+                    <button style={{ width: 100, height: 100, borderRadius: '50%' }}>
+                      {uploading && <Loader backdrop center />}
+                      {fileInfo ? <img src={fileInfo} width="100%" height="100%" /> : <CameraRetroIcon />}
+                    </button>
+                  </Uploader>
+                </div>
+                <p className="mt-5 text-cyan capitalize">
+                  {user.name}
+                  <br />
+                  <span className="text-gray">{user.role === 1 ? `(${t('User')})` : `(${t('Doctor')})`}</span>
+                </p>
+              </Card>
+            </Col>
+            <Col xs={24} lg={16}>
+              <Card className="rounded-none mt-5 p-0 pb-5 lg:mt-0 lg:w-[600px]">
+                <article className="flex">
+                  <div
+                    onClick={() => setActiveTabe(1)}
+                    className={clsx(
+                      'grow px-5 py-4 capitalize border-solid border-t-0 border-r-0 border-l-0 font-semibold cursor-pointer',
+                      activeTabe === 1 ? 'border-b-2 border-cyan text-cyan' : 'border-b border-gray',
+                    )}
+                  >
+                    {t('Personal_Info')}
+                  </div>
+                  <div
+                    onClick={() => setActiveTabe(2)}
+                    className={clsx(
+                      'grow px-5 py-4 capitalize  border-solid border-t-0 border-r-0 border-l-0 font-semibold cursor-pointer',
+                      activeTabe === 2 ? 'border-b-2 border-cyan text-cyan' : 'border-b border-gray',
+                    )}
+                  >
+                    {t('Payment_Info')}
+                  </div>
+                </article>
+                <article className="p-5 relative">
                   {plainText ? (
-                    <Control name="phone" placeholder="Phone Number" size="lg" />
+                    <a className="cursor-pointer absolute end-0 top-0 mt-5 mx-3" onClick={() => setPlainText(false)}>
+                      {t('Edit')} <LuEdit />
+                    </a>
                   ) : (
-                    <InputGroup>
-                      <InputGroup.Addon>{countryCode}</InputGroup.Addon>
-                      <Control name="phone" placeholder="Phone Number" size="lg" />
-                    </InputGroup>
+                    ''
                   )}
-                </Group>
-                <Group controlId="gender">
-                  <Form.ControlLabel>Gender </Form.ControlLabel>
-                  <Control accepter={RadioGroup} name="gender" inline>
-                    <Radio value="1">Male</Radio>
-                    <Radio value="2">Female</Radio>
-                  </Control>
-                </Group>
 
-                {plainText ? (
-                  ''
-                ) : (
-                  <Group controlId="submit">
-                    <ButtonToolbar>
-                      <Button disabled={loading} onClick={handleSubmit} appearance="primary" type="submit" loading={loading}>
-                        <strong className="pb-[1px] mx-[2px]">Update</strong>
-                      </Button>
-                      <Button onClick={() => setPlainText(true)}>Cancel</Button>
-                    </ButtonToolbar>
-                  </Group>
-                )}
-              </Form>
-            </article>
-          </Card>
-        </section>
+                  <Form
+                    plaintext={plainText}
+                    ref={formRef}
+                    formValue={formValue}
+                    onChange={setFormValues}
+                    fluid
+                    className="sign-form"
+                  >
+                    <Group controlId="name">
+                      <Form.ControlLabel>{t('Name')}</Form.ControlLabel>
+                      <Control size="lg" placeholder={t('Name')} name="name" block="true" />
+                      {!plainText ? <HelpText>{t('Name_Helper_Text')}</HelpText> : ''}
+                    </Group>
+                    <Group controlId="email">
+                      <Form.ControlLabel>{t('Email')}</Form.ControlLabel>
+                      <Control size="lg" block="true" placeholder={t('Email')} name="email" />
+                    </Group>
+                    <Group controlId="countryId">
+                      <Form.ControlLabel>{t('Country')}</Form.ControlLabel>
+                      <Control
+                        onSelect={(id) => {
+                          setCountryCode(countries?.find((el) => el?.id === id)?.country_code);
+                        }}
+                        placeholder={t('Country')}
+                        menuMaxHeight={300}
+                        menuStyle={{ maxWidth: '10px' }}
+                        block
+                        name="countryId"
+                        accepter={InputPicker}
+                        data={countriesData}
+                        size="lg"
+                      />
+                    </Group>
+                    <Group controlId="birthDate">
+                      <Form.ControlLabel>{t('Birth_Date')}</Form.ControlLabel>
+                      <Control
+                        placeholder={t('Birth_Date')}
+                        accepter={DatePicker}
+                        style={{ width: '100%' }}
+                        name="birthDate"
+                        block
+                      />
+                    </Group>
+                    <Group controlId="phone">
+                      <Form.ControlLabel>{t('Phone')}</Form.ControlLabel>
+
+                      {plainText ? (
+                        <Control name="phone" placeholder={t('Phone')} size="lg" />
+                      ) : (
+                        <InputGroup>
+                          <InputGroup.Addon>{countryCode}</InputGroup.Addon>
+                          <Control name="phone" placeholder={t('Phone')} size="lg" />
+                        </InputGroup>
+                      )}
+                    </Group>
+                    <Group controlId="gender">
+                      <Form.ControlLabel>{t('Gender')}</Form.ControlLabel>
+                      <Control accepter={RadioGroup} name="gender" inline>
+                        {genders?.map((el) => {
+                          return (
+                            <Radio key={el?.id} value={el?.id}>
+                              {t(el?.name)}
+                            </Radio>
+                          );
+                        })}
+                      </Control>
+                    </Group>
+
+                    {plainText ? (
+                      ''
+                    ) : (
+                      <FlexboxGrid justify="center">
+                        <FlexboxGrid.Item>
+                          <Group controlId="submit">
+                            <ButtonToolbar>
+                              <Button
+                                disabled={loading}
+                                onClick={handleSubmit}
+                                appearance="primary"
+                                type="submit"
+                                loading={loading}
+                              >
+                                <strong className="pb-[1px] mx-[2px]">{t('Update')}</strong>
+                              </Button>
+                              <Button
+                                onClick={() => {
+                                  setPlainText(true);
+                                  setFormValues(initalFormValues);
+                                }}
+                              >
+                                {t('Cancel')}
+                              </Button>
+                            </ButtonToolbar>
+                          </Group>
+                        </FlexboxGrid.Item>
+                      </FlexboxGrid>
+                    )}
+                  </Form>
+                </article>
+              </Card>
+            </Col>
+          </Row>
+        </Grid>
       </div>
     </main>
   );
