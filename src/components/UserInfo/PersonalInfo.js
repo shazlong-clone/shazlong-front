@@ -114,7 +114,7 @@ function PersonalInfo() {
     });
   }, []);
   return (
-    <article className="p-5 relative">
+    <article className="relative">
       {plainText ? (
         <a className="cursor-pointer absolute end-0 top-0 mt-5 mx-3" onClick={() => setPlainText(false)}>
           {t('Edit')} <LuEdit />

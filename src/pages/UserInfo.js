@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next';
 import CameraRetroIcon from '@rsuite/icons/legacy/CameraRetro';
 import { API_BASE_URL } from '../config/enviroment.config';
 import PersonalInfo from '../components/UserInfo/PersonalInfo';
+import PaymentInfo from '../components/UserInfo/PaymentInfo';
 
 function UserInfo() {
   const { user = {} } = useSelector((state) => state?.auth);
@@ -95,7 +96,7 @@ function UserInfo() {
                     {t('Payment_Info')}
                   </div>
                 </article>
-                <PersonalInfo />
+                <article className="h-[460px] p-5">{activeTabe === 1 ? <PersonalInfo /> : <PaymentInfo />}</article>
               </Card>
             </Col>
           </Row>
