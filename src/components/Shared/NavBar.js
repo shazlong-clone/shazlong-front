@@ -154,24 +154,22 @@ function NavBar() {
                   <ul className="mt-[30px] list-none px-0">
                     <li className="px-5 flex gap-3 items-center">
                       <img src={user?.photo ? user?.photo : personIcon} alt="therapist" className="rounded-full w-[50px]" />
-                      <span className="text-lg italic font-[100]">John Doe</span>
+                      <span className="text-lg italic font-[100]">{user?.name}</span>
                     </li>
                     <hr />
                     <li className="px-5">
-                      <Link
-                        onClick={() => setOpen(false)}
-                        to="/user-info"
-                        className="text-inherit inline-flex items-center gap-2 hover:no-underline"
-                      >
-                        <BsPersonBadgeFill className="text-3xl" />
-                        <span className="text-lg">Your Profile</span>
+                      <Link to="/user-info" className="text-inherit hover:no-underline">
+                        <div onClick={() => setOpen(false)} className="inline-flex items-center gap-2 text-cyan">
+                          <BsPersonBadgeFill className="text-3xl" />
+                          <span className="text-lg">{t('Your_Profile')}</span>
+                        </div>
                       </Link>
                     </li>
                     <hr />
                     <li className="text-red-600 flex items-center justify-center gap-2">
                       <span className="text-lg cursor-pointer flex items-center gap-2" onClick={signOutHandler}>
                         <GoSignOut className="text-3xl" />
-                        Sign Out
+                        {t('Sign_Out')}
                       </span>
                     </li>
                   </ul>

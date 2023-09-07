@@ -92,5 +92,7 @@
   "Dont_Have_Account_Sign_Up": "لا تمتلك حساب ؟ انشئ حساب ",
   "Here": "هنا",
   "max_length_eror": " الحد الاقصي  {{count}} حروف",
-  "loading": "جاري التحمبل"
+  "loading": "جاري التحمبل",
+  "Your_Profile": "الملف الشخصي",
+  "Sign_Out": "تسجيل خروج"
 }

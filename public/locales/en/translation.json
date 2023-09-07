@@ -89,5 +89,7 @@
   "Dont_Have_Account_Sign_Up": "Dont Have Account Sign Up",
   "Here": "Here",
   "max_length_eror": "Max {{count}} Letters",
-  "loading": "loading"
+  "loading": "loading",
+  "Your_Profile": "Your Profile",
+  "Sign_Out": "Sign Out"
 }
