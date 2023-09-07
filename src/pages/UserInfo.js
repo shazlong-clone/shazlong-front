@@ -80,7 +80,7 @@ function UserInfo() {
                   <div
                     onClick={() => setActiveTabe(1)}
                     className={clsx(
-                      'grow px-5 py-4 capitalize border-solid border-t-0 border-r-0 border-l-0 font-semibold cursor-pointer',
+                      'grow px-5 py-4 capitalize border-solid border-t-0 border-r-0 border-l-0 font-semibold cursor-pointer text-sm lg:text-lg',
                       activeTabe === 1 ? 'border-b-2 border-cyan text-cyan' : 'border-b border-gray',
                     )}
                   >
@@ -89,14 +89,14 @@ function UserInfo() {
                   <div
                     onClick={() => setActiveTabe(2)}
                     className={clsx(
-                      'grow px-5 py-4 capitalize  border-solid border-t-0 border-r-0 border-l-0 font-semibold cursor-pointer',
+                      'grow px-5 py-4 capitalize  border-solid border-t-0 border-r-0 border-l-0 font-semibold cursor-pointer text-sm lg:text-lg',
                       activeTabe === 2 ? 'border-b-2 border-cyan text-cyan' : 'border-b border-gray',
                     )}
                   >
                     {t('Payment_Info')}
                   </div>
                 </article>
-                <article className="h-[460px] p-5">{activeTabe === 1 ? <PersonalInfo /> : <PaymentInfo />}</article>
+                <article className="p-5">{activeTabe === 1 ? <PersonalInfo /> : <PaymentInfo />}</article>
               </Card>
             </Col>
           </Row>

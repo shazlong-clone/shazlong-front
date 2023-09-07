@@ -58,9 +58,11 @@ function NavBar() {
           <strong className="capitalize">{user?.name}</strong>
         </li>
         <li className="text-base px-3 py-2 cursor-pointer">
-          <Link onClick={close} to="/user-info" className="no-underline hover:no-underline flex gap-2 items-center">
-            <BsPersonCircle />
-            <span className="capitalize">my Profile</span>
+          <Link to="/user-info" className="no-underline hover:no-underline">
+            <div onClick={close} className="flex gap-2 items-center">
+              <BsPersonCircle />
+              <span className="capitalize">my Profile</span>
+            </div>
           </Link>
         </li>
         <li

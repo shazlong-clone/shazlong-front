@@ -30,7 +30,7 @@ function PersonalInfo() {
     countryId: user?.countryId || '',
     phone: user?.phone || '',
     gender: user?.gender || '',
-    birthDate: new Date(user?.birthDate).getTime(),
+    birthDate: new Date(user?.birthDate),
     countryCode: user?.countryCode,
   };
   const [formValue, setFormValues] = useState(initalFormValues);
@@ -116,7 +116,7 @@ function PersonalInfo() {
   return (
     <article className="relative">
       {plainText ? (
-        <a className="cursor-pointer absolute end-0 top-0 mt-5 mx-3" onClick={() => setPlainText(false)}>
+        <a className="cursor-pointer absolute end-0 top-0 mt-5 mx-3 z-20" onClick={() => setPlainText(false)}>
           {t('Edit')} <LuEdit />
         </a>
       ) : (

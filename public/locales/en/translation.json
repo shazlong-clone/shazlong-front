@@ -87,5 +87,7 @@
   "Privacy_Policy": "privacy policy",
   "forgot_password": "forgot password ?",
   "Dont_Have_Account_Sign_Up": "Dont Have Account Sign Up",
-  "Here": "Here"
+  "Here": "Here",
+  "max_length_eror": "Max {{count}} Letters",
+  "loading": "loading"
 }

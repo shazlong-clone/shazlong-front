@@ -90,5 +90,7 @@
   "Privacy_Policy": "الشروط والاحكام",
   "forgot_password": "نسيت كلمة السر?",
   "Dont_Have_Account_Sign_Up": "لا تمتلك حساب ؟ انشئ حساب ",
-  "Here": "هنا"
+  "Here": "هنا",
+  "max_length_eror": " الحد الاقصي  {{count}} حروف",
+  "loading": "جاري التحمبل"
 }

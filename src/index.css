@@ -252,6 +252,10 @@ a:active {
 [dir='rtl'] .rs-btn {
   @apply text-[18px];
 }
-[dir='rtl'] .rs-popover{
-  @apply right-auto
+[dir='rtl'] .rs-popover {
+  @apply right-auto;
+}
+
+.rs-uploader-trigger input[type='file'] {
+  @apply w-full;
 }

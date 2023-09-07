@@ -6,6 +6,7 @@ import LayOut from './components/Shared/LayOut';
 import Loading from './components/Shared/BackDropLoading';
 import LangWrapper from './components/Shared/LangWrapper';
 import ProtectedRoute from './components/Shared/ProtectedRoute';
+import { useTranslation } from 'react-i18next';
 
 const Home = lazy(() => import('./pages/Home'));
 const ThearpistProfile = lazy(() => import('./pages/ThearpistProfile'));
@@ -31,36 +32,34 @@ const UserInfo = lazy(() => import('./pages/UserInfo'));
 function App() {
   return (
     <Suspense fallback={<Loading />}>
-      <ErrorBoundary>
-        <LangWrapper>
-          <Routes>
-            <Route path="/sign-up" element={<SignUp />} />
-            <Route path="/sign-in" element={<SignIn />} />
-            <Route exact path="/doctor-signup" element={<DoctorSignUp />} />
-            <Route exact path="/therapist-verify-email-registration" element={<VerifyEmailRegistration />} />
-            <Route path="/" element={<LayOut />}>
-              <Route index element={<Home />} />
-              <Route exact path="therapists" element={<Therapists />} />
-              <Route exact path="thearpist-profile/:id" element={<ThearpistProfile />} />
-              <Route exact path="checkout/:doctorId/:slotId" element={<Checkout />} />
-              <Route exact path="instructions" element={<Instructions />} />
-              <Route exact path="online" element={<Online />} />
-              <Route exact path="my-therapy" element={<MyTherapy />} />
-              <Route exact path="licence" element={<Licence />} />
-              <Route exact path="blogs" element={<Blogs />} />
-              <Route exact path="blog/:id" element={<Blog />} />
-              <Route exact path="psychometer" element={<Psychometer />} />
-              <Route exact path="psychotest/:id" element={<Psychotest />} />
-              <Route exact path="join-us" element={<JoinUs />} />
-              <Route exact path="user-info" element={<ProtectedRoute />}>
-                <Route exact index element={<UserInfo />} />
-              </Route>
-              <Route exact path="test" element={<Test />} />
-              <Route exact path="*" element={<Error />} />
+      <LangWrapper>
+        <Routes>
+          <Route path="/sign-up" element={<SignUp />} />
+          <Route path="/sign-in" element={<SignIn />} />
+          <Route exact path="/doctor-signup" element={<DoctorSignUp />} />
+          <Route exact path="/therapist-verify-email-registration" element={<VerifyEmailRegistration />} />
+          <Route path="/" element={<LayOut />}>
+            <Route index element={<Home />} />
+            <Route exact path="therapists" element={<Therapists />} />
+            <Route exact path="thearpist-profile/:id" element={<ThearpistProfile />} />
+            <Route exact path="checkout/:doctorId/:slotId" element={<Checkout />} />
+            <Route exact path="instructions" element={<Instructions />} />
+            <Route exact path="online" element={<Online />} />
+            <Route exact path="my-therapy" element={<MyTherapy />} />
+            <Route exact path="licence" element={<Licence />} />
+            <Route exact path="blogs" element={<Blogs />} />
+            <Route exact path="blog/:id" element={<Blog />} />
+            <Route exact path="psychometer" element={<Psychometer />} />
+            <Route exact path="psychotest/:id" element={<Psychotest />} />
+            <Route exact path="join-us" element={<JoinUs />} />
+            <Route exact path="user-info" element={<ProtectedRoute />}>
+              <Route exact index element={<UserInfo />} />
             </Route>
-          </Routes>
-        </LangWrapper>
-      </ErrorBoundary>
+            <Route exact path="test" element={<Test />} />
+            <Route exact path="*" element={<Error />} />
+          </Route>
+        </Routes>
+      </LangWrapper>
     </Suspense>
   );
 }
