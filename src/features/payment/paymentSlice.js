@@ -11,6 +11,10 @@ export const createOrUpdatePayment = createAsyncThunk('createOrUpdatePayment', a
   const res = await service.post('/api/v1/payment', params);
   return res.data;
 });
+export const getPayment = createAsyncThunk('getPayment', async () => {
+  const res = await service.get('/api/v1/payment');
+  return res.data;
+});
 
 const paymentSlice = createSlice({
   name: 'payment',
@@ -21,6 +25,12 @@ const paymentSlice = createSlice({
       state.vodafoneCash = action.payload.data.payment.vodafoneCash
       state.fawry = action.payload.data.payment.fawry
     });
+    builder.addCase(getPayment.fulfilled, (state, action) => {
+      state.card = action.payload.data.payment.card
+      state.vodafoneCash = action.payload.data.payment.vodafoneCash
+      state.fawry = action.payload.data.payment.fawry
+    });
+    
   },
 });
 

@@ -95,5 +95,6 @@
   "loading": "جاري التحمبل",
   "Your_Profile": "الملف الشخصي",
   "Sign_Out": "تسجيل خروج",
-  "updated_successfuly": "تم التحديث بنجاح"
+  "updated_successfuly": "تم التحديث بنجاح",
+  "not_valid_vodafone_number":"رقم غير صحييح"
 }

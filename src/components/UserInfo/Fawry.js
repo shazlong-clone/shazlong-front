@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import {
   Button,
   Modal,
@@ -22,16 +22,15 @@ const { Group, Control } = Form;
 
 function CreditCard() {
   const { t } = useTranslation();
-  const { card } = useSelector((state) => state?.payment);
+  const { fawry } = useSelector((state) => state?.payment);
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = React.useState(false);
   const formRef = useRef();
   const toaster = useToaster();
   const dispatch = useDispatch();
   const [formValue, setFormValue] = useState({
-    cardNumber: card?.cardNumber,
-    expireDate: card?.expireDate,
-    cvc: card?.cvc,
+    email: fawry?.cardNumber,
+    phone: fawry?.expireDate,
   });
   const onSubmit = async () => {
     if (!formRef.current.check()) return;
@@ -40,7 +39,7 @@ function CreditCard() {
       const res = await dispatch(
         createOrUpdatePayment({
           payment: {
-            card: formValue,
+            fawry: formValue,
           },
         }),
       );
@@ -74,14 +73,13 @@ function CreditCard() {
     }
   };
   const model = Schema.Model({
-    cardNumber: Schema.Types.StringType().isRequired(t('required')),
-    expireDate: Schema.Types.StringType().isRequired(t('required')),
-    cvc: Schema.Types.StringType().isRequired(t('required')),
+    email: Schema.Types.StringType().isRequired(t('required')).isEmail('not_vaid_email'),
+    phone: Schema.Types.StringType()
+      .isRequired(t('required'))
+      .addRule((value) => {
+        return /^(010|\+2010)\d{8}/.test(value);
+      }, t('not_valid_vodafone_number')),
   });
-  useEffect(() => {
-    setFormValue({ cardNumber: card?.cardNumber, expireDate: card?.expireDate, cvc: card?.cvc });
-  }, [card]);
-  
   return (
     <>
       <a className="cursor-pointer underline" onClick={() => setOpen(true)}>
@@ -101,55 +99,15 @@ function CreditCard() {
         <Modal.Body>
           <Form ref={formRef} onChange={setFormValue} formValue={formValue} fluid model={model}>
             <Grid fluid>
-              <Row gutter={5}>
-                <Col xs={24} className="mb-6 mt-3">
-                  <Group controlId="cardNumber">
-                    <Control
-                      accepter={MaskedInput}
-                      mask={[
-                        /\d/,
-                        /\d/,
-                        /\d/,
-                        /\d/,
-                        ' ',
-                        /\d/,
-                        /\d/,
-                        /\d/,
-                        /\d/,
-                        ' ',
-                        /\d/,
-                        /\d/,
-                        /\d/,
-                        /\d/,
-                        ' ',
-                        /\d/,
-                        /\d/,
-                        /\d/,
-                        /\d/,
-                      ]}
-                      placeholder="Card Number"
-                      placeholderChar="_"
-                      guide={true}
-                      keepCharPositions={true}
-                      name="cardNumber"
-                      block="true"
-                    />
+              <Row gutter={5} className='mt-5'>
+                <Col xs={12} className="mb-6">
+                  <Group controlId="email">
+                    <Control placeholder="Email" name="email" block="true" />
                   </Group>
                 </Col>
-                <Col xs={14} className="mb-6">
-                  <Group controlId="cardNumber">
-                    <Control
-                      accepter={MaskedInput}
-                      mask={[/\d/, /\d/, '/', /\d/, /\d/]}
-                      placeholder="Expire Date (MM/YY)"
-                      name="expireDate"
-                      block="true"
-                    />
-                  </Group>
-                </Col>
-                <Col xs={10}>
-                  <Group controlId="cardNumber">
-                    <Control accepter={MaskedInput} mask={[/\d/, /\d/, /\d/]} placeholder="CVC" name="cvc" block="true" />
+                <Col xs={12}>
+                  <Group controlId="phone">
+                    <Control placeholder="Phone" name="phone" block="true" />
                   </Group>
                 </Col>
               </Row>

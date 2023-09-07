@@ -9,7 +9,6 @@ import {
   Grid,
   Row,
   Col,
-  MaskedInput,
   FlexboxGrid,
   ButtonToolbar,
 } from 'rsuite';
@@ -22,16 +21,14 @@ const { Group, Control } = Form;
 
 function CreditCard() {
   const { t } = useTranslation();
-  const { card } = useSelector((state) => state?.payment);
+  const { vodafoneCash } = useSelector((state) => state?.payment);
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = React.useState(false);
   const formRef = useRef();
   const toaster = useToaster();
   const dispatch = useDispatch();
   const [formValue, setFormValue] = useState({
-    cardNumber: card?.cardNumber,
-    expireDate: card?.expireDate,
-    cvc: card?.cvc,
+    phone: vodafoneCash?.phone,
   });
   const onSubmit = async () => {
     if (!formRef.current.check()) return;
@@ -40,7 +37,7 @@ function CreditCard() {
       const res = await dispatch(
         createOrUpdatePayment({
           payment: {
-            card: formValue,
+            vodaphoneCash: formValue,
           },
         }),
       );
@@ -74,14 +71,13 @@ function CreditCard() {
     }
   };
   const model = Schema.Model({
-    cardNumber: Schema.Types.StringType().isRequired(t('required')),
-    expireDate: Schema.Types.StringType().isRequired(t('required')),
-    cvc: Schema.Types.StringType().isRequired(t('required')),
+    phone: Schema.Types.StringType().isRequired(t('required')).addRule((value) =>{
+        return /^(010|\+2010)\d{8}/.test(value);
+    }, t('not_valid_vodafone_number'))
   });
-  useEffect(() => {
-    setFormValue({ cardNumber: card?.cardNumber, expireDate: card?.expireDate, cvc: card?.cvc });
-  }, [card]);
-  
+  useEffect(()=>{
+    setFormValue({ phone: vodafoneCash?.phone,})
+  },[vodafoneCash]);
   return (
     <>
       <a className="cursor-pointer underline" onClick={() => setOpen(true)}>
@@ -96,7 +92,7 @@ function CreditCard() {
         onClose={() => setOpen(false)}
       >
         <Modal.Header>
-          <Modal.Title>Add Credit Card</Modal.Title>
+          <Modal.Title>Add Vodafone Cash</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form ref={formRef} onChange={setFormValue} formValue={formValue} fluid model={model}>
@@ -105,51 +101,10 @@ function CreditCard() {
                 <Col xs={24} className="mb-6 mt-3">
                   <Group controlId="cardNumber">
                     <Control
-                      accepter={MaskedInput}
-                      mask={[
-                        /\d/,
-                        /\d/,
-                        /\d/,
-                        /\d/,
-                        ' ',
-                        /\d/,
-                        /\d/,
-                        /\d/,
-                        /\d/,
-                        ' ',
-                        /\d/,
-                        /\d/,
-                        /\d/,
-                        /\d/,
-                        ' ',
-                        /\d/,
-                        /\d/,
-                        /\d/,
-                        /\d/,
-                      ]}
-                      placeholder="Card Number"
-                      placeholderChar="_"
-                      guide={true}
-                      keepCharPositions={true}
-                      name="cardNumber"
+                      placeholder="Phone"
+                      name="phone"
                       block="true"
                     />
-                  </Group>
-                </Col>
-                <Col xs={14} className="mb-6">
-                  <Group controlId="cardNumber">
-                    <Control
-                      accepter={MaskedInput}
-                      mask={[/\d/, /\d/, '/', /\d/, /\d/]}
-                      placeholder="Expire Date (MM/YY)"
-                      name="expireDate"
-                      block="true"
-                    />
-                  </Group>
-                </Col>
-                <Col xs={10}>
-                  <Group controlId="cardNumber">
-                    <Control accepter={MaskedInput} mask={[/\d/, /\d/, /\d/]} placeholder="CVC" name="cvc" block="true" />
                   </Group>
                 </Col>
               </Row>

@@ -92,5 +92,7 @@
   "loading": "loading",
   "Your_Profile": "Your Profile",
   "Sign_Out": "Sign Out",
-  "updated_successfuly": "Updated Successfuly"
+  "updated_successfuly": "Updated Successfuly",
+  "not_valid_vodafone_number":"invalid vodafone number"
+
 }
