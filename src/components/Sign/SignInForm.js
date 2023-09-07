@@ -36,7 +36,7 @@ function SignUpForm() {
           <Message type="success" closable showIcon>
             {t('sign_in_successfuly')}
           </Message>,
-          { duration: 5000 },
+          { duration: 2000 },
         );
         localStorage.setItem('token', res.payload.token);
         navigate('/');
@@ -45,7 +45,7 @@ function SignUpForm() {
           <Message type="error" closable showIcon>
             {res.payload.message}
           </Message>,
-          { duration: 5000 },
+          { duration: 2000 },
         );
       }
     } catch (err) {

@@ -1,24 +1,28 @@
+
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import service from '../../config/enviroment.config';
 
 const initialState = {
-  card: '',
-  vodaphoneCash: '',
-  fawry: '',
+    card:{},
+    vodafoneCash:{},
+    fawry:{}
 };
-
-export const createOrUpdatePayemnt = createAsyncThunk('createOrUpdatePayemnt', async (params) => {
+export const createOrUpdatePayment = createAsyncThunk('createOrUpdatePayment', async (params) => {
   const res = await service.post('/api/v1/payment', params);
   return res.data;
 });
+
 const paymentSlice = createSlice({
   name: 'payment',
   initialState,
   extraReducers: (builder) => {
-    builder.addCase(createOrUpdatePayemnt.fulfilled, (state, action) => {
-      console.log('ssssssssssssssssssssssssssss');
+    builder.addCase(createOrUpdatePayment.fulfilled, (state, action) => {
+      state.card = action.payload.data.payment.card
+      state.vodafoneCash = action.payload.data.payment.vodafoneCash
+      state.fawry = action.payload.data.payment.fawry
     });
   },
 });
 
-export default paymentSlice;
+
+export default paymentSlice.reducer;

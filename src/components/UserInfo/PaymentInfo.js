@@ -19,9 +19,7 @@ import {
 } from 'rsuite';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { createOrUpdatePayemnt } from '../../features/payment/paymentSlice';
-
+import {createOrUpdatePayment} from '../../features/payment/paymentSlice'
 const { Group, Control } = Form;
 function PaymentInfo() {
   const [cresitCardopen, setCreditCardOpen] = React.useState(false);
@@ -45,20 +43,19 @@ function PaymentInfo() {
     try {
       setLoading(true);
       const res = await dispatch(
-        createOrUpdatePayemnt({
-          payment: {
-            card: formValue,
-          },
+        createOrUpdatePayment({
+          payment:{
+            card:formValue
+          }
         }),
       );
-      if (res.payload.status) {
+      if (res?.payload?.status) {
         toaster.push(
           <Message type="success" closable showIcon>
             {t('updated_successfuly')}
           </Message>,
           { duration: 5000 },
         );
-        localStorage.setItem('token', res.payload.token);
         setCreditCardOpen(false);
       } else {
         toaster.push(
@@ -69,6 +66,7 @@ function PaymentInfo() {
         );
       }
     } catch (err) {
+      console.log(err);
       toaster.push(
         <Message closable showIcon type="error">
           {t('internal_server_error')}
