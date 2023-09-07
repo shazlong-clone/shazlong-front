@@ -25,7 +25,7 @@ export const updateMe = createAsyncThunk('updateMe', async (params) => {
 });
 
 const authSlice = createSlice({
-  name: 'authSlice',
+  name: 'auth',
   initialState,
   reducers: {
     signOut: (state) => {

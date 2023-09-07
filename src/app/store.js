@@ -4,6 +4,7 @@ import authSlice from '../features/auth/authSlice';
 import storage from 'redux-persist/lib/storage';
 import { persistReducer, persistStore } from 'redux-persist';
 import thunk from 'redux-thunk';
+import paymentSlice from '../features/payment/paymentSlice';
 
 const persistConfig = {
   key: 'shazlong',
@@ -12,6 +13,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
   theme: themeSlice,
   auth: authSlice,
+  payment: paymentSlice,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

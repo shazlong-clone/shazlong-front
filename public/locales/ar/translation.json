@@ -94,5 +94,6 @@
   "max_length_eror": " الحد الاقصي  {{count}} حروف",
   "loading": "جاري التحمبل",
   "Your_Profile": "الملف الشخصي",
-  "Sign_Out": "تسجيل خروج"
+  "Sign_Out": "تسجيل خروج",
+  "updated_successfuly": "تم التحديث بنجاح"
 }

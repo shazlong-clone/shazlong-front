@@ -1,30 +1,89 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import viza from '../../assets/images/visa_new.png';
 import masterCard from '../../assets/images/master_card_new.svg';
 import vodafone from '../../assets/images/Vodafone_icon.png';
 import fawry from '../../assets/images/fawry.png';
-import { Button, Col, Form, Grid, Modal, Row, Schema } from 'rsuite';
+import {
+  Button,
+  ButtonToolbar,
+  Col,
+  FlexboxGrid,
+  Form,
+  Grid,
+  MaskedInput,
+  Message,
+  Modal,
+  Row,
+  Schema,
+  useToaster,
+} from 'rsuite';
 import { useTranslation } from 'react-i18next';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { createOrUpdatePayemnt } from '../../features/payment/paymentSlice';
+
 const { Group, Control } = Form;
 function PaymentInfo() {
   const [cresitCardopen, setCreditCardOpen] = React.useState(false);
   const { t } = useTranslation();
+  const [loading, setLoading] = useState(false);
   const model = Schema.Model({
     cardNumber: Schema.Types.StringType().isRequired(t('required')),
-    expireDate: Schema.Types.StringType()
-      .isRequired(t('required'))
-      .maxLength(5, t('max_length_eror', { count: 5 })),
-    cvc: Schema.Types.StringType()
-      .isRequired(t('required'))
-      .maxLength(3, t(3, t('max_length_eror', { count: 3 }))),
+    expireDate: Schema.Types.StringType().isRequired(t('required')),
+    cvc: Schema.Types.StringType().isRequired(t('required')),
   });
   const [formValue, setFormValue] = useState({
     cardNumber: '',
     expireDate: '',
     cvc: '',
   });
+  const formRef = useRef();
+  const toaster = useToaster();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const onSubmit = async () => {
+    if (!formRef.current.check()) return;
+    try {
+      setLoading(true);
+      const res = await dispatch(
+        createOrUpdatePayemnt({
+          payment: {
+            card: formValue,
+          },
+        }),
+      );
+      if (res.payload.status) {
+        toaster.push(
+          <Message type="success" closable showIcon>
+            {t('updated_successfuly')}
+          </Message>,
+          { duration: 5000 },
+        );
+        localStorage.setItem('token', res.payload.token);
+        setCreditCardOpen(false);
+      } else {
+        toaster.push(
+          <Message type="error" closable showIcon>
+            {res.payload.message}
+          </Message>,
+          { duration: 5000 },
+        );
+      }
+    } catch (err) {
+      toaster.push(
+        <Message closable showIcon type="error">
+          {t('internal_server_error')}
+        </Message>,
+        {
+          duration: 5000,
+        },
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
-    <article className="p-5 relative">
+    <article className="relative">
       <section className="mb-5">
         <div className="flex justify-between">
           <aside className="flex gap-1 items-center">
@@ -50,36 +109,89 @@ function PaymentInfo() {
                 <Modal.Title>Add Credit Card</Modal.Title>
               </Modal.Header>
               <Modal.Body>
-                <Form onChange={setFormValue} formValue={formValue} fluid model={model}>
+                <Form ref={formRef} onChange={setFormValue} formValue={formValue} fluid model={model}>
                   <Grid fluid>
                     <Row gutter={5}>
                       <Col xs={24} className="mb-6 mt-3">
                         <Group controlId="cardNumber">
-                          <Control placeholder="Card Number" name="cardNumber" block="true" />
+                          <Control
+                            accepter={MaskedInput}
+                            mask={[
+                              /\d/,
+                              /\d/,
+                              /\d/,
+                              /\d/,
+                              ' ',
+                              /\d/,
+                              /\d/,
+                              /\d/,
+                              /\d/,
+                              ' ',
+                              /\d/,
+                              /\d/,
+                              /\d/,
+                              /\d/,
+                              ' ',
+                              /\d/,
+                              /\d/,
+                              /\d/,
+                              /\d/,
+                            ]}
+                            placeholder="Card Number"
+                            placeholderChar="_"
+                            guide={true}
+                            keepCharPositions={true}
+                            name="cardNumber"
+                            block="true"
+                          />
                         </Group>
                       </Col>
                       <Col xs={14} className="mb-6">
                         <Group controlId="cardNumber">
-                          <Control placeholder="Expire Date __/__" name="expireDate" block="true" />
+                          <Control
+                            accepter={MaskedInput}
+                            mask={[/\d/, /\d/, '/', /\d/, /\d/]}
+                            placeholder="Expire Date (MM/YY)"
+                            name="expireDate"
+                            block="true"
+                          />
                         </Group>
                       </Col>
                       <Col xs={10}>
                         <Group controlId="cardNumber">
-                          <Control placeholder="CVC" name="cvc" block="true" />
+                          <Control accepter={MaskedInput} mask={[/\d/, /\d/, /\d/]} placeholder="CVC" name="cvc" block="true" />
                         </Group>
                       </Col>
                     </Row>
                   </Grid>
+                  <FlexboxGrid justify="end">
+                    <FlexboxGrid.Item>
+                      <ButtonToolbar>
+                        <Button
+                          onClick={onSubmit}
+                          style={{ marginBottom: '0px' }}
+                          className="mb-0"
+                          type="submit"
+                          appearance="primary"
+                          loading={loading}
+                          disabled={loading}
+                        >
+                          Add
+                        </Button>
+                        <Button
+                          disabled={loading}
+                          style={{ marginBottom: '0px' }}
+                          onClick={() => setCreditCardOpen(false)}
+                          appearance="subtle"
+                        >
+                          Cancel
+                        </Button>
+                      </ButtonToolbar>
+                    </FlexboxGrid.Item>
+                  </FlexboxGrid>
                 </Form>
               </Modal.Body>
-              <Modal.Footer>
-                <Button onClick={() => setCreditCardOpen(false)} appearance="primary">
-                  Ok
-                </Button>
-                <Button onClick={() => setCreditCardOpen(false)} appearance="subtle">
-                  Cancel
-                </Button>
-              </Modal.Footer>
+              <Modal.Footer></Modal.Footer>
             </Modal>
           </aside>
         </div>

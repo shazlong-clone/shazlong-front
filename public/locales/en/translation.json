@@ -91,5 +91,6 @@
   "max_length_eror": "Max {{count}} Letters",
   "loading": "loading",
   "Your_Profile": "Your Profile",
-  "Sign_Out": "Sign Out"
+  "Sign_Out": "Sign Out",
+  "updated_successfuly": "Updated Successfuly"
 }
