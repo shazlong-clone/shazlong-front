@@ -40,7 +40,6 @@ function PaymentInfo() {
   const formRef = useRef();
   const toaster = useToaster();
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const onSubmit = async () => {
     if (!formRef.current.check()) return;
     try {

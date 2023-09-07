@@ -16,7 +16,7 @@ const paymentSlice = createSlice({
   initialState,
   extraReducers: (builder) => {
     builder.addCase(createOrUpdatePayemnt.fulfilled, (state, action) => {
-      state = action.payload.data.payment;
+      console.log('ssssssssssssssssssssssssssss');
     });
   },
 });
