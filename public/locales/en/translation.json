@@ -93,6 +93,7 @@
   "Your_Profile": "Your Profile",
   "Sign_Out": "Sign Out",
   "updated_successfuly": "Updated Successfuly",
-  "not_valid_vodafone_number":"invalid vodafone number"
-
+  "not_valid_vodafone_number": "invalid vodafone number",
+  "removed_successfuly": "removed successfuly",
+  "my_profile": "my profile"
 }

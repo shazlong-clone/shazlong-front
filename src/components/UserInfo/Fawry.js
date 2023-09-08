@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   Button,
   Modal,
@@ -29,8 +29,8 @@ function CreditCard() {
   const toaster = useToaster();
   const dispatch = useDispatch();
   const [formValue, setFormValue] = useState({
-    email: fawry?.cardNumber,
-    phone: fawry?.expireDate,
+    email: fawry?.email,
+    phone: fawry?.phone,
   });
   const onSubmit = async () => {
     if (!formRef.current.check()) return;
@@ -80,6 +80,10 @@ function CreditCard() {
         return /^(010|\+2010)\d{8}/.test(value);
       }, t('not_valid_vodafone_number')),
   });
+  useEffect(() => {
+    setFormValue({ email: fawry?.email, phone: fawry?.phone });
+  }, [fawry]);
+
   return (
     <>
       <a className="cursor-pointer underline" onClick={() => setOpen(true)}>
@@ -99,7 +103,7 @@ function CreditCard() {
         <Modal.Body>
           <Form ref={formRef} onChange={setFormValue} formValue={formValue} fluid model={model}>
             <Grid fluid>
-              <Row gutter={5} className='mt-5'>
+              <Row gutter={5} className="mt-5">
                 <Col xs={12} className="mb-6">
                   <Group controlId="email">
                     <Control placeholder="Email" name="email" block="true" />

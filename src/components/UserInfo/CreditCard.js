@@ -78,10 +78,11 @@ function CreditCard() {
     expireDate: Schema.Types.StringType().isRequired(t('required')),
     cvc: Schema.Types.StringType().isRequired(t('required')),
   });
+
   useEffect(() => {
     setFormValue({ cardNumber: card?.cardNumber, expireDate: card?.expireDate, cvc: card?.cvc });
   }, [card]);
-  
+
   return (
     <>
       <a className="cursor-pointer underline" onClick={() => setOpen(true)}>

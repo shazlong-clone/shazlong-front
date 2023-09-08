@@ -42,11 +42,15 @@ function NavBar() {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state?.auth);
   const triggerRef = React.useRef();
+  const navgiagte = useNavigate();
   const close = () => triggerRef.current.close();
-
-  const signOutHandler = () => {
-    dispatch(signOut());
+  const handleProfile = () => {
     close();
+    navgiagte('/user-info');
+  };
+  const signOutHandler = () => {
+    close();
+    dispatch(signOut());
     setOpen(false);
     navigate('/');
   };
@@ -58,19 +62,19 @@ function NavBar() {
           <strong className="capitalize">{user?.name}</strong>
         </li>
         <li className="text-base px-3 py-2 cursor-pointer">
-          <Link to="/user-info" className="no-underline hover:no-underline">
-            <div onClick={close} className="flex gap-2 items-center">
+          <a className="no-underline hover:no-underline">
+            <div onClick={handleProfile} className="flex gap-2 items-center">
               <BsPersonCircle />
-              <span className="capitalize">my Profile</span>
+              <span className="capitalize">{t('my_profile')}</span>
             </div>
-          </Link>
+          </a>
         </li>
         <li
           onClick={signOutHandler}
           className="text-red-600 hover:text-red-500 text-base flex gap-2 items-center px-3 py-2 cursor-pointer"
         >
-          <GoSignOut className="text-xl  items-center" />
-          <span className="pb-[1px]">Sign Out</span>
+          <GoSignOut className="text-xl  items-center mt-[3px]" />
+          <span className="pb-[1px]">{t('Sign_Out')}</span>
         </li>
       </ul>
     </Popover>

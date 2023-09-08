@@ -1,17 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import {
-  Button,
-  Modal,
-  Schema,
-  Form,
-  Message,
-  useToaster,
-  Grid,
-  Row,
-  Col,
-  FlexboxGrid,
-  ButtonToolbar,
-} from 'rsuite';
+import { Button, Modal, Schema, Form, Message, useToaster, Grid, Row, Col, FlexboxGrid, ButtonToolbar } from 'rsuite';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { createOrUpdatePayment } from '../../features/payment/paymentSlice';
@@ -37,7 +25,7 @@ function CreditCard() {
       const res = await dispatch(
         createOrUpdatePayment({
           payment: {
-            vodaphoneCash: formValue,
+            vodafoneCash: formValue,
           },
         }),
       );
@@ -71,13 +59,15 @@ function CreditCard() {
     }
   };
   const model = Schema.Model({
-    phone: Schema.Types.StringType().isRequired(t('required')).addRule((value) =>{
+    phone: Schema.Types.StringType()
+      .isRequired(t('required'))
+      .addRule((value) => {
         return /^(010|\+2010)\d{8}/.test(value);
-    }, t('not_valid_vodafone_number'))
+      }, t('not_valid_vodafone_number')),
   });
-  useEffect(()=>{
-    setFormValue({ phone: vodafoneCash?.phone,})
-  },[vodafoneCash]);
+  useEffect(() => {
+    setFormValue({ phone: vodafoneCash?.phone });
+  }, [vodafoneCash]);
   return (
     <>
       <a className="cursor-pointer underline" onClick={() => setOpen(true)}>
@@ -100,11 +90,7 @@ function CreditCard() {
               <Row gutter={5}>
                 <Col xs={24} className="mb-6 mt-3">
                   <Group controlId="cardNumber">
-                    <Control
-                      placeholder="Phone"
-                      name="phone"
-                      block="true"
-                    />
+                    <Control placeholder="Phone" name="phone" block="true" />
                   </Group>
                 </Col>
               </Row>
