@@ -10,9 +10,7 @@ function Image() {
           alt="undraw_sign_up"
         />
         <article className="absolute top-0 left-0 bg-gray/20 h-full w-full text-white text-center">
-          <h1 className="flex items-center h-full justify-center lg:max-w-lg lg:m-auto xl:w-full">
-            A journey of a thousand miles begins with a single step{' '}
-          </h1>
+          <h1 className="flex items-center h-full justify-center lg:max-w-lg lg:m-auto xl:w-full">{t('Journy')}</h1>
         </article>
       </main>
     </>
