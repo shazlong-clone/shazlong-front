@@ -13,7 +13,7 @@ import { useTranslation } from 'react-i18next';
 function PaymentInfo() {
   const dispatch = useDispatch();
   const { card, vodafoneCash, fawry } = useSelector((state) => state?.payment);
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const toaster = useToaster();
   const handelremove = async (params) => {
     try {
@@ -63,7 +63,7 @@ function PaymentInfo() {
               <img src={viza} alt="viza" />
               <img src={masterCard} alt="masterCard" />
             </span>
-            <span>Credit Card</span>
+            <span>{t('Credit_Card')}</span>
           </aside>
           <aside>
             <CreditCard />
@@ -71,19 +71,22 @@ function PaymentInfo() {
         </div>
         <div className="bg-gray/5 px-3 text-center py-5 mt-3 text-start font-[500] text-[14px]">
           {!card ? (
-            <article className="text-center">You don t have any saved credit card details</article>
+            <article className="text-center">{t('You_dont_have_any_saved_method_details', { method: t('Credit_Card') })}</article>
           ) : (
             <FlexboxGrid justify="space-between">
               <FlexboxGrid.Item>
-                card Number: {card?.cardNumber}
+                {t('Card_Number')}: {card?.cardNumber}
                 <br />
                 cvc: {card?.cvc}
                 <br />
-                expire Date: {card?.expireDate}
+                {t('Expire_Date')}: {card?.expireDate}
               </FlexboxGrid.Item>
               <FlexboxGrid.Item>
-                <a className="text-red-500 hover:text-red-500 cursor-pointer" onClick={() => handelremove({ cart: '' })}>
-                  Remove
+                <a
+                  className="text-red-500 underline hover:text-red-500 cursor-pointer"
+                  onClick={() => handelremove({ card: '' })}
+                >
+                  {t('Remove')}
                 </a>
               </FlexboxGrid.Item>
             </FlexboxGrid>
@@ -94,7 +97,7 @@ function PaymentInfo() {
         <div className="flex justify-between">
           <aside className="flex items-center gap-1">
             <img className="w-[20px]" src={vodafone} alt="vodafone" />
-            <span className="mt-1">Vodafone Cash</span>
+            <span className="mt-1">{t('Vodafone_Cash')}</span>
           </aside>
           <aside>
             <VodafonCash />
@@ -102,13 +105,20 @@ function PaymentInfo() {
         </div>
         <div className="bg-gray/5 px-3 text-center py-5 mt-3 text-start font-[500] text-[14px]">
           {!vodafoneCash ? (
-            <article className="text-center">You don t have any saved vodafone cash details</article>
+            <article className="text-center">
+              {t('You_dont_have_any_saved_method_details', { method: t('Vodafone_Cash') })}
+            </article>
           ) : (
             <FlexboxGrid justify="space-between">
-              <FlexboxGrid.Item>Phone: {vodafoneCash?.phone}</FlexboxGrid.Item>
               <FlexboxGrid.Item>
-                <a className="text-red-500 hover:text-red-500 cursor-pointer" onClick={() => handelremove({ vodafoneCash: '' })}>
-                  Remove
+                {t('Phone')}: {vodafoneCash?.phone}
+              </FlexboxGrid.Item>
+              <FlexboxGrid.Item>
+                <a
+                  className="text-red-500 underline hover:text-red-500 cursor-pointer"
+                  onClick={() => handelremove({ vodafoneCash: '' })}
+                >
+                  {t('Remove')}
                 </a>
               </FlexboxGrid.Item>
             </FlexboxGrid>
@@ -120,7 +130,7 @@ function PaymentInfo() {
         <div className="flex justify-between">
           <aside className="flex gap-1">
             <img className="w-[80px]" src={fawryImg} alt="fawry" />
-            <span className="mt-[px]">Fawry</span>
+            <span className="mt-[px]">{t('Fawry')}</span>
           </aside>
           <aside>
             <Fawry />
@@ -128,17 +138,20 @@ function PaymentInfo() {
         </div>
         <div className="bg-gray/5 px-3 text-center py-5 mt-3 text-start font-[500] text-[14px]">
           {!fawry ? (
-            <article className="text-center">You don t have any saved Fawry details</article>
+            <article className="text-center">{t('You_dont_have_any_saved_method_details', { method: t('Fawry') })}</article>
           ) : (
             <FlexboxGrid justify="space-between">
               <FlexboxGrid.Item>
-                Phone: {fawry?.phone}
+                {t('Phone')}: {fawry?.phone}
                 <br />
-                email: {fawry?.email}
+                {t('Email')}: {fawry?.email}
               </FlexboxGrid.Item>
               <FlexboxGrid.Item>
-                <a className="text-red-500 hover:text-red-500 cursor-pointer" onClick={() => handelremove({ fawry: '' })}>
-                  Remove
+                <a
+                  className="text-red-500 underline hover:text-red-500 cursor-pointer"
+                  onClick={() => handelremove({ fawry: '' })}
+                >
+                  {t('Remove')}
                 </a>
               </FlexboxGrid.Item>
             </FlexboxGrid>

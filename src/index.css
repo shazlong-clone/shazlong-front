@@ -249,9 +249,7 @@ a:active {
 .custom-timeline .rs-timeline-item-content {
   margin-left: 24px;
 }
-[dir='rtl'] .rs-btn {
-  @apply text-[18px];
-}
+
 [dir='rtl'] .rs-popover {
   @apply right-auto;
 }

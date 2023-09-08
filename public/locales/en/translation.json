@@ -95,5 +95,15 @@
   "updated_successfuly": "Updated Successfuly",
   "not_valid_vodafone_number": "invalid vodafone number",
   "removed_successfuly": "removed successfuly",
-  "my_profile": "my profile"
+  "my_profile": "my profile",
+  "Credit_Card": "Credit Card",
+  "Add_New": "Add New",
+  "Remove": "Remove",
+  "Vodafone_Cash": "Vodafone Cash",
+  "Fawry": "Fawry",
+  "Card_Number": "Card Number",
+  "Expire_Date": "Expire Date",
+  "You_dont_have_any_saved_method_details": "You don t have any {{method}} details",
+  "Add": "Add",
+  "Expire_Date_(MM/YY)": "Expire_Date_(MM/YY)"
 }

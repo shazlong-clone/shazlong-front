@@ -87,7 +87,7 @@ function CreditCard() {
   return (
     <>
       <a className="cursor-pointer underline" onClick={() => setOpen(true)}>
-        Add New
+        {t('Add_New')}
       </a>
       <Modal
         dialogClassName="lg:w-[450px]"
@@ -98,7 +98,7 @@ function CreditCard() {
         onClose={() => setOpen(false)}
       >
         <Modal.Header>
-          <Modal.Title>Add Credit Card</Modal.Title>
+          <Modal.Title>{t('Add') + t('Credit_Card')}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form ref={formRef} onChange={setFormValue} formValue={formValue} fluid model={model}>
@@ -106,12 +106,12 @@ function CreditCard() {
               <Row gutter={5} className="mt-5">
                 <Col xs={12} className="mb-6">
                   <Group controlId="email">
-                    <Control placeholder="Email" name="email" block="true" />
+                    <Control placeholder={t('Email')} name="email" block="true" />
                   </Group>
                 </Col>
                 <Col xs={12}>
                   <Group controlId="phone">
-                    <Control placeholder="Phone" name="phone" block="true" />
+                    <Control placeholder={t('Phone')} name="phone" block="true" />
                   </Group>
                 </Col>
               </Row>
@@ -128,10 +128,10 @@ function CreditCard() {
                     loading={loading}
                     disabled={loading}
                   >
-                    Add
+                    {t('Add')}
                   </Button>
                   <Button disabled={loading} style={{ marginBottom: '0px' }} onClick={() => setOpen(false)} appearance="subtle">
-                    Cancel
+                    {t('Cancel')}
                   </Button>
                 </ButtonToolbar>
               </FlexboxGrid.Item>

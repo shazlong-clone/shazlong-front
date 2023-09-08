@@ -98,5 +98,15 @@
   "updated_successfuly": "تم التحديث بنجاح",
   "not_valid_vodafone_number": "رقم غير صحييح",
   "removed_successfuly": "تم الحذف بنجاح",
-  "my_profile": "الملف الشخصي"
+  "my_profile": "الملف الشخصي",
+  "Credit_Card": "البطاقة ائتمانية",
+  "Add_New": "إضافة جديد",
+  "Remove": "حذف",
+  "Vodafone_Cash": "فودافون كاش",
+  "Fawry": "فوري",
+  "Card_Number": "رقم الكارت",
+  "Expire_Date": "تاريخ الانتهاء",
+  "You_dont_have_any_saved_method_details": "لايوجد اي تفاصيل عن  {{method}}",
+  "Add": "إضافة",
+  "Expire_Date_(MM/YY)": "تاريخ الانتهاء (الشهر/السنة)"
 }
