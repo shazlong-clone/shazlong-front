@@ -1,75 +1,91 @@
-import React, { useEffect, useState } from 'react';
-import { Button, ButtonToolbar, Checkbox, Form, InputGroup, InputPicker, Schema } from 'rsuite';
+import React, { useEffect, useRef, useState, useTransition } from 'react';
+import { Button, ButtonToolbar, Checkbox, Form, InputGroup, Message, Schema, useToaster } from 'rsuite';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import EyeIcon from '@rsuite/icons/legacy/Eye';
 import EyeSlashIcon from '@rsuite/icons/legacy/EyeSlash';
-import clsx from 'clsx';
 import { Link } from 'react-router-dom';
 import { FaLock } from 'react-icons/fa';
+import { useDispatch } from 'react-redux';
+import { signUpDoctor } from '../../features/auth/authSlice';
+
 const { Group, HelpText, Control } = Form;
 function DocSignUpForm() {
+  const { t } = useTransition();
   const [acceptLicence, setAcceptLicence] = useState(false);
   const [visible, setVisible] = useState(false);
   const [visibleConfirm, setVisibleConConfirm] = useState(false);
-  const [countries, setCountries] = useState([]);
-  const countriesData = countries?.map((item) => ({
-    label: (
-      <div key={item?.id} className="flex gap-1">
-        <span className={clsx(item?.country_flag, 'min-w-[1.3em]')} />
-        <span>{item?.country_name}</span>
-      </div>
-    ),
-    value: item?.id,
-  }));
 
   const model = Schema.Model({
-    user_name: Schema.Types.StringType().isRequired('This field is required.'),
-    email: Schema.Types.StringType().isEmail('Please enter a valid email address.'),
+    name: Schema.Types.StringType().isRequired('This field is required.'),
+    email: Schema.Types.StringType().isRequired('This field is required.').isEmail('Please enter a valid email address.'),
     password: Schema.Types.StringType().isRequired('This field is required'),
-    password_confirm: Schema.Types.StringType().isRequired('This field is required'),
-    country_id: Schema.Types.NumberType().isRequired('This field is required'),
+    passwordConfirm: Schema.Types.StringType()
+      .isRequired('This field is required')
+      .addRule((value, data) => {
+        return value === data?.password;
+      }, 'password and password Confirm Not Equal'),
+    acceptLicenceValue: Schema.Types.BooleanType()
+      .isRequired('This field is required')
+      .addAsyncRule((value) => {
+        return value === true;
+      }, 'you sholed accept licence rules'),
   });
+  const formRef = useRef();
   const [formValue, setFormValues] = useState({
-    user_name: '',
+    name: '',
     email: '',
     password: '',
-    password_confirm: '',
-    country_id: '',
-    accept_licence: '',
+    passwordConfirm: '',
   });
-  const onSubmit = (isValid) => {
-    if (!isValid) return;
+  const [loading, setLoading] = useState();
+  const toaster = useToaster();
+  const dispatch = useDispatch();
+  const onSubmit = async () => {
+    if (!formRef.current.check()) return;
+    try {
+      setLoading(true);
+      const res = await dispatch(signUpDoctor(formValue));
+      if (res.payload.status) {
+        toaster.push(
+          <Message type="success" closable showIcon>
+            {t('sign_up_successfuly')}
+          </Message>,
+          { duration: 2000 },
+        );
+      } else {
+        toaster.push(
+          <Message type="error" closable showIcon>
+            {res.payload.message}
+          </Message>,
+          { duration: 2000 },
+        );
+      }
+    } catch (err) {
+      toaster.push(
+        <Message closable showIcon type="error">
+          {t('internal_server_error')}
+        </Message>,
+        {
+          duration: 5000,
+        },
+      );
+    } finally {
+      setLoading(false);
+    }
   };
   useEffect(() => {
-    fetch('/api/countries.json').then((res) => {
-      res.json().then((resJosn) => {
-        setCountries(resJosn);
-      });
-    });
     AOS.init();
   }, []);
   return (
     <>
-      <Form formValue={formValue} onChange={setFormValues} model={model} fluid className="mt-5 sign-form">
-        <Group controlId="user_name">
-          <Control size="lg" placeholder="User Name *" name="user_name" block="true" />
+      <Form ref={formRef} formValue={formValue} onChange={setFormValues} model={model} fluid className="mt-5 sign-form">
+        <Group controlId="name">
+          <Control size="lg" placeholder="User Name *" name="name" block="true" />
           <HelpText>You can use letters a-z, numbers and periods (- , _ , .)</HelpText>
         </Group>
         <Group controlId="email">
           <Control size="lg" block="true" placeholder="Email *" name="email" />
-        </Group>
-        <Group controlId="country_id">
-          <Control
-            placeholder="Country *"
-            menuMaxHeight={300}
-            menuStyle={{ maxWidth: '10px' }}
-            block
-            name="country_id"
-            accepter={InputPicker}
-            data={countriesData}
-            size="lg"
-          />
         </Group>
         <Group controlId="password">
           <InputGroup>
@@ -77,12 +93,12 @@ function DocSignUpForm() {
             <InputGroup.Button onClick={() => setVisible(!visible)}>{visible ? <EyeIcon /> : <EyeSlashIcon />}</InputGroup.Button>
           </InputGroup>
         </Group>
-        <Group controlId="password_confirm">
+        <Group controlId="passwordConfirm">
           <InputGroup accepter={InputGroup}>
             <Control
               placeholder="Password Confirm *"
               size="lg"
-              name="password_confirm"
+              name="passwordConfirm"
               type={visibleConfirm ? 'text' : 'password'}
             />
             <InputGroup.Button onClick={() => setVisibleConConfirm(!visibleConfirm)}>
@@ -91,24 +107,40 @@ function DocSignUpForm() {
           </InputGroup>
         </Group>
 
-        <Group controlId="accept_licence" className="ml-[-10px]">
+        <Group controlId="acceptLicenceValue" className="ml-[-10px]">
           <Control
             onChange={(val, checked) => {
               setAcceptLicence(checked);
             }}
             accepter={Checkbox}
-            name="accept_licence"
+            name="acceptLicence"
           >
-            I agree with the <Link to="/licence"> privacy policy</Link>
+            {t('I_Agree_With_The')}
+            <Link to="/licence" className="underline">
+              {t('Privacy_Policy')}
+            </Link>
           </Control>
         </Group>
         <Group controlId="submit">
           <ButtonToolbar>
-            <Button disabled={!acceptLicence} onClick={onSubmit} appearance="primary" type="submit" block startIcon={<FaLock />}>
-              <strong className="pb-[1px] mx-[2px]">Register</strong>
+            <Button
+              disabled={!acceptLicence || loading}
+              onClick={onSubmit}
+              appearance="primary"
+              type="submit"
+              block
+              loading={loading}
+              startIcon={<FaLock />}
+            >
+              <strong className="pb-[1px] mx-[2px]">{t('Sign_Up')}</strong>
             </Button>
           </ButtonToolbar>
         </Group>
+        <div className="text-center mt-[-10px]">
+          <Link to="/sign-in" className="underline">
+            {t('Sign_In')}
+          </Link>
+        </div>
       </Form>
     </>
   );

@@ -1,12 +1,10 @@
 import React from 'react';
 import { Suspense, lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import ErrorBoundary from './components/Shared/ErrorBoundary';
 import LayOut from './components/Shared/LayOut';
 import Loading from './components/Shared/BackDropLoading';
 import LangWrapper from './components/Shared/LangWrapper';
 import ProtectedRoute from './components/Shared/ProtectedRoute';
-import { useTranslation } from 'react-i18next';
 
 const Home = lazy(() => import('./pages/Home'));
 const ThearpistProfile = lazy(() => import('./pages/ThearpistProfile'));

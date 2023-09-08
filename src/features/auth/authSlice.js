@@ -4,6 +4,7 @@ import service from '../../config/enviroment.config';
 const initialState = {
   user: {},
   token: localStorage.getItem('token'),
+  doctorVerificationCode: '',
 };
 export const signUp = createAsyncThunk('signUp', async (params) => {
   const res = await service.post('/api/v1/users/signup', params);
@@ -21,6 +22,11 @@ export const getMe = createAsyncThunk('getMe', async () => {
 
 export const updateMe = createAsyncThunk('updateMe', async (params) => {
   const res = await service.patch('/api/v1/users/updateMe', params);
+  return res.data;
+});
+
+export const signUpDoctor = createAsyncThunk('doctorSignUp', async (params) => {
+  const res = await service.patch('/api/v1/doctors/signup', params);
   return res.data;
 });
 
@@ -48,6 +54,9 @@ const authSlice = createSlice({
     });
     builder.addCase(updateMe.fulfilled, (state, action) => {
       state.user = action?.payload?.data?.user;
+    });
+    builder.addCase(signUpDoctor.fulfilled, (state, action) => {
+      state.doctorVerificationCode = action?.payload?.code;
     });
   },
 });

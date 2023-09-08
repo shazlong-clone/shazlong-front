@@ -124,8 +124,10 @@
   "Private_and_Safe_Body": "شيزلونج منصة آمنة وخاصة 100%",
   "Recorded_Notes": "ملاحظات مسجلة",
   "Recorded_Notes_Body": "نوفرلك خاصية تساعدك على متابعة عملائك عن طريق تسجيل ملاحظاتك وتقاريرك الطبية لكل عميل بشكل آمن.",
-  "Registration": "اضغط على انضم لنا الآن",
-  "Registration_Desc": "Click on join Shezlong now.",
+  "How_to_join_Shezlong": "كيف تنضم ل فرق",
+  "therapists_team": "فريق شزلونج ؟",
+  "Registration": "التسجيل",
+  "Registration_Desc": "اضغط على انضم لنا الآن",
   "CV": "السيرة الذاتية",
   "CV_Desc": "قم بارفاق السرة الذاتية",
   "Profile": "الملف الشخصي",
@@ -133,5 +135,6 @@
   "Slots": "الفترات",
   "Add_time_slots_to_run_sessions": "قم بإضافة الفترات لتفعيل الجلسات",
   "End": "النهاية",
-  "End_Desc": "مبرروك لقد تم انضمامك الينا"
+  "End_Desc": "تم انضمامك الينا",
+  "Join_Now": "انضم لنا الان"
 }

@@ -37,18 +37,18 @@ function JoinUs() {
     },
     {
       image_path: folder,
-      header: 'Client history',
-      body: ' Access all your client previous prescriptions, so you can give them better help ',
+      header: t('Client_history'),
+      body: t('Client_history_Body'),
     },
     {
       image_path: lock,
-      header: 'Private and Safe',
-      body: ' Shezlong is 100% private and secured. ',
+      header: t('Private_and_Safe'),
+      body: t('Private_and_Safe_Body'),
     },
     {
       image_path: note,
-      header: 'Recorded Notes',
-      body: ' Securely keep notes and medical reports for your clients. ',
+      header: t('Recorded_Notes'),
+      body: t('Recorded_Notes_Body'),
     },
   ];
 
@@ -100,42 +100,43 @@ function JoinUs() {
           </section>
           <section className="lg:flex lg:gap-10 lg:mt-20 lg:justify-center">
             <h4>
-              How to join Shezlong <br />
-              therapists’ team ? <div className="w-[100px] h-[2px] mt-2 mb-10 bg-cyan " />
+              {t('How_to_join_Shezlong')}
+              <br />
+              {t('therapists_team')} <div className="w-[100px] h-[2px] mt-2 mb-10 bg-cyan " />
               <article className="pb-24 hidden lg:block">
                 <Link to="/doctor-signup">
                   <Button appearance="primary" className="rounded-full font-bold">
-                    Join Shezlong now
+                    {t('Join_Now')}
                   </Button>
                 </Link>
               </article>
             </h4>
             <Timeline className="custom-timeline pb-10">
-              <Timeline.Item dot={<GiClick />}>
-                <strong>Registration</strong>
-                <p> Click on join Shezlong now. </p>
+              <Timeline.Item className="rtl:pr-9" dot={<GiClick />}>
+                <strong>{t('Registration')}</strong>
+                <p> {t('Registration_Desc')} </p>
               </Timeline.Item>
-              <Timeline.Item dot={<TextImageIcon />}>
-                <strong>CV</strong>
-                <p>upload your own C.V.</p>
+              <Timeline.Item className="rtl:pr-9" dot={<TextImageIcon />}>
+                <strong>{t('CV')}</strong>
+                <p>{t('CV_Desc')}</p>
               </Timeline.Item>
-              <Timeline.Item dot={<UserBadgeIcon />}>
-                <strong>Profile</strong>
-                <p> Complete your profile </p>
+              <Timeline.Item className="rtl:pr-9" dot={<UserBadgeIcon />}>
+                <strong>{t('Profile')}</strong>
+                <p>{t('Profile_Desc')} </p>
               </Timeline.Item>
-              <Timeline.Item dot={<CalendarIcon />}>
-                <strong>Slots</strong>
-                <p> Add time slots to run sessions. </p>
+              <Timeline.Item className="rtl:pr-9" dot={<CalendarIcon />}>
+                <strong>{t('Slots')}</strong>
+                <p>{t('Slots_Desc')}</p>
               </Timeline.Item>
-              <Timeline.Item dot={<CheckIcon />}>
-                <strong>End</strong>
-                <p>Congratuation You Have Joined Us</p>
+              <Timeline.Item className="rtl:pr-9" dot={<CheckIcon />}>
+                <strong>{t('End')}</strong>
+                <p>{t('End_Desc')}</p>
               </Timeline.Item>
             </Timeline>
             <article className="text-center pb-24 lg:hidden">
               <Link to="/doctor-signup">
                 <Button appearance="primary" className="rounded-full font-bold">
-                  Join Shezlong now
+                  {t('Join_Now')}
                 </Button>
               </Link>
             </article>

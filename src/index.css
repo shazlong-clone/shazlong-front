@@ -238,9 +238,9 @@ a:active {
   border-radius: 50%;
   font-size: 18px;
   color: #999;
-  margin-left: -13px;
   justify-content: center;
   padding: 8px;
+  @apply ml-[-13px] rtl:ml-0 rtl:mr-[-15px];
 }
 .custom-timeline .rs-timeline-item-custom-dot svg {
   display: flex;

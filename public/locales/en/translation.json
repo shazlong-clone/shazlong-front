@@ -121,7 +121,7 @@
   "Recorded_Notes": "Recorded Notes",
   "Recorded_Notes_Body": "Securely keep notes and medical reports for your clients.",
   "How_to_join_Shezlong": "How to join Shezlong",
-  "therapists_team ?": "therapists’ team ?",
+  "therapists_team": "therapists’ team ?",
   "Registration": "Registration",
   "Registration_Desc": "Click on join Shezlong now.",
   "CV": "CV",
@@ -131,5 +131,6 @@
   "Slots": "Slots",
   "Add_time_slots_to_run_sessions": "Add time slots to run sessions.",
   "End": "End",
-  "End_Desc": "Congratuation You Have Joined Us"
+  "End_Desc": "Congratuation You Have Joined Us",
+  "Join_Now": "Jion Now"
 }
