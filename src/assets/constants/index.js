@@ -19,3 +19,6 @@ export const genders = [
   { id: '1', name: 'Male' },
   { id: '2', name: 'FeMale' },
 ];
+
+export const DOCTOR = 2;
+export const USER = 1;

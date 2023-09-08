@@ -6,10 +6,13 @@ import ismho from '../../assets/images/ismho-grey.webp';
 import SVLogoFill from '../../assets/images/SVLogoFill.svg';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
+import { DOCTOR } from '../../assets/constants';
 
 function Footer() {
   const { t, i18n } = useTranslation();
   const locale = i18n.resolvedLanguage;
+  const { user } = useSelector((state) => state?.auth);
   return (
     <div className="bg-gray/90 text-white py-10  md:px-10 md:py-16">
       <div className="container">
@@ -60,25 +63,37 @@ function Footer() {
               <h2 className="text-3xl lg:text-xl lg:text-start lg:mb-5">{t('Join_Us')}</h2>
               <div className="inline">
                 <article className="lg:flex items-center gap-2">
-                  <Link to="/sign-up" className="hover:no-underline active:no-underline">
-                    <button
-                      className="
-                  font-bold border mt-5 lg:mt-0 rounded-lg border-white text-white bg-opacity-0
-                  bg-gray py-3 px-14  md:block md:w-full"
-                    >
-                      {t('Join_As_A_Client')}
-                    </button>
-                  </Link>
-                  <div className="my-3">{t('Or')}</div>
-                  <Link to="/join-us" className="hover:no-underline active:no-underline">
-                    <button
-                      className="
-                  font-bold border rounded-lg border-white text-white  bg-opacity-0
-                  bg-gray py-3  px-14  md:block md:w-full"
-                    >
-                      {t('Join_As_A_Therapist')}
-                    </button>
-                  </Link>
+                  {!user?._id ? (
+                    <>
+                      <Link to="/sign-up" className="hover:no-underline active:no-underline grow">
+                        <button
+                          className="
+                        font-bold border mt-5 lg:mt-0 rounded-lg border-white text-white bg-opacity-0
+                        bg-gray py-3 px-14  md:block md:w-full"
+                        >
+                          {t('Join_As_A_Client')}
+                        </button>
+                      </Link>
+                      <div className="my-3">{t('Or')}</div>
+                    </>
+                  ) : (
+                    ''
+                  )}
+
+                  {user?.role !== DOCTOR ? (
+                    <>
+                      <Link to="/join-us" className="hover:no-underline active:no-underline grow">
+                        <button
+                          className="font-bold border rounded-lg border-white text-white  bg-opacity-0
+                                  bg-gray py-3  px-14  md:block md:w-full w-full"
+                        >
+                          {t('Join_As_A_Therapist')}
+                        </button>
+                      </Link>
+                    </>
+                  ) : (
+                    ''
+                  )}
                 </article>
                 <div className="mt-5">
                   {t('Have_Account')}
