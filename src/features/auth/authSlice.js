@@ -26,7 +26,7 @@ export const updateMe = createAsyncThunk('updateMe', async (params) => {
 });
 
 export const signUpDoctor = createAsyncThunk('doctorSignUp', async (params) => {
-  const res = await service.patch('/api/v1/doctors/signup', params);
+  const res = await service.post('/api/v1/doctors/signup', params);
   return res.data;
 });
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, useTransition } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Button, ButtonToolbar, Checkbox, Form, InputGroup, Message, Schema, useToaster } from 'rsuite';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
@@ -8,10 +8,14 @@ import { Link } from 'react-router-dom';
 import { FaLock } from 'react-icons/fa';
 import { useDispatch } from 'react-redux';
 import { signUpDoctor } from '../../features/auth/authSlice';
+import { useTranslation } from 'react-i18next';
+
+import { SignUpCompContext } from './DoctorSignUpComp';
 
 const { Group, HelpText, Control } = Form;
 function DocSignUpForm() {
-  const { t } = useTransition();
+  const { setPass } = useContext(SignUpCompContext);
+  const { t } = useTranslation();
   const [acceptLicence, setAcceptLicence] = useState(false);
   const [visible, setVisible] = useState(false);
   const [visibleConfirm, setVisibleConConfirm] = useState(false);
@@ -25,13 +29,9 @@ function DocSignUpForm() {
       .addRule((value, data) => {
         return value === data?.password;
       }, 'password and password Confirm Not Equal'),
-    acceptLicenceValue: Schema.Types.BooleanType()
-      .isRequired('This field is required')
-      .addAsyncRule((value) => {
-        return value === true;
-      }, 'you sholed accept licence rules'),
   });
   const formRef = useRef();
+
   const [formValue, setFormValues] = useState({
     name: '',
     email: '',
@@ -53,6 +53,7 @@ function DocSignUpForm() {
           </Message>,
           { duration: 2000 },
         );
+        setPass(true);
       } else {
         toaster.push(
           <Message type="error" closable showIcon>
@@ -107,7 +108,7 @@ function DocSignUpForm() {
           </InputGroup>
         </Group>
 
-        <Group controlId="acceptLicenceValue" className="ml-[-10px]">
+        <Group controlId="acceptLicence" className="ml-[-10px]">
           <Control
             onChange={(val, checked) => {
               setAcceptLicence(checked);
