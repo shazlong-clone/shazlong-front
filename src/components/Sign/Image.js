@@ -1,6 +1,8 @@
 import React from 'react';
 import road from '../../assets/images/road-bg.jpg';
+import { useTranslation } from 'react-i18next';
 function Image() {
+  const { t } = useTranslation();
   return (
     <>
       <main className="relative">

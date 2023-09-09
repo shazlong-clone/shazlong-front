@@ -1,6 +1,8 @@
 import React from 'react';
 import join from '../../assets/images/join-half-cover..png';
+import { useTranslation } from 'react-i18next';
 function Image() {
+  const { t } = useTranslation();
   return (
     <>
       <main className="relative hidden lg:block">
