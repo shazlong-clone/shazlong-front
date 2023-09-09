@@ -3,8 +3,8 @@ import service from '../../config/enviroment.config';
 
 const initialState = {
   user: {},
-  token: localStorage.getItem('token'),
-  doctorVerificationCode: '',
+  token: localStorage.getItem('token') || '',
+  doctorVerificationCode: localStorage.getItem('doctorVerificationCode') || '',
 };
 export const signUp = createAsyncThunk('signUp', async (params) => {
   const res = await service.post('/api/v1/users/signup', params);

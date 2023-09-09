@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Button, ButtonToolbar, Checkbox, Form, InputGroup, Message, Schema, useToaster } from 'rsuite';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
@@ -10,11 +10,8 @@ import { useDispatch } from 'react-redux';
 import { signUpDoctor } from '../../features/auth/authSlice';
 import { useTranslation } from 'react-i18next';
 
-import { SignUpCompContext } from './DoctorSignUpComp';
-
 const { Group, HelpText, Control } = Form;
 function DocSignUpForm() {
-  const { setPass } = useContext(SignUpCompContext);
   const { t } = useTranslation();
   const [acceptLicence, setAcceptLicence] = useState(false);
   const [visible, setVisible] = useState(false);
@@ -53,7 +50,7 @@ function DocSignUpForm() {
           </Message>,
           { duration: 2000 },
         );
-        setPass(true);
+        localStorage.setItem('doctorVerificationCode', res.payload.code);
       } else {
         toaster.push(
           <Message type="error" closable showIcon>

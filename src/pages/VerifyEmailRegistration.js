@@ -1,14 +1,42 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Button, Col, DatePicker, Form, Grid, InputNumber, InputPicker, Row, TagPicker, Uploader } from 'rsuite';
+import {
+  Button,
+  Col,
+  DatePicker,
+  Form,
+  Grid,
+  InputNumber,
+  InputPicker,
+  Radio,
+  Row,
+  TagPicker,
+  Uploader,
+  RadioGroup,
+  FlexboxGrid,
+} from 'rsuite';
 import logo from '../assets/images/shezlong-logo.svg';
 import { useTranslation } from 'react-i18next';
 import clsx from 'clsx';
 import { Link } from 'react-router-dom';
+import { genders } from '../assets/constants';
+import { API_BASE_URL } from '../config/enviroment.config';
+import { useSelector } from 'react-redux';
+
 const { Control, HelpText, Group } = Form;
 function VerifyEmailRegistration() {
   const [countries, setCountries] = useState([]);
   const formRef = useRef();
-  const [formValue, setFormValue] = useState({});
+  const { doctorVerificationCode } = useSelector((state) => state?.auth);
+  const [formValue, setFormValue] = useState({
+    fullArName: '',
+    fullEnName: '',
+    experienceYears: null,
+    gender: null,
+    country: null,
+    languages: [],
+    prefix: '',
+    birthDate: null,
+  });
   const onSubmit = () => {
     if (!formRef.current?.check()) return;
   };
@@ -31,6 +59,19 @@ function VerifyEmailRegistration() {
       value: item,
     };
   });
+  const { t } = useTranslation();
+  const props = {
+    name: 'cv',
+    disabledFileItem: true,
+    maxPreviewFileSize: 1,
+    fileListVisible: true,
+    listType: 'picture-text',
+    action: `${API_BASE_URL}/api/v1/doctors/uploadCv`,
+    headers: {
+      'verification-code': doctorVerificationCode || '',
+    },
+  };
+
   useEffect(() => {
     fetch('/api/lang.json').then((res) => {
       res.json().then((resJson) => {
@@ -62,19 +103,19 @@ function VerifyEmailRegistration() {
               <Col xs={24} md={12} lg={8} className="mb-5">
                 <Group>
                   <HelpText>Full Name In English *</HelpText>
-                  <Control size="lg" placeholder="Full Name" name="en_name" />
+                  <Control size="lg" placeholder="Full Name" name="fullEnName" />
                 </Group>
               </Col>
               <Col xs={24} md={12} lg={8} className="mb-5">
                 <Group>
                   <HelpText>Full Name In Arabic *</HelpText>
-                  <Control size="lg" placeholder="الاسم" name="ar_name" />
+                  <Control size="lg" placeholder="الاسم" name="fullArName" />
                 </Group>
               </Col>
               <Col xs={24} md={12} lg={8} className="mb-5">
                 <Group>
                   <HelpText>Experience year *</HelpText>
-                  <Control size="lg" accepter={InputNumber} placeholder="الاسم" name="experience_year" />
+                  <Control size="lg" accepter={InputNumber} placeholder="الاسم" name="experienceYears" />
                 </Group>
               </Col>
               <Col xs={24} md={12} lg={8} className="mb-5">
@@ -103,7 +144,7 @@ function VerifyEmailRegistration() {
                     menuClassName="max-w-[1]"
                     accepter={TagPicker}
                     placeholder="language"
-                    name="lang"
+                    name="languages"
                   />
                 </Group>
               </Col>
@@ -128,22 +169,38 @@ function VerifyEmailRegistration() {
                   <Control size="lg" className="w-full" accepter={DatePicker} placeholder="Birth Date" name="birthDate" />
                 </Group>
               </Col>
-              <Col>
+              <Col xs={24} md={12} lg={8} className="mb-5">
+                <Group controlId="gender">
+                  <HelpText>Gender *</HelpText>
+                  <Control accepter={RadioGroup} name="gender" inline>
+                    {genders?.map((el) => {
+                      return (
+                        <Radio key={el?.id} value={el?.id}>
+                          {t(el?.name)}
+                        </Radio>
+                      );
+                    })}
+                  </Control>
+                </Group>
+              </Col>
+              <Col xs={24} md={12} lg={8} className="mb-5">
                 <HelpText> </HelpText>
-                <Uploader listType="picture-text" action="//jsonplaceholder.typicode.com/posts/">
-                  <Button appearance="ghost" size="lg">
+                <Uploader {...props}>
+                  <Button block appearance="ghost" size="lg">
                     CV
                   </Button>
                 </Uploader>
               </Col>
-              <Col>
-                <HelpText> </HelpText>
-                <Button size="lg" onClick={onSubmit} type="submit" appearance="primary">
-                  Submit
-                </Button>
-              </Col>
             </Row>
           </Grid>
+          <FlexboxGrid justify="center">
+            <Col className="mb-5">
+              <HelpText> </HelpText>
+              <Button size="lg" onClick={onSubmit} type="submit" appearance="primary">
+                Submit
+              </Button>
+            </Col>
+          </FlexboxGrid>
         </Form>
       </div>
     </main>
