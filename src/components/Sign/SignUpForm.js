@@ -21,7 +21,7 @@ import EyeSlashIcon from '@rsuite/icons/legacy/EyeSlash';
 import clsx from 'clsx';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaLock } from 'react-icons/fa';
-import { signUp } from '../../features/auth/authSlice';
+import { signUp } from '../../features/auth/authAction';
 import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { genders } from '../../assets/constants';

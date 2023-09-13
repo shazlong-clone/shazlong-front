@@ -15,7 +15,7 @@ import {
   Message,
 } from 'rsuite';
 import { genders } from '../../assets/constants';
-import { updateMe } from '../../features/auth/authSlice';
+import { updateMe } from '../../features/auth/authAction';
 import { LuEdit } from 'react-icons/lu';
 import { useTranslation } from 'react-i18next';
 

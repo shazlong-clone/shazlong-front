@@ -13,6 +13,8 @@ import {
   Uploader,
   RadioGroup,
   FlexboxGrid,
+  toaster,
+  Message,
 } from 'rsuite';
 import logo from '../assets/images/shezlong-logo.svg';
 import { useTranslation } from 'react-i18next';
@@ -20,8 +22,8 @@ import clsx from 'clsx';
 import { Link } from 'react-router-dom';
 import { genders } from '../assets/constants';
 import { API_BASE_URL } from '../config/enviroment.config';
-import { useSelector } from 'react-redux';
-
+import { useDispatch, useSelector } from 'react-redux';
+// import {verificate} from '../features/auth/authSlice' 
 const { Control, HelpText, Group } = Form;
 function VerifyEmailRegistration() {
   const [countries, setCountries] = useState([]);
@@ -37,8 +39,15 @@ function VerifyEmailRegistration() {
     prefix: '',
     birthDate: null,
   });
-  const onSubmit = () => {
+  const dispatch = useDispatch();
+  const onSubmit = async() => {
     if (!formRef.current?.check()) return;
+    try{
+      // const res = await dispatch(verificate());
+
+    }catch(err){
+      toaster.push(<Message>{}</Message>)
+    }
   };
   const [lang, setLang] = useState([]);
   const { i18n } = useTranslation();

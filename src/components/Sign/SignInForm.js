@@ -7,7 +7,7 @@ import EyeSlashIcon from '@rsuite/icons/legacy/EyeSlash';
 import { FaLock } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { signInUser } from '../../features/auth/authSlice';
+import { signInUser } from '../../features/auth/authAction';
 import { useTranslation } from 'react-i18next';
 const { Group, HelpText, Control } = Form;
 function SignUpForm() {

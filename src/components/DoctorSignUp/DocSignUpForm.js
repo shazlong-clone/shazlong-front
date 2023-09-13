@@ -7,7 +7,7 @@ import EyeSlashIcon from '@rsuite/icons/legacy/EyeSlash';
 import { Link } from 'react-router-dom';
 import { FaLock } from 'react-icons/fa';
 import { useDispatch } from 'react-redux';
-import { signUpDoctor } from '../../features/auth/authSlice';
+import { signUpDoctor } from '../../features/auth/authAction';
 import { useTranslation } from 'react-i18next';
 
 const { Group, HelpText, Control } = Form;
@@ -46,7 +46,7 @@ function DocSignUpForm() {
       if (res.payload.status) {
         toaster.push(
           <Message type="success" closable showIcon>
-            {t('sign_up_successfuly')}
+            {t('signed_up_success')}
           </Message>,
           { duration: 2000 },
         );
