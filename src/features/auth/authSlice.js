@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { signUp, signInUser, getMe, updateMe, signUpDoctor } from './authAction';
+import { signUp, signInUser, getMe, updateMe, signUpDoctor, verificate } from './authAction';
 const initialState = {
   user: {},
   token: localStorage.getItem('token') || '',
@@ -18,11 +18,11 @@ const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(signUp.fulfilled, (state, action) => {
-      state.token = action.payload.token;
-      state.user = action.payload.data.user;
+      state.token = action?.payload?.token;
+      state.user = action?.payload?.data?.user;
     });
     builder.addCase(signInUser.fulfilled, (state, action) => {
-      state.token = action.payload.token;
+      state.token = action?.payload?.token;
       state.user = action?.payload?.data?.user;
     });
     builder.addCase(getMe.fulfilled, (state, action) => {
@@ -33,6 +33,12 @@ const authSlice = createSlice({
     });
     builder.addCase(signUpDoctor.fulfilled, (state, action) => {
       state.doctorVerificationCode = action?.payload?.code;
+    });
+    builder.addCase(verificate.fulfilled, (state, action) => {
+      if (action?.payload?.token) {
+        state.token = action?.payload?.token;
+        state.user = action.payload.data.user;
+      }
     });
   },
 });

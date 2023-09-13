@@ -1,7 +1,4 @@
-import { memo, useEffect, useState } from 'react';
-
-
-
+import { useEffect, useState } from 'react';
 
 const Parent = () => {
   const [time, setTime] = useState(Date.now());
@@ -13,9 +10,14 @@ const Parent = () => {
   return (
     <div>
       <article>{time}</article>
-      <a href='/ddd' onClick={(e)=>{
-        e.preventDefault()
-      }}>link</a>
+      <a
+        href="/ddd"
+        onClick={(e) => {
+          e.preventDefault();
+        }}
+      >
+        link
+      </a>
     </div>
   );
 };

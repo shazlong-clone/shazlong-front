@@ -24,3 +24,11 @@ export const signUpDoctor = createAsyncThunk('doctorSignUp', async (params) => {
   const res = await service.post('/api/v1/doctors/signup', params);
   return res.data;
 });
+export const verificate = createAsyncThunk('doctorVerification', async (params) => {
+  const res = await service.patch('/api/v1/doctors/verify-email-registration', params, {
+    headers: {
+      'verification-code': localStorage.getItem('doctorVerificationCode'),
+    },
+  });
+  return res.data;
+});

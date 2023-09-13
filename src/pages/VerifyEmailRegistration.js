@@ -7,11 +7,9 @@ import {
   Grid,
   InputNumber,
   InputPicker,
-  Radio,
   Row,
   TagPicker,
   Uploader,
-  RadioGroup,
   FlexboxGrid,
   toaster,
   Message,
@@ -23,9 +21,11 @@ import { Link } from 'react-router-dom';
 import { genders } from '../assets/constants';
 import { API_BASE_URL } from '../config/enviroment.config';
 import { useDispatch, useSelector } from 'react-redux';
-// import {verificate} from '../features/auth/authSlice' 
+import { verificate } from '../features/auth/authAction';
 const { Control, HelpText, Group } = Form;
 function VerifyEmailRegistration() {
+  const { t } = useTranslation();
+  const [loading, setLoading] = useState(false);
   const [countries, setCountries] = useState([]);
   const formRef = useRef();
   const { doctorVerificationCode } = useSelector((state) => state?.auth);
@@ -40,13 +40,37 @@ function VerifyEmailRegistration() {
     birthDate: null,
   });
   const dispatch = useDispatch();
-  const onSubmit = async() => {
+  const onSubmit = async () => {
     if (!formRef.current?.check()) return;
-    try{
-      // const res = await dispatch(verificate());
-
-    }catch(err){
-      toaster.push(<Message>{}</Message>)
+    try {
+      setLoading(true);
+      const res = await dispatch(verificate(formValue));
+      if (res.payload.status) {
+        toaster.push(
+          <Message type="success" showIcon={true} closable={true}>
+            {t('update_successfuly')}
+          </Message>,
+          { duration: 5000 },
+        );
+      } else {
+        toaster.push(
+          <Message type="error" showIcon={true} closable={true}>
+            {res.payload.message}
+          </Message>,
+          { duration: 5000 },
+        );
+      }
+    } catch (err) {
+      toaster.push(
+        <Message closable showIcon type="error">
+          {t('internal_server_error')}
+        </Message>,
+        {
+          duration: 5000,
+        },
+      );
+    } finally {
+      setLoading(false);
     }
   };
   const [lang, setLang] = useState([]);
@@ -62,13 +86,19 @@ function VerifyEmailRegistration() {
     ),
     value: item?.id,
   }));
+
+  const genderData = genders?.map((el) => {
+    return {
+      label: t(el?.name),
+      value: el?.id,
+    };
+  });
   const prefixData = ['Dr', 'PsyD', 'Prof', 'MBPsS', 'Mr', 'Mrs', 'Ms'].map((item) => {
     return {
       label: item,
       value: item,
     };
   });
-  const { t } = useTranslation();
   const props = {
     name: 'cv',
     disabledFileItem: true,
@@ -124,7 +154,7 @@ function VerifyEmailRegistration() {
               <Col xs={24} md={12} lg={8} className="mb-5">
                 <Group>
                   <HelpText>Experience year *</HelpText>
-                  <Control size="lg" accepter={InputNumber} placeholder="الاسم" name="experienceYears" />
+                  <Control size="lg" accepter={InputNumber} placeholder="Experience year" name="experienceYears" />
                 </Group>
               </Col>
               <Col xs={24} md={12} lg={8} className="mb-5">
@@ -140,6 +170,12 @@ function VerifyEmailRegistration() {
                     className="lg:max-w-[308px]"
                     menuClassName="md:max-w-[1px]"
                   />
+                </Group>
+              </Col>
+              <Col xs={24} md={12} lg={8} className="mb-5">
+                <Group controlId="gender">
+                  <HelpText>Gender *</HelpText>
+                  <Control className="lg:max-w-[308px]" size="lg" data={genderData} accepter={InputPicker} name="gender" block />
                 </Group>
               </Col>
               <Col xs={24} md={12} lg={8} className="mb-5">
@@ -179,23 +215,9 @@ function VerifyEmailRegistration() {
                 </Group>
               </Col>
               <Col xs={24} md={12} lg={8} className="mb-5">
-                <Group controlId="gender">
-                  <HelpText>Gender *</HelpText>
-                  <Control accepter={RadioGroup} name="gender" inline>
-                    {genders?.map((el) => {
-                      return (
-                        <Radio key={el?.id} value={el?.id}>
-                          {t(el?.name)}
-                        </Radio>
-                      );
-                    })}
-                  </Control>
-                </Group>
-              </Col>
-              <Col xs={24} md={12} lg={8} className="mb-5">
                 <HelpText> </HelpText>
                 <Uploader {...props}>
-                  <Button block appearance="ghost" size="lg">
+                  <Button className="py-20" block appearance="ghost" size="lg">
                     CV
                   </Button>
                 </Uploader>
@@ -205,7 +227,7 @@ function VerifyEmailRegistration() {
           <FlexboxGrid justify="center">
             <Col className="mb-5">
               <HelpText> </HelpText>
-              <Button size="lg" onClick={onSubmit} type="submit" appearance="primary">
+              <Button loading={loading} disabled={loading} size="lg" onClick={onSubmit} type="submit" appearance="primary">
                 Submit
               </Button>
             </Col>
