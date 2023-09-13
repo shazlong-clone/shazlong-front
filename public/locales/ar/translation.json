@@ -141,5 +141,11 @@
   "First_Step": " شكرا لاختيارك شيزلونج ، لقد أتممت الخطوة الاولي لاستكمال التسجيل اضغط علي الزر بالاسفل",
   "Journy": "رحلة الألف ميل تبدأ بخطوة واحدة",
   "Continue": "استمرار",
-  "Registration_Step": "الخطوة"
+  "Registration_Step": "الخطوة",
+  "Step": "Step",
+  "Full_Name_In_English": "الاسم كامالا بالانجليزية",
+  "Full_Name_In_Arabic": "الاسم بالغة العربية",
+  "Experience_Year": "سنوات الخبرة",
+  "Language": "اللغة",
+  "Prefix": "اللقب"
 }

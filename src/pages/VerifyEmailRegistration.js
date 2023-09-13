@@ -133,7 +133,7 @@ function VerifyEmailRegistration() {
             <img className="w-full max-w-[300px]" src={logo} alt="" />
           </Link>
           <p className="font-[500] text-[20px] mt-5">
-            {t('Registration')} <span className="text-cyan">Step 2/3</span>
+            {t('Registration')} <span className="text-cyan">{t('Step')} 2/3</span>
           </p>
           <div className="w-[50px] h-[3px] bg-cyan m-auto mt-5" />
         </div>
@@ -143,31 +143,30 @@ function VerifyEmailRegistration() {
               <Row gutter={16}>
                 <Col xs={24} md={12} lg={8} className="mb-5">
                   <Group>
-                    <HelpText>Full Name In English *</HelpText>
-                    <Control size="lg" placeholder="Full Name" name="fullEnName" />
+                    <HelpText>{t('Full_Name_In_English')} *</HelpText>
+                    <Control size="lg" name="fullEnName" />
                   </Group>
                 </Col>
                 <Col xs={24} md={12} lg={8} className="mb-5">
                   <Group>
-                    <HelpText>Full Name In Arabic *</HelpText>
-                    <Control size="lg" placeholder="الاسم" name="fullArName" />
+                    <HelpText>{t('Full_Name_In_Arabic')} *</HelpText>
+                    <Control size="lg" name="fullArName" />
                   </Group>
                 </Col>
                 <Col xs={24} md={12} lg={8} className="mb-5">
                   <Group>
-                    <HelpText>Experience year *</HelpText>
-                    <Control size="lg" accepter={InputNumber} placeholder="Experience year" name="experienceYears" />
+                    <HelpText>{t('Experience_Year')} *</HelpText>
+                    <Control size="lg" accepter={InputNumber} name="experienceYears" />
                   </Group>
                 </Col>
                 <Col xs={24} md={12} lg={8} className="mb-5">
                   <Group>
-                    <HelpText>Country *</HelpText>
+                    <HelpText>{t('Country')} *</HelpText>
                     <Control
                       size="lg"
                       data={countriesData}
                       block
                       accepter={InputPicker}
-                      placeholder="Country"
                       name="country"
                       className="lg:max-w-[308px]"
                       menuClassName="md:max-w-[1px]"
@@ -176,7 +175,7 @@ function VerifyEmailRegistration() {
                 </Col>
                 <Col xs={24} md={12} lg={8} className="mb-5">
                   <Group controlId="gender">
-                    <HelpText>Gender *</HelpText>
+                    <HelpText>{t('Gender')} *</HelpText>
                     <Control
                       className="lg:max-w-[308px]"
                       size="lg"
@@ -189,7 +188,7 @@ function VerifyEmailRegistration() {
                 </Col>
                 <Col xs={24} md={12} lg={8} className="mb-5">
                   <Group>
-                    <HelpText>Language *</HelpText>
+                    <HelpText>{t('Language')} *</HelpText>
                     <Control
                       block
                       size="lg"
@@ -197,19 +196,17 @@ function VerifyEmailRegistration() {
                       className="lg:max-w-[308px]"
                       menuClassName="max-w-[1]"
                       accepter={TagPicker}
-                      placeholder="language"
                       name="languages"
                     />
                   </Group>
                 </Col>
                 <Col xs={24} md={12} lg={8} className="mb-5">
                   <Group>
-                    <HelpText>Prefix *</HelpText>
+                    <HelpText>{t('Prefix')} *</HelpText>
                     <Control
                       size="lg"
                       data={prefixData}
                       accepter={InputPicker}
-                      placeholder="prefix"
                       name="prefix"
                       block
                       className="lg:max-w-[308px]"
@@ -219,15 +216,15 @@ function VerifyEmailRegistration() {
                 </Col>
                 <Col xs={24} md={12} lg={8} className="mb-5">
                   <Group>
-                    <HelpText>Birth Date *</HelpText>
-                    <Control size="lg" className="w-full" accepter={DatePicker} placeholder="Birth Date" name="birthDate" />
+                    <HelpText>{t('Birth_Date')} *</HelpText>
+                    <Control size="lg" className="w-full" accepter={DatePicker} name="birthDate" />
                   </Group>
                 </Col>
                 <Col xs={24} md={12} lg={8} className="mb-5">
                   <HelpText> </HelpText>
                   <Uploader {...props}>
-                    <Button className="py-20" block appearance="ghost" size="lg">
-                      CV
+                    <Button block appearance="ghost" size="lg">
+                      {t('CV')}
                     </Button>
                   </Uploader>
                 </Col>
@@ -237,7 +234,7 @@ function VerifyEmailRegistration() {
               <Col>
                 <HelpText> </HelpText>
                 <Button loading={loading} disabled={loading} size="lg" onClick={onSubmit} type="submit" appearance="primary">
-                  Submit
+                  {t('Update')}
                 </Button>
               </Col>
             </FlexboxGrid>

@@ -137,5 +137,11 @@
   "First_Step": "Thanks for choosing Shazlong you have Done first Sept to Continue Press Button Below",
   "Continue": "Continue",
   "Journy": "A journey of a thousand miles begins with a single step",
-  "Registration_Step": "Registration Step"
+  "Registration_Step": "Registration Step",
+  "Step": "Step",
+  "Full_Name_In_English": "Full Name In English",
+  "Full_Name_In_Arabic": "الاسم بالغة العربية",
+  "Experience_Year": "Experience Year",
+  "Language": "Language",
+  "Prefix": "Prefix"
 }
