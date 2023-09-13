@@ -7,6 +7,7 @@ import { Button } from 'rsuite';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import i18next from 'i18next';
 export const SignUpCompContext = createContext();
 function SignUpComp() {
   const { t } = useTranslation();
@@ -17,8 +18,11 @@ function SignUpComp() {
         {!doctorVerificationCode ? (
           <section data-aos="fade-up" data-aos-duration="1000" className="mb-5 mx-auto lg:max-w-sm py-10 container">
             <SignLogo />
-            <strong className="mt-8 block text-cyan text-center">Registration Step 1/3</strong>
-            <strong className="mt-4 block text-center">All fields marked with * are required</strong>
+            <strong className="mt-8 block text-cyan text-center">
+              {t('Registration_Step')}
+              {i18next.resolvedLanguage === 'ar' ? ` ${(3).toLocaleString('ar-EG')}/${(1).toLocaleString('ar-EG')}` : '1/3'}
+            </strong>
+            <strong className="mt-4 block text-center">{t('All_fields_marked_with_*_are_required')}</strong>
             <DocSignUpForm />
           </section>
         ) : (

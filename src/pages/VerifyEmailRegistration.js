@@ -13,6 +13,7 @@ import {
   FlexboxGrid,
   toaster,
   Message,
+  Panel,
 } from 'rsuite';
 import logo from '../assets/images/shezlong-logo.svg';
 import { useTranslation } from 'react-i18next';
@@ -132,107 +133,116 @@ function VerifyEmailRegistration() {
             <img className="w-full max-w-[300px]" src={logo} alt="" />
           </Link>
           <p className="font-[500] text-[20px] mt-5">
-            Registration <span className="text-cyan">Step 2/3</span>
+            {t('Registration')} <span className="text-cyan">Step 2/3</span>
           </p>
           <div className="w-[50px] h-[3px] bg-cyan m-auto mt-5" />
         </div>
-        <Form ref={formRef} formValue={formValue} onChange={setFormValue} fluid>
-          <Grid>
-            <Row gutter={16}>
-              <Col xs={24} md={12} lg={8} className="mb-5">
-                <Group>
-                  <HelpText>Full Name In English *</HelpText>
-                  <Control size="lg" placeholder="Full Name" name="fullEnName" />
-                </Group>
-              </Col>
-              <Col xs={24} md={12} lg={8} className="mb-5">
-                <Group>
-                  <HelpText>Full Name In Arabic *</HelpText>
-                  <Control size="lg" placeholder="الاسم" name="fullArName" />
-                </Group>
-              </Col>
-              <Col xs={24} md={12} lg={8} className="mb-5">
-                <Group>
-                  <HelpText>Experience year *</HelpText>
-                  <Control size="lg" accepter={InputNumber} placeholder="Experience year" name="experienceYears" />
-                </Group>
-              </Col>
-              <Col xs={24} md={12} lg={8} className="mb-5">
-                <Group>
-                  <HelpText>Country *</HelpText>
-                  <Control
-                    size="lg"
-                    data={countriesData}
-                    block
-                    accepter={InputPicker}
-                    placeholder="Country"
-                    name="country"
-                    className="lg:max-w-[308px]"
-                    menuClassName="md:max-w-[1px]"
-                  />
-                </Group>
-              </Col>
-              <Col xs={24} md={12} lg={8} className="mb-5">
-                <Group controlId="gender">
-                  <HelpText>Gender *</HelpText>
-                  <Control className="lg:max-w-[308px]" size="lg" data={genderData} accepter={InputPicker} name="gender" block />
-                </Group>
-              </Col>
-              <Col xs={24} md={12} lg={8} className="mb-5">
-                <Group>
-                  <HelpText>Language *</HelpText>
-                  <Control
-                    block
-                    size="lg"
-                    data={data}
-                    className="lg:max-w-[308px]"
-                    menuClassName="max-w-[1]"
-                    accepter={TagPicker}
-                    placeholder="language"
-                    name="languages"
-                  />
-                </Group>
-              </Col>
-              <Col xs={24} md={12} lg={8} className="mb-5">
-                <Group>
-                  <HelpText>Prefix *</HelpText>
-                  <Control
-                    size="lg"
-                    data={prefixData}
-                    accepter={InputPicker}
-                    placeholder="prefix"
-                    name="prefix"
-                    block
-                    className="lg:max-w-[308px]"
-                    menuStyle={{ maxHeight: '200px' }}
-                  />
-                </Group>
-              </Col>
-              <Col xs={24} md={12} lg={8} className="mb-5">
-                <Group>
-                  <HelpText>Birth Date *</HelpText>
-                  <Control size="lg" className="w-full" accepter={DatePicker} placeholder="Birth Date" name="birthDate" />
-                </Group>
-              </Col>
-              <Col xs={24} md={12} lg={8} className="mb-5">
+        <Panel bordered className="bg-white py-5">
+          <Form ref={formRef} formValue={formValue} onChange={setFormValue} fluid>
+            <Grid>
+              <Row gutter={16}>
+                <Col xs={24} md={12} lg={8} className="mb-5">
+                  <Group>
+                    <HelpText>Full Name In English *</HelpText>
+                    <Control size="lg" placeholder="Full Name" name="fullEnName" />
+                  </Group>
+                </Col>
+                <Col xs={24} md={12} lg={8} className="mb-5">
+                  <Group>
+                    <HelpText>Full Name In Arabic *</HelpText>
+                    <Control size="lg" placeholder="الاسم" name="fullArName" />
+                  </Group>
+                </Col>
+                <Col xs={24} md={12} lg={8} className="mb-5">
+                  <Group>
+                    <HelpText>Experience year *</HelpText>
+                    <Control size="lg" accepter={InputNumber} placeholder="Experience year" name="experienceYears" />
+                  </Group>
+                </Col>
+                <Col xs={24} md={12} lg={8} className="mb-5">
+                  <Group>
+                    <HelpText>Country *</HelpText>
+                    <Control
+                      size="lg"
+                      data={countriesData}
+                      block
+                      accepter={InputPicker}
+                      placeholder="Country"
+                      name="country"
+                      className="lg:max-w-[308px]"
+                      menuClassName="md:max-w-[1px]"
+                    />
+                  </Group>
+                </Col>
+                <Col xs={24} md={12} lg={8} className="mb-5">
+                  <Group controlId="gender">
+                    <HelpText>Gender *</HelpText>
+                    <Control
+                      className="lg:max-w-[308px]"
+                      size="lg"
+                      data={genderData}
+                      accepter={InputPicker}
+                      name="gender"
+                      block
+                    />
+                  </Group>
+                </Col>
+                <Col xs={24} md={12} lg={8} className="mb-5">
+                  <Group>
+                    <HelpText>Language *</HelpText>
+                    <Control
+                      block
+                      size="lg"
+                      data={data}
+                      className="lg:max-w-[308px]"
+                      menuClassName="max-w-[1]"
+                      accepter={TagPicker}
+                      placeholder="language"
+                      name="languages"
+                    />
+                  </Group>
+                </Col>
+                <Col xs={24} md={12} lg={8} className="mb-5">
+                  <Group>
+                    <HelpText>Prefix *</HelpText>
+                    <Control
+                      size="lg"
+                      data={prefixData}
+                      accepter={InputPicker}
+                      placeholder="prefix"
+                      name="prefix"
+                      block
+                      className="lg:max-w-[308px]"
+                      menuStyle={{ maxHeight: '200px' }}
+                    />
+                  </Group>
+                </Col>
+                <Col xs={24} md={12} lg={8} className="mb-5">
+                  <Group>
+                    <HelpText>Birth Date *</HelpText>
+                    <Control size="lg" className="w-full" accepter={DatePicker} placeholder="Birth Date" name="birthDate" />
+                  </Group>
+                </Col>
+                <Col xs={24} md={12} lg={8} className="mb-5">
+                  <HelpText> </HelpText>
+                  <Uploader {...props}>
+                    <Button className="py-20" block appearance="ghost" size="lg">
+                      CV
+                    </Button>
+                  </Uploader>
+                </Col>
+              </Row>
+            </Grid>
+            <FlexboxGrid justify="center">
+              <Col>
                 <HelpText> </HelpText>
-                <Uploader {...props}>
-                  <Button className="py-20" block appearance="ghost" size="lg">
-                    CV
-                  </Button>
-                </Uploader>
+                <Button loading={loading} disabled={loading} size="lg" onClick={onSubmit} type="submit" appearance="primary">
+                  Submit
+                </Button>
               </Col>
-            </Row>
-          </Grid>
-          <FlexboxGrid justify="center">
-            <Col className="mb-5">
-              <HelpText> </HelpText>
-              <Button loading={loading} disabled={loading} size="lg" onClick={onSubmit} type="submit" appearance="primary">
-                Submit
-              </Button>
-            </Col>
-          </FlexboxGrid>
-        </Form>
+            </FlexboxGrid>
+          </Form>
+        </Panel>
       </div>
     </main>
   );

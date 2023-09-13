@@ -2,8 +2,10 @@ import { createSlice } from '@reduxjs/toolkit';
 import { signUp, signInUser, getMe, updateMe, signUpDoctor, verificate } from './authAction';
 const initialState = {
   user: {},
+  doctor: {},
   token: localStorage.getItem('token') || '',
   doctorVerificationCode: localStorage.getItem('doctorVerificationCode') || '',
+  doctorToken: '',
 };
 
 const authSlice = createSlice({
@@ -18,8 +20,10 @@ const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(signUp.fulfilled, (state, action) => {
-      state.token = action?.payload?.token;
-      state.user = action?.payload?.data?.user;
+      if (action?.payload?.token) {
+        state.token = action?.payload?.token;
+        state.user = action?.payload?.data?.user;
+      }
     });
     builder.addCase(signInUser.fulfilled, (state, action) => {
       state.token = action?.payload?.token;
@@ -36,8 +40,8 @@ const authSlice = createSlice({
     });
     builder.addCase(verificate.fulfilled, (state, action) => {
       if (action?.payload?.token) {
-        state.token = action?.payload?.token;
-        state.user = action.payload.data.user;
+        state.doctorToken = action?.payload?.token;
+        state.doctor = action.payload.data.user;
       }
     });
   },

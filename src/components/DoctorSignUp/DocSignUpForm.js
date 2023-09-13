@@ -79,22 +79,22 @@ function DocSignUpForm() {
     <>
       <Form ref={formRef} formValue={formValue} onChange={setFormValues} model={model} fluid className="mt-5 sign-form">
         <Group controlId="name">
-          <Control size="lg" placeholder="User Name *" name="name" block="true" />
-          <HelpText>You can use letters a-z, numbers and periods (- , _ , .)</HelpText>
+          <Control size="lg" placeholder={t('Name') + '*'} name="name" block="true" />
+          <HelpText>{t('Name_Helper_Text')}</HelpText>
         </Group>
         <Group controlId="email">
-          <Control size="lg" block="true" placeholder="Email *" name="email" />
+          <Control size="lg" block="true" placeholder={t('Email') + '*'} name="email" />
         </Group>
         <Group controlId="password">
           <InputGroup>
-            <Control size="lg" name="password" placeholder="Password *" type={visible ? 'text' : 'password'} />
+            <Control size="lg" name="password" placeholder={t('Password') + '*'} type={visible ? 'text' : 'password'} />
             <InputGroup.Button onClick={() => setVisible(!visible)}>{visible ? <EyeIcon /> : <EyeSlashIcon />}</InputGroup.Button>
           </InputGroup>
         </Group>
         <Group controlId="passwordConfirm">
           <InputGroup accepter={InputGroup}>
             <Control
-              placeholder="Password Confirm *"
+              placeholder={t('Password_Confirm') + '*'}
               size="lg"
               name="passwordConfirm"
               type={visibleConfirm ? 'text' : 'password'}
