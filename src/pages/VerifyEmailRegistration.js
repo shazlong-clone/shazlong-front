@@ -18,7 +18,7 @@ import {
 import logo from '../assets/images/shezlong-logo.svg';
 import { useTranslation } from 'react-i18next';
 import clsx from 'clsx';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { genders } from '../assets/constants';
 import { API_BASE_URL } from '../config/enviroment.config';
 import { useDispatch, useSelector } from 'react-redux';
@@ -40,6 +40,7 @@ function VerifyEmailRegistration() {
     prefix: '',
     birthDate: null,
   });
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const onSubmit = async () => {
     if (!formRef.current?.check()) return;
@@ -53,6 +54,9 @@ function VerifyEmailRegistration() {
           </Message>,
           { duration: 5000 },
         );
+        localStorage.setItem('doctorToken', res.payload.token);
+        localStorage.setItem('doctorVerificationCode', '');
+        navigate('/doctor');
       } else {
         toaster.push(
           <Message type="error" showIcon={true} closable={true}>
@@ -133,7 +137,11 @@ function VerifyEmailRegistration() {
             <img className="w-full max-w-[300px]" src={logo} alt="" />
           </Link>
           <p className="font-[500] text-[20px] mt-5">
-            {t('Registration')} <span className="text-cyan">{t('Step')} 2/3</span>
+            {t('Registration')}
+            <span className="text-cyan">
+              {t('Step')}
+              {i18n.resolvedLanguage === 'ar' ? ` ${(2).toLocaleString('ar-EG')} / ${(3).toLocaleString('ar-EG')}` : '2/3'}
+            </span>
           </p>
           <div className="w-[50px] h-[3px] bg-cyan m-auto mt-5" />
         </div>

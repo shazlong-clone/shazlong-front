@@ -5,7 +5,7 @@ const initialState = {
   doctor: {},
   token: localStorage.getItem('token') || '',
   doctorVerificationCode: localStorage.getItem('doctorVerificationCode') || '',
-  doctorToken: '',
+  doctorToken: localStorage.getItem('doctorToken') || '',
 };
 
 const authSlice = createSlice({
@@ -42,6 +42,7 @@ const authSlice = createSlice({
       if (action?.payload?.token) {
         state.doctorToken = action?.payload?.token;
         state.doctor = action.payload.data.user;
+        state.doctorVerificationCode = '';
       }
     });
   },

@@ -26,6 +26,7 @@ const JoinUs = lazy(() => import('./pages/JoinUs'));
 const DoctorSignUp = lazy(() => import('./pages/DoctorSignUp'));
 const VerifyEmailRegistration = lazy(() => import('./pages/VerifyEmailRegistration'));
 const UserInfo = lazy(() => import('./pages/UserInfo'));
+const Doctor = lazy(() => import('./pages/Doctor'));
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
           <Route path="/sign-in" element={<SignIn />} />
           <Route exact path="/doctor-signup" element={<DoctorSignUp />} />
           <Route exact path="/therapist-verify-email-registration" element={<VerifyEmailRegistration />} />
+          <Route exact path="/doctor" element={<Doctor />} />
           <Route path="/" element={<LayOut />}>
             <Route index element={<Home />} />
             <Route exact path="therapists" element={<Therapists />} />
