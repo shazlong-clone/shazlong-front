@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import service from '../../config/enviroment.config';
+import service from '../../config/userService';
 
 const initialState = {
   card: '',

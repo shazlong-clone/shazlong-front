@@ -15,6 +15,7 @@ import TextImageIcon from '@rsuite/icons/TextImage';
 import { GiClick } from 'react-icons/gi';
 import { useTranslation } from 'react-i18next';
 import clsx from 'clsx';
+import { useSelector } from 'react-redux';
 
 function JoinUs() {
   const { t, i18n } = useTranslation();
@@ -52,6 +53,7 @@ function JoinUs() {
     },
   ];
 
+  const { doctor } = useSelector((state) => state?.auth);
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, []);
@@ -76,9 +78,15 @@ function JoinUs() {
           <p className="text-gray/70 lg:leading-9 text-[16px] mb-12 lg:max-w-xl lg:text-xl lg:mb-15">
             {t('Join_Shzlong_now_body')}
           </p>
-          <Link to="/doctor-signup">
-            <Button className="rounded-full font-bold">{t('Join_As_A_Therapist')}</Button>
-          </Link>
+          {doctor?._id ? (
+            <Link to="/doctor">
+              <Button className="rounded-full font-bold">{t('Join_As_A_Therapist')}</Button>
+            </Link>
+          ) : (
+            <Link to="/doctor-signup">
+              <Button className="rounded-full font-bold">{t('Join_As_A_Therapist')}</Button>
+            </Link>
+          )}
         </section>
       </div>
       <div className="bg-cyan/5">

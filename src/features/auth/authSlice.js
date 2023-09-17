@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { signUp, signInUser, getMe, updateMe, signUpDoctor, verificate } from './authAction';
+import { signUp, signInUser, getMe, updateMe, signUpDoctor, verificate, getMeAsDoctor } from './authAction';
 const initialState = {
   user: {},
   doctor: {},
@@ -39,6 +39,13 @@ const authSlice = createSlice({
       state.doctorVerificationCode = action?.payload?.code;
     });
     builder.addCase(verificate.fulfilled, (state, action) => {
+      if (action?.payload?.token) {
+        state.doctorToken = action?.payload?.token;
+        state.doctor = action.payload.data.user;
+        state.doctorVerificationCode = '';
+      }
+    });
+    builder.addCase(getMeAsDoctor.fulfilled, (state, action) => {
       if (action?.payload?.token) {
         state.doctorToken = action?.payload?.token;
         state.doctor = action.payload.data.user;

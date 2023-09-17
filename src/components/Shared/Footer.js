@@ -7,7 +7,6 @@ import SVLogoFill from '../../assets/images/SVLogoFill.svg';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-import { DOCTOR } from '../../assets/constants';
 
 function Footer() {
   const { t, i18n } = useTranslation();
@@ -80,20 +79,14 @@ function Footer() {
                     ''
                   )}
 
-                  {user?.role !== DOCTOR ? (
-                    <>
-                      <Link to="/join-us" className="hover:no-underline active:no-underline grow">
-                        <button
-                          className="font-bold border rounded-lg border-white text-white  bg-opacity-0
+                  <Link to="/doctor" className="hover:no-underline active:no-underline grow">
+                    <button
+                      className="font-bold border rounded-lg border-white text-white  bg-opacity-0
                                   bg-gray py-3  px-14  md:block md:w-full w-full"
-                        >
-                          {t('Join_As_A_Therapist')}
-                        </button>
-                      </Link>
-                    </>
-                  ) : (
-                    ''
-                  )}
+                    >
+                      {t('Join_As_A_Therapist')}
+                    </button>
+                  </Link>
                 </article>
                 <div className="mt-5">
                   {t('Have_Account')}

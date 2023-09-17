@@ -1,5 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import service from '../../config/enviroment.config';
+import service from '../../config/userService';
+import doctorService from '../../config/doctorService';
 
 export const signUp = createAsyncThunk('signUp', async (params) => {
   const res = await service.post('/api/v1/users/signup', params);
@@ -30,5 +31,10 @@ export const verificate = createAsyncThunk('doctorVerification', async (params) 
       'verification-code': localStorage.getItem('doctorVerificationCode'),
     },
   });
+  return res.data;
+});
+
+export const getMeAsDoctor = createAsyncThunk('getMeAsDoctor', async () => {
+  const res = await doctorService.get('/api/v1/doctors/getMe');
   return res.data;
 });

@@ -12,7 +12,7 @@ import { GoSignOut } from 'react-icons/go';
 import personIcon from '../../assets/images/person-icon-blue-7563.png';
 import useMediaQuery from '../../utils/useMediaQuery';
 import { useDispatch, useSelector } from 'react-redux';
-import { getMe } from '../../features/auth/authAction';
+import { getMe, getMeAsDoctor } from '../../features/auth/authAction';
 import { signOut } from '../../features/auth/authSlice';
 
 import { AiOutlineCaretDown } from 'react-icons/ai';
@@ -84,6 +84,7 @@ function NavBar() {
 
   useEffect(() => {
     dispatch(getMe());
+    dispatch(getMeAsDoctor());
   }, []);
 
   return (
