@@ -80,7 +80,7 @@ function CustomerService({ close }) {
                   <strong className="text-[14px]">Send Us a message</strong>
                   <p className="text-gray/60 text-[14px]">We typically reply in under a minute</p>
                 </div>
-                <div className="text-cyan flex items-center text-xl cursor-pointer">
+                <div className="text-cyan flex items-center text-xl cursor-pointer rtl:rotate-180">
                   <IoMdSend />
                 </div>
               </aside>
@@ -114,7 +114,7 @@ function CustomerService({ close }) {
         >
           <section className="bg-cyan p-5 text-white lg:rounded-t-md">
             <article className="flex items-center justify-between text-xl ">
-              <span className="cursor-pointer" onClick={() => setActiveTabe(1)}>
+              <span className="cursor-pointer rtl:rotate-180" onClick={() => setActiveTabe(1)}>
                 <MdArrowBackIosNew />
               </span>
               <h4>Customer Suport</h4>
