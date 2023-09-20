@@ -7,6 +7,7 @@ const Parent = () => {
       setTime(Date.now());
     }, 1000);
   }, []);
+  
   return (
     <div>
       <article>{time}</article>
