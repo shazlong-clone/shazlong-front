@@ -1,15 +1,16 @@
 import React from 'react';
-import { Divider, Drawer, IconButton, Nav, Sidenav } from 'rsuite';
+import { Avatar, Badge, Divider, Drawer, IconButton, Nav, Sidenav } from 'rsuite';
 import MenuIcon from '@rsuite/icons/Menu';
 import useMediaQuery from '../../utils/useMediaQuery';
 import clsx from 'clsx';
 import { Link, NavLink, Outlet } from 'react-router-dom';
-import WhisperComp from './WhisperComp';
 import SettingWhisper from './SettingWhisper';
 import logo from '../../assets/images/shezlong-logo.svg';
+import logoAr from '../../assets/images/shezlong-logo-ar.svg';
 import { appNavs } from '../../config/NavConfig';
 import { setActiveSideBar } from '../../features/theme/themeSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import NotificationWhisper from './NotificationWhisper';
 
 const NavItem = (props) => {
   const { title, eventKey, ...rest } = props;
@@ -34,7 +35,8 @@ const NavList = () => {
     <Nav activeKey={activeKey} onSelect={setActiveKey} className="overflow-hidden">
       <Sidenav.Header className="text-center">
         <Link to="/doctor">
-          <img className="w-[180px] my-5" src={logo} />
+          <img className="w-[170px] my-5 px-1 rtl:hidden" src={logo} />
+          <img className="w-[170px] my-5 px-1 ltr:hidden" src={logoAr} />
         </Link>
         <Divider className="my-0" />
       </Sidenav.Header>
@@ -76,7 +78,7 @@ function DoctorLayout() {
   return (
     <>
       <div className="flex min-h-screen">
-        <main className="hidden lg:block fixed" style={{ width: 250 }}>
+        <main className="hidden lg:block fixed" style={expanded ? { width: 250 } : {}}>
           <Sidenav expanded={expanded} defaultOpenKeys={['3', '4']} className="min-h-screen">
             <Sidenav.Body>
               <NavList />
@@ -86,31 +88,34 @@ function DoctorLayout() {
         </main>
         <main className={clsx('bg-gray/10 grow transition-[0.3s]', expanded ? 'lg:ps-[270px]' : 'lg:ps-[76px]')}>
           <div className="lg:pb-5">
-            <article className="max-lg:bg-white max-lg:shadow-xl">
-              <section className="flex px-5 items-center justify-between pt-2 lg:pt-5 lg:px-10">
+            <article className="max-lg:bg-white max-lg:shadow-sm max-lg:mb-5 max-lg:fixed w-full">
+              <section className="flex px-5 items-center justify-between py-2 lg:pt-5 lg:px-10">
                 <article>
                   <IconButton className="lg:hidden bg-transparent" onClick={() => handleOpen('left')} icon={<MenuIcon />} />
                   <h4 className="hidden lg:block">{activeSideBar}</h4>
                 </article>
                 <article>
                   <div className="flex items-center gap-5">
+                    <NotificationWhisper />
                     <SettingWhisper placement="bottomEnd" />
-                    <WhisperComp placement="bottomEnd" />
+                    <Avatar
+                      className="cursor-pointer"
+                      circle
+                      src="https://avatars.githubusercontent.com/u/8225666"
+                      alt="@SevenOutman"
+                    />
                   </div>
                 </article>
               </section>
             </article>
-            <div className="px-5 lg:px-10">
+            <div className="px-5 lg:px-10 max-lg:py-[70px]">
               <Outlet />
             </div>
           </div>
           {lg ? (
             ''
           ) : (
-            <Drawer size="xs" placement={placement} open={open} onClose={() => setOpen(false)}>
-              <Drawer.Header>
-                <Drawer.Title>Shazlong Doctors</Drawer.Title>
-              </Drawer.Header>
+            <Drawer className="doctor-drawer" size="xs" placement={placement} open={open} onClose={() => setOpen(false)}>
               <Drawer.Body className="px-0 pt-0 bg-[#f7f7fa]">
                 <Sidenav defaultOpenKeys={['3', '4']}>
                   <Sidenav.Body>

@@ -1,33 +1,47 @@
-import React from 'react';
-import { Divider, Dropdown, IconButton, Popover, Whisper } from 'rsuite';
+import React, { useRef } from 'react';
+import { IconButton, Popover, Radio, RadioGroup, Whisper } from 'rsuite';
 import { AiOutlineSetting } from 'react-icons/ai';
+import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
+import { lngs } from '../../assets/constants/index';
 
-const DefaultPopover = React.forwardRef(({ ...props }, ref) => {
+const WhisperComp = ({ placement }) => {
+  const { locale } = useSelector((state) => state?.theme);
+  const { i18n } = useTranslation();
+  const triggerRef = useRef();
+  const close = () => triggerRef.current.close();
   return (
-    <Popover style={{ padding: '0px' }} ref={ref} {...props} full>
-      <Dropdown.Menu>
-        <Dropdown.Item>New File</Dropdown.Item>
-        <Dropdown.Item>New File</Dropdown.Item>
-        <Dropdown.Item>Download As...</Dropdown.Item>
-        <Dropdown.Item>Export PDF</Dropdown.Item>
-        <Dropdown.Item>Export HTML</Dropdown.Item>
-        <Dropdown.Item divider />
-        <Dropdown.Item>Settings</Dropdown.Item>
-        <Dropdown.Item>About</Dropdown.Item>
-      </Dropdown.Menu>
-    </Popover>
+    <Whisper
+      trigger="click"
+      placement={placement}
+      ref={triggerRef}
+      controlId={`control-id-${placement}`}
+      speaker={
+        <Popover title="language">
+          <RadioGroup defaultValue={locale || 'en'} name="radioList">
+            {Object.keys(lngs)?.map((key) => {
+              return (
+                <Radio
+                  key={key}
+                  value={key}
+                  onChange={(lang) => {
+                    close();
+                    setTimeout(() => {
+                      i18n.changeLanguage(lang);
+                    }, 300);
+                  }}
+                >
+                  {lngs[key]?.nativeName}
+                </Radio>
+              );
+            })}
+          </RadioGroup>
+        </Popover>
+      }
+    >
+      <IconButton className="bg-transparent" icon={<AiOutlineSetting className="text-xl" />} />
+    </Whisper>
   );
-});
-
-const WhisperComp = ({ placement }) => (
-  <Whisper
-    trigger="click"
-    placement={placement}
-    controlId={`control-id-${placement}`}
-    speaker={<DefaultPopover content={`I am positioned to the ${placement}`} />}
-  >
-    <IconButton className="bg-transparent" icon={<AiOutlineSetting className="text-xl" />} />
-  </Whisper>
-);
+};
 
 export default WhisperComp;

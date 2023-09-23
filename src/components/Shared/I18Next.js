@@ -31,7 +31,7 @@ function App() {
               type="submit"
               onClick={() => i18n.changeLanguage(lng)}
             >
-              {lngs[lng].nativeName}
+              {lngs[lng]?.nativeName}
             </button>
           ))}
         </div>

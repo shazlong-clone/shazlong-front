@@ -262,3 +262,13 @@ a:active {
 .doctor-popover .rs-popover {
   padding: 0px;
 }
+
+.doctor-drawer .rs-drawer-body-close {
+  z-index: 10;
+  right: 15px;
+  left: auto;
+}
+
+.rs-sidenav-toggle-button svg {
+  @apply rtl:rotate-180;
+}

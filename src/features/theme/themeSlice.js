@@ -18,7 +18,6 @@ export const themeSlice = createSlice({
       state.locale = action.payload;
     },
     setActiveSideBar: (state, action) => {
-      console.log(action);
       state.activeSideBar = action.payload;
     },
   },
