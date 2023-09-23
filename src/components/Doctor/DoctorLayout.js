@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Avatar, Divider, Drawer, IconButton, Nav, Sidenav } from 'rsuite';
 import MenuIcon from '@rsuite/icons/Menu';
 import useMediaQuery from '../../utils/useMediaQuery';
@@ -34,10 +34,8 @@ const NavList = () => {
   return (
     <Nav activeKey={activeKey} onSelect={setActiveKey} className="overflow-hidden">
       <Sidenav.Header className="text-center">
-        <Link to="/doctor">
-          <img className="w-[170px] my-5 px-1 rtl:hidden" src={logo} />
-          <img className="w-[170px] my-5 px-1 ltr:hidden" src={logoAr} />
-        </Link>
+        <img className="w-[170px] my-5 px-1 rtl:hidden" src={logo} />
+        <img className="w-[170px] my-5 px-1 ltr:hidden" src={logoAr} />
         <Divider className="my-0" />
       </Sidenav.Header>
       {appNavs.map((item) => {

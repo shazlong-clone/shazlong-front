@@ -9,7 +9,6 @@ import { useNavigate } from 'react-router-dom';
 
 const WhisperComp = ({ placement }) => {
   const { locale } = useSelector((state) => state?.theme);
-  const { i18n } = useTranslation();
   const triggerRef = useRef();
   const close = () => triggerRef.current.close();
   const dispatch = useDispatch();
@@ -19,6 +18,8 @@ const WhisperComp = ({ placement }) => {
     dispatch(doctorSignOut());
     navigate('/');
   };
+  const { doctor } = useSelector((state) => state?.auth);
+  const { i18n } = useTranslation();
   return (
     <Whisper
       trigger="click"
@@ -26,7 +27,8 @@ const WhisperComp = ({ placement }) => {
       ref={triggerRef}
       controlId={`control-id-${placement}`}
       speaker={
-        <Popover title="language">
+        <Popover title={i18n?.resolvedLanguage === 'ar' ? doctor?.fullArName : doctor?.fullEnName}>
+          <Divider className="my-0" />
           <RadioGroup defaultValue={locale || 'en'} name="radioList">
             {Object.keys(lngs)?.map((key) => {
               return (

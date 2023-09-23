@@ -7,9 +7,9 @@ function Slots() {
     <>
       <Breadcrumb>
         <Breadcrumb.Item as={Link} to="/doctor">
-          Home
+          Doctor
         </Breadcrumb.Item>
-        <Breadcrumb.Item active as={Link} to="/doctor">
+        <Breadcrumb.Item active as={Link} to="slots">
           Slots
         </Breadcrumb.Item>
       </Breadcrumb>

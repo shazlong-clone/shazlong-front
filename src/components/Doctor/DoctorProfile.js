@@ -6,7 +6,10 @@ function DoctorProfile() {
   return (
     <>
       <Breadcrumb>
-        <Breadcrumb.Item active>Home</Breadcrumb.Item>
+        <Breadcrumb.Item as={Link} to="/doctor">
+          Doctor
+        </Breadcrumb.Item>
+        <Breadcrumb.Item active>Profile</Breadcrumb.Item>
       </Breadcrumb>
       <Panel className="bg-white">
         <Placeholder rows={50} />
