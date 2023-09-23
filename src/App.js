@@ -6,6 +6,9 @@ import Loading from './components/Shared/BackDropLoading';
 import LangWrapper from './components/Shared/LangWrapper';
 import ProtectedRoute from './components/Shared/ProtectedRoute';
 import ProtectDoctor from './components/Shared/ProtectDoctor';
+import Slots from './components/doctor/Slots';
+import Bookings from './components/doctor/Bookings';
+import DoctorProfile from './components/doctor/DoctorProfile';
 
 const Home = lazy(() => import('./pages/Home'));
 const ThearpistProfile = lazy(() => import('./pages/ThearpistProfile'));
@@ -27,7 +30,6 @@ const JoinUs = lazy(() => import('./pages/JoinUs'));
 const DoctorSignUp = lazy(() => import('./pages/DoctorSignUp'));
 const VerifyEmailRegistration = lazy(() => import('./pages/VerifyEmailRegistration'));
 const UserInfo = lazy(() => import('./pages/UserInfo'));
-const Doctor = lazy(() => import('./pages/Doctor'));
 
 function App() {
   return (
@@ -39,7 +41,9 @@ function App() {
           <Route exact path="/doctor-signup" element={<DoctorSignUp />} />
           <Route exact path="/therapist-verify-email-registration" element={<VerifyEmailRegistration />} />
           <Route exact path="/doctor" element={<ProtectDoctor />}>
-            <Route exact index element={<Doctor />} />
+            <Route exact index element={<DoctorProfile />} />
+            <Route exact path="slots" element={<Slots />} />
+            <Route exact path="bookings" element={<Bookings />} />
           </Route>
           <Route path="/" element={<LayOut />}>
             <Route index element={<Home />} />

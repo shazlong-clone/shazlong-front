@@ -258,3 +258,7 @@ a:active {
 .rs-uploader-trigger input[type='file'] {
   @apply w-full;
 }
+
+.doctor-popover .rs-popover {
+  padding: 0px;
+}

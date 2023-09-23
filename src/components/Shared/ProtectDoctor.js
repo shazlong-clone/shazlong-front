@@ -1,10 +1,11 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Navigate, Outlet } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
+import DoctorLayout from '../doctor/DoctorLayout';
 
 function ProtectDoctor() {
   const { doctor } = useSelector((state) => state?.auth);
-  return doctor?._id ? <Outlet /> : <Navigate to="/join-us" />;
+  return doctor?._id ? <DoctorLayout /> : <Navigate to="/join-us" />;
 }
 
 export default ProtectDoctor;

@@ -4,6 +4,8 @@ export const themeSlice = createSlice({
   name: 'theme',
   initialState: {
     isChatOpen: false,
+    locale: localStorage.getItem('i18nextLng'),
+    activeSideBar: '',
   },
   reducers: {
     openChat: (state) => {
@@ -14,11 +16,15 @@ export const themeSlice = createSlice({
     },
     changeLang: (state, action) => {
       state.locale = action.payload;
-    }
+    },
+    setActiveSideBar: (state, action) => {
+      console.log(action);
+      state.activeSideBar = action.payload;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { openChat, closeChat, changeLang } = themeSlice.actions;
+export const { openChat, closeChat, changeLang, setActiveSideBar } = themeSlice.actions;
 
 export default themeSlice.reducer;
