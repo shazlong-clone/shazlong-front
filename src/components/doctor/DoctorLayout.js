@@ -1,9 +1,9 @@
 import React from 'react';
-import { Drawer, IconButton, Nav, Sidenav } from 'rsuite';
+import { Divider, Drawer, IconButton, Nav, Sidenav } from 'rsuite';
 import MenuIcon from '@rsuite/icons/Menu';
 import useMediaQuery from '../../utils/useMediaQuery';
 import clsx from 'clsx';
-import { NavLink, Outlet } from 'react-router-dom';
+import { Link, NavLink, Outlet } from 'react-router-dom';
 import WhisperComp from './WhisperComp';
 import SettingWhisper from './SettingWhisper';
 import logo from '../../assets/images/shezlong-logo.svg';
@@ -32,8 +32,11 @@ const NavList = () => {
   const [activeKey, setActiveKey] = React.useState('1');
   return (
     <Nav activeKey={activeKey} onSelect={setActiveKey} className="overflow-hidden">
-      <Sidenav.Header>
-        <img className="w-[170px] my-5 px-1" src={logo} />
+      <Sidenav.Header className="text-center">
+        <Link to="/doctor">
+          <img className="w-[180px] my-5" src={logo} />
+        </Link>
+        <Divider className="my-0" />
       </Sidenav.Header>
       {appNavs.map((item) => {
         const { children, ...rest } = item;
