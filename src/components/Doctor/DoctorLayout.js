@@ -73,6 +73,10 @@ function DoctorLayout() {
   };
   const [expanded, setExpanded] = React.useState(true);
   const { activeSideBar } = useSelector((state) => state?.theme);
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, []);
+
   return (
     <>
       <div className="flex min-h-screen">
@@ -84,7 +88,7 @@ function DoctorLayout() {
             <Sidenav.Toggle expanded={expanded} onToggle={(expanded) => setExpanded(expanded)} />
           </Sidenav>
         </main>
-        <main className={clsx('bg-gray/10 grow transition-[0.3s]', expanded ? 'lg:ps-[270px]' : 'lg:ps-[76px]')}>
+        <main className={clsx('bg-gray/10 grow transition-[0.3s]', expanded ? 'lg:ps-[250px]' : 'lg:ps-[58px]')}>
           <div className="lg:pb-5">
             <article className="max-lg:bg-white max-lg:shadow-sm max-lg:mb-5 max-lg:fixed w-full">
               <section className="flex px-5 items-center justify-between py-2 lg:pt-5 lg:px-10">
@@ -106,7 +110,7 @@ function DoctorLayout() {
                 </article>
               </section>
             </article>
-            <div className="px-5 lg:px-10 max-lg:py-[70px]">
+            <div className="max-lg:py-[70px]">
               <Outlet />
             </div>
           </div>

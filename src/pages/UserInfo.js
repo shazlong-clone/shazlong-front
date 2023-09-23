@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Card from '../components/Shared/Card';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import clsx from 'clsx';
 import { useToaster, Message, Uploader, Loader, Grid, Col, Row } from 'rsuite';
 import { useTranslation } from 'react-i18next';
@@ -8,6 +8,7 @@ import CameraRetroIcon from '@rsuite/icons/legacy/CameraRetro';
 import { API_BASE_URL } from '../config/enviroment.config';
 import PersonalInfo from '../components/UserInfo/PersonalInfo';
 import PaymentInfo from '../components/UserInfo/PaymentInfo';
+import { getMe } from '../features/auth/authAction';
 
 function UserInfo() {
   const { user = {} } = useSelector((state) => state?.auth);
@@ -28,6 +29,7 @@ function UserInfo() {
   const [uploading, setUploading] = React.useState(false);
 
   const [fileInfo, setFileInfo] = React.useState(user?.photo ?? null);
+  const dispatch = useDispatch();
   const props = {
     name: 'photo',
     fileListVisible: false,
@@ -44,6 +46,7 @@ function UserInfo() {
     },
     onSuccess: () => {
       setUploading(false);
+      dispatch(getMe());
       toaster.push(<Message type="success">Uploaded successfully</Message>);
     },
     onError: () => {
@@ -59,7 +62,7 @@ function UserInfo() {
           <Row gutter={24}>
             <Col xs={24} lg={8}>
               <Card className="rounded-none text-center">
-                <div className="relative inline-block p-2">
+                <div className="relative inline-block p-2 ">
                   <Uploader {...props}>
                     <button style={{ width: 100, height: 100, borderRadius: '50%' }}>
                       {uploading && <Loader backdrop center />}

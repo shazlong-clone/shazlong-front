@@ -4,7 +4,7 @@ import { Breadcrumb, Panel, Placeholder } from 'rsuite';
 
 function Slots() {
   return (
-    <>
+    <main className="px-5 lg:px-10">
       <Breadcrumb>
         <Breadcrumb.Item as={Link} to="/doctor">
           Doctor
@@ -16,7 +16,7 @@ function Slots() {
       <Panel className="bg-white">
         <Placeholder rows={50} />
       </Panel>
-    </>
+    </main>
   );
 }
 

@@ -20,14 +20,14 @@ const paymentSlice = createSlice({
   initialState,
   extraReducers: (builder) => {
     builder.addCase(createOrUpdatePayment.fulfilled, (state, action) => {
-      state.card = action.payload.data.payment.card;
-      state.vodafoneCash = action.payload.data.payment.vodafoneCash;
-      state.fawry = action.payload.data.payment.fawry;
+      state.card = action.payload.data?.payment?.card;
+      state.vodafoneCash = action.payload.data?.payment?.vodafoneCash;
+      state.fawry = action.payload.data?.payment?.fawry;
     });
     builder.addCase(getPayment.fulfilled, (state, action) => {
-      state.card = action.payload.data.payment.card;
-      state.vodafoneCash = action.payload.data.payment.vodafoneCash;
-      state.fawry = action.payload.data.payment.fawry;
+      state.card = action.payload.data?.payment?.card;
+      state.vodafoneCash = action.payload.data?.payment?.vodafoneCash;
+      state.fawry = action.payload.data?.payment?.fawry;
     });
   },
 });
