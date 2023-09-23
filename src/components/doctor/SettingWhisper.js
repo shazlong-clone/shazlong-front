@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { IconButton, Popover, Radio, RadioGroup, Whisper } from 'rsuite';
+import { Divider, IconButton, Popover, Radio, RadioGroup, Whisper } from 'rsuite';
 import { AiOutlineSetting } from 'react-icons/ai';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
@@ -36,6 +36,8 @@ const WhisperComp = ({ placement }) => {
               );
             })}
           </RadioGroup>
+          <Divider className="my-0" />
+          <div className="text-center text-red-500 font-bold pt-[10px] cursor-pointer">Sign Out</div>
         </Popover>
       }
     >

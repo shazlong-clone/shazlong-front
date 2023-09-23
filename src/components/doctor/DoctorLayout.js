@@ -1,5 +1,5 @@
 import React from 'react';
-import { Avatar, Badge, Divider, Drawer, IconButton, Nav, Sidenav } from 'rsuite';
+import { Avatar, Divider, Drawer, IconButton, Nav, Sidenav } from 'rsuite';
 import MenuIcon from '@rsuite/icons/Menu';
 import useMediaQuery from '../../utils/useMediaQuery';
 import clsx from 'clsx';
