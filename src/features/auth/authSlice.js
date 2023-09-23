@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { signUp, signInUser, getMe, updateMe, signUpDoctor, verificate, getMeAsDoctor } from './authAction';
+import { signUp, signInUser, getMe, updateMe, signUpDoctor, verificate, getMeAsDoctor, signInDoctor } from './authAction';
 const initialState = {
   user: {},
   doctor: {},
@@ -16,6 +16,11 @@ const authSlice = createSlice({
       state.token = '';
       state.user = {};
       localStorage.setItem('token', '');
+    },
+    doctorSignOut: (state) => {
+      state.doctorToken = '';
+      state.doctor = {};
+      localStorage.setItem('doctorToken', '');
     },
   },
   extraReducers: (builder) => {
@@ -52,8 +57,12 @@ const authSlice = createSlice({
         state.doctorVerificationCode = '';
       }
     });
+    builder.addCase(signInDoctor.fulfilled, (state, action) => {
+      state.doctorToken = action?.payload?.token;
+      state.doctor = action?.payload?.data?.user;
+    });
   },
 });
 
-export const { signOut } = authSlice.actions;
+export const { signOut, doctorSignOut } = authSlice.actions;
 export default authSlice.reducer;

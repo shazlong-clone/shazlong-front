@@ -1,15 +1,24 @@
 import React, { useRef } from 'react';
 import { Divider, IconButton, Popover, Radio, RadioGroup, Whisper } from 'rsuite';
 import { AiOutlineSetting } from 'react-icons/ai';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { lngs } from '../../assets/constants/index';
+import { doctorSignOut } from '../../features/auth/authSlice';
+import { useNavigate } from 'react-router-dom';
 
 const WhisperComp = ({ placement }) => {
   const { locale } = useSelector((state) => state?.theme);
   const { i18n } = useTranslation();
   const triggerRef = useRef();
   const close = () => triggerRef.current.close();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const signOut = () => {
+    close();
+    dispatch(doctorSignOut());
+    navigate('/');
+  };
   return (
     <Whisper
       trigger="click"
@@ -37,7 +46,9 @@ const WhisperComp = ({ placement }) => {
             })}
           </RadioGroup>
           <Divider className="my-0" />
-          <div className="text-center text-red-500 font-bold pt-[10px] cursor-pointer">Sign Out</div>
+          <div onClick={signOut} className="text-center text-red-500 font-bold pt-[10px] cursor-pointer">
+            Sign Out
+          </div>
         </Popover>
       }
     >

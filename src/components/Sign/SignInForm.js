@@ -7,10 +7,10 @@ import EyeSlashIcon from '@rsuite/icons/legacy/EyeSlash';
 import { FaLock } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { signInUser } from '../../features/auth/authAction';
+import { signInDoctor, signInUser } from '../../features/auth/authAction';
 import { useTranslation } from 'react-i18next';
 const { Group, HelpText, Control } = Form;
-function SignUpForm() {
+function SignUpForm({ isSignAsUse }) {
   const { t } = useTranslation();
   const [visible, setVisible] = useState(false);
   const [acceptLiecence, setAcceptLicence] = useState(false);
@@ -30,7 +30,12 @@ function SignUpForm() {
     if (!formRef.current.check()) return;
     try {
       setLoading(true);
-      const res = await dispatch(signInUser(formValue));
+      let res;
+      if (isSignAsUse) {
+        res = await dispatch(signInUser(formValue));
+      } else {
+        res = await dispatch(signInDoctor(formValue));
+      }
       if (res.payload.status) {
         toaster.push(
           <Message type="success" closable showIcon>
@@ -38,8 +43,13 @@ function SignUpForm() {
           </Message>,
           { duration: 2000 },
         );
-        localStorage.setItem('token', res.payload.token);
-        navigate('/');
+        if (isSignAsUse) {
+          localStorage.setItem('token', res.payload.token);
+          navigate('/');
+        } else {
+          localStorage.setItem('doctorToken', res.payload.token);
+          navigate('/doctor');
+        }
       } else {
         toaster.push(
           <Message type="error" closable showIcon>
@@ -61,6 +71,7 @@ function SignUpForm() {
       setLoading(false);
     }
   };
+
   useEffect(() => {
     AOS.init();
   }, []);
@@ -80,7 +91,6 @@ function SignUpForm() {
             <Link to="/forgot-password">{t('forgot_password')}</Link>
           </HelpText>
         </Group>
-
         <Group controlId="submit">
           <ButtonToolbar>
             <Button

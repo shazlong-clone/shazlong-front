@@ -38,7 +38,7 @@ const requestHandler = (request) => {
   if (token) {
     request.headers['authorization'] = `Bearer ${token}`;
   }
-  request.headers['locale'] = locale;
+  request.headers['Accept-Language'] = locale;
 
   return request;
 };

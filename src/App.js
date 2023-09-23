@@ -6,9 +6,9 @@ import Loading from './components/Shared/BackDropLoading';
 import LangWrapper from './components/Shared/LangWrapper';
 import ProtectedRoute from './components/Shared/ProtectedRoute';
 import ProtectDoctor from './components/Shared/ProtectDoctor';
-import Slots from './components/doctor/Slots';
-import Bookings from './components/doctor/Bookings';
-import DoctorProfile from './components/doctor/DoctorProfile';
+import Slots from './components/Doctor/Slots';
+import Bookings from './components/Doctor/Bookings';
+import DoctorProfile from './components/Doctor/DoctorProfile';
 
 const Home = lazy(() => import('./pages/Home'));
 const ThearpistProfile = lazy(() => import('./pages/ThearpistProfile'));

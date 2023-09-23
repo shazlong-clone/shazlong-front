@@ -90,9 +90,9 @@ function Footer() {
                 </article>
                 <div className="mt-5">
                   {t('Have_Account')}
-                  <a href="/sign-in" className="text-white hover:text-white underline">
+                  <Link to="/sign-in" className="text-white hover:text-white underline px-1 inline-block">
                     {t('Sign_In')}
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>

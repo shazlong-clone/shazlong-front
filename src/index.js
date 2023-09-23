@@ -5,7 +5,7 @@ import 'flag-icons/css/flag-icons.css';
 import './index.css';
 import './i18n';
 import { BrowserRouter } from 'react-router-dom';
-import { store, persistor } from './app/store';
+import { store, persistor } from './redux/store';
 import { Provider } from 'react-redux';
 import { ThemeSwitcherProvider } from 'react-css-theme-switcher';
 import { PersistGate } from 'redux-persist/integration/react';
