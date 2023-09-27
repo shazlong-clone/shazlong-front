@@ -1,9 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Breadcrumb, Col, Grid, Panel, Placeholder, Row, Tag, TagGroup } from 'rsuite';
+import { Breadcrumb, Col, FlexboxGrid, Grid, Panel, Placeholder, Row } from 'rsuite';
+import { MdOutlineEdit } from 'react-icons/md';
 import { AiOutlineMail, AiOutlineHome } from 'react-icons/ai';
 import { BsTelephone } from 'react-icons/bs';
 import { GiEarthAfricaEurope } from 'react-icons/gi';
+import Interstes from './Interstes';
 
 function DoctorProfile() {
   const info = [
@@ -81,15 +83,13 @@ function DoctorProfile() {
         <section className="px-5 lg:px-10">
           <Grid fluid>
             <Row gutter={16}>
-              <Col xs={8}>
-                <Panel className="bg-white mb-6" header={<h5 className="capitalize">Intersts</h5>}>
-                  <Placeholder rows={8} />
-                </Panel>
+              <Col xs={24} md={8}>
+                <Interstes />
                 <Panel className="bg-white">
                   <Placeholder rows={5} />
                 </Panel>
               </Col>
-              <Col xs={16}>
+              <Col xs={24} md={16}>
                 <Panel className="bg-white mb-6">
                   <Placeholder rows={8} />
                 </Panel>
