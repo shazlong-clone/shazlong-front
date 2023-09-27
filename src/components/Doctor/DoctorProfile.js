@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Breadcrumb, Col, Grid, Panel, Placeholder, Row } from 'rsuite';
+import { Breadcrumb, Col, Grid, Panel, Placeholder, Row, Tag, TagGroup } from 'rsuite';
 import { AiOutlineMail, AiOutlineHome } from 'react-icons/ai';
 import { BsTelephone } from 'react-icons/bs';
 import { GiEarthAfricaEurope } from 'react-icons/gi';
@@ -43,11 +43,7 @@ function DoctorProfile() {
         <Breadcrumb.Item active>Profile</Breadcrumb.Item>
       </Breadcrumb>
       <div className="relative">
-        <img
-          className="w-full absolute left-[0px] top-0 h-[150px] lg:h-[200px]"
-          src="https://emilus.themenate.net/img/others/img-12.jpg"
-        />
-        <section className="px-5 lg:px-10  relative top-[70px] lg:top-[120px] mb-[150px]">
+        <section className="px-5 lg:px-10  relative  mb-[10px]">
           <Panel className="bg-white overflow-visible">
             <div className="lg:flex gap-10">
               <article className="absolute top-[-30px] left-[50%] translate-x-[-50%] lg:static lg:translate-x-0">
@@ -69,10 +65,10 @@ function DoctorProfile() {
                       return (
                         <div key={el?.id} className="grid grid-cols-2">
                           <article className="flex gap-2 items-center">
-                            <i className="text-2xl text-cyan">{el?.icon}</i>
-                            <span className="text-gray/50">{el?.key}:</span>
+                            <i className="text-md text-cyan">{el?.icon}</i>
+                            <span className="font-light">{el?.key}:</span>
                           </article>
-                          <article className="font-bold">{el?.value}</article>
+                          <article className="font-bold text-sm pt-1">{el?.value}</article>
                         </div>
                       );
                     })}
@@ -86,8 +82,8 @@ function DoctorProfile() {
           <Grid fluid>
             <Row gutter={16}>
               <Col xs={8}>
-                <Panel className="bg-white mb-6">
-                  <Placeholder rows={15} />
+                <Panel className="bg-white mb-6" header={<h5 className="capitalize">Intersts</h5>}>
+                  <Placeholder rows={8} />
                 </Panel>
                 <Panel className="bg-white">
                   <Placeholder rows={5} />

@@ -4,7 +4,6 @@ import authSlice from '../features/auth/authSlice';
 import paymentSlice from '../features/payment/paymentSlice';
 import storage from 'redux-persist/lib/storage';
 import { persistReducer, persistStore } from 'redux-persist';
-import thunk from 'redux-thunk';
 
 const persistConfig = {
   key: 'shazlong',

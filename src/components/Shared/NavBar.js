@@ -48,13 +48,18 @@ function NavBar() {
   const close = () => triggerRef.current.close();
   const handleProfile = () => {
     close();
-    navgiagte('/user-info');
+    setTimeout(()=>{
+      navgiagte('/user-info');
+    },0)
   };
   const signOutHandler = () => {
     close();
-    dispatch(signOut());
-    setOpen(false);
-    navigate('/');
+    setTimeout(()=>{
+      dispatch(signOut());
+      setOpen(false);
+      navigate('/');
+    },0)
+
   };
   const speaker = (
     <Popover className="p-0" style={!lg ? { display: 'none' } : {}}>

@@ -1,25 +1,21 @@
-import { useEffect, useState } from 'react';
+import { forwardRef, useRef } from 'react';
 
-const Parent = () => {
-  const [time, setTime] = useState(Date.now());
-  useEffect(()=>{
-    console.log('inuse Effect')
-  },[]);
-  1
-  2
+const CustomButtom = forwardRef ((props, ref) =>{
+  return <button onClick={()=> ref.current.focus()}>
+    cliclk
+  </button>
+}) 
+const Test = () => {
+  const ref = useRef();
   return (
-    <div>
-      {
-        console.log('render')
-      }
-      <article>{time}</article>
-      <a
-        href="/ddd"
-      >
-        link
-      </a>
-    </div>
+    <>
+    <input ref={ref} />
+    <CustomButtom ref={ref}>
+      Focus on Input
+    </CustomButtom>
+    </>
   );
 };
 
-export default Parent;
+
+export default Test;
