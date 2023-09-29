@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Breadcrumb, Col, FlexboxGrid, Grid, Panel, Placeholder, Row } from 'rsuite';
-import { MdOutlineEdit } from 'react-icons/md';
+import { Breadcrumb, Col, Grid, Panel, Placeholder, Row } from 'rsuite';
 import { AiOutlineMail, AiOutlineHome } from 'react-icons/ai';
 import { BsTelephone } from 'react-icons/bs';
 import { GiEarthAfricaEurope } from 'react-icons/gi';
 import Interstes from './Interstes';
+import Certificates from './Certificates';
 
 function DoctorProfile() {
   const info = [
@@ -85,9 +85,7 @@ function DoctorProfile() {
             <Row gutter={16}>
               <Col xs={24} md={8}>
                 <Interstes />
-                <Panel className="bg-white">
-                  <Placeholder rows={5} />
-                </Panel>
+                <Certificates />
               </Col>
               <Col xs={24} md={16}>
                 <Panel className="bg-white mb-6">
