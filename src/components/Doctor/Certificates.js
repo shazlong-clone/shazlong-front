@@ -1,13 +1,11 @@
 import React from 'react';
-import { Panel, Placeholder } from 'rsuite';
+import { Panel } from 'rsuite';
 
 function Certificates() {
   return (
-    <div>
-      <Panel className="bg-white">
-        <Placeholder rows={5} />
-      </Panel>
-    </div>
+    <>
+      <Panel>sss</Panel>
+    </>
   );
 }
 
