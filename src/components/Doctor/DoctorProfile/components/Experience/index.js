@@ -2,16 +2,8 @@ import React, { useRef, useState } from 'react';
 import { MdOutlineEdit } from 'react-icons/md';
 import { Button, FlexboxGrid, Form, IconButton, Modal, Panel, Schema, Stack, TagPicker } from 'rsuite';
 import { RiAddFill } from 'react-icons/ri';
-// Omit this line if loading form a CDN
-import translate from 'translate';
 
-translate.engine = 'google'; // "google", "yandex", "libre", "deepl"
-translate.key = 'AIzaSyD-Yh-rniO3bujLARYUFzIWfvFLXETKfPY';
-
-// "Hola mundo"
 function Interstes() {
-  translate('Hello world', 'ar').then((val) => console.log(val));
-
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);

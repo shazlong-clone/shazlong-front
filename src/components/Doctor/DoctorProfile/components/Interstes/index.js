@@ -36,7 +36,6 @@ function Interstes() {
           </FlexboxGrid.Item>
           <FlexboxGrid.Item>
             <IconButton onClick={handleOpen} size="lg" className="rounded-full" icon={<MdOutlineEdit />} />
-
             <Modal backdrop="static" open={open} onClose={handleClose}>
               <Modal.Header>
                 <Modal.Title>Edit Intersts</Modal.Title>

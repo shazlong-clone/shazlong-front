@@ -23,8 +23,15 @@ const ProductItem = ({ rowValue = {}, onChange, rowIndex, rowError, handleMinus,
     onChange(rowIndex, { ...rowValue, title: value });
   };
 
+  const handleChangeArTitle = (value) => {
+    onChange(rowIndex, { ...rowValue, ar_title: value });
+  };
+
   const handleChangeName = (value) => {
     onChange(rowIndex, { ...rowValue, name: value });
+  };
+  const handleChangeArName = (value) => {
+    onChange(rowIndex, { ...rowValue, ar_name: value });
   };
 
   const handleChangeTime = (value) => {
@@ -32,22 +39,30 @@ const ProductItem = ({ rowValue = {}, onChange, rowIndex, rowError, handleMinus,
   };
 
   return (
-    <FlexboxGrid className="max-md:border max-md:border-solid max-md:border-gray/20 rounded-sm my-1 max-md:py-5">
-      <FlexboxGrid.Item as={Col} xs={24} md={7} className="max-md:mb-1">
+    <FlexboxGrid className="max-md:border max-md:border-solid max-md:border-gray/20 rounded-sm my-1 max-md:py-5 max-md:px-4">
+      <FlexboxGrid.Item as={Col} xs={24} md={4} className="max-md:mb-1">
         <Input placeholder="Title" block value={rowValue.title} onChange={handleChangeTitle} />
         {rowError ? <ErrorMessage>{rowError.title.errorMessage}</ErrorMessage> : null}
       </FlexboxGrid.Item>
-      <FlexboxGrid.Item as={Col} xs={24} md={7} className="max-md:mb-1">
+      <FlexboxGrid.Item as={Col} xs={24} md={4} className="max-md:mb-1">
+        <Input placeholder="Arabic Title" block value={rowValue.ar_title} onChange={handleChangeArTitle} />
+        {rowError ? <ErrorMessage>{rowError.ar_title.errorMessage}</ErrorMessage> : null}
+      </FlexboxGrid.Item>
+      <FlexboxGrid.Item as={Col} xs={24} md={4} className="max-md:mb-1">
         <Input placeholder="Name" block value={rowValue.name} onChange={handleChangeName} />
         {rowError ? <ErrorMessage>{rowError.name.errorMessage}</ErrorMessage> : null}
+      </FlexboxGrid.Item>
+      <FlexboxGrid.Item as={Col} xs={24} md={4} className="max-md:mb-1">
+        <Input placeholder="Arabic Name" block value={rowValue.ar_name} onChange={handleChangeArTitle} />
+        {rowError ? <ErrorMessage>{rowError.ar_name.errorMessage}</ErrorMessage> : null}
       </FlexboxGrid.Item>
       <FlexboxGrid.Item as={Col} xs={24} md={7} className="max-md:mb-1">
         <DateRangePicker block value={rowValue.time} onChange={handleChangeTime} />
         {rowError ? <ErrorMessage>{rowError.time.errorMessage}</ErrorMessage> : null}
       </FlexboxGrid.Item>
-      <FlexboxGrid.Item as={Col} xs={24} md={3} className="max-md:text-center">
+      <FlexboxGrid.Item as={Col} xs={24} md={1} className="max-md:text-end">
         <IconButton
-          className="text-red-500 max-md:w-[120px]"
+          className="text-red-500"
           disabled={education?.length === 1}
           onClick={() => handleMinus(rowIndex)}
           icon={<MinusIcon />}
@@ -80,7 +95,7 @@ const ProductInputControl = ({ value = [], onChange, fieldError }) => {
     }
   };
   const handleAdd = () => {
-    handleChangeProducts(education.concat([{ title: '', name: '', time: '' }]));
+    handleChangeProducts(education.concat([{ title: '', ar_title: '', name: '', ar_name: '', time: '' }]));
   };
   return (
     <div className="w-full">
@@ -109,7 +124,7 @@ const EducationForm = ({ handleClose }) => {
   const formRef = React.useRef();
   const [formError, setFormError] = React.useState({});
   const [formValue, setFormValue] = React.useState({
-    education: [{ title: '', name: '', time: '' }],
+    education: [{ title: '', ar_title: '', name: '', ar_name: '', time: '' }],
   });
   return (
     <FlexboxGrid>

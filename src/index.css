@@ -272,3 +272,13 @@ a:active {
 .rs-sidenav-toggle-button svg {
   @apply rtl:rotate-180;
 }
+
+.rs-sidenav-default {
+  background: white;
+}
+.rs-sidenav-default .rs-sidenav-item {
+  @apply bg-white hover:bg-gray/10;
+}
+.rs-sidenav-default .rs-sidenav-toggle-button {
+  @apply bg-white hover:bg-gray/10;
+}

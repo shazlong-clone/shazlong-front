@@ -1,5 +1,5 @@
 import React from 'react';
-import { Col, FlexboxGrid, Panel, Steps } from 'rsuite';
+import { Col, FlexboxGrid, Panel } from 'rsuite';
 import EditModal from './components/EditModal';
 
 function Education() {

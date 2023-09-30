@@ -53,7 +53,7 @@ function DoctorProfile() {
         <Breadcrumb.Item active>Profile</Breadcrumb.Item>
       </Breadcrumb>
       <div className="relative">
-        <section className="px-5 lg:px-36  relative  mb-[10px]">
+        <section className="px-5 lg:px-36  relative  mb-[24px]">
           <Panel className="bg-white overflow-visible">
             <div className="lg:flex gap-10">
               <article className="absolute top-[-30px] left-[50%] translate-x-[-50%] lg:static lg:translate-x-0">
