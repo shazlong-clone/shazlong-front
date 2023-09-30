@@ -18,7 +18,7 @@ const model = Schema.Model({
 
 const ErrorMessage = ({ children }) => <span style={{ color: 'red' }}>{children}</span>;
 
-const ProductItem = ({ rowValue = {}, onChange, rowIndex, rowError, handleMinus, certifications }) => {
+const ProductItem = ({ rowValue = {}, onChange, rowIndex, rowError, handleMinus, education }) => {
   const handleChangeTitle = (value) => {
     onChange(rowIndex, { ...rowValue, title: value });
   };
@@ -34,11 +34,11 @@ const ProductItem = ({ rowValue = {}, onChange, rowIndex, rowError, handleMinus,
   return (
     <FlexboxGrid className="max-md:border max-md:border-solid max-md:border-gray/20 rounded-sm my-1 max-md:py-5">
       <FlexboxGrid.Item as={Col} xs={24} md={7} className="max-md:mb-1">
-        <Input block value={rowValue.title} onChange={handleChangeTitle} />
+        <Input placeholder="Title" block value={rowValue.title} onChange={handleChangeTitle} />
         {rowError ? <ErrorMessage>{rowError.title.errorMessage}</ErrorMessage> : null}
       </FlexboxGrid.Item>
       <FlexboxGrid.Item as={Col} xs={24} md={7} className="max-md:mb-1">
-        <Input block value={rowValue.name} onChange={handleChangeName} />
+        <Input placeholder="Name" block value={rowValue.name} onChange={handleChangeName} />
         {rowError ? <ErrorMessage>{rowError.name.errorMessage}</ErrorMessage> : null}
       </FlexboxGrid.Item>
       <FlexboxGrid.Item as={Col} xs={24} md={7} className="max-md:mb-1">
@@ -48,7 +48,7 @@ const ProductItem = ({ rowValue = {}, onChange, rowIndex, rowError, handleMinus,
       <FlexboxGrid.Item as={Col} xs={24} md={3} className="max-md:text-center">
         <IconButton
           className="text-red-500 max-md:w-[120px]"
-          disabled={certifications?.length === 1}
+          disabled={education?.length === 1}
           onClick={() => handleMinus(rowIndex)}
           icon={<MinusIcon />}
         />
@@ -60,31 +60,31 @@ const ProductItem = ({ rowValue = {}, onChange, rowIndex, rowError, handleMinus,
 
 const ProductInputControl = ({ value = [], onChange, fieldError }) => {
   const errors = fieldError ? fieldError.array : [];
-  const [certifications, setCertifications] = React.useState(value);
+  const [education, setEducation] = React.useState(value);
   const handleChangeProducts = (nextProducts) => {
-    setCertifications(nextProducts);
+    setEducation(nextProducts);
     onChange(nextProducts);
   };
   const handleInputChange = (rowIndex, value) => {
-    const nextProducts = [...certifications];
+    const nextProducts = [...education];
     nextProducts[rowIndex] = value;
     handleChangeProducts(nextProducts);
   };
 
   const handleMinus = (index) => {
     if (index === null || index === undefined) {
-      handleChangeProducts(certifications.slice(0, -1));
+      handleChangeProducts(education.slice(0, -1));
     } else {
-      certifications.splice(index, 1);
-      handleChangeProducts(certifications);
+      education.splice(index, 1);
+      handleChangeProducts(education);
     }
   };
   const handleAdd = () => {
-    handleChangeProducts(certifications.concat([{ title: '', name: '', time: '' }]));
+    handleChangeProducts(education.concat([{ title: '', name: '', time: '' }]));
   };
   return (
     <div className="w-full">
-      {certifications.map((rowValue, index) => (
+      {education.map((rowValue, index) => (
         <>
           <ProductItem
             key={index}
@@ -93,23 +93,23 @@ const ProductInputControl = ({ value = [], onChange, fieldError }) => {
             rowError={errors[index] ? errors[index].object : null}
             onChange={handleInputChange}
             handleMinus={handleMinus}
-            certifications={certifications}
+            education={education}
           />
         </>
       ))}
       <Button className="mt-5 flex gap-1" onClick={handleAdd}>
         <PlusIcon className="text-cyan" />
-        <span>Add Certicate</span>
+        <span>Add Education</span>
       </Button>
     </div>
   );
 };
 
-const CertficationForm = ({ handleClose }) => {
+const EducationForm = ({ handleClose }) => {
   const formRef = React.useRef();
   const [formError, setFormError] = React.useState({});
   const [formValue, setFormValue] = React.useState({
-    certifications: [{ title: '', name: '', time: '' }],
+    education: [{ title: '', name: '', time: '' }],
   });
   return (
     <FlexboxGrid>
@@ -123,7 +123,7 @@ const CertficationForm = ({ handleClose }) => {
           formValue={formValue}
           model={model}
         >
-          <Form.Control name="certifications" accepter={ProductInputControl} fieldError={formError.certifications} />
+          <Form.Control name="education" accepter={ProductInputControl} fieldError={formError.education} />
           <hr />
           <FlexboxGrid justify="end">
             <FlexboxGridItem>
@@ -146,4 +146,4 @@ const CertficationForm = ({ handleClose }) => {
   );
 };
 
-export default CertficationForm;
+export default EducationForm;

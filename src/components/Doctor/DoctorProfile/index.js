@@ -1,12 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Breadcrumb, Col, FlexboxGrid, Grid, Panel, Placeholder, Row } from 'rsuite';
+import { Breadcrumb, Col, Grid, Panel, Placeholder, Row } from 'rsuite';
 import { AiOutlineMail, AiOutlineHome } from 'react-icons/ai';
 import { BsTelephone } from 'react-icons/bs';
 import { GiEarthAfricaEurope } from 'react-icons/gi';
-import Interstes from './Interstes';
-import Certificates from './Certifications';
-import FlexboxGridItem from 'rsuite/esm/FlexboxGrid/FlexboxGridItem';
+import Certifications from './components/Certifications';
+import Interstes from './components/Interstes/index';
+import Education from './components/Education';
 
 function DoctorProfile() {
   const info = [
@@ -92,12 +92,10 @@ function DoctorProfile() {
             <Row gutter={16}>
               <Col xs={24} md={8}>
                 <Interstes />
-                <Certificates />
+                <Certifications />
               </Col>
               <Col xs={24} md={16}>
-                <Panel className="bg-white mb-6">
-                  <Placeholder rows={8} />
-                </Panel>
+                <Education />
                 <Panel className="bg-white">
                   <Placeholder rows={20} />
                 </Panel>

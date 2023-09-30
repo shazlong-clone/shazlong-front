@@ -4,13 +4,13 @@ import MenuIcon from '@rsuite/icons/Menu';
 import useMediaQuery from '../../utils/useMediaQuery';
 import clsx from 'clsx';
 import { NavLink, Outlet } from 'react-router-dom';
-import SettingWhisper from './SettingWhisper';
+import SettingWhisper from './components/SettingWhisper';
 import logo from '../../assets/images/shezlong-logo.svg';
 import logoAr from '../../assets/images/shezlong-logo-ar.svg';
 import { appNavs } from '../../config/NavConfig';
 import { setActiveSideBar } from '../../features/theme/themeSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import NotificationWhisper from './NotificationWhisper';
+import NotificationWhisper from './components/NotificationWhisper';
 
 const NavItem = (props) => {
   const { title, eventKey, ...rest } = props;

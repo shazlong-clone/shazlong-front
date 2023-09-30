@@ -3,8 +3,8 @@ import { Divider, IconButton, Popover, Radio, RadioGroup, Whisper } from 'rsuite
 import { AiOutlineSetting } from 'react-icons/ai';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import { lngs } from '../../assets/constants/index';
-import { doctorSignOut } from '../../features/auth/authSlice';
+import { lngs } from '../../../assets/constants/index';
+import { doctorSignOut } from '../../../features/auth/authSlice';
 import { useNavigate } from 'react-router-dom';
 
 const WhisperComp = ({ placement }) => {

@@ -32,7 +32,7 @@ function Certifications() {
       header={
         <FlexboxGrid justify="space-between" align="middle">
           <FlexboxGrid.Item>
-            <h5 className="capitalize">Certifications</h5>
+            <h5 className="capitalize text-gray/80">Certifications</h5>
           </FlexboxGrid.Item>
           <FlexboxGrid.Item>
             <EditModal />

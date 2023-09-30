@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { MdOutlineEdit } from 'react-icons/md';
-import { Button, ButtonToolbar, FlexboxGrid, Form, IconButton, Modal, Panel, Schema, Stack, TagPicker } from 'rsuite';
+import { Button, FlexboxGrid, Form, IconButton, Modal, Panel, Schema, Stack, TagPicker } from 'rsuite';
 
 function Interstes() {
   const [open, setOpen] = React.useState(false);
@@ -32,7 +32,7 @@ function Interstes() {
       header={
         <FlexboxGrid justify="space-between" align="middle">
           <FlexboxGrid.Item>
-            <h5 className="capitalize">Intersts</h5>
+            <h5 className="capitalize text-gray/80">Intersts</h5>
           </FlexboxGrid.Item>
           <FlexboxGrid.Item>
             <IconButton onClick={handleOpen} size="lg" className="rounded-full" icon={<MdOutlineEdit />} />

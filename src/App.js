@@ -62,7 +62,7 @@ function App() {
             <Route path="user-info" element={<ProtectedRoute />}>
               <Route index element={<UserInfo />} />
             </Route>
-            <Route  path="test" element={<Test />} />
+            <Route path="test" element={<Test />} />
             <Route path="*" element={<Error />} />
           </Route>
         </Routes>
