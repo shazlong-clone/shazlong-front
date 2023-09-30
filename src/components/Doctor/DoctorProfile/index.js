@@ -1,12 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Breadcrumb, Col, Grid, Panel, Placeholder, Row } from 'rsuite';
+import { Breadcrumb, Col, Grid, Panel, Row } from 'rsuite';
 import { AiOutlineMail, AiOutlineHome } from 'react-icons/ai';
 import { BsTelephone } from 'react-icons/bs';
 import { GiEarthAfricaEurope } from 'react-icons/gi';
 import Certifications from './components/Certifications';
 import Interstes from './components/Interstes/index';
 import Education from './components/Education';
+import Experience from './components/Experience';
 
 function DoctorProfile() {
   const info = [
@@ -45,14 +46,14 @@ function DoctorProfile() {
   ];
   return (
     <>
-      <Breadcrumb className="px-5 lg:px-10">
+      <Breadcrumb className="px-5 lg:px-36">
         <Breadcrumb.Item as={Link} to="/doctor">
           Doctor
         </Breadcrumb.Item>
         <Breadcrumb.Item active>Profile</Breadcrumb.Item>
       </Breadcrumb>
       <div className="relative">
-        <section className="px-5 lg:px-10  relative  mb-[10px]">
+        <section className="px-5 lg:px-36  relative  mb-[10px]">
           <Panel className="bg-white overflow-visible">
             <div className="lg:flex gap-10">
               <article className="absolute top-[-30px] left-[50%] translate-x-[-50%] lg:static lg:translate-x-0">
@@ -87,7 +88,7 @@ function DoctorProfile() {
             </div>
           </Panel>
         </section>
-        <section className="px-5 lg:px-10">
+        <section className="px-5 lg:px-36">
           <Grid fluid>
             <Row gutter={16}>
               <Col xs={24} md={8}>
@@ -96,9 +97,7 @@ function DoctorProfile() {
               </Col>
               <Col xs={24} md={16}>
                 <Education />
-                <Panel className="bg-white">
-                  <Placeholder rows={20} />
-                </Panel>
+                <Experience />
               </Col>
             </Row>
           </Grid>
