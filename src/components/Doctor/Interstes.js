@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { MdOutlineEdit } from 'react-icons/md';
-import { Button, ButtonToolbar, FlexboxGrid, Form, Modal, Panel, Schema, TagPicker } from 'rsuite';
+import { Button, ButtonToolbar, FlexboxGrid, Form, IconButton, Modal, Panel, Schema, Stack, TagPicker } from 'rsuite';
 
 function Interstes() {
   const [open, setOpen] = React.useState(false);
@@ -30,19 +30,12 @@ function Interstes() {
     <Panel
       className="bg-white mb-6"
       header={
-        <FlexboxGrid justify="space-between">
+        <FlexboxGrid justify="space-between" align="middle">
           <FlexboxGrid.Item>
             <h5 className="capitalize">Intersts</h5>
           </FlexboxGrid.Item>
           <FlexboxGrid.Item>
-            <ButtonToolbar
-              onClick={handleOpen}
-              className="rounded-full hover:bg-gray/20 text-xl
-             hover:text-gray transition  cursor-pointer w-[30px] h-[30px]
-              flex items-center justify-center"
-            >
-              <MdOutlineEdit />
-            </ButtonToolbar>
+            <IconButton onClick={handleOpen} size="lg" className="rounded-full" icon={<MdOutlineEdit />} />
 
             <Modal backdrop="static" open={open} onClose={handleClose}>
               <Modal.Header>
@@ -57,9 +50,12 @@ function Interstes() {
                   </Form.Group>
                   <hr className="m-3 mx-0" />
                   <FlexboxGrid justify="end">
-                    <Button appearance="primary" onClick={handleSubmit} type="submit">
-                      Save
-                    </Button>
+                    <Stack spacing={16}>
+                      <Button onClick={handleClose}>Cancel</Button>
+                      <Button appearance="primary" onClick={handleSubmit} type="submit">
+                        Save
+                      </Button>
+                    </Stack>
                   </FlexboxGrid>
                 </Form>
               </Modal.Body>
@@ -72,9 +68,7 @@ function Interstes() {
         {interstesList?.map((el) => {
           return (
             <>
-              <span className="bg-gray/5 inline-block px-3 rounded-3xl font-[500] cursor-pointer hover:bg-gray/30 transition">
-                {el}
-              </span>
+              <Button className="rounded-3xl py-1">{el}</Button>
             </>
           );
         })}

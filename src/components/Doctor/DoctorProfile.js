@@ -1,11 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Breadcrumb, Col, Grid, Panel, Placeholder, Row } from 'rsuite';
+import { Breadcrumb, Col, FlexboxGrid, Grid, Panel, Placeholder, Row } from 'rsuite';
 import { AiOutlineMail, AiOutlineHome } from 'react-icons/ai';
 import { BsTelephone } from 'react-icons/bs';
 import { GiEarthAfricaEurope } from 'react-icons/gi';
 import Interstes from './Interstes';
-import Certificates from './Certificates';
+import Certificates from './Certifications';
+import FlexboxGridItem from 'rsuite/esm/FlexboxGrid/FlexboxGridItem';
 
 function DoctorProfile() {
   const info = [
@@ -33,6 +34,12 @@ function DoctorProfile() {
       id: 4,
       key: 'Website',
       value: 'ellarbae.io',
+      icon: <GiEarthAfricaEurope />,
+    },
+    {
+      id: 5,
+      key: 'Feez',
+      value: 'EGY 750/30 mins | EGY 1000/60 mins',
       icon: <GiEarthAfricaEurope />,
     },
   ];
@@ -65,12 +72,12 @@ function DoctorProfile() {
                   <section className="xl:grid grid-cols-2 gap-x-10">
                     {info?.map((el) => {
                       return (
-                        <div key={el?.id} className="grid grid-cols-2">
+                        <div key={el?.id} className="grid grid-cols-[1fr_2fr]">
                           <article className="flex gap-2 items-center">
                             <i className="text-md text-cyan">{el?.icon}</i>
-                            <span className="font-light">{el?.key}:</span>
+                            <span className="font-[500] lg:text-[14px]">{el?.key}:</span>
                           </article>
-                          <article className="font-bold text-sm pt-1">{el?.value}</article>
+                          <article className="font-[700] text-sm lg:text-[14px] pt-1">{el?.value}</article>
                         </div>
                       );
                     })}

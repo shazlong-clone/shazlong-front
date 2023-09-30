@@ -3,7 +3,7 @@ import { Avatar, Divider, Drawer, IconButton, Nav, Sidenav } from 'rsuite';
 import MenuIcon from '@rsuite/icons/Menu';
 import useMediaQuery from '../../utils/useMediaQuery';
 import clsx from 'clsx';
-import { Link, NavLink, Outlet } from 'react-router-dom';
+import { NavLink, Outlet } from 'react-router-dom';
 import SettingWhisper from './SettingWhisper';
 import logo from '../../assets/images/shezlong-logo.svg';
 import logoAr from '../../assets/images/shezlong-logo-ar.svg';
@@ -36,6 +36,9 @@ const NavList = () => {
       <Sidenav.Header className="text-center">
         <img className="w-[170px] my-5 px-1 rtl:hidden" src={logo} />
         <img className="w-[170px] my-5 px-1 ltr:hidden" src={logoAr} />
+        <div className="font-bold text-gray/80 text-[12px] text-center mb-5 tracking-[7px]">
+          Doctor <br /> Dashboard
+        </div>
         <Divider className="my-0" />
       </Sidenav.Header>
       {appNavs.map((item) => {
@@ -119,7 +122,7 @@ function DoctorLayout() {
           ) : (
             <Drawer className="doctor-drawer" size="xs" placement={placement} open={open} onClose={() => setOpen(false)}>
               <Drawer.Body className="px-0 pt-0 bg-[#f7f7fa]">
-                <Sidenav defaultOpenKeys={['3', '4']}>
+                <Sidenav>
                   <Sidenav.Body>
                     <NavList />
                   </Sidenav.Body>
