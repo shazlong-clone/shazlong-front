@@ -19,7 +19,7 @@ import logo from '../assets/images/shezlong-logo.svg';
 import { useTranslation } from 'react-i18next';
 import clsx from 'clsx';
 import { Link, useNavigate } from 'react-router-dom';
-import { genders } from '../assets/constants';
+import { genders, prefixList } from '../assets/constants';
 import { API_BASE_URL } from '../config/enviroment.config';
 import { useDispatch, useSelector } from 'react-redux';
 import { verificate } from '../features/auth/authAction';
@@ -98,7 +98,7 @@ function VerifyEmailRegistration() {
       value: el?.id,
     };
   });
-  const prefixData = ['Dr', 'PsyD', 'Prof', 'MBPsS', 'Mr', 'Mrs', 'Ms'].map((item) => {
+  const prefixData = prefixList.map((item) => {
     return {
       label: item,
       value: item,
