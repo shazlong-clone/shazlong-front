@@ -25,7 +25,7 @@ root.render(
       <BrowserRouter>
         <Provider store={store}>
           <PersistGate loading={null} persistor={persistor}>
-            <ThemeSwitcherProvider insertionPoint="inject-styles-here" defaultTheme="ltr" themeMap={themes}>
+            <ThemeSwitcherProvider insertionPoint={document.getElementById('inject-styles-here')} defaultTheme="ltr" themeMap={themes}>
               <LocalizeRsuit>
                 <App />
               </LocalizeRsuit>
