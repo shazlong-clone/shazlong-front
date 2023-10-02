@@ -1,17 +1,5 @@
 import React, { useRef, useState } from 'react';
-import {
-  Button,
-  DateRangePicker,
-  FlexboxGrid,
-  Form,
-  IconButton,
-  InputNumber,
-  InputPicker,
-  Modal,
-  Schema,
-  Stack,
-  Uploader,
-} from 'rsuite';
+import { Button, FlexboxGrid, Form, IconButton, InputNumber, InputPicker, Modal, Schema, Stack } from 'rsuite';
 import { MdOutlineEdit } from 'react-icons/md';
 import { useTranslation } from 'react-i18next';
 import { egyptGovernorates, prefixList } from '../../../assets/constants';
@@ -52,6 +40,14 @@ function EditModal() {
         <Modal.Body style={{ overflow: 'visible', paddingBottom: '0px', marginTop: '0px' }}>
           <Form fluid model={model} formValue={formValue} onChange={setFormValue} ref={formRef}>
             <hr className="m-2 mx-0" />
+            <Form.Group dir="rtl" controlId="ArabicName">
+              <Form.HelpText>الاسم بالغة العربية</Form.HelpText>
+              <Form.Control placeholder="الاسم بالغة العربية" block name="arabic_name" />
+            </Form.Group>
+            <Form.Group dir="ltr" controlId="English Name">
+              <Form.HelpText>English Name</Form.HelpText>
+              <Form.Control placeholder="English Name" block name="english_name" />
+            </Form.Group>
             <Form.Group controlId="Email">
               <Form.HelpText>Email</Form.HelpText>
               <Form.Control placeholder="Enter Email" block name="email" />

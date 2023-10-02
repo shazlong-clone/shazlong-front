@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Breadcrumb, Col, Grid, Panel, Row } from 'rsuite';
 import { AiOutlineMail, AiOutlineHome } from 'react-icons/ai';
@@ -9,8 +9,12 @@ import Interstes from './components/Interstes/index';
 import Education from './components/Education';
 import Experience from './components/Experience';
 import EditModal from '../components/EditModal';
+import Viewer from 'react-viewer';
+import { useSelector } from 'react-redux';
 
 function DoctorProfile() {
+  const [visible, setVisible] = useState(false);
+  const { doctor } = useSelector((state) => state?.auth);
   const info = [
     {
       id: 1,
@@ -42,6 +46,16 @@ function DoctorProfile() {
       id: 5,
       key: 'Feez',
       value: 'EGY 750/30 mins | EGY 1000/60 mins',
+      icon: <GiEarthAfricaEurope />,
+    },
+    {
+      id: 5,
+      key: 'CV',
+      value: (
+        <a className="cursor-pointer" onClick={() => setVisible(true)}>
+          View
+        </a>
+      ),
       icon: <GiEarthAfricaEurope />,
     },
   ];
@@ -79,7 +93,7 @@ function DoctorProfile() {
                             <i className="text-md text-cyan flex items-center">{el?.icon}</i>
                             <span className="font-[500] lg:text-[14px]">{el?.key}:</span>
                           </article>
-                          <article className="font-[700] text-sm lg:text-[14px] pt-1">{el?.value}</article>
+                          <article className="font-[700] text-sm lg:text-[14px] pt-1 flex items-center">{el?.value}</article>
                         </div>
                       );
                     })}
@@ -107,6 +121,13 @@ function DoctorProfile() {
           </Grid>
         </section>
       </div>
+      <Viewer
+        visible={visible}
+        onClose={() => {
+          setVisible(false);
+        }}
+        images={[{ src: doctor?.cv, alt: 'cv' }]}
+      />
     </>
   );
 }
