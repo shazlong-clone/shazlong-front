@@ -3,6 +3,7 @@ import { Button, FlexboxGrid, Form, IconButton, InputNumber, InputPicker, Modal,
 import { MdOutlineEdit } from 'react-icons/md';
 import { useTranslation } from 'react-i18next';
 import { egyptGovernorates, prefixList } from '../../../assets/constants';
+import Viewer from 'react-viewer';
 
 function EditModal() {
   const formRef = useRef();
