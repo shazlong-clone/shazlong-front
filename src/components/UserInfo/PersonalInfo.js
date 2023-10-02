@@ -82,6 +82,7 @@ function PersonalInfo() {
             duration: 5000,
           },
         );
+        setPlainText(true);
       } else {
         toaster.push(
           <Message closable showIcon type="error">
