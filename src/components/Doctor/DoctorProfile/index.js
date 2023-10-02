@@ -8,6 +8,7 @@ import Certifications from './components/Certifications';
 import Interstes from './components/Interstes/index';
 import Education from './components/Education';
 import Experience from './components/Experience';
+import EditModal from '../components/EditModal';
 
 function DoctorProfile() {
   const info = [
@@ -33,8 +34,8 @@ function DoctorProfile() {
 
     {
       id: 4,
-      key: 'Website',
-      value: 'ellarbae.io',
+      key: 'Abbreviation',
+      value: 'Doctor',
       icon: <GiEarthAfricaEurope />,
     },
     {
@@ -54,7 +55,7 @@ function DoctorProfile() {
       </Breadcrumb>
       <div className="relative">
         <section className="px-5 lg:px-36  relative  mb-[24px]">
-          <Panel className="bg-white overflow-visible">
+          <Panel className="bg-white overflow-visible relative">
             <div className="lg:flex gap-10">
               <article className="absolute top-[-30px] left-[50%] translate-x-[-50%] lg:static lg:translate-x-0">
                 <img
@@ -62,7 +63,7 @@ function DoctorProfile() {
                   className="border-[5px] border-white border-solid rounded-md object-cover w-[120px] h-[120px]"
                 />
               </article>
-              <article className="mt-[80px] lg:mt-0 grow">
+              <article className="mt-[80px] lg:mt-0 grow relative">
                 <h4>Ella Robinson</h4>
                 <div className="lg:flex gap-5">
                   <section>
@@ -75,7 +76,7 @@ function DoctorProfile() {
                       return (
                         <div key={el?.id} className="grid grid-cols-[1fr_2fr]">
                           <article className="flex gap-2 items-center">
-                            <i className="text-md text-cyan">{el?.icon}</i>
+                            <i className="text-md text-cyan flex items-center">{el?.icon}</i>
                             <span className="font-[500] lg:text-[14px]">{el?.key}:</span>
                           </article>
                           <article className="font-[700] text-sm lg:text-[14px] pt-1">{el?.value}</article>
@@ -85,6 +86,9 @@ function DoctorProfile() {
                   </section>
                 </div>
               </article>
+            </div>
+            <div className="absolute top-[20px] end-[20px]">
+              <EditModal />
             </div>
           </Panel>
         </section>

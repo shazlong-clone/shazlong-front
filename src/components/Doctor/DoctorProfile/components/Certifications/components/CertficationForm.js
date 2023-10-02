@@ -61,7 +61,7 @@ const ProductItem = ({ rowValue = {}, onChange, rowIndex, rowError, handleMinus,
       </FlexboxGrid.Item>
       <FlexboxGrid.Item as={Col} xs={24} md={1} className="max-md:text-end">
         <IconButton
-          className="text-red-500 "
+          className="text-red-500"
           disabled={certifications?.length === 1}
           onClick={() => handleMinus(rowIndex)}
           icon={<MinusIcon />}
