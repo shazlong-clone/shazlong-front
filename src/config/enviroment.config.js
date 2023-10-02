@@ -1,7 +1,8 @@
 // Config
 export const ENTRY_ROUTE = '/sign-up';
 export const TOKEN_PAYLOAD_KEY = 'authorization';
-export const PROD_API = '';
+// eslint-disable-next-line no-undef
+export const PROD_API = process.env.REACT_APP_PROD_BASE_API;
 // eslint-disable-next-line no-undef
 export const DEV_API = process.env.REACT_APP_DEV_BASE_API;
 // eslint-disable-next-line no-undef
