@@ -153,13 +153,13 @@ function VerifyEmailRegistration() {
                 <Col xs={24} md={12} lg={8} className="mb-5">
                   <Group>
                     <HelpText>{t('Full_Name_In_English')} *</HelpText>
-                    <Control size="lg" name="fullEnName" />
+                    <Control dir="ltr" size="lg" name="fullEnName" />
                   </Group>
                 </Col>
                 <Col xs={24} md={12} lg={8} className="mb-5">
                   <Group>
                     <HelpText>{t('Full_Name_In_Arabic')} *</HelpText>
-                    <Control size="lg" name="fullArName" />
+                    <Control dir="rtl" size="lg" name="fullArName" />
                   </Group>
                 </Col>
                 <Col xs={24} md={12} lg={8} className="mb-5">
