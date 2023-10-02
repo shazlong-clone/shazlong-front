@@ -106,6 +106,7 @@ function VerifyEmailRegistration() {
   });
   const props = {
     name: 'cv',
+    accept: 'image/png, image/jpeg',
     disabledFileItem: true,
     maxPreviewFileSize: 1,
     fileListVisible: true,
