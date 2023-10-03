@@ -23,11 +23,12 @@ import { genders, prefixList } from '../assets/constants';
 import { API_BASE_URL } from '../config/enviroment.config';
 import { useDispatch, useSelector } from 'react-redux';
 import { verificate } from '../features/auth/authAction';
+import { getCountries } from '../features/shared/sharedActions';
 const { Control, HelpText, Group } = Form;
 function VerifyEmailRegistration() {
   const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
-  const [countries, setCountries] = useState([]);
+  const { countries } = useSelector((state) => state?.shared);
   const formRef = useRef();
   const { doctorVerificationCode } = useSelector((state) => state?.auth);
   const [formValue, setFormValue] = useState({
@@ -123,11 +124,7 @@ function VerifyEmailRegistration() {
         setLang(resJson);
       });
     });
-    fetch('/api/countries.json').then((res) => {
-      res.json().then((resJosn) => {
-        setCountries(resJosn);
-      });
-    });
+    dispatch(getCountries());
   }, []);
 
   return (

@@ -18,6 +18,7 @@ import { genders } from '../../assets/constants';
 import { updateMe } from '../../features/auth/authAction';
 import { LuEdit } from 'react-icons/lu';
 import { useTranslation } from 'react-i18next';
+import { getCountries } from '../../features/shared/sharedActions';
 
 const { Group, HelpText, Control } = Form;
 function PersonalInfo() {
@@ -34,7 +35,7 @@ function PersonalInfo() {
     countryCode: user?.countryCode,
   };
   const [formValue, setFormValues] = useState(initalFormValues);
-  const [countries, setCountries] = useState([]);
+  const { countries } = useSelector((state) => state?.shared);
 
   const countriesData = countries?.map((item) => ({
     label: (
@@ -108,11 +109,7 @@ function PersonalInfo() {
   };
 
   useEffect(() => {
-    fetch('/api/countries.json').then((res) => {
-      res.json().then((resJosn) => {
-        setCountries(resJosn);
-      });
-    });
+    dispatch(getCountries());
   }, []);
   return (
     <article className="relative">

@@ -3,8 +3,9 @@ import { Button, FlexboxGrid, Form, IconButton, InputGroup, InputNumber, InputPi
 import { MdOutlineEdit } from 'react-icons/md';
 import { useTranslation } from 'react-i18next';
 import { egyptGovernorates, prefixList } from '../../../assets/constants';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import clsx from 'clsx';
+import { getCountries } from '../../../features/shared/sharedActions';
 
 function EditModal() {
   const {
@@ -27,8 +28,7 @@ function EditModal() {
     interstes: Schema.Types.ArrayType().isRequired('This field is required.'),
   });
   const [countryCodeState, setCountryCode] = useState(countryCode || '');
-  const [countries, setCountries] = useState([]);
-
+  const { countries } = useSelector((state) => state?.shared);
   const handleOpen = () => setOpen(true);
   const [open, setOpen] = useState(false);
   const egyptGovernoratesData = egyptGovernorates?.map((el) => {
@@ -57,12 +57,9 @@ function EditModal() {
     value: item?.id,
   }));
 
+  const dispatch = useDispatch();
   useEffect(() => {
-    fetch('/api/countries.json').then((res) => {
-      res.json().then((resJosn) => {
-        setCountries(resJosn);
-      });
-    });
+    dispatch(getCountries());
   }, []);
 
   return (

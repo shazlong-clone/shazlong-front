@@ -22,9 +22,10 @@ import clsx from 'clsx';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaLock } from 'react-icons/fa';
 import { signUp } from '../../features/auth/authAction';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { genders } from '../../assets/constants';
+import { getCountries } from '../../features/shared/sharedActions';
 
 const { Group, HelpText, Control } = Form;
 function SignUpForm() {
@@ -35,9 +36,9 @@ function SignUpForm() {
   const [acceptLicence, setAcceptLicence] = useState(false);
   const [visible, setVisible] = useState(false);
   const [visibleConfirm, setVisibleConConfirm] = useState(false);
-  const [countries, setCountries] = useState([]);
   const [loading, setLoading] = useState(false);
   const [countryCode, setCountryCode] = useState('+20');
+  const { countries } = useSelector((state) => state?.shared);
   const countriesData = countries?.map((item) => ({
     label: (
       <div key={item?.id} className="flex gap-1">
@@ -128,11 +129,7 @@ function SignUpForm() {
   };
 
   useEffect(() => {
-    fetch('/api/countries.json').then((res) => {
-      res.json().then((resJosn) => {
-        setCountries(resJosn);
-      });
-    });
+    dispatch(getCountries());
     AOS.init();
   }, []);
 
