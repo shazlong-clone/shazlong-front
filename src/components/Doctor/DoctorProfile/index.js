@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Breadcrumb, Col, Grid, Panel, Row } from 'rsuite';
+import { Breadcrumb, Col, Grid, Panel, Row, Tooltip, Whisper } from 'rsuite';
 import { AiOutlineMail, AiOutlineHome } from 'react-icons/ai';
 import { BsTelephone } from 'react-icons/bs';
 import { GiEarthAfricaEurope } from 'react-icons/gi';
@@ -14,38 +14,50 @@ import { useSelector } from 'react-redux';
 
 function DoctorProfile() {
   const [visible, setVisible] = useState(false);
-  const { doctor } = useSelector((state) => state?.auth);
+  const {
+    doctor: { fullArName, fullEnName, prefix, email, address, phone, feez, cv },
+  } = useSelector((state) => state?.auth);
+
   const info = [
     {
       id: 1,
       key: 'Email',
-      value: 'ellarbae@coolmail.io',
+      value: email ?? '-',
       icon: <AiOutlineMail />,
     },
     {
       id: 2,
       key: 'Phone',
-      value: '+2010096495258',
+      value: phone ?? '-',
       icon: <BsTelephone />,
     },
 
     {
       id: 3,
       key: 'Address',
-      value: 'Los Angeles, CA',
+      value: address ?? '-',
       icon: <AiOutlineHome />,
     },
-
     {
       id: 4,
-      key: 'Abbreviation',
-      value: 'Doctor',
+      key: 'Prefix',
+      value: prefix,
       icon: <GiEarthAfricaEurope />,
     },
     {
       id: 5,
       key: 'Feez',
-      value: 'EGY 750/30 mins | EGY 1000/60 mins',
+      value: feez?.at(0)?.amount ? `EGY ${feez?.at(0)?.amount}/30 mins | EGY ${feez?.at(1)?.amount}/60 mins` : '-',
+      icon: <GiEarthAfricaEurope />,
+    },
+    {
+      id: 5,
+      key: 'Country',
+      value: (
+        <a className="cursor-pointer" onClick={() => setVisible(true)}>
+          View
+        </a>
+      ),
       icon: <GiEarthAfricaEurope />,
     },
     {
@@ -78,17 +90,12 @@ function DoctorProfile() {
                 />
               </article>
               <article className="mt-[80px] lg:mt-0 grow relative">
-                <h4>Ella Robinson</h4>
+                <h4>{fullEnName}</h4>
                 <div className="lg:flex gap-5">
-                  <section>
-                    <p className="text-gray/50 mb-4 text-sm lg:max-w-[200px] xl:max-w-[250px]">
-                      It is a long established fact that a reader will be distracted.
-                    </p>
-                  </section>
-                  <section className="xl:grid grid-cols-2 gap-x-10">
+                  <section className="xl:grid xl:grid-cols-2 2xl:grid-cols-4 gap-x-10">
                     {info?.map((el) => {
                       return (
-                        <div key={el?.id} className="grid grid-cols-[1fr_2fr]">
+                        <div key={el?.id} className="flex gap-2">
                           <article className="flex gap-2 items-center">
                             <i className="text-md text-cyan flex items-center">{el?.icon}</i>
                             <span className="font-[500] lg:text-[14px]">{el?.key}:</span>
@@ -126,7 +133,7 @@ function DoctorProfile() {
         onClose={() => {
           setVisible(false);
         }}
-        images={[{ src: doctor?.cv, alt: 'cv' }]}
+        images={[{ src: cv, alt: 'cv' }]}
       />
     </>
   );

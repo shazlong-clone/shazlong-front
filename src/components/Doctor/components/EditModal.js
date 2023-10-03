@@ -1,18 +1,34 @@
-import React, { useRef, useState } from 'react';
-import { Button, FlexboxGrid, Form, IconButton, InputNumber, InputPicker, Modal, Schema, Stack } from 'rsuite';
+import React, { useEffect, useRef, useState } from 'react';
+import { Button, FlexboxGrid, Form, IconButton, InputGroup, InputNumber, InputPicker, Modal, Schema, Stack } from 'rsuite';
 import { MdOutlineEdit } from 'react-icons/md';
 import { useTranslation } from 'react-i18next';
 import { egyptGovernorates, prefixList } from '../../../assets/constants';
-import Viewer from 'react-viewer';
+import { useSelector } from 'react-redux';
+import clsx from 'clsx';
 
 function EditModal() {
+  const {
+    doctor: { fullArName, fullEnName, prefix, email, address, phone, feez, countryCode },
+  } = useSelector((state) => state?.auth);
   const formRef = useRef();
   const handleClose = () => setOpen(false);
   const { i18n } = useTranslation();
-  const [formValue, setFormValue] = useState({});
+  const [formValue, setFormValue] = useState({
+    fullArName: fullArName,
+    fullEnName: fullEnName,
+    prefix: prefix,
+    email: email,
+    address: address,
+    phone: phone,
+    feez_per_30_min: feez?.at(0)?.amount,
+    feez_per_60_min: feez?.at(1)?.amount,
+  });
   const model = Schema.Model({
     interstes: Schema.Types.ArrayType().isRequired('This field is required.'),
   });
+  const [countryCodeState, setCountryCode] = useState(countryCode || '');
+  const [countries, setCountries] = useState([]);
+
   const handleOpen = () => setOpen(true);
   const [open, setOpen] = useState(false);
   const egyptGovernoratesData = egyptGovernorates?.map((el) => {
@@ -30,24 +46,42 @@ function EditModal() {
   const handleSubmit = () => {
     if (!formRef.current.check()) return;
   };
+  const countriesData = countries?.map((item) => ({
+    label: (
+      <div key={item?.id} className="flex gap-1">
+        <span className={clsx(item?.country_flag, 'min-w-[1.3em]')} />
+        <span>{item?.country_name}</span>
+        <strong className="text-gray/25">{item?.country_code}</strong>
+      </div>
+    ),
+    value: item?.id,
+  }));
+
+  useEffect(() => {
+    fetch('/api/countries.json').then((res) => {
+      res.json().then((resJosn) => {
+        setCountries(resJosn);
+      });
+    });
+  }, []);
 
   return (
     <>
       <IconButton onClick={handleOpen} size="lg" className="rounded-full" icon={<MdOutlineEdit />} />
       <Modal backdrop="static" open={open} onClose={handleClose}>
         <Modal.Header>
-          <Modal.Title>Edit Experience</Modal.Title>
+          <Modal.Title>Edit Pernsonal Info</Modal.Title>
         </Modal.Header>
         <Modal.Body style={{ overflow: 'visible', paddingBottom: '0px', marginTop: '0px' }}>
           <Form fluid model={model} formValue={formValue} onChange={setFormValue} ref={formRef}>
             <hr className="m-2 mx-0" />
             <Form.Group dir="rtl" controlId="ArabicName">
               <Form.HelpText>الاسم بالغة العربية</Form.HelpText>
-              <Form.Control placeholder="الاسم بالغة العربية" block name="arabic_name" />
+              <Form.Control placeholder="الاسم بالغة العربية" block name="fullArName" />
             </Form.Group>
             <Form.Group dir="ltr" controlId="English Name">
               <Form.HelpText>English Name</Form.HelpText>
-              <Form.Control placeholder="English Name" block name="english_name" />
+              <Form.Control placeholder="English Name" block name="fullEnName" />
             </Form.Group>
             <Form.Group controlId="Email">
               <Form.HelpText>Email</Form.HelpText>
@@ -63,13 +97,32 @@ function EditModal() {
                 name="address"
               />
             </Form.Group>
+            <Form.Group controlId="countryId">
+              <Form.ControlLabel>Country</Form.ControlLabel>
+              <Form.Control
+                onSelect={(id) => {
+                  setCountryCode(countries?.find((el) => el?.id === id)?.country_code);
+                }}
+                placeholder="Country"
+                menuMaxHeight={300}
+                menuStyle={{ maxWidth: '10px' }}
+                block
+                name="countryId"
+                accepter={InputPicker}
+                data={countriesData}
+                size="lg"
+              />
+            </Form.Group>
             <Form.Group controlId="Phone">
               <Form.HelpText>Phone</Form.HelpText>
-              <Form.Control placeholder="Enter Phone" block name="phone" />
+              <InputGroup>
+                <InputGroup.Addon>{countryCodeState ?? '-'}</InputGroup.Addon>
+                <Form.Control name="phone" placeholder="Phone" size="lg" />
+              </InputGroup>
             </Form.Group>
-            <Form.Group controlId="Abbreviation">
-              <Form.HelpText>Prefix</Form.HelpText>
-              <Form.Control data={prefixData} accepter={InputPicker} placeholder="Enter Prefix" block name="prefex" />
+            <Form.Group controlId="prefix">
+              <Form.HelpText>prefix</Form.HelpText>
+              <Form.Control data={prefixData} accepter={InputPicker} placeholder="Enter Prefix" block name="prefix" />
             </Form.Group>
             <Form.Group controlId="Feez30">
               <Form.HelpText>Feez Per 30 minutes</Form.HelpText>
