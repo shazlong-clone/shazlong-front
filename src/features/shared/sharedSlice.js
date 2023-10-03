@@ -1,13 +1,17 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getCountries } from './sharedActions';
+import { getCountries, getLangs } from './sharedActions';
 export const themeSlice = createSlice({
   name: 'shared',
   initialState: {
     countries: [],
+    languages: [],
   },
   extraReducers: (builder) => {
     builder.addCase(getCountries.fulfilled, (state, action) => {
       state.countries = action.payload?.data;
+    });
+    builder.addCase(getLangs.fulfilled, (state, action) => {
+      state.languages = action.payload?.data;
     });
   },
 });

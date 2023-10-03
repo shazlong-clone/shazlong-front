@@ -23,7 +23,8 @@ import { genders, prefixList } from '../assets/constants';
 import { API_BASE_URL } from '../config/enviroment.config';
 import { useDispatch, useSelector } from 'react-redux';
 import { verificate } from '../features/auth/authAction';
-import { getCountries } from '../features/shared/sharedActions';
+import { getCountries, getLangs } from '../features/shared/sharedActions';
+
 const { Control, HelpText, Group } = Form;
 function VerifyEmailRegistration() {
   const { t } = useTranslation();
@@ -37,17 +38,20 @@ function VerifyEmailRegistration() {
     experienceYears: null,
     gender: null,
     country: null,
+    countryCode: null,
     languages: [],
     prefix: '',
     birthDate: null,
   });
+  const [countryCode, setCountryCode] = useState('+20');
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const onSubmit = async () => {
     if (!formRef.current?.check()) return;
     try {
       setLoading(true);
-      const res = await dispatch(verificate(formValue));
+      const res = await dispatch(verificate({ ...formValue, countryCode }));
       if (res.payload.status) {
         toaster.push(
           <Message type="success" showIcon={true} closable={true}>
@@ -79,9 +83,9 @@ function VerifyEmailRegistration() {
       setLoading(false);
     }
   };
-  const [lang, setLang] = useState([]);
+  const { languages } = useSelector((state) => state?.shared);
   const { i18n } = useTranslation();
-  const data = lang.map((item) => ({ label: i18n?.resolvedLanguage === 'ar' ? item.ar_name : item?.name, value: item?.id }));
+  const data = languages.map((item) => ({ label: i18n?.resolvedLanguage === 'ar' ? item.ar_name : item?.name, value: item?.id }));
   const countriesData = countries?.map((item) => ({
     label: (
       <div key={item?.id} className="flex gap-1">
@@ -119,11 +123,7 @@ function VerifyEmailRegistration() {
   };
 
   useEffect(() => {
-    fetch('/api/lang.json').then((res) => {
-      res.json().then((resJson) => {
-        setLang(resJson);
-      });
-    });
+    dispatch(getLangs());
     dispatch(getCountries());
   }, []);
 
@@ -169,6 +169,9 @@ function VerifyEmailRegistration() {
                   <Group>
                     <HelpText>{t('Country')} *</HelpText>
                     <Control
+                      onSelect={(id) => {
+                        setCountryCode(countries?.find((el) => el?.id === id)?.country_code);
+                      }}
                       size="lg"
                       data={countriesData}
                       block

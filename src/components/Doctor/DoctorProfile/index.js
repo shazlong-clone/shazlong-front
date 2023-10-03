@@ -14,8 +14,9 @@ import { useSelector } from 'react-redux';
 
 function DoctorProfile() {
   const [visible, setVisible] = useState(false);
+  const { countries, languages } = useSelector((state) => state?.shared);
   const {
-    doctor: { fullArName, fullEnName, prefix, email, address, phone, feez, cv },
+    doctor: { fullEnName, prefix, email, address, phone, feez, cv, country, languages: doctorLang },
   } = useSelector((state) => state?.auth);
 
   const info = [
@@ -51,17 +52,20 @@ function DoctorProfile() {
       icon: <GiEarthAfricaEurope />,
     },
     {
-      id: 5,
+      id: 6,
       key: 'Country',
-      value: (
-        <a className="cursor-pointer" onClick={() => setVisible(true)}>
-          View
-        </a>
-      ),
+      value: countries?.find((el) => el?.id === country)?.country_name,
       icon: <GiEarthAfricaEurope />,
     },
     {
-      id: 5,
+      id: 7,
+      key: 'Country',
+      value: doctorLang?.map((langId) => languages?.find((el) => el?.id == langId)?.name)?.join(','),
+      icon: <GiEarthAfricaEurope />,
+    },
+
+    {
+      id: 8,
       key: 'CV',
       value: (
         <a className="cursor-pointer" onClick={() => setVisible(true)}>
@@ -100,7 +104,7 @@ function DoctorProfile() {
                             <i className="text-md text-cyan flex items-center">{el?.icon}</i>
                             <span className="font-[500] lg:text-[14px]">{el?.key}:</span>
                           </article>
-                          <article className="font-[700] text-sm lg:text-[14px] pt-1 flex items-center">{el?.value}</article>
+                          <article className="font-[700] text-sm lg:text-[14px] pt-1 flex items-center pb-1">{el?.value}</article>
                         </div>
                       );
                     })}

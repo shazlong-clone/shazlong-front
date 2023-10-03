@@ -1,15 +1,27 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Button, FlexboxGrid, Form, IconButton, InputGroup, InputNumber, InputPicker, Modal, Schema, Stack } from 'rsuite';
+import {
+  Button,
+  FlexboxGrid,
+  Form,
+  IconButton,
+  InputGroup,
+  InputNumber,
+  InputPicker,
+  Modal,
+  Schema,
+  Stack,
+  TagPicker,
+} from 'rsuite';
 import { MdOutlineEdit } from 'react-icons/md';
 import { useTranslation } from 'react-i18next';
 import { egyptGovernorates, prefixList } from '../../../assets/constants';
 import { useDispatch, useSelector } from 'react-redux';
 import clsx from 'clsx';
-import { getCountries } from '../../../features/shared/sharedActions';
+import { getCountries, getLangs } from '../../../features/shared/sharedActions';
 
 function EditModal() {
   const {
-    doctor: { fullArName, fullEnName, prefix, email, address, phone, feez, countryCode },
+    doctor: { fullArName, fullEnName, prefix, email, address, phone, feez, countryCode, country, languages: doctorLang },
   } = useSelector((state) => state?.auth);
   const formRef = useRef();
   const handleClose = () => setOpen(false);
@@ -21,6 +33,8 @@ function EditModal() {
     email: email,
     address: address,
     phone: phone,
+    country: country,
+    languages: doctorLang,
     feez_per_30_min: feez?.at(0)?.amount,
     feez_per_60_min: feez?.at(1)?.amount,
   });
@@ -56,10 +70,18 @@ function EditModal() {
     ),
     value: item?.id,
   }));
+  const { languages } = useSelector((state) => state?.shared);
+  const languagesData = languages?.map((el) => {
+    return {
+      label: i18n.resolvedLanguage === 'ar' ? el?.ar_name : el?.name,
+      value: el?.id,
+    };
+  });
 
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getCountries());
+    dispatch(getLangs());
   }, []);
 
   return (
@@ -69,22 +91,22 @@ function EditModal() {
         <Modal.Header>
           <Modal.Title>Edit Pernsonal Info</Modal.Title>
         </Modal.Header>
-        <Modal.Body style={{ overflow: 'visible', paddingBottom: '0px', marginTop: '0px' }}>
+        <Modal.Body style={{ paddingBottom: '0px', marginTop: '0px', padding: '0 5px' }}>
           <Form fluid model={model} formValue={formValue} onChange={setFormValue} ref={formRef}>
             <hr className="m-2 mx-0" />
-            <Form.Group dir="rtl" controlId="ArabicName">
+            <Form.Group style={{ marginBottom: '5px' }} dir="rtl" controlId="ArabicName">
               <Form.HelpText>الاسم بالغة العربية</Form.HelpText>
               <Form.Control placeholder="الاسم بالغة العربية" block name="fullArName" />
             </Form.Group>
-            <Form.Group dir="ltr" controlId="English Name">
+            <Form.Group style={{ marginBottom: '5px' }} dir="ltr" controlId="English Name">
               <Form.HelpText>English Name</Form.HelpText>
               <Form.Control placeholder="English Name" block name="fullEnName" />
             </Form.Group>
-            <Form.Group controlId="Email">
+            <Form.Group style={{ marginBottom: '5px' }} controlId="Email">
               <Form.HelpText>Email</Form.HelpText>
               <Form.Control placeholder="Enter Email" block name="email" />
             </Form.Group>
-            <Form.Group controlId="Address">
+            <Form.Group style={{ marginBottom: '5px' }} controlId="Address">
               <Form.HelpText>Address</Form.HelpText>
               <Form.Control
                 data={egyptGovernoratesData}
@@ -94,7 +116,7 @@ function EditModal() {
                 name="address"
               />
             </Form.Group>
-            <Form.Group controlId="countryId">
+            <Form.Group style={{ marginBottom: '5px' }} controlId="country">
               <Form.ControlLabel>Country</Form.ControlLabel>
               <Form.Control
                 onSelect={(id) => {
@@ -104,24 +126,28 @@ function EditModal() {
                 menuMaxHeight={300}
                 menuStyle={{ maxWidth: '10px' }}
                 block
-                name="countryId"
+                name="country"
                 accepter={InputPicker}
                 data={countriesData}
                 size="lg"
               />
             </Form.Group>
-            <Form.Group controlId="Phone">
+            <Form.Group style={{ marginBottom: '5px' }} controlId="Phone">
               <Form.HelpText>Phone</Form.HelpText>
               <InputGroup>
                 <InputGroup.Addon>{countryCodeState ?? '-'}</InputGroup.Addon>
                 <Form.Control name="phone" placeholder="Phone" size="lg" />
               </InputGroup>
             </Form.Group>
-            <Form.Group controlId="prefix">
+            <Form.Group style={{ marginBottom: '5px' }} controlId="prefix">
               <Form.HelpText>prefix</Form.HelpText>
               <Form.Control data={prefixData} accepter={InputPicker} placeholder="Enter Prefix" block name="prefix" />
             </Form.Group>
-            <Form.Group controlId="Feez30">
+            <Form.Group style={{ marginBottom: '5px' }} controlId="languages">
+              <Form.HelpText>Languages</Form.HelpText>
+              <Form.Control data={languagesData} accepter={TagPicker} placeholder="Enter lang" block name="languages" />
+            </Form.Group>
+            <Form.Group style={{ marginBottom: '5px' }} controlId="Feez30">
               <Form.HelpText>Feez Per 30 minutes</Form.HelpText>
               <Form.Control
                 prefix="30 mins"
@@ -132,7 +158,7 @@ function EditModal() {
                 name="feez_per_30_min"
               />
             </Form.Group>
-            <Form.Group controlId="Feez60">
+            <Form.Group style={{ marginBottom: '5px' }} controlId="Feez60">
               <Form.HelpText>Feez Per 60 minutes</Form.HelpText>
               <Form.Control
                 prefix="60 mins"
