@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { Fragment, useRef, useState } from 'react';
 import { MdOutlineEdit } from 'react-icons/md';
 import { Button, Divider, FlexboxGrid, IconButton, Panel, Schema } from 'rsuite';
 import EditModal from './components/EditModal';
@@ -22,7 +22,7 @@ function Experience() {
         .fill('')
         .map((el, i) => {
           return (
-            <>
+            <React.Fragment key={Math.random()}>
               {i == 0 ? '' : <Divider />}
               <div key={Math.random(el)} className="flex gap-4 w-full text-start mb-5 items-start">
                 <section>
@@ -40,7 +40,7 @@ function Experience() {
                   <a className="text-sm">Oct 2005 - Sep 2007</a>
                 </section>
               </div>
-            </>
+            </React.Fragment>
           );
         })}
     </Panel>

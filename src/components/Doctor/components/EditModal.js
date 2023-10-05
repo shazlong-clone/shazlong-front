@@ -21,7 +21,7 @@ import { getCountries, getLangs } from '../../../features/shared/sharedActions';
 
 function EditModal() {
   const {
-    doctor: { fullArName, fullEnName, prefix, email, address, phone, feez, countryCode, country, languages: doctorLang },
+    doctor: { fullArName, fullEnName, prefix, email, phone, feez, countryCode, country, languages: doctorLang },
   } = useSelector((state) => state?.auth);
   const formRef = useRef();
   const handleClose = () => setOpen(false);
@@ -31,7 +31,6 @@ function EditModal() {
     fullEnName: fullEnName,
     prefix: prefix,
     email: email,
-    address: address,
     phone: phone,
     country: country,
     languages: doctorLang,
@@ -105,16 +104,6 @@ function EditModal() {
             <Form.Group style={{ marginBottom: '5px' }} controlId="Email">
               <Form.HelpText>Email</Form.HelpText>
               <Form.Control placeholder="Enter Email" block name="email" />
-            </Form.Group>
-            <Form.Group style={{ marginBottom: '5px' }} controlId="Address">
-              <Form.HelpText>Address</Form.HelpText>
-              <Form.Control
-                data={egyptGovernoratesData}
-                accepter={InputPicker}
-                placeholder="Enter Address"
-                block
-                name="address"
-              />
             </Form.Group>
             <Form.Group style={{ marginBottom: '5px' }} controlId="country">
               <Form.ControlLabel>Country</Form.ControlLabel>

@@ -8,10 +8,10 @@ export const themeSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(getCountries.fulfilled, (state, action) => {
-      state.countries = action.payload?.data;
+      state.countries = action.payload;
     });
     builder.addCase(getLangs.fulfilled, (state, action) => {
-      state.languages = action.payload?.data;
+      state.languages = action.payload;
     });
   },
 });

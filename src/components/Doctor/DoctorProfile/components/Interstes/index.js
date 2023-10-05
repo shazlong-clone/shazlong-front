@@ -65,11 +65,7 @@ function Interstes() {
     >
       <div className="flex gap-2 flex-wrap" key={Math.random()}>
         {interstesList?.map((el) => {
-          return (
-            <>
-              <Button className="rounded-3xl py-1">{el}</Button>
-            </>
-          );
+          return (<Button key={el}  className="rounded-3xl py-1">{el}</Button>);
         })}
       </div>
     </Panel>
