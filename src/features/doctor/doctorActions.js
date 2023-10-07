@@ -8,3 +8,7 @@ export const getMeAsDoctor = createAsyncThunk('getMeAsDoctor', async () => {
   const res = await doctorService.get('/api/v1/doctors/getMe');
   return res.data;
 });
+export const addOrUpdateDoctorExperience = createAsyncThunk('addOrUpdateDoctorExperience', async (params) => {
+  const res = await doctorService.post('/api/v1/doctors/addOrUpdateDoctorExperience', params);
+  return res.data;
+});
