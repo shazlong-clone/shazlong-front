@@ -1,16 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-import { Form, Button, Schema, Input, FlexboxGrid, IconButton, DateRangePicker, Col, Divider, Stack } from 'rsuite';
+import {
+  Form,
+  Button,
+  Schema,
+  Input,
+  FlexboxGrid,
+  IconButton,
+  DateRangePicker,
+  Col,
+  Divider,
+  Stack,
+  useToaster,
+  Message,
+} from 'rsuite';
 import PlusIcon from '@rsuite/icons/Plus';
 import MinusIcon from '@rsuite/icons/Minus';
 import FlexboxGridItem from 'rsuite/esm/FlexboxGrid/FlexboxGridItem';
+import { useDispatch, useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
+import { getMeAsDoctor, updateDoctorProfile } from '../../../../../../features/doctor/doctorActions';
 
 const { ArrayType, StringType, DateType, ObjectType } = Schema.Types;
 const model = Schema.Model({
   certifications: ArrayType().of(
     ObjectType().shape({
-      name: StringType().isRequired('Required.'),
-      title: StringType().isRequired('Required.'),
+      name: StringType().isRequired('Required.').minLength(5, 'max length 5 chars'),
+      title: StringType().isRequired('Required.').minLength(5, 'max length 5 chars'),
       time: ArrayType().of(DateType().isRequired('Required.')).isRequired('Required.'),
     }),
   ),
@@ -27,11 +43,11 @@ const ProductItem = ({ rowValue = {}, onChange, rowIndex, rowError, handleMinus,
     onChange(rowIndex, { ...rowValue, ar_title: value });
   };
 
-  const handleChangeName = (value) => {
-    onChange(rowIndex, { ...rowValue, name: value });
+  const handleChangePlace = (value) => {
+    onChange(rowIndex, { ...rowValue, place: value });
   };
-  const handleChangeArName = (value) => {
-    onChange(rowIndex, { ...rowValue, ar_name: value });
+  const handleChangeArPlace = (value) => {
+    onChange(rowIndex, { ...rowValue, ar_place: value });
   };
 
   const handleChangeTime = (value) => {
@@ -49,24 +65,19 @@ const ProductItem = ({ rowValue = {}, onChange, rowIndex, rowError, handleMinus,
         {rowError ? <ErrorMessage>{rowError.ar_title.errorMessage}</ErrorMessage> : null}
       </FlexboxGrid.Item>
       <FlexboxGrid.Item as={Col} xs={24} md={4} className="max-md:mb-1">
-        <Input placeholder="Name" block value={rowValue.name} onChange={handleChangeName} />
+        <Input placeholder="Place" block value={rowValue.place} onChange={handleChangePlace} />
         {rowError ? <ErrorMessage>{rowError.name.errorMessage}</ErrorMessage> : null}
       </FlexboxGrid.Item>
       <FlexboxGrid.Item as={Col} xs={24} md={4} className="max-md:mb-1">
-        <Input placeholder="Arabic Name" block value={rowValue.ar_name} onChange={handleChangeArTitle} />
-        {rowError ? <ErrorMessage>{rowError.ar_name.errorMessage}</ErrorMessage> : null}
+        <Input placeholder="Arabic Place" block value={rowValue.ar_place} onChange={handleChangeArPlace} />
+        {rowError ? <ErrorMessage>{rowError.ar_place.errorMessage}</ErrorMessage> : null}
       </FlexboxGrid.Item>
       <FlexboxGrid.Item as={Col} xs={24} md={7} className="max-md:mb-1">
         <DateRangePicker block value={rowValue.time} onChange={handleChangeTime} />
         {rowError ? <ErrorMessage>{rowError.time.errorMessage}</ErrorMessage> : null}
       </FlexboxGrid.Item>
       <FlexboxGrid.Item as={Col} xs={24} md={1} className="max-md:text-end">
-        <IconButton
-          className="text-red-500"
-          disabled={education?.length === 1}
-          onClick={() => handleMinus(rowIndex)}
-          icon={<MinusIcon />}
-        />
+        <IconButton disabled={education?.length === 1} onClick={() => handleMinus(rowIndex)} icon={<MinusIcon />} />
         {rowError ? <div>&#160;</div> : null}
       </FlexboxGrid.Item>
     </FlexboxGrid>
@@ -95,7 +106,7 @@ const ProductInputControl = ({ value = [], onChange, fieldError }) => {
     }
   };
   const handleAdd = () => {
-    handleChangeProducts(education.concat([{ title: '', ar_title: '', name: '', ar_name: '', time: '' }]));
+    handleChangeProducts(education.concat([{ title: '', ar_title: '', palce: '', ar_palce: '', time: '' }]));
   };
   return (
     <div className="w-full">
@@ -119,13 +130,58 @@ const ProductInputControl = ({ value = [], onChange, fieldError }) => {
     </div>
   );
 };
-
 const EducationForm = ({ handleClose }) => {
   const formRef = React.useRef();
   const [formError, setFormError] = React.useState({});
+  const { profile } = useSelector((state) => state?.doctor);
   const [formValue, setFormValue] = React.useState({
-    education: [{ title: '', ar_title: '', name: '', ar_name: '', time: '' }],
+    educations: profile?.educations
+      ? profile?.educations?.map((el) => {
+          return { ...el, time: el?.time?.map((d) => new Date(d)) };
+        })
+      : [{ title: '', ar_title: '', place: '', ar_place: '', time: '' }],
   });
+  const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
+  const toaster = useToaster();
+  const { t } = useTranslation();
+
+  const handelSubmit = async () => {
+    if (!formRef.current.check()) return;
+    try {
+      setLoading(true);
+      const res = await dispatch(updateDoctorProfile(formValue));
+      if (res?.payload?.status) {
+        toaster.push(
+          <Message type="success" closable showIcon>
+            {t('updated_successfuly')}
+          </Message>,
+          { duration: 5000 },
+        );
+        dispatch(getMeAsDoctor());
+        handleClose();
+      } else {
+        toaster.push(
+          <Message type="error" closable showIcon>
+            {res.payload.message}
+          </Message>,
+          { duration: 5000 },
+        );
+      }
+    } catch (err) {
+      toaster.push(
+        <Message closable showIcon type="error">
+          {t('internal_server_error')}
+        </Message>,
+        {
+          duration: 5000,
+        },
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <FlexboxGrid>
       <FlexboxGrid.Item colspan={24}>
@@ -144,12 +200,7 @@ const EducationForm = ({ handleClose }) => {
             <FlexboxGridItem>
               <Stack spacing={6}>
                 <Button onClick={handleClose}>Cancel</Button>
-                <Button
-                  appearance="primary"
-                  onClick={() => {
-                    if (!formRef.current.check()) return;
-                  }}
-                >
+                <Button loading={loading} appearance="primary" onClick={handelSubmit}>
                   Save
                 </Button>
               </Stack>
