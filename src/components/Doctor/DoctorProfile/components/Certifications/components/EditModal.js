@@ -7,10 +7,10 @@ function EditModal() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
   return (
     <>
       <IconButton onClick={handleOpen} size="lg" className="rounded-full" icon={<MdOutlineEdit />} />
-
       <Modal size="lg" backdrop="static" open={open} onClose={handleClose}>
         <Modal.Header>
           <Modal.Title>Edit Certifications</Modal.Title>
