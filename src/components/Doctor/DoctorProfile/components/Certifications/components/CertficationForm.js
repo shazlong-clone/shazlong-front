@@ -4,7 +4,7 @@ import { Form, Button, Schema, Input, FlexboxGrid, IconButton, DateRangePicker, 
 import PlusIcon from '@rsuite/icons/Plus';
 import MinusIcon from '@rsuite/icons/Minus';
 import FlexboxGridItem from 'rsuite/esm/FlexboxGrid/FlexboxGridItem';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { getMeAsDoctor, updateDoctorProfile } from '../../../../../../features/doctor/doctorActions';
 const { ArrayType, StringType, DateType, ObjectType } = Schema.Types;
@@ -121,8 +121,13 @@ const ProductInputControl = ({ value = [], onChange, fieldError }) => {
 const CertficationForm = ({ handleClose }) => {
   const formRef = React.useRef();
   const [formError, setFormError] = React.useState({});
+  const { profile } = useSelector((state) => state?.doctor);
   const [formValue, setFormValue] = React.useState({
-    certifications: [{ title: '', ar_title: '', place: '', ar_place: '', time: '' }],
+    certifications: profile?.certifications
+      ? profile?.certifications?.map((el) => {
+          return { ...el, time: el?.time?.map((d) => new Date(d)) };
+        })
+      : [{ title: '', ar_title: '', place: '', ar_place: '', time: '' }],
   });
   const { t } = useTranslation();
   const toaster = useToaster();
