@@ -16,8 +16,8 @@ export const splitArrOfChunchN = (arr, len) => {
 };
 
 export const genders = [
-  { id: '1', name: 'Male' },
-  { id: '2', name: 'FeMale' },
+  { id: 1, name: 'Male' },
+  { id: 2, name: 'FeMale' },
 ];
 
 export const DOCTOR = 2;
@@ -25,3 +25,33 @@ export const USER = 1;
 
 export const prefixList = ['Dr', 'PsyD', 'Prof', 'MBPsS', 'Mr', 'Mrs', 'Ms'];
 
+export const specializationList = [
+  {
+    id: 1,
+    name: 'Adolescence_Disorders',
+  },
+  {
+    id: 2,
+    name: 'Adolescence_Disorders',
+  },
+  {
+    id: 3,
+    name: 'Mood_Disorders_depression',
+  },
+  {
+    id: 4,
+    name: 'Anxiety_Disorders_And_Obsessions',
+  },
+  {
+    id: 5,
+    name: 'Marriage_CounsellingRelationship_Disorders',
+  },
+  {
+    id: 6,
+    name: 'Addiction',
+  },
+  {
+    id: 7,
+    name: 'Sexual_Disorders',
+  },
+];

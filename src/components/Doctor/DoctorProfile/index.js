@@ -12,6 +12,7 @@ import EditModal from '../components/EditModal';
 import Viewer from 'react-viewer';
 import { useDispatch, useSelector } from 'react-redux';
 import { getMeAsDoctor } from '../../../features/auth/authAction';
+import { genders } from '../../../assets/constants';
 
 function DoctorProfile() {
   const [visible, setVisible] = useState(false);
@@ -20,7 +21,7 @@ function DoctorProfile() {
     fullEnName,
     prefix,
     email,
-    address,
+    gender,
     phone,
     feez,
     cv,
@@ -47,8 +48,8 @@ function DoctorProfile() {
 
     {
       id: 3,
-      key: 'Address',
-      value: address ?? '-',
+      key: 'Gender',
+      value: genders?.find((el) => el?.id === gender)?.name ?? '-',
       icon: <AiOutlineHome />,
     },
     {

@@ -10,6 +10,8 @@ import {
   MaskedInput,
   Message,
   Modal,
+  Radio,
+  RadioGroup,
   Schema,
   Stack,
   TagPicker,
@@ -17,7 +19,7 @@ import {
 } from 'rsuite';
 import { MdOutlineEdit } from 'react-icons/md';
 import { useTranslation } from 'react-i18next';
-import { prefixList } from '../../../assets/constants';
+import { genders, prefixList } from '../../../assets/constants';
 import { useDispatch, useSelector } from 'react-redux';
 import clsx from 'clsx';
 import { getCountries, getLangs } from '../../../features/shared/sharedActions';
@@ -28,8 +30,17 @@ function EditModal() {
   const { languages } = useSelector((state) => state?.shared);
 
   const {
-    doctor: { fullArName, fullEnName, prefix, email, phone, feez, countryCode, country, languages: doctorLang },
-  } = useSelector((state) => state?.auth);
+    fullArName,
+    fullEnName,
+    prefix,
+    email,
+    phone,
+    feez,
+    countryCode,
+    country,
+    languages: doctorLang,
+    gender,
+  } = useSelector((state) => state?.doctor?.profile);
   const formRef = useRef();
 
   const handleClose = () => setOpen(false);
@@ -51,6 +62,7 @@ function EditModal() {
     feez_per_30_min: feez?.at(0)?.amount,
     feez_per_60_min: feez?.at(1)?.amount,
     countryCode: countryCodeState,
+    gender,
   });
 
   const { countries } = useSelector((state) => state?.shared);
@@ -82,6 +94,7 @@ function EditModal() {
         { amount: formValue?.feez_per_30_min, duration: 30 },
         { amount: formValue?.feez_per_60_min, duration: 60 },
       ],
+      countryCode: countryCodeState,
     };
 
     try {
@@ -95,6 +108,7 @@ function EditModal() {
           { duration: 2000 },
         );
         dispatch(getMeAsDoctor());
+        setOpen(false);
       } else {
         toaster.push(
           <Message type="error" closable showIcon>
@@ -220,6 +234,16 @@ function EditModal() {
                 block={'true'}
                 name="feez_per_60_min"
               />
+            </Form.Group>
+            <Form.Group>
+              <Form.HelpText>Gender</Form.HelpText>
+              <Form.Control name="gender" accepter={RadioGroup} inline>
+                {genders?.map((el) => (
+                  <Radio key={Math.random()} value={el?.id}>
+                    {t(el?.name)}
+                  </Radio>
+                ))}
+              </Form.Control>
             </Form.Group>
             <hr className="m-3 mx-0" />
             <FlexboxGrid justify="end">
