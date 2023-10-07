@@ -1,29 +1,17 @@
-import React, { forwardRef, useRef, useState } from 'react';
-import {
-  Button,
-  DateRangePicker,
-  FlexboxGrid,
-  Form,
-  IconButton,
-  Loader,
-  Message,
-  Modal,
-  Schema,
-  Stack,
-  Uploader,
-  toaster,
-} from 'rsuite';
+import React, { forwardRef, useEffect, useRef, useState } from 'react';
+import { Button, DateRangePicker, FlexboxGrid, Form, IconButton, Message, Modal, Schema, Stack, Uploader, toaster } from 'rsuite';
 import { RiAddFill } from 'react-icons/ri';
 import AvatarIcon from '@rsuite/icons/legacy/Avatar';
 import { useDispatch } from 'react-redux';
 import { getMeAsDoctor, addOrUpdateDoctorExperience } from '../../../../../../features/doctor/doctorActions';
 import { useTranslation } from 'react-i18next';
+import { MdOutlineEdit } from 'react-icons/md';
 
-function EditModal() {
+function EditModal({ experience }) {
   const formRef = useRef();
   const handleClose = () => setOpen(false);
 
-  const [formValue, setFormValue] = useState({});
+  const [formValue, setFormValue] = useState({ ...experience, time: experience?.time?.map((el) => new Date(el)) });
   const model = Schema.Model({
     time: Schema.Types.ArrayType().of(Schema.Types.DateType().isRequired('Required.')).isRequired('Required.'),
     title: Schema.Types.StringType().isRequired('Required.'),
@@ -42,7 +30,6 @@ function EditModal() {
     if (!formRef.current.check()) return;
     try {
       setLoading(true);
-
       let formData = new FormData();
       for (const key in formValue) {
         formData.append(key, formValue[key]);
@@ -106,9 +93,21 @@ function EditModal() {
     );
   });
 
+  useEffect(() => {
+    if (experience?.company_logo) {
+      const url = `data:image/png;base64,${experience?.company_logo}`;
+      fetch(url).then((res) => setFormValue({ ...formValue, company_logo: res.blob() }));
+      setFileInfo(url);
+    }
+  }, []);
   return (
     <>
-      <IconButton onClick={handleOpen} size="lg" className="rounded-full" icon={<RiAddFill />} />
+      {!experience ? (
+        <IconButton onClick={handleOpen} size="lg" className="rounded-full" icon={<RiAddFill />} />
+      ) : (
+        <IconButton onClick={handleOpen} icon={<MdOutlineEdit />} className="rounded-full" />
+      )}
+
       <Modal backdrop="static" open={open} onClose={handleClose}>
         <Modal.Header>
           <Modal.Title>Add Experience</Modal.Title>
