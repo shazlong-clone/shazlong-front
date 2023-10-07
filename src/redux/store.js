@@ -3,6 +3,7 @@ import themeSlice from '../features/theme/themeSlice';
 import authSlice from '../features/auth/authSlice';
 import paymentSlice from '../features/payment/paymentSlice';
 import sharedSlice from '../features/shared/sharedSlice';
+import doctorSlice from '../features/doctor/doctorSlice';
 import storage from 'redux-persist/lib/storage';
 import { persistReducer, persistStore } from 'redux-persist';
 
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   auth: authSlice,
   payment: paymentSlice,
   shared: sharedSlice,
+  doctor: doctorSlice,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

@@ -7,25 +7,39 @@ import {
   InputGroup,
   InputNumber,
   InputPicker,
+  MaskedInput,
+  Message,
   Modal,
   Schema,
   Stack,
   TagPicker,
+  useToaster,
 } from 'rsuite';
 import { MdOutlineEdit } from 'react-icons/md';
 import { useTranslation } from 'react-i18next';
-import { egyptGovernorates, prefixList } from '../../../assets/constants';
+import { prefixList } from '../../../assets/constants';
 import { useDispatch, useSelector } from 'react-redux';
 import clsx from 'clsx';
 import { getCountries, getLangs } from '../../../features/shared/sharedActions';
+import { updateDoctorProfile } from '../../../features/doctor/doctorActions';
+import { getMeAsDoctor } from '../../../features/auth/authAction';
 
 function EditModal() {
+  const { languages } = useSelector((state) => state?.shared);
+
   const {
     doctor: { fullArName, fullEnName, prefix, email, phone, feez, countryCode, country, languages: doctorLang },
   } = useSelector((state) => state?.auth);
   const formRef = useRef();
+
   const handleClose = () => setOpen(false);
-  const { i18n } = useTranslation();
+
+  const { t, i18n } = useTranslation();
+
+  const [loading, setLoading] = useState(false);
+
+  const [countryCodeState, setCountryCode] = useState(countryCode || '');
+
   const [formValue, setFormValue] = useState({
     fullArName: fullArName,
     fullEnName: fullEnName,
@@ -36,28 +50,71 @@ function EditModal() {
     languages: doctorLang,
     feez_per_30_min: feez?.at(0)?.amount,
     feez_per_60_min: feez?.at(1)?.amount,
+    countryCode: countryCodeState,
   });
-  const model = Schema.Model({
-    interstes: Schema.Types.ArrayType().isRequired('This field is required.'),
-  });
-  const [countryCodeState, setCountryCode] = useState(countryCode || '');
+
   const { countries } = useSelector((state) => state?.shared);
-  const handleOpen = () => setOpen(true);
+
   const [open, setOpen] = useState(false);
-  const egyptGovernoratesData = egyptGovernorates?.map((el) => {
-    return {
-      label: i18n.resolvedLanguage === 'ar' ? el?.ar_name : el?.name,
-      value: el?.id,
-    };
+
+  const model = Schema.Model({
+    fullArName: Schema.Types.StringType(),
+    fullEnName: Schema.Types.StringType(),
+    email: Schema.Types.StringType().isEmail('Not Valid Email'),
   });
+
+  const handleOpen = () => setOpen(true);
+
   const prefixData = prefixList?.map((el) => {
     return {
       label: el,
       value: el,
     };
   });
-  const handleSubmit = () => {
+
+  const toaster = useToaster();
+
+  const handleSubmit = async () => {
     if (!formRef.current.check()) return;
+    const params = {
+      ...formValue,
+      feez: [
+        { amount: formValue?.feez_per_30_min, duration: 30 },
+        { amount: formValue?.feez_per_60_min, duration: 60 },
+      ],
+    };
+
+    try {
+      setLoading(true);
+      const res = await dispatch(updateDoctorProfile(params));
+      if (res.payload.status) {
+        toaster.push(
+          <Message type="success" closable showIcon>
+            {t('Updated_Succefuly')}
+          </Message>,
+          { duration: 2000 },
+        );
+        dispatch(getMeAsDoctor());
+      } else {
+        toaster.push(
+          <Message type="error" closable showIcon>
+            {res.payload.message}
+          </Message>,
+          { duration: 2000 },
+        );
+      }
+    } catch (err) {
+      toaster.push(
+        <Message closable showIcon type="error">
+          {t('internal_server_error')}
+        </Message>,
+        {
+          duration: 5000,
+        },
+      );
+    } finally {
+      setLoading(false);
+    }
   };
   const countriesData = countries?.map((item) => ({
     label: (
@@ -69,7 +126,7 @@ function EditModal() {
     ),
     value: item?.id,
   }));
-  const { languages } = useSelector((state) => state?.shared);
+
   const languagesData = languages?.map((el) => {
     return {
       label: i18n.resolvedLanguage === 'ar' ? el?.ar_name : el?.name,
@@ -95,15 +152,15 @@ function EditModal() {
             <hr className="m-2 mx-0" />
             <Form.Group style={{ marginBottom: '5px' }} dir="rtl" controlId="ArabicName">
               <Form.HelpText>الاسم بالغة العربية</Form.HelpText>
-              <Form.Control placeholder="الاسم بالغة العربية" block name="fullArName" />
+              <Form.Control placeholder="الاسم بالغة العربية" block={'true'} name="fullArName" />
             </Form.Group>
             <Form.Group style={{ marginBottom: '5px' }} dir="ltr" controlId="English Name">
               <Form.HelpText>English Name</Form.HelpText>
-              <Form.Control placeholder="English Name" block name="fullEnName" />
+              <Form.Control placeholder="English Name" block={'true'} name="fullEnName" />
             </Form.Group>
             <Form.Group style={{ marginBottom: '5px' }} controlId="Email">
               <Form.HelpText>Email</Form.HelpText>
-              <Form.Control placeholder="Enter Email" block name="email" />
+              <Form.Control placeholder="Enter Email" block={'true'} name="email" />
             </Form.Group>
             <Form.Group style={{ marginBottom: '5px' }} controlId="country">
               <Form.ControlLabel>Country</Form.ControlLabel>
@@ -125,16 +182,22 @@ function EditModal() {
               <Form.HelpText>Phone</Form.HelpText>
               <InputGroup>
                 <InputGroup.Addon>{countryCodeState ?? '-'}</InputGroup.Addon>
-                <Form.Control name="phone" placeholder="Phone" size="lg" />
+                <Form.Control
+                  accepter={MaskedInput}
+                  mask={[/\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/]}
+                  name="phone"
+                  placeholder="Phone"
+                  size="lg"
+                />
               </InputGroup>
             </Form.Group>
             <Form.Group style={{ marginBottom: '5px' }} controlId="prefix">
               <Form.HelpText>prefix</Form.HelpText>
-              <Form.Control data={prefixData} accepter={InputPicker} placeholder="Enter Prefix" block name="prefix" />
+              <Form.Control data={prefixData} accepter={InputPicker} placeholder="Enter Prefix" block={'true'} name="prefix" />
             </Form.Group>
             <Form.Group style={{ marginBottom: '5px' }} controlId="languages">
               <Form.HelpText>Languages</Form.HelpText>
-              <Form.Control data={languagesData} accepter={TagPicker} placeholder="Enter lang" block name="languages" />
+              <Form.Control data={languagesData} accepter={TagPicker} placeholder="Enter lang" block={'true'} name="languages" />
             </Form.Group>
             <Form.Group style={{ marginBottom: '5px' }} controlId="Feez30">
               <Form.HelpText>Feez Per 30 minutes</Form.HelpText>
@@ -143,7 +206,7 @@ function EditModal() {
                 min={0}
                 accepter={InputNumber}
                 placeholder="Enter Feez Per 30 minutes"
-                block
+                block={'true'}
                 name="feez_per_30_min"
               />
             </Form.Group>
@@ -154,7 +217,7 @@ function EditModal() {
                 min={0}
                 accepter={InputNumber}
                 placeholder="Enter Feez Per 60 minutes"
-                block
+                block={'true'}
                 name="feez_per_60_min"
               />
             </Form.Group>
@@ -162,7 +225,7 @@ function EditModal() {
             <FlexboxGrid justify="end">
               <Stack spacing={16}>
                 <Button onClick={handleClose}>Cancel</Button>
-                <Button appearance="primary" onClick={handleSubmit} type="submit">
+                <Button loading={loading} appearance="primary" onClick={handleSubmit} type="submit">
                   Save
                 </Button>
               </Stack>

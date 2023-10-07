@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Breadcrumb, Col, Grid, Panel, Row, Tooltip, Whisper } from 'rsuite';
 import { AiOutlineMail, AiOutlineHome } from 'react-icons/ai';
@@ -10,15 +10,27 @@ import Education from './components/Education';
 import Experience from './components/Experience';
 import EditModal from '../components/EditModal';
 import Viewer from 'react-viewer';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { getMeAsDoctor } from '../../../features/auth/authAction';
 
 function DoctorProfile() {
   const [visible, setVisible] = useState(false);
   const { countries, languages } = useSelector((state) => state?.shared);
   const {
-    doctor: { fullEnName, prefix, email, address, phone, feez, cv, country, languages: doctorLang },
-  } = useSelector((state) => state?.auth);
-
+    fullEnName,
+    prefix,
+    email,
+    address,
+    phone,
+    feez,
+    cv,
+    country,
+    languages: doctorLang,
+  } = useSelector((state) => state?.doctor.profile);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getMeAsDoctor());
+  }, []);
   const info = [
     {
       id: 1,
