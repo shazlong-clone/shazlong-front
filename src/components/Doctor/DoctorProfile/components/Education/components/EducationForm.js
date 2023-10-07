@@ -1,19 +1,6 @@
 import React, { useState } from 'react';
 
-import {
-  Form,
-  Button,
-  Schema,
-  Input,
-  FlexboxGrid,
-  IconButton,
-  DateRangePicker,
-  Col,
-  Divider,
-  Stack,
-  useToaster,
-  Message,
-} from 'rsuite';
+import { Form, Button, Schema, Input, FlexboxGrid, IconButton, DateRangePicker, Col, Stack, useToaster, Message } from 'rsuite';
 import PlusIcon from '@rsuite/icons/Plus';
 import MinusIcon from '@rsuite/icons/Minus';
 import FlexboxGridItem from 'rsuite/esm/FlexboxGrid/FlexboxGridItem';
@@ -194,7 +181,7 @@ const EducationForm = ({ handleClose }) => {
           formValue={formValue}
           model={model}
         >
-          <Form.Control name="education" accepter={ProductInputControl} fieldError={formError.education} />
+          <Form.Control name="educations" accepter={ProductInputControl} fieldError={formError.education} />
           <hr />
           <FlexboxGrid justify="end">
             <FlexboxGridItem>
