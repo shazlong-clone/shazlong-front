@@ -282,3 +282,7 @@ a:active {
 .rs-sidenav-default .rs-sidenav-toggle-button {
   @apply bg-white hover:bg-gray/10;
 }
+
+.wrap-anywhere {
+  overflow-wrap: anywhere;
+}

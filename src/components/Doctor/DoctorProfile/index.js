@@ -72,7 +72,7 @@ function DoctorProfile() {
     },
     {
       id: 7,
-      key: 'Country',
+      key: 'Languages',
       value: doctorLang?.map((langId) => languages?.find((el) => el?.id == langId)?.name)?.join(','),
       icon: <GiEarthAfricaEurope />,
     },
@@ -117,7 +117,9 @@ function DoctorProfile() {
                             <i className="text-md text-cyan flex items-center">{el?.icon}</i>
                             <span className="font-[500] lg:text-[14px]">{el?.key}:</span>
                           </article>
-                          <article className="font-[700] text-sm lg:text-[14px] pt-1 flex items-center pb-1">{el?.value}</article>
+                          <article className="font-[700] text-sm lg:text-[14px] pt-1 flex items-center pb-1 wrap-anywhere">
+                            {el?.value}
+                          </article>
                         </div>
                       );
                     })}
