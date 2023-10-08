@@ -1,11 +1,86 @@
-import React, { Fragment, useRef, useState } from 'react';
-import { Button, Divider, FlexboxGrid, IconButton, Panel, Schema } from 'rsuite';
+import React, { useState } from 'react';
+import { Button, Divider, FlexboxGrid, IconButton, Message, Panel, Popover, Stack, Whisper, useToaster } from 'rsuite';
 import EditModal from './components/EditModal';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
+import { RiDeleteBinLine } from 'react-icons/ri';
+import { AiFillWarning } from 'react-icons/ai';
+import { useTranslation } from 'react-i18next';
+import { deleteExperienceById, getMeAsDoctor } from '../../../../../features/doctor/doctorActions';
 
 function Experience() {
   const { profile } = useSelector((state) => state?.doctor);
+  const toaster = useToaster();
+  const { t } = useTranslation();
+  const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
+  const hamdelDeleteExperience = async (id) => {
+    try {
+      setLoading(true);
+      const res = await dispatch(deleteExperienceById(id));
+      if (res.payload.status) {
+        toaster.push(
+          <Message type="success" closable showIcon>
+            {t('Updated_Succefuly')}
+          </Message>,
+          { duration: 2000 },
+        );
+        dispatch(getMeAsDoctor());
+      } else {
+        toaster.push(
+          <Message type="error" closable showIcon>
+            {res.payload.message}
+          </Message>,
+          { duration: 2000 },
+        );
+      }
+    } catch (err) {
+      toaster.push(
+        <Message closable showIcon type="error">
+          {t('internal_server_error')}
+        </Message>,
+        {
+          duration: 5000,
+        },
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
+  const DefaultPopover = React.forwardRef(({ id, ...props }, ref) => {
+    return (
+      <Popover
+        ref={ref}
+        title={
+          <div className="flex items-center">
+            <AiFillWarning className="text-yellow-500 text-2xl" /> warn
+          </div>
+        }
+        {...props}
+      >
+        Are you sure to delete this task?
+        <br />
+        <div className="flex justify-end">
+          <Button
+            loading={loading}
+            size="sm"
+            onClick={() => hamdelDeleteExperience(id)}
+            className="mt-3"
+            color="red"
+            appearance="primary"
+          >
+            Delete
+          </Button>
+        </div>
+      </Popover>
+    );
+  });
+
+  const CustomComponent = ({ id }) => (
+    <Whisper trigger="click" placement="topEnd" controlId="control-id-center" speaker={<DefaultPopover id={id} />}>
+      <IconButton icon={<RiDeleteBinLine />} className="rounded-full" />
+    </Whisper>
+  );
   return (
     <Panel
       className="bg-white mb-6"
@@ -33,7 +108,10 @@ function Experience() {
                   <section className="grow">
                     <h6 className="mb-2 flex justify-between items-center">
                       <span>{el?.title}</span>
-                      <EditModal experience={el} />
+                      <Stack spacing={6}>
+                        <EditModal experience={el} />
+                        <CustomComponent id={el?._id} />
+                      </Stack>
                     </h6>
                     <p className="text-sm">{el?.description}</p>
                     <a className="text-sm">

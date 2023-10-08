@@ -12,3 +12,8 @@ export const addOrUpdateDoctorExperience = createAsyncThunk('addOrUpdateDoctorEx
   const res = await doctorService.post('/api/v1/doctors/addOrUpdateDoctorExperience', params);
   return res.data;
 });
+
+export const deleteExperienceById = createAsyncThunk('deleteExperienceById', async (id) => {
+  const res = await doctorService.delete(`/api/v1/doctors/deleteExperienceById/${id}`);
+  return res.data;
+});
