@@ -16,7 +16,7 @@ function SignUpForm({ isSignAsUse }) {
   const [acceptLiecence, setAcceptLicence] = useState(false);
   const navigate = useNavigate();
   const model = Schema.Model({
-    email: Schema.Types.StringType().isRequired(t('required')).isEmail(t('not_vaid_email'), true),
+    email: Schema.Types.StringType().isRequired(t('required')).isEmail(t('not_valid_email'), true),
     password: Schema.Types.StringType().isRequired(t('required')),
   });
   const [formValue, setFormValues] = useState({

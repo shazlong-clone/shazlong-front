@@ -73,7 +73,7 @@ function CreditCard() {
     }
   };
   const model = Schema.Model({
-    email: Schema.Types.StringType().isRequired(t('required')).isEmail('not_vaid_email'),
+    email: Schema.Types.StringType().isRequired(t('required')).isEmail('not_valid_email'),
     phone: Schema.Types.StringType()
       .isRequired(t('required'))
       .addRule((value) => {

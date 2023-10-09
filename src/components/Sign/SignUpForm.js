@@ -52,7 +52,7 @@ function SignUpForm() {
 
   const model = Schema.Model({
     name: Schema.Types.StringType().isRequired(t('required')),
-    email: Schema.Types.StringType().isRequired(t('required')).isEmail(t('not_vaid_email'), true),
+    email: Schema.Types.StringType().isRequired(t('required')).isEmail(t('not_valid_email'), true),
     password: Schema.Types.StringType().isRequired(t('required')),
     passwordConfirm: Schema.Types.StringType().isRequired(t('required')),
     countryId: Schema.Types.NumberType().isRequired(t('required')),
