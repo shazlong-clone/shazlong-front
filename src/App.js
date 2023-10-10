@@ -20,7 +20,7 @@ const Online = lazy(() => import('./pages/Online'));
 const MyTherapy = lazy(() => import('./pages/MyTherapy'));
 const SignUp = lazy(() => import('./pages/SignUp'));
 const SignIn = lazy(() => import('./pages/SignIn'));
-const Test = lazy(() => import('./components/Shared/Test'));
+const Test = lazy(() => import('./pages/Test'));
 const Licence = lazy(() => import('./pages/Licence'));
 const Blogs = lazy(() => import('./pages/Blogs'));
 const Blog = lazy(() => import('./pages/Blog'));
