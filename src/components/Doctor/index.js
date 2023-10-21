@@ -103,7 +103,7 @@ function DoctorLayout() {
                 </article>
                 <article>
                   <div className="flex items-center gap-5">
-                    <NotificationWhisper />
+                    {/* <NotificationWhisper /> */}
                     <SettingWhisper placement="bottomEnd" />
                     <Avatar className="cursor-pointer" circle src={profile?.photo} alt="@SevenOutman" />
                   </div>
