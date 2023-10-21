@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Breadcrumb, Col, Grid, Panel, Row, Tooltip, Whisper } from 'rsuite';
+import { Breadcrumb, Col, Grid, Panel, Row } from 'rsuite';
 import { AiOutlineMail, AiOutlineHome } from 'react-icons/ai';
 import { BsTelephone } from 'react-icons/bs';
-import { GiEarthAfricaEurope } from 'react-icons/gi';
+import { ImEarth } from 'react-icons/im';
 import Certifications from './components/Certifications';
 import Interstes from './components/Interstes/index';
 import Education from './components/Education';
@@ -13,6 +13,9 @@ import Viewer from 'react-viewer';
 import { useDispatch, useSelector } from 'react-redux';
 import { getMeAsDoctor } from '../../../features/auth/authAction';
 import { genders } from '../../../assets/constants';
+import { LuSubtitles, LuLanguages } from 'react-icons/lu';
+import { AiOutlineDollarCircle } from 'react-icons/ai';
+import { CgFileDocument } from 'react-icons/cg';
 
 function DoctorProfile() {
   const [visible, setVisible] = useState(false);
@@ -27,7 +30,7 @@ function DoctorProfile() {
     cv,
     country,
     languages: doctorLang,
-  } = useSelector((state) => state?.doctor.profile);
+  } = useSelector((state) => state?.doctor?.profile) ?? {};
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getMeAsDoctor());
@@ -56,25 +59,25 @@ function DoctorProfile() {
       id: 4,
       key: 'Prefix',
       value: prefix,
-      icon: <GiEarthAfricaEurope />,
+      icon: <LuSubtitles />,
     },
     {
       id: 5,
       key: 'Feez',
       value: feez?.at(0)?.amount ? `EGY ${feez?.at(0)?.amount}/30 mins | EGY ${feez?.at(1)?.amount}/60 mins` : '-',
-      icon: <GiEarthAfricaEurope />,
+      icon: <AiOutlineDollarCircle />,
     },
     {
       id: 6,
       key: 'Country',
       value: countries?.find((el) => el?.id === country)?.country_name,
-      icon: <GiEarthAfricaEurope />,
+      icon: <ImEarth />,
     },
     {
       id: 7,
       key: 'Languages',
       value: doctorLang?.map((langId) => languages?.find((el) => el?.id == langId)?.name)?.join(','),
-      icon: <GiEarthAfricaEurope />,
+      icon: <LuLanguages />,
     },
 
     {
@@ -85,7 +88,7 @@ function DoctorProfile() {
           View
         </a>
       ),
-      icon: <GiEarthAfricaEurope />,
+      icon: <CgFileDocument />,
     },
   ];
   return (
@@ -147,13 +150,17 @@ function DoctorProfile() {
           </Grid>
         </section>
       </div>
-      <Viewer
-        visible={visible}
-        onClose={() => {
-          setVisible(false);
-        }}
-        images={[{ src: cv, alt: 'cv' }]}
-      />
+      {cv ? (
+        <Viewer
+          visible={visible}
+          onClose={() => {
+            setVisible(false);
+          }}
+          images={[{ src: cv, alt: 'cv' }]}
+        />
+      ) : (
+        ''
+      )}
     </>
   );
 }

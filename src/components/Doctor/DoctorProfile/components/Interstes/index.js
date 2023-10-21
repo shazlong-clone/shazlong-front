@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { updateDoctorProfile } from '../../../../../features/doctor/doctorActions';
 import { getMeAsDoctor } from '../../../../../features/auth/authAction';
 import { getSpecialization } from '../../../../../features/shared/sharedActions';
+import Empty from '../../../../Shared/Shared';
 
 function Interstes() {
   const [open, setOpen] = React.useState(false);
@@ -103,19 +104,21 @@ function Interstes() {
         </FlexboxGrid>
       }
     >
-      <div className="flex gap-2 flex-wrap" key={Math.random()}>
-        {!profile?.specialization?.length
-          ? 'No Specialization Found'
-          : specializationList
-              ?.filter((el) => profile?.specialization?.includes(el?.id))
-              ?.map((el) => {
-                return (
-                  <Button key={el?.id} className="rounded-3xl py-1">
-                    {i18n.resolvedLanguage === 'ar' ? el?.ar_name : el?.name}
-                  </Button>
-                );
-              })}
-      </div>
+      {!profile?.specialization?.length ? (
+        <Empty />
+      ) : (
+        <div className="flex gap-2 flex-wrap" key={Math.random()}>
+          {specializationList
+            ?.filter((el) => profile?.specialization?.includes(el?.id))
+            ?.map((el) => {
+              return (
+                <Button key={el?.id} className="rounded-3xl py-1">
+                  {i18n.resolvedLanguage === 'ar' ? el?.ar_name : el?.name}
+                </Button>
+              );
+            })}
+        </div>
+      )}
     </Panel>
   );
 }

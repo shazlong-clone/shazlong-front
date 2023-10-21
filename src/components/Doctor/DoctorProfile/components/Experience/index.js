@@ -7,6 +7,7 @@ import { RiDeleteBinLine } from 'react-icons/ri';
 import { AiFillWarning } from 'react-icons/ai';
 import { useTranslation } from 'react-i18next';
 import { deleteExperienceById, getMeAsDoctor } from '../../../../../features/doctor/doctorActions';
+import Empty from '../../../../Shared/Shared';
 
 function Experience() {
   const { profile } = useSelector((state) => state?.doctor);
@@ -95,33 +96,35 @@ function Experience() {
         </FlexboxGrid>
       }
     >
-      {!profile?.experiences?.length
-        ? 'no experience'
-        : profile?.experiences.map((el, i) => {
-            return (
-              <React.Fragment key={Math.random()}>
-                {i == 0 ? '' : <Divider />}
-                <div key={Math.random()} className="flex gap-4 w-full text-start mb-5 items-start">
-                  <section>
-                    <img className="w-[50px] h-[50px] object-cover" src={`data:image/jpeg;base64,${el?.company_logo}`} />
-                  </section>
-                  <section className="grow">
-                    <h6 className="mb-2 flex justify-between items-center">
-                      <span>{el?.title}</span>
-                      <Stack spacing={6}>
-                        <EditModal experience={el} />
-                        <CustomComponent id={el?._id} />
-                      </Stack>
-                    </h6>
-                    <p className="text-sm">{el?.description}</p>
-                    <a className="text-sm">
-                      {moment(el?.time?.at(0)).format('MMM YYYY')}-{moment(el?.time?.at(1)).format('MMM YYYY')}
-                    </a>
-                  </section>
-                </div>
-              </React.Fragment>
-            );
-          })}
+      {!profile?.experiences?.length ? (
+        <Empty />
+      ) : (
+        profile?.experiences.map((el, i) => {
+          return (
+            <React.Fragment key={Math.random()}>
+              {i == 0 ? '' : <Divider />}
+              <div key={Math.random()} className="flex gap-4 w-full text-start mb-5 items-start">
+                <section>
+                  <img className="w-[50px] h-[50px] object-cover" src={`data:image/jpeg;base64,${el?.company_logo}`} />
+                </section>
+                <section className="grow">
+                  <h6 className="mb-2 flex justify-between items-center">
+                    <span>{el?.title}</span>
+                    <Stack spacing={6}>
+                      <EditModal experience={el} />
+                      <CustomComponent id={el?._id} />
+                    </Stack>
+                  </h6>
+                  <p className="text-sm">{el?.description}</p>
+                  <a className="text-sm">
+                    {moment(el?.time?.at(0)).format('MMM YYYY')}-{moment(el?.time?.at(1)).format('MMM YYYY')}
+                  </a>
+                </section>
+              </div>
+            </React.Fragment>
+          );
+        })
+      )}
     </Panel>
   );
 }

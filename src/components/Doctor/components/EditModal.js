@@ -40,7 +40,7 @@ function EditModal() {
     country,
     languages: doctorLang,
     gender,
-  } = useSelector((state) => state?.doctor?.profile);
+  } = useSelector((state) => state?.doctor?.profile) ?? {};
   const formRef = useRef();
 
   const handleClose = () => setOpen(false);
