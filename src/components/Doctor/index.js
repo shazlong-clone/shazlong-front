@@ -74,6 +74,8 @@ function DoctorLayout() {
     setOpen(true);
     setPlacement(key);
   };
+  const { profile } = useSelector((state) => state?.doctor);
+
   const [expanded, setExpanded] = React.useState(true);
   const { activeSideBar } = useSelector((state) => state?.theme);
   useEffect(() => {
@@ -103,12 +105,7 @@ function DoctorLayout() {
                   <div className="flex items-center gap-5">
                     <NotificationWhisper />
                     <SettingWhisper placement="bottomEnd" />
-                    <Avatar
-                      className="cursor-pointer"
-                      circle
-                      src="https://avatars.githubusercontent.com/u/8225666"
-                      alt="@SevenOutman"
-                    />
+                    <Avatar className="cursor-pointer" circle src={profile?.photo} alt="@SevenOutman" />
                   </div>
                 </article>
               </section>

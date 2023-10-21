@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Breadcrumb, Col, Grid, Panel, Row } from 'rsuite';
+import { Breadcrumb, Col, Grid, Loader, Message, Panel, Row, Uploader, useToaster } from 'rsuite';
 import { AiOutlineMail, AiOutlineHome } from 'react-icons/ai';
 import { BsTelephone } from 'react-icons/bs';
 import { ImEarth } from 'react-icons/im';
@@ -16,8 +16,50 @@ import { genders } from '../../../assets/constants';
 import { LuSubtitles, LuLanguages } from 'react-icons/lu';
 import { AiOutlineDollarCircle } from 'react-icons/ai';
 import { CgFileDocument } from 'react-icons/cg';
+import { API_BASE_URL } from '../../../config/enviroment.config';
+import CameraRetroIcon from '@rsuite/icons/legacy/CameraRetro';
+import { useTranslation } from 'react-i18next';
 
 function DoctorProfile() {
+  const { doctorToken } = useSelector((state) => state?.auth);
+  const [uploading, setUploading] = React.useState(false);
+  const { profile = {} } = useSelector((state) => state?.doctor);
+  const { t } = useTranslation();
+  function previewFile(file, callback) {
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      callback(reader.result);
+    };
+    reader.readAsDataURL(file);
+  }
+  const toaster = useToaster();
+  const [fileInfo, setFileInfo] = React.useState(profile?.photo ?? null);
+  const props = {
+    name: 'photo',
+    accept: 'image/*',
+    fileListVisible: false,
+    listType: 'picture',
+    action: `${API_BASE_URL}/api/v1/doctors/update-photo`,
+    headers: {
+      authorization: `Bearer ${doctorToken}`,
+    },
+    onUpload: (file) => {
+      setUploading(true);
+      previewFile(file.blobFile, (value) => {
+        setFileInfo(value);
+      });
+    },
+    onSuccess: () => {
+      setUploading(false);
+      dispatch(getMeAsDoctor());
+      toaster.push(<Message type="success">{t('update_successfuly')}</Message>);
+    },
+    onError: () => {
+      setFileInfo(null);
+      setUploading(false);
+      toaster.push(<Message type="error">{t('internal_server_error')}</Message>);
+    },
+  };
   const [visible, setVisible] = useState(false);
   const { countries, languages } = useSelector((state) => state?.shared);
   const {
@@ -102,15 +144,19 @@ function DoctorProfile() {
       <div className="relative">
         <section className="px-5 lg:px-36  relative  mb-[24px]">
           <Panel className="bg-white overflow-visible relative">
-            <div className="lg:flex gap-10">
+            <div className="lg:flex gap-5">
               <article className="absolute top-[-30px] left-[50%] translate-x-[-50%] lg:static lg:translate-x-0">
-                <img
-                  src="https://avatars.githubusercontent.com/u/8225666"
-                  className="border-[5px] border-white border-solid rounded-md object-cover w-[120px] h-[120px]"
-                />
+                <div className="relative inline-block p-2 ">
+                  <Uploader {...props}>
+                    <button style={{ width: 120, height: 120, margin: '0px' }}>
+                      {uploading && <Loader backdrop center />}
+                      {fileInfo ? <img src={fileInfo} width="100%" height="100%" /> : <CameraRetroIcon />}
+                    </button>
+                  </Uploader>
+                </div>
               </article>
               <article className="mt-[80px] lg:mt-0 grow relative">
-                <h4>{fullEnName}</h4>
+                <h4 className="max-lg:text-center">{fullEnName}</h4>
                 <div className="lg:flex gap-5">
                   <section className="xl:grid xl:grid-cols-2 2xl:grid-cols-4 gap-x-10">
                     {info?.map((el) => {
