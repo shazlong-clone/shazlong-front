@@ -1,8 +1,33 @@
-import React from 'react';
+import React, { memo, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Breadcrumb, Panel, Placeholder } from 'rsuite';
-
+import { Breadcrumb, Button, Calendar, Panel } from 'rsuite';
+import { useDispatch, useSelector } from 'react-redux';
+import CellAddModal from './components/CellAddModal';
+import { getSlots } from '../../../features/doctor/doctorActions';
+import moment from 'moment';
+import { MdArrowRightAlt } from 'react-icons/md';
 function Slots() {
+  const { slots } = useSelector((state) => state?.doctor);
+  function renderCell(date) {
+    return (
+      <>
+        <CellAddModal date={date} />
+        <div className="grid gap-2 mt-5">
+          {slots?.map((slot, i) => {
+            return moment(date?.toISOString()).isSame(slot?.from, 'day') ? (
+              <Button key={i} className="py-0">
+                {moment(slot.from).format('hh:mm a')} <MdArrowRightAlt className="text-xl" /> {moment(slot.to).format('hh mm a')}
+              </Button>
+            ) : null;
+          })}
+        </div>
+      </>
+    );
+  }
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getSlots());
+  }, []);
   return (
     <main className="px-5 lg:px-36">
       <Breadcrumb>
@@ -14,10 +39,10 @@ function Slots() {
         </Breadcrumb.Item>
       </Breadcrumb>
       <Panel className="bg-white">
-        <Placeholder rows={50} />
+        <Calendar className="slot-calender" bordered renderCell={renderCell} />
       </Panel>
     </main>
   );
 }
 
-export default Slots;
+export default memo(Slots);

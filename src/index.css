@@ -286,3 +286,62 @@ a:active {
 .wrap-anywhere {
   overflow-wrap: anywhere;
 }
+
+.calendar-todo-list {
+  text-align: left;
+  padding: 0;
+  list-style: none;
+}
+
+.calendar-todo-list li {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.calendar-todo-item-badge {
+  vertical-align: top;
+  margin-top: 8px;
+  width: 6px;
+  height: 6px;
+}
+
+.slot-calender .rs-calendar-table-cell {
+  position: relative;
+}
+.icon-add-btn {
+  display: none;
+}
+.rs-calendar-table-cell:hover .icon-add-btn {
+  display: inline-block;
+}
+
+.slot-calender .rs-panel-body {
+  padding: 0px;
+}
+.slot-calender .rs-calendar-table-cell-content {
+  height: inherit !important;
+  min-height: 100px;
+}
+
+.slot-calender .rs-calendar-table-cell-day {
+  text-align: end;
+  font-weight: 500;
+}
+.slot-calender .rs-calendar-table-cell-content {
+  cursor: auto;
+}
+.slot-calender .rs-calendar-table-cell-is-today .rs-calendar-table-cell-day {
+  text-align: center;
+  margin-right: 0px;
+  margin-left: auto;
+}
+.slot-calender .rs-calendar-table-cell {
+  border: 1px solid #e5e5ea;
+}
+.slot-calender .rs-calendar-table {
+  border-collapse: collapse;
+}
+.rs-calendar-table-cell-content:hover {
+  background: transparent;
+}

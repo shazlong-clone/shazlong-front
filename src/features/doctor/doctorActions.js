@@ -17,3 +17,12 @@ export const deleteExperienceById = createAsyncThunk('deleteExperienceById', asy
   const res = await doctorService.delete(`/api/v1/doctors/deleteExperienceById/${id}`);
   return res.data;
 });
+
+export const getSlots = createAsyncThunk('getSlots', async () => {
+  const res = await doctorService.get('/api/v1/slots');
+  return res.data;
+});
+export const createSlots = createAsyncThunk('createSlots', async (params) => {
+  const res = await doctorService.post('/api/v1/slots', params);
+  return res.data;
+});
