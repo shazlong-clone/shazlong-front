@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { getMeAsDoctor } from '../auth/authAction';
-import { createSlots, getSlots } from './doctorActions';
+import { getSlots } from './doctorActions';
 
 const initialState = {
   profile: {},

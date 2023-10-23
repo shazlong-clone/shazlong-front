@@ -26,3 +26,11 @@ export const createSlots = createAsyncThunk('createSlots', async (params) => {
   const res = await doctorService.post('/api/v1/slots', params);
   return res.data;
 });
+export const updateSlot = createAsyncThunk('updateSlot', async ({ id, params }) => {
+  const res = await doctorService.patch(`/api/v1/slots/${id}`, params);
+  return res.data;
+});
+export const deleteSlot = createAsyncThunk('deleteSlot', async (id) => {
+  const res = await doctorService.delete(`/api/v1/slots/${id}`);
+  return res.data;
+});

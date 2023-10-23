@@ -2,9 +2,10 @@ import moment from 'moment';
 import { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
-import { Button, DateRangePicker, Form, Message, Modal, Schema, useToaster } from 'rsuite';
-import { getSlots, createSlots } from '../../../../features/doctor/doctorActions';
+import { Badge, Button, DateRangePicker, FlexboxGrid, Form, Message, Modal, Schema, useToaster } from 'rsuite';
+import { deleteSlot, getSlots, updateSlot } from '../../../../features/doctor/doctorActions';
 import { MdArrowRightAlt } from 'react-icons/md';
+import { TbCircleFilled } from 'react-icons/tb';
 
 const UpdateSlot = ({ date, slot }) => {
   const { t } = useTranslation();
@@ -23,6 +24,7 @@ const UpdateSlot = ({ date, slot }) => {
       }, 'from_must_be_grater_yjat_to'),
   });
   const [loading, setLoading] = useState(false);
+  const [dLoading, setDLoading] = useState(false);
   const toaster = useToaster();
   const dispatch = useDispatch();
 
@@ -32,18 +34,12 @@ const UpdateSlot = ({ date, slot }) => {
     const to = formValue?.from_to[1];
 
     const params = {
-      slots: [
-        {
-          from: moment(date)
-            .set({ hours: from.getHours(), minutes: from.getMinutes(), seconds: 0, milliseconds: 0 })
-            .toISOString(),
-          to: moment(date).set({ hours: to.getHours(), minutes: to.getMinutes(), seconds: 0, milliseconds: 0 }).toISOString(),
-        },
-      ],
+      from: moment(date).set({ hours: from.getHours(), minutes: from.getMinutes(), seconds: 0, milliseconds: 0 }).toISOString(),
+      to: moment(date).set({ hours: to.getHours(), minutes: to.getMinutes(), seconds: 0, milliseconds: 0 }).toISOString(),
     };
     try {
       setLoading(true);
-      const res = await dispatch(createSlots(params));
+      const res = await dispatch(updateSlot({ id: slot._id, params }));
       if (res.payload.status) {
         toaster.push(
           <Message type="success" closable showIcon>
@@ -74,10 +70,55 @@ const UpdateSlot = ({ date, slot }) => {
       setLoading(false);
     }
   };
+
+  const handelDelete = async () => {
+    try {
+      setDLoading(true);
+      const res = await dispatch(deleteSlot(slot._id));
+      if (res.payload.status) {
+        toaster.push(
+          <Message type="success" closable showIcon>
+            {t('Updated_Succefuly')}
+          </Message>,
+          { duration: 2000 },
+        );
+        dispatch(getSlots());
+        setOpen(false);
+      } else {
+        toaster.push(
+          <Message type="error" closable showIcon>
+            {res.payload.message}
+          </Message>,
+          { duration: 2000 },
+        );
+      }
+    } catch (err) {
+      toaster.push(
+        <Message closable showIcon type="error">
+          {t('internal_server_error')}
+        </Message>,
+        {
+          duration: 5000,
+        },
+      );
+    } finally {
+      setDLoading(false);
+    }
+  };
+
   return (
     <>
-      <Button onClick={handleOpen} className="py-0">
-        {moment(slot.from).format('hh:mm a')} <MdArrowRightAlt className="text-xl" /> {moment(slot.to).format('hh mm a')}
+      <Button
+        onClick={handleOpen}
+        className="text-xs font-bold"
+        appearance="primary"
+        color={moment(slot.from).isSameOrAfter(moment()) ? 'red' : slot.reserved ? 'green' : ''}
+      >
+        <div className="flex items-center justify-between min-w-[140px]">
+          {moment(slot.from).format('hh:mm a')}
+          <MdArrowRightAlt className="text-xl" />
+          {moment(slot.to).format('hh mm a')}
+        </div>
       </Button>
       <Modal open={open} onClose={handleClose}>
         <Modal.Header>
@@ -99,12 +140,21 @@ const UpdateSlot = ({ date, slot }) => {
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={handleClose} appearance="subtle">
-            Cancel
-          </Button>
-          <Button loading={loading} onClick={handelSubmit} appearance="primary">
-            Save
-          </Button>
+          <FlexboxGrid justify="space-between">
+            <FlexboxGrid.Item>
+              <Button disabled={slot.reserved} loading={dLoading} onClick={handelDelete} color="red" appearance="primary">
+                Delete
+              </Button>
+            </FlexboxGrid.Item>
+            <FlexboxGrid.Item>
+              <Button onClick={handleClose} appearance="subtle">
+                Cancel
+              </Button>
+              <Button loading={loading} onClick={handelSubmit} appearance="primary">
+                Save
+              </Button>
+            </FlexboxGrid.Item>
+          </FlexboxGrid>
         </Modal.Footer>
       </Modal>
     </>

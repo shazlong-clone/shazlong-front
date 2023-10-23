@@ -14,13 +14,15 @@ function Slots() {
       <>
         <AddSlot date={date} />
         <div className="grid gap-2 mt-5">
-          {slots?.map((slot, i) => {
-            return moment(date?.toISOString()).isSame(slot?.from, 'day') ? (
-              <Fragment key={i}>
-                <UpdateSlot date={date} slot={slot} />
-              </Fragment>
-            ) : null;
-          })}
+          {slots
+            ?.filter((slot) => !slot?.isDeleted)
+            ?.map((slot, i) => {
+              return moment(date?.toISOString()).isSame(slot?.from, 'day') ? (
+                <Fragment key={i}>
+                  <UpdateSlot date={date} slot={slot} />
+                </Fragment>
+              ) : null;
+            })}
         </div>
       </>
     );

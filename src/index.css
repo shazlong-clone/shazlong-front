@@ -356,3 +356,7 @@ a:active {
     border-radius: 3px;
   }
 }
+
+.slot-calender .rs-calendar-table-cell-selected .rs-calendar-table-cell-content {
+  box-shadow: none;
+}

@@ -17,8 +17,8 @@ const CellAddModal = ({ date }) => {
     from_to: Schema.Types.MixedType()
       .isRequired('Required.')
       .addRule((value) => {
-        return moment(value[1]).isAfter(value[0]);
-      }, 'from_must_be_grater_yjat_to'),
+        return moment(value[1]).isSameOrBefore(value[0]);
+      }, 'from_must_be_grater_than_to'),
   });
   const [loading, setLoading] = useState(false);
   const toaster = useToaster();
