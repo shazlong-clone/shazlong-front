@@ -345,3 +345,14 @@ a:active {
 .rs-calendar-table-cell-content:hover {
   background: transparent;
 }
+.rs-calendar-time-dropdown-column ul {
+  &::-webkit-scrollbar {
+    width: 0.5em;
+    height: 0.5em;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--rs-text-tertiary);
+    border-radius: 3px;
+  }
+}
