@@ -10,7 +10,6 @@ import logoAr from '../../assets/images/shezlong-logo-ar.svg';
 import { appNavs } from '../../config/NavConfig';
 import { setActiveSideBar } from '../../features/theme/themeSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import NotificationWhisper from './components/NotificationWhisper';
 
 const NavItem = (props) => {
   const { title, eventKey, ...rest } = props;

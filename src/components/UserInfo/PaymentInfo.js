@@ -13,7 +13,7 @@ import { useTranslation } from 'react-i18next';
 function PaymentInfo() {
   const dispatch = useDispatch();
   const { card, vodafoneCash, fawry } = useSelector((state) => state?.payment);
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const toaster = useToaster();
   const handelremove = async (params) => {
     try {

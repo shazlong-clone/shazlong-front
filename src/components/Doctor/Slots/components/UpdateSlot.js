@@ -2,10 +2,9 @@ import moment from 'moment';
 import { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
-import { Badge, Button, DateRangePicker, FlexboxGrid, Form, Message, Modal, Schema, useToaster } from 'rsuite';
+import { Button, DateRangePicker, FlexboxGrid, Form, Message, Modal, Schema, useToaster } from 'rsuite';
 import { deleteSlot, getSlots, updateSlot } from '../../../../features/doctor/doctorActions';
 import { MdArrowRightAlt } from 'react-icons/md';
-import { TbCircleFilled } from 'react-icons/tb';
 
 const UpdateSlot = ({ date, slot }) => {
   const { t } = useTranslation();

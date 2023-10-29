@@ -9,7 +9,6 @@ import {
   Grid,
   Row,
   Col,
-  MaskedInput,
   FlexboxGrid,
   ButtonToolbar,
 } from 'rsuite';
