@@ -66,6 +66,9 @@ function Interstes() {
   useEffect(() => {
     dispatch(getSpecialization());
   }, []);
+  useEffect(()=>{
+    setFormValue({specialization: profile?.specialization ?? []})
+  },[profile])
 
   return (
     <Panel
@@ -112,9 +115,9 @@ function Interstes() {
             ?.filter((el) => profile?.specialization?.includes(el?.id))
             ?.map((el) => {
               return (
-                <Button key={el?.id} className="rounded-3xl py-1">
+                <section key={el?.id} className="rounded-3xl py-1 bg-gray/5 px-2">
                   {i18n.resolvedLanguage === 'ar' ? el?.ar_name : el?.name}
-                </Button>
+                </section>
               );
             })}
         </div>

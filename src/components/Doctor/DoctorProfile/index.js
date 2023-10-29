@@ -77,6 +77,9 @@ function DoctorProfile() {
   useEffect(() => {
     dispatch(getMeAsDoctor());
   }, []);
+  useEffect(()=>{
+    setFileInfo(profile?.photo)
+  },[profile])
   const info = [
     {
       id: 1,
