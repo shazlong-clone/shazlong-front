@@ -89,7 +89,7 @@ function TherapistsCard() {
                 })}
               </div>
               <div className="mt-5">
-                <Stack justifyContent="center" spacing={10}>
+                <Stack justifyContent="end" spacing={10}>
                   <Link to={`/thearpist-profile/${el?.id}`} className="block active:no-underline hover:no-underline">
                     View Profile
                   </Link>
