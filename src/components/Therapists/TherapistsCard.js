@@ -23,7 +23,7 @@ function TherapistsCard() {
       <main className="lg:grid lg:grid-cols-[1fr_1fr] lg:gap-2 font-[500]">
         {doctors?.result?.map((el) => {
           return (
-            <section key={Math.random()} className="bg-white rounded-3xl mt-3 p-6 text-sm lg:mb-5 lg:mt-0">
+            <section key={Math.random()} className="bg-white rounded-3xl mt-3 p-6 text-sm lg:mb-5 lg:mt-0 overflow-hidden">
               <div className="flex gap-5">
                 <Link to={`/thearpist-profile/${el?.id}`}>
                   <Badge color="green">
@@ -50,10 +50,13 @@ function TherapistsCard() {
                 </article>
               </div>
               <p className="my-2 font-[500]">Interests:</p>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex gap-2 items-start">
                 {el?.specialization?.slice(0, 2)?.map((id) => {
                   return (
-                    <section key={Math.random()} className="bg-green/10 text-green rounded-xl px-3 py-1">
+                    <section
+                      key={Math.random()}
+                      className="bg-green/10 text-green rounded-xl px-3 py-1 whitespace-nowrap overflow-hidden text-ellipsis hover:whitespace-normal hover:overflow-visible cursor-pointer"
+                    >
                       {i18n.resolvedLanguage === 'ar'
                         ? specializationList?.find((el) => el?.id === id)?.ar_name
                         : specializationList?.find((el) => el?.id === id)?.name}
@@ -86,7 +89,7 @@ function TherapistsCard() {
                 })}
               </div>
               <div className="mt-5">
-                <Stack justifyContent="end" spacing={10}>
+                <Stack justifyContent="center" spacing={10}>
                   <Link to={`/thearpist-profile/${el?.id}`} className="block active:no-underline hover:no-underline">
                     View Profile
                   </Link>
