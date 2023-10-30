@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Avatar, Badge, Button, Rate } from 'rsuite';
+import { Avatar, Badge, Button, Rate, Stack } from 'rsuite';
 
 import { BsPersonSquare } from 'react-icons/bs';
 import { GiAlarmClock } from 'react-icons/gi';
@@ -20,14 +20,20 @@ function TherapistsCard() {
 
   return (
     <>
-      <main className="lg:grid lg:grid-cols-[1fr_1fr] lg:gap-2">
+      <main className="lg:grid lg:grid-cols-[1fr_1fr] lg:gap-2 font-[500]">
         {doctors?.result?.map((el) => {
           return (
             <section key={Math.random()} className="bg-white rounded-3xl mt-3 p-6 text-sm lg:mb-5 lg:mt-0">
               <div className="flex gap-5">
                 <Link to={`/thearpist-profile/${el?.id}`}>
                   <Badge color="green">
-                    <Avatar size="lg" circle={true} src={`data:image/jpeg;base64,${el?.photo}`} alt="@superman66" />
+                    <Avatar
+                      className="avatar-doctor-card"
+                      size="lg"
+                      circle={true}
+                      src={`data:image/jpeg;base64,${el?.photo}`}
+                      alt="@superman66"
+                    />
                   </Badge>
                 </Link>
                 <article className="grow">
@@ -43,9 +49,9 @@ function TherapistsCard() {
                   <div className="text-xs">5({el?.nReviews} Reviews)</div>
                 </article>
               </div>
-              <p className="my-2">Interests:</p>
-              <div className="flex flex-wrap gap-2 text-xs">
-                {el?.specialization?.map((id) => {
+              <p className="my-2 font-[500]">Interests:</p>
+              <div className="flex flex-wrap gap-2">
+                {el?.specialization?.slice(0, 2)?.map((id) => {
                   return (
                     <section key={Math.random()} className="bg-green/10 text-green rounded-xl px-3 py-1">
                       {i18n.resolvedLanguage === 'ar'
@@ -55,11 +61,16 @@ function TherapistsCard() {
                   );
                 })}
               </div>
-              <div className="my-2 flex items-center text-xs gap-1">
+              <div className="my-2 flex items-center gap-1">
                 <i className="text-xl text-cyan flex items-center">
                   <GiAlarmClock />
                 </i>
-                <span>Nearest session : {moment(el?.nearestSlot?.from).isValid() ? moment(el?.nearestSlot?.from).format('dddd, MMM. D [at] h:mm A') : ''} </span>
+                <span>
+                  Nearest session :
+                  {moment(el?.nearestSlot?.from).isValid()
+                    ? moment(el?.nearestSlot?.from).format('dddd, MMM. D [at] h:mm A')
+                    : ''}
+                </span>
               </div>
               <div className="flex items-center gap-1">
                 <i className="text-xl text-cyan flex items-center">
@@ -75,11 +86,14 @@ function TherapistsCard() {
                 })}
               </div>
               <div className="mt-5">
-                <Link to={`/thearpist-profile/${el?.id}`} className="block active:no-underline hover:no-underline">
-                  <Button appearance="primary" block>
+                <Stack justifyContent="space-between" spacing={10}>
+                  <Link to={`/thearpist-profile/${el?.id}`} className="block active:no-underline hover:no-underline">
                     View Profile
+                  </Link>
+                  <Button size="lg" appearance="primary" block>
+                    Book Now
                   </Button>
-                </Link>
+                </Stack>
               </div>
             </section>
           );
