@@ -1,75 +1,89 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Avatar, Badge, Button, Rate } from 'rsuite';
 
 import { BsPersonSquare } from 'react-icons/bs';
 import { GiAlarmClock } from 'react-icons/gi';
 import { GiCash } from 'react-icons/gi';
 import { Link } from 'react-router-dom';
-import therapist from '../../assets/images/therapist.webp';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllDoctors } from '../../features/shared/sharedActions';
+import { useTranslation } from 'react-i18next';
+import moment from 'moment';
 
 function TherapistsCard() {
+  const dispatch = useDispatch();
+  const { i18n } = useTranslation();
+  const { doctors, specializationList } = useSelector((state) => state?.shared);
+  useEffect(() => {
+    dispatch(getAllDoctors());
+  }, []);
+
   return (
     <>
       <main className="lg:grid lg:grid-cols-[1fr_1fr] lg:gap-2">
-        {Array(5)
-          .fill({ id: 1 })
-          ?.map((el) => {
-            return (
-              <section key={Math.random()} className="bg-white rounded-3xl mt-3 p-6 text-sm lg:mb-5 lg:mt-0">
-                <div className="flex gap-5">
-                  <Link to={`/thearpist-profile/${el?.id}`}>
-                    <Badge color="green">
-                      <Avatar size="lg" circle={true} src={therapist} alt="@superman66" />
-                    </Badge>
-                  </Link>
-                  <article className="grow">
-                    <p>Mohamed Abdelwareth</p>
-                    <div className="flex justify-between text-xs my-1 text-cyan">
-                      <section>Psychiatrist</section>
-                      <section>
-                        <BsPersonSquare /> <span>25+</span>
-                        <span>Sessions</span>
-                      </section>
-                    </div>
-                    <Rate size="xs" defaultValue={3} />
-                    <div className="text-xs">5(3 Reviews)</div>
-                  </article>
-                </div>
-                <p className="my-2">Interests:</p>
-                <div className="flex flex-wrap gap-2 text-xs">
-                  {['Communication Disorders', 'PTSD']?.map((el) => {
-                    return (
-                      <section key={Math.random()} className="bg-green/10 text-green rounded-xl px-3 py-1">
-                        {el}
-                      </section>
-                    );
-                  })}
-                </div>
-                <div className="my-2 flex items-center text-xs gap-1">
-                  <i className="text-xl text-cyan flex items-center">
-                    <GiAlarmClock />
-                  </i>
-                  <span>Nearest session : Thursday, Jul. 27 at 10:00 AM </span>
-                </div>
-                <div className="flex items-center gap-1">
-                  <i className="text-xl text-cyan flex items-center">
-                    <GiCash />
-                  </i>
-                  <span className="text-cyan font-bold"> EGP 450 </span>
-                  <span>/ 30 mins </span>
-                  <span className="text-cyan font-bold">EGP 900</span>
-                  <span>/ 60 mins </span>
-                </div>
-                <div className="mt-5">
-                  <Link to={`/thearpist-profile/${el?.id}`} className="block active:no-underline hover:no-underline">
-                    <Button appearance="primary" block>
-                      View Profile
-                    </Button>
-                  </Link>
-                </div>
-              </section>
-            );
-          })}
+        {doctors?.result?.map((el) => {
+          return (
+            <section key={Math.random()} className="bg-white rounded-3xl mt-3 p-6 text-sm lg:mb-5 lg:mt-0">
+              <div className="flex gap-5">
+                <Link to={`/thearpist-profile/${el?.id}`}>
+                  <Badge color="green">
+                    <Avatar size="lg" circle={true} src={`data:image/jpeg;base64,${el?.photo}`} alt="@superman66" />
+                  </Badge>
+                </Link>
+                <article className="grow">
+                  <p>{i18n.resolvedLanguage === 'ar' ? el?.fullArName : el?.fullEnName}</p>
+                  <div className="flex justify-between text-xs my-1 text-cyan">
+                    <section>{el?.prefix}</section>
+                    <section>
+                      <BsPersonSquare /> <span>25+</span>
+                      <span>Sessions</span>
+                    </section>
+                  </div>
+                  <Rate size="xs" defaultValue={3} />
+                  <div className="text-xs">5({el?.nReviews} Reviews)</div>
+                </article>
+              </div>
+              <p className="my-2">Interests:</p>
+              <div className="flex flex-wrap gap-2 text-xs">
+                {el?.specialization?.map((id) => {
+                  return (
+                    <section key={Math.random()} className="bg-green/10 text-green rounded-xl px-3 py-1">
+                      {i18n.resolvedLanguage === 'ar'
+                        ? specializationList?.find((el) => el?.id === id)?.ar_name
+                        : specializationList?.find((el) => el?.id === id)?.name}
+                    </section>
+                  );
+                })}
+              </div>
+              <div className="my-2 flex items-center text-xs gap-1">
+                <i className="text-xl text-cyan flex items-center">
+                  <GiAlarmClock />
+                </i>
+                <span>Nearest session : {moment(el?.nearestSlot?.from).isValid() ? moment(el?.nearestSlot?.from).format('dddd, MMM. D [at] h:mm A') : ''} </span>
+              </div>
+              <div className="flex items-center gap-1">
+                <i className="text-xl text-cyan flex items-center">
+                  <GiCash />
+                </i>
+                {el?.feez?.map((el) => {
+                  return (
+                    <>
+                      <span className="text-cyan font-bold"> EGP {el?.amount} </span>
+                      <span>/ {el?.duration} mins </span>
+                    </>
+                  );
+                })}
+              </div>
+              <div className="mt-5">
+                <Link to={`/thearpist-profile/${el?.id}`} className="block active:no-underline hover:no-underline">
+                  <Button appearance="primary" block>
+                    View Profile
+                  </Button>
+                </Link>
+              </div>
+            </section>
+          );
+        })}
       </main>
     </>
   );

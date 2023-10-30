@@ -111,7 +111,7 @@ const UpdateSlot = ({ date, slot }) => {
         onClick={handleOpen}
         className="text-xs font-bold"
         appearance="primary"
-        color={moment(slot.from).isSameOrAfter(moment()) ? 'red' : slot.reserved ? 'green' : ''}
+        color={moment(slot.from).isSameOrAfter(moment(slot.to)) ? 'red' : slot.reserved ? 'green' : ''}
       >
         <div className="flex items-center justify-between min-w-[140px]">
           {moment(slot.from).format('hh:mm a')}
