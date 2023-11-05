@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { updateDoctorProfile } from '../../../../../features/doctor/doctorActions';
 import { getMeAsDoctor } from '../../../../../features/auth/authAction';
 import { getSpecialization } from '../../../../../features/shared/sharedActions';
-import Empty from '../../../../Shared/Shared';
+import Empty from '../../../../Shared/Empty';
 
 function Interstes() {
   const [open, setOpen] = React.useState(false);

@@ -7,7 +7,7 @@ import { RiDeleteBinLine } from 'react-icons/ri';
 import { AiFillWarning } from 'react-icons/ai';
 import { useTranslation } from 'react-i18next';
 import { deleteExperienceById, getMeAsDoctor } from '../../../../../features/doctor/doctorActions';
-import Empty from '../../../../Shared/Shared';
+import Empty from '../../../../Shared/Empty';
 
 function Experience() {
   const { profile } = useSelector((state) => state?.doctor);

@@ -3,7 +3,7 @@ import { FlexboxGrid, Panel, Steps } from 'rsuite';
 import EditModal from './components/EditModal';
 import { useSelector } from 'react-redux';
 import moment from 'moment';
-import Empty from '../../../../Shared/Shared';
+import Empty from '../../../../Shared/Empty';
 
 function Certifications() {
   const { profile } = useSelector((state) => state?.doctor);

@@ -3,7 +3,7 @@ import { Col, FlexboxGrid, Panel } from 'rsuite';
 import EditModal from './components/EditModal';
 import moment from 'moment';
 import { useSelector } from 'react-redux';
-import Empty from '../../../../Shared/Shared';
+import Empty from '../../../../Shared/Empty';
 
 function Education() {
   const { profile } = useSelector((state) => state?.doctor);

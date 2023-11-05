@@ -9,7 +9,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getAllDoctors } from '../../features/shared/sharedActions';
 import { useTranslation } from 'react-i18next';
 import moment from 'moment';
-
+import personImg from '../../assets/images/person.png';
+import Empty from '../Shared/Empty';
 function TherapistsCard() {
   const dispatch = useDispatch();
   const { i18n } = useTranslation();
@@ -31,7 +32,7 @@ function TherapistsCard() {
                       className="avatar-doctor-card"
                       size="lg"
                       circle={true}
-                      src={`data:image/jpeg;base64,${el?.photo}`}
+                      src={el.photo ? `data:image/jpeg;base64,${el?.photo ?? ''}` : personImg}
                       alt="@superman66"
                     />
                   </Badge>
@@ -51,18 +52,20 @@ function TherapistsCard() {
               </div>
               <p className="my-2 font-[500]">Interests:</p>
               <div className="flex gap-2 items-start">
-                {el?.specialization?.slice(0, 2)?.map((id) => {
-                  return (
-                    <section
-                      key={Math.random()}
-                      className="bg-green/10 text-green rounded-xl px-3 py-1 whitespace-nowrap overflow-hidden text-ellipsis hover:whitespace-normal hover:overflow-visible cursor-pointer"
-                    >
-                      {i18n.resolvedLanguage === 'ar'
-                        ? specializationList?.find((el) => el?.id === id)?.ar_name
-                        : specializationList?.find((el) => el?.id === id)?.name}
-                    </section>
-                  );
-                })}
+                {!el?.specialization?.length
+                  ? 'no Interstes Found'
+                  : el?.specialization?.slice(0, 2)?.map((id) => {
+                      return (
+                        <section
+                          key={Math.random()}
+                          className="bg-green/10 text-green rounded-xl px-3 py-1 whitespace-nowrap overflow-hidden text-ellipsis hover:whitespace-normal hover:overflow-visible cursor-pointer"
+                        >
+                          {i18n.resolvedLanguage === 'ar'
+                            ? specializationList?.find((el) => el?.id === id)?.ar_name
+                            : specializationList?.find((el) => el?.id === id)?.name}
+                        </section>
+                      );
+                    })}
               </div>
               <div className="my-2 flex items-center gap-1">
                 <i className="text-xl text-cyan flex items-center">
@@ -70,26 +73,28 @@ function TherapistsCard() {
                 </i>
                 <span>
                   Nearest session :
-                  {moment(el?.nearestSlot?.from).isValid()
+                  {moment(el?.nearestSlot?.from).isValid() && el?.nearestSlot?.from
                     ? moment(el?.nearestSlot?.from).format('dddd, MMM. D [at] h:mm A')
-                    : ''}
+                    : 'No Slots Found'}
                 </span>
               </div>
               <div className="flex items-center gap-1">
                 <i className="text-xl text-cyan flex items-center">
                   <GiCash />
                 </i>
-                {el?.feez?.map((el) => {
-                  return (
-                    <>
-                      <span className="text-cyan font-bold"> EGP {el?.amount} </span>
-                      <span>/ {el?.duration} mins </span>
-                    </>
-                  );
-                })}
+                {!el?.feez?.length
+                  ? 'no feez found'
+                  : el?.feez?.map((el) => {
+                      return (
+                        <>
+                          <span className="text-cyan font-bold"> EGP {el?.amount} </span>
+                          <span>/ {el?.duration} mins </span>
+                        </>
+                      );
+                    })}
               </div>
-              <div className="mt-5">
-                <Stack justifyContent="end" spacing={10}>
+              <div className="mt-5 lg:mt-10">
+                <Stack justifyContent="center" spacing={10}>
                   <Link to={`/thearpist-profile/${el?.id}`} className="block active:no-underline hover:no-underline">
                     View Profile
                   </Link>
