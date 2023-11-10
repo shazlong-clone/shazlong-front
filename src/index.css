@@ -360,3 +360,6 @@ a:active {
 .slot-calender .rs-calendar-table-cell-selected .rs-calendar-table-cell-content {
   box-shadow: none;
 }
+.rs-picker-menu.rs-picker-check-menu{
+  z-index: 1500;
+}

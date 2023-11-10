@@ -25,7 +25,6 @@ const getEnv = () => {
 };
 
 const API_BASE_URL = getEnv();
-
 const service = axios.create({
   baseURL: API_BASE_URL,
 });

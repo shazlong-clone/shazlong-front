@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import Header from '../Shared/Header';
 import { useTranslation } from 'react-i18next';
+import { useDispatch, useSelector } from 'react-redux';
+import { getSpecialization } from '../../features/shared/sharedActions';
 function Diseases() {
   const { t, i18n } = useTranslation();
   const loacle = i18n.resolvedLanguage;
-  const [specilties, setSpecialties] = useState([]);
+  const specializationList = useSelector((state) => state?.shared?.specializationList);
+  const dispatch = useDispatch();
   useEffect(() => {
-    fetch('/api/specialty.json').then((res) => {
-      res.json().then((data) => {
-        setSpecialties(data);
-      });
-    });
+    dispatch(getSpecialization());
   }, []);
 
   return (
@@ -18,7 +17,7 @@ function Diseases() {
       <Header>{t('We_Connect_You_With_Licensed_Therapists')}</Header>
       <p className="text-center text-cyan/90 mb-5 lg:text-lg">{t('Select_Specialty')}</p>
       <section className="flex flex-wrap gap-5">
-        {specilties?.map((el) => {
+        {specializationList?.map((el) => {
           return (
             <button
               key={Math.random()}

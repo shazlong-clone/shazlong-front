@@ -10,19 +10,21 @@ import { getAllDoctors } from '../../features/shared/sharedActions';
 import { useTranslation } from 'react-i18next';
 import moment from 'moment';
 import personImg from '../../assets/images/person.png';
-import Empty from '../Shared/Empty';
+import { getPrefix } from '../../features/shared/sharedActions';
 function TherapistsCard() {
   const dispatch = useDispatch();
   const { i18n } = useTranslation();
-  const { doctors, specializationList } = useSelector((state) => state?.shared);
+  const { doctors, specializationList, prefixesList } = useSelector((state) => state?.shared);
   useEffect(() => {
     dispatch(getAllDoctors());
+    dispatch(getPrefix());
   }, []);
 
   return (
     <>
       <main className="lg:grid lg:grid-cols-[1fr_1fr] lg:gap-2 font-[500]">
         {doctors?.result?.map((el) => {
+          const prefix = prefixesList?.find((pref) => pref?.id === el?.prefix);
           return (
             <section key={Math.random()} className="bg-white rounded-3xl mt-3 p-6 text-sm lg:mb-5 lg:mt-0 overflow-hidden">
               <div className="flex gap-5">
@@ -32,22 +34,24 @@ function TherapistsCard() {
                       className="avatar-doctor-card"
                       size="lg"
                       circle={true}
-                      src={el.photo ? `data:image/jpeg;base64,${el?.photo ?? ''}` : personImg}
+                      src={el.photo ? el.photo : personImg}
                       alt="@superman66"
                     />
                   </Badge>
                 </Link>
                 <article className="grow">
-                  <p>{i18n.resolvedLanguage === 'ar' ? el?.fullArName : el?.fullEnName}</p>
+                  <p className="text-lg">{i18n.resolvedLanguage === 'ar' ? el?.fullArName : el?.fullEnName}</p>
                   <div className="flex justify-between text-xs my-1 text-cyan">
-                    <section>{el?.prefix}</section>
+                    <section className="text-md">{i18n.resolvedLanguage === 'ar' ? prefix?.ar_name : prefix?.name}</section>
                     <section>
-                      <BsPersonSquare /> <span>25+</span>
+                      <BsPersonSquare /> <span>{el?.sessions}+</span>
                       <span>Sessions</span>
                     </section>
                   </div>
-                  <Rate size="xs" defaultValue={3} />
-                  <div className="text-xs">5({el?.nReviews} Reviews)</div>
+                  <Rate readOnly size="xs" defaultValue={el?.avgReviews} />
+                  <div className="text-xs">
+                    {el?.avgReviews}({el?.nReviews} Reviews)
+                  </div>
                 </article>
               </div>
               <p className="my-2 font-[500]">Interests:</p>
@@ -61,8 +65,8 @@ function TherapistsCard() {
                           className="bg-green/10 text-green rounded-xl px-3 py-1 whitespace-nowrap overflow-hidden text-ellipsis hover:whitespace-normal hover:overflow-visible cursor-pointer"
                         >
                           {i18n.resolvedLanguage === 'ar'
-                            ? specializationList?.find((el) => el?.id === id)?.ar_name
-                            : specializationList?.find((el) => el?.id === id)?.name}
+                            ? specializationList?.find((spec) => spec?.id === id)?.ar_name
+                            : specializationList?.find((spec) => spec?.id === id)?.name}
                         </section>
                       );
                     })}

@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getAllDoctors, getCountries, getLangs, getSpecialization } from './sharedActions';
+import { getAllDoctors, getCountries, getLangs, getPrefix, getSpecialization } from './sharedActions';
 export const themeSlice = createSlice({
   name: 'shared',
   initialState: {
@@ -7,6 +7,7 @@ export const themeSlice = createSlice({
     languages: [],
     specializationList: [],
     doctors: {},
+    prefixesList: [],
   },
   extraReducers: (builder) => {
     builder.addCase(getCountries.fulfilled, (state, action) => {
@@ -17,6 +18,9 @@ export const themeSlice = createSlice({
     });
     builder.addCase(getSpecialization.fulfilled, (state, action) => {
       state.specializationList = action.payload;
+    });
+    builder.addCase(getPrefix.fulfilled, (state, action) => {
+      state.prefixesList = action.payload;
     });
     builder.addCase(getAllDoctors.fulfilled, (state, action) => {
       state.doctors = action.payload?.data;

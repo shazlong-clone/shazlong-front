@@ -12,7 +12,6 @@ import {
   SelectPicker,
   TagPicker,
 } from 'rsuite';
-import { DateRangePicker } from 'rsuite';
 import FlexboxGridItem from 'rsuite/esm/FlexboxGrid/FlexboxGridItem';
 function FilterForm() {
   const data = ['Eugenia', 'Bryan', 'Linda', 'Nancy', 'Lloyd', 'Alice', 'Julia', 'Albert'].map((item) => ({
@@ -36,11 +35,6 @@ function FilterForm() {
             <Checkbox value="Now">Now</Checkbox>
             <Checkbox value="This_Week">This Week</Checkbox>
           </Form.Control>
-        </Form.Group>
-
-        <Form.Group>
-          <Form.ControlLabel className="font-bold text-lg text-cyan mb-3">Specific date or range</Form.ControlLabel>
-          <Form.Control name="date" block cleanable showOneCalendar accepter={DateRangePicker} />
         </Form.Group>
         <Form.Group controlId="selectPicker">
           <Form.ControlLabel className="font-bold text-lg text-cyan">Country:</Form.ControlLabel>

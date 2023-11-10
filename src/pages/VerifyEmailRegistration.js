@@ -38,7 +38,6 @@ function VerifyEmailRegistration() {
     experienceYears: null,
     gender: null,
     country: null,
-    countryCode: null,
     languages: [],
     prefix: '',
     birthDate: null,
