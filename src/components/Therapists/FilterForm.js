@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, ButtonToolbar, Rate, Radio, RadioGroup, FlexboxGrid, Form, InputPicker, RangeSlider, TagPicker } from 'rsuite';
 import { getAllDoctors, getCountries } from '../../features/shared/sharedActions';
@@ -8,8 +8,7 @@ import { genders } from '../../assets/constants';
 const NOW = 0;
 const TODAY = 1;
 const THIS_WEEK = 7;
-
-function FilterForm() {
+function FilterForm({ setLoading, loading }) {
   const { t, i18n } = useTranslation();
   const { countries, specializationList } = useSelector((state) => state?.shared);
   const countriesOptions = countries.map((item) => ({
@@ -27,11 +26,12 @@ function FilterForm() {
   }));
   const formRef = useRef();
   const [formValue, setFormValue] = useState({
-    amount: [120, 1000],
+    amount: [0, 500],
   });
 
   const onSubmit = async () => {
     if (!formRef.current.check()) return;
+
     let params = { ...formValue };
     if (formValue?.availability === NOW) {
       params.isOnline = true;
@@ -42,7 +42,9 @@ function FilterForm() {
       params.maxAmount = formValue.amount[1];
       delete params['amount'];
     }
-    dispatch(getAllDoctors(params));
+    setLoading(true);
+    await dispatch(getAllDoctors(params));
+    setLoading(false);
   };
   const onCancel = async () => {
     setFormValue({});
@@ -105,10 +107,18 @@ function FilterForm() {
               <FlexboxGrid.Item>Egy</FlexboxGrid.Item>
             </FlexboxGrid>
           </Form.ControlLabel>
-          <Form.Control className="slider-custom" accepter={RangeSlider} min={5} max={2000} name="amount" label="Level" />
+          <Form.Control
+            className="slider-custom"
+            accepter={RangeSlider}
+            step={10}
+            min={10}
+            max={2000}
+            name="amount"
+            label="Level"
+          />
         </Form.Group>
         <ButtonToolbar className="flex justify-center">
-          <Button appearance="primary" type="submit" onClick={onSubmit}>
+          <Button loading={loading} appearance="primary" type="submit" onClick={onSubmit}>
             Submit
           </Button>
           <Button appearance="ghost" type="reset" onClick={onCancel}>

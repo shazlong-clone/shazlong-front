@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Input, InputGroup, InputPicker } from 'rsuite';
 import SearchIcon from '@rsuite/icons/Search';
 import SearchTherapist from '../Therapists/SearchTherapist';
@@ -6,6 +6,7 @@ import TherapistsCard from '../Therapists/TherapistsCard';
 import FilterForm from '../Therapists/FilterForm';
 import { filterMenu } from '../../costansts/index';
 function TherapistsComp() {
+  const [loading, setLoading] = useState();
   return (
     <>
       <section className="mt-3">
@@ -29,10 +30,10 @@ function TherapistsComp() {
       </section>
       <section className="grid lg:grid-cols-[1fr_2.5fr] gap-10">
         <article className="hidden lg:block">
-          <FilterForm />
+          <FilterForm setLoading={setLoading} loading={loading} />
         </article>
         <article>
-          <TherapistsCard />
+          <TherapistsCard loading={loading} />
         </article>
       </section>
     </>
