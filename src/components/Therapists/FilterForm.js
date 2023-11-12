@@ -1,39 +1,68 @@
-import React from 'react';
-import {
-  Button,
-  ButtonToolbar,
-  Checkbox,
-  CheckboxGroup,
-  FlexboxGrid,
-  Form,
-  InputPicker,
-  RangeSlider,
-  Rate,
-  SelectPicker,
-  TagPicker,
-} from 'rsuite';
-import FlexboxGridItem from 'rsuite/esm/FlexboxGrid/FlexboxGridItem';
-function FilterForm() {
-  const data = ['Eugenia', 'Bryan', 'Linda', 'Nancy', 'Lloyd', 'Alice', 'Julia', 'Albert'].map((item) => ({
-    label: item,
-    value: item,
-  }));
+import React, { useEffect, useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Button, ButtonToolbar, Rate, Radio, RadioGroup, FlexboxGrid, Form, InputPicker, RangeSlider, TagPicker } from 'rsuite';
+import { getAllDoctors, getCountries } from '../../features/shared/sharedActions';
+import clsx from 'clsx';
+import { useTranslation } from 'react-i18next';
+import { genders } from '../../assets/constants';
+const NOW = 0;
+const TODAY = 1;
+const THIS_WEEK = 7;
 
-  const selectData = ['Eugenia', 'Bryan', 'Linda', 'Nancy', 'Lloyd', 'Alice', 'Julia', 'Albert'].map((item) => ({
-    label: item,
-    value: item,
+function FilterForm() {
+  const { t, i18n } = useTranslation();
+  const { countries, specializationList } = useSelector((state) => state?.shared);
+  const countriesOptions = countries.map((item) => ({
+    label: (
+      <div key={item?.id} className="flex gap-1">
+        <span className={clsx(item?.country_flag, 'min-w-[1.3em]')} />
+        <span className="max-w-[320px] whitespace-nowrap overflow-hidden text-ellipsis">{item?.country_name}</span>
+      </div>
+    ),
+    value: item?.id,
   }));
+  const specializationOptions = specializationList.map((item) => ({
+    label: i18n?.resolvedLanguage === 'ar' ? item?.ar_name : item?.name,
+    value: item?.id,
+  }));
+  const formRef = useRef();
+  const [formValue, setFormValue] = useState({
+    amount: [120, 1000],
+  });
+
+  const onSubmit = async () => {
+    if (!formRef.current.check()) return;
+    let params = { ...formValue };
+    if (formValue?.availability === NOW) {
+      params.isOnline = true;
+      delete params['availability'];
+    }
+    if (formValue?.amount) {
+      params.minAmount = formValue.amount[0];
+      params.maxAmount = formValue.amount[1];
+      delete params['amount'];
+    }
+    dispatch(getAllDoctors(params));
+  };
+  const onCancel = async () => {
+    setFormValue({});
+    dispatch(getAllDoctors());
+  };
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getCountries());
+  }, []);
   return (
     <div className="lg:bg-white lg:p-5 lg:rounded-3xl">
       <h3 className="text-center hidden lg:block">Filter</h3>
       <hr className="hidden lg:block" />
-      <Form fluid>
+      <Form ref={formRef} formValue={formValue} fluid onChange={setFormValue}>
         <Form.Group>
           <Form.ControlLabel className="font-bold text-lg text-cyan">Availability</Form.ControlLabel>
-          <Form.Control name="availability" accepter={CheckboxGroup}>
-            <Checkbox value="Today">Today</Checkbox>
-            <Checkbox value="Now">Now</Checkbox>
-            <Checkbox value="This_Week">This Week</Checkbox>
+          <Form.Control name="availability" accepter={RadioGroup}>
+            <Radio value={TODAY}>Today</Radio>
+            <Radio value={NOW}>Now</Radio>
+            <Radio value={THIS_WEEK}>This Week</Radio>
           </Form.Control>
         </Form.Group>
         <Form.Group controlId="selectPicker">
@@ -42,54 +71,47 @@ function FilterForm() {
             preventOverflow
             palcement="bottomStart"
             menuMaxHeight={200}
-            name="selectPicker"
+            name="country"
             accepter={InputPicker}
-            data={selectData}
-            block
-          />
-        </Form.Group>
-        <Form.Group controlId="selectPicker">
-          <Form.ControlLabel className="font-bold text-lg text-cyan">Region:</Form.ControlLabel>
-          <Form.Control
-            name="region"
-            preventOverflow
-            menuMaxHeight={200}
-            palcement="bottomStart"
-            accepter={SelectPicker}
-            data={selectData}
+            data={countriesOptions}
             block
           />
         </Form.Group>
         <Form.Group>
           <Form.ControlLabel className="font-bold text-lg text-cyan mb-3">Areas of interest</Form.ControlLabel>
-          <Form.Control name="intersrt" accepter={TagPicker} data={data} block />
+          <Form.Control name="specialization" accepter={TagPicker} data={specializationOptions} block />
         </Form.Group>
         <Form.Group>
-          <Form.ControlLabel className="font-bold text-lg text-cyan">Therapist Gender</Form.ControlLabel>
-          <Form.Control name="gender" inline accepter={CheckboxGroup}>
-            <Checkbox value="Male">Male</Checkbox>
-            <Checkbox value="Female">Female</Checkbox>
+          <Form.ControlLabel className="font-bold text-lg text-cyan">Gender</Form.ControlLabel>
+          <Form.Control name="gender" inline accepter={RadioGroup}>
+            {genders?.map((el) => {
+              return (
+                <Radio key={el?.id} value={el?.id}>
+                  {i18n.resolvedLanguage === 'ar' ? el?.ar_name : el?.name}
+                </Radio>
+              );
+            })}
           </Form.Control>
         </Form.Group>
         <Form.Group>
-          <Form.ControlLabel className="font-bold text-lg text-cyan">Therapist Gender</Form.ControlLabel>
+          <Form.ControlLabel className="font-bold text-lg text-cyan">Rate</Form.ControlLabel>
           <Form.Control name="rate" accepter={Rate} />
         </Form.Group>
 
         <Form.Group controlId="slider">
           <Form.ControlLabel className="font-bold text-lg text-cyan b">
             <FlexboxGrid justify="space-between">
-              <FlexboxGridItem>Feez:</FlexboxGridItem>
-              <FlexboxGridItem>Egy</FlexboxGridItem>
+              <FlexboxGrid.Item>Feez:</FlexboxGrid.Item>
+              <FlexboxGrid.Item>Egy</FlexboxGrid.Item>
             </FlexboxGrid>
           </Form.ControlLabel>
-          <Form.Control className="slider-custom" accepter={RangeSlider} name="slider" label="Level" />
+          <Form.Control className="slider-custom" accepter={RangeSlider} min={5} max={2000} name="amount" label="Level" />
         </Form.Group>
         <ButtonToolbar className="flex justify-center">
-          <Button appearance="primary" type="submit">
+          <Button appearance="primary" type="submit" onClick={onSubmit}>
             Submit
           </Button>
-          <Button appearance="ghost" type="reset">
+          <Button appearance="ghost" type="reset" onClick={onCancel}>
             Cancel
           </Button>
         </ButtonToolbar>

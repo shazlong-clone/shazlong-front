@@ -19,7 +19,7 @@ export const getPrefix = createAsyncThunk('getPrefix', async () => {
   return res?.data;
 });
 
-export const getAllDoctors = createAsyncThunk('getAllDoctors', async () => {
-  const res = await service.get('/api/v1/doctors/getAllDoctors');
+export const getAllDoctors = createAsyncThunk('getAllDoctors', async (params) => {
+  const res = await service.get('/api/v1/doctors/getAllDoctors', { params });
   return res?.data;
 });

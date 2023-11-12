@@ -14,7 +14,8 @@ import { getPrefix } from '../../features/shared/sharedActions';
 function TherapistsCard() {
   const dispatch = useDispatch();
   const { i18n } = useTranslation();
-  const { doctors, specializationList, prefixesList } = useSelector((state) => state?.shared);
+  const { doctors, specializationList, prefixesList, countries } = useSelector((state) => state?.shared);
+
   useEffect(() => {
     dispatch(getAllDoctors());
     dispatch(getPrefix());
@@ -24,6 +25,7 @@ function TherapistsCard() {
     <>
       <main className="lg:grid lg:grid-cols-[1fr_1fr] lg:gap-2 font-[500]">
         {doctors?.result?.map((el) => {
+          const country = countries?.find((country) => country?.id === el?.country);
           const prefix = prefixesList?.find((pref) => pref?.id === el?.prefix);
           return (
             <section key={Math.random()} className="bg-white rounded-3xl mt-3 p-6 text-sm lg:mb-5 lg:mt-0 overflow-hidden">
@@ -40,7 +42,14 @@ function TherapistsCard() {
                   </Badge>
                 </Link>
                 <article className="grow">
-                  <p className="text-lg">{i18n.resolvedLanguage === 'ar' ? el?.fullArName : el?.fullEnName}</p>
+                  <section className="flex justify-between">
+                    <p className="text-lg">{i18n.resolvedLanguage === 'ar' ? el?.fullArName : el?.fullEnName}</p>
+                    <p className="flex gap-1">
+                      <span>{country?.country_name}</span>
+                      <span className={country?.country_flag} />
+                    </p>
+                  </section>
+
                   <div className="flex justify-between text-xs my-1 text-cyan">
                     <section className="text-md">{i18n.resolvedLanguage === 'ar' ? prefix?.ar_name : prefix?.name}</section>
                     <section>
