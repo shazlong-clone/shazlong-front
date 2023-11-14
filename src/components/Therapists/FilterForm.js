@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, ButtonToolbar, Rate, Radio, RadioGroup, FlexboxGrid, Form, InputPicker, RangeSlider, TagPicker } from 'rsuite';
-import { getAllDoctors, getCountries } from '../../features/shared/sharedActions';
+import { getAllDoctors, getCountries, getLangs } from '../../features/shared/sharedActions';
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import { genders } from '../../assets/constants';
@@ -9,13 +9,13 @@ const NOW = 0;
 const TODAY = 1;
 const THIS_WEEK = 7;
 function FilterForm({ setLoading, loading }) {
-  const { t, i18n } = useTranslation();
-  const { countries, specializationList } = useSelector((state) => state?.shared);
+  const { i18n } = useTranslation();
+  const { countries, specializationList, languages } = useSelector((state) => state?.shared);
   const countriesOptions = countries.map((item) => ({
     label: (
       <div key={item?.id} className="flex gap-1">
         <span className={clsx(item?.country_flag, 'min-w-[1.3em]')} />
-        <span className="max-w-[320px] whitespace-nowrap overflow-hidden text-ellipsis">{item?.country_name}</span>
+        <span className="max-w-[250px] whitespace-nowrap overflow-hidden text-ellipsis">{item?.country_name}</span>
       </div>
     ),
     value: item?.id,
@@ -24,9 +24,21 @@ function FilterForm({ setLoading, loading }) {
     label: i18n?.resolvedLanguage === 'ar' ? item?.ar_name : item?.name,
     value: item?.id,
   }));
+  const langOptions = languages?.map((lang) => {
+    return {
+      label: i18n.resolvedLanguage === 'ar' ? lang?.ar_name : lang?.name,
+      value: lang?.id,
+    };
+  });
   const formRef = useRef();
   const [formValue, setFormValue] = useState({
     amount: [0, 500],
+    availability: null,
+    country: [],
+    specialization: [],
+    gender: null,
+    languages: [],
+    rate: null,
   });
 
   const onSubmit = async () => {
@@ -42,6 +54,16 @@ function FilterForm({ setLoading, loading }) {
       params.maxAmount = formValue.amount[1];
       delete params['amount'];
     }
+    if (formValue?.languages) {
+      params['languages'] = formValue?.languages?.join(',');
+    }
+    if (formValue?.country) {
+      params['country'] = formValue?.country?.join(',');
+    }
+    if (formValue?.specialization) {
+      params['specialization'] = formValue?.specialization?.join(',');
+    }
+
     setLoading(true);
     await dispatch(getAllDoctors(params));
     setLoading(false);
@@ -53,6 +75,7 @@ function FilterForm({ setLoading, loading }) {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getCountries());
+    dispatch(getLangs());
   }, []);
   return (
     <div className="lg:bg-white lg:p-5 lg:rounded-3xl">
@@ -74,7 +97,7 @@ function FilterForm({ setLoading, loading }) {
             palcement="bottomStart"
             menuMaxHeight={200}
             name="country"
-            accepter={InputPicker}
+            accepter={TagPicker}
             data={countriesOptions}
             block
           />
@@ -94,6 +117,10 @@ function FilterForm({ setLoading, loading }) {
               );
             })}
           </Form.Control>
+        </Form.Group>
+        <Form.Group>
+          <Form.ControlLabel className="font-bold text-lg text-cyan">languages</Form.ControlLabel>
+          <Form.Control block name="languages" accepter={TagPicker} data={langOptions} />
         </Form.Group>
         <Form.Group>
           <Form.ControlLabel className="font-bold text-lg text-cyan">Rate</Form.ControlLabel>
