@@ -1,10 +1,12 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button, ButtonToolbar, Rate, Radio, RadioGroup, FlexboxGrid, Form, InputPicker, RangeSlider, TagPicker } from 'rsuite';
+import { Button, ButtonToolbar, Rate, Radio, RadioGroup, FlexboxGrid, Form, RangeSlider, TagPicker } from 'rsuite';
 import { getAllDoctors, getCountries, getLangs } from '../../features/shared/sharedActions';
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import { genders } from '../../assets/constants';
+import { setInifinteDoctors, setNextPage, setDoctorSearchParams } from '../../features/shared/sharedSlice';
+import { pageSize } from './TherapistsCard';
 const NOW = 0;
 const TODAY = 1;
 const THIS_WEEK = 7;
@@ -65,12 +67,14 @@ function FilterForm({ setLoading, loading }) {
     }
 
     setLoading(true);
-    await dispatch(getAllDoctors(params));
+    dispatch(setInifinteDoctors([]));
+    dispatch(setNextPage(1));
+    dispatch(setDoctorSearchParams(params));
+    await dispatch(getAllDoctors({ ...params, page: 1, size: pageSize }));
     setLoading(false);
   };
   const onCancel = async () => {
     setFormValue({});
-    dispatch(getAllDoctors());
   };
   const dispatch = useDispatch();
   useEffect(() => {

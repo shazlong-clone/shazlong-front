@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { getAllDoctors, getCountries, getLangs, getPrefix, getSpecialization } from './sharedActions';
-export const themeSlice = createSlice({
+export const sharedSlice = createSlice({
   name: 'shared',
   initialState: {
     countries: [],
@@ -8,6 +8,20 @@ export const themeSlice = createSlice({
     specializationList: [],
     doctors: {},
     prefixesList: [],
+    infiniteDoctors: [],
+    doctorCurrentPage: 1,
+    doctorSearchParams: {},
+  },
+  reducers: {
+    setInifinteDoctors: (state, action) => {
+      state.infiniteDoctors = action?.payload;
+    },
+    setNextPage: (state, action) => {
+      state.doctorCurrentPage = action?.payload;
+    },
+    setDoctorSearchParams: (state, action) => {
+      state.doctorSearchParams = action?.payload;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(getCountries.fulfilled, (state, action) => {
@@ -28,6 +42,7 @@ export const themeSlice = createSlice({
   },
 });
 
+export const { setInifinteDoctors, setNextPage, setDoctorSearchParams } = sharedSlice.actions;
 // Action creators are generated for each case reducer function
 
-export default themeSlice.reducer;
+export default sharedSlice.reducer;
