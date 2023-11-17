@@ -20,6 +20,6 @@ export const getPrefix = createAsyncThunk('getPrefix', async () => {
 });
 
 export const getAllDoctors = createAsyncThunk('getAllDoctors', async (params) => {
-  const res = await service.get('/api/v1/doctors/getAllDoctors', { params });
+  const res = await service.post('/api/v1/doctors/getAllDoctors', params);
   return res?.data;
 });

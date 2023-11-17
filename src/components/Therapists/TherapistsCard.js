@@ -5,7 +5,7 @@ import { getAllDoctors } from '../../features/shared/sharedActions';
 import { getPrefix } from '../../features/shared/sharedActions';
 import DoctorCard from './DoctorCard';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import { setInifinteDoctors, setNextPage } from '../../features/shared/sharedSlice';
+import { setCurrentDoctorPageSize } from '../../features/shared/sharedSlice';
 export const pageSize = 6;
 const LoadinCard = () => {
   return Array(2)
@@ -20,18 +20,13 @@ const LoadinCard = () => {
 };
 function TherapistsCard({ loading }) {
   const dispatch = useDispatch();
-  const { doctors, infiniteDoctors, doctorCurrentPage, doctorSearchParams } = useSelector((state) => state?.shared);
+  const { doctors, doctorSearchParams, doctorCurrentPageSize } = useSelector((state) => state?.shared);
   const handelGetDoctors = async () => {
-    dispatch(getAllDoctors({ ...doctorSearchParams, page: doctorCurrentPage, size: pageSize }));
+    dispatch(getAllDoctors({ ...doctorSearchParams, page: 1, size: doctorCurrentPageSize }));
   };
   useEffect(() => {
     handelGetDoctors();
-  }, [doctorCurrentPage]);
-  useEffect(() => {
-    const tempDoctors = doctors?.result ?? [];
-    const tempInfinteDoctors = infiniteDoctors ?? [];
-    dispatch(setInifinteDoctors([...tempInfinteDoctors, ...tempDoctors]));
-  }, [doctors]);
+  }, [doctorCurrentPageSize]);
   useEffect(() => {
     dispatch(getPrefix());
   }, []);
@@ -54,10 +49,8 @@ function TherapistsCard({ loading }) {
         </div>
       ) : (
         <InfiniteScroll
-          dataLength={infiniteDoctors?.length ?? pageSize} //This is important field to render the next data
-          next={() => {
-            dispatch(setNextPage(doctorCurrentPage + 1));
-          }}
+          dataLength={doctors?.result?.length ?? pageSize} //This is important field to render the next data
+          next={() => dispatch(setCurrentDoctorPageSize(doctorCurrentPageSize + pageSize))}
           hasMore={doctors?.totalPages !== doctors?.currentPage}
           loader={
             <CardContainer>
@@ -71,7 +64,7 @@ function TherapistsCard({ loading }) {
           }
         >
           <CardContainer>
-            {infiniteDoctors?.map((doctor) => {
+            {doctors?.result?.map((doctor) => {
               return (
                 <>
                   <DoctorCard doctor={doctor} />

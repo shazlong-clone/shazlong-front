@@ -5,14 +5,14 @@ import { getAllDoctors, getCountries, getLangs } from '../../features/shared/sha
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import { genders } from '../../assets/constants';
-import { setInifinteDoctors, setNextPage, setDoctorSearchParams } from '../../features/shared/sharedSlice';
+import { setCurrentDoctorPageSize, setDoctorSearchParams } from '../../features/shared/sharedSlice';
 import { pageSize } from './TherapistsCard';
 const NOW = 0;
 const TODAY = 1;
 const THIS_WEEK = 7;
 function FilterForm({ setLoading, loading }) {
   const { i18n } = useTranslation();
-  const { countries, specializationList, languages } = useSelector((state) => state?.shared);
+  const { countries, specializationList, languages, doctorSearchParams } = useSelector((state) => state?.shared);
   const countriesOptions = countries.map((item) => ({
     label: (
       <div key={item?.id} className="flex gap-1">
@@ -33,48 +33,16 @@ function FilterForm({ setLoading, loading }) {
     };
   });
   const formRef = useRef();
-  const [formValue, setFormValue] = useState({
-    amount: [0, 500],
-    availability: null,
-    country: [],
-    specialization: [],
-    gender: null,
-    languages: [],
-    rate: null,
-  });
 
   const onSubmit = async () => {
     if (!formRef.current.check()) return;
-
-    let params = { ...formValue };
-    if (formValue?.availability === NOW) {
-      params.isOnline = true;
-      delete params['availability'];
-    }
-    if (formValue?.amount) {
-      params.minAmount = formValue.amount[0];
-      params.maxAmount = formValue.amount[1];
-      delete params['amount'];
-    }
-    if (formValue?.languages) {
-      params['languages'] = formValue?.languages?.join(',');
-    }
-    if (formValue?.country) {
-      params['country'] = formValue?.country?.join(',');
-    }
-    if (formValue?.specialization) {
-      params['specialization'] = formValue?.specialization?.join(',');
-    }
-
     setLoading(true);
-    dispatch(setInifinteDoctors([]));
-    dispatch(setNextPage(1));
-    dispatch(setDoctorSearchParams(params));
-    await dispatch(getAllDoctors({ ...params, page: 1, size: pageSize }));
+    await dispatch(getAllDoctors({ ...doctorSearchParams, page: 1, size: pageSize }));
+    dispatch(setCurrentDoctorPageSize(pageSize));
     setLoading(false);
   };
   const onCancel = async () => {
-    setFormValue({});
+    setDoctorSearchParams({});
   };
   const dispatch = useDispatch();
   useEffect(() => {
@@ -85,7 +53,12 @@ function FilterForm({ setLoading, loading }) {
     <div className="lg:bg-white lg:p-5 lg:rounded-3xl">
       <h3 className="text-center hidden lg:block">Filter</h3>
       <hr className="hidden lg:block" />
-      <Form ref={formRef} formValue={formValue} fluid onChange={setFormValue}>
+      <Form
+        ref={formRef}
+        formValue={doctorSearchParams}
+        fluid
+        onChange={(formValues) => dispatch(setDoctorSearchParams(formValues))}
+      >
         <Form.Group>
           <Form.ControlLabel className="font-bold text-lg text-cyan">Availability</Form.ControlLabel>
           <Form.Control name="availability" accepter={RadioGroup}>

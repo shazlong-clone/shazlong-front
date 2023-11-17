@@ -8,19 +8,23 @@ export const sharedSlice = createSlice({
     specializationList: [],
     doctors: {},
     prefixesList: [],
-    infiniteDoctors: [],
-    doctorCurrentPage: 1,
-    doctorSearchParams: {},
+    doctorCurrentPageSize: 6,
+    doctorSearchParams: {
+      amount: [0, 500],
+      availability: null,
+      country: [],
+      specialization: [],
+      gender: null,
+      languages: [],
+      rate: null,
+    },
   },
   reducers: {
-    setInifinteDoctors: (state, action) => {
-      state.infiniteDoctors = action?.payload;
-    },
-    setNextPage: (state, action) => {
-      state.doctorCurrentPage = action?.payload;
-    },
     setDoctorSearchParams: (state, action) => {
       state.doctorSearchParams = action?.payload;
+    },
+    setCurrentDoctorPageSize: (state, action) => {
+      state.doctorCurrentPageSize = action?.payload;
     },
   },
   extraReducers: (builder) => {
@@ -42,7 +46,7 @@ export const sharedSlice = createSlice({
   },
 });
 
-export const { setInifinteDoctors, setNextPage, setDoctorSearchParams } = sharedSlice.actions;
+export const { setDoctorSearchParams, setCurrentDoctorPageSize } = sharedSlice.actions;
 // Action creators are generated for each case reducer function
 
 export default sharedSlice.reducer;
