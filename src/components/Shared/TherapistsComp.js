@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { Input, InputGroup, InputPicker } from 'rsuite';
 import SearchIcon from '@rsuite/icons/Search';
-import SearchTherapist from '../Therapists/SearchTherapist';
+import SearchTherapistSideBar from '../Therapists/SearchTherapistSideBar';
 import TherapistsCard from '../Therapists/TherapistsCard';
 import FilterForm from '../Therapists/FilterForm';
 import { filterMenu } from '../../costansts/index';
 function TherapistsComp() {
-  const [loading, setLoading] = useState();
   return (
     <>
       <section className="mt-3">
@@ -26,14 +25,14 @@ function TherapistsComp() {
         </div>
       </section>
       <section className="flex justify-between gap-3 lg:hidden">
-        <SearchTherapist />
+        <SearchTherapistSideBar />
       </section>
       <section className="grid lg:grid-cols-[1fr_2.5fr] gap-10">
         <article className="hidden lg:block">
-          <FilterForm setLoading={setLoading} loading={loading} />
+          <FilterForm />
         </article>
         <article>
-          <TherapistsCard loading={loading} />
+          <TherapistsCard />
         </article>
       </section>
     </>

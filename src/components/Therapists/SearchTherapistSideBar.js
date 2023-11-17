@@ -3,20 +3,31 @@ import { Button, Divider, Drawer } from 'rsuite';
 import { MdFilterList } from 'react-icons/md';
 import { TbArrowsSort } from 'react-icons/tb';
 import { filterMenu } from '../../costansts/index';
+import { setSearchTherapistSideBarOpen } from '../../features/shared/sharedSlice';
 import FilterForm from './FilterForm';
-function SearchTherapist() {
+import { useDispatch, useSelector } from 'react-redux';
+function SearchTherapistSideBar() {
   const [open, setOpen] = useState(false);
-  const [filterOpen, setFilterOpen] = useState(false);
-
+  const { searchTherapistSideBarOpen } = useSelector((state) => state?.shared);
+  const dispatch = useDispatch();
   return (
     <>
-      <Button onClick={() => setOpen(true)} appearance="ghost" className="grow py-0 flex items-center gap-2">
+      <Button
+        onClick={() => dispatch(setSearchTherapistSideBarOpen(true))}
+        appearance="ghost"
+        className="grow py-0 flex items-center gap-2"
+      >
         <MdFilterList /> <span>filter</span>
       </Button>
-      <Button onClick={() => setFilterOpen(true)} appearance="ghost" className="grow py-0 flex items-center gap-2">
+      <Button onClick={() => setOpen(true)} appearance="ghost" className="grow py-0 flex items-center gap-2">
         <TbArrowsSort /> <span>sort</span>
       </Button>
-      <Drawer open={open} size="full" backdrop="static" onClose={() => setOpen(false)}>
+      <Drawer
+        open={searchTherapistSideBarOpen}
+        size="full"
+        backdrop="static"
+        onClose={() => dispatch(setSearchTherapistSideBarOpen(false))}
+      >
         <Drawer.Header>
           <Drawer.Title className="text-2xl text-center text-gray">Filters</Drawer.Title>
         </Drawer.Header>
@@ -24,7 +35,7 @@ function SearchTherapist() {
           <FilterForm />
         </Drawer.Body>
       </Drawer>
-      <Drawer open={filterOpen} size="xs" placement="bottom" onClose={() => setFilterOpen(false)}>
+      <Drawer open={open} size="xs" placement="bottom" onClose={() => setOpen(false)}>
         <Drawer.Header>
           <Drawer.Title className="text-2xl text-center text-gray">Filters</Drawer.Title>
         </Drawer.Header>
@@ -46,4 +57,4 @@ function SearchTherapist() {
   );
 }
 
-export default SearchTherapist;
+export default SearchTherapistSideBar;

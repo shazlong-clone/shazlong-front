@@ -1,18 +1,24 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, ButtonToolbar, Rate, Radio, RadioGroup, FlexboxGrid, Form, RangeSlider, TagPicker } from 'rsuite';
 import { getAllDoctors, getCountries, getLangs } from '../../features/shared/sharedActions';
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import { genders } from '../../assets/constants';
-import { setCurrentDoctorPageSize, setDoctorSearchParams } from '../../features/shared/sharedSlice';
+import {
+  setCurrentDoctorPageSize,
+  setDoctorSearchParams,
+  setDoctorSearchLoading,
+  setSearchTherapistSideBarOpen,
+} from '../../features/shared/sharedSlice';
 import { pageSize } from './TherapistsCard';
 const NOW = 0;
 const TODAY = 1;
 const THIS_WEEK = 7;
-function FilterForm({ setLoading, loading }) {
+function FilterForm() {
   const { i18n } = useTranslation();
-  const { countries, specializationList, languages, doctorSearchParams } = useSelector((state) => state?.shared);
+  const { countries, specializationList, languages, doctorSearchParams, doctorSearchLoading, searchTherapistSideBarOpen } =
+    useSelector((state) => state?.shared);
   const countriesOptions = countries.map((item) => ({
     label: (
       <div key={item?.id} className="flex gap-1">
@@ -36,13 +42,22 @@ function FilterForm({ setLoading, loading }) {
 
   const onSubmit = async () => {
     if (!formRef.current.check()) return;
-    setLoading(true);
+    dispatch(setDoctorSearchLoading(true));
     await dispatch(getAllDoctors({ ...doctorSearchParams, page: 1, size: pageSize }));
     dispatch(setCurrentDoctorPageSize(pageSize));
-    setLoading(false);
+    dispatch(setDoctorSearchLoading(false));
+    if (searchTherapistSideBarOpen) {
+      dispatch(setSearchTherapistSideBarOpen(false));
+    }
   };
+
   const onCancel = async () => {
-    setDoctorSearchParams({});
+    dispatch(
+      setDoctorSearchParams({
+        amount: [10, 500],
+      }),
+    );
+    dispatch(getAllDoctors({ amount: [10, 500], page: 1, size: pageSize }));
   };
   const dispatch = useDispatch();
   useEffect(() => {
@@ -122,7 +137,7 @@ function FilterForm({ setLoading, loading }) {
           />
         </Form.Group>
         <ButtonToolbar className="flex justify-center">
-          <Button loading={loading} appearance="primary" type="submit" onClick={onSubmit}>
+          <Button loading={doctorSearchLoading} appearance="primary" type="submit" onClick={onSubmit}>
             Submit
           </Button>
           <Button appearance="ghost" type="reset" onClick={onCancel}>
