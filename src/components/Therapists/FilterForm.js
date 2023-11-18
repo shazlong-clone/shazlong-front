@@ -13,6 +13,7 @@ import {
 } from '../../features/shared/sharedSlice';
 import { pageSize } from './TherapistsCard';
 import { createSearchParams, useNavigate } from 'react-router-dom';
+
 const NOW = 0;
 const TODAY = 1;
 const THIS_WEEK = 7;
@@ -77,12 +78,20 @@ function FilterForm() {
     dispatch(getLangs());
   }, []);
   const navigate = useNavigate();
+  const RemoveNull = (params) => {
+    let newParams = {};
+    for (const key in params) {
+      newParams[key] = params[key] ?? '';
+    }
+    return newParams;
+  };
   useEffect(() => {
+    console.log('infilter');
     navigate({
-      search: `?${createSearchParams(doctorSearchParams)}`,
-      replace: true,
+      search: `?${createSearchParams(RemoveNull(doctorSearchParams))}`,
     });
   }, [doctorSearchParams]);
+
   return (
     <div className="lg:bg-white lg:p-5 lg:rounded-3xl">
       <h3 className="text-center hidden lg:block">Filter</h3>

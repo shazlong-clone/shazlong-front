@@ -20,19 +20,21 @@ const themes = {
 };
 
 root.render(
-  <React.StrictMode>
-    <ErrorBoundary>
-      <BrowserRouter>
-        <Provider store={store}>
-          <PersistGate loading={null} persistor={persistor}>
-            <ThemeSwitcherProvider insertionPoint={document.getElementById('inject-styles-here')} defaultTheme="ltr" themeMap={themes}>
-              <LocalizeRsuit>
-                <App />
-              </LocalizeRsuit>
-            </ThemeSwitcherProvider>
-          </PersistGate>
-        </Provider>
-      </BrowserRouter>
-    </ErrorBoundary>
-  </React.StrictMode>,
+  <ErrorBoundary>
+    <BrowserRouter>
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <ThemeSwitcherProvider
+            insertionPoint={document.getElementById('inject-styles-here')}
+            defaultTheme="ltr"
+            themeMap={themes}
+          >
+            <LocalizeRsuit>
+              <App />
+            </LocalizeRsuit>
+          </ThemeSwitcherProvider>
+        </PersistGate>
+      </Provider>
+    </BrowserRouter>
+  </ErrorBoundary>,
 );

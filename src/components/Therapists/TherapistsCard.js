@@ -1,11 +1,13 @@
-import React, { memo, useEffect } from 'react';
+import React, { memo, useEffect, useMemo } from 'react';
 import { Placeholder } from 'rsuite';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllDoctors, getSpecialization } from '../../features/shared/sharedActions';
 import { getPrefix } from '../../features/shared/sharedActions';
 import DoctorCard from './DoctorCard';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import { setCurrentDoctorPageSize } from '../../features/shared/sharedSlice';
+import { setCurrentDoctorPageSize, setDoctorSearchParams } from '../../features/shared/sharedSlice';
+import { useSearchParams } from 'react-router-dom';
+import { convertQueryParamsToJson } from '../../costansts';
 export const pageSize = 6;
 const LoadinCard = () => {
   return Array(2)
@@ -20,16 +22,36 @@ const LoadinCard = () => {
 };
 function TherapistsCard() {
   const dispatch = useDispatch();
-  const { doctors, doctorSearchParams, doctorCurrentPageSize, doctorSearchLoading } = useSelector((state) => state?.shared);
+  const { doctors, doctorCurrentPageSize, doctorSearchLoading } = useSelector((state) => state?.shared);
+  const [searchParams] = useSearchParams();
+  const search = useMemo(() => {
+    return {
+      amount: searchParams.getAll('amount')?.map((el) => Number(el)) ?? [10, 500],
+      availability: searchParams.get('availability') ?? null,
+      country: searchParams.getAll('country')?.map((el) => Number(el)) ?? [],
+      specialization: searchParams.getAll('specialization')?.map((el) => Number(el)) ?? [],
+      gender: searchParams.get('gender') ?? null,
+      languages: searchParams.getAll('languages')?.map((el) => Number(el)) ?? [],
+      rate: searchParams.get('rate') ?? null,
+      name: searchParams.get('name') ?? '',
+      sortBy: searchParams.get('sortBy') ?? '',
+      sort: searchParams.get('sort') ?? 'ASC',
+      page: searchParams.get('page') ?? 1,
+      size: searchParams.get('size') ?? 6,
+    };
+  }, [searchParams]);
   const handelGetDoctors = async () => {
-    dispatch(getAllDoctors({ ...doctorSearchParams, page: 1, size: doctorCurrentPageSize }));
+    dispatch(getAllDoctors({ ...search, page: 1, size: doctorCurrentPageSize }));
   };
+
+  // Iterate through all parameters and log their key-value pairs
   useEffect(() => {
     handelGetDoctors();
   }, [doctorCurrentPageSize]);
   useEffect(() => {
     dispatch(getPrefix());
     dispatch(getSpecialization());
+    dispatch(setDoctorSearchParams(search));
   }, []);
   const CardContainer = ({ children }) => {
     return <main className="lg:grid lg:grid-cols-[1fr_1fr] lg:gap-2 font-[500] lg:mb-18">{children}</main>;
