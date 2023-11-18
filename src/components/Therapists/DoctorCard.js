@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Avatar, Badge, Button, Rate, Stack } from 'rsuite';
 
 import { BsPersonSquare } from 'react-icons/bs';
@@ -122,4 +122,4 @@ function DoctorCard({ doctor }) {
   );
 }
 
-export default DoctorCard;
+export default memo(DoctorCard);

@@ -12,6 +12,7 @@ import {
   setSearchTherapistSideBarOpen,
 } from '../../features/shared/sharedSlice';
 import { pageSize } from './TherapistsCard';
+import { createSearchParams, useNavigate } from 'react-router-dom';
 const NOW = 0;
 const TODAY = 1;
 const THIS_WEEK = 7;
@@ -54,7 +55,18 @@ function FilterForm() {
   const onCancel = async () => {
     dispatch(
       setDoctorSearchParams({
-        amount: [10, 500],
+        amount: [0, 500],
+        availability: null,
+        country: [],
+        specialization: [],
+        gender: null,
+        languages: [],
+        rate: null,
+        name: '',
+        sortBy: '',
+        sort: 'ASC',
+        page: 1,
+        size: 6,
       }),
     );
     dispatch(getAllDoctors({ amount: [10, 500], page: 1, size: pageSize }));
@@ -64,6 +76,13 @@ function FilterForm() {
     dispatch(getCountries());
     dispatch(getLangs());
   }, []);
+  const navigate = useNavigate();
+  useEffect(() => {
+    navigate({
+      search: `?${createSearchParams(doctorSearchParams)}`,
+      replace: true,
+    });
+  }, [doctorSearchParams]);
   return (
     <div className="lg:bg-white lg:p-5 lg:rounded-3xl">
       <h3 className="text-center hidden lg:block">Filter</h3>

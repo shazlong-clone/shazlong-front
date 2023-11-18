@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { memo, useEffect } from 'react';
 import { Placeholder } from 'rsuite';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllDoctors, getSpecialization } from '../../features/shared/sharedActions';
@@ -79,4 +79,4 @@ function TherapistsCard() {
   );
 }
 
-export default TherapistsCard;
+export default memo(TherapistsCard);
