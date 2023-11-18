@@ -1,12 +1,12 @@
 import React from 'react';
-import ClickCounter from '../components/Test/ClickCounter';
+import ClickCounter from '../components/Test';
 
 function Test() {
-    return (
-        <div>
-            <ClickCounter />
-        </div>
-    );
+  return (
+    <div>
+      <ClickCounter />
+    </div>
+  );
 }
 
 export default Test;
