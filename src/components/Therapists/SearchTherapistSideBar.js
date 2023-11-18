@@ -1,15 +1,38 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Divider, Drawer } from 'rsuite';
 import { MdFilterList } from 'react-icons/md';
 import { TbArrowsSort } from 'react-icons/tb';
 import { sortMenu } from '../../costansts/index';
-import { setSearchTherapistSideBarOpen } from '../../features/shared/sharedSlice';
+import { setSearchTherapistSideBarOpen, setDoctorSearchLoading, setDoctorSearchParams } from '../../features/shared/sharedSlice';
 import FilterForm from './FilterForm';
 import { useDispatch, useSelector } from 'react-redux';
+import { getAllDoctors } from '../../features/shared/sharedActions';
+import clsx from 'clsx';
+
 function SearchTherapistSideBar() {
   const [open, setOpen] = useState(false);
-  const { searchTherapistSideBarOpen } = useSelector((state) => state?.shared);
+  const { searchTherapistSideBarOpen, doctorSearchParams, doctorCurrentPageSize } = useSelector((state) => state?.shared);
+
   const dispatch = useDispatch();
+  const handelSortChange = async (id) => {
+    setOpen(false);
+    const sortion = sortMenu?.find((el) => el?.id === id);
+    const newParams = { ...doctorSearchParams, sortBy: sortion?.sortBy, sort: sortion?.sort };
+    dispatch(setDoctorSearchParams(newParams));
+    dispatch(setDoctorSearchLoading(true));
+    await dispatch(getAllDoctors({ ...newParams, page: 1, size: doctorCurrentPageSize }));
+    dispatch(setDoctorSearchLoading(false));
+  };
+  useEffect(() => {
+    window.addEventListener('resize', () => {
+      if (window.innerWidth >= 1024 && (open || searchTherapistSideBarOpen)) {
+        dispatch(setSearchTherapistSideBarOpen(false));
+        setOpen(false);
+      }
+    });
+    return () => window.removeEventListener('resize', () => {});
+  }, []);
+
   return (
     <>
       <Button
@@ -44,12 +67,22 @@ function SearchTherapistSideBar() {
             {sortMenu?.map((el) => {
               return (
                 <div key={Math.random()}>
-                  <li className="px-3 py-2 cursor-pointer hover:bg-gray/5 active:bg-gray/10">{el?.label}</li>
+                  <li
+                    onClick={() => handelSortChange(el?.id)}
+                    className={clsx(
+                      'px-3 py-2 cursor-pointer hover:bg-gray/5 active:bg-gray/10',
+                      el?.sortBy === doctorSearchParams?.sortBy && el?.sort === doctorSearchParams?.sort ? 'bg-gray/5' : '',
+                    )}
+                  >
+                    {el?.label}
+                  </li>
                   <Divider className="my-0" />
                 </div>
               );
             })}
-            <li className="text-red-700 py-2 cursor-pointer hover:bg-red-50 active:bg-red-100">Rest</li>
+            <li onClick={handelSortChange} className="text-red-700 py-2 cursor-pointer hover:bg-red-50 active:bg-red-100">
+              Rest
+            </li>
           </ul>
         </Drawer.Body>
       </Drawer>

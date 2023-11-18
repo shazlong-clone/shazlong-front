@@ -13636,7 +13636,7 @@ textarea.rs-picker-menu .rs-picker-search-bar .rs-picker-search-bar-input {
 /* rtl:end:ignore */
 .rs-tooltip {
   position: absolute;
-  z-index: 1070;
+  z-index: 10;
   display: block;
   font-size: 12px;
   opacity: 0;

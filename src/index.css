@@ -110,8 +110,6 @@ object {
 
 .slider-custom .rs-tooltip {
   opacity: 1;
-}
-.slider-custom .rs-tooltip {
   display: block;
   top: -30px;
 }
@@ -360,6 +358,6 @@ a:active {
 .slot-calender .rs-calendar-table-cell-selected .rs-calendar-table-cell-content {
   box-shadow: none;
 }
-.rs-picker-menu.rs-picker-check-menu{
+.rs-picker-menu.rs-picker-check-menu {
   z-index: 1500;
 }

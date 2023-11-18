@@ -12,7 +12,7 @@
   "Explore_Our_Therapists": "اكتشف معالجينا",
   "Get_Matched": "تواصل مع المعالج",
   "Online_Therapist_Online_Header": "اذا كنت تريد التحدث فنحن هنا",
-  "Learn_More": "تعلم المزيد",
+  "Learn_flex gap-4 text-center justify-between py-3 px-4 shadow-2xl": "تعلم المزيد",
   "Online_Therapist_zero": "عفوًا، لا يوجد معالجون متصلون الآن",
   "Online_Therapist_one": "معالج متصل الآن، يمكنك التواصل معه خلال 15 دقيقة",
   "Online_Therapist_two": "معالجان متصلان الآن، يمكنك التواصل معهما الآن خلال 15 دقيقة",

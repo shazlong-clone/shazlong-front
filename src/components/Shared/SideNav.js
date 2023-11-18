@@ -41,6 +41,14 @@ function FooterNav() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open]);
+  useEffect(() => {
+    window.addEventListener('resize', () => {
+      if (window.innerWidth >= 1024 && open) {
+        setOpen(false);
+      }
+      return () => window.removeEventListener('resize', () => {});
+    });
+  }, []);
   const Menu = ({ title, icon, link, id }) => {
     return (
       <section className="pointer hover:text-cyan/90 transition-all text-center" onClick={() => setActiveTabe(id)}>

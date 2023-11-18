@@ -43,9 +43,16 @@ function TherapistsComp() {
               onChange={handelSortChange}
               block
               size="lg"
-              data={sortMenu?.map((el) => {
+              data={[...sortMenu, { label: 'Rest', value: '' }]?.map((el) => {
                 return { label: el?.label, value: el?.id };
               })}
+              renderMenuItem={(label, item) => {
+                return <div className={!item?.value ? 'text-red-500' : ''}>{label}</div>;
+              }}
+              value={
+                sortMenu?.find((el) => el.sortBy === doctorSearchParams?.sortBy && el?.sort === doctorSearchParams?.sort)?.id ||
+                null
+              }
             />
           </section>
         </div>
