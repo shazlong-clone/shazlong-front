@@ -4,14 +4,22 @@ import SearchIcon from '@rsuite/icons/Search';
 import SearchTherapistSideBar from '../Therapists/SearchTherapistSideBar';
 import TherapistsCard, { pageSize } from '../Therapists/TherapistsCard';
 import FilterForm from '../Therapists/FilterForm';
-import { filterMenu } from '../../costansts/index';
-import { setDoctorSearchParams } from '../../features/shared/sharedSlice';
+import { sortMenu } from '../../costansts/index';
+import { setDoctorSearchLoading, setDoctorSearchParams } from '../../features/shared/sharedSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllDoctors } from '../../features/shared/sharedActions';
 
 function TherapistsComp() {
-  const { doctorSearchParams } = useSelector((state) => state?.shared);
+  const { doctorSearchParams, doctorCurrentPageSize } = useSelector((state) => state?.shared);
   const dispatch = useDispatch();
+  const handelSortChange = async (id) => {
+    const sortion = sortMenu?.find((el) => el?.id === id);
+    const newParams = { ...doctorSearchParams, sortBy: sortion?.sortBy, sort: sortion?.sort };
+    dispatch(setDoctorSearchParams(newParams));
+    dispatch(setDoctorSearchLoading(true));
+    await dispatch(getAllDoctors({ ...newParams, page: 1, size: doctorCurrentPageSize }));
+    dispatch(setDoctorSearchLoading(false));
+  };
   return (
     <>
       <section className="mt-3">
@@ -21,6 +29,8 @@ function TherapistsComp() {
               <Input
                 onChange={(v) => dispatch(setDoctorSearchParams({ ...doctorSearchParams, name: v }))}
                 placeholder="Search by Therapist Name"
+                onPressEnter={() => dispatch(getAllDoctors({ ...doctorSearchParams, page: 1, size: pageSize }))}
+                value={doctorSearchParams?.name || ''}
               />
               <InputGroup.Button onClick={() => dispatch(getAllDoctors({ ...doctorSearchParams, page: 1, size: pageSize }))}>
                 <SearchIcon />
@@ -29,7 +39,14 @@ function TherapistsComp() {
           </section>
           <section />
           <section className="hidden lg:block">
-            <InputPicker block size="lg" data={filterMenu} />
+            <InputPicker
+              onChange={handelSortChange}
+              block
+              size="lg"
+              data={sortMenu?.map((el) => {
+                return { label: el?.label, value: el?.id };
+              })}
+            />
           </section>
         </div>
       </section>

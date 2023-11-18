@@ -1,15 +1,24 @@
-export const filterMenu = [
+export const ASC = 'ASC';
+export const DESC = 'DESC';
+
+export const sortMenu = [
   {
     label: 'Fees (From low to high)',
-    value: '1',
+    id: '1',
+    sortBy: 'feez',
+    sort: ASC,
   },
   {
-    label: 'Fees (From low to high)',
-    value: '2',
+    label: 'Fees (From high to low)',
+    id: '2',
+    sortBy: 'feez',
+    sort: DESC,
   },
   {
     label: 'Top rated therapists ',
-    value: '3',
+    id: '3',
+    sortBy: 'stars',
+    sort: DESC,
   },
 ];
 

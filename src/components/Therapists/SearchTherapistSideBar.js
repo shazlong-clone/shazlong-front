@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Button, Divider, Drawer } from 'rsuite';
 import { MdFilterList } from 'react-icons/md';
 import { TbArrowsSort } from 'react-icons/tb';
-import { filterMenu } from '../../costansts/index';
+import { sortMenu } from '../../costansts/index';
 import { setSearchTherapistSideBarOpen } from '../../features/shared/sharedSlice';
 import FilterForm from './FilterForm';
 import { useDispatch, useSelector } from 'react-redux';
@@ -39,17 +39,17 @@ function SearchTherapistSideBar() {
         <Drawer.Header>
           <Drawer.Title className="text-2xl text-center text-gray">Filters</Drawer.Title>
         </Drawer.Header>
-        <Drawer.Body className="px-[0px] py-3">
+        <Drawer.Body className="px-[0px] pb-3 pt-0">
           <ul className="list-none px-0 text-center">
-            {filterMenu?.map((el) => {
+            {sortMenu?.map((el) => {
               return (
                 <div key={Math.random()}>
-                  <li className="px-3">{el?.label}</li>
-                  <Divider className="my-3" />
+                  <li className="px-3 py-2 cursor-pointer hover:bg-gray/5 active:bg-gray/10">{el?.label}</li>
+                  <Divider className="my-0" />
                 </div>
               );
             })}
-            <li className="text-red-700">Rest</li>
+            <li className="text-red-700 py-2 cursor-pointer hover:bg-red-50 active:bg-red-100">Rest</li>
           </ul>
         </Drawer.Body>
       </Drawer>

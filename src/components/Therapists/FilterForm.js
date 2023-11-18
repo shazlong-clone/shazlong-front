@@ -72,7 +72,7 @@ function FilterForm() {
         ref={formRef}
         formValue={doctorSearchParams}
         fluid
-        onChange={(formValues) => dispatch(setDoctorSearchParams(formValues))}
+        onChange={(formValues) => dispatch(setDoctorSearchParams({ ...doctorSearchParams, ...formValues }))}
       >
         <Form.Group>
           <Form.ControlLabel className="font-bold text-lg text-cyan">Availability</Form.ControlLabel>

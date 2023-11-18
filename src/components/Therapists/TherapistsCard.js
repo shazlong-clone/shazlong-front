@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Placeholder } from 'rsuite';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllDoctors } from '../../features/shared/sharedActions';
+import { getAllDoctors, getSpecialization } from '../../features/shared/sharedActions';
 import { getPrefix } from '../../features/shared/sharedActions';
 import DoctorCard from './DoctorCard';
 import InfiniteScroll from 'react-infinite-scroll-component';
@@ -18,9 +18,9 @@ const LoadinCard = () => {
       );
     });
 };
-function TherapistsCard({ loading }) {
+function TherapistsCard() {
   const dispatch = useDispatch();
-  const { doctors, doctorSearchParams, doctorCurrentPageSize } = useSelector((state) => state?.shared);
+  const { doctors, doctorSearchParams, doctorCurrentPageSize, doctorSearchLoading } = useSelector((state) => state?.shared);
   const handelGetDoctors = async () => {
     dispatch(getAllDoctors({ ...doctorSearchParams, page: 1, size: doctorCurrentPageSize }));
   };
@@ -29,6 +29,7 @@ function TherapistsCard({ loading }) {
   }, [doctorCurrentPageSize]);
   useEffect(() => {
     dispatch(getPrefix());
+    dispatch(getSpecialization());
   }, []);
   const CardContainer = ({ children }) => {
     return <main className="lg:grid lg:grid-cols-[1fr_1fr] lg:gap-2 font-[500] lg:mb-18">{children}</main>;
@@ -36,7 +37,7 @@ function TherapistsCard({ loading }) {
 
   return (
     <>
-      {loading ? (
+      {doctorSearchLoading ? (
         <CardContainer>
           <LoadinCard />
           <LoadinCard />
@@ -59,7 +60,7 @@ function TherapistsCard({ loading }) {
           }
           endMessage={
             <p style={{ textAlign: 'center' }}>
-              <b>Yay! You have seen it all</b>
+              <b></b>
             </p>
           }
         >

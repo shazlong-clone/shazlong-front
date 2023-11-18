@@ -53,7 +53,7 @@ function DoctorCard({ doctor }) {
         </article>
       </div>
       <p className="my-2 font-[500]">Interests:</p>
-      <div className="flex gap-2 items-start flex-wrap">
+      <div className="flex gap-2 items-start max-w-[400px]">
         {!doctor?.specialization?.length
           ? 'no Interstes Found'
           : doctor?.specialization?.slice(0, 2)?.map((id) => {

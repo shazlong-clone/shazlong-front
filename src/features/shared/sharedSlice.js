@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { getAllDoctors, getCountries, getLangs, getPrefix, getSpecialization } from './sharedActions';
+import { ASC } from '../../costansts/index';
 export const sharedSlice = createSlice({
   name: 'shared',
   initialState: {
@@ -20,6 +21,10 @@ export const sharedSlice = createSlice({
       languages: [],
       rate: null,
       name: '',
+      sortBy: '',
+      sort: ASC,
+      page: 1,
+      size: 6,
     },
   },
 
