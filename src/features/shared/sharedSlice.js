@@ -19,6 +19,7 @@ export const sharedSlice = createSlice({
       gender: null,
       languages: [],
       rate: null,
+      name: '',
     },
   },
 
