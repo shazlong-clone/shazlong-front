@@ -13,7 +13,6 @@ import personImg from '../../assets/images/person.png';
 function DoctorCard({ doctor }) {
   const { specializationList, prefixesList, countries, languages } = useSelector((state) => state?.shared);
   const { i18n } = useTranslation();
-
   const country = countries?.find((country) => country?.id === doctor?.country);
   const prefix = prefixesList?.find((pref) => pref?.id === doctor?.prefix);
   return (

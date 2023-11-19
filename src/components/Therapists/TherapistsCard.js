@@ -7,7 +7,6 @@ import DoctorCard from './DoctorCard';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { setCurrentDoctorPageSize, setDoctorSearchParams } from '../../features/shared/sharedSlice';
 import { useSearchParams } from 'react-router-dom';
-import { convertQueryParamsToJson } from '../../costansts';
 export const pageSize = 6;
 const LoadinCard = () => {
   return Array(2)

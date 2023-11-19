@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, ButtonToolbar, Rate, Radio, RadioGroup, FlexboxGrid, Form, RangeSlider, TagPicker } from 'rsuite';
 import { getAllDoctors, getCountries, getLangs } from '../../features/shared/sharedActions';
@@ -13,6 +13,20 @@ import {
 } from '../../features/shared/sharedSlice';
 import { pageSize } from './TherapistsCard';
 import { createSearchParams, useNavigate } from 'react-router-dom';
+export const initalSearchParams = {
+  amount: [0, 500],
+  availability: null,
+  country: [],
+  specialization: [],
+  gender: null,
+  languages: [],
+  rate: null,
+  name: '',
+  sortBy: '',
+  sort: 'ASC',
+  page: 1,
+  size: pageSize,
+};
 
 const NOW = 0;
 const TODAY = 1;
@@ -41,11 +55,12 @@ function FilterForm() {
     };
   });
   const formRef = useRef();
-
+  const [formValues, setFormValues] = useState(initalSearchParams);
   const onSubmit = async () => {
     if (!formRef.current.check()) return;
     dispatch(setDoctorSearchLoading(true));
-    await dispatch(getAllDoctors({ ...doctorSearchParams, page: 1, size: pageSize }));
+    dispatch(setDoctorSearchParams({ ...doctorSearchParams, ...formValues }));
+    await dispatch(getAllDoctors({ ...doctorSearchParams, ...formValues, page: 1, size: pageSize }));
     dispatch(setCurrentDoctorPageSize(pageSize));
     dispatch(setDoctorSearchLoading(false));
     if (searchTherapistSideBarOpen) {
@@ -54,23 +69,9 @@ function FilterForm() {
   };
 
   const onCancel = async () => {
-    dispatch(
-      setDoctorSearchParams({
-        amount: [0, 500],
-        availability: null,
-        country: [],
-        specialization: [],
-        gender: null,
-        languages: [],
-        rate: null,
-        name: '',
-        sortBy: '',
-        sort: 'ASC',
-        page: 1,
-        size: 6,
-      }),
-    );
-    dispatch(getAllDoctors({ amount: [10, 500], page: 1, size: pageSize }));
+    dispatch(setDoctorSearchParams(initalSearchParams));
+    setFormValues(initalSearchParams);
+    dispatch(getAllDoctors(initalSearchParams));
   };
   const dispatch = useDispatch();
   useEffect(() => {
@@ -86,7 +87,6 @@ function FilterForm() {
     return newParams;
   };
   useEffect(() => {
-    console.log('infilter');
     navigate({
       search: `?${createSearchParams(RemoveNull(doctorSearchParams))}`,
     });
@@ -96,12 +96,7 @@ function FilterForm() {
     <div className="lg:bg-white lg:p-5 lg:rounded-3xl">
       <h3 className="text-center hidden lg:block">Filter</h3>
       <hr className="hidden lg:block" />
-      <Form
-        ref={formRef}
-        formValue={doctorSearchParams}
-        fluid
-        onChange={(formValues) => dispatch(setDoctorSearchParams({ ...doctorSearchParams, ...formValues }))}
-      >
+      <Form ref={formRef} formValue={formValues} onChange={setFormValues} fluid>
         <Form.Group>
           <Form.ControlLabel className="font-bold text-lg text-cyan">Availability</Form.ControlLabel>
           <Form.Control name="availability" accepter={RadioGroup}>
