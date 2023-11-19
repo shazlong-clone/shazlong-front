@@ -47,19 +47,19 @@ function App() {
           </Route>
           <Route path="/" element={<LayOut />}>
             <Route index element={<Home />} />
-            <Route path="therapists" element={<Therapists />} />
-            <Route path="thearpist-profile/:id" element={<ThearpistProfile />} />
-            <Route path="checkout/:doctorId/:slotId" element={<Checkout />} />
-            <Route path="instructions" element={<Instructions />} />
-            <Route path="online" element={<Online />} />
-            <Route path="my-therapy" element={<MyTherapy />} />
-            <Route path="licence" element={<Licence />} />
-            <Route path="blogs" element={<Blogs />} />
-            <Route path="blog/:id" element={<Blog />} />
-            <Route path="psychometer" element={<Psychometer />} />
-            <Route path="psychotest/:id" element={<Psychotest />} />
-            <Route path="join-us" element={<JoinUs />} />
-            <Route path="user-info" element={<ProtectedRoute />}>
+            <Route path="/therapists" element={<Therapists />} />
+            <Route path="/thearpist-profile/:id" element={<ThearpistProfile />} />
+            <Route path="/checkout/:doctorId/:slotId" element={<Checkout />} />
+            <Route path="/instructions" element={<Instructions />} />
+            <Route path="/online" element={<Online />} />
+            <Route path="/my-therapy" element={<MyTherapy />} />
+            <Route path="/licence" element={<Licence />} />
+            <Route path="/blogs" element={<Blogs />} />
+            <Route path="/blog/:id" element={<Blog />} />
+            <Route path="/psychometer" element={<Psychometer />} />
+            <Route path="/psychotest/:id" element={<Psychotest />} />
+            <Route path="/join-us" element={<JoinUs />} />
+            <Route path="/user-info" element={<ProtectedRoute />}>
               <Route index element={<UserInfo />} />
             </Route>
             <Route path="test" element={<Test />} />

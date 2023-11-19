@@ -365,3 +365,19 @@ a:active {
 .infinite-scroll-component {
   overflow: hidden !important;
 }
+
+.custom-badge .rs-badge-content{
+  top: 84%;
+  right: 15%;
+  border: 3px solid white;
+  background: #999;
+}
+.custom-badge.green-bage .rs-badge-content{
+  background:green ;
+}
+.custom-badge .rs-badge-independent.rs-badge-dot, .rs-badge-wrapper .rs-badge-content:empty{
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+}
+

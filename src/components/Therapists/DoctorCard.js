@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import moment from 'moment';
 import personImg from '../../assets/images/person.png';
+import clsx from 'clsx';
 
 function DoctorCard({ doctor }) {
   const { specializationList, prefixesList, countries, languages } = useSelector((state) => state?.shared);
@@ -19,15 +20,17 @@ function DoctorCard({ doctor }) {
     <section key={Math.random()} className="bg-white rounded-3xl mt-3 p-6 text-sm lg:mb-5 lg:mt-0 overflow-hidden">
       <div className="flex gap-5">
         <Link to={`/thearpist-profile/${doctor?.id}`}>
-          <Badge color="green">
-            <Avatar
-              className="avatar-doctor-card"
-              size="lg"
-              circle={true}
-              src={doctor.photo ? doctor.photo : personImg}
-              alt="@superman66"
-            />
-          </Badge>
+          <span className={clsx('custom-badge', doctor?.isOnline && 'green-bage')}>
+            <Badge size='lg'>
+              <Avatar
+                className="avatar-doctor-card"
+                size="lg"
+                circle={true}
+                src={doctor.photo ? doctor.photo : personImg}
+                alt="@superman66"
+              />
+            </Badge>
+          </span>
         </Link>
         <article className="grow">
           <section className="flex justify-between">
