@@ -343,16 +343,14 @@ a:active {
 .rs-calendar-table-cell-content:hover {
   background: transparent;
 }
-.rs-calendar-time-dropdown-column ul {
-  &::-webkit-scrollbar {
-    width: 0.5em;
-    height: 0.5em;
-  }
+.rs-calendar-time-dropdown-column ul::-webkit-scrollbar {
+  width: 0.5em;
+  height: 0.5em;
+}
 
-  &::-webkit-scrollbar-thumb {
-    background-color: var(--rs-text-tertiary);
-    border-radius: 3px;
-  }
+.rs-calendar-time-dropdown-column ul::-webkit-scrollbar-thumb {
+  background-color: var(--rs-text-tertiary);
+  border-radius: 3px;
 }
 
 .slot-calender .rs-calendar-table-cell-selected .rs-calendar-table-cell-content {
@@ -366,18 +364,18 @@ a:active {
   overflow: hidden !important;
 }
 
-.custom-badge .rs-badge-content{
+.custom-badge .rs-badge-content {
   top: 84%;
   right: 15%;
   border: 3px solid white;
   background: #999;
 }
-.custom-badge.green-bage .rs-badge-content{
-  background:green ;
+.custom-badge.green-bage .rs-badge-content {
+  background: green;
 }
-.custom-badge .rs-badge-independent.rs-badge-dot, .rs-badge-wrapper .rs-badge-content:empty{
+.custom-badge .rs-badge-independent.rs-badge-dot,
+.rs-badge-wrapper .rs-badge-content:empty {
   width: 18px;
   height: 18px;
   border-radius: 50%;
 }
-

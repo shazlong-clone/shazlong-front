@@ -4,7 +4,7 @@ import { Button, ButtonToolbar, Rate, Radio, RadioGroup, FlexboxGrid, Form, Rang
 import { getAllDoctors, getCountries, getLangs } from '../../features/shared/sharedActions';
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
-import { genders } from '../../assets/constants';
+import { availability, genders } from '../../assets/constants';
 import {
   setCurrentDoctorPageSize,
   setDoctorSearchParams,
@@ -28,11 +28,8 @@ export const initalSearchParams = {
   size: pageSize,
 };
 
-const NOW = 0;
-const TODAY = 1;
-const THIS_WEEK = 7;
 function FilterForm() {
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
   const { countries, specializationList, languages, doctorSearchParams, doctorSearchLoading, searchTherapistSideBarOpen } =
     useSelector((state) => state?.shared);
   const countriesOptions = countries.map((item) => ({
@@ -94,19 +91,23 @@ function FilterForm() {
 
   return (
     <div className="lg:bg-white lg:p-5 lg:rounded-3xl">
-      <h3 className="text-center hidden lg:block">Filter</h3>
+      <h3 className="text-center hidden lg:block">{t('Filter')}</h3>
       <hr className="hidden lg:block" />
       <Form ref={formRef} formValue={formValues} onChange={setFormValues} fluid>
         <Form.Group>
-          <Form.ControlLabel className="font-bold text-lg text-cyan">Availability</Form.ControlLabel>
+          <Form.ControlLabel className="font-bold text-lg text-cyan">{t('Availability')}</Form.ControlLabel>
           <Form.Control name="availability" accepter={RadioGroup}>
-            <Radio value={TODAY}>Today</Radio>
-            <Radio value={NOW}>Now</Radio>
-            <Radio value={THIS_WEEK}>This Week</Radio>
+            {availability?.map((el) => {
+              return (
+                <Radio key={el?.id} value={el?.id}>
+                  {t(el?.name)}
+                </Radio>
+              );
+            })}
           </Form.Control>
         </Form.Group>
         <Form.Group controlId="selectPicker">
-          <Form.ControlLabel className="font-bold text-lg text-cyan">Country:</Form.ControlLabel>
+          <Form.ControlLabel className="font-bold text-lg text-cyan">{t('Country')}</Form.ControlLabel>
           <Form.Control
             preventOverflow
             palcement="bottomStart"
@@ -118,11 +119,11 @@ function FilterForm() {
           />
         </Form.Group>
         <Form.Group>
-          <Form.ControlLabel className="font-bold text-lg text-cyan mb-3">Areas of interest</Form.ControlLabel>
+          <Form.ControlLabel className="font-bold text-lg text-cyan mb-3">{t('Areas_Of_Interest')}</Form.ControlLabel>
           <Form.Control name="specialization" accepter={TagPicker} data={specializationOptions} block />
         </Form.Group>
         <Form.Group>
-          <Form.ControlLabel className="font-bold text-lg text-cyan">Gender</Form.ControlLabel>
+          <Form.ControlLabel className="font-bold text-lg text-cyan">{t('Gender')}</Form.ControlLabel>
           <Form.Control name="gender" inline accepter={RadioGroup}>
             {genders?.map((el) => {
               return (
@@ -134,23 +135,23 @@ function FilterForm() {
           </Form.Control>
         </Form.Group>
         <Form.Group>
-          <Form.ControlLabel className="font-bold text-lg text-cyan">languages</Form.ControlLabel>
+          <Form.ControlLabel className="font-bold text-lg text-cyan">{t('Language')}</Form.ControlLabel>
           <Form.Control block name="languages" accepter={TagPicker} data={langOptions} />
         </Form.Group>
         <Form.Group>
-          <Form.ControlLabel className="font-bold text-lg text-cyan">Rate</Form.ControlLabel>
+          <Form.ControlLabel className="font-bold text-lg text-cyan">{t('Rate')}</Form.ControlLabel>
           <Form.Control name="rate" accepter={Rate} />
         </Form.Group>
 
         <Form.Group controlId="slider">
           <Form.ControlLabel className="font-bold text-lg text-cyan b">
             <FlexboxGrid justify="space-between">
-              <FlexboxGrid.Item>Feez:</FlexboxGrid.Item>
-              <FlexboxGrid.Item>Egy</FlexboxGrid.Item>
+              <FlexboxGrid.Item>{t('Feez')}:</FlexboxGrid.Item>
+              <FlexboxGrid.Item>{t('Egy')}</FlexboxGrid.Item>
             </FlexboxGrid>
           </Form.ControlLabel>
           <Form.Control
-            className="slider-custom"
+            className="slider-custom mt-10"
             accepter={RangeSlider}
             step={10}
             min={10}
@@ -161,10 +162,10 @@ function FilterForm() {
         </Form.Group>
         <ButtonToolbar className="flex justify-center">
           <Button loading={doctorSearchLoading} appearance="primary" type="submit" onClick={onSubmit}>
-            Submit
+            {t('Search')}
           </Button>
           <Button appearance="ghost" type="reset" onClick={onCancel}>
-            Cancel
+            {t('Cancel')}
           </Button>
         </ButtonToolbar>
       </Form>

@@ -145,5 +145,18 @@
   "Language": "Language",
   "Prefix": "Prefix",
   "sign_in_as": "Sign in as",
-  "No_Data": "No Data"
+  "No_Data": "No Data",
+  "Search_By_Therapist_Name": "Search By Therapist Name",
+  "Sorting": "Sorting",
+  "Filter": "Filter",
+  "Rest": "Rest",
+  "Availability": "Availability",
+  "Now": "Now",
+  "Today": "Today",
+  "This_Week": "This Week",
+  "Areas_Of_Interest": "Areas Of Interest",
+  "Rate": "Rate",
+  "Feez": "Feez",
+  "Egy": "Egy",
+  "Search": "Search"
 }

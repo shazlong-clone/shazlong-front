@@ -21,7 +21,7 @@ function DoctorCard({ doctor }) {
       <div className="flex gap-5">
         <Link to={`/thearpist-profile/${doctor?.id}`}>
           <span className={clsx('custom-badge', doctor?.isOnline && 'green-bage')}>
-            <Badge size='lg'>
+            <Badge size="lg">
               <Avatar
                 className="avatar-doctor-card"
                 size="lg"

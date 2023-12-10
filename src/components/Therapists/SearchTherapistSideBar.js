@@ -8,11 +8,12 @@ import FilterForm from './FilterForm';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllDoctors } from '../../features/shared/sharedActions';
 import clsx from 'clsx';
+import { useTranslation } from 'react-i18next';
 
 function SearchTherapistSideBar() {
   const [open, setOpen] = useState(false);
   const { searchTherapistSideBarOpen, doctorSearchParams, doctorCurrentPageSize } = useSelector((state) => state?.shared);
-
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const handelSortChange = async (id) => {
     setOpen(false);
@@ -40,10 +41,10 @@ function SearchTherapistSideBar() {
         appearance="ghost"
         className="grow py-0 flex items-center gap-2"
       >
-        <MdFilterList /> <span>filter</span>
+        <MdFilterList /> <span>{t('Filter')}</span>
       </Button>
       <Button onClick={() => setOpen(true)} appearance="ghost" className="grow py-0 flex items-center gap-2">
-        <TbArrowsSort /> <span>sort</span>
+        <TbArrowsSort /> <span>{t('Sorting')}</span>
       </Button>
       <Drawer
         open={searchTherapistSideBarOpen}
@@ -52,7 +53,7 @@ function SearchTherapistSideBar() {
         onClose={() => dispatch(setSearchTherapistSideBarOpen(false))}
       >
         <Drawer.Header>
-          <Drawer.Title className="text-2xl text-center text-gray">Filters</Drawer.Title>
+          <Drawer.Title className="text-2xl text-center text-gray">{t('Filter')}</Drawer.Title>
         </Drawer.Header>
         <Drawer.Body className="px-[30px]">
           <FilterForm />
@@ -60,7 +61,7 @@ function SearchTherapistSideBar() {
       </Drawer>
       <Drawer open={open} size="xs" placement="bottom" onClose={() => setOpen(false)}>
         <Drawer.Header>
-          <Drawer.Title className="text-2xl text-center text-gray">Filters</Drawer.Title>
+          <Drawer.Title className="text-2xl text-center text-gray">{t('Filter')}</Drawer.Title>
         </Drawer.Header>
         <Drawer.Body className="px-[0px] pb-3 pt-0">
           <ul className="list-none px-0 text-center">
@@ -81,7 +82,7 @@ function SearchTherapistSideBar() {
               );
             })}
             <li onClick={handelSortChange} className="text-red-700 py-2 cursor-pointer hover:bg-red-50 active:bg-red-100">
-              Rest
+              {t('Rest')}
             </li>
           </ul>
         </Drawer.Body>

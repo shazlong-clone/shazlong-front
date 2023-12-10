@@ -8,8 +8,10 @@ import { sortMenu } from '../../costansts/index';
 import { setDoctorSearchLoading, setDoctorSearchParams } from '../../features/shared/sharedSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllDoctors } from '../../features/shared/sharedActions';
+import { useTranslation } from 'react-i18next';
 
 function TherapistsComp() {
+  const { t } = useTranslation();
   const { doctorSearchParams, doctorCurrentPageSize } = useSelector((state) => state?.shared);
   const dispatch = useDispatch();
   const handelSortChange = async (id) => {
@@ -28,7 +30,7 @@ function TherapistsComp() {
             <InputGroup size="lg" inside className="mb-10">
               <Input
                 onChange={(v) => dispatch(setDoctorSearchParams({ ...doctorSearchParams, name: v }))}
-                placeholder="Search by Therapist Name"
+                placeholder={t('Search_By_Therapist_Name')}
                 onPressEnter={() => dispatch(getAllDoctors({ ...doctorSearchParams, page: 1, size: pageSize }))}
                 value={doctorSearchParams?.name || ''}
               />
@@ -40,6 +42,7 @@ function TherapistsComp() {
           <section />
           <section className="hidden lg:block">
             <InputPicker
+              placeholder={t('Sorting')}
               onChange={handelSortChange}
               block
               size="lg"

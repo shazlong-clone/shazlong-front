@@ -149,5 +149,18 @@
   "Language": "اللغة",
   "Prefix": "اللقب",
   "sign_in_as": "سجل دخول ك",
-  "No_Data": "لايوجد بيانات"
+  "No_Data": "لايوجد بيانات",
+  "Search_By_Therapist_Name": "البحث باسم الدكتور او المعالج",
+  "Sorting": "الترتيب",
+  "Filter": "البحث",
+  "Rest": "الغاء",
+  "Availability": "التواجد",
+  "Now": "الان",
+  "Today": "اليوم",
+  "This_Week": "هذا الاسبوع",
+  "Areas_Of_Interest": "التخصص",
+  "Rate": "التقيم",
+  "Feez": "المبلغ",
+  "Egy": "جنيها مصريا",
+  "Search": "بحث"
 }

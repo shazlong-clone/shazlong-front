@@ -24,3 +24,18 @@ export const DOCTOR = 2;
 export const USER = 1;
 
 export const prefixList = ['Dr', 'PsyD', 'Prof', 'MBPsS', 'Mr', 'Mrs', 'Ms'];
+
+export const availability = [
+  {
+    id: 0,
+    name: 'Now',
+  },
+  {
+    id: 1,
+    name: 'Today',
+  },
+  {
+    id: 7,
+    name: 'This_Week',
+  },
+];
