@@ -26,11 +26,11 @@ function Hero() {
         </div>
         <section className="mt-16 mb-5 flex flex-col gap-4 md:mb-32">
           <Link to="/therapists">
-            <Button appearance="primary" className="w-[200px] lg:w-[400px]">
+            <Button appearance="primary" className="w-[200px] lg:w-[400px] text-xl">
               {t('Explore_Our_Therapists')}
             </Button>
           </Link>
-          <Button appearance="ghost" className="w-[200px] lg:w-[400px]">
+          <Button appearance="ghost" className="w-[200px] lg:w-[400px] text-xl">
             {t('Contact')}
           </Button>
         </section>
