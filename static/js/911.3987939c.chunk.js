@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkmy=self.webpackChunkmy||[]).push([[911],{69911:(s,e,n)=>{n.r(e),n.d(e,{default:()=>r});n(72791);var a=n(65848),c=n(31999),i=n(80184);const r=function(){return(0,i.jsx)("main",{className:"bg-cyan/5",children:(0,i.jsxs)("div",{className:"container py-4 min-h-[100vh]",children:[(0,i.jsx)(a.Z,{to:"/",children:"Therapist List"}),(0,i.jsx)(c.Z,{})]})})}}}]);
+//# sourceMappingURL=911.3987939c.chunk.js.map
