@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import Header from '../Shared/Header';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';

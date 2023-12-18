@@ -3,7 +3,6 @@ import { useTranslation } from 'react-i18next';
 import { twMerge } from 'tailwind-merge';
 
 function Empty({message, className, ...props}) {
-    console.log(className)
     const { t } = useTranslation();
     return (
         <div className={twMerge('text-center', className ?? '')} {...props}>
