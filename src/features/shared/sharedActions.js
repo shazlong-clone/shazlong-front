@@ -24,3 +24,8 @@ export const getAllDoctors = createAsyncThunk('getAllDoctors', async (params) =>
   const res = await service.post('/api/v1/doctors/getAllDoctors', params);
   return res?.data;
 });
+
+export const getOnlineDoctors = createAsyncThunk('getOnlineDoctors', async () => {
+  const res = await service.get('/api/v1/doctors/getOnlineDoctors');
+  return res.data;
+});

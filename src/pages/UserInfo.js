@@ -32,6 +32,7 @@ function UserInfo() {
   const dispatch = useDispatch();
   const props = {
     name: 'photo',
+    accept: 'image/*',
     fileListVisible: false,
     listType: 'picture',
     action: `${API_BASE_URL}/api/v1/users/uploadPhoto`,
@@ -47,12 +48,12 @@ function UserInfo() {
     onSuccess: () => {
       setUploading(false);
       dispatch(getMe());
-      toaster.push(<Message type="success">Uploaded successfully</Message>);
+      toaster.push(<Message type="success">{t('updated_successfuly')}</Message>);
     },
-    onError: () => {
+    onError: (err) => {
       setFileInfo(null);
       setUploading(false);
-      toaster.push(<Message type="error">Upload failed</Message>);
+      toaster.push(<Message type="error"> {err?.response?.message || t('internal_server_error')}</Message>);
     },
   };
   return (

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import doc1 from '../../assets/images/doc1.webp';
 import doc2 from '../../assets/images/doc2.webp';
 import doc3 from '../../assets/images/doc3.jpg';
@@ -6,6 +6,8 @@ import { AvatarGroup, Avatar } from 'rsuite';
 import useMediaQuery from '../../utils/useMediaQuery';
 import { useTranslation } from 'react-i18next';
 import { Button } from 'rsuite';
+import { getOnlineDoctors } from '../../features/shared/sharedActions';
+import { useDispatch, useSelector } from 'react-redux';
 const users = [
   {
     avatar: doc1,
@@ -28,22 +30,26 @@ const max = 3;
 
 function OnlineTherapist() {
   const { t } = useTranslation();
-
+  const { onlineDoctors } = useSelector((state) => state?.shared);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getOnlineDoctors());
+  }, []);
   return (
     <div className="bg-white p-5 rounded-3xl xl:p-8">
       <h1 className="text-gray/90 text-xl md:mb-6 lg:mb-10 lg:text-3xl mb-6">{t('Online_Therapist_Online_Header')}</h1>
       <section className="flex flex-col lg:flex-row items-center gap-3 justify-between">
         <AvatarGroup stack size={useMediaQuery('lg') ? 'lg' : 'md'}>
-          {users
-            .filter((user, i) => i < max)
-            .map((user) => (
-              <Avatar circle key={user.name} src={user.avatar} alt={user.name} />
+          {onlineDoctors
+            ?.filter((user, i) => i < max)
+            ?.map((user) => (
+              <Avatar circle key={user.name} src={user.photo} alt="img" />
             ))}
-          {users.length <= max ? (
+          {onlineDoctors?.length <= max ? (
             ''
           ) : (
             <Avatar className={users?.length > 0 ? 'd-none' : ''} circle style={{ background: '#111' }}>
-              +{users.length - max}
+              +{onlineDoctors?.length - max}
             </Avatar>
           )}
         </AvatarGroup>

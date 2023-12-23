@@ -16,7 +16,7 @@ import {
 } from 'rsuite';
 import { genders } from '../../assets/constants';
 import { updateMe } from '../../features/auth/authAction';
-import { LuEdit } from 'react-icons/lu';
+import { FiEdit2 } from 'react-icons/fi';
 import { useTranslation } from 'react-i18next';
 import { getCountries } from '../../features/shared/sharedActions';
 
@@ -115,7 +115,7 @@ function PersonalInfo() {
     <article className="relative">
       {plainText ? (
         <a className="cursor-pointer absolute end-0 top-0 mt-5 mx-3 z-20" onClick={() => setPlainText(false)}>
-          {t('Edit')} <LuEdit />
+          {t('Edit')} <FiEdit2 />
         </a>
       ) : (
         ''

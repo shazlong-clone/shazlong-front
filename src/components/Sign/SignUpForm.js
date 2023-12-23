@@ -57,7 +57,7 @@ function SignUpForm() {
     passwordConfirm: Schema.Types.StringType().isRequired(t('required')),
     countryId: Schema.Types.NumberType().isRequired(t('required')),
     phone: Schema.Types.StringType().isRequired(t('required')),
-    gender: Schema.Types.StringType().isRequired(t('required')),
+    gender: Schema.Types.NumberType().isRequired(t('required')),
     birthDate: Schema.Types.DateType().isRequired(t('required')),
   });
 
