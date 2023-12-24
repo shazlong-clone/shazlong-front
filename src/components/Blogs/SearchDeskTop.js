@@ -41,13 +41,13 @@ function SearchDeskTop() {
                 </span>
               </article>
               <article className="flex justify-center gap-10 items-center text-xl lg:flex-[1_1_33%]">
-                <a href="https://www.facebook.com/ShezlongApp/">
+                <a target="_blank" href="https://www.facebook.com/ShezlongApp/" rel="noreferrer">
                   <FaFacebookF />
                 </a>
-                <a href="https://www.linkedin.com/company/shezlong/?originalSubdomain=ae">
+                <a target="_blank" href="https://www.linkedin.com/company/shezlong/?originalSubdomain=ae" rel="noreferrer">
                   <FaLinkedinIn />
                 </a>
-                <a href="https://www.linkedin.com/company/shezlong/?originalSubdomain=ae">
+                <a target="_blank" href="https://www.linkedin.com/company/shezlong/?originalSubdomain=ae" rel="noreferrer">
                   <FiInstagram />
                 </a>
               </article>

@@ -345,7 +345,7 @@ function BlogHtml() {
 
           <h4 className="font-bold mt-5">Make Life Better: Share this article on</h4>
 
-          <div className="shez-share-single-post">
+          <div className="shez-share-single-post flex gap-1">
             <a
               href="https://facebook.com/sharer/sharer.php?u=https://blog.shezlong.com/en/how-to-stay-healthy-and-safe-while-fasting-during-ramadan/"
               target="_blank"

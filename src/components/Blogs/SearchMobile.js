@@ -41,7 +41,7 @@ function SearchMobile() {
         <InternalHeader
           className="py-2"
           icon={
-            <Button className="flex items-center text-xl font-bold text-gray p-4" block onClick={onChange}>
+            <Button className="flex items-center text-xl font-bold text-gray p-4 bg-transparent" block onClick={onChange}>
               {
                 <>
                   <AlignJustifyIcon className={clsx('absolute', !show ? 'animate-scallup' : 'animate-scalldown')} />
