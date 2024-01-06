@@ -37,7 +37,7 @@ function Checkout() {
   const { doctorId } = useParams();
 
   return (
-    <main className="bg-cyan/5 py-5">
+    <main className="bg-[var(--rs-primary-700)]/5 py-5">
       <div className="container">
         <InternalHeader link={`/thearpist-profile/${doctorId}`}>Check Out</InternalHeader>
       </div>
@@ -57,7 +57,7 @@ function Checkout() {
               .fill('')
               ?.map(() => {
                 return (
-                  <Card key={Math.random()} className=" bg-gray/5 rounded-lg p-2 mb-0 mt-2 grid gap-2">
+                  <Card key={Math.random()} className=" bg-[var(--rs-gray-100)] rounded-lg p-2 mb-0 mt-2 grid gap-2">
                     <article className="flex gap-2 items-center">
                       <LuAlarmClock className="text-xl text-cyan" />
                       <aside className="text-sm">Today Jul 10 (1:00 PM : 2:00 PM)</aside>

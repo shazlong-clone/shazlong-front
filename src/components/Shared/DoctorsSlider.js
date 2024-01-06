@@ -17,7 +17,7 @@ function DoctorsSlider() {
   };
   return (
     <>
-      <article className="slick-blog slick-container slick-articel mt-10 xl:mt-0 bg-cyan/30 border border-solid border-cyan p-5  pb-8 rounded-lg">
+      <article className="slick-blog slick-container slick-articel mt-10 xl:mt-0 bg-[var(--rs-primary-700)]/30 border border-solid border-cyan p-5  pb-8 rounded-lg">
         <Card className="xl:mb-0 rounded-lg">
           <h3 className="text-center mb-3">Get Help</h3>
           <Slider {...settings}>
@@ -28,7 +28,7 @@ function DoctorsSlider() {
                   <div className="border-x-2 border-white border-solid" key={Math.random()}>
                     <article className="text-center">
                       <img
-                        className="rounded-full m-auto border border-cyan border-solid p-1 bg-cyan/10"
+                        className="rounded-full m-auto border border-cyan border-solid p-1 bg-[var(--rs-primary-700)]/10"
                         width="100px"
                         height="100px"
                         src={therapist}

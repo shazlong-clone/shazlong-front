@@ -36,7 +36,7 @@ function Profile({ setBounceBg }) {
           return (
             <span
               key={Math.random()}
-              className="bg-green/10 mb-2 text-xs font-bold px-3 py-1 rounded-3xl text-green/60 inline-block"
+              className="bg-[var(--rs-green-100)] mb-2 text-xs font-bold px-3 py-1 rounded-3xl text-green/60 inline-block"
             >
               {el}
             </span>

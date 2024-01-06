@@ -6,7 +6,7 @@ function OurTherapist() {
   const { t } = useTranslation();
   return (
     <div>
-      <div className="bg-cyan/20 py-1">
+      <div className="bg-[var(--rs-primary-100)] py-1">
         <Header>{t('Meet_Our_Therapists')}</Header>
         <img
           src={therapist}

@@ -127,7 +127,7 @@ function VerifyEmailRegistration() {
   }, []);
 
   return (
-    <main className="bg-gray/5 min-h-screen">
+    <main className="bg-[var(--rs-gray-100)] min-h-screen">
       <div className="container">
         <div className="text-center pt-5 mb-[60px]">
           <Link to="/">
@@ -140,9 +140,9 @@ function VerifyEmailRegistration() {
               {i18n.resolvedLanguage === 'ar' ? ` ${(2).toLocaleString('ar-EG')} / ${(3).toLocaleString('ar-EG')}` : '2/3'}
             </span>
           </p>
-          <div className="w-[50px] h-[3px] bg-cyan m-auto mt-5" />
+          <div className="w-[50px] h-[3px] bg-[var(--rs-primary-700)] m-auto mt-5" />
         </div>
-        <Panel bordered className="bg-white py-5">
+        <Panel bordered className="bg-[var(--rs-bg-card)] py-5">
           <Form ref={formRef} formValue={formValue} onChange={setFormValue} fluid>
             <Grid>
               <Row gutter={16}>

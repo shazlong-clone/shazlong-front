@@ -44,7 +44,7 @@ function SampleNextArrow(props) {
   const { onClick } = props;
   return (
     <div
-      className={clsx('text-green text-3xl top-[50%] absolute right-[-30px] translate-y-[-40%] cursor-pointer')}
+      className={clsx('text-[var(--rs-green-400)] text-3xl top-[50%] absolute right-[-30px] translate-y-[-40%] cursor-pointer')}
       onClick={onClick}
     >
       <BsFillArrowRightCircleFill />
@@ -56,7 +56,7 @@ function SamplePrevArrow(props) {
   const { onClick } = props;
   return (
     <div
-      className={clsx('text-green text-3xl top-[50%] absolute left-[-30px] translate-y-[-40%] cursor-pointer z-[5]')}
+      className={clsx('text-[var(--rs-green-400)] text-3xl top-[50%] absolute left-[-30px] translate-y-[-40%] cursor-pointer z-[5]')}
       onClick={onClick}
     >
       <BsFillArrowLeftCircleFill />
@@ -98,7 +98,7 @@ function Tetemonials() {
         <Slider {...settings}>
           {data?.map((el) => {
             return (
-              <div key={el?.message} className="bg-white rounded-lg p-6 shadow-md">
+              <div key={el?.message} className="bg-[var(--rs-bg-card)] rounded-lg p-6 shadow-md">
                 <article className="flex justify-between mb-5">
                   <section className="flex gap-3 items-center">
                     <div className="text-3xl text-cyan/20 flex justify-center items-center">
@@ -107,7 +107,7 @@ function Tetemonials() {
                     <div>
                       <div>
                         To{' '}
-                        <a className="text-green cursor-pointer" href="/">
+                        <a className="text-[var(--rs-green-900)] cursor-pointer" href="/">
                           {el?.to}
                         </a>
                       </div>

@@ -7,7 +7,7 @@ import { L1, L2, L3, L4, L5, L6, L7, L8 } from '../components/Licences/Terms';
 function Licence() {
   const Panel = React.forwardRef((props, ref) => (
     <div {...props} ref={ref}>
-      <section className="py-2 px-2 bg-white text-gray text-[13px] font-bold">{props?.body}</section>
+      <section className="py-2 px-2 bg-[var(--rs-bg-card)] text-gray text-[13px] font-bold">{props?.body}</section>
     </div>
   ));
   const [licences, setLicence] = React.useState([
@@ -71,7 +71,7 @@ function Licence() {
   };
 
   return (
-    <main className="bg-gray/5 py-2 licence">
+    <main className="bg-[var(--rs-gray-100)] py-2 licence">
       <div className="container">
         <section>
           <h2>Privacy and Policy</h2>

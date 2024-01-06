@@ -27,7 +27,7 @@ function SignUpComp() {
           </section>
         ) : (
           <section className="text-center flex h-[100vh] items-center flex-col justify-center font-[500]">
-            <article className="text-green text-[30px]">
+            <article className="text-[var(--rs-green-900)] text-[30px]">
               <BsFillPatchCheckFill />
             </article>
             <article>{t('First_Step_Done')}</article>

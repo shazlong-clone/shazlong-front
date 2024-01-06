@@ -9,7 +9,7 @@ function Education() {
   const { profile } = useSelector((state) => state?.doctor);
   return (
     <Panel
-      className="bg-white mb-6"
+      className="bg-[var(--rs-bg-card)] mb-6"
       header={
         <FlexboxGrid justify="space-between" align="middle">
           <FlexboxGrid.Item>
@@ -28,7 +28,7 @@ function Education() {
           {profile?.educations?.map((el) => {
             return (
               <FlexboxGrid key={Math.random()} align="middle" className="mb-2 w-full">
-                <FlexboxGrid.Item as={Col} className=" bg-cyan/90 h-[90%] rounded-lg w-[5px] p-0"></FlexboxGrid.Item>
+                <FlexboxGrid.Item as={Col} className=" bg-[var(--rs-primary-700)]/90 h-[90%] rounded-lg w-[5px] p-0"></FlexboxGrid.Item>
                 <FlexboxGrid.Item as={Col}>
                   <p className="font-[500] mt-0">{el?.title}</p>
                   <p className="text-sm">{el?.place}</p>

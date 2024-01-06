@@ -14,7 +14,7 @@ function Instructions() {
     ' If you are reserving the session from Egypt, you cannot access the session room from elsewhere. Reservations made from Egypt are paid in Egyptian pounds, while reservations made from elsewhere are paid in U.S. dollars. If the session is paid in a non-matching currency, it cannot be refunded. ',
   ];
   return (
-    <main className="bg-gray/5 py-3">
+    <main className="bg-[var(--rs-gray-100)] py-3">
       <div className="container">
         {/* <h4 className='mb-2 text-center w-[200px] m-auto'></h4> */}
         <InternalHeader className="gap-5 text-center">Cancellation and Refund Policy</InternalHeader>

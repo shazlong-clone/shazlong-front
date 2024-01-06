@@ -9,7 +9,7 @@ import Booking from '../components/TherapistProfile/Booking.js';
 function ThearpistProfile() {
   const [bouncebg, setBounceBg] = useState(false);
   return (
-    <main className="bg-gray/5">
+    <main className="bg-[var(--rs-gray-100)]">
       <div className="container overflow-auto">
         <InternalHeader className="lg:mt-10" link="/therapists">
           TherapistProfile

@@ -57,7 +57,7 @@ function UserInfo() {
     },
   };
   return (
-    <main className="bg-cyan/10 py-5">
+    <main className="bg-[var(--rs-primary-700)]/10 py-5">
       <div className="container">
         <Grid className="lg:my-10">
           <Row gutter={24}>

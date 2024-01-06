@@ -89,14 +89,14 @@ function JoinUs() {
           )}
         </section>
       </div>
-      <div className="bg-cyan/5">
+      <div className="bg-[var(--rs-primary-700)]/5">
         <main className="container">
           <h4 className="text-center pt-10">{t('What_Shezlong_offers_you')}</h4>
-          <div className="w-[100px] h-[2px] mx-auto mt-2 mb-10 bg-cyan " />
+          <div className="w-[100px] h-[2px] mx-auto mt-2 mb-10 bg-[var(--rs-primary-700)] " />
           <section className="lg:grid lg:grid-cols-3 lg:gap-8">
             {data?.map((el) => {
               return (
-                <article key={Math.random()} className="flex bg-white rounded-sm mb-5">
+                <article key={Math.random()} className="flex bg-[var(--rs-bg-card)] rounded-sm mb-5">
                   <img src={el?.image_path} className="max-h-[120px]" alt="" />
                   <aside className="py-5 px-3 font-[500] text-[16px] ">
                     <h5 className="mb-5">{el?.header}</h5>
@@ -110,7 +110,7 @@ function JoinUs() {
             <h4>
               {t('How_to_join_Shezlong')}
               <br />
-              {t('therapists_team')} <div className="w-[100px] h-[2px] mt-2 mb-10 bg-cyan " />
+              {t('therapists_team')} <div className="w-[100px] h-[2px] mt-2 mb-10 bg-[var(--rs-primary-700)] " />
               <article className="pb-24 hidden lg:block">
                 <Link to="/doctor-signup">
                   <Button appearance="primary" className="rounded-full font-bold">

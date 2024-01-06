@@ -12,7 +12,7 @@ import Help from './Help';
 
 function Info() {
   return (
-    <div className="bg-gray/5 pt-16 md:pb-0">
+    <div className="bg-[var(--rs-gray-100)] pt-16 md:pb-0">
       <div className="container">
         <OnlineTherapist />
         <Diseases />

@@ -36,8 +36,8 @@ function OnlineTherapist() {
     dispatch(getOnlineDoctors());
   }, []);
   return (
-    <div className="bg-white p-5 rounded-3xl xl:p-8">
-      <h1 className="text-gray/90 text-xl md:mb-6 lg:mb-10 lg:text-3xl mb-6">{t('Online_Therapist_Online_Header')}</h1>
+    <div className="bg-[var(--rs-bg-card)] p-5 rounded-3xl xl:p-8">
+      <h1 className="text-[var(--rs-gray-900)] text-xl md:mb-6 lg:mb-10 lg:text-3xl mb-6">{t('Online_Therapist_Online_Header')}</h1>
       <section className="flex flex-col lg:flex-row items-center gap-3 justify-between">
         <AvatarGroup stack size={useMediaQuery('lg') ? 'lg' : 'md'}>
           {onlineDoctors
@@ -54,7 +54,7 @@ function OnlineTherapist() {
           )}
         </AvatarGroup>
         <article>
-          <p className="text-gray/60 font-bold text-center my-4 lg:text-xl xl:my-8">
+          <p className="text-[var(--rs-gray-700)] font-bold text-center my-4 lg:text-xl xl:my-8">
             {users?.length > 0 ? (
               <span className="inline-block w-3 h-3 bg-green rounded-full mx-5"></span>
             ) : (

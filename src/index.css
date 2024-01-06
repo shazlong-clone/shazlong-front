@@ -3,12 +3,8 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --green: theme(colors.green);
-  --gray: theme(colors.gray);
-  --cyan: theme(colors.cyan);
-  --white: theme(colors.white);
-  --black: theme(colors.balck);
+:root{
+  --special-bg :#3591a60d
 }
 
 html {
@@ -57,7 +53,7 @@ html {
   content: '•';
   text-align: center;
   opacity: 0.25;
-  color: var(--gray);
+  color: var(--rs-gray-400);
   transform: translate(-50%, -50%);
 }
 .home-testimonial .slick-dots li button:hover:before,
@@ -65,7 +61,7 @@ html {
   opacity: 0.5;
 }
 .home-testimonial .slick-dots li.slick-active button:before {
-  color: var(--green);
+  color: var(--rs-green-400);
   opacity: 1;
 }
 
@@ -119,7 +115,7 @@ object {
 }
 .slider-skills .rs-slider-progress-bar {
   border-radius: 6px;
-  background: var(--gray);
+  background: var(--rs-gray-400);
   opacity: 0.9;
 }
 
@@ -175,17 +171,17 @@ object {
 .input-unset {
   all: unset;
   width: 100%;
-  color: var(--gray);
+  color: var(--rs-gray-400);
   opacity: 0.5;
 }
 
 .slick-blog .slick-dots li button:before {
   content: ' ';
-  @apply bg-white rounded-full border border-cyan border-solid w-[15px] h-[15px];
+  @apply bg-white rounded-full border border-[var(--rs-primary-400)] border-solid w-[15px] h-[15px];
 }
 
 .slick-blog .slick-dots li.slick-active button:before {
-  @apply bg-cyan;
+  @apply bg-[var(--rs-primary-400)];
 }
 
 .slick-blog .slick-next:before,
@@ -203,7 +199,7 @@ object {
 }
 .slick-articel .slick-dots li button:before {
   content: ' ';
-  @apply bg-white rounded-full border border-cyan border-solid w-[15px] h-[15px] z-50;
+  @apply bg-white rounded-full border border-[var(--rs-primary-400)] border-solid w-[15px] h-[15px] z-50;
 }
 a:active {
   text-decoration: none;
@@ -275,10 +271,10 @@ a:active {
   background: white;
 }
 .rs-sidenav-default .rs-sidenav-item {
-  @apply bg-white hover:bg-gray/10;
+  @apply bg-white hover:bg-[var(--rs-gray-400)];
 }
 .rs-sidenav-default .rs-sidenav-toggle-button {
-  @apply bg-white hover:bg-gray/10;
+  @apply bg-white hover:bg-[var(--rs-gray-400)];
 }
 
 .wrap-anywhere {
@@ -371,7 +367,7 @@ a:active {
   background: #999;
 }
 .custom-badge.green-bage .rs-badge-content {
-  background: green;
+  background: var(--rs-green-400);
 }
 .custom-badge .rs-badge-independent.rs-badge-dot,
 .rs-badge-wrapper .rs-badge-content:empty {

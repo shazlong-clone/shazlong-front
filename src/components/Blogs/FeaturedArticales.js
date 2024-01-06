@@ -25,7 +25,7 @@ function FeaturedArticales() {
 
   return (
     <div className="rounded-lg container pb-5 xl:grid xl:grid-cols-[1fr_405px] xl:gap-5 xl:mt-10">
-      <section className="xl:grid group xl:grid-cols-2 xl:gap-5 rounded-lg bg-white mt-5 xl:mt-0 hover:shadow-md transition">
+      <section className="xl:grid group xl:grid-cols-2 xl:gap-5 rounded-lg bg-[var(--rs-bg-card)] mt-5 xl:mt-0 hover:shadow-md transition">
         <article className="h-full relative">
           <Link ref={ref}>
             <img
@@ -35,8 +35,8 @@ function FeaturedArticales() {
               src="https://blog.shezlong.com/wp-content/uploads/2023/04/67-1.jpg"
               alt="dd"
             />
-            <div className="absolute bg-gray/50 top-0 left-0 w-full h-full text-white rounded-t-lg xl:rounded-l-lg xl:rounded-t-none overflow-hidden">
-              <span className="bg-white text-cyan rounded-3xl font-bold px-3 py-2 absolute left-3 top-3 text-sm">wellness</span>
+            <div className="absolute bg-[var(--rs-gray-100)]0 top-0 left-0 w-full h-full text-white rounded-t-lg xl:rounded-l-lg xl:rounded-t-none overflow-hidden">
+              <span className="bg-[var(--rs-bg-card)] text-cyan rounded-3xl font-bold px-3 py-2 absolute left-3 top-3 text-sm">wellness</span>
               <div className="absolute bottom-0 left-0 p-2 xl:translate-y-[100%] group-hover:translate-y-[0%] transition">
                 <span className="text-sm">shred on:</span>
                 <p className="flex items-center gap-2">
@@ -79,7 +79,7 @@ function FeaturedArticales() {
                   <div className="border-x-2 border-white border-solid" key={Math.random()}>
                     <article className="text-center">
                       <img
-                        className="rounded-full m-auto border border-cyan border-solid p-1 bg-cyan/10"
+                        className="rounded-full m-auto border border-cyan border-solid p-1 bg-[var(--rs-primary-700)]/10"
                         width="100px"
                         height="100px"
                         src={therapist}

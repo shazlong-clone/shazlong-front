@@ -4,7 +4,7 @@ import TherapistsComp from '../components/Shared/TherapistsComp';
 
 function Online() {
   return (
-    <main className="bg-cyan/5">
+    <main className="bg-[var(--rs-primary-700)]/5">
       <div className="container py-4 min-h-[100vh]">
         <InternalHeader to="/">OnLine</InternalHeader>
         <TherapistsComp />

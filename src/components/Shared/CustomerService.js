@@ -51,10 +51,10 @@ function CustomerService({ close }) {
   return (
     <>
       <div
-        className={clsx('fixed top-0 left-0 h-[100vh] w-full bg-white z-[51] lg:static lg:h-[60vh] lg:w-[400px] lg:rounded-md')}
+        className={clsx('fixed top-0 left-0 h-[100vh] w-full bg-[var(--rs-bg-card)] z-[51] lg:static lg:h-[60vh] lg:w-[400px] lg:rounded-md')}
       >
         <aside className={clsx(activeTabe === 1 ? 'block' : 'hidden')}>
-          <section className="text-white bg-cyan px-5 p-10 lg:rounded-t-md xl:py-5">
+          <section className="text-white bg-[var(--rs-primary-700)] px-5 p-10 lg:rounded-t-md xl:py-5">
             <article onClick={() => dispatch(closeChat())} className="flex justify-between items-center">
               <img width="50px" height="50px" src={logo_white} alt="intercomcdn" />
               <span onClick={close} className="text-xl cursor-pointer">
@@ -73,7 +73,7 @@ function CustomerService({ close }) {
               <h4>How We Can Help You</h4>
             </article>
           </section>
-          <section className="px-5 pt-1 pb-5 bg-gradient-to-b from-cyan to-white">
+          <section className="px-5 pt-1 pb-5 bg-gradient-to-b from-[var(--rs-primary-700)] to-white">
             <Card className="text-gray rounded-[10px] py-4">
               <aside className="flex justify-between items-center">
                 <div>
@@ -86,7 +86,7 @@ function CustomerService({ close }) {
               </aside>
             </Card>
           </section>
-          <section className="absolute bottom-0 py-6 shadow-[#00000024_0px_0px_25px] w-full border-t border-b-0 border-r-0 border-l-0  border-solid border-gray/5 flex justify-evenly text-3xl">
+          <section className="absolute bottom-0 py-6 shadow-[#00000024_0px_0px_25px] w-full border-t border-b-0 border-r-0 border-l-0  border-solid border-[var(--rs-gray-100)] flex justify-evenly text-3xl">
             <aside onClick={() => setActiveTabe(1)} className="grid cursor-pointer text-center text-cyan">
               <span className=" flex justify-center h-[30px]">
                 <AiFillHome />
@@ -112,7 +112,7 @@ function CustomerService({ close }) {
               : 'hidden',
           )}
         >
-          <section className="bg-cyan p-5 text-white lg:rounded-t-md">
+          <section className="bg-[var(--rs-primary-700)] p-5 text-white lg:rounded-t-md">
             <article className="flex items-center justify-between text-xl ">
               <span className="cursor-pointer rtl:rotate-180" onClick={() => setActiveTabe(1)}>
                 <MdArrowBackIosNew />
@@ -132,7 +132,7 @@ function CustomerService({ close }) {
           </section>
           {open && (
             <section className="px-5 py-2 mt-5">
-              <Card className="shadow-md relative border border-solid border-gray/20 rounded-md">
+              <Card className="shadow-md relative border border-solid border-[var(--rs-gray-50)] rounded-md">
                 <span className="absolute top-3 right-3 cursor-pointer" onClick={() => setOpen(false)}>
                   <RxCross2 />
                 </span>
@@ -151,23 +151,23 @@ function CustomerService({ close }) {
           )}
           <section className="overflow-y-scroll p-5">
             <div className="flex max-w-[80%] items-end gap-1  mt-1 ml-auto justify-end">
-              <span className="bg-cyan rounded-md p-2 text-white">Hi</span>
+              <span className="bg-[var(--rs-primary-700)] rounded-md p-2 text-white">Hi</span>
               <img src={therapist} className="w-[20px] mb-1 h-[20px] rounded-full" alt="" />
             </div>
 
             <div className="flex items-end gap-1 max-w-[80%] mt-1">
               <img src={therapist} className="w-[20px] mb-1 h-[20px] rounded-full opacity-0" alt="" />
-              <span className="bg-gray/5 rounded-md p-2 text-gray">Hi</span>
+              <span className="bg-[var(--rs-gray-100)] rounded-md p-2 text-gray">Hi</span>
             </div>
             <div className="flex items-end gap-1 max-w-[80%] mt-1">
               <img src={therapist} className="w-[20px] mb-1 h-[20px] rounded-full" alt="" />
-              <span className="bg-gray/5 rounded-md p-2 text-gray">
+              <span className="bg-[var(--rs-gray-100)] rounded-md p-2 text-gray">
                 at the moment there are no group therapy, however we will inform you once there is dear
               </span>
             </div>
           </section>
           <section className={clsx('shadow-[0px_-17px_30px_0px_rgba(0,0,0,0.1)] pb-[50]', lg && 'mb-0')}>
-            <article className="flex py-3 items-center px-5 gap-5 bg-gray/5 border border-solid border-gray/5 border-t-1 border-b-0 border-r-0 border-l-0">
+            <article className="flex py-3 items-center px-5 gap-5 bg-[var(--rs-gray-50)] border border-solid border-[var(--rs-gray-100)] border-t-1 border-b-0 border-r-0 border-l-0">
               <textarea
                 id="review-text"
                 onChange={handleChange}

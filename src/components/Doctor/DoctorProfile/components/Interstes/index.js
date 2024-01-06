@@ -72,7 +72,7 @@ function Interstes() {
 
   return (
     <Panel
-      className="bg-white mb-6"
+      className="bg-[var(--rs-bg-card)] mb-6"
       header={
         <FlexboxGrid justify="space-between" align="middle">
           <FlexboxGrid.Item>
@@ -115,7 +115,7 @@ function Interstes() {
             ?.filter((el) => profile?.specialization?.includes(el?.id))
             ?.map((el) => {
               return (
-                <section key={el?.id} className="rounded-3xl py-1 bg-gray/5 px-2">
+                <section key={el?.id} className="rounded-3xl py-1 bg-[var(--rs-gray-100)] px-2">
                   {i18n.resolvedLanguage === 'ar' ? el?.ar_name : el?.name}
                 </section>
               );

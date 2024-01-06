@@ -28,7 +28,7 @@ function HowItWorks() {
   return (
     <div>
       <Header>{t('How_It_is_Works')}</Header>
-      <section className="flex flex-col lg:flex-row gap-y-5 bg-white rounded-lg p-5 flex-wrap justify-center lg:gap-x-12">
+      <section className="flex flex-col lg:flex-row gap-y-5 bg-[var(--rs-bg-card)] rounded-lg p-5 flex-wrap justify-center lg:gap-x-12">
         {data?.map((el, i) => {
           return (
             <article key={el?.title} className={clsx('flex gap-x-5 lg:w-[46%]')}>

@@ -8,7 +8,7 @@ function Psychotest() {
   const [activeQuestion, setActiveQuestion] = useState(0);
   return (
     <>
-      <main className="bg-cyan py-5">
+      <main className="bg-[var(--rs-primary-700)] py-5">
         <div className="container">
           <section>
             <InternalHeader className="text-white mb-5" iconClassName="text-white">
@@ -16,7 +16,7 @@ function Psychotest() {
             </InternalHeader>
             <article className="lg:flex lg:gap-24 lg:justify-center">
               <Card className="max-w-[400px]">
-                <p className="text-green font-[500] mb-3 capitalize">caoution</p>
+                <p className="text-[var(--rs-green-900)] font-[500] mb-3 capitalize">caoution</p>
                 Please read the scale items and choose the best answer that fits during the last 2 weeks. There are no right or
                 wrong answers, and you do not need to spend too much time answering any of them.
               </Card>
@@ -31,12 +31,12 @@ function Psychotest() {
       </main>
       <main>
         <div className="container">
-          <section className="border border-solid border-gray/20 my-5 max-w-3xl mx-auto">
+          <section className="border border-solid border-[var(--rs-gray-50)] my-5 max-w-3xl mx-auto">
             <h6 className="px-5 text-center my-5">
               Please read the test sentences and choose the best answer that fits you during the{' '}
             </h6>
             <Progress.Line percent={30} strokeColor="#3591a6" />
-            <article className="bg-cyan py-2">
+            <article className="bg-[var(--rs-primary-700)] py-2">
               {Array(5)
                 .fill('')
                 .map((question, index, arr) => {
@@ -81,8 +81,8 @@ function Psychotest() {
                         key={Math.random}
                         className={twMerge(
                           clsx(
-                            'cursor-pointer bg-gray/5 w-5 h-5 rounded-full text-center flex-wrap',
-                            i === activeQuestion && 'bg-gray/50',
+                            'cursor-pointer bg-[var(--rs-gray-100)] w-5 h-5 rounded-full text-center flex-wrap',
+                            i === activeQuestion && 'bg-[var(--rs-gray-100)]0',
                           ),
                         )}
                       >

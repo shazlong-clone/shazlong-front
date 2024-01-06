@@ -31,7 +31,7 @@ function Benfits() {
         <section className="lg:flex gap-5">
           {benfits?.map((el) => {
             return (
-              <div key={el?.titile} className="bg-white my-16 rounded-2xl p-6 shadow-xl lg:flex-[1_1_30%]">
+              <div key={el?.titile} className="bg-[var(--rs-bg-card)] my-16 rounded-2xl p-6 shadow-xl lg:flex-[1_1_30%]">
                 <article key={el?.titile} className="flex justify-between relative">
                   <h5 className="text-cyan/80 mb-3">{el?.titile}</h5>
                   <img src={el?.img} alt={el?.titile} className="absolute top-[-70px] right-0 w-20" />

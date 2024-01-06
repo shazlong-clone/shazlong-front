@@ -17,7 +17,7 @@ function DoctorCard({ doctor }) {
   const country = countries?.find((country) => country?.id === doctor?.country);
   const prefix = prefixesList?.find((pref) => pref?.id === doctor?.prefix);
   return (
-    <section key={Math.random()} className="bg-white rounded-3xl mt-3 p-6 text-sm lg:mb-5 lg:mt-0 overflow-hidden">
+    <section key={Math.random()} className="bg-[var(--rs-bg-card)] rounded-3xl mt-3 p-6 text-sm lg:mb-5 lg:mt-0 overflow-hidden">
       <div className="flex gap-5">
         <Link to={`/thearpist-profile/${doctor?.id}`}>
           <span className={clsx('custom-badge', doctor?.isOnline && 'green-bage')}>
@@ -62,7 +62,7 @@ function DoctorCard({ doctor }) {
               return (
                 <section
                   key={Math.random()}
-                  className="bg-green/10 text-green rounded-xl px-3 py-1 whitespace-nowrap overflow-hidden text-ellipsis hover:whitespace-normal hover:overflow-visible cursor-pointer"
+                  className="bg-[var(--rs-green-50)] text-[var(--rs-green-800)] rounded-xl px-3 py-1 whitespace-nowrap overflow-hidden text-ellipsis hover:whitespace-normal hover:overflow-visible cursor-pointer"
                 >
                   {i18n.resolvedLanguage === 'ar'
                     ? specializationList?.find((spec) => spec?.id === id)?.ar_name
@@ -77,7 +77,7 @@ function DoctorCard({ doctor }) {
           {doctor?.languages?.map((langId) => {
             const langItem = languages?.find((lg) => lg?.id === langId);
             return (
-              <span key={langId} className=" px-1 rounded-md bg-gray/5">
+              <span key={langId} className=" px-1 rounded-md bg-[var(--rs-gray-100)]">
                 {i18n.resolvedLanguage === 'ar' ? langItem?.ar_name : langItem?.name}
               </span>
             );
@@ -92,7 +92,7 @@ function DoctorCard({ doctor }) {
           Nearest session :
           {moment(doctor?.nearestSlot?.from).isValid() && doctor?.nearestSlot?.from
             ? moment(doctor?.nearestSlot?.from).format('dddd, MMM. D [at] h:mm A')
-            : 'No Slots Found'}
+            : '--'}
         </span>
       </div>
       <div className="flex items-center gap-1">

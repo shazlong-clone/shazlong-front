@@ -12,7 +12,7 @@ const agents = [agent1, agent2, agent3, agent4];
 function Help() {
   const { t } = useTranslation();
   return (
-    <main className=" lg:bg-cyan/20 bg-white  rounded-lg lg:rounded-none ">
+    <main className=" lg:bg-[var(--rs-primary-100)] bg-[var(--rs-bg-card)]  rounded-lg lg:rounded-none ">
       <div className={clsx('p-4 lg:p-10 lg:container m-auto')}>
         <h3 className="lg:text-center text-gray/80 text-[20px] lg:text-[30px] lg:mb-9">{t('Still_Need_Help')}</h3>
         <div className="lg:flex">

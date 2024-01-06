@@ -92,9 +92,9 @@ function DoctorLayout() {
             <Sidenav.Toggle expanded={expanded} onToggle={(expanded) => setExpanded(expanded)} />
           </Sidenav>
         </main>
-        <main className={clsx('bg-gray/5 grow transition-[0.3s]', expanded ? 'lg:ps-[250px]' : 'lg:ps-[58px]')}>
+        <main className={clsx('bg-[var(--rs-gray-100)] grow transition-[0.3s]', expanded ? 'lg:ps-[250px]' : 'lg:ps-[58px]')}>
           <div className="lg:pb-5">
-            <article className="max-lg:bg-white max-lg:shadow-sm max-lg:mb-5 max-lg:fixed w-full z-20">
+            <article className="max-lg:bg-[var(--rs-bg-card)] max-lg:shadow-sm max-lg:mb-5 max-lg:fixed w-full z-20">
               <section className="flex px-5 items-center justify-between py-2 lg:pt-5 lg:px-36">
                 <article>
                   <IconButton className="lg:hidden bg-transparent" onClick={() => handleOpen('left')} icon={<MenuIcon />} />

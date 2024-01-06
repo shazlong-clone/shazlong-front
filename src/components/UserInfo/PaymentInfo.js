@@ -69,7 +69,7 @@ function PaymentInfo() {
             <CreditCard />
           </aside>
         </div>
-        <div className="bg-gray/5 px-3 text-center py-5 mt-3 text-start font-[500] text-[14px]">
+        <div className="bg-[var(--rs-gray-100)] px-3 text-center py-5 mt-3 text-start font-[500] text-[14px]">
           {!card ? (
             <article className="text-center">{t('You_dont_have_any_saved_method_details', { method: t('Credit_Card') })}</article>
           ) : (
@@ -103,7 +103,7 @@ function PaymentInfo() {
             <VodafonCash />
           </aside>
         </div>
-        <div className="bg-gray/5 px-3 text-center py-5 mt-3 text-start font-[500] text-[14px]">
+        <div className="bg-[var(--rs-gray-100)] px-3 text-center py-5 mt-3 text-start font-[500] text-[14px]">
           {!vodafoneCash ? (
             <article className="text-center">
               {t('You_dont_have_any_saved_method_details', { method: t('Vodafone_Cash') })}
@@ -136,7 +136,7 @@ function PaymentInfo() {
             <Fawry />
           </aside>
         </div>
-        <div className="bg-gray/5 px-3 text-center py-5 mt-3 text-start font-[500] text-[14px]">
+        <div className="bg-[var(--rs-gray-100)] px-3 text-center py-5 mt-3 text-start font-[500] text-[14px]">
           {!fawry ? (
             <article className="text-center">{t('You_dont_have_any_saved_method_details', { method: t('Fawry') })}</article>
           ) : (

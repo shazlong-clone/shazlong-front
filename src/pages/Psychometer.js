@@ -107,9 +107,9 @@ function Psychometer() {
   );
   return (
     <>
-      <main className="bg-cyan text-white pt-5">
+      <main className="bg-[var(--rs-primary-700)] text-white pt-5">
         <div className="container">
-          <InternalHeader iconClassName="text-white">Psycho meter</InternalHeader>
+          <InternalHeader iconClassName="text-white hover:text-white">Psycho meter</InternalHeader>
           <section className="font-[500] text-base pt-5 relative xl:grid xl:grid-cols-[1fr_250px] xl:gap xl:items-end">
             <article className="xl:pt-5 xl:pb-10">
               <p className="xl:mb-5">
@@ -148,10 +148,10 @@ function Psychometer() {
           </section>
         </div>
       </main>
-      <main className="bg-gray/5 py-10">
+      <main className="py-10">
         <div className="container">
           <div className="xl:grid xl:grid-cols-[1fr_260px] xl:gap-3">
-            <section className="bg-white">
+            <section className="bg-[var(--rs-bg-card)]">
               <Table
                 className="text-gray/90"
                 rowExpandedHeight={lg ? 200 : 200}

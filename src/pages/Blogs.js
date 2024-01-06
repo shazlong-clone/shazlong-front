@@ -7,7 +7,7 @@ import SearchDeskTop from '../components/Blogs/SearchDeskTop';
 function Blogs() {
   return (
     <>
-      <main className="bg-gray/5">
+      <main className="bg-[var(--rs-gray-100)]">
         <section className="lg:hidden">
           <SearchMobile />
         </section>

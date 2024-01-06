@@ -121,8 +121,8 @@ function Booking({ setBounceBg, bouncebg, ...props }) {
         <Slider {...settings}>
           {doctorSlots.map((el) => {
             return (
-              <div key={Math.random()} className="bg-cyan/5 border border-solid border-white text-center rounded-lg">
-                <section className="text-white bg-cyan rounded-t-lg py-1 font-bold">Sat 08</section>
+              <div key={Math.random()} className="bg-[var(--rs-primary-700)]/5 border border-solid border-white text-center rounded-lg">
+                <section className="text-white bg-[var(--rs-primary-700)] rounded-t-lg py-1 font-bold">Sat 08</section>
                 <section className="grid my-2 gap-2">
                   {el?.slots.map((slot) => {
                     return (
@@ -134,7 +134,7 @@ function Booking({ setBounceBg, bouncebg, ...props }) {
                               slot?.isBooked
                                 ? 'border border-solid border-red-400 text-red-400 bg-red-50 line-through'
                                 : slot?.isSelected
-                                ? 'border border-solid border-green text-green bg-green/10'
+                                ? 'border border-solid border-green text-green bg-[var(--rs-green-100)]'
                                 : '',
                             ),
                           )}
@@ -155,7 +155,7 @@ function Booking({ setBounceBg, bouncebg, ...props }) {
             <span>Available</span>
           </article>
           <article className="flex items-center">
-            <RxDotFilled className="text-green text-2xl flex items-center" />
+            <RxDotFilled className="text-[var(--rs-green-900)] text-2xl flex items-center" />
             <span>Seleced</span>
           </article>
           <article className="flex items-center">
@@ -196,7 +196,7 @@ function Booking({ setBounceBg, bouncebg, ...props }) {
       <Card>
         <section className="mb-2">
           <article className="flex justify-center gap-3 items-center mb-5">
-            <span className=" bg-cyan rounded-full p-3 w-10 h-10 flex justify-center items-center text-white">2</span>
+            <span className=" bg-[var(--rs-primary-700)] rounded-full p-3 w-10 h-10 flex justify-center items-center text-white">2</span>
             <span>Selected Slots</span>
           </article>
           <Tag closable className="mb-2 bg-gray/10 ">

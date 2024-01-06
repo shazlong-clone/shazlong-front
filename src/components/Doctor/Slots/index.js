@@ -41,7 +41,7 @@ function Slots() {
           Slots
         </Breadcrumb.Item>
       </Breadcrumb>
-      <Panel className="bg-white">
+      <Panel className="bg-[var(--rs-bg-card)]">
         <Calendar className="slot-calender" bordered renderCell={renderCell} />
       </Panel>
     </main>

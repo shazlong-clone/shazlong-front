@@ -29,7 +29,7 @@ function MyTherapy() {
   };
 
   return (
-    <main className="bg-gray/5 py-3">
+    <main className="bg-[var(--rs-gray-100)] py-3">
       <div className="container">
         <InternalHeader>My Therapy</InternalHeader>
         <section className="lg:flex gap-5 items-start">

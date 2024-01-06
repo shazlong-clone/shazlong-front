@@ -17,7 +17,7 @@ function Phone() {
       </div>
       <div className="lg:flex gap-5">
         <section>
-          <h2 className="hidden lg:block lg:text-cyan/90">{t('Taking_Care_Of_Mental_Health')}</h2>
+          <h2 className="hidden lg:block lg:text-[var(--rs-primary-700)]">{t('Taking_Care_Of_Mental_Health')}</h2>
           <p className="text-center lg:text-2xl lg:rtl:text-xl lg:text-start lg:mb-16 lg:mt-4 lg:font-light lg:rtl:font-bold lg:max-w-[500px]">
             {t('Enjoy_App')}
           </p>

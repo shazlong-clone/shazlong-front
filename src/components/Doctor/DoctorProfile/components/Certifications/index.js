@@ -10,7 +10,7 @@ function Certifications() {
 
   return (
     <Panel
-      className="bg-white mb-6"
+      className="bg-[var(--rs-bg-card)] mb-6"
       header={
         <FlexboxGrid justify="space-between" align="middle">
           <FlexboxGrid.Item>

@@ -13,7 +13,7 @@ const LoadinCard = () => {
     .fill('')
     ?.map(() => {
       return (
-        <section key={Math.random()} className="bg-white rounded-3xl mt-3 p-6 text-sm lg:mb-5 lg:mt-0 overflow-hidden">
+        <section key={Math.random()} className="bg-[var(--rs-bg-card)] rounded-3xl mt-3 p-6 text-sm lg:mb-5 lg:mt-0 overflow-hidden">
           <Placeholder.Paragraph style={{ marginTop: 30 }} graph="circle" rows={8} />
         </section>
       );

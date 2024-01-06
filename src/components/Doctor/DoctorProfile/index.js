@@ -146,7 +146,7 @@ function DoctorProfile() {
       </Breadcrumb>
       <div className="relative">
         <section className="px-5 lg:px-36  relative  mb-[24px]">
-          <Panel className="bg-white overflow-visible relative">
+          <Panel className="bg-[var(--rs-bg-card)] overflow-visible relative">
             <div className="lg:flex gap-5">
               <article className="absolute top-[-30px] left-[50%] translate-x-[-50%] lg:static lg:translate-x-0">
                 <div className="relative inline-block p-2 ">

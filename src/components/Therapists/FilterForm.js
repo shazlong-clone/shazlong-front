@@ -90,7 +90,7 @@ function FilterForm() {
   }, [doctorSearchParams]);
 
   return (
-    <div className="lg:bg-white lg:p-5 lg:rounded-3xl">
+    <div className="lg:bg-[var(--rs-bg-card)] lg:p-5 lg:rounded-3xl">
       <h3 className="text-center hidden lg:block">{t('Filter')}</h3>
       <hr className="hidden lg:block" />
       <Form ref={formRef} formValue={formValues} onChange={setFormValues} fluid>

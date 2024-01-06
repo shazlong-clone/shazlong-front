@@ -93,7 +93,7 @@ function NavBar() {
   }, []);
 
   return (
-    <div className="container items-center border-b-[1px] border-gray/10 px-4 py-3 bg-white">
+    <div className="container items-center border-b-[1px] border-[var(--rs-gray-100)] px-4 py-3 bg-[var(--rs-bg-card)]">
       <div className="flex justify-between items-center m-auto">
         <section className="lg:flex-[1_1_33%]">
           <Link to="/">
@@ -107,7 +107,7 @@ function NavBar() {
                 <li key={Math.random()}>
                   <NavLink
                     to={to}
-                    className="hover:text-green hover:no-underline focus:no-underline active:text-green focus:text-green  text-gray"
+                    className="text-[var(--rs-gray-900)] hover:text-[var(--rs-green-400)] hover:no-underline focus:no-underline active:text-[var(--rs-green-900)] focus:text-[var(--rs-green-400)]  text-gray"
                   >
                     {name}
                   </NavLink>
@@ -123,7 +123,7 @@ function NavBar() {
                 key={lngs[el]?.nativeName}
                 onClick={() => i18n.changeLanguage(el)}
                 className={clsx(
-                  'text-gray/75 cursor-pointer hover:underline flex',
+                  'text-[var(--rs-gray-700)] cursor-pointer hover:underline flex',
                   currLang === el ? 'hidden' : '',
                   currLang === 'ar' ? 'pt-2' : '',
                 )}
@@ -136,12 +136,12 @@ function NavBar() {
           {!user?._id ? (
             <>
               <Link className="text-inherit hover:no-underline hover:text-inherit" to="/sign-in">
-                <article className="text-green border border-solid border-green py-1 px-2 rounded-3xl cursor-pointer  lg:py-1 lg:px-5 text-[12px] text-center  xl:text-base">
+                <article className="text-[var(--rs-green-400)] border border-solid border-[var(--rs-green-400)] py-1 px-2 rounded-3xl cursor-pointer  lg:py-1 lg:px-5 text-[12px] text-center  xl:text-base">
                   {t('Sign_In')}
                 </article>
               </Link>
               <Link className="text-inherit hover:no-underline hover:text-inherit" to="/sign-up">
-                <article className="text-white bg-green py-1 px-2 rounded-3xl cursor-pointer lg:py-1 lg:px-5 text-[12px] text-center  xl:text-base flex rtl:pt-2">
+                <article className="text-white bg-[var(--rs-green-400)] py-1 px-2 rounded-3xl cursor-pointer lg:py-1 lg:px-5 text-[12px] text-center  xl:text-base flex rtl:pt-2">
                   {t('Sign_Up')}
                 </article>
               </Link>

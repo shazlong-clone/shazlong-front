@@ -66,7 +66,7 @@ function SearchDeskTop() {
         <div
           ref={ref2}
           className={clsx(
-            'absolute bg-white bottom-0 transform translate-y-[100%] w-full shadow-xl flex items-center h-[80px] z-20',
+            'absolute bg-[var(--rs-bg-card)] bottom-0 transform translate-y-[100%] w-full shadow-xl flex items-center h-[80px] z-20',
             !search && (hovering || hovering2) ? 'block' : 'hidden',
           )}
         >
