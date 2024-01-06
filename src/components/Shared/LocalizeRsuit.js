@@ -9,7 +9,7 @@ function LocalizeRsuit({ children }) {
   const lang = useSelector((state) => state?.theme?.locale);
   const locale = lang === 'ar' ? arEG : enUS;
   return (
-    <CustomProvider rtl={lang === 'ar' ? true : false} locale={locale}>
+    <CustomProvider theme='light' rtl={lang === 'ar' ? true : false} locale={locale}>
       {children}
     </CustomProvider>
   );
