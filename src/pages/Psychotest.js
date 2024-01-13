@@ -57,7 +57,7 @@ function Psychotest() {
                                   }}
                                   className={twMerge(
                                     clsx(
-                                      'rounded-sm shadow-md py-3 cursor-pointer animate__animated animate__fadeInLeft duration-75 inline-block text-xl',
+                                      'rounded-sm shadow-md py-3 cursor-pointer  inline-block text-xl',
                                     ),
                                   )}
                                   style={{ animationDuration: `${300 * (i + 1)}ms` }}

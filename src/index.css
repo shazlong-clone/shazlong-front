@@ -3,9 +3,7 @@
 @tailwind components;
 @tailwind utilities;
 
-:root{
-  --special-bg :#3591a60d
-}
+
 
 html {
   scroll-behavior: smooth;
@@ -374,4 +372,23 @@ a:active {
   width: 18px;
   height: 18px;
   border-radius: 50%;
+}
+
+.parent-grid {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  grid-template-rows: repeat(4, minmax(100px, auto));
+}
+
+.item {
+  display: grid;
+  grid-column: 2 / 7;
+  grid-row: 2 / 4;
+  grid-template-columns: subgrid;
+  grid-template-rows: repeat(3, 80px);
+}
+
+.subitem {
+  grid-column: 3 / 6;
+  grid-row: 1 / 3;
 }
