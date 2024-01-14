@@ -18,7 +18,7 @@ function Help() {
         <div className="lg:flex">
           <section className="lg:flex-[1_1_50%]">
             <h5 className="text-[13px] font-normal lg:font-bold lg:text-[20px] lg:mb-10">{t('Suportive_Team')}</h5>
-            <p className="hidden lg:block mb-10">{t('Contact_them')}</p>
+            <p className="hidden lg:block mb-10 opacity-70">{t('Contact_them')}</p>
             <div>
               <article className="flex text-center mt-5 justify-center gap-3 lg:justify-start">
                 {agents?.map((agent) => {

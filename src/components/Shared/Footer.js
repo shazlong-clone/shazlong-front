@@ -67,6 +67,7 @@ function Footer() {
                       <Link to="/sign-up" className="hover:no-underline active:no-underline grow">
                         <button
                           className="
+                        min-w-[250px]
                         font-bold border mt-5 lg:mt-0 rounded-lg border-white text-white bg-opacity-0
                         bg-transparent py-3 px-14  md:block md:w-full"
                         >
@@ -81,9 +82,11 @@ function Footer() {
 
                   <Link to="/doctor" className="hover:no-underline active:no-underline grow">
                     <button
-                      className="font-bold border rounded-lg border-white text-white  bg-opacity-0
-                                  bg-transparent py-3  px-14  md:block md:w-full w-full"
-                    >
+                          className="
+                          min-w-[250px]
+                        font-bold border lg:mt-0 rounded-lg border-white text-white bg-opacity-0
+                        bg-transparent py-3 px-14  md:block md:w-full"
+                        >
                       {t('Join_As_A_Therapist')}
                     </button>
                   </Link>
