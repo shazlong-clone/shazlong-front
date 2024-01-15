@@ -158,5 +158,21 @@
   "Rate": "Rate",
   "Feez": "Feez",
   "Egy": "Egy",
-  "Search": "Search"
+  "Search": "Search",
+  "Therapist_List": "Therapist List",
+  "View_Profile": "View Profile",
+  "Book_Now": "Book Now",
+  "Nearest_Session": "Nearest Session",
+  "Interests": "Interests",
+  "Languages": "Languages",
+  "No_Nearst_Sessions": "No Nearst Sessions",
+  "Fees (From low to high)": "Fees (From low to high)",
+  "Fees (From high to low)": "Fees (From high to low)",
+  "Top rated therapists": "Top rated therapists",
+  "Therapists": "Therapists",
+  "Online": "Online",
+  "My_Therapy": "My Therapy",
+  "More": "More",
+  "Support": "Support",
+  "At_Hour": "at"
 }

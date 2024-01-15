@@ -162,5 +162,21 @@
   "Rate": "التقيم",
   "Feez": "المبلغ",
   "Egy": "جنيها مصريا",
-  "Search": "بحث"
+  "Search": "بحث",
+  "Therapist_List": "الاطباء",
+  "View_Profile": "ملف الطبيب",
+  "Book_Now": "احجز الان",
+  "Nearest_Session": "أقرب جلسه",
+  "Interests": "التخصص",
+  "Languages": "الغات",
+  "No_Nearst_Sessions": "لايوجد جلسات في الوقت الحالي",
+  "Fees (From low to high)": "مصاريف الجلسه من الادني الي الاعلي",
+  "Fees (From high to low)": "مصاريف الجلسه من الاعلي الي الادني",
+  "Top rated therapists": "افضل المعاليجين",
+  "Therapists": "المعالجين",
+  "Online": "متاح الان",
+  "My_Therapy": "جلساتي",
+  "More": "المزيد",
+  "Support": "الدعم",
+  "At_Hour": "في تمام الساعة"
 }

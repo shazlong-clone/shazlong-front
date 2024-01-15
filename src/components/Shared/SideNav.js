@@ -12,6 +12,7 @@ import { Link, NavLink } from 'react-router-dom';
 import clsx from 'clsx';
 import { useDispatch } from 'react-redux';
 import { openChat } from '../../features/theme/themeSlice';
+import { t } from 'i18next';
 const menu = [
   {
     name: 'Home',
@@ -51,8 +52,11 @@ function FooterNav() {
   }, []);
   const Menu = ({ title, icon, link, id }) => {
     return (
-      <section className="pointer hover:text-cyan/90 transition-all text-center" onClick={() => setActiveTabe(id)}>
-        <NavLink to={link} className={clsx(activeTabe === id ? 'text-cyan' : 'text-gray')}>
+      <section
+        className="pointer hover:text-[var(--rs-primary-500)] transition-all text-center"
+        onClick={() => setActiveTabe(id)}
+      >
+        <NavLink to={link} className={clsx(activeTabe === id ? 'text-[var(--rs-primary-500)]' : 'text-[var(--rs-gray-700)]')}>
           <i className="text-2xl">{icon}</i>
           <div className="text-[12px]">{title}</div>
         </NavLink>
@@ -61,22 +65,22 @@ function FooterNav() {
   };
   return (
     <>
-      <div className=" bg-[var(--rs-bg-card)] md:hidden w-full bottom-0 right-0 fixed text-gray cursor-pointer z-50">
+      <div className="bg-[var(--rs-bg-card)] md:hidden w-full bottom-0 right-0 fixed text-gray cursor-pointer z-50">
         <article className="flex gap-4 text-center justify-between py-3 px-4 shadow-2xl">
           <div>
-            <Menu title="Therapists" id={0} link="/therapists" icon={<BiGroup />} />
+            <Menu title={t('Therapists')} id={0} link="/therapists" icon={<BiGroup />} />
           </div>
           <div>
-            <Menu title="Online" id={1} link="/online" icon={<BiVideoPlus />} />
+            <Menu title={t('Online')} id={1} link="/online" icon={<BiVideoPlus />} />
           </div>
           <div>
-            <Menu title="My Therapy" id={2} link="/my-therapy" icon={<RiPsychotherapyLine />} />
+            <Menu title={t('My_Therapy')} id={2} link="/my-therapy" icon={<RiPsychotherapyLine />} />
           </div>
           <div onClick={() => dispatch(openChat())}>
-            <Menu title="Support" id={3} icon={<MdSupportAgent />} />
+            <Menu title={t('Support')} id={3} icon={<MdSupportAgent />} />
           </div>
           <div onClick={() => setOpen(true)}>
-            <Menu title="More" id={4} icon={<FiMoreHorizontal />} />
+            <Menu title={t('More')} id={4} icon={<FiMoreHorizontal />} />
           </div>
         </article>
         <Drawer size="full" placement="left" open={open} onClose={() => setOpen(false)} className="bg-gray">
@@ -90,7 +94,7 @@ function FooterNav() {
                   <Link
                     key={Math.random()}
                     to={el?.link}
-                    className="text-gray active:underline-none active:on-underline focus:no-underline"
+                    className="text-[var(--rs-gray-700)] active:underline-none active:on-underline focus:no-underline"
                     onClick={() => setOpen(false)}
                   >
                     <section className="flex items-center gap-3 py-3 px-2">

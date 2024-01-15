@@ -72,10 +72,12 @@ function SearchTherapistSideBar() {
                     onClick={() => handelSortChange(el?.id)}
                     className={clsx(
                       'px-3 py-2 cursor-pointer hover:bg-[var(--rs-gray-100)] active:bg-gray/10',
-                      el?.sortBy === doctorSearchParams?.sortBy && el?.sort === doctorSearchParams?.sort ? 'bg-[var(--rs-gray-100)]' : '',
+                      el?.sortBy === doctorSearchParams?.sortBy && el?.sort === doctorSearchParams?.sort
+                        ? 'bg-[var(--rs-gray-100)]'
+                        : '',
                     )}
                   >
-                    {el?.label}
+                    {t(el?.translationKey)}
                   </li>
                   <Divider className="my-0" />
                 </div>

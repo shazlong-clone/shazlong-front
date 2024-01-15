@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Input, InputGroup, InputPicker } from 'rsuite';
 import SearchIcon from '@rsuite/icons/Search';
 import SearchTherapistSideBar from '../Therapists/SearchTherapistSideBar';
@@ -22,6 +22,9 @@ function TherapistsComp() {
     await dispatch(getAllDoctors({ ...newParams, page: 1, size: doctorCurrentPageSize }));
     dispatch(setDoctorSearchLoading(false));
   };
+  useEffect(() => {
+    window.scrollTo({ top: 0 });
+  }, []);
   return (
     <>
       <section className="mt-3">
@@ -47,7 +50,7 @@ function TherapistsComp() {
               block
               size="lg"
               data={[...sortMenu, { label: 'Rest', value: '' }]?.map((el) => {
-                return { label: el?.label, value: el?.id };
+                return { label: t(el?.translationKey), value: el?.id };
               })}
               renderMenuItem={(label, item) => {
                 return <div className={!item?.value ? 'text-red-500' : ''}>{label}</div>;
@@ -63,7 +66,7 @@ function TherapistsComp() {
       <section className="flex justify-between gap-3 lg:hidden">
         <SearchTherapistSideBar />
       </section>
-      <section className="grid lg:grid-cols-[1fr_2.5fr] gap-10">
+      <section className="lg:grid lg:grid-cols-[1fr_2.5fr] lg:gap-10">
         <article className="hidden lg:block">
           <FilterForm />
         </article>

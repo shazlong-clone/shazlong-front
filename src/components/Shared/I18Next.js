@@ -24,12 +24,14 @@ function App() {
     <div className="App">
       <header className="App-header">
         <div>
-          {Object.keys(lngs).map((lng) => (
+          {Object.keys(lngs)?.map((lng) => (
             <button
               key={lng}
               style={{ fontWeight: i18n.resolvedLanguage === lng ? 'bold' : 'normal' }}
               type="submit"
-              onClick={() => i18n.changeLanguage(lng)}
+              onClick={() => {
+                i18n.changeLanguage(lng);
+              }}
             >
               {lngs[lng]?.nativeName}
             </button>

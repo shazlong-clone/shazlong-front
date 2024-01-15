@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useMemo } from 'react';
+import React, { Fragment, memo, useEffect, useMemo } from 'react';
 import { Placeholder } from 'rsuite';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllDoctors, getSpecialization } from '../../features/shared/sharedActions';
@@ -13,7 +13,10 @@ const LoadinCard = () => {
     .fill('')
     ?.map(() => {
       return (
-        <section key={Math.random()} className="bg-[var(--rs-bg-card)] rounded-3xl mt-3 p-6 text-sm lg:mb-5 lg:mt-0 overflow-hidden">
+        <section
+          key={Math.random()}
+          className="bg-[var(--rs-bg-card)] rounded-3xl mt-3 p-6 text-sm lg:mb-5 lg:mt-0 overflow-hidden"
+        >
           <Placeholder.Paragraph style={{ marginTop: 30 }} graph="circle" rows={8} />
         </section>
       );
@@ -86,11 +89,11 @@ function TherapistsCard() {
           }
         >
           <CardContainer>
-            {doctors?.result?.map((doctor) => {
+            {doctors?.result?.map((doctor, i) => {
               return (
-                <>
+                <Fragment key={i}>
                   <DoctorCard doctor={doctor} />
-                </>
+                </Fragment>
               );
             })}
           </CardContainer>

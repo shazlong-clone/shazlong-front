@@ -1,21 +1,26 @@
 import React, { memo } from 'react';
-import { Avatar, Badge, Button, Rate, Stack } from 'rsuite';
+import { Avatar, Badge, Button, Rate, Stack, useMediaQuery } from 'rsuite';
 
 import { BsPersonSquare } from 'react-icons/bs';
 import { GiAlarmClock } from 'react-icons/gi';
 import { GiCash } from 'react-icons/gi';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import moment from 'moment';
 import personImg from '../../assets/images/person.png';
 import clsx from 'clsx';
+import { IoMdMale } from 'react-icons/io';
+import { IoMdFemale } from 'react-icons/io';
 
 function DoctorCard({ doctor }) {
+  const { t } = useTranslation();
+  const [isMobile] = useMediaQuery(['md']);
   const { specializationList, prefixesList, countries, languages } = useSelector((state) => state?.shared);
   const { i18n } = useTranslation();
   const country = countries?.find((country) => country?.id === doctor?.country);
   const prefix = prefixesList?.find((pref) => pref?.id === doctor?.prefix);
+  const navigate = useNavigate();
   return (
     <section key={Math.random()} className="bg-[var(--rs-bg-card)] rounded-3xl mt-3 p-6 text-sm lg:mb-5 lg:mt-0 overflow-hidden">
       <div className="flex gap-5">
@@ -33,16 +38,23 @@ function DoctorCard({ doctor }) {
           </span>
         </Link>
         <article className="grow">
-          <section className="flex justify-between">
-            <p className="text-lg">{i18n.resolvedLanguage === 'ar' ? doctor?.fullArName : doctor?.fullEnName}</p>
-            <p className="flex gap-1">
-              <span>{country?.country_name}</span>
+          <section className="flex justify-between gap-1">
+            <p className="text-md lg:text-lg  min-w-fit">
+              {i18n.resolvedLanguage === 'ar' ? doctor?.fullArName : doctor?.fullEnName}
+            </p>
+            <p className="flex gap-1 mt-0 items-center">
+              <span className="max-w-[200px] whitespace-nowrap overflow-hidden text-ellipsis hover:whitespace-normal pt-[6px]">
+                {country?.country_name}
+              </span>
               <span className={country?.country_flag} />
             </p>
           </section>
 
           <div className="flex justify-between text-xs my-1 text-cyan">
-            <section className="text-md">{i18n.resolvedLanguage === 'ar' ? prefix?.ar_name : prefix?.name}</section>
+            <section className="text-md flex gap-1 items-center">
+              <span>{i18n.resolvedLanguage === 'ar' ? prefix?.ar_name : prefix?.name}</span>
+              <span className="text-lg flex items-center">{doctor?.gender === 1 ? <IoMdFemale /> : <IoMdMale />}</span>
+            </section>
             <section>
               <BsPersonSquare /> <span>{doctor?.sessions}+</span>
               <span>Sessions</span>
@@ -54,7 +66,7 @@ function DoctorCard({ doctor }) {
           </div>
         </article>
       </div>
-      <p className="my-2 font-[500]">Interests:</p>
+      <p className="my-2 font-[500]">{t('Interests')}:</p>
       <div className="flex gap-2 items-start max-w-[400px]">
         {!doctor?.specialization?.length
           ? 'no Interstes Found'
@@ -62,7 +74,12 @@ function DoctorCard({ doctor }) {
               return (
                 <section
                   key={Math.random()}
-                  className="bg-[var(--rs-green-50)] text-[var(--rs-green-800)] rounded-xl px-3 py-1 whitespace-nowrap overflow-hidden text-ellipsis hover:whitespace-normal hover:overflow-visible cursor-pointer"
+                  className="
+                  bg-[var(--rs-green-50)] text-[var(--rs-green-800)] rounded-xl px-3 py-1 
+                  whitespace-nowrap overflow-hidden text-ellipsis 
+                  hover:whitespace-normal hover:overflow-visible cursor-pointer
+                  text-[12px] lg:text-md
+                  "
                 >
                   {i18n.resolvedLanguage === 'ar'
                     ? specializationList?.find((spec) => spec?.id === id)?.ar_name
@@ -73,7 +90,7 @@ function DoctorCard({ doctor }) {
       </div>
       <div className="mt-4">
         <section className="flex gap-2 flex-wrap mx-2 items-center">
-          Languages :
+          {t('Languages')} :
           {doctor?.languages?.map((langId) => {
             const langItem = languages?.find((lg) => lg?.id === langId);
             return (
@@ -89,10 +106,10 @@ function DoctorCard({ doctor }) {
           <GiAlarmClock />
         </i>
         <span>
-          Nearest session :
+          {t('Nearest_Session')}: &nbsp;
           {moment(doctor?.nearestSlot?.from).isValid() && doctor?.nearestSlot?.from
-            ? moment(doctor?.nearestSlot?.from).format('dddd, MMM. D [at] h:mm A')
-            : '--'}
+            ? moment(doctor?.nearestSlot?.from).format('dddd, MMM. D [at] h:mm A')?.replace('at', t('At_Hour'))
+            : t('No_Nearst_Sessions')}
         </span>
       </div>
       <div className="flex items-center gap-1">
@@ -111,12 +128,22 @@ function DoctorCard({ doctor }) {
             })}
       </div>
       <div className="mt-5 lg:mt-10">
-        <Stack justifyContent="center" spacing={10}>
-          <Link to={`/thearpist-profile/${doctor?.id}`} className="block active:no-underline hover:no-underline">
-            View Profile
-          </Link>
-          <Button size="lg" appearance="primary" block>
-            Book Now
+        <Stack justifyContent="flex-end" spacing={10}>
+          <Button
+            onClick={() => navigate(`/thearpist-profile/${doctor?.id}`)}
+            size={isMobile ? 'md' : 'sm'}
+            appearance="ghost"
+            block
+          >
+            {t('View_Profile')}
+          </Button>
+          <Button
+            onClick={() => navigate(`/thearpist-profile/${doctor?.id}`)}
+            size={isMobile ? 'md' : 'sm'}
+            appearance="primary"
+            block
+          >
+            {t('Book_Now')}
           </Button>
         </Stack>
       </div>
