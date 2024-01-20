@@ -3,8 +3,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
 html {
   scroll-behavior: smooth;
 }
@@ -363,6 +361,10 @@ a:active {
   right: 15%;
   border: 3px solid white;
   background: #999;
+}
+[dir='rtl'] .custom-badge .rs-badge-content {
+  right: auto;
+  left: 75%;
 }
 .custom-badge.green-bage .rs-badge-content {
   background: var(--rs-green-400);

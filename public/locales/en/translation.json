@@ -174,5 +174,7 @@
   "My_Therapy": "My Therapy",
   "More": "More",
   "Support": "Support",
-  "At_Hour": "at"
+  "At_Hour": "at",
+  "Sessions_one":"{{count}} Session",
+  "Sessions_other":"{{count}} Sessions"
 }

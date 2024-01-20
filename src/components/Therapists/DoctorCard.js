@@ -38,7 +38,7 @@ function DoctorCard({ doctor }) {
           </span>
         </Link>
         <article className="grow">
-          <section className="flex justify-between gap-1">
+          <section className="lg:flex lg:justify-between lg:gap-1">
             <p className="text-md lg:text-lg  min-w-fit">
               {i18n.resolvedLanguage === 'ar' ? doctor?.fullArName : doctor?.fullEnName}
             </p>
@@ -55,9 +55,9 @@ function DoctorCard({ doctor }) {
               <span>{i18n.resolvedLanguage === 'ar' ? prefix?.ar_name : prefix?.name}</span>
               <span className="text-lg flex items-center">{doctor?.gender === 1 ? <IoMdFemale /> : <IoMdMale />}</span>
             </section>
-            <section>
-              <BsPersonSquare /> <span>{doctor?.sessions}+</span>
-              <span>Sessions</span>
+            <section className='flex gap-1'>
+              <BsPersonSquare /> 
+              <span>+ {t('Sessions', {count: doctor?.sessions})}</span>
             </section>
           </div>
           <Rate readOnly size="xs" defaultValue={doctor?.avgReviews} />
