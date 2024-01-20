@@ -7,6 +7,7 @@ import DoctorCard from './DoctorCard';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { setCurrentDoctorPageSize, setDoctorSearchParams } from '../../features/shared/sharedSlice';
 import { useSearchParams } from 'react-router-dom';
+import NoDataFound from '../Shared/NoDataFound';
 export const pageSize = 6;
 const LoadinCard = () => {
   return Array(2)
@@ -17,7 +18,7 @@ const LoadinCard = () => {
           key={Math.random()}
           className="bg-[var(--rs-bg-card)] rounded-3xl mt-3 p-6 text-sm lg:mb-5 lg:mt-0 overflow-hidden"
         >
-          <Placeholder.Paragraph style={{ marginTop: 30 }} graph="circle" rows={8} />
+          <Placeholder.Paragraph style={{ marginTop: 30 }} graph="circle" rows={8} active />
         </section>
       );
     });
@@ -68,10 +69,7 @@ function TherapistsCard() {
           <LoadinCard />
         </CardContainer>
       ) : !doctors?.result?.length ? (
-        <div className="text-center mt-20">
-          <img src="https://www.jobhai.com/static/no-data.svg" />
-          <p className="my-3">No Data Found</p>
-        </div>
+        <NoDataFound />
       ) : (
         <InfiniteScroll
           dataLength={doctors?.result?.length ?? pageSize} //This is important field to render the next data

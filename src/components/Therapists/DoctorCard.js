@@ -24,14 +24,14 @@ function DoctorCard({ doctor }) {
   return (
     <section key={Math.random()} className="bg-[var(--rs-bg-card)] rounded-3xl mt-3 p-6 text-sm lg:mb-5 lg:mt-0 overflow-hidden">
       <div className="flex gap-5">
-        <Link to={`/thearpist-profile/${doctor?.id}`}>
+        <Link to={`/thearpist-profile/${doctor?._id}`}>
           <span className={clsx('custom-badge', doctor?.isOnline && 'green-bage')}>
             <Badge size="lg">
               <Avatar
                 className="avatar-doctor-card"
                 size="lg"
                 circle={true}
-                src={doctor.photo ? doctor.photo : personImg}
+                src={doctor?.photo ? doctor?.photo : personImg}
                 alt="@superman66"
               />
             </Badge>
@@ -130,7 +130,7 @@ function DoctorCard({ doctor }) {
       <div className="mt-5 lg:mt-10">
         <Stack justifyContent="flex-end" spacing={10}>
           <Button
-            onClick={() => navigate(`/thearpist-profile/${doctor?.id}`)}
+            onClick={() => navigate(`/thearpist-profile/${doctor?._id}`)}
             size={isMobile ? 'md' : 'sm'}
             appearance="ghost"
             block
@@ -138,7 +138,7 @@ function DoctorCard({ doctor }) {
             {t('View_Profile')}
           </Button>
           <Button
-            onClick={() => navigate(`/thearpist-profile/${doctor?.id}`)}
+            onClick={() => navigate(`/thearpist-profile/${doctor?._id}`)}
             size={isMobile ? 'md' : 'sm'}
             appearance="primary"
             block

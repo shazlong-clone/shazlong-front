@@ -1,5 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getAllDoctors, getCountries, getLangs, getOnlineDoctors, getPrefix, getSpecialization } from './sharedActions';
+import {
+  getAllDoctors,
+  getCountries,
+  getLangs,
+  getOnlineDoctors,
+  getPrefix,
+  getSpecialization,
+  getDoctorProfile,
+} from './sharedActions';
 import { ASC } from '../../costansts/index';
 export const sharedSlice = createSlice({
   name: 'shared',
@@ -27,6 +35,7 @@ export const sharedSlice = createSlice({
       size: 6,
     },
     onlineDoctors: [],
+    doctorProfile: {},
   },
 
   reducers: {
@@ -61,6 +70,9 @@ export const sharedSlice = createSlice({
     });
     builder.addCase(getOnlineDoctors.fulfilled, (state, action) => {
       state.onlineDoctors = action.payload?.data.results;
+    });
+    builder.addCase(getDoctorProfile.fulfilled, (state, action) => {
+      state.doctorProfile = action.payload?.data;
     });
   },
 });

@@ -175,6 +175,11 @@
   "More": "More",
   "Support": "Support",
   "At_Hour": "at",
-  "Sessions_one":"{{count}} Session",
-  "Sessions_other":"{{count}} Sessions"
+  "Sessions_one": "{{count}} Session",
+  "Sessions_other": "{{count}} Sessions",
+  "NO_Data_Found": "NO Data Found",
+  "Therapist_Profile": "Therapist Profile",
+  "Reviews_zero": "No Reviews Exists",
+  "Reviews_one": "One Review",
+  "Reviews_other": "{{count}} Reviews"
 }

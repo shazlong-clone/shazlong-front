@@ -180,9 +180,17 @@
   "More": "المزيد",
   "Support": "الدعم",
   "At_Hour": "في تمام الساعة",
-  "Sessions_one":"جلسة",
-  "Sessions_two":"جلستان",
-  "Sessions_few":"{{count}} جلسات",
-  "Sessions_many":"{{count}} جلسة",
-  "Sessions_other":"{{count}} جلسة"
+  "Sessions_one": "جلسة",
+  "Sessions_two": "جلستان",
+  "Sessions_few": "{{count}} جلسات",
+  "Sessions_many": "{{count}} جلسة",
+  "Sessions_other": "{{count}} جلسة",
+  "NO_Data_Found": "عفوا لايوجد بيانات متاحة",
+  "Therapist_Profile": "ملف الطبيب",
+  "Reviews_zero": "لايوجد مراجعات",
+  "Reviews_one": "مراجعة واحدة",
+  "Reviews_two": "مراجعتان",
+  "Reviews_few": "{{count}} مراجعات",
+  "Reviews_many": "{{count}} مراجعات",
+  "Reviews_other": "{{count}} مراجعة"
 }
