@@ -192,5 +192,18 @@
   "Reviews_two": "مراجعتان",
   "Reviews_few": "{{count}} مراجعات",
   "Reviews_many": "{{count}} مراجعات",
-  "Reviews_other": "{{count}} مراجعة"
+  "Reviews_other": "{{count}} مراجعة",
+  "Sessions_Num": "عدد الجلسات",
+  "Join_Date": "تاريخ الانضمام",
+  "Write_Review": "تقيم الدكتور",
+  "Your_opinion_matters_tell_us_about_your_experience_with": "تجربتك تهمنا اخبرنا عن تجربتك مع {{doctor}}",
+  "Femal_Doctor": "دكتورة",
+  "Male_Doctor": "دكتور",
+  "How_would_you_rate_your_experience": "كيف كانت التجربية ؟",
+  "Write_something_about_your_experience": "اكتب شئا عن تجربتك .",
+  "Would_you_recommend_this_therapist_to_others": "هل سترشح دكتور {{name}} لاخرين ؟",
+  "Yes": "نعم",
+  "No": "لا",
+  "Confirm": "تــأكيد",
+  "Book": "حجز جلسة"
 }

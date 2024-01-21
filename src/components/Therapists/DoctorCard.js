@@ -12,6 +12,7 @@ import personImg from '../../assets/images/person.png';
 import clsx from 'clsx';
 import { IoMdMale } from 'react-icons/io';
 import { IoMdFemale } from 'react-icons/io';
+import { genders } from '../../assets/constants';
 
 function DoctorCard({ doctor }) {
   const { t } = useTranslation();
@@ -53,11 +54,13 @@ function DoctorCard({ doctor }) {
           <div className="flex justify-between text-xs my-1 text-cyan">
             <section className="text-md flex gap-1 items-center">
               <span>{i18n.resolvedLanguage === 'ar' ? prefix?.ar_name : prefix?.name}</span>
-              <span className="text-lg flex items-center">{doctor?.gender === 1 ? <IoMdFemale /> : <IoMdMale />}</span>
+              <span className="text-lg flex items-center">
+                {doctor?.gender === genders[1]?.id ? <IoMdFemale /> : <IoMdMale />}
+              </span>
             </section>
-            <section className='flex gap-1'>
-              <BsPersonSquare /> 
-              <span>+ {t('Sessions', {count: doctor?.sessions})}</span>
+            <section className="flex gap-1">
+              <BsPersonSquare />
+              <span>+ {t('Sessions', { count: doctor?.sessions })}</span>
             </section>
           </div>
           <Rate readOnly size="xs" defaultValue={doctor?.avgReviews} />

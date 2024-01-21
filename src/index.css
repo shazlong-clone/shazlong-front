@@ -375,7 +375,9 @@ a:active {
   height: 18px;
   border-radius: 50%;
 }
-
+.profile-badge .rs-badge-content {
+  top: 92%;
+}
 .parent-grid {
   display: grid;
   grid-template-columns: repeat(9, 1fr);
@@ -393,4 +395,10 @@ a:active {
 .subitem {
   grid-column: 3 / 6;
   grid-row: 1 / 3;
+}
+
+@media (min-width: 1536px) {
+  .container {
+    max-width: 1280px;
+  }
 }

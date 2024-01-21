@@ -181,5 +181,16 @@
   "Therapist_Profile": "Therapist Profile",
   "Reviews_zero": "No Reviews Exists",
   "Reviews_one": "One Review",
-  "Reviews_other": "{{count}} Reviews"
+  "Reviews_other": "{{count}} Reviews",
+  "Sessions_Num": "Number of Sessions",
+  "Join_Date": "Join Date",
+  "Write_Review": "Write Review",
+  "Your_opinion_matters_tell_us_about_your_experience_with": "Your opinion matters, tell us about your experience with {{doctor}}",
+  "Femal_Doctor": "doctor",
+  "Male_Doctor": "doctor",
+  "How_would_you_rate_your_experience": "How would you rate your experience ?",
+  "Write_something_about_your_experience": "Write something about your experience.",
+  "Would_you_recommend_this_therapist_to_others?": "Would you recommend {{doctor}} to others",
+  "Confirm": "Confirm",
+  "Book": "Book Session"
 }

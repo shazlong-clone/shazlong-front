@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { Badge, Button, Rate } from 'rsuite';
 import therapist from '../../assets/images/therapist.webp';
 import { GiWorld } from 'react-icons/gi';
@@ -8,26 +8,39 @@ import { RiPsychotherapyLine } from 'react-icons/ri';
 import Card from '../Shared/Card';
 import useMediaQuery from '../../utils/useMediaQuery';
 import Review from './Review';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
+import { getCountries, getLangs, getPrefix, getSpecialization } from '../../features/shared/sharedActions';
+import clsx from 'clsx';
+import moment from 'moment';
 function Profile({ setBounceBg }) {
-  const interstes = ['Mood disorders (depression)', 'Anxiety disorders and obsessions'];
   const lg = useMediaQuery('lg');
-  const { doctorProfile, prefixesList } = useSelector((state) => state?.shared);
+  const { doctorProfile, prefixesList, specializationList, languages, countries } = useSelector((state) => state?.shared);
   const { t, i18n } = useTranslation();
   const prefix = prefixesList?.find((pref) => pref?.id === doctorProfile?.prefix);
-
+  const dispatch = useDispatch();
+  const doctorCountry = useMemo(() => {
+    return countries?.find((country) => country?.id === doctorProfile?.country);
+  }, []);
+  useEffect(() => {
+    dispatch(getPrefix());
+    dispatch(getSpecialization());
+    dispatch(getLangs());
+    dispatch(getCountries());
+  }, []);
   return (
     <Card className="mb-5 lg:p-10">
       <section className="flex gap-5 lg:mb-5">
         <article>
-          <Badge color="green">
-            <img
-              className="w-[60px] h-[60px] lg:w-[100px] lg:h-[100px] rounded-full"
-              alt="img"
-              src={doctorProfile?.photo || therapist}
-            />
-          </Badge>
+          <span className={clsx('custom-badge profile-badge', doctorProfile?.isOnline && 'green-bage')}>
+            <Badge color="green">
+              <img
+                className="w-[60px] h-[60px] lg:w-[100px] lg:h-[100px] rounded-full"
+                alt="img"
+                src={doctorProfile?.photo || therapist}
+              />
+            </Badge>
+          </span>
         </article>
         <article className="grid gap-y-1">
           <h6 className="lg:text-xl">{i18n.resolvedLanguage === 'ar' ? doctorProfile?.fullArName : doctorProfile?.fullEnName}</h6>
@@ -37,20 +50,18 @@ function Profile({ setBounceBg }) {
             <span className="underline">
               {doctorProfile?.avgReviews}({t('Reviews', { count: doctorProfile?.nReviews })})
             </span>
-            <Button appearance="link" className="text-sm p-0">
-              Write Reviews
-            </Button>
           </aside>
         </article>
       </section>
       <section className="flex gap-1 flex-wrap mt-3">
-        {interstes?.map((el) => {
+        {doctorProfile?.specialization?.map((id) => {
+          const specializationItem = specializationList?.find((spec) => spec?.id === id);
           return (
             <span
               key={Math.random()}
-              className="bg-[var(--rs-green-100)] mb-2 text-xs font-bold px-3 py-1 rounded-3xl text-green/60 inline-block"
+              className="bg-[var(--rs-green-100)] text-[var(--rs-green-900)] mb-2 text-xs font-bold px-3 py-1 rounded-3xl text-green/60 inline-block"
             >
-              {el}
+              {i18n.resolvedLanguage === 'ar' ? specializationItem?.ar_name : specializationItem?.name}
             </span>
           );
         })}
@@ -60,32 +71,40 @@ function Profile({ setBounceBg }) {
           <li className="flex items-center gap-1">
             <span className="text-cyan flex items-center gap-3">
               <i className="flex items-center text-lg">{<GiWorld />}</i>
-              <aside className="text-lg">Language:</aside>
+              <aside className="text-lg">{t('Language')}:</aside>
             </span>
-            <aside className="text-xs lg:text-base font-bold">Arabic,English</aside>
+            <aside className="text-xs lg:text-base font-bold">
+              {doctorProfile?.languages?.map((langId) => {
+                const lang = languages?.find((el) => el?.id === langId);
+                return <span key={lang?.id}>{i18n.resolvedLanguage === 'ar' ? lang?.ar_name : lang?.name}</span>;
+              })}
+            </aside>
           </li>
           <li className="flex items-center gap-1">
             <span className="text-cyan flex items-center gap-3">
               <i className="flex items-center text-lg">{<BsFlag />}</i>
-              <aside className="text-lg">Counary:</aside>
+              <aside className="text-lg">{t('Country')}:</aside>
             </span>
-            <aside className="text-xs lg:text-base font-bold">Egypt</aside>
+            <aside className="text-xs lg:text-base font-bold flex items-center gap-2">
+              <span className="flex items-center pt-1">{doctorCountry?.country_name}</span>
+              <span className={clsx(doctorCountry?.country_flag)} />
+            </aside>
           </li>
           <li className="flex items-center gap-1">
             <span className="text-cyan flex items-center gap-3">
               <i className="flex items-center text-lg">{<SlCalender />}</i>
-              <aside className="text-lg">Join Date:</aside>
+              <aside className="text-lg">{t('Join_Date')}:</aside>
             </span>
-            <aside className="text-xs lg:text-base font-bold">5 years ago</aside>
+            <aside className="text-xs lg:text-base font-bold">{moment(doctorProfile?.createdAt)?.fromNow()}</aside>
           </li>
           <li className="flex items-center gap-1">
             <span className="text-cyan flex items-center gap-3">
               <i className="flex items-center text-lg">{<RiPsychotherapyLine />}</i>
               <aside className="text-lg" id="checkout">
-                Num of Sessions:
+                {t('Sessions_Num')}:
               </aside>
             </span>
-            <aside className="text-xs lg:text-base font-bold">1000+ session</aside>
+            <aside className="text-xs lg:text-base font-bold">{t('Sessions', { count: doctorProfile?.sessions })}</aside>
           </li>
         </ul>
       </section>
@@ -93,7 +112,7 @@ function Profile({ setBounceBg }) {
         <Review />
         <a href="#checkout" className="lg:hidden">
           <Button onClick={() => setBounceBg(true)} appearance="primary" size={lg ? 'lg' : 'md'}>
-            Book
+            {t('Book')}
           </Button>
         </a>
       </section>

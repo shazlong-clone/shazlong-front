@@ -30,7 +30,7 @@ function Tetemonials() {
     <div>
       <section className="text-center">
         <Card className="text-start">
-          <h5 className="text-center">Reviews</h5>
+          <h4 className="text-center">Tetemonials</h4>
           {data?.map((el) => {
             return (
               <div key={el?.message} className="py-2">

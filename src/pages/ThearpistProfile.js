@@ -79,7 +79,6 @@ function ThearpistProfile() {
               </>
             ) : (
               <>
-                <Intersts />
                 <SkillsReview />
                 <Tetemonials />
                 <Experience />
