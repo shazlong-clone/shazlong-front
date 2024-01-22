@@ -48,18 +48,17 @@ function NavBar() {
   const close = () => triggerRef.current.close();
   const handleProfile = () => {
     close();
-    setTimeout(()=>{
+    setTimeout(() => {
       navgiagte('/user-info');
-    },0)
+    }, 0);
   };
   const signOutHandler = () => {
     close();
-    setTimeout(()=>{
+    setTimeout(() => {
       dispatch(signOut());
       setOpen(false);
       navigate('/');
-    },0)
-
+    }, 0);
   };
   const speaker = (
     <Popover className="p-0" style={!lg ? { display: 'none' } : {}}>
@@ -93,7 +92,10 @@ function NavBar() {
   }, []);
 
   return (
-    <div className="container items-center border-b-[1px] border-[var(--rs-gray-100)] px-4 py-3 bg-[var(--rs-bg-card)]">
+    <div
+      className="container items-center border-b-[1px] border-[var(--rs-gray-100)] px-4 py-3 bg-[var(--rs-bg-card)]"
+      id="link2"
+    >
       <div className="flex justify-between items-center m-auto">
         <section className="lg:flex-[1_1_33%]">
           <Link to="/">

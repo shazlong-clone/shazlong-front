@@ -20,7 +20,7 @@ function Review() {
 
   return (
     <>
-      <span className="flex justify-end">
+      <span className="flex justify-center">
         <Button onClick={handleOpen} size={lg ? 'lg' : 'md'} appearance="primary">
           {t('Write_Review')}
         </Button>

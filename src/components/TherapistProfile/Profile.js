@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo } from 'react';
 import { Badge, Button, Rate } from 'rsuite';
-import therapist from '../../assets/images/therapist.webp';
+import person from '../../assets/images/person.png';
 import { GiWorld } from 'react-icons/gi';
 import { BsFlag } from 'react-icons/bs';
 import { SlCalender } from 'react-icons/sl';
@@ -37,7 +37,7 @@ function Profile({ setBounceBg }) {
               <img
                 className="w-[60px] h-[60px] lg:w-[100px] lg:h-[100px] rounded-full"
                 alt="img"
-                src={doctorProfile?.photo || therapist}
+                src={doctorProfile?.photo || person}
               />
             </Badge>
           </span>
@@ -46,7 +46,7 @@ function Profile({ setBounceBg }) {
           <h6 className="lg:text-xl">{i18n.resolvedLanguage === 'ar' ? doctorProfile?.fullArName : doctorProfile?.fullEnName}</h6>
           <h6 className="font-medium text-cyan lg:text-lg">{i18n.resolvedLanguage === 'ar' ? prefix?.ar_name : prefix?.name}</h6>
           <Rate defaultValue={4} readOnly size="xs" />
-          <aside className="flex gap-2 items-center text-xs">
+          <aside className="flex gap-2 items-center text-[1rem]">
             <span className="underline">
               {doctorProfile?.avgReviews}({t('Reviews', { count: doctorProfile?.nReviews })})
             </span>
@@ -100,18 +100,21 @@ function Profile({ setBounceBg }) {
           <li className="flex items-center gap-1">
             <span className="text-cyan flex items-center gap-3">
               <i className="flex items-center text-lg">{<RiPsychotherapyLine />}</i>
-              <aside className="text-lg" id="checkout">
-                {t('Sessions_Num')}:
-              </aside>
+              <aside className="text-lg">{t('Sessions_Num')}:</aside>
             </span>
             <aside className="text-xs lg:text-base font-bold">{t('Sessions', { count: doctorProfile?.sessions })}</aside>
           </li>
         </ul>
       </section>
-      <section className="flex lg:block justify-center gap-2 mt-5 lg:text-start">
+      <section className="flex  justify-center gap-2 pt-5 lg:text-start" id="link1">
         <Review />
-        <a href="#checkout" className="lg:hidden">
-          <Button onClick={() => setBounceBg(true)} appearance="primary" size={lg ? 'lg' : 'md'}>
+        <a href="#link1" className="lg:hidden">
+          <Button onClick={() => setBounceBg(true)} appearance="ghost" size={lg ? 'lg' : 'md'}>
+            {t('Book')}
+          </Button>
+        </a>
+        <a href="#link2" className="hidden lg:block">
+          <Button onClick={() => setBounceBg(true)} appearance="ghost" size={lg ? 'lg' : 'md'}>
             {t('Book')}
           </Button>
         </a>

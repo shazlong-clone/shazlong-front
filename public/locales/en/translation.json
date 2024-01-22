@@ -192,5 +192,8 @@
   "Write_something_about_your_experience": "Write something about your experience.",
   "Would_you_recommend_this_therapist_to_others?": "Would you recommend {{doctor}} to others",
   "Confirm": "Confirm",
-  "Book": "Book Session"
+  "Book": "Book Session",
+  "Available": "Available",
+  "Seleced": "Seleced",
+  "Reserved": "Reserved"
 }

@@ -8,7 +8,9 @@ import { RxDotFilled } from 'react-icons/rx';
 import { doctorSlots } from './data';
 import { Button, Input, Modal, Tag } from 'rsuite';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 function Booking({ setBounceBg, bouncebg, ...props }) {
+  const { t } = useTranslation();
   const [open, setOpen] = React.useState(false);
   const [timeZons, setTimeZons] = useState({
     fullTimeZons: [],
@@ -27,7 +29,7 @@ function Booking({ setBounceBg, bouncebg, ...props }) {
     dots: false,
     infinite: false,
     speed: 500,
-    slidesToShow: 7,
+    slidesToShow: 5,
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 2000,
@@ -121,7 +123,10 @@ function Booking({ setBounceBg, bouncebg, ...props }) {
         <Slider {...settings}>
           {doctorSlots.map((el) => {
             return (
-              <div key={Math.random()} className="bg-[var(--rs-primary-700)]/5 border border-solid border-white text-center rounded-lg">
+              <div
+                key={Math.random()}
+                className="bg-[var(--rs-primary-100)] border border-solid border-white text-center rounded-lg"
+              >
                 <section className="text-white bg-[var(--rs-primary-700)] rounded-t-lg py-1 font-bold">Sat 08</section>
                 <section className="grid my-2 gap-2">
                   {el?.slots.map((slot) => {
@@ -130,12 +135,12 @@ function Booking({ setBounceBg, bouncebg, ...props }) {
                         <span
                           className={twMerge(
                             clsx(
-                              'bg-gray/10 p-1 text-xs font-[600] rounded-md px-2 cursor-pointer',
+                              'p-1 rtl:pt-[7px] text-xs font-[600] rounded-md px-2 cursor-pointer',
                               slot?.isBooked
-                                ? 'border border-solid border-red-400 text-red-400 bg-red-50 line-through'
+                                ? 'border border-solid border-red-400 text-red-400 bg-red-50 line-through cursor-not-allowed'
                                 : slot?.isSelected
-                                ? 'border border-solid border-green text-green bg-[var(--rs-green-100)]'
-                                : '',
+                                ? 'border border-solid border-[var(--rs-green-500)] text-[var(--rs-green-500)] bg-[var(--rs-green-100)] hover:text-[var(--rs-green-700)] hover:bg-[var(--rs-green-200)]'
+                                : 'bg-[var(--rs-gray-50)] hover:bg-[var(--rs-gray-400)]',
                             ),
                           )}
                         >
@@ -149,18 +154,18 @@ function Booking({ setBounceBg, bouncebg, ...props }) {
             );
           })}
         </Slider>
-        <section className="flex text-center gap-4 text-xs justify-center mt-5">
+        <section className="flex text-center gap-4 justify-center mt-5">
           <article className="flex items-center">
-            <RxDotFilled className="text-gray/25 text-2xl flex items-center" />
-            <span>Available</span>
+            <RxDotFilled className="text-gray/25 text-3xl flex items-center" />
+            <span className="pt-1">{t('Available')}</span>
           </article>
           <article className="flex items-center">
-            <RxDotFilled className="text-[var(--rs-green-900)] text-2xl flex items-center" />
-            <span>Seleced</span>
+            <RxDotFilled className="text-[var(--rs-green-900)] text-3xl flex items-center" />
+            <span className="pt-1">{t('Seleced')}</span>
           </article>
           <article className="flex items-center">
-            <RxDotFilled className="text-red-500 text-2xl flex items-center" />
-            <span>Reserved</span>
+            <RxDotFilled className="text-red-500 text-3xl flex items-center" />
+            <span className="pt-1">{t('Reserved')}</span>
           </article>
         </section>
         <hr />
@@ -196,7 +201,9 @@ function Booking({ setBounceBg, bouncebg, ...props }) {
       <Card>
         <section className="mb-2">
           <article className="flex justify-center gap-3 items-center mb-5">
-            <span className=" bg-[var(--rs-primary-700)] rounded-full p-3 w-10 h-10 flex justify-center items-center text-white">2</span>
+            <span className=" bg-[var(--rs-primary-700)] rounded-full p-3 w-10 h-10 flex justify-center items-center text-white">
+              2
+            </span>
             <span>Selected Slots</span>
           </article>
           <Tag closable className="mb-2 bg-gray/10 ">

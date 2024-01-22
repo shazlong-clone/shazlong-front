@@ -9,7 +9,7 @@ export const doctorSlots = [
       },
       {
         h: '02:00 PM',
-        isBooked: true,
+        isBooked: false,
         isSelected: true,
       },
     ],
@@ -20,11 +20,11 @@ export const doctorSlots = [
       {
         h: '02:00 PM',
         isBooked: false,
-        isSelected: false,
+        isSelected: true,
       },
       {
         h: '02:00 PM',
-        isBooked: true,
+        isBooked: false,
         isSelected: false,
       },
       {
