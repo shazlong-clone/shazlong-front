@@ -35,7 +35,7 @@ function Profile({ setBounceBg }) {
           <span className={clsx('custom-badge profile-badge', doctorProfile?.isOnline && 'green-bage')}>
             <Badge color="green">
               <img
-                className="w-[60px] h-[60px] lg:w-[100px] lg:h-[100px] rounded-full"
+                className="w-[78px] h-[78px] lg:w-[100px] lg:h-[100px] rounded-full"
                 alt="img"
                 src={doctorProfile?.photo || person}
               />
@@ -47,9 +47,7 @@ function Profile({ setBounceBg }) {
           <h6 className="font-medium text-cyan lg:text-lg">{i18n.resolvedLanguage === 'ar' ? prefix?.ar_name : prefix?.name}</h6>
           <Rate defaultValue={4} readOnly size="xs" />
           <aside className="flex gap-2 items-center text-[1rem]">
-            <span className="underline">
-              {doctorProfile?.avgReviews}({t('Reviews', { count: doctorProfile?.nReviews })})
-            </span>
+            <span className="underline">({t('Reviews', { count: doctorProfile?.nReviews })})</span>
           </aside>
         </article>
       </section>

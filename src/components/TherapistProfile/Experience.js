@@ -44,7 +44,7 @@ function Experience() {
               return (
                 <div key={Math.random()}>
                   <section className="flex gap-3">
-                    <article className="w-3 lg:w-1 rounded-md bg-[var(--rs-primary-700)]"></article>
+                    <article className="w-2 lg:w-1 rounded-md bg-[var(--rs-primary-700)]"></article>
                     <article>
                       <div>{item?.text}</div>
                       <div className="italic font-light">Psychological research center</div>

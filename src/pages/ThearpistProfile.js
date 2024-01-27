@@ -48,7 +48,7 @@ function ThearpistProfile() {
         <InternalHeader className="lg:mt-10 mt-5" link="/therapists">
           {t('Therapist_Profile')}
         </InternalHeader>
-        <section className="lg:grid lg:grid-cols-2 lg:gap-6 mb-5">
+        <section className="lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)] lg:gap-6 mb-5">
           <article>
             {loading ? (
               <Panel className="bg-[var(--rs-bg-card)] rounded-3xl mt-5">

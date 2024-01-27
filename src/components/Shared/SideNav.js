@@ -13,6 +13,7 @@ import clsx from 'clsx';
 import { useDispatch } from 'react-redux';
 import { openChat } from '../../features/theme/themeSlice';
 import { t } from 'i18next';
+import { RiGroupLine } from 'react-icons/ri';
 const menu = [
   {
     name: 'Home',
@@ -20,7 +21,7 @@ const menu = [
     link: '/',
   },
   {
-    name: 'Psychmeter',
+    name: 'Psychological_Tests',
     icon: <BiTestTube />,
     link: '/psychometer',
   },
@@ -28,6 +29,11 @@ const menu = [
     name: 'Blog',
     icon: <FaBlog />,
     link: '/blogs',
+  },
+  {
+    name: 'Therapist_List',
+    icon: <RiGroupLine />,
+    link: '/therapists',
   },
 ];
 
@@ -85,7 +91,7 @@ function FooterNav() {
         </article>
         <Drawer size="full" placement="left" open={open} onClose={() => setOpen(false)} className="bg-gray">
           <Drawer.Header>
-            <Drawer.Title className="text-center text-2xl text-cyan">More</Drawer.Title>
+            <Drawer.Title className="text-center text-2xl text-cyan">{t('More')}</Drawer.Title>
           </Drawer.Header>
           <Drawer.Body className="p-0">
             <div>
@@ -99,7 +105,7 @@ function FooterNav() {
                   >
                     <section className="flex items-center gap-3 py-3 px-2">
                       <i className="text-2xl flex items-center">{el?.icon}</i>
-                      <span className="text-xl font-extralight">{el?.name}</span>
+                      <span className="text-xl font-extralight">{t(el?.name)}</span>
                     </section>
                     <hr className="m-0" />
                   </Link>

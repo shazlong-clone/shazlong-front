@@ -3,7 +3,7 @@ import Card from '../Shared/Card';
 import { Slider } from 'rsuite';
 import { useTranslation } from 'react-i18next';
 function SkillsReview() {
-  const {t} = useTranslation(); 
+  const { t } = useTranslation();
   // this sills shoud e added be admin section will be added later
   const sliderSkills = [
     {
@@ -13,10 +13,6 @@ function SkillsReview() {
     {
       name: 'Understanding_Of_The_Situation',
       percent: 4.2,
-    },
-    {
-      name: 'Understanding_Of_The_Situation',
-      percent: 4,
     },
     {
       name: 'Providing_Effective_Solutions',
