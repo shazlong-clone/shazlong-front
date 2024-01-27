@@ -36,7 +36,7 @@ function FilterForm() {
     label: (
       <div key={item?.id} className="flex gap-1">
         <span className={clsx(item?.country_flag, 'min-w-[1.3em]')} />
-        <span className="max-w-[250px] whitespace-nowrap overflow-hidden text-ellipsis">{item?.country_name}</span>
+        <span className="max-w-[250px] lg:max-w-[220px] whitespace-nowrap overflow-hidden text-ellipsis">{item?.country_name}</span>
       </div>
     ),
     value: item?.id,

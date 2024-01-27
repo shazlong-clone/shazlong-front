@@ -3,6 +3,8 @@ import React from 'react';
 import { Button, Rate } from 'rsuite';
 
 import Card from '../Shared/Card';
+import { useTranslation } from 'react-i18next';
+
 
 const data = [
   {
@@ -26,11 +28,12 @@ const data = [
 ];
 
 function Tetemonials() {
+  const {t} = useTranslation();
   return (
     <div>
       <section className="text-center">
         <Card className="text-start">
-          <h4 className="text-center">Tetemonials</h4>
+          <h4 className="text-center">{t('Testemonials')}</h4>
           {data?.map((el) => {
             return (
               <div key={el?.message} className="py-2">

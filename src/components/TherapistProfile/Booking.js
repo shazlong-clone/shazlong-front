@@ -137,7 +137,7 @@ function Booking({ setBounceBg, bouncebg, ...props }) {
                             clsx(
                               'p-1 rtl:pt-[7px] text-xs font-[600] rounded-md px-2 cursor-pointer',
                               slot?.isBooked
-                                ? 'border border-solid border-red-400 text-red-400 bg-red-50 line-through cursor-not-allowed'
+                                ? 'border border-solid border-[var(--rs-red-400)] text-[var(--rs-red-400)] bg-[var(--rs-red-50)] line-through cursor-not-allowed'
                                 : slot?.isSelected
                                 ? 'border border-solid border-[var(--rs-green-500)] text-[var(--rs-green-500)] bg-[var(--rs-green-100)] hover:text-[var(--rs-green-700)] hover:bg-[var(--rs-green-200)]'
                                 : 'bg-[var(--rs-gray-50)] hover:bg-[var(--rs-gray-400)]',

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Profile from '../components/TherapistProfile/Profile.js';
 import InternalHeader from '../components/Shared/InternalHeader.js';
-import Intersts from '../components/TherapistProfile/Intersts.js';
 import Tetemonials from '../components/TherapistProfile/Tetemonials.js';
 import SkillsReview from '../components/TherapistProfile/SkillsReview.js';
 import Experience from '../components/TherapistProfile/Experience.js';

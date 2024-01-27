@@ -208,5 +208,11 @@
   "Book": "حجز جلسة",
   "Available": "متاح",
   "Seleced": "محدد",
-  "Reserved": "محجوز"
+  "Reserved": "محجوز",
+  "Communication":"التواصل",
+  "Understanding_Of_The_Situation":"فهم جيد للحالة والتعامل معها بشكل مناسب",
+  "Providing_Effective_Solutions":"يعطي حلول فعالة",
+  "Commitment_To_Start_And_End_Times":"الالتزام بالمواعيد",
+  "Skills_Review":"مراجعة المهارات",
+  "Testemonials": "الشهادات والتوصيات"
 }

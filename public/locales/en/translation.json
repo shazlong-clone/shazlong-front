@@ -195,5 +195,11 @@
   "Book": "Book Session",
   "Available": "Available",
   "Seleced": "Seleced",
-  "Reserved": "Reserved"
+  "Reserved": "Reserved",
+  "Communication":"Communication",
+  "Understanding_Of_The_Situation":"Understanding of the situation",
+  "Providing_Effective_Solutions":"Providing effective solutions",
+  "Commitment_To_Start_And_End_Times":"Commitment to start and end times",
+  "Skills_Review":"Skills Review",
+  "Testemonials": "Testemonials"
 }
