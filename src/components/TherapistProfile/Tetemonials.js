@@ -1,58 +1,51 @@
 import React from 'react';
 
-import { Button, Rate } from 'rsuite';
+import { Rate, Pagination } from 'rsuite';
 
 import Card from '../Shared/Card';
 import { useTranslation } from 'react-i18next';
-
-
-const data = [
-  {
-    to: 'Mohamed Rashad',
-    stars: 4.5,
-    time: 'a Day ago',
-    message: '  Thanks Dr. Basmaaaaaa 🥰  ',
-  },
-  {
-    to: 'Saeed Khaled',
-    stars: 4.5,
-    time: '2 Days ago',
-    message: '  first session, it was good 🤍   ',
-  },
-  {
-    to: 'Saeed Khaled',
-    stars: 4.5,
-    time: '2 Days ago',
-    message: '  first session, it was good 🤍   ',
-  },
-];
-
+import { useSelector } from 'react-redux';
+import moment from 'moment';
+const rowPerPage = 3;
 function Tetemonials() {
-  const {t} = useTranslation();
+  const [activePage, setActivePage] = React.useState(1);
+  const { t } = useTranslation();
+  const reviews = useSelector((state) => state?.shared?.doctorProfile?.reviews);
+
   return (
     <div>
       <section className="text-center">
         <Card className="text-start">
           <h4 className="text-center">{t('Testemonials')}</h4>
-          {data?.map((el) => {
+          {reviews?.slice((activePage - 1) * rowPerPage, (activePage - 1) * rowPerPage + rowPerPage)?.map((review) => {
             return (
-              <div key={el?.message} className="py-2">
-                <Rate size="xs" defaultValue={3} readOnly />
-                <section>{el?.message}</section>
-                <section className="flex justify-between items-center">
-                  <article>
-                    <span>sae...</span>{' '}
+              <div key={review?._id} className="py-2">
+                <Rate size="xs" defaultValue={review.rate} readOnly />
+                <section>{review?.message}</section>
+                <section className="flex justify-between items-center mt-4 mb-2">
+                  <article className="flex justify-center gap-1 text-xs items-center">
+                    <img src={review?.user?.photo} className="size-5 rounded-full" />
+                    <span>{review?.user?.name}</span>
                   </article>
-                  <article className="text-gray/60 font-light">aday ago</article>
+                  <article className="text-gray/60 font-light text-xs">{moment(review?.createdAt)?.fromNow()}</article>
                 </section>
                 <hr className="m-0" />
               </div>
             );
           })}
-          <section className="text-center">
-            <Button className="no-underline active:no-underline focus:no-underline" appearance="link">
-              view more review
-            </Button>
+          <section className="text-center flex justify-center">
+            <Pagination
+              prev
+              last
+              next
+              ellipsis
+              first
+              size="md"
+              total={reviews?.length}
+              limit={rowPerPage}
+              activePage={activePage}
+              onChangePage={setActivePage}
+            />
           </section>
         </Card>
       </section>

@@ -1,14 +1,45 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import Card from '../Shared/Card';
 import Slider from 'react-slick';
 import { BsFillArrowRightCircleFill, BsFillArrowLeftCircleFill } from 'react-icons/bs';
 import clsx from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import { RxDotFilled } from 'react-icons/rx';
-import { doctorSlots } from './data';
-import { Button, Input, Modal, Tag } from 'rsuite';
+import { Button, Divider, Input, Modal, Stack, Tag } from 'rsuite';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
+import moment from 'moment';
+import { RxCross2 } from 'react-icons/rx';
+
+const formateSlots = (inputSlots) => {
+  const doctorSlots = [];
+
+  // Group slots by date
+  const groupedSlots = inputSlots.reduce((result, slot) => {
+    const date = moment(slot.from).format('ddd DD');
+    if (!result[date]) {
+      result[date] = [];
+    }
+
+    const time = moment(slot.from).format('hh:mm A');
+    const isBooked = slot.reserved;
+    const isSelected = false;
+
+    result[date].push({ h: time, isBooked, isSelected });
+    return result;
+  }, {});
+
+  // Transform the grouped slots into the desired doctorSlots format
+  for (const date in groupedSlots) {
+    const formattedDate = moment(date, 'ddd DD').format('ddd DD');
+    const slots = groupedSlots[date];
+
+    doctorSlots.push({ date: formattedDate, slots });
+  }
+  return doctorSlots;
+};
+
 function Booking({ setBounceBg, bouncebg, ...props }) {
   const { t } = useTranslation();
   const [open, setOpen] = React.useState(false);
@@ -106,6 +137,17 @@ function Booking({ setBounceBg, bouncebg, ...props }) {
       });
     }
   };
+  const { doctorProfile = {} } = useSelector((state) => state?.shared);
+
+  const slots = useMemo(() => {
+    return formateSlots(doctorProfile?.slots ?? []);
+  }, [doctorProfile?.slots]);
+
+  const [localeSlots, setLocaleSlots] = useState(slots);
+
+  useEffect(() => {
+    setLocaleSlots(slots);
+  }, [slots]);
   useEffect(() => {
     getTimeZons();
   }, []);
@@ -115,24 +157,42 @@ function Booking({ setBounceBg, bouncebg, ...props }) {
     }, 1000);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [bouncebg]);
+  const handelSelect = (date, h) => {
+    const newLocaleSlots = localeSlots?.map((day) => {
+      if (day?.date === date) {
+        const newLocaleSlots = day?.slots?.map((slot) => {
+          if (slot?.h === h && !slot?.isBooked) {
+            return { ...slot, isSelected: !slot?.isSelected };
+          } else {
+            return slot;
+          }
+        });
+        return { ...day, slots: newLocaleSlots };
+      } else {
+        return day;
+      }
+    });
+    setLocaleSlots(newLocaleSlots);
+  };
 
   return (
     <div {...props}>
       <Card className={twMerge('lg:px-10', bouncebg && 'bouncebg')}>
-        <h5 className="text-center mb-4">Book Session</h5>
+        <h5 className="text-center mb-4">{t('Book_Session')}</h5>
         <Slider {...settings}>
-          {doctorSlots.map((el) => {
+          {localeSlots?.map((day) => {
             return (
               <div
                 key={Math.random()}
                 className="bg-[var(--rs-primary-100)] border border-solid border-white text-center rounded-lg"
               >
-                <section className="text-white bg-[var(--rs-primary-700)] rounded-t-lg py-1 font-bold">Sat 08</section>
+                <section className="text-white bg-[var(--rs-primary-700)] rounded-t-lg py-1 font-bold">{day?.date}</section>
                 <section className="grid my-2 gap-2">
-                  {el?.slots.map((slot) => {
+                  {day?.slots.map((slot) => {
                     return (
                       <aside key={Math.random()}>
                         <span
+                          onClick={() => handelSelect(day?.date, slot?.h)}
                           className={twMerge(
                             clsx(
                               'p-1 rtl:pt-[7px] text-xs font-[600] rounded-md px-2 cursor-pointer',
@@ -156,7 +216,7 @@ function Booking({ setBounceBg, bouncebg, ...props }) {
         </Slider>
         <section className="flex text-center gap-4 justify-center mt-5">
           <article className="flex items-center">
-            <RxDotFilled className="text-gray/25 text-3xl flex items-center" />
+            <RxDotFilled className="text-3xl flex items-center" />
             <span className="pt-1">{t('Available')}</span>
           </article>
           <article className="flex items-center">
@@ -206,15 +266,40 @@ function Booking({ setBounceBg, bouncebg, ...props }) {
             </span>
             <span>Selected Slots</span>
           </article>
-          <Tag closable className="mb-2 bg-gray/10 ">
-            saeed
-          </Tag>
-          <Tag closable className="mb-2 bg-gray/10 ">
-            saeed
-          </Tag>
-          <Tag closable className="mb-2 bg-gray/10 ">
-            saeed
-          </Tag>
+          <Stack wrap row spacing={4}>
+            {localeSlots
+              ?.filter((day) => {
+                return day?.slots?.some((d) => d?.isSelected);
+              })
+              ?.map((day) => {
+                return day?.slots
+                  ?.filter((slot) => {
+                    return slot?.isSelected;
+                  })
+                  ?.map((slot) => {
+                    const date = `${day?.date} - ${slot?.h}`;
+                    return (
+                      <span
+                        onClick={() => handelSelect(day?.date, slot?.h)}
+                        key={date}
+                        className="
+                          p-1 border border-solid 
+                          cursor-pointer
+                          border-[var(--rs-green-500)]
+                          rounded-md
+                          text-[13px]
+                          text-[var(--rs-green-500)]
+                          hover:text-[var(--rs-green-100)]
+                          hover:bg-[var(--rs-green-500)]
+                          flex items-center gap-1"
+                      >
+                        {date}
+                        <RxCross2 />
+                      </span>
+                    );
+                  });
+              })}
+          </Stack>
         </section>
         <section className="text-center">
           <Link to="/checkout/5/5" className="hover:no-underline active:not-underline">
