@@ -32,10 +32,9 @@ const formateSlots = (inputSlots) => {
 
   // Transform the grouped slots into the desired doctorSlots format
   for (const date in groupedSlots) {
-    const formattedDate = moment(date, 'ddd DD').format('ddd DD');
     const slots = groupedSlots[date];
 
-    doctorSlots.push({ date: formattedDate, slots });
+    doctorSlots.push({ date, slots });
   }
   return doctorSlots;
 };
@@ -174,6 +173,16 @@ function Booking({ setBounceBg, bouncebg, ...props }) {
     });
     setLocaleSlots(newLocaleSlots);
   };
+  const selctedSlotsLength =
+    localeSlots
+      ?.filter((day) => {
+        return day?.slots?.some((d) => d?.isSelected);
+      })
+      ?.map((day) => {
+        return day?.slots?.filter((slot) => {
+          return slot?.isSelected;
+        });
+      })?.length ?? 0;
 
   return (
     <div {...props}>
@@ -262,48 +271,52 @@ function Booking({ setBounceBg, bouncebg, ...props }) {
         <section className="mb-2">
           <article className="flex justify-center gap-3 items-center mb-5">
             <span className=" bg-[var(--rs-primary-700)] rounded-full p-3 w-10 h-10 flex justify-center items-center text-white">
-              2
+              {selctedSlotsLength}
             </span>
             <span>Selected Slots</span>
           </article>
-          <Stack wrap row spacing={4}>
-            {localeSlots
-              ?.filter((day) => {
-                return day?.slots?.some((d) => d?.isSelected);
-              })
-              ?.map((day) => {
-                return day?.slots
-                  ?.filter((slot) => {
-                    return slot?.isSelected;
-                  })
-                  ?.map((slot) => {
-                    const date = `${day?.date} - ${slot?.h}`;
-                    return (
-                      <span
-                        onClick={() => handelSelect(day?.date, slot?.h)}
-                        key={date}
-                        className="
+          {selctedSlotsLength ? (
+            <Stack wrap row spacing={4}>
+              {localeSlots
+                ?.filter((day) => {
+                  return day?.slots?.some((d) => d?.isSelected);
+                })
+                ?.map((day) => {
+                  return day?.slots
+                    ?.filter((slot) => {
+                      return slot?.isSelected;
+                    })
+                    ?.map((slot) => {
+                      const date = `${day?.date} - ${slot?.h}`;
+                      return (
+                        <span
+                          onClick={() => handelSelect(day?.date, slot?.h)}
+                          key={date}
+                          className="
                           p-1 border border-solid 
                           cursor-pointer
-                          border-[var(--rs-green-500)]
+                          border-[var(--rs-primary-500)]
                           rounded-md
                           text-[13px]
-                          text-[var(--rs-green-500)]
-                          hover:text-[var(--rs-green-100)]
-                          hover:bg-[var(--rs-green-500)]
+                          text-[var(--rs-primary-500)]
+                          hover:text-[var(--rs-primary-100)]
+                          hover:bg-[var(--rs-primary-500)]
                           flex items-center gap-1"
-                      >
-                        {date}
-                        <RxCross2 />
-                      </span>
-                    );
-                  });
-              })}
-          </Stack>
+                        >
+                          {date}
+                          <RxCross2 />
+                        </span>
+                      );
+                    });
+                })}
+            </Stack>
+          ) : (
+            <Stack justifyContent='center'>not selcted a session yet</Stack>
+          )}
         </section>
         <section className="text-center">
           <Link to="/checkout/5/5" className="hover:no-underline active:not-underline">
-            <Button appearance="primary" className="block w-full">
+            <Button disabled={!selctedSlotsLength} appearance="primary" className="block w-full">
               Book
             </Button>
           </Link>

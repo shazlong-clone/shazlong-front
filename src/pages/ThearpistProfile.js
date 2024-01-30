@@ -45,7 +45,7 @@ function ThearpistProfile() {
   return (
     <main className="bg-[var(--rs-gray-100)]">
       <div className="container overflow-auto">
-        <InternalHeader className="lg:mt-10 mt-5" link="/therapists">
+        <InternalHeader className="lg:mt-10 mt-5 mb-5" link="/therapists">
           {t('Therapist_Profile')}
         </InternalHeader>
         <section className="lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)] lg:gap-6 mb-5">
