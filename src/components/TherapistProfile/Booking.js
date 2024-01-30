@@ -5,16 +5,17 @@ import { BsFillArrowRightCircleFill, BsFillArrowLeftCircleFill } from 'react-ico
 import clsx from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import { RxDotFilled } from 'react-icons/rx';
-import { Button, Divider, Input, Modal, Stack, Tag } from 'rsuite';
+import { Button, Input, Modal, Stack } from 'rsuite';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import moment from 'moment';
 import { RxCross2 } from 'react-icons/rx';
+import i18next from 'i18next';
 
 const formateSlots = (inputSlots) => {
   const doctorSlots = [];
-
+  
   // Group slots by date
   const groupedSlots = inputSlots.reduce((result, slot) => {
     const date = moment(slot.from).format('ddd DD');
@@ -140,9 +141,10 @@ function Booking({ setBounceBg, bouncebg, ...props }) {
 
   const slots = useMemo(() => {
     return formateSlots(doctorProfile?.slots ?? []);
-  }, [doctorProfile?.slots]);
+  }, [doctorProfile?.slots, i18next.resolvedLanguage]);
 
   const [localeSlots, setLocaleSlots] = useState(slots);
+  console.log(localeSlots)
 
   useEffect(() => {
     setLocaleSlots(slots);
@@ -150,6 +152,7 @@ function Booking({ setBounceBg, bouncebg, ...props }) {
   useEffect(() => {
     getTimeZons();
   }, []);
+
   useEffect(() => {
     setTimeout(() => {
       setBounceBg(false);
@@ -311,7 +314,7 @@ function Booking({ setBounceBg, bouncebg, ...props }) {
                 })}
             </Stack>
           ) : (
-            <Stack justifyContent='center'>not selcted a session yet</Stack>
+            <Stack justifyContent='center'>no selcted a session yet</Stack>
           )}
         </section>
         <section className="text-center">
