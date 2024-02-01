@@ -202,5 +202,9 @@
   "Commitment_To_Start_And_End_Times": "Commitment to start and end times",
   "Skills_Review": "Skills Review",
   "Testemonials": "Testemonials",
-  "Book_Session": "Book Session"
+  "Book_Session": "Book Session",
+  "Selcted_Slots":"Selcted Slots",
+  "no_selcted_a_session_yet":"no selcted a session yet",
+  "Change_Time":"Change Time",
+  "Change_Time_Zone":"Change Time Zone"
 }

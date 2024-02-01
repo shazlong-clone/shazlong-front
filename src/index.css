@@ -402,3 +402,7 @@ a:active {
     max-width: 1280px;
   }
 }
+[dir='rtl'] .rs-pagination-symbol{
+  transform: rotate(180deg);
+  transform-origin: center;
+}

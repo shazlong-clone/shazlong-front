@@ -13,21 +13,32 @@ import moment from 'moment';
 import { RxCross2 } from 'react-icons/rx';
 import i18next from 'i18next';
 
-const formateSlots = (inputSlots) => {
+const momentOffset =(date,offset) =>{
+  if(date && offset){
+    return moment(date).utcOffset(offset);
+
+  }
+  if(date){
+    return moment(date)
+  }
+  return moment()
+
+}
+const formateSlots = (inputSlots, offset) => {
   const doctorSlots = [];
   
   // Group slots by date
   const groupedSlots = inputSlots.reduce((result, slot) => {
-    const date = moment(slot.from).format('ddd DD');
+    const date = momentOffset(slot.from, offset).format('ddd DD');
     if (!result[date]) {
       result[date] = [];
     }
 
-    const time = moment(slot.from).format('hh:mm A');
+    const time = momentOffset(slot.from,offset).format('hh:mm A');
     const isBooked = slot.reserved;
     const isSelected = false;
 
-    result[date].push({ h: time, isBooked, isSelected });
+    result[date].push({ h: time, isBooked, isSelected, id:slot?._id });
     return result;
   }, {});
 
@@ -47,15 +58,21 @@ function Booking({ setBounceBg, bouncebg, ...props }) {
     fullTimeZons: [],
     searchedTimeZon: [],
   });
+  const [selctedTimeZone, setSelctedTimeZone] = useState();
+
   const getTimeZons = async () => {
-    const res = await fetch('api/timrzons.json');
+    const res = await fetch('/data/timezons.json');
     const resJosn = await res.json();
     setTimeZons({
       fullTimeZons: resJosn,
       searchedTimeZon: resJosn,
     });
-  };
+    const user_zone = window.localStorage.getItem('user_zone'); 
+    setSelctedTimeZone(resJosn?.find(zone => zone?.city === user_zone || 'Africa/Cairo'));
+    
 
+  };
+  
   const settings = {
     dots: false,
     infinite: false,
@@ -140,15 +157,19 @@ function Booking({ setBounceBg, bouncebg, ...props }) {
   const { doctorProfile = {} } = useSelector((state) => state?.shared);
 
   const slots = useMemo(() => {
-    return formateSlots(doctorProfile?.slots ?? []);
-  }, [doctorProfile?.slots, i18next.resolvedLanguage]);
+    return formateSlots(doctorProfile?.slots ?? [], selctedTimeZone?.date?.replace(/\(|\)/g, ''));
+  }, [doctorProfile?.slots, i18next.resolvedLanguage, selctedTimeZone]);
 
   const [localeSlots, setLocaleSlots] = useState(slots);
-  console.log(localeSlots)
 
   useEffect(() => {
-    setLocaleSlots(slots);
+    setLocaleSlots(slots?.map(day =>{
+      return {...day, slots:day?.slots?.map(slot =>{
+        return {...slot, isSelected: selectedSlots?.map(day => day?.slots)?.flat()?.map(s =>s?.id)?.includes(slot?.id) }
+      })}
+    }));
   }, [slots]);
+
   useEffect(() => {
     getTimeZons();
   }, []);
@@ -176,6 +197,7 @@ function Booking({ setBounceBg, bouncebg, ...props }) {
     });
     setLocaleSlots(newLocaleSlots);
   };
+
   const selctedSlotsLength =
     localeSlots
       ?.filter((day) => {
@@ -186,7 +208,22 @@ function Booking({ setBounceBg, bouncebg, ...props }) {
           return slot?.isSelected;
         });
       })?.length ?? 0;
-
+      const [selectedSlots, setSelctedSlots] = useState([]);
+      useEffect(()=>{
+        const selcted = localeSlots
+                ?.filter((day) => {
+                  return day?.slots?.some((d) => d?.isSelected);
+                })
+                ?.map((day) => {
+                  return {
+                    date: day?.date,
+                    slots: day?.slots?.filter((slot) => {
+                      return slot?.isSelected;
+                    })
+                  }
+                  });                    
+        setSelctedSlots(selcted);
+      },[localeSlots]);
   return (
     <div {...props}>
       <Card className={twMerge('lg:px-10', bouncebg && 'bouncebg')}>
@@ -203,11 +240,11 @@ function Booking({ setBounceBg, bouncebg, ...props }) {
                   {day?.slots.map((slot) => {
                     return (
                       <aside key={Math.random()}>
-                        <span
+                        <div
                           onClick={() => handelSelect(day?.date, slot?.h)}
                           className={twMerge(
                             clsx(
-                              'p-1 rtl:pt-[7px] text-xs font-[600] rounded-md px-2 cursor-pointer',
+                              'w-[80%] m-auto p-1 rtl:pt-[7px] text-xs font-[600] rounded-md px-2 cursor-pointer',
                               slot?.isBooked
                                 ? 'border border-solid border-[var(--rs-red-400)] text-[var(--rs-red-400)] bg-[var(--rs-red-50)] line-through cursor-not-allowed'
                                 : slot?.isSelected
@@ -217,7 +254,7 @@ function Booking({ setBounceBg, bouncebg, ...props }) {
                           )}
                         >
                           {slot?.h}
-                        </span>
+                        </div>
                       </aside>
                     );
                   })}
@@ -242,26 +279,29 @@ function Booking({ setBounceBg, bouncebg, ...props }) {
         </section>
         <hr />
         <p>
-          All Times Are Africa/Cairo{' '}
+          All Times Are {selctedTimeZone?.city + selctedTimeZone?.date }
           <Button appearance="link" onClick={handleOpen}>
-            Change
+            {t('Change')}
           </Button>
         </p>
         <Modal size="lg" keyboard={false} open={open} onClose={handleClose}>
           <Modal.Header>
             <Modal.Title>
-              Change Time Zone <hr />
+              {t('Change_Time_Zone')} <hr />
             </Modal.Title>
           </Modal.Header>
           <Modal.Body className="text-center mt-0 py-2">
             <Input onChange={handeSearch} className="w-[300px] mx-auto mb-10" placeholder="search" />
             <section className="grid grid-cols-[1fr] md:grid-cols-[1fr_1fr] xl:lg:grid-cols-[1fr_1fr_1fr] text-start text-base font-normal">
-              {timeZons?.searchedTimeZon?.map((el) => {
+              {timeZons?.searchedTimeZon?.map((zone) => {
                 return (
-                  <article key={Math.random()}>
-                    <span className="cursor-pointer">
-                      <span>{el?.city}</span>
-                      <span>{el?.date}</span>
+                  <article onClick={()=>{
+                    setSelctedTimeZone(zone);
+                    window.localStorage.setItem('user_zone', zone?.city)
+                  }} key={zone?.city}>
+                    <span className={twMerge(clsx('cursor-pointer hover:bg-[var(--rs-gray-100)]', selctedTimeZone?.city === zone.city ? 'bg-[var(--rs-primary-200)] hover:bg-[var(--rs-primary-200)]' :'')) }>
+                      <span>{zone?.city}</span>
+                      <span>{zone?.date}</span>
                     </span>
                   </article>
                 );
@@ -274,47 +314,38 @@ function Booking({ setBounceBg, bouncebg, ...props }) {
         <section className="mb-2">
           <article className="flex justify-center gap-3 items-center mb-5">
             <span className=" bg-[var(--rs-primary-700)] rounded-full p-3 w-10 h-10 flex justify-center items-center text-white">
-              {selctedSlotsLength}
+              {selectedSlots?.map(day=> day?.slots)?.flat()?.length ?? 0}
             </span>
-            <span>Selected Slots</span>
+            <span>{t('Selcted_Slots')}</span>
           </article>
           {selctedSlotsLength ? (
             <Stack wrap row spacing={4}>
-              {localeSlots
-                ?.filter((day) => {
-                  return day?.slots?.some((d) => d?.isSelected);
+             {
+              selectedSlots?.map(day => {
+                return day?.slots?.map(slot =>{
+                  return <span
+                  onClick={() => handelSelect(day?.date, slot?.h)}
+                  key={slot?.h}
+                  className="
+                  p-1 border border-solid 
+                  cursor-pointer
+                  border-[var(--rs-primary-500)]
+                  rounded-md
+                  text-[13px]
+                  text-[var(--rs-primary-500)]
+                  hover:text-[var(--rs-primary-100)]
+                  hover:bg-[var(--rs-primary-500)]
+                  flex items-center gap-1"
+                >
+                  {`${day?.date} ${slot?.h}`}
+                  <RxCross2 />
+                </span>
                 })
-                ?.map((day) => {
-                  return day?.slots
-                    ?.filter((slot) => {
-                      return slot?.isSelected;
-                    })
-                    ?.map((slot) => {
-                      const date = `${day?.date} - ${slot?.h}`;
-                      return (
-                        <span
-                          onClick={() => handelSelect(day?.date, slot?.h)}
-                          key={date}
-                          className="
-                          p-1 border border-solid 
-                          cursor-pointer
-                          border-[var(--rs-primary-500)]
-                          rounded-md
-                          text-[13px]
-                          text-[var(--rs-primary-500)]
-                          hover:text-[var(--rs-primary-100)]
-                          hover:bg-[var(--rs-primary-500)]
-                          flex items-center gap-1"
-                        >
-                          {date}
-                          <RxCross2 />
-                        </span>
-                      );
-                    });
-                })}
+              })
+             }
             </Stack>
           ) : (
-            <Stack justifyContent='center'>no selcted a session yet</Stack>
+            <Stack justifyContent='center'>{t('no_selcted_a_session_yet')}</Stack>
           )}
         </section>
         <section className="text-center">

@@ -216,5 +216,10 @@
   "Skills_Review": "مراجعة المهارات",
   "Testemonials": "الشهادات والتوصيات",
   "Home": "الهوم",
-  "Book_Session": "حجز جلسة"
+  "Book_Session": "حجز جلسة",
+  "Selcted_Slots":"الجلسات المحددة",
+  "no_selcted_a_session_yet":"اختر جلستك الان",
+  "Change_Time":"تغير التوقيت",
+  "Change_Time_Zone":"تغير التوقيت المحلي"
+
 }
