@@ -34,3 +34,8 @@ export const getDoctorProfile = createAsyncThunk('getDoctorProfile', async (id) 
   const res = await service.get(`/api/v1/doctors/${id}`);
   return res.data;
 });
+
+export const getSlotsByIds = createAsyncThunk('getSlotsByIds', async (slotsIds) => {
+  const res = await service.get(`/api/v1/slots/get-by-ids?slotsIds=${slotsIds}`);
+  return res.data;
+});

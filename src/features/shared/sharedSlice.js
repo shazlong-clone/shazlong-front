@@ -7,6 +7,7 @@ import {
   getPrefix,
   getSpecialization,
   getDoctorProfile,
+  getSlotsByIds,
 } from './sharedActions';
 import { ASC } from '../../costansts/index';
 export const sharedSlice = createSlice({
@@ -36,6 +37,7 @@ export const sharedSlice = createSlice({
     },
     onlineDoctors: [],
     doctorProfile: {},
+    checkoutSlots:[]
   },
 
   reducers: {
@@ -74,6 +76,10 @@ export const sharedSlice = createSlice({
     builder.addCase(getDoctorProfile.fulfilled, (state, action) => {
       state.doctorProfile = action.payload?.data;
     });
+    builder.addCase(getSlotsByIds.fulfilled, (state, action) => {
+      state.checkoutSlots = action.payload?.data;
+    });
+    
   },
 });
 

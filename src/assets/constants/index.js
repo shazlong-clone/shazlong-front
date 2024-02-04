@@ -39,3 +39,7 @@ export const availability = [
     name: 'This_Week',
   },
 ];
+
+export const transctionFeez = 5;
+export const couponCode = '1234';
+export const discount = 20;

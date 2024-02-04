@@ -156,6 +156,7 @@ function Booking({ setBounceBg, bouncebg, ...props }) {
   };
   const { doctorProfile = {} } = useSelector((state) => state?.shared);
 
+
   const slots = useMemo(() => {
     return formateSlots(doctorProfile?.slots ?? [], selctedTimeZone?.date?.replace(/\(|\)/g, ''));
   }, [doctorProfile?.slots, i18next.resolvedLanguage, selctedTimeZone]);
@@ -165,7 +166,7 @@ function Booking({ setBounceBg, bouncebg, ...props }) {
   useEffect(() => {
     setLocaleSlots(slots?.map(day =>{
       return {...day, slots:day?.slots?.map(slot =>{
-        return {...slot, isSelected: selectedSlots?.map(day => day?.slots)?.flat()?.map(s =>s?.id)?.includes(slot?.id) }
+        return {...slot, isSelected: selctedDays?.map(day => day?.slots)?.flat()?.map(s =>s?.id)?.includes(slot?.id) }
       })}
     }));
   }, [slots]);
@@ -208,7 +209,7 @@ function Booking({ setBounceBg, bouncebg, ...props }) {
           return slot?.isSelected;
         });
       })?.length ?? 0;
-      const [selectedSlots, setSelctedSlots] = useState([]);
+      const [selctedDays, setSelctedDays] = useState([]);
       useEffect(()=>{
         const selcted = localeSlots
                 ?.filter((day) => {
@@ -222,7 +223,7 @@ function Booking({ setBounceBg, bouncebg, ...props }) {
                     })
                   }
                   });                    
-        setSelctedSlots(selcted);
+        setSelctedDays(selcted);
       },[localeSlots]);
   return (
     <div {...props}>
@@ -312,16 +313,20 @@ function Booking({ setBounceBg, bouncebg, ...props }) {
       </Card>
       <Card>
         <section className="mb-2">
-          <article className="flex justify-center gap-3 items-center mb-5">
-            <span className=" bg-[var(--rs-primary-700)] rounded-full p-3 w-10 h-10 flex justify-center items-center text-white">
-              {selectedSlots?.map(day=> day?.slots)?.flat()?.length ?? 0}
-            </span>
-            <span>{t('Selcted_Slots')}</span>
+          <article className="flex flex-col justify-center gap-3 items-center mb-5">
+            <div className=" bg-[var(--rs-green-700)] rounded-full p-3 w-10 h-10 flex justify-center items-center text-white">
+              {selctedDays?.map(day=> day?.slots)?.flat()?.length ?? 0}
+            </div>
+            {
+              selctedSlotsLength > 0
+              ?<div>{t('Selcted_Slots')}</div>
+              :<Stack justifyContent='center'>{t('no_selcted_a_session_yet')}</Stack>
+            }
           </article>
           {selctedSlotsLength ? (
             <Stack wrap row spacing={4}>
              {
-              selectedSlots?.map(day => {
+              selctedDays?.map(day => {
                 return day?.slots?.map(slot =>{
                   return <span
                   onClick={() => handelSelect(day?.date, slot?.h)}
@@ -344,14 +349,13 @@ function Booking({ setBounceBg, bouncebg, ...props }) {
               })
              }
             </Stack>
-          ) : (
-            <Stack justifyContent='center'>{t('no_selcted_a_session_yet')}</Stack>
-          )}
+          ) :null}
         </section>
+
         <section className="text-center">
-          <Link to="/checkout/5/5" className="hover:no-underline active:not-underline">
-            <Button disabled={!selctedSlotsLength} appearance="primary" className="block w-full">
-              Book
+          <Link to={`/checkout?slots_ids=${selctedDays?.map(day=> day?.slots)?.flat()?.map(slot => slot?.id)?.join(',')}`} className="hover:no-underline active:not-underline">
+            <Button disabled={!selctedSlotsLength} appearance="primary" color='green' className="block w-1/2 m-auto">
+              {t('Book')}
             </Button>
           </Link>
         </section>

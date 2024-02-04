@@ -105,17 +105,17 @@ function Profile({ setBounceBg }) {
         </ul>
       </section>
       <section className="flex  justify-center gap-2 pt-5 lg:text-start" id="link1">
-        <Review />
         <a href="#link1" className="lg:hidden">
+          <Button onClick={() => setBounceBg(true)} appearance="primary" size={lg ? 'lg' : 'md'}>
+            {t('Book_Session')}
+          </Button>
+        </a>
+        <Review />
+        {/* <a href="#link2" className="hidden lg:block">
           <Button onClick={() => setBounceBg(true)} appearance="ghost" size={lg ? 'lg' : 'md'}>
             {t('Book')}
           </Button>
-        </a>
-        <a href="#link2" className="hidden lg:block">
-          <Button onClick={() => setBounceBg(true)} appearance="ghost" size={lg ? 'lg' : 'md'}>
-            {t('Book')}
-          </Button>
-        </a>
+        </a> */}
       </section>
     </Card>
   );

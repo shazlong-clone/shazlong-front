@@ -13,6 +13,7 @@ import {
 } from '../../features/shared/sharedSlice';
 import { pageSize } from './TherapistsCard';
 import { createSearchParams, useNavigate } from 'react-router-dom';
+import { RemoveNullKeys } from '../../utils/fn';
 export const initalSearchParams = {
   amount: [0, 500],
   availability: null,
@@ -76,16 +77,10 @@ function FilterForm() {
     dispatch(getLangs());
   }, []);
   const navigate = useNavigate();
-  const RemoveNull = (params) => {
-    let newParams = {};
-    for (const key in params) {
-      newParams[key] = params[key] ?? '';
-    }
-    return newParams;
-  };
+
   useEffect(() => {
     navigate({
-      search: `?${createSearchParams(RemoveNull(doctorSearchParams))}`,
+      search: `?${createSearchParams(RemoveNullKeys(doctorSearchParams))}`,
     });
   }, [doctorSearchParams]);
 

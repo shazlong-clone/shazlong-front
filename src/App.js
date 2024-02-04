@@ -49,7 +49,7 @@ function App() {
             <Route index element={<Home />} />
             <Route path="/therapists" element={<Therapists />} />
             <Route path="/thearpist-profile/:id" element={<ThearpistProfile />} />
-            <Route path="/checkout/:doctorId/:slotId" element={<Checkout />} />
+            <Route path="/checkout" element={<Checkout />} />
             <Route path="/instructions" element={<Instructions />} />
             <Route path="/online" element={<Online />} />
             <Route path="/my-therapy" element={<MyTherapy />} />

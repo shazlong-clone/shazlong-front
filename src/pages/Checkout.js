@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import InternalHeader from '../components/Shared/InternalHeader';
-import { Avatar, Button, Divider, Input } from 'rsuite';
-import therapist from '../assets/images/therapist.webp';
+import { Avatar, Button, Divider, IconButton, Input } from 'rsuite';
+import person from '../assets/images/person.png';
 import Card from '../components/Shared/Card';
 import { LuAlarmClock } from 'react-icons/lu';
 import { GiCash } from 'react-icons/gi';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { RadioTile, RadioTileGroup } from 'rsuite';
 import visa_new from '../assets/images/visa_new.png';
 import master_card_new from '../assets/images/master_card_new.svg';
@@ -17,6 +17,14 @@ import vodafon from '../assets/images/Vodafone_icon.png';
 import { RiArrowDownSLine, RiArrowUpSLine } from 'react-icons/ri';
 import clsx from 'clsx';
 import useMediaQuery from '../utils/useMediaQuery';
+import { useSearchParams } from 'react-router-dom';
+import Empty from '../components/Shared/Empty';
+import { useTranslation } from 'react-i18next';
+import { getPrefix, getSlotsByIds } from '../features/shared/sharedActions';
+import { useDispatch, useSelector } from 'react-redux';
+import moment from 'moment';
+import { transctionFeez, discount, couponCode } from '../assets/constants';
+
 const instruction = [
   ' 1- Internet speed must not be not less than 2 MB/s. ',
   ' 2- The session room opens 10 minutes before your session start time. ',
@@ -31,69 +39,143 @@ const instruction = [
   ' 7- Please make sure to attend your session from a quiet and an appropriate place. ',
   ' 8- If you are reserving the session from Egypt, you cannot access the session room from elsewhere. Reservations made from Egypt are paid in Egyptian pounds, while reservations made from elsewhere are paid in U.S. dollars. If the session is paid in a non-matching currency, it cannot be refunded. ',
 ];
+
 function Checkout() {
   const [openCpllapse, setOpenCpllapse] = useState(false);
   const lg = useMediaQuery('lg');
   const { doctorId } = useParams();
+  const { t, i18n } = useTranslation();
+  const [searchParams] = useSearchParams();
+  const slots_ids = searchParams.get('slots_ids');
+  const navigate = useNavigate();
+  const dicpatch = useDispatch();
+  const { checkoutSlots = [], prefixesList = [] } = useSelector((state) => state?.shared);
+  const doctor = useMemo(() => {
+    return checkoutSlots?.at(0)?.doctor;
+  }, [checkoutSlots]);
+  const couponRef = useRef();
+  const [discountState, setDiscount] = useState(0);
+  const handelCopon = () => {
+    if (couponRef.current.value === couponCode) {
+      setDiscount(discount);
+    } else {
+      setDiscount(0);
+    }
+  };
+  const getFeez = (from, to) => {
+    return doctor?.feez?.find((feezItem) => {
+      return moment(to).diff(moment(from), 'minutes') == feezItem?.duration;
+    })?.amount;
+  };
+
+  const subTotal = useMemo(() => {
+    return checkoutSlots?.reduce((prevSlot, currSlot) => {
+      return prevSlot + getFeez(currSlot?.from, currSlot?.to);
+    }, 0);
+  }, [checkoutSlots]);
+
+  useEffect(() => {
+    if (slots_ids) {
+      dicpatch(getSlotsByIds(slots_ids));
+    }
+    dicpatch(getPrefix());
+  }, []);
+
+  if (!slots_ids) {
+    return (
+      <div className="flex items-center flex-col  min-h-[calc(100vh_-_353px_-128px_-24px_-48px_-1px)] justify-center">
+        <Empty message={t('Checkout_No_Slots')} />
+        <Button className="mt-5" onClick={() => navigate(-1)} appearance="primary">
+          selcet slot again
+        </Button>
+      </div>
+    );
+  }
 
   return (
-    <main className="bg-[var(--rs-primary-700)]/5 py-5">
+    <main className="bg-[var(--rs-gray-50)] py-5">
       <div className="container">
-        <InternalHeader link={`/thearpist-profile/${doctorId}`}>Check Out</InternalHeader>
+        <InternalHeader link={`/thearpist-profile/${doctorId}`}>{t('Check_Out')}</InternalHeader>
       </div>
       <div className="container grid gap-5 lg:grid-cols-2 items-start">
         <Card className="mb-0">
           <section className="flex gap-2 items-center lg:gap-5">
-            <Link to="/thearpist-profile/1">
-              <Avatar size={lg ? 'lg' : 'md'} circle src={therapist} alt="img" />
+            <Link to={doctor?.photo}>
+              <Avatar size={lg ? 'lg' : 'md'} circle src={doctor?.photo || person} alt="img" />
             </Link>
             <aside>
-              <div className="capitalize font-medium">wassim Asgrf</div>
-              <div className="text-cyan text-xs lg:text-base">psychologist</div>
+              <div className="capitalize font-medium">
+                {i18n.resolvedLanguage === 'ar' ? doctor?.fullArName : doctor?.fullEnName}
+              </div>
+              <div className="text-cyan text-xs lg:text-base">
+                {i18n.resolvedLanguage === 'ar'
+                  ? prefixesList?.find((prefix) => prefix?.id === doctor?.prefix)?.ar_name
+                  : prefixesList?.find((prefix) => prefix?.id === doctor?.prefix)?.name}
+              </div>
             </aside>
           </section>
           <section className="my-4">
-            {Array(2)
-              .fill('')
-              ?.map(() => {
-                return (
-                  <Card key={Math.random()} className=" bg-[var(--rs-gray-100)] rounded-lg p-2 mb-0 mt-2 grid gap-2">
-                    <article className="flex gap-2 items-center">
-                      <LuAlarmClock className="text-xl text-cyan" />
-                      <aside className="text-sm">Today Jul 10 (1:00 PM : 2:00 PM)</aside>
-                    </article>
-                    <article className="flex gap-2 items-center">
-                      <GiCash className="text-xl text-cyan" />
-                      <aside className="font-semibold text-sm">300 EGP</aside>
-                    </article>
-                  </Card>
-                );
-              })}
+            {checkoutSlots?.map((slot) => {
+              return (
+                <Card key={Math.random()} className=" bg-[var(--rs-gray-100)] rounded-lg p-2 mb-0 mt-2 grid gap-2">
+                  <article className="flex gap-2 items-center">
+                    <LuAlarmClock className="text-xl text-cyan" />
+                    <aside className="text-sm">
+                      {`${moment(slot?.from).format('ddd DD')} ( ${t('From')} ${moment(slot?.from).format('hh:mm a')} ${t(
+                        'To',
+                      )} ${moment(slot?.to).format('hh:mm a')} )`}
+                    </aside>
+                  </article>
+                  <article className="flex gap-2 items-center">
+                    <GiCash className="text-xl text-cyan" />
+                    <aside className="font-semibold text-sm">{`${getFeez(slot?.from, slot?.to)} ${t('Egy')}`}</aside>
+                  </article>
+                </Card>
+              );
+            })}
           </section>
           <section>
-            <h5 className="my-3 text-gray/80 text-center">coupon</h5>
+            <h5 className="my-3 text-gray/80 text-center">{t('coupon')}</h5>
             <article className="flex gap-2">
-              <Input placeholder="coupon" />
-              <Button appearance="primary">Apply</Button>
+              <Input
+                
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    // Cancel the default action, if needed
+                    e.preventDefault();
+                    // Trigger the button element with a click
+                    handelCopon();
+                  }
+                }}
+                ref={couponRef}
+                placeholder={t('coupon')}
+              />
+              <Button appearance="primary" onClick={handelCopon}>
+                {t('Apply')}
+              </Button>
             </article>
-            <Divider />
           </section>
           <section className="mt-3 grid gap-2 capitalize">
             <article className="flex justify-between">
-              <span>subtotal</span>
-              <span>600 EGP</span>
+              <span>{t('Subtotal', { count: checkoutSlots?.length || 1 })}</span>
+              <span>{`${subTotal} ${t('Egy')}`}</span>
             </article>
             <article className="flex justify-between">
-              <span>Transction Feez</span>
-              <span>33 EGP</span>
+              <span>{t('Transction_Feez')}</span>
+              <span>
+                {transctionFeez} {t('Egy')}
+              </span>
             </article>
             <article className="flex justify-between">
-              <span>Discount</span>
-              <span className="line-through">600 EGP</span>
+              <span>{t('Discount')}</span>
+              <span>{`${discountState} ${t('Egy')}`}</span>
             </article>
+            <Divider />
             <article className="flex justify-between font-bold">
-              <span>Total</span>
-              <span>633 EGP</span>
+              <span>{t('Total')}</span>
+              <span>
+                {subTotal + transctionFeez - discountState} {t('Egy')}
+              </span>
             </article>
           </section>
         </Card>
@@ -139,7 +221,7 @@ function Checkout() {
         <Card>
           <h5 className="grid grid-cols-[1fr_auto] items-center mb-5" onClick={() => setOpenCpllapse(!openCpllapse)}>
             <span>How to get the best session experience?</span>
-            <span>{openCpllapse ? <RiArrowDownSLine /> : <RiArrowUpSLine />} </span>
+            <IconButton className="rounded-full" icon={openCpllapse ? <RiArrowDownSLine /> : <RiArrowUpSLine />} />
           </h5>
           <div>
             <ul className={clsx('px-0 list-none grid gap-2 text-sm lg:text-base', !openCpllapse && 'hidden h-0')}>
