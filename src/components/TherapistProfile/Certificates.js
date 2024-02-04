@@ -13,10 +13,15 @@ function Certificates({ title, data }) {
           return (
             <div key={Math.random()}>
               <section className="flex gap-3">
-                <article className="min-w-[4px] lg:w-1 rounded-md bg-[var(--rs-primary-700)]"></article>
+                <article className="min-w-[4px] lg:w-1 rounded-md bg-[var(--rs-primary-700)]" />
+                <article>
+                  <img className="w-[50px] h-[50px] object-contain" src={item?.company_logo} />
+                </article>
                 <article>
                   <div>{i18n.resolvedLanguage === 'ar' ? item?.ar_title : item?.title}</div>
-                  <div className="italic font-light">{i18n.resolvedLanguage === 'ar' ? item?.ar_place : item?.place}</div>
+                  <div className="italic font-light">
+                    {i18n.resolvedLanguage === 'ar' ? item?.ar_description : item?.description}
+                  </div>
                   <div className="text-[var(--rs-primary-700)]">
                     {moment(item?.time[0]).isValid() ? moment(item?.time[0]).format('MMM YYYY') : ''}
                     <span className="px-2">-</span>

@@ -25,25 +25,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
 import { transctionFeez, discount, couponCode } from '../assets/constants';
 
-const instruction = [
-  ' 1- Internet speed must not be not less than 2 MB/s. ',
-  ' 2- The session room opens 10 minutes before your session start time. ',
-  ' 3- If you face any difficulties before or during the session, both sides should contact the support team (the blue circle at the bottom) directly. ',
-  <>
-    4- If you cancel the session 6 hours or less before the session start time, a fee will be deducted from your paid amount. If
-    you do not attend the session, then none of the fees will be refunded. Please read our cancellation and refund policy for more
-    information click <Link to="/instructions">here</Link> .
-  </>,
-  ' 5- For the session room, we recommend using a desktop computer or a laptop. If you are using a mobile device, please beware that only Safari is supported on Apple devices and we recommend Google Chrome on Android devices. It is also important for iOS devices to have the latest updates. ',
-  ' 6- You can cancel or reschedule sessions only a limited number of times monthly. ',
-  ' 7- Please make sure to attend your session from a quiet and an appropriate place. ',
-  ' 8- If you are reserving the session from Egypt, you cannot access the session room from elsewhere. Reservations made from Egypt are paid in Egyptian pounds, while reservations made from elsewhere are paid in U.S. dollars. If the session is paid in a non-matching currency, it cannot be refunded. ',
-];
-
 function Checkout() {
   const [openCpllapse, setOpenCpllapse] = useState(false);
   const lg = useMediaQuery('lg');
-  const { doctorId } = useParams();
   const { t, i18n } = useTranslation();
   const [searchParams] = useSearchParams();
   const slots_ids = searchParams.get('slots_ids');
@@ -110,12 +94,12 @@ function Checkout() {
   return (
     <main className="bg-[var(--rs-gray-50)] py-5">
       <div className="container">
-        <InternalHeader link={`/thearpist-profile/${doctorId}`}>{t('Check_Out')}</InternalHeader>
+        <InternalHeader link={`/thearpist-profile/${doctor?._id}`}>{t('Check_Out')}</InternalHeader>
       </div>
       <div className="container grid gap-5 lg:grid-cols-2 items-start">
         <Card className="mb-0">
           <section className="flex gap-2 items-center lg:gap-5">
-            <Link to={doctor?.photo}>
+            <Link to={`/thearpist-profile/${doctor?._id}`}>
               <Avatar size={lg ? 'lg' : 'md'} circle src={doctor?.photo || person} alt="img" />
             </Link>
             <aside>

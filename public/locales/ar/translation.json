@@ -224,7 +224,7 @@
   "Checkout_No_Slots": "خطأ في اخيار الجلسات",
   "From": "من",
   "To": "الي",
-  "Check_Out": "عملية الدقع",
+  "Check_Out": "عملية الدفع",
   "coupon": "كوبون الخصم",
   "Subtotal_one": "قيمة الجلسة",
   "Subtotal": "قيمة الجلسات",
@@ -243,5 +243,8 @@
   "Selcet_Slot_Again": "اختر جلسه مره اخري",
   "Payment_Method": "طرق الدفع",
   "Pay": "دفع",
-  "Chat_With_Support_Team": "تواصل مع خدمة العملاء"
+  "Chat_With_Support_Team": "تواصل مع خدمة العملاء",
+  "Certifications": "الشهادات",
+  "Education": "التعليم",
+  "Experience": "الخبرات"
 }

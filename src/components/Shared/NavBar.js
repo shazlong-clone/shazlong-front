@@ -62,7 +62,7 @@ function NavBar() {
   };
   const speaker = (
     <Popover className="p-0" style={!lg ? { display: 'none' } : {}}>
-      <ul className="p-0 list-none divide-y-[1px] divide-x-0 divide-solid divide-gray/10">
+      <ul className="p-0 list-none divide-y-[1px] divide-x-0 divide-solid divide-[var(--rs-gray-100)]">
         <li className="px-3 flex items-center gap-2 py-2">
           <img className="rounded-full" src={user?.photo ? user?.photo : personIcon} width="40px" height="40px" />
           <strong className="capitalize">{user?.name}</strong>

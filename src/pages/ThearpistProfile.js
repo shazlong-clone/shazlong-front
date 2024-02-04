@@ -4,10 +4,11 @@ import InternalHeader from '../components/Shared/InternalHeader.js';
 import Tetemonials from '../components/TherapistProfile/Tetemonials.js';
 import SkillsReview from '../components/TherapistProfile/SkillsReview.js';
 import Experience from '../components/TherapistProfile/Experience.js';
+import Certificates from '../components/TherapistProfile/Certificates.js';
 import Booking from '../components/TherapistProfile/Booking.js';
 import { useParams } from 'react-router-dom';
 import { getDoctorProfile } from '../features/shared/sharedActions.js';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import NoDataFound from '../components/Shared/NoDataFound.js';
 import { Panel, Placeholder } from 'rsuite';
 import { useTranslation } from 'react-i18next';
@@ -18,6 +19,7 @@ function ThearpistProfile() {
   const [loading, setLoading] = useState(false);
   const [err, setError] = useState(null);
   const { t } = useTranslation();
+  const { doctorProfile } = useSelector((state) => state?.shared);
   useEffect(() => {
     dispatch({
       type: 'getDoctorProfile/fulfilled',
@@ -80,7 +82,9 @@ function ThearpistProfile() {
               <>
                 <SkillsReview />
                 <Tetemonials />
-                <Experience />
+                <Certificates title={t('Experience')} data={doctorProfile?.experiences || []} />
+                <Experience title={t('Certifications')} data={doctorProfile?.certifications || []} />
+                <Experience title={t('Education')} data={doctorProfile?.educations || []} />
               </>
             )}
           </article>
