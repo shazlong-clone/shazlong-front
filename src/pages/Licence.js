@@ -99,7 +99,7 @@ function Licence() {
             </p>
             <h4 className="pt-5">Privacy and Policy</h4>
 
-            <ul className="p-0  list-none bg-gray text-white rounded-sm border border-white/75 border-solid divide-x-0 divide-solid divide-y divide-white">
+            <ul className="p-0  list-none bg-gray  rounded-sm border border-white/75 border-solid divide-x-0 divide-solid divide-y divide-white">
               {licences.map((el, i) => {
                 return (
                   <li key={i}>

@@ -65,7 +65,7 @@ function DoctorCard({ doctor }) {
           </div>
           <Rate readOnly size="xs" defaultValue={doctor?.avgReviews} />
           <div className="text-xs">
-            {doctor?.avgReviews}({doctor?.nReviews} Reviews)
+            {doctor?.avgReviews?.toFixed(1)}({t('Reviews', {count: doctor?.nReviews})})
           </div>
         </article>
       </div>

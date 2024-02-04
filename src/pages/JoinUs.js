@@ -70,7 +70,7 @@ function JoinUs() {
       >
         <section
           className={clsx(
-            'h-[460px] bg-gradient-to-r from-cyan to-transparent  text-white px-5 lg:px-16',
+            'h-[460px] from-[var(--rs-primary-700)] to-transparent  text-white px-5 lg:px-16',
             i18n.resolvedLanguage === 'ar' ? 'bg-gradient-to-l' : 'bg-gradient-to-r',
           )}
         >

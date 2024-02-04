@@ -66,7 +66,7 @@ function OnlineTherapist() {
           </p>
         </article>
         <article>
-          <Button appearance="ghost" className="w-[250px]">
+          <Button href='/therapists' appearance="ghost" className="w-[250px]">
             {t('Learn_More')}
           </Button>
         </article>

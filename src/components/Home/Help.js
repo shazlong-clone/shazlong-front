@@ -26,7 +26,7 @@ function Help() {
                 })}
               </article>
               <article className="flex justify-center lg:justify-start mt-5">
-                <Button appearance="primary">Chat with Support Team</Button>
+                <Button appearance="primary">{t('Chat_With_Support_Team')}</Button>
               </article>
             </div>
           </section>
