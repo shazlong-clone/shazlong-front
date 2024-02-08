@@ -214,7 +214,7 @@
   "Providing_Effective_Solutions": "يعطي حلول فعالة",
   "Commitment_To_Start_And_End_Times": "الالتزام بالمواعيد",
   "Skills_Review": "مراجعة المهارات",
-  "Testemonials": "الشهادات والتوصيات",
+  "Testemonials": "التقيمات والمراجعات",
   "Home": "الهوم",
   "Book_Session": "حجز جلسة",
   "Selcted_Slots": "الجلسات المحددة",
@@ -246,5 +246,8 @@
   "Chat_With_Support_Team": "تواصل مع خدمة العملاء",
   "Certifications": "الشهادات",
   "Education": "التعليم",
-  "Experience": "الخبرات"
+  "Experience": "الخبرات",
+  "Review_Added":"تمت اضافة مراجعتك بنجاح"
+
+
 }

@@ -1,23 +1,69 @@
-import React, { useRef } from 'react';
-import { Button, Form, Input, Modal, Radio, RadioGroup, Rate } from 'rsuite';
+import React, { useRef, useState } from 'react';
+import { Button, Form, Input, Message, Modal, Radio, RadioGroup, Rate, Schema, useToaster } from 'rsuite';
 import useMediaQuery from '../../utils/useMediaQuery';
 import FormGroup from 'rsuite/esm/FormGroup';
 import FormControl from 'rsuite/esm/FormControl';
 import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { genders } from '../../assets/constants';
 import i18next from 'i18next';
+import { createReview, getDoctorProfile } from '../../features/shared/sharedActions';
+import { useParams } from 'react-router-dom';
 
 function Review() {
   const [open, setOpen] = React.useState(false);
+  const { id } = useParams();
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const lg = useMediaQuery('lg');
   const Textarea = React.forwardRef((props, ref) => <Input block={true} {...props} as="textarea" ref={ref} />);
-  let ref = useRef();
+  const formRef = useRef();
   const { t } = useTranslation();
   const { doctorProfile } = useSelector((state) => state?.shared);
+  const [loading, setLoading] = useState(false);
+  const toaster = useToaster();
+  const dispatch = useDispatch();
+  const formValue = useRef();
+  const handelConfirm = async() =>{
+    if (!formRef.current.check()) return; 
+      try {
+        setLoading(true);
+        const res = await dispatch(createReview({...formValue.current, doctor:id}));
+        if (res?.payload?.status) {
+          dispatch(getDoctorProfile(id))
+          toaster.push(
+            <Message type="success" closable showIcon>
+              {t('Review_Added')}
+            </Message>,
+            { duration: 5000 },
+          );
+          handleClose();
+        } else {
+          toaster.push(
+            <Message type="error" closable showIcon>
+              {res.payload.message}
+            </Message>,
+            { duration: 5000 },
+          );
+        }
+      } catch (err) {
+        toaster.push(
+          <Message closable showIcon type="error">
+            {t('internal_server_error')}
+          </Message>,
+          {
+            duration: 5000,
+          },
+        );
+      } finally {
+        setLoading(false);
+      }
+  }
 
+  const model = Schema.Model({
+    message: Schema.Types.StringType().isRequired(t('required')),
+    rate: Schema.Types.NumberType().isRequired(t('required')),
+  });
   return (
     <>
       <span className="flex justify-center">
@@ -39,9 +85,11 @@ function Review() {
             {i18next.resolvedLanguage === 'ar' ? doctorProfile?.fullArName : doctorProfile?.fullEnName}
           </p>
           <Form
+            model={model}
             fluid
+            ref={formRef}
             onChange={(values) => {
-              ref.current = values;
+              formValue.current = values;
             }}
           >
             <FormGroup>
@@ -50,16 +98,16 @@ function Review() {
             </FormGroup>
             <FormGroup>
               <Form.ControlLabel className="text-base">2.{t('Write_something_about_your_experience')}</Form.ControlLabel>
-              <FormControl className="mt-2" placeholder="write you review here" rows={5} name="textarea" accepter={Textarea} />
+              <FormControl className="mt-2" placeholder="write you review here" rows={5} name="message" accepter={Textarea} />
             </FormGroup>
             <FormGroup>
               <Form.ControlLabel className="text-base">
-                3.{' '}
+                3.
                 {t('Would_you_recommend_this_therapist_to_others', {
                   name: i18next.resolvedLanguage == 'ar' ? doctorProfile?.fullArName : doctorProfile?.fullEnName,
                 })}
               </Form.ControlLabel>
-              <FormControl className="mt-2" name="RadioGroup" accepter={RadioGroup}>
+              <FormControl className="mt-2" name="recommend" accepter={RadioGroup}>
                 <Radio value="Yes">{t('Yes')}</Radio>
                 <Radio value="no">{t('No')}</Radio>
               </FormControl>
@@ -67,7 +115,7 @@ function Review() {
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={handleClose} appearance="primary">
+          <Button loading={loading} onClick={handelConfirm} appearance="primary">
             {t('Confirm')}
           </Button>
           <Button onClick={handleClose} appearance="subtle">

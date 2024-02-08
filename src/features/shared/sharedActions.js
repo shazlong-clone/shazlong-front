@@ -39,3 +39,7 @@ export const getSlotsByIds = createAsyncThunk('getSlotsByIds', async (slotsIds) 
   const res = await service.get(`/api/v1/slots/get-by-ids?slotsIds=${slotsIds}`);
   return res.data;
 });
+export const createReview = createAsyncThunk('createReview', async (params) => {
+  const res = await service.post('/api/v1/reviews', params);
+  return res.data;
+});

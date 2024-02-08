@@ -10,14 +10,13 @@ const rowPerPage = 3;
 function Tetemonials() {
   const [activePage, setActivePage] = React.useState(1);
   const { t } = useTranslation();
-  const reviews = useSelector((state) => state?.shared?.doctorProfile?.reviews);
-
+  const reviews = useSelector((state) => state?.shared?.doctorProfile?.reviews) || [];
   return (
     <div>
       <section className="text-center">
         <Card className="text-start">
           <h4 className="text-center">{t('Testemonials')}</h4>
-          {reviews?.slice((activePage - 1) * rowPerPage, (activePage - 1) * rowPerPage + rowPerPage)?.map((review) => {
+          {reviews?.toSorted((a,b)=> new Date(b.createdAt) - new Date(a.createdAt))?.slice((activePage - 1) * rowPerPage, (activePage - 1) * rowPerPage + rowPerPage)?.map((review) => {
             return (
               <div key={review?._id} className="py-2">
                 <Rate size="xs" defaultValue={review.rate} readOnly />
