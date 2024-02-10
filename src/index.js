@@ -9,7 +9,6 @@ import { store, persistor } from './redux/store';
 import { Provider } from 'react-redux';
 import { ThemeSwitcherProvider } from 'react-css-theme-switcher';
 import { PersistGate } from 'redux-persist/integration/react';
-import LocalizeRsuit from './components/Shared/LocalizeRsuit';
 import ErrorBoundary from './components/Shared/ErrorBoundary';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -29,9 +28,7 @@ root.render(
             defaultTheme="ltr"
             themeMap={themes}
           >
-            <LocalizeRsuit>
               <App />
-            </LocalizeRsuit>
           </ThemeSwitcherProvider>
         </PersistGate>
       </Provider>
