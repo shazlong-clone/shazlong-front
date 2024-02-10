@@ -29,15 +29,15 @@ function NavBar() {
   const nav = [
     {
       name: t('Therapists_List'),
-      to: '/therapists',
+      to: 'therapists',
     },
     {
       name: t('Psychometer'),
-      to: '/psychometer',
+      to: 'psychometer',
     },
     {
       name: t('Blog'),
-      to: '/blogs',
+      to: 'blogs',
     },
   ];
   const navigate = useNavigate();

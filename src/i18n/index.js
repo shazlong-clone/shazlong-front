@@ -19,8 +19,8 @@ i18n
       escapeValue: false, // not needed for react as it escapes by default
     },
     detection: {
-      order: ['cookie', 'localStorage', 'htmlTag', 'sessionStorage', 'navigator', 'path', 'querystring', 'subdomain'],
-      caches: ['cookie', 'localStorage'],
+      order: ['path', 'localStorage', 'cookie', 'localStorage', 'htmlTag', 'sessionStorage', 'navigator', 'querystring', 'subdomain'],
+      caches: ['localStorage', 'cookie'],
     },
     backend: {
       loadPath: '/locales/{{lng}}/translation.json',
