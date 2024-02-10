@@ -12,7 +12,7 @@ import { useTranslation } from 'react-i18next';
 
 function SearchTherapistSideBar() {
   const [open, setOpen] = useState(false);
-  const { searchTherapistSideBarOpen, doctorSearchParams, doctorCurrentPageSize } = useSelector((state) => state?.shared);
+  const { searchTherapistSideBarOpen, doctorSearchParams } = useSelector((state) => state?.shared);
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const handelSortChange = async (id) => {
@@ -21,7 +21,7 @@ function SearchTherapistSideBar() {
     const newParams = { ...doctorSearchParams, sortBy: sortion?.sortBy, sort: sortion?.sort };
     dispatch(setDoctorSearchParams(newParams));
     dispatch(setDoctorSearchLoading(true));
-    await dispatch(getAllDoctors({ ...newParams, page: 1, size: doctorCurrentPageSize }));
+    await dispatch(getAllDoctors({ ...newParams, page: 1 }));
     dispatch(setDoctorSearchLoading(false));
   };
   useEffect(() => {

@@ -5,7 +5,7 @@ import { getAllDoctors, getSpecialization } from '../../features/shared/sharedAc
 import { getPrefix } from '../../features/shared/sharedActions';
 import DoctorCard from './DoctorCard';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import { setCurrentDoctorPageSize, setDoctorSearchParams } from '../../features/shared/sharedSlice';
+import { setDoctorSearchParams } from '../../features/shared/sharedSlice';
 import { useSearchParams } from 'react-router-dom';
 import NoDataFound from '../Shared/NoDataFound';
 export const pageSize = 6;
@@ -25,7 +25,7 @@ const LoadinCard = () => {
 };
 function TherapistsCard() {
   const dispatch = useDispatch();
-  const { doctors, doctorCurrentPageSize, doctorSearchLoading } = useSelector((state) => state?.shared);
+  const { doctors , doctorSearchLoading } = useSelector((state) => state?.shared);
   const [searchParams] = useSearchParams();
   const search = useMemo(() => {
     return {
@@ -43,18 +43,14 @@ function TherapistsCard() {
       size: searchParams.get('size') ?? 6,
     };
   }, [searchParams]);
-  const handelGetDoctors = async () => {
-    dispatch(getAllDoctors({ ...search, page: 1, size: doctorCurrentPageSize }));
-  };
 
-  // Iterate through all parameters and log their key-value pairs
-  useEffect(() => {
-    handelGetDoctors();
-  }, [doctorCurrentPageSize]);
+
   useEffect(() => {
     dispatch(getPrefix());
     dispatch(getSpecialization());
     dispatch(setDoctorSearchParams(search));
+    dispatch(getAllDoctors({ ...search, page: 1 }));
+
   }, []);
   const CardContainer = ({ children }) => {
     return <main className="lg:grid lg:grid-cols-[1fr_1fr] lg:gap-2 font-[500] lg:mb-18">{children}</main>;
@@ -73,7 +69,10 @@ function TherapistsCard() {
       ) : (
         <InfiniteScroll
           dataLength={doctors?.result?.length ?? pageSize} //This is important field to render the next data
-          next={() => dispatch(setCurrentDoctorPageSize(doctorCurrentPageSize + pageSize))}
+          next={() =>{
+            
+            dispatch(getAllDoctors({ ...search, page: (+doctors?.currentPage ?? 0 )+ 1}))
+          }}
           hasMore={doctors?.totalPages !== doctors?.currentPage}
           loader={
             <CardContainer>

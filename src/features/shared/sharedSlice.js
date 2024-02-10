@@ -18,7 +18,6 @@ export const sharedSlice = createSlice({
     specializationList: [],
     doctors: {},
     prefixesList: [],
-    doctorCurrentPageSize: 6,
     doctorSearchLoading: false,
     searchTherapistSideBarOpen: false,
     doctorSearchParams: {
@@ -44,9 +43,7 @@ export const sharedSlice = createSlice({
     setDoctorSearchParams: (state, action) => {
       state.doctorSearchParams = action?.payload;
     },
-    setCurrentDoctorPageSize: (state, action) => {
-      state.doctorCurrentPageSize = action?.payload;
-    },
+
     setDoctorSearchLoading: (state, action) => {
       state.doctorSearchLoading = action?.payload;
     },
@@ -68,7 +65,15 @@ export const sharedSlice = createSlice({
       state.prefixesList = action.payload;
     });
     builder.addCase(getAllDoctors.fulfilled, (state, action) => {
-      state.doctors = action.payload?.data;
+      if(action?.payload?.data?.currentPage === 1){
+        state.doctors = action.payload.data
+      }else {
+        const oldDoctors = state?.doctors?.result ?? [];
+        const newDoctors = action?.payload?.data?.result ?? [];
+        const allDoctors = [...oldDoctors, ...newDoctors ]
+        state.doctors = {...action.payload?.data, result: allDoctors };
+      }
+
     });
     builder.addCase(getOnlineDoctors.fulfilled, (state, action) => {
       state.onlineDoctors = action.payload?.data.results;
@@ -83,7 +88,7 @@ export const sharedSlice = createSlice({
   },
 });
 
-export const { setDoctorSearchParams, setCurrentDoctorPageSize, setDoctorSearchLoading, setSearchTherapistSideBarOpen } =
+export const { setDoctorSearchParams, setDoctorSearchLoading, setSearchTherapistSideBarOpen } =
   sharedSlice.actions;
 // Action creators are generated for each case reducer function
 

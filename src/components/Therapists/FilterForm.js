@@ -6,7 +6,6 @@ import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import { availability, genders } from '../../assets/constants';
 import {
-  setCurrentDoctorPageSize,
   setDoctorSearchParams,
   setDoctorSearchLoading,
   setSearchTherapistSideBarOpen,
@@ -59,7 +58,6 @@ function FilterForm() {
     dispatch(setDoctorSearchLoading(true));
     dispatch(setDoctorSearchParams({ ...doctorSearchParams, ...formValues }));
     await dispatch(getAllDoctors({ ...doctorSearchParams, ...formValues, page: 1, size: pageSize }));
-    dispatch(setCurrentDoctorPageSize(pageSize));
     dispatch(setDoctorSearchLoading(false));
     if (searchTherapistSideBarOpen) {
       dispatch(setSearchTherapistSideBarOpen(false));
@@ -67,9 +65,11 @@ function FilterForm() {
   };
 
   const onCancel = async () => {
+    dispatch(setDoctorSearchLoading(true));
     dispatch(setDoctorSearchParams(initalSearchParams));
     setFormValues(initalSearchParams);
-    dispatch(getAllDoctors(initalSearchParams));
+    await dispatch(getAllDoctors(initalSearchParams));
+    dispatch(setDoctorSearchLoading(false));
   };
   const dispatch = useDispatch();
   useEffect(() => {

@@ -12,14 +12,14 @@ import { useTranslation } from 'react-i18next';
 
 function TherapistsComp() {
   const { t } = useTranslation();
-  const { doctorSearchParams, doctorCurrentPageSize } = useSelector((state) => state?.shared);
+  const { doctorSearchParams } = useSelector((state) => state?.shared);
   const dispatch = useDispatch();
   const handelSortChange = async (id) => {
     const sortion = sortMenu?.find((el) => el?.id === id);
     const newParams = { ...doctorSearchParams, sortBy: sortion?.sortBy, sort: sortion?.sort };
     dispatch(setDoctorSearchParams(newParams));
     dispatch(setDoctorSearchLoading(true));
-    await dispatch(getAllDoctors({ ...newParams, page: 1, size: doctorCurrentPageSize }));
+    await dispatch(getAllDoctors({ ...newParams, page: 1 }));
     dispatch(setDoctorSearchLoading(false));
   };
   useEffect(() => {
