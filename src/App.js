@@ -3,7 +3,6 @@ import { Suspense, lazy } from 'react';
 import { Routes, Route, Navigate, Outlet } from 'react-router-dom';
 import LayOut from './components/Shared/LayOut';
 import Loading from './components/Shared/BackDropLoading';
-import LangWrapper from './components/Shared/LangWrapper';
 import ProtectedRoute from './components/Shared/ProtectedRoute';
 import ProtectDoctor from './components/Shared/ProtectDoctor';
 import Slots from './components/Doctor/Slots';
@@ -38,7 +37,6 @@ const LangRedirect = () => {
 function App() {
   return (
     <Suspense fallback={<Loading />}>
-      <LangWrapper>
         <Routes>
           <Route path="/" element={<LangRedirect />} />
           <Route path="/:lang" element={<Outlet />}>
@@ -73,7 +71,6 @@ function App() {
             </Route>
           </Route>
         </Routes>
-      </LangWrapper>
     </Suspense>
   );
 }

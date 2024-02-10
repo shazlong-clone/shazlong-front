@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { changeLang } from '../../features/theme/themeSlice';
 import { useThemeSwitcher } from 'react-css-theme-switcher';
@@ -14,8 +13,7 @@ import { CustomProvider } from 'rsuite';
 function LangWrapper({ children }) {
   const navigate = useNavigate();
   const { switcher, themes } = useThemeSwitcher();
-  const { i18n } = useTranslation();
-  const currLang = i18n.resolvedLanguage;
+  const currLang = localStorage.getItem('i18nextLng');
   if (currLang) {
     moment.locale(currLang);
   }

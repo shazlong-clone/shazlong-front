@@ -10,6 +10,7 @@ import { Provider } from 'react-redux';
 import { ThemeSwitcherProvider } from 'react-css-theme-switcher';
 import { PersistGate } from 'redux-persist/integration/react';
 import ErrorBoundary from './components/Shared/ErrorBoundary';
+import LangWrapper from './components/Shared/LangWrapper';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -28,7 +29,9 @@ root.render(
             defaultTheme="ltr"
             themeMap={themes}
           >
+            <LangWrapper>
               <App />
+            </LangWrapper>
           </ThemeSwitcherProvider>
         </PersistGate>
       </Provider>

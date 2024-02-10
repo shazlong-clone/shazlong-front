@@ -25,14 +25,29 @@ class ErrorBoundary extends React.Component {
       // You can render any custom fallback UI
       return (
         <h1 className="text-center flex justify-center items-center h-[100vh]">
-          <div>
-            Something went wrong.
-            <br /> Tray Again Later
-            <br />
-            <a href="/">
-              <Button appearance="primary">Back Home</Button>
-            </a>
-          </div>
+          {localStorage.getItem('i18nextLng') === 'ar' ? (
+            <div>
+              حدث خطأ ما .
+              <br /> الرجاء المحاولة لاحقا
+              <br />
+              <a href="/">
+                <Button appearance="primary" size="lg">
+                  الرجوع للرئسية
+                </Button>
+              </a>
+            </div>
+          ) : (
+            <div>
+              Something went wrong .
+              <br /> Tray Again Later
+              <br />
+              <a href="/">
+                <Button appearance="primary" size="lg">
+                  Back Home
+                </Button>
+              </a>
+            </div>
+          )}
         </h1>
       );
     }
