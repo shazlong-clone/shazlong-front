@@ -94,12 +94,12 @@ function Checkout() {
   return (
     <main className="bg-[var(--rs-gray-50)] py-5">
       <div className="container">
-        <InternalHeader link={`/thearpist-profile/${doctor?._id}`}>{t('Check_Out')}</InternalHeader>
+        <InternalHeader link={`/${i18n.resolvedLanguage}/thearpist-profile/${doctor?._id}`}>{t('Check_Out')}</InternalHeader>
       </div>
       <div className="container grid gap-5 lg:grid-cols-2 items-start">
         <Card className="mb-0">
           <section className="flex gap-2 items-center lg:gap-5">
-            <Link to={`/thearpist-profile/${doctor?._id}`}>
+            <Link to={`/${i18n.resolvedLanguage}/thearpist-profile/${doctor?._id}`}>
               <Avatar size={lg ? 'lg' : 'md'} circle src={doctor?.photo || person} alt="img" />
             </Link>
             <aside>
