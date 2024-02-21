@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import 'flag-icons/css/flag-icons.css';
@@ -11,6 +11,7 @@ import { ThemeSwitcherProvider } from 'react-css-theme-switcher';
 import { PersistGate } from 'redux-persist/integration/react';
 import ErrorBoundary from './components/Shared/ErrorBoundary';
 import LangWrapper from './components/Shared/LangWrapper';
+import Loading from './components/Shared/BackDropLoading';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -29,9 +30,11 @@ root.render(
             defaultTheme="ltr"
             themeMap={themes}
           >
-            <LangWrapper>
-              <App />
-            </LangWrapper>
+            <Suspense fallback={<Loading />}>
+              <LangWrapper>
+                <App />
+              </LangWrapper>
+            </Suspense>
           </ThemeSwitcherProvider>
         </PersistGate>
       </Provider>

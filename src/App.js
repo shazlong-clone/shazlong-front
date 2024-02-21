@@ -36,7 +36,6 @@ const LangRedirect = () => {
 };
 function App() {
   return (
-    <Suspense fallback={<Loading />}>
         <Routes>
           <Route path="/" element={<LangRedirect />} />
           <Route path="/:lang" element={<Outlet />}>
@@ -71,7 +70,6 @@ function App() {
             </Route>
           </Route>
         </Routes>
-    </Suspense>
   );
 }
 
