@@ -1,8 +1,7 @@
 import React from 'react';
-import { Suspense, lazy } from 'react';
+import { lazy } from 'react';
 import { Routes, Route, Navigate, Outlet } from 'react-router-dom';
 import LayOut from './components/Shared/LayOut';
-import Loading from './components/Shared/BackDropLoading';
 import ProtectedRoute from './components/Shared/ProtectedRoute';
 import ProtectDoctor from './components/Shared/ProtectDoctor';
 import Slots from './components/Doctor/Slots';
