@@ -33,6 +33,8 @@ const LangRedirect = () => {
   const lang = localStorage.getItem('i18nextLng');
   return <Navigate to={`/${lang}`} />;
 };
+
+
 function App() {
   return (
         <Routes>

@@ -11,7 +11,7 @@ import { signInDoctor, signInUser } from '../../features/auth/authAction';
 import { useTranslation } from 'react-i18next';
 const { Group, HelpText, Control } = Form;
 function SignUpForm({ isSignAsUse }) {
-  const { t } = useTranslation();
+  const { t,i18n } = useTranslation();
   const [visible, setVisible] = useState(false);
   const [acceptLiecence, setAcceptLicence] = useState(false);
   const navigate = useNavigate();
@@ -88,7 +88,7 @@ function SignUpForm({ isSignAsUse }) {
             <InputGroup.Button onClick={() => setVisible(!visible)}>{visible ? <EyeIcon /> : <EyeSlashIcon />}</InputGroup.Button>
           </InputGroup>
           <HelpText>
-            <Link to="/forgot-password">{t('forgot_password')}</Link>
+            <Link to={`/${i18n.resolvedLanguage}/forgot-password`}>{t('forgot_password')}</Link>
           </HelpText>
         </Group>
         <Group controlId="submit">
@@ -113,13 +113,13 @@ function SignUpForm({ isSignAsUse }) {
         }}
       >
         {t('I_Agree_With_The')}{' '}
-        <Link className="underline" to="/licence">
+        <Link className="underline" to={`/${i18n.resolvedLanguage}/licence`}>
           {t('Privacy_Policy')}
         </Link>{' '}
       </Checkbox>
       <div className="text-center mt-5">
         {t('Dont_Have_Account_Sign_Up')}
-        <Link to="/sign-up" className="underline">
+        <Link to={`/${i18n.resolvedLanguage}/sign-up`} className="underline">
           {t('Here')}
         </Link>
       </div>

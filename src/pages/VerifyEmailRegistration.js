@@ -130,7 +130,7 @@ function VerifyEmailRegistration() {
     <main className="bg-[var(--rs-gray-100)] min-h-screen">
       <div className="container">
         <div className="text-center pt-5 mb-[60px]">
-          <Link to="/">
+          <Link to={`/${i18n.resolvedLanguage}`}>
             <img className="w-full max-w-[300px]" src={logo} alt="" />
           </Link>
           <p className="font-[500] text-[20px] mt-5">

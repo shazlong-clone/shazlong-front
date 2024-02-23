@@ -98,7 +98,7 @@ function NavBar() {
     >
       <div className="flex justify-between items-center m-auto">
         <section className="lg:flex-[1_1_33%]">
-          <Link to="/">
+          <Link to={`/${i18n.resolvedLanguage}`}>
             <img src={currLang === 'ar' ? shazlongLogoAr : shazlongLogo} alt="logo" className="md:w-[160px] w-[100px]" />
           </Link>
         </section>
@@ -137,12 +137,12 @@ function NavBar() {
 
           {!user?._id ? (
             <>
-              <Link className="text-inherit hover:no-underline hover:text-inherit" to="/sign-in">
+              <Link className="text-inherit hover:no-underline hover:text-inherit" to={`/${i18n.resolvedLanguage}/sign-in`}>
                 <article className="text-[var(--rs-green-400)] border border-solid border-[var(--rs-green-400)] py-1 px-2 rounded-3xl cursor-pointer  lg:py-1 lg:px-5 text-[12px] text-center  xl:text-base">
                   {t('Sign_In')}
                 </article>
               </Link>
-              <Link className="text-inherit hover:no-underline hover:text-inherit" to="/sign-up">
+              <Link className="text-inherit hover:no-underline hover:text-inherit" to={`/${i18n.resolvedLanguage}/sign-up`}>
                 <article className="text-white bg-[var(--rs-green-400)] py-1 px-2 rounded-3xl cursor-pointer lg:py-1 lg:px-5 text-[12px] text-center  xl:text-base flex rtl:pt-2">
                   {t('Sign_Up')}
                 </article>

@@ -52,7 +52,7 @@ const formateSlots = (inputSlots, offset) => {
 };
 
 function Booking({ setBounceBg, bouncebg, ...props }) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [open, setOpen] = React.useState(false);
   const [timeZons, setTimeZons] = useState({
     fullTimeZons: [],
@@ -353,7 +353,7 @@ function Booking({ setBounceBg, bouncebg, ...props }) {
         </section>
 
         <section className="text-center">
-          <Link to={`/checkout?slots_ids=${selctedDays?.map(day=> day?.slots)?.flat()?.map(slot => slot?.id)?.join(',')}`} className="hover:no-underline active:not-underline">
+          <Link to={`/${i18n.resolvedLanguage}/checkout?slots_ids=${selctedDays?.map(day=> day?.slots)?.flat()?.map(slot => slot?.id)?.join(',')}`} className="hover:no-underline active:not-underline">
             <Button disabled={!selctedSlotsLength} appearance="primary" color='green' className="block w-1/2 m-auto">
               {t('Book')}
             </Button>

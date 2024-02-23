@@ -8,6 +8,7 @@ import ExpandOutlineIcon from '@rsuite/icons/ExpandOutline';
 import useMediaQuery from '../utils/useMediaQuery';
 import DoctorsSlider from '../components/Shared/DoctorsSlider';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const { Column, HeaderCell, Cell } = Table;
 const rowKey = 'title';
@@ -97,10 +98,11 @@ function Psychometer() {
     setExpandedRowKeys(nextExpandedRowKeys);
   };
   const lg = useMediaQuery('lg');
+  const { i18n } = useTranslation();
 
   const TitleCell = ({ rowData, dataKey, ...props }) => (
     <Cell {...props}>
-      <Link to="/psychotest/55" className="hover:no-underline">
+      <Link to={`/${i18n}/psychotest/55`} className="hover:no-underline">
         {rowData[dataKey]}
       </Link>
     </Cell>

@@ -44,7 +44,7 @@ function Checkout() {
     t('Instruction_3'),
     <>
       {t('Instruction_4')}
-      <Link className="underline" to="/instructions">
+      <Link className="underline" to={`/${i18n.resolvedLanguage}/instructions`}>
         {t('Here')}
       </Link>
     </>,

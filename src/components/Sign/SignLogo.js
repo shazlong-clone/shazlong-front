@@ -10,7 +10,7 @@ function SignLogo() {
   return (
     <>
       <div className="text-center">
-        <Link to="/">
+        <Link to={`/${i18n.resolvedLanguage}`}>
           <img width="70%" src={locale === 'ar' ? arLogo : logo} alt="/" />
         </Link>
       </div>

@@ -10,7 +10,7 @@ import { useSelector } from 'react-redux';
 import i18next from 'i18next';
 export const SignUpCompContext = createContext();
 function SignUpComp() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { doctorVerificationCode } = useSelector((state) => state?.auth);
   return (
     <main className="lg:px-0 lg:w-full">
@@ -32,7 +32,7 @@ function SignUpComp() {
             </article>
             <article>{t('First_Step_Done')}</article>
             <article className="my-5">{t('First_Step')}</article>
-            <Link to="/therapist-verify-email-registration">
+            <Link to={`/${i18n.resolvedLanguage}/therapist-verify-email-registration`}>
               <Button appearance="primary" color="green">
                 {t('Continue')}
               </Button>

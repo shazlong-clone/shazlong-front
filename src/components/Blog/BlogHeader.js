@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { FaFacebookF, FaLinkedinIn, FaTwitter } from 'react-icons/fa';
 import { AiFillEye } from 'react-icons/ai';
 import { VscBook } from 'react-icons/vsc';
+import i18n from '../../i18n';
 function BlogHeader() {
   return (
     <>
@@ -23,7 +24,7 @@ function BlogHeader() {
             <img src={therapist} alt="therapist" className="rounded-full w-[60px] h-[60px]" />
             <span>
               <i className="block">Published By:</i>
-              <Link to="thearpist-profile/555">
+              <Link to={`/${i18n.resolvedLanguage}thearpist-profile/555`}>
                 <small>John Doe</small>
               </Link>
             </span>

@@ -30,7 +30,7 @@ import { getCountries } from '../../features/shared/sharedActions';
 const { Group, HelpText, Control } = Form;
 function SignUpForm() {
   const navigate = useNavigate();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const toaster = useToaster();
   const dispatch = useDispatch();
   const [acceptLicence, setAcceptLicence] = useState(false);
@@ -206,7 +206,7 @@ function SignUpForm() {
             name="acceptLicence"
           >
             {t('I_Agree_With_The')}
-            <Link to="/licence" className="underline">
+            <Link to={`/${i18n.resolvedLanguage}/licence`} className="underline">
               {t('Privacy_Policy')}
             </Link>
           </Control>
@@ -227,7 +227,7 @@ function SignUpForm() {
           </ButtonToolbar>
         </Group>
         <div className="text-center mt-[-10px]">
-          <Link to="/sign-in" className="underline">
+          <Link to={`/${i18n.resolvedLanguage}/sign-in`} className="underline">
             {t('Sign_In')}
           </Link>
         </div>

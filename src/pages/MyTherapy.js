@@ -5,7 +5,9 @@ import therapits from '../assets/images/therapist.webp';
 import clsx from 'clsx';
 import { Button, Steps } from 'rsuite';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 function MyTherapy() {
+  const { i18n } = useTranslation();
   const [activeTabe, setActiveTabe] = useState(1);
   const tabs = [
     {
@@ -74,12 +76,12 @@ function MyTherapy() {
                   <Steps.Item title="Reserve a session" description=" Choose time and date suit you " />
                   <Steps.Item title="Payment" description=" Choose your payment method among 3 different payment methods " />
                   <Steps.Item
-                    title={<Link to="/therapists">Start your session</Link>}
+                    title={<Link to={`/${i18n.resolvedLanguage}/therapists`}>Start your session</Link>}
                     description=" Talk to your therapist online privately "
                   />
                 </Steps>
                 <div className="text-center lg:mt-10">
-                  <Link to="/therapists">
+                  <Link to={`${i18n.resolvedLanguage}/therapists`}>
                     <Button appearance="primary" className="mt-3 w-full lg:w-min">
                       Book Your First Session
                     </Button>

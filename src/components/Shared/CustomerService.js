@@ -19,10 +19,11 @@ import { Link } from 'react-router-dom';
 import EmojiDropdown from './EmojiDropdown';
 import { useMediaQuery } from '@uidotdev/usehooks';
 import therapist from '../../assets/images/therapist.webp';
+import { useTranslation } from 'react-i18next';
 function CustomerService({ close }) {
   const dispatch = useDispatch();
   const [activeTabe, setActiveTabe] = useState(1);
-
+  const {t, i18n} = useTranslation();
   const [message, setMessage] = useState('');
   const textAreaRef = useRef();
 
@@ -143,7 +144,7 @@ function CustomerService({ close }) {
                 <h5 className="text-cyan text-center mt-5">Need a session today.</h5>
                 <p className="mt-2 text-center">
                   <strong className="text-[12px]">
-                    Click <Link to="/therapists">here</Link> to check out our Available therapists.
+                    Click <Link to={`/${i18n.resolvedLanguage}/therapists`}>here</Link> to check out our Available therapists.
                   </strong>
                 </p>
               </Card>

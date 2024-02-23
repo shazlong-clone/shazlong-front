@@ -25,7 +25,7 @@ function Hero() {
           <p className="text-gray/60 md:text-xl">{t('Shazlong_Number1')}</p>
         </div>
         <section className="mt-16 mb-5 flex flex-col gap-4 md:mb-32">
-          <Link to="/therapists">
+          <Link to={`/${i18n.resolvedLanguage}/therapists`}>
             <Button appearance="primary" className="w-[200px] lg:w-[400px] text-sm lg:text-xl">
               {t('Explore_Our_Therapists')}
             </Button>

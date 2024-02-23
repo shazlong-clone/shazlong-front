@@ -12,7 +12,7 @@ import { useTranslation } from 'react-i18next';
 
 const { Group, HelpText, Control } = Form;
 function DocSignUpForm() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [acceptLicence, setAcceptLicence] = useState(false);
   const [visible, setVisible] = useState(false);
   const [visibleConfirm, setVisibleConConfirm] = useState(false);
@@ -28,7 +28,7 @@ function DocSignUpForm() {
       }, 'password and password Confirm Not Equal'),
   });
   const formRef = useRef();
-
+  
   const [formValue, setFormValues] = useState({
     name: '',
     email: '',
@@ -114,7 +114,7 @@ function DocSignUpForm() {
             name="acceptLicence"
           >
             {t('I_Agree_With_The')}
-            <Link to="/licence" className="underline">
+            <Link to={`/${i18n.resolvedLanguage}/licence`} className="underline">
               {t('Privacy_Policy')}
             </Link>
           </Control>
@@ -135,7 +135,7 @@ function DocSignUpForm() {
           </ButtonToolbar>
         </Group>
         <div className="text-center mt-[-10px]">
-          <Link to="/sign-in" className="underline">
+          <Link to={`/${i18n.resolvedLanguage}/sign-in`} className="underline">
             {t('Sign_In')}
           </Link>
         </div>

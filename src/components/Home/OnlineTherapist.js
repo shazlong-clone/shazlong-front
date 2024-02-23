@@ -29,7 +29,7 @@ const users = [
 const max = 3;
 
 function OnlineTherapist() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { onlineDoctors } = useSelector((state) => state?.shared);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -66,7 +66,7 @@ function OnlineTherapist() {
           </p>
         </article>
         <article>
-          <Button href='/therapists' appearance="ghost" className="w-[250px]">
+          <Button href={`${i18n.resolvedLanguage}/therapists`} appearance="ghost" className="w-[250px]">
             {t('Learn_More')}
           </Button>
         </article>
