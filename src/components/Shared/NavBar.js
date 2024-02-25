@@ -16,6 +16,7 @@ import { getMe, getMeAsDoctor } from '../../features/auth/authAction';
 import { signOut } from '../../features/auth/authSlice';
 
 import { AiOutlineCaretDown } from 'react-icons/ai';
+import { twMerge } from 'tailwind-merge';
 
 function NavBar() {
   const [open, setOpen] = useState(false);
@@ -109,7 +110,10 @@ function NavBar() {
                 <li key={Math.random()}>
                   <NavLink
                     to={to}
-                    className="text-[var(--rs-gray-900)] hover:text-[var(--rs-green-400)] hover:no-underline focus:no-underline active:text-[var(--rs-green-900)] focus:text-[var(--rs-green-400)]  text-gray"
+                    className={clsx(
+                      'text-[var(--rs-gray-700)] hover:text-[var(--rs-green-300)] hover:no-underline focus:no-underline active:text-[var(--rs-green-900)] focus:text-[var(--rs-green-400)]',
+                      window.location.pathname?.includes(to) ? 'text-[--rs-green-300]' : 'text-[--rs-gray-800]',
+                    )}
                   >
                     {name}
                   </NavLink>

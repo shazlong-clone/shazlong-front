@@ -119,7 +119,7 @@ function Checkout() {
                 <Card key={Math.random()} className=" bg-[var(--rs-gray-100)] rounded-lg p-2 mb-0 mt-2 grid gap-2">
                   <article className="flex gap-2 items-center">
                     <LuAlarmClock className="text-xl text-cyan" />
-                    <aside className="text-sm">
+                    <aside className="text-[17px]">
                       {`${moment(slot?.from).format('ddd DD')} ( ${t('From')} ${moment(slot?.from).format('hh:mm a')} ${t(
                         'To',
                       )} ${moment(slot?.to).format('hh:mm a')} )`}
@@ -127,7 +127,7 @@ function Checkout() {
                   </article>
                   <article className="flex gap-2 items-center">
                     <GiCash className="text-xl text-cyan" />
-                    <aside className="font-semibold text-sm">{`${getFeez(slot?.from, slot?.to)} ${t('Egy')}`}</aside>
+                    <aside className="font-semibold text-[17px]">{`${getFeez(slot?.from, slot?.to)} ${t('Egy')}`}</aside>
                   </article>
                 </Card>
               );
