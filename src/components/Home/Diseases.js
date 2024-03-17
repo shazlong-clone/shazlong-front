@@ -91,7 +91,7 @@ function Diseases() {
         {specializationList?.map((el, i) => {
           return (
             <button
-              onClick={() => navigate('/therapists')}
+              onClick={() => navigate(`/${loacle}/therapists`)}
               key={i}
               className="active:bg-[var(--rs-gray-50)] flex-[1_1_40%] md:flex-[1_1_30%] lg:flex-[1_1_20%]
                flex text-lg items-center bg-[var(--rs-bg-card)] p-2 lg:p-5 rounded-xl gap-3 

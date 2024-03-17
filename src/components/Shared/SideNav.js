@@ -14,33 +14,37 @@ import { useDispatch } from 'react-redux';
 import { openChat } from '../../features/theme/themeSlice';
 import { t } from 'i18next';
 import { RiGroupLine } from 'react-icons/ri';
-const menu = [
-  {
-    name: 'Home',
-    icon: <AiOutlineHome />,
-    link: '/',
-  },
-  {
-    name: 'Psychological_Tests',
-    icon: <BiTestTube />,
-    link: '/psychometer',
-  },
-  {
-    name: 'Blog',
-    icon: <FaBlog />,
-    link: '/blogs',
-  },
-  {
-    name: 'Therapist_List',
-    icon: <RiGroupLine />,
-    link: '/therapists',
-  },
-];
+import { useTranslation } from 'react-i18next';
 
 function FooterNav() {
   const [activeTabe, setActiveTabe] = useState('/');
   const [open, setOpen] = React.useState(false);
   const dispatch = useDispatch();
+  const {i18n} = useTranslation();
+  const locale = i18n.resolvedLanguage;
+  const menu = [
+    {
+      name: 'Home',
+      icon: <AiOutlineHome />,
+      link: `/${locale}`,
+    },
+    {
+      name: 'Psychological_Tests',
+      icon: <BiTestTube />,
+      link: `/${locale}/psychometer`,
+    },
+    {
+      name: 'Blog',
+      icon: <FaBlog />,
+      link: `/${locale}/blogs`,
+    },
+    {
+      name: 'Therapist_List',
+      icon: <RiGroupLine />,
+      link: `${locale}/therapists`,
+    },
+  ];
+  
 
   useEffect(() => {
     if (!open && activeTabe === 4) {
@@ -69,18 +73,20 @@ function FooterNav() {
       </section>
     );
   };
+
+
   return (
     <>
       <div className="bg-[var(--rs-bg-card)] md:hidden w-full bottom-0 right-0 fixed text-gray cursor-pointer z-50">
         <article className="flex gap-4 text-center justify-between py-3 px-4 shadow-2xl">
           <div>
-            <Menu title={t('Therapists')} id={0} link="/therapists" icon={<BiGroup />} />
+            <Menu title={t('Therapists')} id={0} link={`/${locale}/therapists`} icon={<BiGroup />} />
           </div>
           <div>
-            <Menu title={t('Online')} id={1} link="/online" icon={<BiVideoPlus />} />
+            <Menu title={t('Online')} id={1} link={`/${locale}/online`} icon={<BiVideoPlus />} />
           </div>
           <div>
-            <Menu title={t('My_Therapy')} id={2} link="/my-therapy" icon={<RiPsychotherapyLine />} />
+            <Menu title={t('My_Therapy')} id={2} link={`/${locale}/my-therapy`} icon={<RiPsychotherapyLine />} />
           </div>
           <div onClick={() => dispatch(openChat())}>
             <Menu title={t('Support')} id={3} icon={<MdSupportAgent />} />

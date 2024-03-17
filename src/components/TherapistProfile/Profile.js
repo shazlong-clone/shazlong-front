@@ -57,7 +57,7 @@ function Profile({ setBounceBg }) {
           return (
             <span
               key={Math.random()}
-              className="bg-[var(--rs-green-100)] text-[var(--rs-green-900)] mb-2 text-sm font-bold px-3 py-1 rounded-3xl text-green/60 inline-block"
+              className="bg-[var(--rs-gray-100)] text-[var(--rs-gray-900)] mb-2 text-sm font-bold px-3 py-1 rounded-3xl text-green/60 inline-block"
             >
               {i18n.resolvedLanguage === 'ar' ? specializationItem?.ar_name : specializationItem?.name}
             </span>

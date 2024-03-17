@@ -16,7 +16,6 @@ import { getMe, getMeAsDoctor } from '../../features/auth/authAction';
 import { signOut } from '../../features/auth/authSlice';
 
 import { AiOutlineCaretDown } from 'react-icons/ai';
-import { twMerge } from 'tailwind-merge';
 
 function NavBar() {
   const [open, setOpen] = useState(false);
@@ -50,7 +49,7 @@ function NavBar() {
   const handleProfile = () => {
     close();
     setTimeout(() => {
-      navgiagte('/user-info');
+      navgiagte(`/${currLang}/user-info`);
     }, 0);
   };
   const signOutHandler = () => {
@@ -176,7 +175,7 @@ function NavBar() {
                     </li>
                     <hr />
                     <li className="px-5">
-                      <Link to="/user-info" className="text-inherit hover:no-underline">
+                      <Link to={`${currLang}/user-info`} className="text-inherit hover:no-underline">
                         <div onClick={() => setOpen(false)} className="inline-flex items-center gap-2 text-cyan">
                           <BsPersonBadgeFill className="text-3xl" />
                           <span className="text-lg">{t('Your_Profile')}</span>
