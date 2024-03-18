@@ -9,7 +9,6 @@ import {
   getDoctorProfile,
   getSlotsByIds,
 } from './sharedActions';
-import { ASC } from '../../costansts/index';
 export const sharedSlice = createSlice({
   name: 'shared',
   initialState: {
@@ -20,23 +19,10 @@ export const sharedSlice = createSlice({
     prefixesList: [],
     doctorSearchLoading: false,
     searchTherapistSideBarOpen: false,
-    doctorSearchParams: {
-      amount: [0, 500],
-      availability: null,
-      country: [],
-      specialization: [],
-      gender: null,
-      languages: [],
-      rate: null,
-      name: '',
-      sortBy: '',
-      sort: ASC,
-      page: 1,
-      size: 6,
-    },
+    doctorSearchParams: {},
     onlineDoctors: [],
     doctorProfile: {},
-    checkoutSlots:[]
+    checkoutSlots: [],
   },
 
   reducers: {
@@ -65,15 +51,14 @@ export const sharedSlice = createSlice({
       state.prefixesList = action.payload;
     });
     builder.addCase(getAllDoctors.fulfilled, (state, action) => {
-      if(action?.payload?.data?.currentPage === 1){
-        state.doctors = action.payload.data
-      }else {
+      if (action?.payload?.data?.currentPage === 1) {
+        state.doctors = action.payload.data;
+      } else {
         const oldDoctors = state?.doctors?.result ?? [];
         const newDoctors = action?.payload?.data?.result ?? [];
-        const allDoctors = [...oldDoctors, ...newDoctors ]
-        state.doctors = {...action.payload?.data, result: allDoctors };
+        const allDoctors = [...oldDoctors, ...newDoctors];
+        state.doctors = { ...action.payload?.data, result: allDoctors };
       }
-
     });
     builder.addCase(getOnlineDoctors.fulfilled, (state, action) => {
       state.onlineDoctors = action.payload?.data.results;
@@ -84,12 +69,10 @@ export const sharedSlice = createSlice({
     builder.addCase(getSlotsByIds.fulfilled, (state, action) => {
       state.checkoutSlots = action.payload?.data;
     });
-    
   },
 });
 
-export const { setDoctorSearchParams, setDoctorSearchLoading, setSearchTherapistSideBarOpen } =
-  sharedSlice.actions;
+export const { setDoctorSearchParams, setDoctorSearchLoading, setSearchTherapistSideBarOpen } = sharedSlice.actions;
 // Action creators are generated for each case reducer function
 
 export default sharedSlice.reducer;

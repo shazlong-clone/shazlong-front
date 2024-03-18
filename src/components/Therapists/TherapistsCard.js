@@ -25,36 +25,16 @@ const LoadinCard = () => {
 };
 function TherapistsCard() {
   const dispatch = useDispatch();
-  const { doctors , doctorSearchLoading } = useSelector((state) => state?.shared);
-  const [searchParams] = useSearchParams();
-  const search = useMemo(() => {
-    return {
-      amount: searchParams.getAll('amount')?.map((el) => Number(el)) ?? [10, 500],
-      availability: searchParams.get('availability') ?? null,
-      country: searchParams.getAll('country')?.map((el) => Number(el)) ?? [],
-      specialization: searchParams.getAll('specialization')?.map((el) => Number(el)) ?? [],
-      gender: searchParams.get('gender') || null,
-      languages: searchParams.getAll('languages')?.map((el) => Number(el)) ?? [],
-      rate: searchParams.get('rate') ?? null,
-      name: searchParams.get('name') ?? null,
-      sortBy: searchParams.get('sortBy') ?? '',
-      sort: searchParams.get('sort') ?? 'ASC',
-      page: searchParams.get('page') ?? 1,
-      size: searchParams.get('size') ?? 6,
-    };
-  }, [searchParams]);
-
+  const { doctors, doctorSearchLoading } = useSelector((state) => state?.shared);
 
   useEffect(() => {
     dispatch(getPrefix());
     dispatch(getSpecialization());
-    dispatch(setDoctorSearchParams(search));
-    dispatch(getAllDoctors({ ...search, page: 1 }));
-
   }, []);
   const CardContainer = ({ children }) => {
     return <main className="lg:grid lg:grid-cols-[1fr_1fr] lg:gap-2 font-[500] lg:mb-18">{children}</main>;
   };
+  const doctorSearchParams = useSelector((state) => state?.shared?.doctorSearchParams);
 
   return (
     <>
@@ -69,9 +49,8 @@ function TherapistsCard() {
       ) : (
         <InfiniteScroll
           dataLength={doctors?.result?.length ?? pageSize} //This is important field to render the next data
-          next={() =>{
-            
-            dispatch(getAllDoctors({ ...search, page: (+doctors?.currentPage ?? 0 )+ 1}))
+          next={() => {
+            dispatch(getAllDoctors({ ...doctorSearchParams, page: (+doctors?.currentPage ?? 0) + 1 }));
           }}
           hasMore={doctors?.totalPages !== doctors?.currentPage}
           loader={

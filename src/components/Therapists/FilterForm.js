@@ -1,17 +1,13 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, ButtonToolbar, Rate, Radio, RadioGroup, FlexboxGrid, Form, RangeSlider, TagPicker } from 'rsuite';
 import { getAllDoctors, getCountries, getLangs } from '../../features/shared/sharedActions';
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import { availability, genders } from '../../assets/constants';
-import {
-  setDoctorSearchParams,
-  setDoctorSearchLoading,
-  setSearchTherapistSideBarOpen,
-} from '../../features/shared/sharedSlice';
+import { setDoctorSearchParams, setDoctorSearchLoading, setSearchTherapistSideBarOpen } from '../../features/shared/sharedSlice';
 import { pageSize } from './TherapistsCard';
-import { createSearchParams, useNavigate } from 'react-router-dom';
+import { createSearchParams, useNavigate, useSearchParams } from 'react-router-dom';
 import { RemoveNullKeys } from '../../utils/fn';
 export const initalSearchParams = {
   amount: [0, 500],
@@ -23,9 +19,6 @@ export const initalSearchParams = {
   rate: null,
   name: '',
   sortBy: '',
-  sort: 'ASC',
-  page: 1,
-  size: pageSize,
 };
 
 function FilterForm() {
@@ -36,7 +29,9 @@ function FilterForm() {
     label: (
       <div key={item?.id} className="flex gap-1">
         <span className={clsx(item?.country_flag, 'min-w-[1.3em]')} />
-        <span className="max-w-[250px] lg:max-w-[220px] whitespace-nowrap overflow-hidden text-ellipsis">{item?.country_name}</span>
+        <span className="max-w-[250px] lg:max-w-[220px] whitespace-nowrap overflow-hidden text-ellipsis">
+          {item?.country_name}
+        </span>
       </div>
     ),
     value: item?.id,
@@ -52,12 +47,33 @@ function FilterForm() {
     };
   });
   const formRef = useRef();
-  const [formValues, setFormValues] = useState(initalSearchParams);
+  const [searchParams] = useSearchParams();
+  const search = useMemo(() => {
+    return {
+      amount: searchParams.getAll('amount')?.map((el) => Number(el)) ?? [10, 500],
+      availability: Number(searchParams.get('availability')) ?? null,
+      country: searchParams.getAll('country')?.map((el) => Number(el)) ?? [],
+      specialization: searchParams.getAll('specialization')?.map((el) => Number(el)) ?? [],
+      gender: Number(searchParams.get('gender')) || null,
+      languages: searchParams.getAll('languages')?.map((el) => Number(el)) ?? [],
+      rate: Number(searchParams.get('rate')) ?? null,
+      name: searchParams.get('name') ?? null,
+      sortBy: Number(searchParams.get('sortBy')) ?? '',
+      sort: searchParams.get('sort') ?? 'ASC',
+    };
+  }, [searchParams]);
+
+  const [formValues, setFormValues] = useState(search);
+  const navigate = useNavigate();
   const onSubmit = async () => {
     if (!formRef.current.check()) return;
     dispatch(setDoctorSearchLoading(true));
-    dispatch(setDoctorSearchParams({ ...doctorSearchParams, ...formValues }));
-    await dispatch(getAllDoctors({ ...doctorSearchParams, ...formValues, page: 1, size: pageSize }));
+    navigate({
+      search: `?${createSearchParams(RemoveNullKeys(formValues))}`,
+    });
+    await dispatch(getAllDoctors({ ...formValues, page: 1, size: pageSize }));
+    dispatch(setDoctorSearchParams({ ...formValues, page: 1, size: pageSize }));
+
     dispatch(setDoctorSearchLoading(false));
     if (searchTherapistSideBarOpen) {
       dispatch(setSearchTherapistSideBarOpen(false));
@@ -68,6 +84,9 @@ function FilterForm() {
     dispatch(setDoctorSearchLoading(true));
     dispatch(setDoctorSearchParams(initalSearchParams));
     setFormValues(initalSearchParams);
+    navigate({
+      search: `?${createSearchParams(RemoveNullKeys(initalSearchParams))}`,
+    });
     await dispatch(getAllDoctors(initalSearchParams));
     dispatch(setDoctorSearchLoading(false));
   };
@@ -75,14 +94,9 @@ function FilterForm() {
   useEffect(() => {
     dispatch(getCountries());
     dispatch(getLangs());
+    dispatch(getAllDoctors(search));
+    setDoctorSearchParams(search);
   }, []);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    navigate({
-      search: `?${createSearchParams(RemoveNullKeys(doctorSearchParams))}`,
-    });
-  }, [doctorSearchParams]);
 
   return (
     <div className="lg:bg-[var(--rs-bg-card)] lg:p-5 lg:rounded-3xl">
