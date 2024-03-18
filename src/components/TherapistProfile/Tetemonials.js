@@ -1,11 +1,11 @@
 import React from 'react';
-
 import { Rate, Pagination } from 'rsuite';
-
 import Card from '../Shared/Card';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import moment from 'moment';
+import person from '../../assets/images/person.png';
+
 const rowPerPage = 3;
 function Tetemonials() {
   const [activePage, setActivePage] = React.useState(1);
@@ -23,7 +23,7 @@ function Tetemonials() {
                 <section>{review?.message}</section>
                 <section className="flex justify-between items-center mt-4 mb-2">
                   <article className="flex justify-center gap-1 text-xs items-center">
-                    <img src={review?.user?.photo} className="size-5 rounded-full" />
+                    <img src={review?.user?.photo ?? person } className="size-5 rounded-full" />
                     <span>{review?.user?.name}</span>
                   </article>
                   <article className="text-gray/60 font-light text-xs">{moment(review?.createdAt)?.fromNow()}</article>

@@ -1,12 +1,15 @@
 import clsx from 'clsx';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Button } from 'rsuite';
+import { openChat } from '../../features/theme/themeSlice';
 
 function Hero() {
   const { t, i18n } = useTranslation();
   const currLang = i18n.resolvedLanguage;
+  const dispatch = useDispatch();
   return (
     <div
       className={clsx(
@@ -30,7 +33,9 @@ function Hero() {
               {t('Explore_Our_Therapists')}
             </Button>
           </Link>
-          <Button appearance="ghost" className="w-[200px] lg:w-[400px] text-sm lg:text-xl">
+          <Button onClick={()=>{
+            dispatch(openChat())
+          }} appearance="ghost" className="w-[200px] lg:w-[400px] text-sm lg:text-xl">
             {t('Contact')}
           </Button>
         </section>

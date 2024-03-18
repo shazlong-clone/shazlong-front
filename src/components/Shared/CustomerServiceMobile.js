@@ -5,12 +5,14 @@ import CustomerService from './CustomerService';
 
 function CustomerServiceMobile() {
   const { isChatOpen } = useSelector((state) => state?.theme);
-
-  return (
-    <div className={clsx(isChatOpen ? 'block' : 'hidden')}>
-      <CustomerService />
-    </div>
-  );
+  if (isChatOpen) {
+    return (
+      <div className={clsx(isChatOpen ? 'block' : 'hidden')}>
+        <CustomerService />
+      </div>
+    );
+  }
+  return '';
 }
 
 export default CustomerServiceMobile;

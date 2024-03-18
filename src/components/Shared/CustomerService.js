@@ -23,7 +23,7 @@ import { useTranslation } from 'react-i18next';
 function CustomerService({ close }) {
   const dispatch = useDispatch();
   const [activeTabe, setActiveTabe] = useState(1);
-  const {t, i18n} = useTranslation();
+  const {i18n} = useTranslation();
   const [message, setMessage] = useState('');
   const textAreaRef = useRef();
 

@@ -3,6 +3,9 @@ import { MdSupportAgent } from 'react-icons/md';
 import { Button, Popover, Whisper } from 'rsuite';
 import CustomerService from './CustomerService';
 import { useTranslation } from 'react-i18next';
+import { useDispatch, useSelector } from 'react-redux';
+import { openChat } from '../../features/theme/themeSlice';
+import useMediaQuery from '../../utils/useMediaQuery';
 
 const DefaultPopover = React.forwardRef(({ close, ...props }, ref) => {
   return (
@@ -12,11 +15,17 @@ const DefaultPopover = React.forwardRef(({ close, ...props }, ref) => {
       </Popover>
     </div>
   );
-                });
+});
+
 function CustomerServiceDeskTop() {
+  const { isChatOpen } = useSelector((state) => state?.theme);
+
   const { t } = useTranslation();
   const triggerRef = React.useRef();
   const close = () => triggerRef.current.close();
+  const dispatch = useDispatch();
+  const lg = useMediaQuery('lg');
+
   return (
     <>
       <Whisper
@@ -26,9 +35,15 @@ function CustomerServiceDeskTop() {
         trigger="click"
         placement="top"
         controlId="control-id-top"
+        open={isChatOpen && lg}
         speaker={<DefaultPopover close={close} />}
       >
-        <Button className="fixed flex gap-2 end-[10%] bottom-[50px] shadow-2xl rounded-full" appearance="primary" color="green">
+        <Button
+          onClick={() => dispatch(openChat())}
+          className="fixed flex gap-2 end-[200px] bottom-[50px] shadow-2xl rounded-full"
+          appearance="primary"
+          color="green"
+        >
           <span className="font-bold">{t('Customer_Service')}</span>
           <span className="text-2xl mb-[3px]">
             <MdSupportAgent className="flex items-center" />

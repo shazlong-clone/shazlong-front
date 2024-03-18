@@ -93,7 +93,7 @@ function Diseases() {
             <button
               onClick={() => navigate(`/${loacle}/therapists`)}
               key={i}
-              className="active:bg-[var(--rs-gray-50)] flex-[1_1_40%] md:flex-[1_1_30%] lg:flex-[1_1_20%]
+              className="active:bg-[var(--rs-primary-400)] flex-[1_1_40%] md:flex-[1_1_30%] lg:flex-[1_1_20%]
                flex text-lg items-center bg-[var(--rs-bg-card)] p-2 lg:p-5 rounded-xl gap-3 
                justify-center text-[var(--rs-primary-400)] cursor-pointer shadow-lg
                shadow-[var(--rs-gray-200)] mt-4 hover:bg-[var(--rs-primary-500)] hover:text-[var(--rs-gray-100)] transition"
