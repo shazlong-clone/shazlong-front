@@ -12,7 +12,7 @@ const DefaultPopover = React.forwardRef(({ close, ...props }, ref) => {
       </Popover>
     </div>
   );
-});
+                });
 function CustomerServiceDeskTop() {
   const { t } = useTranslation();
   const triggerRef = React.useRef();

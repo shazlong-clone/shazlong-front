@@ -28,7 +28,7 @@ function TherapistsComp() {
   return (
     <>
       <section className="mt-3">
-        <div className="grid grid-cols-1 lg:grid-cols-[1.9fr_5px_1fr]">
+        <div className="grid grid-cols-1 lg:grid-cols-[2fr_1px_1.5fr]">
           <section>
             <InputGroup size="lg" inside className="mb-10">
               <Input
@@ -49,7 +49,7 @@ function TherapistsComp() {
               onChange={handelSortChange}
               block
               size="lg"
-              data={[...sortMenu, { label: 'Rest', value: '' }]?.map((el) => {
+              data={[...sortMenu, { label: 'Rest', translationKey: 'Reset', value: '' }]?.map((el) => {
                 return { label: t(el?.translationKey), value: el?.id };
               })}
               renderMenuItem={(label, item) => {

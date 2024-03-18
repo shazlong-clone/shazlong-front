@@ -98,7 +98,7 @@ function Review() {
             </FormGroup>
             <FormGroup>
               <Form.ControlLabel className="text-base">2.{t('Write_something_about_your_experience')}</Form.ControlLabel>
-              <FormControl className="mt-2" placeholder="write you review here" rows={5} name="message" accepter={Textarea} />
+              <FormControl className="mt-2" placeholder={t('Write_Here')} rows={5} name="message" accepter={Textarea} />
             </FormGroup>
             <FormGroup>
               <Form.ControlLabel className="text-base">

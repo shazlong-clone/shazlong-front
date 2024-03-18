@@ -41,7 +41,7 @@ function FooterNav() {
     {
       name: 'Therapist_List',
       icon: <RiGroupLine />,
-      link: `${locale}/therapists`,
+      link: `/${locale}/therapists`,
     },
   ];
   
