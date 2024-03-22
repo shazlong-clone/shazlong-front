@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Button, Modal, Schema, Form, useToaster, Grid, Row, Col, MaskedInput, FlexboxGrid, ButtonToolbar } from 'rsuite';
+import { Button, Modal, Schema, Form, Grid, Row, Col, MaskedInput, FlexboxGrid, ButtonToolbar } from 'rsuite';
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import withSubmit from './withSubmit';
 

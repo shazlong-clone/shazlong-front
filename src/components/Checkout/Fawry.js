@@ -67,7 +67,11 @@ function CreditCard({ data, onSubmit, loading }) {
               <FlexboxGrid.Item>
                 <ButtonToolbar>
                   <Button
-                    onClick={() => onSubmit(formValue)}
+                    onClick={() => {
+                      if (formRef.current.check()) {
+                        onSubmit(formValue);
+                      }
+                    }}
                     style={{ marginBottom: '0px' }}
                     className="mb-0"
                     type="submit"
