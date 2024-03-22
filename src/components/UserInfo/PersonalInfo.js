@@ -13,6 +13,7 @@ import {
   useToaster,
   FlexboxGrid,
   Message,
+  Stack,
 } from 'rsuite';
 import { genders } from '../../assets/constants';
 import { updateMe } from '../../features/auth/authAction';
@@ -108,9 +109,16 @@ function PersonalInfo() {
     }
   };
 
+  const handelCountryId = (id)=>{
+    setCountryCode(countries?.find((el) => el?.id === id)?.country_code);
+  }
+
   useEffect(() => {
     dispatch(getCountries());
   }, []);
+  useEffect(()=>{
+    handelCountryId(user?.countryId)
+  },[user?.countryId])
   return (
     <article className="relative">
       {plainText ? (
@@ -135,7 +143,7 @@ function PersonalInfo() {
           <Form.ControlLabel>{t('Country')}</Form.ControlLabel>
           <Control
             onSelect={(id) => {
-              setCountryCode(countries?.find((el) => el?.id === id)?.country_code);
+              handelCountryId(id)
             }}
             placeholder={t('Country')}
             menuMaxHeight={300}
@@ -153,9 +161,14 @@ function PersonalInfo() {
         </Group>
         <Group controlId="phone">
           <Form.ControlLabel>{t('Phone')}</Form.ControlLabel>
-
+            
           {plainText ? (
-            <Control name="phone" placeholder={t('Phone')} size="lg" />
+            <>
+              <Stack alignItems='center'>
+                <Control name="phone" placeholder={t('Phone')} size="lg" />
+                <span dir='ltr' className='pe-2'>{countryCode}</span>
+              </Stack>
+            </>
           ) : (
             <InputGroup>
               <InputGroup.Addon>{countryCode}</InputGroup.Addon>
@@ -168,7 +181,7 @@ function PersonalInfo() {
           <Control accepter={RadioGroup} name="gender" inline>
             {genders?.map((el) => {
               return (
-                <Radio key={el?.id} value={el?.id}>
+                <Radio key={el?.id} value={String(el?.id)}>
                   {t(el?.name)}
                 </Radio>
               );

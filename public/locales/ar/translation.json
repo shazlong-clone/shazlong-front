@@ -248,5 +248,11 @@
   "Education": "التعليم",
   "Experience": "الخبرات",
   "Review_Added":"تمت اضافة مراجعتك بنجاح",
-  "Write_Here":"اكتب هنا"
+  "Write_Here":"اكتب هنا",
+  "Any_Time": "في اي وقت",
+  "demo_coupon": "كوبون تجريبي {{coupon}}",
+  "Coupon_Applied":" تم تطبيق الكوبون بنجاح",
+  "Invalid_Coupon":"كوبون غير صحيح",
+  "Coupon_Applied_Already":"تم تطبيق الكوبون مسبقا",
+  "Enter_Coupon_Code":"ادخل كود الكوبون"
 }

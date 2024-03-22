@@ -24,43 +24,42 @@ function Review() {
   const toaster = useToaster();
   const dispatch = useDispatch();
   const formValue = useRef();
-  
-  const handelConfirm = async() =>{
-    
-    if (!formRef.current.check()) return; 
-      try {
-        setLoading(true);
-        const res = await dispatch(createReview({...formValue.current, doctor:id}));
-        if (res?.payload?.status) {
-          dispatch(getDoctorProfile(id))
-          toaster.push(
-            <Message type="success" closable showIcon>
-              {t('Review_Added')}
-            </Message>,
-            { duration: 5000 },
-          );
-          handleClose();
-        } else {
-          toaster.push(
-            <Message type="error" closable showIcon>
-              {res.payload.message}
-            </Message>,
-            { duration: 5000 },
-          );
-        }
-      } catch (err) {
+
+  const handelConfirm = async () => {
+    if (!formRef.current.check()) return;
+    try {
+      setLoading(true);
+      const res = await dispatch(createReview({ ...formValue.current, doctor: id }));
+      if (res?.payload?.status) {
+        dispatch(getDoctorProfile(id));
         toaster.push(
-          <Message closable showIcon type="error">
-            {t('internal_server_error')}
+          <Message type="success" closable showIcon>
+            {t('Review_Added')}
           </Message>,
-          {
-            duration: 5000,
-          },
+          { duration: 5000 },
         );
-      } finally {
-        setLoading(false);
+        handleClose();
+      } else {
+        toaster.push(
+          <Message type="error" closable showIcon>
+            {res.payload.message}
+          </Message>,
+          { duration: 5000 },
+        );
       }
-  }
+    } catch (err) {
+      toaster.push(
+        <Message closable showIcon type="error">
+          {t('internal_server_error')}
+        </Message>,
+        {
+          duration: 5000,
+        },
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const model = Schema.Model({
     message: Schema.Types.StringType().isRequired(t('required')),
@@ -69,7 +68,7 @@ function Review() {
   return (
     <>
       <span className="flex justify-center">
-        <Button onClick={handleOpen} size={lg ? 'lg' : 'md'} appearance='ghost'>
+        <Button onClick={handleOpen} size={lg ? 'lg' : 'md'} appearance="ghost">
           {t('Write_Review')}
         </Button>
       </span>

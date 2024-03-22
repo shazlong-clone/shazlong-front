@@ -39,22 +39,39 @@ function Footer() {
               <section>
                 <h4 className="mb-4 font-bold">{t('Shezlong')}</h4>
                 <p>
-                  <Link className='text-[var(--rs-gray-100)] hover:text-[var(--rs-gray-100)]' to={`/${i18n.resolvedLanguage}`}>{t('Emergency_Numbers')}</Link>
+                  <Link className="text-[var(--rs-gray-100)] hover:text-[var(--rs-gray-100)]" to={`/${i18n.resolvedLanguage}`}>
+                    {t('Emergency_Numbers')}
+                  </Link>
                 </p>
                 <p>
-                  <Link className='text-[var(--rs-gray-100)] hover:text-[var(--rs-gray-100)]' to={`/${i18n.resolvedLanguage}`}> {t('Privacy_And_Policy')}</Link>
+                  <Link className="text-[var(--rs-gray-100)] hover:text-[var(--rs-gray-100)]" to={`/${i18n.resolvedLanguage}`}>
+                    {' '}
+                    {t('Privacy_And_Policy')}
+                  </Link>
                 </p>
               </section>
               <section>
                 <h4 className="mb-4 font-bold">{t('Resources')}</h4>
                 <p>
-                  <Link className='text-[var(--rs-gray-100)] hover:text-[var(--rs-gray-100)]' to={`/${i18n.resolvedLanguage}/test`}>{t('Psychological_Tests')}</Link>
+                  <Link
+                    className="text-[var(--rs-gray-100)] hover:text-[var(--rs-gray-100)]"
+                    to={`/${i18n.resolvedLanguage}/test`}
+                  >
+                    {t('Psychological_Tests')}
+                  </Link>
                 </p>
                 <p>
-                  <Link className='text-[var(--rs-gray-100)] hover:text-[var(--rs-gray-100)]' to={`/${i18n.resolvedLanguage}/blogs`}>{t('Blog')}</Link>
+                  <Link
+                    className="text-[var(--rs-gray-100)] hover:text-[var(--rs-gray-100)]"
+                    to={`/${i18n.resolvedLanguage}/blogs`}
+                  >
+                    {t('Blog')}
+                  </Link>
                 </p>
                 <p>
-                  <Link className='text-[var(--rs-gray-100)] hover:text-[var(--rs-gray-100)]' to={`/${i18n.resolvedLanguage}`}>{t('Emergency_Numbers')}</Link>
+                  <Link className="text-[var(--rs-gray-100)] hover:text-[var(--rs-gray-100)]" to={`/${i18n.resolvedLanguage}`}>
+                    {t('Emergency_Numbers')}
+                  </Link>
                 </p>
               </section>
             </div>
@@ -82,11 +99,11 @@ function Footer() {
 
                   <Link to="/doctor" className="hover:no-underline active:no-underline grow">
                     <button
-                          className="
+                      className="
                           min-w-[250px]
                         font-bold border lg:mt-0 rounded-lg border-white text-white bg-opacity-0
                         bg-transparent py-3 px-14  md:block md:w-full"
-                        >
+                    >
                       {t('Join_As_A_Therapist')}
                     </button>
                   </Link>
@@ -104,7 +121,10 @@ function Footer() {
       </div>
       <div className="text-center mt-5">
         {t('Made_By', { year: new Date().getFullYear() })} <img className="w-[30px] text-cyan" src={SVLogoFill} alt="d" />{' '}
-        <a className='text-[var(--rs-gray-100)] hover:text-[var(--rs-gray-100)] underline' href="https://saeedkhal.github.io/saeed-khaled-portfolio/">
+        <a
+          className="text-[var(--rs-gray-100)] hover:text-[var(--rs-gray-100)] underline"
+          href="https://saeedkhal.github.io/saeed-khaled-portfolio/"
+        >
           {t('Saeed_Khaled')}
           <br />
         </a>

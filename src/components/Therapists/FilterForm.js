@@ -11,7 +11,7 @@ import { createSearchParams, useNavigate, useSearchParams } from 'react-router-d
 import { RemoveNullKeys } from '../../utils/fn';
 export const initalSearchParams = {
   amount: [0, 500],
-  availability: null,
+  availability: 'all',
   country: [],
   specialization: [],
   gender: null,
@@ -19,11 +19,12 @@ export const initalSearchParams = {
   rate: null,
   name: '',
   sortBy: '',
+
 };
 
 function FilterForm() {
   const { i18n, t } = useTranslation();
-  const { countries, specializationList, languages, doctorSearchParams, doctorSearchLoading, searchTherapistSideBarOpen } =
+  const { countries, specializationList, languages, doctorSearchLoading, searchTherapistSideBarOpen } =
     useSelector((state) => state?.shared);
   const countriesOptions = countries.map((item) => ({
     label: (
@@ -48,10 +49,12 @@ function FilterForm() {
   });
   const formRef = useRef();
   const [searchParams] = useSearchParams();
+  
   const search = useMemo(() => {
+    const amount = searchParams.getAll('amount')?.map((el) => Number(el));
     return {
-      amount: searchParams.getAll('amount')?.map((el) => Number(el)) ?? [10, 500],
-      availability: Number(searchParams.get('availability')) ?? null,
+      amount: amount?.length ? amount : [10, 500],
+      availability: searchParams.get('availability') ?? 'all',
       country: searchParams.getAll('country')?.map((el) => Number(el)) ?? [],
       specialization: searchParams.getAll('specialization')?.map((el) => Number(el)) ?? [],
       gender: Number(searchParams.get('gender')) || null,
@@ -62,6 +65,7 @@ function FilterForm() {
       sort: searchParams.get('sort') ?? 'ASC',
     };
   }, [searchParams]);
+
 
   const [formValues, setFormValues] = useState(search);
   const navigate = useNavigate();

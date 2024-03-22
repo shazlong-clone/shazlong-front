@@ -27,19 +27,26 @@ export const prefixList = ['Dr', 'PsyD', 'Prof', 'MBPsS', 'Mr', 'Mrs', 'Ms'];
 
 export const availability = [
   {
-    id: 0,
+    id: '0',
     name: 'Now',
   },
   {
-    id: 1,
+    id: '1',
     name: 'Today',
   },
   {
-    id: 7,
+    id: '7',
     name: 'This_Week',
   },
+  {
+    id: 'all',
+    name: 'Any_Time',
+  }
 ];
 
 export const transctionFeez = 5;
-export const couponCode = '1234';
+
+export const couponCode = Array.from(crypto.getRandomValues(new Uint32Array(5)))
+  .map((x) => x.toString(36).slice(0,5))
+  .join('');
 export const discount = 20;

@@ -1,16 +1,17 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import InternalHeader from '../components/Shared/InternalHeader';
-import { Avatar, Button, Divider, IconButton, Input } from 'rsuite';
+import { Avatar, Button, Divider, Form, IconButton, Input, Message, toaster } from 'rsuite';
 import person from '../assets/images/person.png';
 import Card from '../components/Shared/Card';
-import { LuAlarmClock } from 'react-icons/lu';
+import { LuAlarmClock, LuCopy } from 'react-icons/lu';
 import { GiCash } from 'react-icons/gi';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { RadioTile, RadioTileGroup } from 'rsuite';
 import visa_new from '../assets/images/visa_new.png';
 import master_card_new from '../assets/images/master_card_new.svg';
 import we from '../assets/images/we_icon.svg';
 import orange from '../assets/images/orange_icon.svg';
+import { FaCheck } from 'react-icons/fa6';
 import etisalat_icon from '../assets/images/etisalat_icon.svg';
 import fawry from '../assets/images/fawry.png';
 import vodafon from '../assets/images/Vodafone_icon.png';
@@ -26,6 +27,8 @@ import moment from 'moment';
 import { transctionFeez, discount, couponCode } from '../assets/constants';
 
 function Checkout() {
+  const [textCopied, setTextCopied] = useState(false);
+  const [coupon, setCoupon] = useState('');
   const [openCpllapse, setOpenCpllapse] = useState(false);
   const lg = useMediaQuery('lg');
   const { t, i18n } = useTranslation();
@@ -52,12 +55,30 @@ function Checkout() {
     t('Instruction_6'),
     t('Instruction_7'),
   ];
-  const couponRef = useRef();
   const [discountState, setDiscount] = useState(0);
+
   const handelCopon = () => {
-    if (couponRef.current.value === couponCode) {
+    if(!coupon) {
+      toaster.push(
+        <Message closable showIcon type="error">
+          {t('Enter_Coupon_Code')}
+        </Message>,
+      );
+      return;
+    }
+    if (coupon === couponCode) {
       setDiscount(discount);
+      toaster.push(
+        <Message closable showIcon type="success">
+          {t('Coupon_Applied')}
+        </Message>,
+      );
     } else {
+      toaster.push(
+        <Message closable showIcon type="error">
+          {t('Invalid_Coupon')}
+        </Message>,
+      );
       setDiscount(0);
     }
   };
@@ -66,7 +87,10 @@ function Checkout() {
       return moment(to).diff(moment(from), 'minutes') == feezItem?.duration;
     })?.amount;
   };
-
+  const handelCopy = () => {
+    navigator.clipboard.writeText(couponCode);
+    setTextCopied(true);
+  };
   const subTotal = useMemo(() => {
     return checkoutSlots?.reduce((prevSlot, currSlot) => {
       return prevSlot + getFeez(currSlot?.from, currSlot?.to);
@@ -137,6 +161,9 @@ function Checkout() {
             <h5 className="my-3 text-gray/80 text-center">{t('coupon')}</h5>
             <article className="flex gap-2">
               <Input
+                disabled={discountState}
+                value={coupon}
+                onChange={(v) => setCoupon(v)}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter') {
                     // Cancel the default action, if needed
@@ -145,12 +172,32 @@ function Checkout() {
                     handelCopon();
                   }
                 }}
-                ref={couponRef}
                 placeholder={t('coupon')}
               />
-              <Button appearance="primary" onClick={handelCopon}>
-                {t('Apply')}
-              </Button>
+              {discountState ? (
+                <IconButton ripple={false} appearance="primary" color="green" icon={<FaCheck />} circle />
+              ) : (
+                <Button appearance="primary" onClick={handelCopon}>
+                  {t('Apply')}
+                </Button>
+              )}
+            </article>
+            <article className="flex gap-2 mt-2 items-center">
+              {!discountState ? (
+                <>
+                  <Form.HelpText>{t('demo_coupon', { coupon: couponCode })}</Form.HelpText>
+                  {textCopied ? (
+                    <FaCheck className="text-sm text-cyan text-green-300" />
+                  ) : (
+                    <LuCopy
+                      className="cursor-pointer hover:text-[var(--rs-primary-500)] text-[var(--rs-primary-300)]"
+                      onClick={handelCopy}
+                    />
+                  )}
+                </>
+              ) : (
+                <Form.HelpText className='text-green-500'>{t('Coupon_Applied')}</Form.HelpText>
+              )}
             </article>
           </section>
           <section className="mt-3 grid gap-2 capitalize">
