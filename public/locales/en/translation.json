@@ -232,12 +232,13 @@
   "Certifications": "Certificates",
   "Education": "Education",
   "Experience": "Experience",
-  "Review_Added":"Review Added Successfuly",
-  "Write_Here":"Write Here",
+  "Review_Added": "Review Added Successfuly",
+  "Write_Here": "Write Here",
   "Any_Time": "Any Time",
   "demo_coupon": "Demo Coupon  {{coupon}}",
-  "Coupon_Applied":" Coupon Applied Successfuly",
-  "Invalid_Coupon":"Invalid Coupon",
-  "Coupon_Applied_Already":"Coupon Applied Already",
-  "Enter_Coupon_Code":"Enter Coupon Code"
+  "Coupon_Applied": " Coupon Applied Successfuly",
+  "Invalid_Coupon": "Invalid Coupon",
+  "Coupon_Applied_Already": "Coupon Applied Already",
+  "Enter_Coupon_Code": "Enter Coupon Code",
+  "Reserve_Session": "Reserve Session"
 }

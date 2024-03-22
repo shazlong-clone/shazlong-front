@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import vodafone from '../../assets/images/Vodafone_icon.png';
 import fawryImg from '../../assets/images/fawry.png';
 import CreditCard from './CreditCard';
-import VodafonCash from './VodafonCash';
+import VodafonCash from './VodafoneCash';
 import Fawry from './Fawry';
 import viza from '../../assets/images/visa_new.png';
 import masterCard from '../../assets/images/master_card_new.svg';

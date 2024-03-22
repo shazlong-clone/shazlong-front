@@ -1,64 +1,23 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Button, Modal, Schema, Form, Message, useToaster, Grid, Row, Col, FlexboxGrid, ButtonToolbar } from 'rsuite';
+import { Button, Modal, Schema, Form, Grid, Row, Col, FlexboxGrid, ButtonToolbar } from 'rsuite';
 
-import { useDispatch, useSelector } from 'react-redux';
-import { createOrUpdatePayment } from '../../features/payment/paymentSlice';
+import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
+import withSubmit from './withSubmit';
 
 const { Group, Control } = Form;
 
-function CreditCard() {
+function CreditCard({ data, onSubmit, loading }) {
+  const { subTotal, transctionFeez, discountState } = data;
   const { t } = useTranslation();
   const { fawry } = useSelector((state) => state?.payment);
-  const [loading, setLoading] = useState(false);
   const [open, setOpen] = React.useState(false);
   const formRef = useRef();
-  const toaster = useToaster();
-  const dispatch = useDispatch();
   const [formValue, setFormValue] = useState({
     email: fawry?.email,
     phone: fawry?.phone,
   });
-  const onSubmit = async () => {
-    if (!formRef.current.check()) return;
-    try {
-      setLoading(true);
-      const res = await dispatch(
-        createOrUpdatePayment({
-          payment: {
-            fawry: formValue,
-          },
-        }),
-      );
-      if (res?.payload?.status) {
-        toaster.push(
-          <Message type="success" closable showIcon>
-            {t('updated_successfuly')}
-          </Message>,
-          { duration: 5000 },
-        );
-        setOpen(false);
-      } else {
-        toaster.push(
-          <Message type="error" closable showIcon>
-            {res.payload.message}
-          </Message>,
-          { duration: 5000 },
-        );
-      }
-    } catch (err) {
-      toaster.push(
-        <Message closable showIcon type="error">
-          {t('internal_server_error')}
-        </Message>,
-        {
-          duration: 5000,
-        },
-      );
-    } finally {
-      setLoading(false);
-    }
-  };
+
   const model = Schema.Model({
     email: Schema.Types.StringType().isRequired(t('required')).isEmail(t('not_valid_email')),
     phone: Schema.Types.StringType()
@@ -73,9 +32,10 @@ function CreditCard() {
 
   return (
     <>
-      <a className="cursor-pointer underline" onClick={() => setOpen(true)}>
-        {t('Add_New')}
-      </a>
+      <Button onClick={() => setOpen(true)} block className="font-[500] mt-3" appearance="primary">
+        {t('Pay')} <span className="font-bold px-2">{subTotal + transctionFeez - discountState}</span>
+        {t('Egy')}
+      </Button>
       <Modal
         dialogClassName="lg:w-[450px]"
         size="xs"
@@ -107,7 +67,7 @@ function CreditCard() {
               <FlexboxGrid.Item>
                 <ButtonToolbar>
                   <Button
-                    onClick={onSubmit}
+                    onClick={() => onSubmit(formValue)}
                     style={{ marginBottom: '0px' }}
                     className="mb-0"
                     type="submit"
@@ -131,4 +91,4 @@ function CreditCard() {
   );
 }
 
-export default CreditCard;
+export default withSubmit(CreditCard);

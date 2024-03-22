@@ -41,12 +41,16 @@ export const availability = [
   {
     id: 'all',
     name: 'Any_Time',
-  }
+  },
 ];
 
 export const transctionFeez = 5;
 
 export const couponCode = Array.from(crypto.getRandomValues(new Uint32Array(5)))
-  .map((x) => x.toString(36).slice(0,5))
+  .map((x) => x.toString(36).slice(0, 5))
   .join('');
 export const discount = 20;
+
+export const CRIDIT_CARD = 'CREDIT_CARD';
+export const PHONE_CASH = 'PHONE_CASH';
+export const FAWRY = 'FAWRY';

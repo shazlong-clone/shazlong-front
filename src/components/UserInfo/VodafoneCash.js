@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 
 const { Group, Control } = Form;
 
-function CreditCard() {
+function VodafoneCash() {
   const { t } = useTranslation();
   const { vodafoneCash } = useSelector((state) => state?.payment);
   const [loading, setLoading] = useState(false);
@@ -123,4 +123,4 @@ function CreditCard() {
   );
 }
 
-export default CreditCard;
+export default VodafoneCash;

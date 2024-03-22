@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import InternalHeader from '../components/Shared/InternalHeader';
 import { Avatar, Button, Divider, Form, IconButton, Input, Message, toaster } from 'rsuite';
 import person from '../assets/images/person.png';
@@ -24,14 +24,45 @@ import { useTranslation } from 'react-i18next';
 import { getPrefix, getSlotsByIds } from '../features/shared/sharedActions';
 import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
-import { transctionFeez, discount, couponCode } from '../assets/constants';
+import { transctionFeez, discount, couponCode, CRIDIT_CARD, PHONE_CASH, FAWRY } from '../assets/constants';
+import Payment from '../components/Checkout/Payment';
 
 function Checkout() {
+  const { t, i18n } = useTranslation();
   const [textCopied, setTextCopied] = useState(false);
   const [coupon, setCoupon] = useState('');
+  const payMentMethods = [
+    {
+      icon: (
+        <div>
+          <img src={visa_new} alt="visa_new" />
+          <img src={master_card_new} alt="master_card_new" />
+        </div>
+      ),
+      label: t('Credit_Card'),
+      value: CRIDIT_CARD,
+    },
+    {
+      icon: (
+        <div className="flex gap-1 items-center">
+          <img className="w-6 h-6" src={vodafon} alt="vodafon" />
+          <img src={we} alt="we" />
+          <img src={orange} alt="orange" />
+          <img src={etisalat_icon} alt="etisalat_icon" />
+        </div>
+      ),
+      label: t('Vodafone_Cash'),
+      value: PHONE_CASH,
+    },
+    {
+      icon: <img className="w-16" src={fawry} alt="fawry" />,
+      label: t('Fawry'),
+      value: FAWRY,
+    },
+  ];
+  const [paymentMethod, setPaymentMethod] = useState(payMentMethods[0].value);
   const [openCpllapse, setOpenCpllapse] = useState(false);
   const lg = useMediaQuery('lg');
-  const { t, i18n } = useTranslation();
   const [searchParams] = useSearchParams();
   const slots_ids = searchParams.get('slots_ids');
   const navigate = useNavigate();
@@ -58,7 +89,7 @@ function Checkout() {
   const [discountState, setDiscount] = useState(0);
 
   const handelCopon = () => {
-    if(!coupon) {
+    if (!coupon) {
       toaster.push(
         <Message closable showIcon type="error">
           {t('Enter_Coupon_Code')}
@@ -196,7 +227,7 @@ function Checkout() {
                   )}
                 </>
               ) : (
-                <Form.HelpText className='text-green-500'>{t('Coupon_Applied')}</Form.HelpText>
+                <Form.HelpText className="text-green-500">{t('Coupon_Applied')}</Form.HelpText>
               )}
             </article>
           </section>
@@ -226,43 +257,22 @@ function Checkout() {
         </Card>
         <Card className="radio-card my-0">
           <h5 className="mb-6 text-gray/80 text-center">{t('Payment_Method')}</h5>
-          <RadioTileGroup defaultValue="private" aria-label="Visibility Level" className="check-meth">
-            <RadioTile
-              icon={
-                <div>
-                  <img src={visa_new} alt="visa_new" />
-                  <img src={master_card_new} alt="master_card_new" />
-                </div>
-              }
-              label={t('Credit_Card')}
-              value="private"
-              className="h-[70px]"
-            ></RadioTile>
-            <RadioTile
-              icon={
-                <div className="flex gap-1 items-center">
-                  <img className="w-6 h-6" src={vodafon} alt="vodafon" />
-                  <img src={we} alt="we" />
-                  <img src={orange} alt="orange" />
-                  <img src={etisalat_icon} alt="etisalat_icon" />
-                </div>
-              }
-              label={t('Vodafone_Cash')}
-              value="internal"
-              className="h-[70px]"
-            />
-
-            <RadioTile
-              icon={<img className="w-16" src={fawry} alt="fawry" />}
-              label={t('Fawry')}
-              value="public"
-              className="h-[70px]"
-            />
+          <RadioTileGroup value={paymentMethod} aria-label="Visibility Level" className="check-meth">
+            {payMentMethods?.map((paymentMethodItem) => {
+              const { icon, label, value } = paymentMethodItem;
+              return (
+                <RadioTile
+                  onClick={() => setPaymentMethod(value)}
+                  key={Math.random()}
+                  icon={icon}
+                  label={label}
+                  value={value}
+                  className="h-[70px]"
+                />
+              );
+            })}
           </RadioTileGroup>
-          <Button block className="font-[500] mt-3" appearance="primary">
-            {t('Pay')} <span className="font-bold px-2">{subTotal + transctionFeez - discountState}</span>
-            {t('Egy')}
-          </Button>
+          <Payment data={{ subTotal, transctionFeez, discountState, paymentMethod }} />
         </Card>
         <Card>
           <h5 className="grid grid-cols-[1fr_auto] items-center mb-5">
