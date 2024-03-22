@@ -1,15 +1,15 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Button, Modal, Schema, Form, Grid, Row, Col, FlexboxGrid, ButtonToolbar } from 'rsuite';
+import { Button, Modal, Schema, Form, Grid, Row, Col, FlexboxGrid, ButtonToolbar, toaster, Message } from 'rsuite';
 
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import withSubmit from './withSubmit';
+import { PHONE_DEMO } from '../../assets/constants';
 
 const { Group, Control } = Form;
 
 function VodafoneCash({ data, onSubmit, loading }) {
   const { subTotal, transctionFeez, discountState } = data;
-
   const { t } = useTranslation();
   const { vodafoneCash } = useSelector((state) => state?.payment);
   const [open, setOpen] = React.useState(false);
@@ -42,7 +42,7 @@ function VodafoneCash({ data, onSubmit, loading }) {
         onClose={() => setOpen(false)}
       >
         <Modal.Header>
-          <Modal.Title>{t('Add') + t('Vodafone_Cash')}</Modal.Title>
+          <Modal.Title>{t('Reserve_Session')}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form ref={formRef} onChange={setFormValue} formValue={formValue} fluid model={model}>
@@ -60,7 +60,13 @@ function VodafoneCash({ data, onSubmit, loading }) {
                 <ButtonToolbar>
                   <Button
                     onClick={() => {
-                      if (formRef.current.check()) {
+                      if (formValue.phone !== PHONE_DEMO) {
+                        toaster.push(
+                          <Message type="error" closable showIcon>
+                            {t('Invalid_Payment')}
+                          </Message>,
+                        );
+                      } else if (formRef.current.check()) {
                         onSubmit(formValue);
                       }
                     }}
@@ -71,7 +77,7 @@ function VodafoneCash({ data, onSubmit, loading }) {
                     loading={loading}
                     disabled={loading}
                   >
-                    {t('Add')}
+                    {t('Book')}
                   </Button>
                   <Button disabled={loading} style={{ marginBottom: '0px' }} onClick={() => setOpen(false)} appearance="subtle">
                     {t('Cancel')}

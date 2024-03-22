@@ -255,5 +255,6 @@
   "Invalid_Coupon": "كوبون غير صحيح",
   "Coupon_Applied_Already": "تم تطبيق الكوبون مسبقا",
   "Enter_Coupon_Code": "ادخل كود الكوبون",
-  "Reserve_Session": "حجز جلسة"
+  "Reserve_Session": "حجز جلسة",
+  "Invalid_Payment": "عملية دفع غير صحيحة"
 }

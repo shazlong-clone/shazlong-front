@@ -240,5 +240,6 @@
   "Invalid_Coupon": "Invalid Coupon",
   "Coupon_Applied_Already": "Coupon Applied Already",
   "Enter_Coupon_Code": "Enter Coupon Code",
-  "Reserve_Session": "Reserve Session"
+  "Reserve_Session": "Reserve Session",
+  "Invalid_Payment": "Invalid Payment"
 }

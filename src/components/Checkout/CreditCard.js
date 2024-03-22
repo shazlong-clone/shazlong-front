@@ -1,9 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Button, Modal, Schema, Form, Grid, Row, Col, MaskedInput, FlexboxGrid, ButtonToolbar } from 'rsuite';
+import { Button, Modal, Schema, Form, Grid, Row, Col, MaskedInput, FlexboxGrid, ButtonToolbar, toaster, Message } from 'rsuite';
 
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import withSubmit from './withSubmit';
+import { CARD_NUMBER_DEMO, CVC_DEMO, EXPIREDATE_DEMO } from '../../assets/constants';
 
 const { Group, Control } = Form;
 
@@ -44,7 +45,7 @@ function CreditCard({ data, onSubmit, loading }) {
         onClose={() => setOpen(false)}
       >
         <Modal.Header>
-          <Modal.Title>{t('Add') + t('Credit_Card')}</Modal.Title>
+          <Modal.Title>{t('Reserve_Session')}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form ref={formRef} onChange={setFormValue} formValue={formValue} fluid model={model}>
@@ -106,7 +107,22 @@ function CreditCard({ data, onSubmit, loading }) {
               <FlexboxGrid.Item>
                 <ButtonToolbar>
                   <Button
-                    onClick={() => onSubmit(formValue)}
+                    onClick={() => {
+                      if (
+                        formValue.cvc !== CVC_DEMO ||
+                        formValue.cardNumber !== CARD_NUMBER_DEMO ||
+                        formValue.expireDate !== EXPIREDATE_DEMO
+                      ) {
+                        toaster.push(
+                          <Message type="error" closable showIcon>
+                            {t('Invalid_Payment')}
+                          </Message>,
+                        );
+                        return;
+                      } else if (formRef.current.check()) {
+                        onSubmit(formValue);
+                      }
+                    }}
                     style={{ marginBottom: '0px' }}
                     className="mb-0"
                     type="submit"
@@ -114,7 +130,7 @@ function CreditCard({ data, onSubmit, loading }) {
                     loading={loading}
                     disabled={loading}
                   >
-                    {t('Add')}
+                    {t('Book')}
                   </Button>
                   <Button disabled={loading} style={{ marginBottom: '0px' }} onClick={() => setOpen(false)} appearance="subtle">
                     {t('Cancel')}
