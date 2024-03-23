@@ -248,5 +248,7 @@
   "Booked_Success_two": "Booked Successfuly",
   "Booked_Success_few": "Booked Successfuly",
   "Booked_Success_many": "Booked Successfuly",
-  "Booked_Success_other": "Booked Successfuly"
+  "Booked_Success_other": "Booked Successfuly",
+  "Upcoming_Sessions": "Upcoming Sessions",
+  "Previous_Sessions": "Previous Sessions"
 }

@@ -263,5 +263,7 @@
   "Booked_Success_two": "تم حجز الجلستان بنجاح",
   "Booked_Success_few": "تم حجز الجلسات بنجاح",
   "Booked_Success_many": "تم حجز الجلسات بنجاح",
-  "Booked_Success_other": "تم حجز الجلسات بنجاح"
+  "Booked_Success_other": "تم حجز الجلسات بنجاح",
+  "Upcoming_Sessions": "الجلسات القادمة",
+  "Previous_Sessions": "الجلسات السابقة"
 }
