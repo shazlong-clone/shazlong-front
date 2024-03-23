@@ -62,7 +62,7 @@ function VodafoneCash() {
     phone: Schema.Types.StringType()
       .isRequired(t('required'))
       .addRule((value) => {
-        return /^(010|\+2010)\d{8}/.test(value);
+        return /^(010|\+2010|011|\+2011|012|\+2012)\d{8}/.test(value);
       }, t('not_valid_vodafone_number')),
   });
   useEffect(() => {

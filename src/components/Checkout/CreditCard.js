@@ -8,11 +8,10 @@ import { CARD_NUMBER_DEMO, CVC_DEMO, EXPIREDATE_DEMO } from '../../assets/consta
 
 const { Group, Control } = Form;
 
-function CreditCard({ data, onSubmit, loading }) {
+function CreditCard({ data, onSubmit, loading, open, setOpen }) {
   const { subTotal, transctionFeez, discountState } = data;
   const { t } = useTranslation();
   const { card } = useSelector((state) => state?.payment);
-  const [open, setOpen] = React.useState(false);
   const formRef = useRef();
   const [formValue, setFormValue] = useState({
     cardNumber: card?.cardNumber,
@@ -25,6 +24,10 @@ function CreditCard({ data, onSubmit, loading }) {
     expireDate: Schema.Types.StringType().isRequired(t('required')),
     cvc: Schema.Types.StringType().isRequired(t('required')),
   });
+
+  const fillDemoPaymentDemo = () => {
+    setFormValue({ cardNumber: CARD_NUMBER_DEMO, expireDate: EXPIREDATE_DEMO, cvc: CVC_DEMO });
+  };
 
   useEffect(() => {
     setFormValue({ cardNumber: card?.cardNumber, expireDate: card?.expireDate, cvc: card?.cvc });
@@ -103,6 +106,9 @@ function CreditCard({ data, onSubmit, loading }) {
                 </Col>
               </Row>
             </Grid>
+            <Button appearance="link" onClick={fillDemoPaymentDemo}>
+              {t('Fill_Demo_Payment_Info')}
+            </Button>
             <FlexboxGrid justify="end">
               <FlexboxGrid.Item>
                 <ButtonToolbar>

@@ -241,5 +241,12 @@
   "Coupon_Applied_Already": "Coupon Applied Already",
   "Enter_Coupon_Code": "Enter Coupon Code",
   "Reserve_Session": "Reserve Session",
-  "Invalid_Payment": "Invalid Payment"
+  "Invalid_Payment": "Invalid Payment",
+  "Fill_Demo_Payment_Info": "Fill Demo Payment Info",
+  "Booked_Success_zero": "Booked Successfuly",
+  "Booked_Success_one": "Booked Successfuly",
+  "Booked_Success_two": "Booked Successfuly",
+  "Booked_Success_few": "Booked Successfuly",
+  "Booked_Success_many": "Booked Successfuly",
+  "Booked_Success_other": "Booked Successfuly"
 }

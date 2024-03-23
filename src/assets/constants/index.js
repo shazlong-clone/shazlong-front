@@ -55,7 +55,7 @@ export const CRIDIT_CARD = 'CREDIT_CARD';
 export const PHONE_CASH = 'PHONE_CASH';
 export const FAWRY = 'FAWRY';
 
-export const CARD_NUMBER_DEMO = '111111111111';
+export const CARD_NUMBER_DEMO = '1111111111111111';
 export const CVC_DEMO = '111';
 export const EXPIREDATE_DEMO = '25/25';
 export const PHONE_DEMO = '01111111111';

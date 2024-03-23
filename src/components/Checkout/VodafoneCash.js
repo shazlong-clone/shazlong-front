@@ -8,11 +8,10 @@ import { PHONE_DEMO } from '../../assets/constants';
 
 const { Group, Control } = Form;
 
-function VodafoneCash({ data, onSubmit, loading }) {
+function VodafoneCash({ data, onSubmit, loading, open, setOpen }) {
   const { subTotal, transctionFeez, discountState } = data;
   const { t } = useTranslation();
   const { vodafoneCash } = useSelector((state) => state?.payment);
-  const [open, setOpen] = React.useState(false);
   const formRef = useRef();
   const [formValue, setFormValue] = useState({
     phone: vodafoneCash?.phone,
@@ -21,12 +20,16 @@ function VodafoneCash({ data, onSubmit, loading }) {
     phone: Schema.Types.StringType()
       .isRequired(t('required'))
       .addRule((value) => {
-        return /^(010|\+2010)\d{8}/.test(value);
+        return /^(010|\+2010|011|\+2011|012|\+2012)\d{8}/.test(value);
       }, t('not_valid_vodafone_number')),
   });
+  const fillDemoPaymentDemo = () => {
+    setFormValue({ phone: PHONE_DEMO });
+  };
   useEffect(() => {
     setFormValue({ phone: vodafoneCash?.phone });
   }, [vodafoneCash]);
+
   return (
     <>
       <Button onClick={() => setOpen(true)} block className="font-[500] mt-3" appearance="primary">
@@ -55,6 +58,9 @@ function VodafoneCash({ data, onSubmit, loading }) {
                 </Col>
               </Row>
             </Grid>
+            <Button appearance="link" onClick={fillDemoPaymentDemo}>
+              {t('Fill_Demo_Payment_Info')}
+            </Button>
             <FlexboxGrid justify="end">
               <FlexboxGrid.Item>
                 <ButtonToolbar>

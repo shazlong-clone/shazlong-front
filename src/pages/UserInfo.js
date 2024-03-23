@@ -9,6 +9,7 @@ import { API_BASE_URL } from '../config/enviroment.config';
 import PersonalInfo from '../components/UserInfo/PersonalInfo';
 import PaymentInfo from '../components/UserInfo/PaymentInfo';
 import { getMe } from '../features/auth/authAction';
+import MyTherapy from '../components/UserInfo/MyTherapy';
 
 function UserInfo() {
   const { user = {} } = useSelector((state) => state?.auth);
@@ -17,7 +18,23 @@ function UserInfo() {
   const toaster = useToaster();
 
   const [activeTabe, setActiveTabe] = useState(1);
-
+  const tabs = [
+    {
+      label: t('Personal_Info'),
+      key: 1,
+      content: <PersonalInfo />,
+    },
+    {
+      label: t('Payment_Info'),
+      key: 2,
+      content: <PaymentInfo />,
+    },
+    {
+      label: t('My_Therapy'),
+      key: 3,
+      content: <MyTherapy />,
+    },
+  ];
   function previewFile(file, callback) {
     const reader = new FileReader();
     reader.onloadend = () => {
@@ -81,26 +98,20 @@ function UserInfo() {
             <Col xs={24} lg={16}>
               <Card className="rounded-none mt-5 p-0 pb-5 lg:mt-0 lg:w-[600px]">
                 <article className="flex">
-                  <div
-                    onClick={() => setActiveTabe(1)}
-                    className={clsx(
-                      'grow px-5 py-4 capitalize border-solid border-t-0 border-r-0 border-l-0 font-semibold cursor-pointer text-sm lg:text-lg',
-                      activeTabe === 1 ? 'border-b-2 border-cyan text-cyan' : 'border-b border-gray',
-                    )}
-                  >
-                    {t('Personal_Info')}
-                  </div>
-                  <div
-                    onClick={() => setActiveTabe(2)}
-                    className={clsx(
-                      'grow px-5 py-4 capitalize  border-solid border-t-0 border-r-0 border-l-0 font-semibold cursor-pointer text-sm lg:text-lg',
-                      activeTabe === 2 ? 'border-b-2 border-cyan text-cyan' : 'border-b border-gray',
-                    )}
-                  >
-                    {t('Payment_Info')}
-                  </div>
+                  {tabs.map((tab) => (
+                    <div
+                      key={tab.key}
+                      onClick={() => setActiveTabe(tab.key)}
+                      className={clsx(
+                        'grow px-5 py-4 capitalize border-solid border-t-0 border-r-0 border-l-0 font-semibold cursor-pointer text-sm lg:text-lg',
+                        activeTabe === tab.key ? 'border-b-2 border-cyan text-cyan' : 'border-b border-gray',
+                      )}
+                    >
+                      {tab.label}
+                    </div>
+                  ))}
                 </article>
-                <article className="p-5">{activeTabe === 1 ? <PersonalInfo /> : <PaymentInfo />}</article>
+                <article className="p-5">{tabs?.find((tab) => tab?.key === activeTabe)?.content}</article>
               </Card>
             </Col>
           </Row>

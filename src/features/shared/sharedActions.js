@@ -43,3 +43,8 @@ export const createReview = createAsyncThunk('createReview', async (params) => {
   const res = await service.post('/api/v1/reviews', params);
   return res.data;
 });
+
+export const serveSlots = createAsyncThunk('createBookings', async (params) => {
+  const res = await service.post('/api/v1/users/bookings', params);
+  return res.data;
+});

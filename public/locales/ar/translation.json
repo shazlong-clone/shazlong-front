@@ -256,5 +256,12 @@
   "Coupon_Applied_Already": "تم تطبيق الكوبون مسبقا",
   "Enter_Coupon_Code": "ادخل كود الكوبون",
   "Reserve_Session": "حجز جلسة",
-  "Invalid_Payment": "عملية دفع غير صحيحة"
+  "Invalid_Payment": "عملية دفع غير صحيحة",
+  "Fill_Demo_Payment_Info": "ملء معلومات الدفع التجريبية",
+  "Booked_Success_zero": "تم حجز الجلسة بنجاح",
+  "Booked_Success_one": "تم حجز الجلسة بنجاح",
+  "Booked_Success_two": "تم حجز الجلستان بنجاح",
+  "Booked_Success_few": "تم حجز الجلسات بنجاح",
+  "Booked_Success_many": "تم حجز الجلسات بنجاح",
+  "Booked_Success_other": "تم حجز الجلسات بنجاح"
 }
