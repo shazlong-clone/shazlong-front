@@ -265,5 +265,10 @@
   "Booked_Success_many": "تم حجز الجلسات بنجاح",
   "Booked_Success_other": "تم حجز الجلسات بنجاح",
   "Upcoming_Sessions": "الجلسات القادمة",
-  "Previous_Sessions": "الجلسات السابقة"
+  "Previous_Sessions": "الجلسات السابقة",
+  "Canceled": "ملغي",
+  "Attended": "تم الحضور",
+  "Not_Attended": "لم يحضر",
+  "Date": "التاريخ",
+  "Status": "الحالة"
 }

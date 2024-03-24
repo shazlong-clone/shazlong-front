@@ -5,7 +5,7 @@ import CustomerService from './CustomerService';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { openChat } from '../../features/theme/themeSlice';
-import useMediaQuery from '../../utils/useMediaQuery';
+import useMediaQuery from '../../hooks/useMediaQuery';
 
 const DefaultPopover = React.forwardRef(({ close, ...props }, ref) => {
   return (

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Avatar, Divider, Drawer, IconButton, Nav, Sidenav } from 'rsuite';
 import MenuIcon from '@rsuite/icons/Menu';
-import useMediaQuery from '../../utils/useMediaQuery';
+import useMediaQuery from '../../hooks/useMediaQuery';
 import clsx from 'clsx';
 import { NavLink, Outlet } from 'react-router-dom';
 import SettingWhisper from './components/SettingWhisper';

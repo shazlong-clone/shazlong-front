@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { Button, Form, Input, Message, Modal, Radio, RadioGroup, Rate, Schema, useToaster } from 'rsuite';
-import useMediaQuery from '../../utils/useMediaQuery';
+import useMediaQuery from '../../hooks/useMediaQuery';
 import FormGroup from 'rsuite/esm/FormGroup';
 import FormControl from 'rsuite/esm/FormControl';
 import { useTranslation } from 'react-i18next';

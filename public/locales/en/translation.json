@@ -250,5 +250,10 @@
   "Booked_Success_many": "Booked Successfuly",
   "Booked_Success_other": "Booked Successfuly",
   "Upcoming_Sessions": "Upcoming Sessions",
-  "Previous_Sessions": "Previous Sessions"
+  "Previous_Sessions": "Previous Sessions",
+  "Canceled": "Canceled",
+  "Attended": "Attended",
+  "Not_Attended": "Not Attended",
+  "Date": "Date",
+  "Status": "Status"
 }

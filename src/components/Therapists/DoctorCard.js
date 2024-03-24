@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
-import { Avatar, Badge, Button, Rate, Stack, useMediaQuery } from 'rsuite';
-
+import { Avatar, Badge, Button, Rate, Stack } from 'rsuite';
+import useMediaQuery from '../../hooks/useMediaQuery';
 import { BsPersonSquare } from 'react-icons/bs';
 import { GiAlarmClock } from 'react-icons/gi';
 import { GiCash } from 'react-icons/gi';
@@ -16,7 +16,7 @@ import { genders } from '../../assets/constants';
 
 function DoctorCard({ doctor }) {
   const { t } = useTranslation();
-  const [isMobile] = useMediaQuery(['md']);
+  const isMobile = useMediaQuery('md');
   const { specializationList, prefixesList, countries, languages } = useSelector((state) => state?.shared);
   const { i18n } = useTranslation();
   const country = countries?.find((country) => country?.id === doctor?.country);
@@ -65,7 +65,7 @@ function DoctorCard({ doctor }) {
           </div>
           <Rate readOnly size="xs" defaultValue={doctor?.avgReviews} />
           <div className="text-xs">
-            {doctor?.avgReviews?.toFixed(1)}({t('Reviews', {count: doctor?.nReviews})})
+            {doctor?.avgReviews?.toFixed(1)}({t('Reviews', { count: doctor?.nReviews })})
           </div>
         </article>
       </div>

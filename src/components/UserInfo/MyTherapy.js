@@ -1,22 +1,41 @@
-import React from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button, ButtonGroup } from 'rsuite';
+import Sessions from './Sessions';
+import { useDispatch, useSelector } from 'react-redux';
+import { getSessions } from '../../features/user/userActions';
+import moment from 'moment';
+import { PREVIOUS, UPCOMING } from '../../costansts';
 
 function MyTherapy() {
   const [activeKey, setActiveKey] = React.useState(1);
   const { t } = useTranslation();
+  const dispatch = useDispatch();
+  const sessions = useSelector((state) => state?.user?.sessions);
+
+  const upComingSessions = useMemo(() => {
+    return sessions?.filter((session) => moment(session?.slot?.from).isAfter(moment()));
+  }, [sessions]);
+
+  const previouseSessions = useMemo(() => {
+    return sessions?.filter((session) => moment(session?.slot?.from).isBefore(moment()));
+  }, [sessions]);
   const tabs = [
     {
-      key: 1,
+      key: UPCOMING,
       label: t('Upcoming_Sessions'),
-      content: 'Upcoming',
+      content: <Sessions type={UPCOMING} sessions={upComingSessions} />,
     },
     {
-      key: 2,
+      key: PREVIOUS,
       label: t('Previous_Sessions'),
-      content: 'Previous',
+      content: <Sessions type={PREVIOUS} sessions={previouseSessions} />,
     },
   ];
+
+  useEffect(() => {
+    dispatch(getSessions());
+  }, []);
   return (
     <>
       <div className="flex justify-center">

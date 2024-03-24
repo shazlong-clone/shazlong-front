@@ -5,7 +5,7 @@ import { AiOutlineCheckCircle } from 'react-icons/ai';
 import { IconButton, Table } from 'rsuite';
 import CollaspedOutlineIcon from '@rsuite/icons/CollaspedOutline';
 import ExpandOutlineIcon from '@rsuite/icons/ExpandOutline';
-import useMediaQuery from '../utils/useMediaQuery';
+import useMediaQuery from '../hooks/useMediaQuery';
 import DoctorsSlider from '../components/Shared/DoctorsSlider';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';

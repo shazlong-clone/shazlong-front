@@ -17,7 +17,7 @@ import fawry from '../assets/images/fawry.png';
 import vodafon from '../assets/images/Vodafone_icon.png';
 import { RiArrowDownSLine, RiArrowUpSLine } from 'react-icons/ri';
 import clsx from 'clsx';
-import useMediaQuery from '../utils/useMediaQuery';
+import useMediaQuery from '../hooks/useMediaQuery';
 import { useSearchParams } from 'react-router-dom';
 import Empty from '../components/Shared/Empty';
 import { useTranslation } from 'react-i18next';

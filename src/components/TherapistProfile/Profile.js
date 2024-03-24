@@ -6,7 +6,7 @@ import { BsFlag } from 'react-icons/bs';
 import { SlCalender } from 'react-icons/sl';
 import { RiPsychotherapyLine } from 'react-icons/ri';
 import Card from '../Shared/Card';
-import useMediaQuery from '../../utils/useMediaQuery';
+import useMediaQuery from '../../hooks/useMediaQuery';
 import Review from './Review';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
