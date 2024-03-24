@@ -43,7 +43,7 @@ function Sessions({ sessions, type }) {
               <Whisper
                 placement="top"
                 speaker={
-                  <Popover title="Description">
+                  <Popover>
                     <img src={row?.slot?.doctor?.photo} width="100%" height="75" className="rounded-md" />
                     <p>
                       <b>{t('Name')}:</b>{' '}

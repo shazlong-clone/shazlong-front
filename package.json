@@ -48,8 +48,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "gulp": "gulp all",
-    "rsuit-compile": "lessc ./public/rsuit.less ./public/rsuit.css"
+    "gulp": "gulp all"
   },
   "eslintConfig": {
     "extends": [
@@ -82,6 +81,7 @@
     "gulp-autoprefixer": "^8.0.0",
     "gulp-clean-css": "^4.3.0",
     "gulp-cssimport": "^7.0.0",
+    "gulp-less": "^5.0.0",
     "gulp-rename": "^2.0.0",
     "gulp-rtlcss": "^2.0.0",
     "gulp-sourcemaps": "^3.0.0",

@@ -5,8 +5,10 @@ var rename = require('gulp-rename');
 var sourcemaps = require('gulp-sourcemaps');
 var cssimport = require('gulp-cssimport');
 const cleanCSS = require('gulp-clean-css');
+var less = require('gulp-less');
+var path = require('path');
 
-gulp.task('styles', function () {
+gulp.task('create-rtl-css', function () {
   return gulp
     .src(['./public/css/index.css'])
     .pipe(
@@ -36,4 +38,7 @@ gulp.task('sourcemap', () => {
   );
 });
 
-gulp.task('all', gulp.series('styles', 'sourcemap'));
+gulp.task('convert-rsuit-less-to-css', function () {
+  return gulp.src('./public/css/rsuit.less').pipe(less()).pipe(gulp.dest('./public/css'));
+});
+gulp.task('all', gulp.series('convert-rsuit-less-to-css', 'create-rtl-css', 'sourcemap'));
