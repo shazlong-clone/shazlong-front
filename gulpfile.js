@@ -8,33 +8,42 @@ const cleanCSS = require('gulp-clean-css');
 var less = require('gulp-less');
 var path = require('path');
 
+//TO DO
+// 1- convert all pathes to be _dirname + path
 gulp.task('create-rtl-css', function () {
-  return gulp
-    .src(['./public/css/index.css'])
-    .pipe(
-      cssimport({
-        filter: /^\.\/.+/gi, // include only starts with ./ not http
-      }),
-    )
-    .pipe(sourcemaps.init())
-    .pipe(autoprefixer(['last 2 versions', '> 1%'])) // Other post-processing.
-    .pipe(rename('main.css')) // Append "-rtl" to the filename.
-    .pipe(cleanCSS({ compatibility: 'ie8' }))
-    .pipe(gulp.dest('./public/css')) // Output LTR stylesheets.
-    .pipe(rtlcss()) // Convert to RTL.
-    .pipe(rename({ suffix: '-rtl' })) // Append "-rtl" to the filename.
-    .pipe(sourcemaps.write('.')) // Output source maps.
-    .pipe(gulp.dest('./public/css')); // Output RTL stylesheets.;
+  return (
+    gulp
+      // eslint-disable-next-line no-undef
+      .src([path.join(__dirname, 'public/css/index.css')])
+      .pipe(
+        cssimport({
+          filter: /^\.\/.+/gi, // include only starts with ./ not http
+        }),
+      )
+      .pipe(sourcemaps.init())
+      .pipe(autoprefixer(['last 2 versions', '> 1%'])) // Other post-processing.
+      .pipe(rename('main.css')) // Append "-rtl" to the filename.
+      .pipe(cleanCSS({ compatibility: 'ie8' }))
+      // eslint-disable-next-line no-undef
+      .pipe(gulp.dest(path.join(__dirname, 'public/css'))) // Output LTR stylesheets.
+      .pipe(rtlcss()) // Convert to RTL.
+      .pipe(rename({ suffix: '-rtl' })) // Append "-rtl" to the filename.
+      .pipe(sourcemaps.write('.')) // Output source maps.
+      // eslint-disable-next-line no-undef
+      .pipe(gulp.dest(path.join(__dirname, 'public/css')))
+  ); // Output RTL stylesheets.;
 });
 
 gulp.task('sourcemap', () => {
   return (
     gulp
-      .src('./public/css/main.css')
+      // eslint-disable-next-line no-undef
+      .src(path.join(__dirname, 'public/css/main.css'))
       .pipe(sourcemaps.init())
       // Perform other CSS processing here (e.g., autoprefixing, minification)
       .pipe(sourcemaps.write('.'))
-      .pipe(gulp.dest('./public/css'))
+      // eslint-disable-next-line no-undef
+      .pipe(gulp.dest(path.join(__dirname, 'public/css')))
   );
 });
 
