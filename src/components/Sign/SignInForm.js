@@ -11,7 +11,7 @@ import { signInDoctor, signInUser } from '../../features/auth/authAction';
 import { useTranslation } from 'react-i18next';
 const { Group, HelpText, Control } = Form;
 function SignUpForm({ isSignAsUse }) {
-  const { t,i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [visible, setVisible] = useState(false);
   const [acceptLiecence, setAcceptLicence] = useState(false);
   const navigate = useNavigate();
@@ -48,7 +48,7 @@ function SignUpForm({ isSignAsUse }) {
           navigate('/');
         } else {
           localStorage.setItem('doctorToken', res.payload.token);
-          navigate('/doctor');
+          navigate(`/${i18n.resolvedLanguage}/doctor`);
         }
       } else {
         toaster.push(

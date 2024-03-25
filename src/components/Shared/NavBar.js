@@ -43,13 +43,14 @@ function NavBar() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state?.auth);
+  const { doctor } = useSelector((state) => state?.auth);
   const triggerRef = React.useRef();
   const navgiagte = useNavigate();
   const close = () => triggerRef.current.close();
-  const handleProfile = () => {
+  const handleProfile = (to) => {
     close();
     setTimeout(() => {
-      navgiagte(`/${currLang}/user-info`);
+      navgiagte(to ?? `/${currLang}/user-info`);
     }, 0);
   };
   const signOutHandler = () => {
@@ -63,15 +64,24 @@ function NavBar() {
   const speaker = (
     <Popover className="p-0" style={!lg ? { display: 'none' } : {}}>
       <ul className="p-0 list-none divide-y-[1px] divide-x-0 divide-solid divide-[var(--rs-gray-100)]">
-        <li className="px-3 flex items-center gap-2 py-2">
+        <li className="px-3 flex items-center gap-2 py-2 ">
           <img className="rounded-full" src={user?.photo ? user?.photo : personIcon} width="40px" height="40px" />
           <strong className="capitalize">{user?.name}</strong>
         </li>
-        <li className="text-base px-3 py-2 cursor-pointer">
+        <li className="text-base px-3 py-2 cursor-pointer hover:bg-[var(--rs-primary-50)]">
           <a className="no-underline hover:no-underline">
-            <div onClick={handleProfile} className="flex gap-2 items-center">
-              <BsPersonCircle />
+            <div onClick={() => handleProfile(`/${currLang}/user-info`)} className="flex gap-2 items-center">
+              <img className="rounded-full" src={user?.photo ? user?.photo : <BsPersonCircle />} width="20px" height="20px" />
+
               <span className="capitalize">{t('my_profile')}</span>
+            </div>
+          </a>
+        </li>
+        <li className="text-base px-3 py-2 cursor-pointer hover:bg-[var(--rs-primary-50)]">
+          <a className="no-underline hover:no-underline">
+            <div onClick={() => handleProfile(`/${currLang}/doctor`)} className="flex gap-2 items-center">
+              <img className="rounded-full" src={doctor?.photo ? doctor?.photo : <BsPersonCircle />} width="20px" height="20px" />
+              <span className="capitalize">{t('Doctor_Profile')}</span>
             </div>
           </a>
         </li>
@@ -175,10 +185,27 @@ function NavBar() {
                     </li>
                     <hr />
                     <li className="px-5">
-                      <Link to={`${currLang}/user-info`} className="text-inherit hover:no-underline">
+                      <Link to={`/${currLang}/user-info`} className="text-inherit hover:no-underline">
                         <div onClick={() => setOpen(false)} className="inline-flex items-center gap-2 text-cyan">
-                          <BsPersonBadgeFill className="text-3xl" />
+                          {user?.photo ? (
+                            <img src={user?.photo} alt="profile" className="rounded-full w-[25px]" />
+                          ) : (
+                            <BsPersonBadgeFill className="text-3xl" />
+                          )}
                           <span className="text-lg">{t('Your_Profile')}</span>
+                        </div>
+                      </Link>
+                    </li>
+                    <li className="px-5 mt-5">
+                      <Link to={`/${currLang}/doctor`} className="text-inherit hover:no-underline">
+                        <div onClick={() => setOpen(false)} className="inline-flex items-center gap-2 text-cyan">
+                          {user?.photo ? (
+                            <img src={doctor?.photo} alt="profile" className="rounded-full w-[25px]" />
+                          ) : (
+                            <BsPersonBadgeFill className="text-3xl" />
+                          )}
+
+                          <span className="text-lg">{t('Doctor_Profile')}</span>
                         </div>
                       </Link>
                     </li>

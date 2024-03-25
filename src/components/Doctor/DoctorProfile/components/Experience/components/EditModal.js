@@ -95,8 +95,10 @@ function EditModal({ experience }) {
 
   useEffect(() => {
     if (experience?.company_logo) {
-      const url = `data:image/png;base64,${experience?.company_logo}`;
-      fetch(url).then((res) => setFormValue({ ...formValue, company_logo: res.blob() }));
+      const url = `${experience?.company_logo}`;
+      fetch(url)
+        .then((res) => setFormValue({ ...formValue, company_logo: res.blob() }))
+        .catch((err) => console.log(err));
       setFileInfo(url);
     }
   }, []);
@@ -117,19 +119,19 @@ function EditModal({ experience }) {
             <hr className="m-2 mx-0" />
             <Form.Group controlId="title">
               <Form.HelpText>Title</Form.HelpText>
-              <Form.Control dir='ltr' placeholder="Enter Title" block name="title" />
+              <Form.Control dir="ltr" placeholder="Enter Title" block name="title" />
             </Form.Group>
             <Form.Group controlId="ar_title">
               <Form.HelpText>Arabic Title</Form.HelpText>
-              <Form.Control dir='rtl' placeholder="Enter Arabic Title" block name="ar_title" />
+              <Form.Control dir="rtl" placeholder="Enter Arabic Title" block name="ar_title" />
             </Form.Group>
             <Form.Group controlId="description">
               <Form.HelpText>Description</Form.HelpText>
-              <Form.Control dir='ltr' placeholder="Enter Description" block name="description" />
+              <Form.Control dir="ltr" placeholder="Enter Description" block name="description" />
             </Form.Group>
             <Form.Group controlId="ar_description">
               <Form.HelpText>Arabic Description</Form.HelpText>
-              <Form.Control dir='rtl' placeholder="Enter Arabic Description" block name="ar_description" />
+              <Form.Control dir="rtl" placeholder="Enter Arabic Description" block name="ar_description" />
             </Form.Group>
             <Form.Group controlId="time">
               <Form.HelpText>Time</Form.HelpText>
