@@ -8,7 +8,7 @@ import moment from 'moment';
 import { PREVIOUS, UPCOMING } from '../../costansts';
 
 function MyTherapy() {
-  const [activeKey, setActiveKey] = React.useState(1);
+  const [activeKey, setActiveKey] = React.useState(UPCOMING);
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const sessions = useSelector((state) => state?.user?.sessions);
