@@ -270,5 +270,7 @@
   "Attended": "تم الحضور",
   "Not_Attended": "لم يحضر",
   "Date": "التاريخ",
-  "Status": "الحالة"
+  "Status": "الحالة",
+  "page_not_found": "الصفحة غير موجودة",
+  "back_to_home": "العودة للرئيسية"
 }

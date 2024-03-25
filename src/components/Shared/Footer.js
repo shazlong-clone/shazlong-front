@@ -81,7 +81,7 @@ function Footer() {
                 <article className="lg:flex items-center gap-2">
                   {!user?._id ? (
                     <>
-                      <Link to="/sign-up" className="hover:no-underline active:no-underline grow">
+                      <Link to={`/${i18n.resolvedLanguage}/sign-up`} className="hover:no-underline active:no-underline grow">
                         <button
                           className="
                         min-w-[250px]
@@ -97,7 +97,7 @@ function Footer() {
                     ''
                   )}
 
-                  <Link to="/doctor" className="hover:no-underline active:no-underline grow">
+                  <Link to={`/${i18n.resolvedLanguage}/doctor`} className="hover:no-underline active:no-underline grow">
                     <button
                       className="
                           min-w-[250px]
@@ -110,7 +110,10 @@ function Footer() {
                 </article>
                 <div className="mt-5">
                   {t('Have_Account')}
-                  <Link to="/sign-in" className="text-white hover:text-white underline px-1 inline-block">
+                  <Link
+                    to={`/${i18n.resolvedLanguage}/sign-in`}
+                    className="text-white hover:text-white underline px-1 inline-block"
+                  >
                     {t('Sign_In')}
                   </Link>
                 </div>

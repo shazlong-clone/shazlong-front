@@ -216,7 +216,7 @@ a:active {
 }
 
 .custom-timeline {
-  margin-left: 20px;
+  margin-inline-end: 20px;
 }
 .custom-timeline .rs-timeline-item-custom-dot {
   position: absolute;
@@ -238,7 +238,7 @@ a:active {
   align-items: center;
 }
 .custom-timeline .rs-timeline-item-content {
-  margin-left: 24px;
+  margin-inline-start: 24px;
 }
 
 [dir='rtl'] .rs-popover {
@@ -402,7 +402,12 @@ a:active {
     max-width: 1280px;
   }
 }
-[dir='rtl'] .rs-pagination-symbol{
+[dir='rtl'] .rs-pagination-symbol {
+  transform: rotate(180deg);
+  transform-origin: center;
+}
+
+[dir='rtl'] .rs-checkbox-wrapper {
   transform: rotate(180deg);
   transform-origin: center;
 }

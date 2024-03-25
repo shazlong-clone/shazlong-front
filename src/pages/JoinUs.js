@@ -83,7 +83,7 @@ function JoinUs() {
               <Button className="rounded-full font-bold">{t('Join_As_A_Therapist')}</Button>
             </Link>
           ) : (
-            <Link to={`${i18n.resolvedLanguage}/doctor-signup`}>
+            <Link to={`/${i18n.resolvedLanguage}/doctor-signup`}>
               <Button className="rounded-full font-bold">{t('Join_As_A_Therapist')}</Button>
             </Link>
           )}
@@ -112,7 +112,7 @@ function JoinUs() {
               <br />
               {t('therapists_team')} <div className="w-[100px] h-[2px] mt-2 mb-10 bg-[var(--rs-primary-700)] " />
               <article className="pb-24 hidden lg:block">
-                <Link to={`${i18n.resolvedLanguage}/doctor-signup`}>
+                <Link to={`/${i18n.resolvedLanguage}/doctor-signup`}>
                   <Button appearance="primary" className="rounded-full font-bold">
                     {t('Join_Now')}
                   </Button>

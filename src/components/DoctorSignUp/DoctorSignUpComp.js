@@ -2,21 +2,23 @@ import React, { createContext } from 'react';
 import Image from './Image';
 import SignLogo from '../Sign/SignLogo';
 import DocSignUpForm from './DocSignUpForm';
-import { BsFillPatchCheckFill } from 'react-icons/bs';
+import { BsArrowLeftCircle, BsArrowRightCircle, BsFillPatchCheckFill } from 'react-icons/bs';
 import { Button } from 'rsuite';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import i18next from 'i18next';
+import Back from '../Shared/Back';
 export const SignUpCompContext = createContext();
 function SignUpComp() {
   const { t, i18n } = useTranslation();
   const { doctorVerificationCode } = useSelector((state) => state?.auth);
   return (
     <main className="lg:px-0 lg:w-full">
+      <Back />
       <div className="lg:grid lg:grid-cols-[1fr_1.5fr] items-start">
         {!doctorVerificationCode ? (
-          <section data-aos="fade-up" data-aos-duration="1000" className="mb-5 mx-auto lg:max-w-sm py-10 container">
+          <section data-aos="fade-up" data-aos-duration="1000" className="mb-5 mx-auto lg:max-w-sm py-5 container">
             <SignLogo />
             <strong className="mt-8 block text-cyan text-center">
               {t('Registration_Step')}

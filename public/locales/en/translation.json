@@ -255,5 +255,7 @@
   "Attended": "Attended",
   "Not_Attended": "Not Attended",
   "Date": "Date",
-  "Status": "Status"
+  "Status": "Status",
+  "page_not_found": "Page Not Found",
+  "back_to_home": "Back To Home"
 }
