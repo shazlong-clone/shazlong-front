@@ -8,6 +8,7 @@ import { AiFillWarning } from 'react-icons/ai';
 import { useTranslation } from 'react-i18next';
 import { deleteExperienceById, getMeAsDoctor } from '../../../../../features/doctor/doctorActions';
 import Empty from '../../../../Shared/Empty';
+import { FaRegHospital } from 'react-icons/fa';
 
 function Experience() {
   const { profile } = useSelector((state) => state?.doctor);
@@ -105,7 +106,11 @@ function Experience() {
               {i == 0 ? '' : <Divider />}
               <div key={Math.random()} className="flex gap-4 w-full text-start mb-5 items-start">
                 <section>
-                  <img className="w-[50px] h-[50px] object-cover" src={`data:image/jpeg;base64,${el?.company_logo}`} />
+                  {el?.company_logo ? (
+                    <img className="w-[50px] h-[50px] object-cover" src={el?.company_logo} />
+                  ) : (
+                    <FaRegHospital className="w-[50px] h-[50px] object-cover" />
+                  )}
                 </section>
                 <section className="grow">
                   <h6 className="mb-2 flex justify-between items-center">

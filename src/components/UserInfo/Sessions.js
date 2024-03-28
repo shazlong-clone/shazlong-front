@@ -82,7 +82,7 @@ function Sessions({ sessions, type }) {
           <HeaderCell>...</HeaderCell>
           <Cell>
             <Button appearance="link" color="red" className="p-0">
-              Cancel
+              {t('Cancel')}
             </Button>
           </Cell>
         </Column>

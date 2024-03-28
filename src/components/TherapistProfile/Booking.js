@@ -12,21 +12,20 @@ import { useSelector } from 'react-redux';
 import moment from 'moment';
 import { RxCross2 } from 'react-icons/rx';
 import i18next from 'i18next';
+import Empty from '../../components/Shared/Empty';
 
-const momentOffset =(date,offset) =>{
-  if(date && offset){
+const momentOffset = (date, offset) => {
+  if (date && offset) {
     return moment(date).utcOffset(offset);
-
   }
-  if(date){
-    return moment(date)
+  if (date) {
+    return moment(date);
   }
-  return moment()
-
-}
+  return moment();
+};
 const formateSlots = (inputSlots, offset) => {
   const doctorSlots = [];
-  
+
   // Group slots by date
   const groupedSlots = inputSlots.reduce((result, slot) => {
     const date = momentOffset(slot.from, offset).format('ddd DD');
@@ -34,11 +33,11 @@ const formateSlots = (inputSlots, offset) => {
       result[date] = [];
     }
 
-    const time = momentOffset(slot.from,offset).format('hh:mm A');
+    const time = momentOffset(slot.from, offset).format('hh:mm A');
     const isBooked = slot.reserved;
     const isSelected = false;
 
-    result[date].push({ h: time, isBooked, isSelected, id:slot?._id });
+    result[date].push({ h: time, isBooked, isSelected, id: slot?._id });
     return result;
   }, {});
 
@@ -67,12 +66,10 @@ function Booking({ setBounceBg, bouncebg, ...props }) {
       fullTimeZons: resJosn,
       searchedTimeZon: resJosn,
     });
-    const user_zone = window.localStorage.getItem('user_zone'); 
-    setSelctedTimeZone(resJosn?.find(zone => zone?.city === user_zone || 'Africa/Cairo'));
-    
-
+    const user_zone = localStorage.getItem('user_zone');
+    setSelctedTimeZone(resJosn?.find((zone) => zone?.city === (user_zone || 'Africa/Cairo')));
   };
-  
+
   const settings = {
     dots: false,
     infinite: false,
@@ -156,7 +153,6 @@ function Booking({ setBounceBg, bouncebg, ...props }) {
   };
   const { doctorProfile = {} } = useSelector((state) => state?.shared);
 
-
   const slots = useMemo(() => {
     return formateSlots(doctorProfile?.slots ?? [], selctedTimeZone?.date?.replace(/\(|\)/g, ''));
   }, [doctorProfile?.slots, i18next.resolvedLanguage, selctedTimeZone]);
@@ -164,11 +160,23 @@ function Booking({ setBounceBg, bouncebg, ...props }) {
   const [localeSlots, setLocaleSlots] = useState(slots);
 
   useEffect(() => {
-    setLocaleSlots(slots?.map(day =>{
-      return {...day, slots:day?.slots?.map(slot =>{
-        return {...slot, isSelected: selctedDays?.map(day => day?.slots)?.flat()?.map(s =>s?.id)?.includes(slot?.id) }
-      })}
-    }));
+    setLocaleSlots(
+      slots?.map((day) => {
+        return {
+          ...day,
+          slots: day?.slots?.map((slot) => {
+            return {
+              ...slot,
+              isSelected: selctedDays
+                ?.map((day) => day?.slots)
+                ?.flat()
+                ?.map((s) => s?.id)
+                ?.includes(slot?.id),
+            };
+          }),
+        };
+      }),
+    );
   }, [slots]);
 
   useEffect(() => {
@@ -209,61 +217,66 @@ function Booking({ setBounceBg, bouncebg, ...props }) {
           return slot?.isSelected;
         });
       })?.length ?? 0;
-      const [selctedDays, setSelctedDays] = useState([]);
-      useEffect(()=>{
-        const selcted = localeSlots
-                ?.filter((day) => {
-                  return day?.slots?.some((d) => d?.isSelected);
-                })
-                ?.map((day) => {
-                  return {
-                    date: day?.date,
-                    slots: day?.slots?.filter((slot) => {
-                      return slot?.isSelected;
-                    })
-                  }
-                  });                    
-        setSelctedDays(selcted);
-      },[localeSlots]);
+  const [selctedDays, setSelctedDays] = useState([]);
+  useEffect(() => {
+    const selcted = localeSlots
+      ?.filter((day) => {
+        return day?.slots?.some((d) => d?.isSelected);
+      })
+      ?.map((day) => {
+        return {
+          date: day?.date,
+          slots: day?.slots?.filter((slot) => {
+            return slot?.isSelected;
+          }),
+        };
+      });
+    setSelctedDays(selcted);
+  }, [localeSlots]);
   return (
     <div {...props}>
       <Card className={twMerge('lg:px-10', bouncebg && 'bouncebg')}>
-        <h5 className="text-center mb-4">{t('Book_Session')}</h5>
-        <Slider {...settings}>
-          {localeSlots?.map((day) => {
-            return (
-              <div
-                key={Math.random()}
-                className="bg-[var(--rs-primary-100)] border border-solid border-white text-center rounded-lg"
-              >
-                <section className="text-white bg-[var(--rs-primary-700)] rounded-t-lg py-1 font-bold">{day?.date}</section>
-                <section className="grid my-2 gap-2">
-                  {day?.slots.map((slot) => {
-                    return (
-                      <aside key={Math.random()}>
-                        <div
-                          onClick={() => handelSelect(day?.date, slot?.h)}
-                          className={twMerge(
-                            clsx(
-                              'w-[80%] m-auto p-1 rtl:pt-[7px] text-xs font-[600] rounded-md px-2 cursor-pointer',
-                              slot?.isBooked
-                                ? 'border border-solid border-[var(--rs-red-400)] text-[var(--rs-red-400)] bg-[var(--rs-red-50)] line-through cursor-not-allowed'
-                                : slot?.isSelected
-                                ? 'border border-solid border-[var(--rs-green-500)] text-[var(--rs-green-500)] bg-[var(--rs-green-100)] hover:text-[var(--rs-green-700)] hover:bg-[var(--rs-green-200)]'
-                                : 'bg-[var(--rs-gray-50)] hover:bg-[var(--rs-gray-400)]',
-                            ),
-                          )}
-                        >
-                          {slot?.h}
-                        </div>
-                      </aside>
-                    );
-                  })}
-                </section>
-              </div>
-            );
-          })}
-        </Slider>
+        <h4 className="text-center mb-4">{t('Book_Session')}</h4>
+        {localeSlots?.length > 0 ? (
+          <Slider {...settings}>
+            {localeSlots?.map((day) => {
+              return (
+                <div
+                  key={Math.random()}
+                  className="bg-[var(--rs-primary-100)] border border-solid border-white text-center rounded-lg"
+                >
+                  <section className="text-white bg-[var(--rs-primary-700)] rounded-t-lg py-1 font-bold">{day?.date}</section>
+                  <section className="grid my-2 gap-2">
+                    {day?.slots.map((slot) => {
+                      return (
+                        <aside key={Math.random()}>
+                          <div
+                            onClick={() => handelSelect(day?.date, slot?.h)}
+                            className={twMerge(
+                              clsx(
+                                'w-[80%] m-auto p-1 rtl:pt-[7px] text-xs font-[600] rounded-md px-2 cursor-pointer',
+                                slot?.isBooked
+                                  ? 'border border-solid border-[var(--rs-red-400)] text-[var(--rs-red-400)] bg-[var(--rs-red-50)] line-through cursor-not-allowed'
+                                  : slot?.isSelected
+                                  ? 'border border-solid border-[var(--rs-green-500)] text-[var(--rs-green-500)] bg-[var(--rs-green-100)] hover:text-[var(--rs-green-700)] hover:bg-[var(--rs-green-200)]'
+                                  : 'bg-[var(--rs-gray-50)] hover:bg-[var(--rs-gray-400)]',
+                              ),
+                            )}
+                          >
+                            {slot?.h}
+                          </div>
+                        </aside>
+                      );
+                    })}
+                  </section>
+                </div>
+              );
+            })}
+          </Slider>
+        ) : (
+          <Empty message={t('No_slots')} />
+        )}
+
         <section className="flex text-center gap-4 justify-center mt-5">
           <article className="flex items-center">
             <RxDotFilled className="text-3xl flex items-center" />
@@ -280,7 +293,7 @@ function Booking({ setBounceBg, bouncebg, ...props }) {
         </section>
         <hr />
         <p>
-          All Times Are {selctedTimeZone?.city + selctedTimeZone?.date }
+          All Times Are {selctedTimeZone?.city + selctedTimeZone?.date}
           <Button appearance="link" onClick={handleOpen}>
             {t('Change')}
           </Button>
@@ -292,15 +305,27 @@ function Booking({ setBounceBg, bouncebg, ...props }) {
             </Modal.Title>
           </Modal.Header>
           <Modal.Body className="text-center mt-0 py-2">
-            <Input onChange={handeSearch} className="w-[300px] mx-auto mb-10" placeholder="search" />
+            <Input onChange={handeSearch} className="w-[300px] mx-auto mb-10" placeholder={t('Search')} />
             <section className="grid grid-cols-[1fr] md:grid-cols-[1fr_1fr] xl:lg:grid-cols-[1fr_1fr_1fr] text-start text-base font-normal">
               {timeZons?.searchedTimeZon?.map((zone) => {
                 return (
-                  <article onClick={()=>{
-                    setSelctedTimeZone(zone);
-                    window.localStorage.setItem('user_zone', zone?.city)
-                  }} key={zone?.city}>
-                    <span className={twMerge(clsx('cursor-pointer hover:bg-[var(--rs-gray-100)]', selctedTimeZone?.city === zone.city ? 'bg-[var(--rs-primary-200)] hover:bg-[var(--rs-primary-200)]' :'')) }>
+                  <article
+                    onClick={() => {
+                      setSelctedTimeZone(zone);
+                      window.localStorage.setItem('user_zone', zone?.city);
+                    }}
+                    key={zone?.city}
+                  >
+                    <span
+                      className={twMerge(
+                        clsx(
+                          'cursor-pointer hover:bg-[var(--rs-gray-100)]',
+                          selctedTimeZone?.city === zone.city
+                            ? 'bg-[var(--rs-primary-200)] hover:bg-[var(--rs-primary-200)]'
+                            : '',
+                        ),
+                      )}
+                    >
                       <span>{zone?.city}</span>
                       <span>{zone?.date}</span>
                     </span>
@@ -315,23 +340,23 @@ function Booking({ setBounceBg, bouncebg, ...props }) {
         <section className="mb-2">
           <article className="flex flex-col justify-center gap-3 items-center mb-5">
             <div className=" bg-[var(--rs-green-700)] rounded-full p-3 w-10 h-10 flex justify-center items-center text-white">
-              {selctedDays?.map(day=> day?.slots)?.flat()?.length ?? 0}
+              {selctedDays?.map((day) => day?.slots)?.flat()?.length ?? 0}
             </div>
-            {
-              selctedSlotsLength > 0
-              ?<div>{t('Selcted_Slots')}</div>
-              :<Stack justifyContent='center'>{t('no_selcted_a_session_yet')}</Stack>
-            }
+            {selctedSlotsLength > 0 ? (
+              <div>{t('Selcted_Slots')}</div>
+            ) : (
+              <Stack justifyContent="center">{t('no_selcted_a_session_yet')}</Stack>
+            )}
           </article>
           {selctedSlotsLength ? (
             <Stack wrap row spacing={4}>
-             {
-              selctedDays?.map(day => {
-                return day?.slots?.map(slot =>{
-                  return <span
-                  onClick={() => handelSelect(day?.date, slot?.h)}
-                  key={slot?.h}
-                  className="
+              {selctedDays?.map((day) => {
+                return day?.slots?.map((slot) => {
+                  return (
+                    <span
+                      onClick={() => handelSelect(day?.date, slot?.h)}
+                      key={slot?.h}
+                      className="
                   p-1 border border-solid 
                   cursor-pointer
                   border-[var(--rs-primary-500)]
@@ -341,20 +366,27 @@ function Booking({ setBounceBg, bouncebg, ...props }) {
                   hover:text-[var(--rs-primary-100)]
                   hover:bg-[var(--rs-primary-500)]
                   flex items-center gap-1"
-                >
-                  {`${day?.date} ${slot?.h}`}
-                  <RxCross2 />
-                </span>
-                })
-              })
-             }
+                    >
+                      {`${day?.date} ${slot?.h}`}
+                      <RxCross2 />
+                    </span>
+                  );
+                });
+              })}
             </Stack>
-          ) :null}
+          ) : null}
         </section>
 
         <section className="text-center">
-          <Link to={`/${i18n.resolvedLanguage}/checkout?slots_ids=${selctedDays?.map(day=> day?.slots)?.flat()?.map(slot => slot?.id)?.join(',')}`} className="hover:no-underline active:not-underline">
-            <Button disabled={!selctedSlotsLength} appearance="primary" color='green' className="block w-1/2 m-auto">
+          <Link
+            to={`/${i18n.resolvedLanguage}/checkout?slots_ids=${selctedDays
+              ?.map((day) => day?.slots)
+              ?.flat()
+              ?.map((slot) => slot?.id)
+              ?.join(',')}`}
+            className="hover:no-underline active:not-underline"
+          >
+            <Button disabled={!selctedSlotsLength} appearance="primary" color="green" className="block w-1/2 m-auto">
               {t('Book')}
             </Button>
           </Link>

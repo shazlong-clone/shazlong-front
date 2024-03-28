@@ -28,7 +28,7 @@ class ErrorBoundary extends React.Component {
           {localStorage.getItem('i18nextLng') === 'ar' ? (
             <div>
               حدث خطأ ما
-              <br /> . الرجاء المحاولة لاحقا
+              <br /> الرجاء المحاولة لاحقا
               <br />
               <a href="/">
                 <Button appearance="primary" size="lg">

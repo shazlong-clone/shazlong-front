@@ -411,3 +411,8 @@ a:active {
   transform: rotateY(180deg);
   transform-origin: center;
 }
+
+.react-viewer-close,
+.react-viewer-canvas {
+  direction: ltr;
+}
