@@ -260,6 +260,7 @@
   "back_to_home": "Back To Home",
   "Doctor_Profile": "Doctor Profile",
   "No_slots": "No slots",
-  "Not_Spicified": "Not Spicified"
-
+  "Not_Spicified": "Not Spicified",
+  "Are_you_sure_you_want_to_cancel_this_session": "Are you sure you want to cancel this session ?",
+  "Success": "Success Action"
 }

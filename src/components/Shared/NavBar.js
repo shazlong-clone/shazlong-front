@@ -43,8 +43,7 @@ function NavBar() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state?.auth);
-  console.log(user?.photo)
-  const { doctor } = useSelector((state) => state?.auth);
+  const { doctor, doctorToken } = useSelector((state) => state?.auth);
   const triggerRef = React.useRef();
   const navgiagte = useNavigate();
   const close = () => triggerRef.current.close();
@@ -77,7 +76,9 @@ function NavBar() {
             </div>
           </a>
         </li>
-        <li className="text-base px-3 py-2 cursor-pointer hover:bg-[var(--rs-primary-50)]">
+        {
+          doctorToken && 
+          <li className="text-base px-3 py-2 cursor-pointer hover:bg-[var(--rs-primary-50)]">
           <a className="no-underline hover:no-underline">
             <div onClick={() => handleProfile(`/${currLang}/doctor`)} className="flex gap-2 items-center">
               <img className="rounded-full" src={doctor?.photo ? doctor?.photo : personIcon} width="20px" height="20px" />
@@ -85,6 +86,7 @@ function NavBar() {
             </div>
           </a>
         </li>
+        }
         <li
           onClick={signOutHandler}
           className="text-red-600 hover:bg-red-50 text-base flex gap-2 items-center px-3 py-2 cursor-pointer"
@@ -196,19 +198,23 @@ function NavBar() {
                         </div>
                       </Link>
                     </li>
-                    <li className="px-5 mt-5">
-                      <Link to={`/${currLang}/doctor`} className="text-inherit hover:no-underline">
-                        <div onClick={() => setOpen(false)} className="inline-flex items-center gap-2 text-cyan">
-                          {user?.photo ? (
-                            <img src={doctor?.photo} alt="profile" className="rounded-full w-[25px]" />
-                          ) : (
-                            <BsPersonBadgeFill className="text-3xl" />
-                          )}
-
-                          <span className="text-lg">{t('Doctor_Profile')}</span>
-                        </div>
-                      </Link>
-                    </li>
+                    {
+                      doctorToken &&
+                       <li className="px-5 mt-5">
+                       <Link to={`/${currLang}/doctor`} className="text-inherit hover:no-underline">
+                         <div onClick={() => setOpen(false)} className="inline-flex items-center gap-2 text-cyan">
+                           {user?.photo ? (
+                             <img src={doctor?.photo} alt="profile" className="rounded-full w-[25px]" />
+                           ) : (
+                             <BsPersonBadgeFill className="text-3xl" />
+                           )}
+ 
+                           <span className="text-lg">{t('Doctor_Profile')}</span>
+                         </div>
+                       </Link>
+                     </li>
+                    }
+                   
                     <hr />
                     <li className="text-red-600 flex items-center justify-center gap-2">
                       <span className="text-lg cursor-pointer flex items-center gap-2" onClick={signOutHandler}>

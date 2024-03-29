@@ -266,7 +266,7 @@
   "Booked_Success_other": "تم حجز الجلسات بنجاح",
   "Upcoming_Sessions": "الجلسات القادمة",
   "Previous_Sessions": "الجلسات السابقة",
-  "Canceled": "ملغي",
+  "Canceled": "تم الالغاء",
   "Attended": "تم الحضور",
   "Not_Attended": "لم يحضر",
   "Date": "التاريخ",
@@ -275,5 +275,8 @@
   "back_to_home": "العودة للرئيسية",
   "Doctor_Profile": "حسابي كطبيب",
   "No_slots": "لا يوجد جلسات",
-  "Not_Spicified": "غير محدد"
+  "Not_Spicified": "غير محدد",
+  "Are_you_sure_you_want_to_cancel_this_session": "هل تريد الغاء هذه الجلسة؟",
+  "success": "تم تنفيذ طلبك بنجاج"
+  
 }

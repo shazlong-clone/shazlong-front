@@ -1,14 +1,21 @@
 import moment from 'moment';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Button, Popover, Table, Whisper } from 'rsuite';
+import { Button, ButtonToolbar, Modal, Popover, Table, Whisper } from 'rsuite';
 import { useTranslation } from 'react-i18next';
 import { PREVIOUS, UPCOMING, sessionsStatusList } from '../../costansts';
 import { getPrefix } from '../../features/shared/sharedActions';
 import { useDispatch, useSelector } from 'react-redux';
 import { genders } from '../../assets/constants';
+import RemindIcon from '@rsuite/icons/legacy/Remind';
+import useSubmition from '../../hooks/useSubmit';
+import { cancelSession, getSessions } from '../../features/user/userActions';
+
 const { Column, HeaderCell, Cell } = Table;
 function Sessions({ sessions, type }) {
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   const CustomCell = ({ rowData, dataKey, ...props }) => {
     return <Cell {...props}>{rowData[dataKey] ?? props.render(rowData)}</Cell>;
   };
@@ -16,6 +23,15 @@ function Sessions({ sessions, type }) {
 
   const { t, i18n } = useTranslation();
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
+  const submit = useSubmition();
+  const handelCancel = async (id) => {
+    setLoading(true);
+    await submit(cancelSession, { bookingId: id }, { showLoader: false });
+    setLoading(false);
+    handleClose();
+    dispatch(getSessions());
+  };
   useEffect(() => {
     dispatch(getPrefix());
   }, []);
@@ -44,19 +60,18 @@ function Sessions({ sessions, type }) {
                 placement="top"
                 speaker={
                   <Popover>
-                    <div className='max-w-[100px]'>
-
-                    <img src={row?.slot?.doctor?.photo} width="100%" height="75" className="rounded-md" />
-                    <p>
-                      <b>{t('Name')}:</b>{' '}
-                      {i18n.resolvedLanguage === 'ar' ? row?.slot?.doctor?.fullArName : row?.slot?.doctor?.fullEnName}
-                    </p>
-                    <p>
-                      <b>{t('Gender')}:</b> {i18n.resolvedLanguage === 'ar' ? gender?.ar_name : gender?.name}
-                    </p>
-                    <p>
-                      <b>{t('Prefix')}:</b> {i18n.resolvedLanguage === 'ar' ? prefix?.ar_name : prefix?.name}
-                    </p>
+                    <div className="max-w-[100px]">
+                      <img src={row?.slot?.doctor?.photo} width="100%" height="75" className="rounded-md" />
+                      <p>
+                        <b>{t('Name')}:</b>{' '}
+                        {i18n.resolvedLanguage === 'ar' ? row?.slot?.doctor?.fullArName : row?.slot?.doctor?.fullEnName}
+                      </p>
+                      <p>
+                        <b>{t('Gender')}:</b> {i18n.resolvedLanguage === 'ar' ? gender?.ar_name : gender?.name}
+                      </p>
+                      <p>
+                        <b>{t('Prefix')}:</b> {i18n.resolvedLanguage === 'ar' ? prefix?.ar_name : prefix?.name}
+                      </p>
                     </div>
                   </Popover>
                 }
@@ -73,8 +88,8 @@ function Sessions({ sessions, type }) {
         <HeaderCell>{t('Status')}</HeaderCell>
         <CustomCell
           render={(row) => {
-            if(type === PREVIOUS && row?.status === 1) {
-              return t('Not_Spicified')
+            if (type === PREVIOUS && row?.status === 1) {
+              return t('Not_Spicified');
             }
             const session = sessionsStatusList?.find((el) => {
               return el?.id === row?.status;
@@ -86,11 +101,32 @@ function Sessions({ sessions, type }) {
       {type === UPCOMING && (
         <Column flexGrow={1} align="center">
           <HeaderCell>...</HeaderCell>
-          <Cell>
-            <Button appearance="link" color="red" className="p-0">
-              {t('Cancel')}
-            </Button>
-          </Cell>
+          <CustomCell
+            render={(row) => (
+              row.status !== 0 ?
+              <>
+                <ButtonToolbar>
+                  <Button onClick={handleOpen} appearance="link" color="red" className="p-0">
+                    {t('Cancel')}
+                  </Button>
+                </ButtonToolbar>
+                <Modal backdrop="static" role="alertdialog" open={open} onClose={handleClose} size="xs">
+                  <Modal.Body>
+                    <RemindIcon style={{ color: '#ffb300', fontSize: 24 }} />
+                    {t('Are_you_sure_you_want_to_cancel_this_session')}
+                  </Modal.Body>
+                  <Modal.Footer>
+                    <Button loading={loading} onClick={() => handelCancel(row?._id)} appearance="primary">
+                      {t('Yes')}
+                    </Button>
+                    <Button onClick={handleClose} appearance="subtle">
+                      {t('No')}
+                    </Button>
+                  </Modal.Footer>
+                </Modal>
+              </>  : null
+            )}
+          />
         </Column>
       )}
     </Table>

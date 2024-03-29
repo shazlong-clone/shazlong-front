@@ -85,7 +85,7 @@ function DoctorLayout() {
     <>
       <div className="flex min-h-screen">
         <main className="hidden lg:block fixed" style={expanded ? { width: 250 } : {}}>
-          <Sidenav expanded={expanded} defaultOpenKeys={['3', '4']} className="min-h-screen">
+          <Sidenav expanded={expanded} className="min-h-screen">
             <Sidenav.Body>
               <NavList />
             </Sidenav.Body>
@@ -109,7 +109,7 @@ function DoctorLayout() {
                 </article>
               </section>
             </article>
-            <div className="max-lg:py-[70px]">
+            <div className="max-lg:py-[70px] px-5 lg:px-36">
               <Outlet />
             </div>
           </div>

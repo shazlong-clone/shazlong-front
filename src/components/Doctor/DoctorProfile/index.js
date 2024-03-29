@@ -138,14 +138,14 @@ function DoctorProfile() {
   ];
   return (
     <>
-      <Breadcrumb className="px-5 lg:px-36">
+      <Breadcrumb>
         <Breadcrumb.Item as={Link} to="/doctor">
           Doctor
         </Breadcrumb.Item>
         <Breadcrumb.Item active>Profile</Breadcrumb.Item>
       </Breadcrumb>
       <div className="relative">
-        <section className="px-5 lg:px-36  relative  mb-[24px]">
+        <section className="relative  mb-[24px]">
           <Panel className="bg-[var(--rs-bg-card)] overflow-visible relative">
             <div className="lg:flex gap-5">
               <article className="absolute top-[-30px] left-[50%] translate-x-[-50%] lg:static lg:translate-x-0">
@@ -184,7 +184,7 @@ function DoctorProfile() {
             </div>
           </Panel>
         </section>
-        <section className="px-5 lg:px-36">
+        <section>
           <Grid fluid>
             <Row gutter={16}>
               <Col xs={24} md={8}>

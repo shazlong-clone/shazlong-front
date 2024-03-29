@@ -32,7 +32,7 @@ function Slots() {
     dispatch(getSlots());
   }, []);
   return (
-    <main className="px-5 lg:px-36">
+    <>
       <Breadcrumb>
         <Breadcrumb.Item as={Link} to="/doctor">
           Doctor
@@ -44,7 +44,7 @@ function Slots() {
       <Panel className="bg-[var(--rs-bg-card)]">
         <Calendar className="slot-calender" bordered renderCell={renderCell} />
       </Panel>
-    </main>
+    </>
   );
 }
 

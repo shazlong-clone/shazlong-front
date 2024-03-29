@@ -30,21 +30,25 @@ export const searckList = ['Neuroscience(1)', 'Brain Science(2)', 'Psychotherapy
 export const UPCOMING = 1;
 export const PREVIOUS = 2;
 
+export const CANCELED = 0;
+export const RESERVED = 1;
+export const PATIENT_ATTEND = 2;
+export const PATIENT_NOT_ATTEND = 3;
 export const sessionsStatusList = [
   {
-    id: 0,
+    id: CANCELED,
     translationKey: 'Canceled',
   },
   {
-    id: 1,
+    id: RESERVED,
     translationKey: 'Reserved',
   },
   {
-    id: 2,
+    id: PATIENT_ATTEND,
     translationKey: 'Attended',
   },
   {
-    id: 3,
+    id: PATIENT_NOT_ATTEND,
     translationKey: 'Not_Attended',
   },
 ];

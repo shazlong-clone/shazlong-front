@@ -14,7 +14,7 @@ function MyTherapy() {
   const sessions = useSelector((state) => state?.user?.sessions);
 
   const upComingSessions = useMemo(() => {
-    return sessions?.filter((session) => moment(session?.slot?.from).isAfter(moment()));
+    return sessions?.filter((session) => moment(session?.slot?.from).isAfter(moment()) && session?.status !== 0);
   }, [sessions]);
 
   const previouseSessions = useMemo(() => {
