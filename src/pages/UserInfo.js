@@ -10,28 +10,33 @@ import PersonalInfo from '../components/UserInfo/PersonalInfo';
 import PaymentInfo from '../components/UserInfo/PaymentInfo';
 import { getMe } from '../features/auth/authAction';
 import MyTherapy from '../components/UserInfo/MyTherapy';
+import { useSearchParams } from 'react-router-dom';
+import { MY_THERAPY, PAYMENT_INFO, PERSONAL_INFO } from '../costansts';
 
 function UserInfo() {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const tab = searchParams.get('tab') ?? PERSONAL_INFO;
+
   const { user = {} } = useSelector((state) => state?.auth);
 
   const { t } = useTranslation();
   const toaster = useToaster();
 
-  const [activeTabe, setActiveTabe] = useState(1);
+  const [activeTabe, setActiveTabe] = useState(tab);
   const tabs = [
     {
       label: t('Personal_Info'),
-      key: 1,
+      key: PERSONAL_INFO,
       content: <PersonalInfo />,
     },
     {
       label: t('Payment_Info'),
-      key: 2,
+      key: PAYMENT_INFO,
       content: <PaymentInfo />,
     },
     {
       label: t('My_Therapy'),
-      key: 3,
+      key: MY_THERAPY,
       content: <MyTherapy />,
     },
   ];
@@ -73,6 +78,10 @@ function UserInfo() {
       toaster.push(<Message type="error"> {err?.response?.message || t('internal_server_error')}</Message>);
     },
   };
+  const onTabChange = (key) => {
+    setActiveTabe(key);
+    setSearchParams({ tab: key });
+  }
   return (
     <main className="bg-[var(--rs-gray-50)] py-5">
       <div className="container">
@@ -98,10 +107,10 @@ function UserInfo() {
             <Col xs={24} lg={16}>
               <Card className="rounded-none mt-5 p-0 pb-5 lg:mt-0 lg:w-[600px]">
                 <article className="flex">
-                  {tabs.map((tab) => (
+                  {tabs?.map((tab) => (
                     <div
                       key={tab.key}
-                      onClick={() => setActiveTabe(tab.key)}
+                      onClick={() => onTabChange(tab.key)}
                       className={clsx(
                         'grow px-5 py-4 capitalize border-solid border-t-0 border-r-0 border-l-0 font-semibold cursor-pointer text-sm lg:text-lg',
                         activeTabe === tab.key ? 'border-b-2 border-cyan text-cyan' : 'border-b border-gray',

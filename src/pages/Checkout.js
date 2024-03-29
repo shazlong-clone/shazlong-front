@@ -216,7 +216,7 @@ function Checkout() {
             <article className="flex gap-2 mt-2 items-center">
               {!discountState ? (
                 <>
-                  <Form.HelpText>{t('demo_coupon', { coupon: couponCode })}</Form.HelpText>
+                  <Form.HelpText>{t('Demo_Coupon', { coupon: couponCode })}</Form.HelpText>
                   {textCopied ? (
                     <FaCheck className="text-sm text-cyan text-green-300" />
                   ) : (

@@ -1,18 +1,21 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Message, toaster } from 'rsuite';
 import { getSlotsByIds, serveSlots } from '../../features/shared/sharedActions';
+import { MY_THERAPY } from '../../costansts';
 
 function withSubmit(WrappedComponent) {
   return function (props) {
     const [open, setOpen] = useState(false);
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
+    const locale = i18n.resolvedLanguage;
     const [loading, setLoading] = useState();
     const dispatch = useDispatch();
     const [searchParams] = useSearchParams();
     const slots_ids = searchParams.get('slots_ids');
+    const navigate = useNavigate();
     const onSubmit = async () => {
       try {
         setLoading(true);
@@ -30,6 +33,7 @@ function withSubmit(WrappedComponent) {
           );
           dispatch(getSlotsByIds(slots_ids));
           setOpen(false);
+          navigate(`/${locale}/user-info?tab=${MY_THERAPY}`);
         } else {
           toaster.push(
             <Message type="error" closable showIcon>

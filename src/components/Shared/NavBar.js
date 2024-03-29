@@ -43,6 +43,7 @@ function NavBar() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state?.auth);
+  console.log(user?.photo)
   const { doctor } = useSelector((state) => state?.auth);
   const triggerRef = React.useRef();
   const navgiagte = useNavigate();
@@ -71,8 +72,7 @@ function NavBar() {
         <li className="text-base px-3 py-2 cursor-pointer hover:bg-[var(--rs-primary-50)]">
           <a className="no-underline hover:no-underline">
             <div onClick={() => handleProfile(`/${currLang}/user-info`)} className="flex gap-2 items-center">
-              <img className="rounded-full" src={user?.photo ? user?.photo : <BsPersonCircle />} width="20px" height="20px" />
-
+              <img className="rounded-full" src={user?.photo ? user?.photo : personIcon} width="20px" height="20px" />
               <span className="capitalize">{t('my_profile')}</span>
             </div>
           </a>
@@ -80,14 +80,14 @@ function NavBar() {
         <li className="text-base px-3 py-2 cursor-pointer hover:bg-[var(--rs-primary-50)]">
           <a className="no-underline hover:no-underline">
             <div onClick={() => handleProfile(`/${currLang}/doctor`)} className="flex gap-2 items-center">
-              <img className="rounded-full" src={doctor?.photo ? doctor?.photo : <BsPersonCircle />} width="20px" height="20px" />
+              <img className="rounded-full" src={doctor?.photo ? doctor?.photo : personIcon} width="20px" height="20px" />
               <span className="capitalize">{t('Doctor_Profile')}</span>
             </div>
           </a>
         </li>
         <li
           onClick={signOutHandler}
-          className="text-red-600 hover:text-red-500 text-base flex gap-2 items-center px-3 py-2 cursor-pointer"
+          className="text-red-600 hover:bg-red-50 text-base flex gap-2 items-center px-3 py-2 cursor-pointer"
         >
           <GoSignOut className="text-xl  items-center mt-[3px]" />
           <span className="pb-[1px]">{t('Sign_Out')}</span>

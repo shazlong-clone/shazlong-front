@@ -76,7 +76,9 @@ function SignUpForm() {
 
   const handleSubmit = async () => {
     if (!formRef.current.check()) return;
-    if (formValue?.password !== formValue.passwordConfirm) {
+    console.log(formValue?.password)
+    console.log(formValue.passwordConfirm)
+    if (formValue?.password?.trim() !== formValue.passwordConfirm?.trim()) {
       return toaster.push(
         <Message closable showIcon type="error">
           {t('password_passwordconfirm_ne')}
@@ -137,7 +139,7 @@ function SignUpForm() {
     <>
       <Form ref={formRef} formValue={formValue} onChange={setFormValues} model={model} fluid className="mt-5 sign-form">
         <Group controlId="name">
-          <Control size="lg" placeholder="User Name" name="name" block="true" />
+          <Control size="lg" placeholder={t('Name')} name="name" block="true" />
           <HelpText>{t('Name_Helper_Text')}</HelpText>
         </Group>
         <Group controlId="email">

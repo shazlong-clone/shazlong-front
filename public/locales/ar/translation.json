@@ -250,7 +250,7 @@
   "Review_Added": "تمت اضافة مراجعتك بنجاح",
   "Write_Here": "اكتب هنا",
   "Any_Time": "في اي وقت",
-  "demo_coupon": "كوبون تجريبي {{coupon}}",
+  "Demo_Coupon": "كوبون تجريبي {{coupon}}",
   "Coupon_Applied": " تم تطبيق الكوبون بنجاح",
   "Invalid_Coupon": "كوبون غير صحيح",
   "Coupon_Applied_Already": "تم تطبيق الكوبون مسبقا",
@@ -274,5 +274,6 @@
   "page_not_found": "الصفحة غير موجودة",
   "back_to_home": "العودة للرئيسية",
   "Doctor_Profile": "حسابي كطبيب",
-  "No_slots": "لا يوجد جلسات"
+  "No_slots": "لا يوجد جلسات",
+  "Not_Spicified": "غير محدد"
 }

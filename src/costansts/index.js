@@ -48,3 +48,8 @@ export const sessionsStatusList = [
     translationKey: 'Not_Attended',
   },
 ];
+export const PERSONAL_INFO = 'PERSONAL_INFO';
+export const PAYMENT_INFO = 'PAYMENT_INFO';
+export const MY_THERAPY = 'MY_THERAPY';
+
+

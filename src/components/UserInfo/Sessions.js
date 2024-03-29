@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Popover, Table, Whisper } from 'rsuite';
 import { useTranslation } from 'react-i18next';
-import { UPCOMING, sessionsStatusList } from '../../costansts';
+import { PREVIOUS, UPCOMING, sessionsStatusList } from '../../costansts';
 import { getPrefix } from '../../features/shared/sharedActions';
 import { useDispatch, useSelector } from 'react-redux';
 import { genders } from '../../assets/constants';
@@ -44,6 +44,8 @@ function Sessions({ sessions, type }) {
                 placement="top"
                 speaker={
                   <Popover>
+                    <div className='max-w-[100px]'>
+
                     <img src={row?.slot?.doctor?.photo} width="100%" height="75" className="rounded-md" />
                     <p>
                       <b>{t('Name')}:</b>{' '}
@@ -55,6 +57,7 @@ function Sessions({ sessions, type }) {
                     <p>
                       <b>{t('Prefix')}:</b> {i18n.resolvedLanguage === 'ar' ? prefix?.ar_name : prefix?.name}
                     </p>
+                    </div>
                   </Popover>
                 }
               >
@@ -70,6 +73,9 @@ function Sessions({ sessions, type }) {
         <HeaderCell>{t('Status')}</HeaderCell>
         <CustomCell
           render={(row) => {
+            if(type === PREVIOUS && row?.status === 1) {
+              return t('Not_Spicified')
+            }
             const session = sessionsStatusList?.find((el) => {
               return el?.id === row?.status;
             });
