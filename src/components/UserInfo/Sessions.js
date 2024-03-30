@@ -20,23 +20,47 @@ function Sessions({ sessions, type }) {
   const handleClose = () => setOpen(false);
 
   const { prefixesList } = useSelector((state) => state?.shared);
-  
+
   const { t, i18n } = useTranslation();
 
   const dispatch = useDispatch();
-  const [loading, setLoading] = useState(false);
   const submit = useSubmition();
-  const handelCancel = async (id) => {
-    setLoading(true);
-    await submit(cancelSession, { bookingId: id }, { showLoader: false });
-    setLoading(false);
-    handleClose();
-    dispatch(getSessions());
-  };
+
 
   useEffect(() => {
     dispatch(getPrefix());
   }, []);
+  const Confirm = ({id}) => {
+    const [loading, setLoading] = useState(false);
+    const handelCancel = async (id) => {
+      setLoading(true);
+      await submit(cancelSession, { bookingId: id }, { showLoader: false });
+      setLoading(false);
+      handleClose();
+      dispatch(getSessions());
+    };
+    return <>
+      <ButtonToolbar>
+        <Button onClick={handleOpen} appearance="link" color="red" className="p-0">
+          {t('Cancel')}
+        </Button>
+      </ButtonToolbar>
+      <Modal backdrop="static" role="alertdialog" open={open} onClose={handleClose} size="xs">
+        <Modal.Body>
+          <RemindIcon style={{ color: '#ffb300', fontSize: 24 }} />
+          {t('Are_you_sure_you_want_to_cancel_this_session')}
+        </Modal.Body>
+        <Modal.Footer>
+          <Button loading={loading} onClick={() => handelCancel(id)} appearance="primary">
+            {t('Yes')}
+          </Button>
+          <Button onClick={handleClose} appearance="subtle">
+            {t('No')}
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </>;
+  };
 
   return (
     <Table bordered autoHeight data={sessions} className="mt-5 text-sm">
@@ -104,32 +128,7 @@ function Sessions({ sessions, type }) {
       {type === UPCOMING && (
         <Column flexGrow={1} align="center">
           <HeaderCell>...</HeaderCell>
-          <CustomCell
-            render={(row) => (
-              row.status !== 0 ?
-              <>
-                <ButtonToolbar>
-                  <Button onClick={handleOpen} appearance="link" color="red" className="p-0">
-                    {t('Cancel')}
-                  </Button>
-                </ButtonToolbar>
-                <Modal backdrop="static" role="alertdialog" open={open} onClose={handleClose} size="xs">
-                  <Modal.Body>
-                    <RemindIcon style={{ color: '#ffb300', fontSize: 24 }} />
-                    {t('Are_you_sure_you_want_to_cancel_this_session')}
-                  </Modal.Body>
-                  <Modal.Footer>
-                    <Button loading={loading} onClick={() => handelCancel(row?._id)} appearance="primary">
-                      {t('Yes')}
-                    </Button>
-                    <Button onClick={handleClose} appearance="subtle">
-                      {t('No')}
-                    </Button>
-                  </Modal.Footer>
-                </Modal>
-              </>  : null
-            )}
-          />
+          <CustomCell render={(row) => (row.status !== 0 ? <Confirm id={row?._id} /> : null)} />
         </Column>
       )}
     </Table>
