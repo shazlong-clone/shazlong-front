@@ -19,7 +19,7 @@ function Tetemonials() {
           {reviews?.toSorted((a,b)=> new Date(b.createdAt) - new Date(a.createdAt))?.slice((activePage - 1) * rowPerPage, (activePage - 1) * rowPerPage + rowPerPage)?.map((review) => {
             return (
               <div key={review?._id} className="py-2">
-                <Rate size="xs" defaultValue={review.rate} readOnly />
+                <Rate color='yellow' size="xs" defaultValue={review.rate} readOnly />
                 <section>{review?.message}</section>
                 <section className="flex justify-between items-center mt-4 mb-2">
                   <article className="flex justify-center gap-1 text-xs items-center">

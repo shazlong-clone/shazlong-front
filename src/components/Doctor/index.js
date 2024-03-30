@@ -3,7 +3,7 @@ import { Avatar, Divider, Drawer, IconButton, Nav, Sidenav } from 'rsuite';
 import MenuIcon from '@rsuite/icons/Menu';
 import useMediaQuery from '../../hooks/useMediaQuery';
 import clsx from 'clsx';
-import { NavLink, Outlet } from 'react-router-dom';
+import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import SettingWhisper from './components/SettingWhisper';
 import logo from '../../assets/images/shezlong-logo.svg';
 import logoAr from '../../assets/images/shezlong-logo-ar.svg';
@@ -32,6 +32,8 @@ const NavItem = (props) => {
 };
 
 const NavList = () => {
+  const navigate = useNavigate();
+
   const [activeKey, setActiveKey] = React.useState('1');
   const { i18n } = useTranslation();
   const loacle = i18n.resolvedLanguage;
@@ -45,7 +47,7 @@ const NavList = () => {
         </div>
         <Divider className="my-0" />
       </Sidenav.Header>
-      <Nav.Item eventKey="Home" href='/' icon={<Icon as={IoHome} />}>
+      <Nav.Item onClick={() => navigate('/')} eventKey="Home" icon={<Icon as={IoHome} />}>
         Home
       </Nav.Item>
       {appNavs.map((item) => {
@@ -60,7 +62,6 @@ const NavList = () => {
             </Nav.Menu>
           );
         }
-        console.log(newRest)
         if (rest.target === '_blank') {
           return (
             <Nav.Item key={item.eventKey} {...newRest}>

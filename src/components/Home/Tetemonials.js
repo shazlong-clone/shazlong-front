@@ -112,7 +112,7 @@ function Tetemonials() {
                         </a>
                       </div>
                       <div>
-                        <Rate defaultValue={3.5} size="xs" readOnly />
+                        <Rate color='yellow' defaultValue={3.5} size="xs" readOnly />
                       </div>
                     </div>
                   </section>

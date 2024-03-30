@@ -407,7 +407,7 @@ a:active {
   transform-origin: center;
 }
 
-[dir='rtl'] .rs-checkbox-wrapper {
+[dir='rtl'] .rs-checkbox-wrapper, [dir='rtl'] .rs-checkbox-control {
   transform: rotateY(180deg);
   transform-origin: center;
 }

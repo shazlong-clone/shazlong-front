@@ -90,7 +90,7 @@ function FeaturedArticales() {
                     <article className="text-center">
                       <h5 className="text-center text-cyan">Jone Doe</h5>
                       <aside className="text-center">
-                        <Rate allowHalf={true} size="sm" defaultValue={3.5} />
+                        <Rate color='yellow' allowHalf={true} size="sm" defaultValue={3.5} />
                         <small>(250 reviews)</small>
                       </aside>
                       <small>psychotherapist</small>

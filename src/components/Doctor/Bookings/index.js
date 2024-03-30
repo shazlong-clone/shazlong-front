@@ -53,7 +53,7 @@ function Bookings() {
   }, []);
 
   return (
-    <Panel header={t('Bookings')}>
+    <Panel header={t('Bookings')} bordered className='mt-3'>
       <Table bordered autoHeight data={bookings} className="mt-5 text-sm">
         <Column width={50} align="center">
           <HeaderCell style={{ padding: 0 }}>
@@ -76,9 +76,9 @@ function Bookings() {
           <CustomCell render={(row) => <span>{moment(row?.slot.to).format('h:mm A')}</span>} />
         </Column>
         <Column minWidth={80} flexGrow={1} align="center">
-          <HeaderCell>{t('Image')}</HeaderCell>
+          <HeaderCell>{t('Patient')}</HeaderCell>
           <CustomCell
-            style={{ padding: 0 }}
+            style={{ paddingTop: 0, paddingBottom: 0 }}
             render={(row) => (
               <div
                 style={{

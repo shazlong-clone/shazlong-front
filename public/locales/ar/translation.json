@@ -277,6 +277,7 @@
   "No_slots": "لا يوجد جلسات",
   "Not_Spicified": "غير محدد",
   "Are_you_sure_you_want_to_cancel_this_session": "هل تريد الغاء هذه الجلسة؟",
-  "success": "تم تنفيذ طلبك بنجاج"
+  "success": "تم تنفيذ طلبك بنجاج",
+  "Patient": "المريض"
   
 }
