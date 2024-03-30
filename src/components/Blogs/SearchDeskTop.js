@@ -5,7 +5,7 @@ import { RxCross2 } from 'react-icons/rx';
 
 import { useHover } from '@uidotdev/usehooks';
 import clsx from 'clsx';
-import { searckList } from '../../costansts';
+import { searckList } from '../../assets/constants';
 import SearchIcon from '@rsuite/icons/Search';
 function SearchDeskTop() {
   const [ref, hovering] = useHover();

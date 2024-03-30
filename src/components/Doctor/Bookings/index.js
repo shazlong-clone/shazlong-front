@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Checkbox, Panel, Table } from 'rsuite';
+import { Checkbox, Dropdown, IconButton, Panel, Popover, Table, Whisper } from 'rsuite';
 import useSubmition from '../../../hooks/useSubmit';
 import { getDoctorBookings } from '../../../features/doctor/doctorActions';
 import { useSelector } from 'react-redux';
@@ -7,7 +7,7 @@ import CustomCell from '../../Shared/CustomCell';
 import moment from 'moment';
 import { useTranslation } from 'react-i18next';
 import personIcon from '../../../assets/images/person.svg';
-
+import MoreIcon from '@rsuite/icons/legacy/More';
 const { Column, HeaderCell, Cell } = Table;
 
 function Bookings() {
@@ -26,6 +26,33 @@ function Bookings() {
       </div>
     </Cell>
   );
+  const renderMenu = ({ onClose, left, top, className }, ref) => {
+    const handleSelect = () => {
+      onClose();
+    };
+    return (
+      <Popover ref={ref} className={className} style={{ left, top }} full>
+        <Dropdown.Menu onSelect={handleSelect}>
+          <Dropdown.Item eventKey={1}>Follow</Dropdown.Item>
+          <Dropdown.Item eventKey={2}>Sponsor</Dropdown.Item>
+          <Dropdown.Item eventKey={3}>Add to friends</Dropdown.Item>
+          <Dropdown.Item eventKey={4}>View Profile</Dropdown.Item>
+          <Dropdown.Item eventKey={5}>Block</Dropdown.Item>
+        </Dropdown.Menu>
+      </Popover>
+    );
+  };
+
+  // eslint-disable-next-line no-unused-vars
+  const ActionCell = ({ rowData, dataKey, ...props }) => {
+    return (
+      <Cell {...props} className="link-group">
+        <Whisper placement="autoVerticalStart" trigger="click" speaker={renderMenu}>
+          <IconButton appearance="subtle" icon={<MoreIcon />} />
+        </Whisper>
+      </Cell>
+    );
+  };
 
   const [checkedKeys, setCheckedKeys] = React.useState([]);
   let checked = false;
@@ -53,7 +80,7 @@ function Bookings() {
   }, []);
 
   return (
-    <Panel header={t('Bookings')} bordered className='mt-3'>
+    <Panel header={t('Bookings')} bordered className="mt-3">
       <Table bordered autoHeight data={bookings} className="mt-5 text-sm">
         <Column width={50} align="center">
           <HeaderCell style={{ padding: 0 }}>
@@ -94,6 +121,12 @@ function Bookings() {
               </div>
             )}
           />
+        </Column>
+        <Column width={120}>
+          <HeaderCell>
+            <MoreIcon />
+          </HeaderCell>
+          <ActionCell style={{ padding: 5, }} dataKey="id" />
         </Column>
       </Table>
     </Panel>

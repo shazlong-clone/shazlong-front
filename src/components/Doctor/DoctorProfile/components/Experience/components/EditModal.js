@@ -98,6 +98,7 @@ function EditModal({ experience }) {
       const url = `${experience?.company_logo}`;
       fetch(url)
         .then((res) => setFormValue({ ...formValue, company_logo: res.blob() }))
+        // eslint-disable-next-line no-console
         .catch((err) => console.log(err));
       setFileInfo(url);
     }

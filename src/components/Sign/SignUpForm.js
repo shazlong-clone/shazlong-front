@@ -76,8 +76,6 @@ function SignUpForm() {
 
   const handleSubmit = async () => {
     if (!formRef.current.check()) return;
-    console.log(formValue?.password)
-    console.log(formValue.passwordConfirm)
     if (formValue?.password?.trim() !== formValue.passwordConfirm?.trim()) {
       return toaster.push(
         <Message closable showIcon type="error">

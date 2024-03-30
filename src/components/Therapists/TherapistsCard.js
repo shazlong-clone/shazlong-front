@@ -1,12 +1,10 @@
-import React, { Fragment, memo, useEffect, useMemo } from 'react';
+import React, { Fragment, memo, useEffect } from 'react';
 import { Placeholder } from 'rsuite';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllDoctors, getSpecialization } from '../../features/shared/sharedActions';
 import { getPrefix } from '../../features/shared/sharedActions';
 import DoctorCard from './DoctorCard';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import { setDoctorSearchParams } from '../../features/shared/sharedSlice';
-import { useSearchParams } from 'react-router-dom';
 import NoDataFound from '../Shared/NoDataFound';
 export const pageSize = 6;
 const LoadinCard = () => {

@@ -2,7 +2,7 @@ import React, { createContext } from 'react';
 import Image from './Image';
 import SignLogo from '../Sign/SignLogo';
 import DocSignUpForm from './DocSignUpForm';
-import { BsArrowLeftCircle, BsArrowRightCircle, BsFillPatchCheckFill } from 'react-icons/bs';
+import { BsFillPatchCheckFill } from 'react-icons/bs';
 import { Button } from 'rsuite';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';

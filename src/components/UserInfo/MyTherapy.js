@@ -5,7 +5,7 @@ import Sessions from './Sessions';
 import { useDispatch, useSelector } from 'react-redux';
 import { getSessions } from '../../features/user/userActions';
 import moment from 'moment';
-import { PREVIOUS, UPCOMING } from '../../costansts';
+import { PREVIOUS, UPCOMING } from '../../assets/constants';
 
 function MyTherapy() {
   const [activeKey, setActiveKey] = React.useState(UPCOMING);

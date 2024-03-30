@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, ButtonToolbar, Modal, Popover, Table, Whisper } from 'rsuite';
 import { useTranslation } from 'react-i18next';
-import { PREVIOUS, UPCOMING, sessionsStatusList } from '../../costansts';
+import { PREVIOUS, UPCOMING, sessionsStatusList } from '../../assets/constants';
 import { getPrefix } from '../../features/shared/sharedActions';
 import { useDispatch, useSelector } from 'react-redux';
 import { genders } from '../../assets/constants';

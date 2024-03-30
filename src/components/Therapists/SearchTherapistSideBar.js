@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Button, Divider, Drawer } from 'rsuite';
 import { MdFilterList } from 'react-icons/md';
 import { TbArrowsSort } from 'react-icons/tb';
-import { sortMenu } from '../../costansts/index';
+import { sortMenu } from '../../assets/constants';
 import { setSearchTherapistSideBarOpen, setDoctorSearchLoading, setDoctorSearchParams } from '../../features/shared/sharedSlice';
 import FilterForm from './FilterForm';
 import { useDispatch, useSelector } from 'react-redux';

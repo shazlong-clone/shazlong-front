@@ -25,6 +25,7 @@ const useSubmition = () => {
       }
       return res;
     } catch (e) {
+      // eslint-disable-next-line no-console
       console.error(e);
       if (showToast) {
         toaster.push(<Message type="error">{e?.message ?? t('internal_server_error')}</Message>, {

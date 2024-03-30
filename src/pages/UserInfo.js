@@ -11,7 +11,7 @@ import PaymentInfo from '../components/UserInfo/PaymentInfo';
 import { getMe } from '../features/auth/authAction';
 import MyTherapy from '../components/UserInfo/MyTherapy';
 import { useSearchParams } from 'react-router-dom';
-import { MY_THERAPY, PAYMENT_INFO, PERSONAL_INFO } from '../costansts';
+import { MY_THERAPY, PAYMENT_INFO, PERSONAL_INFO } from '../assets/constants';
 
 function UserInfo() {
   const [searchParams, setSearchParams] = useSearchParams();

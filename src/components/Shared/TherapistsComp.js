@@ -4,7 +4,7 @@ import SearchIcon from '@rsuite/icons/Search';
 import SearchTherapistSideBar from '../Therapists/SearchTherapistSideBar';
 import TherapistsCard, { pageSize } from '../Therapists/TherapistsCard';
 import FilterForm from '../Therapists/FilterForm';
-import { sortMenu } from '../../costansts/index';
+import { sortMenu } from '../../assets/constants';
 import { setDoctorSearchLoading, setDoctorSearchParams } from '../../features/shared/sharedSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllDoctors } from '../../features/shared/sharedActions';
