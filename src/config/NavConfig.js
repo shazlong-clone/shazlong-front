@@ -2,7 +2,6 @@ import React from 'react';
 import { Icon } from '@rsuite/icons';
 import { MdDashboard } from 'react-icons/md';
 import { BsFillPersonFill } from 'react-icons/bs';
-import { AiOutlineHome } from 'react-icons/ai';
 
 export const appNavs = [
   {

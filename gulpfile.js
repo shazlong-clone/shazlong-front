@@ -22,7 +22,7 @@ gulp.task('create-rtl-css', function () {
       )
       .pipe(sourcemaps.init())
       .pipe(autoprefixer(['last 2 versions', '> 1%'])) // Other post-processing.
-      .pipe(rename('main.css')) // Append "-rtl" to the filename.
+      .pipe(rename('main.css')) // Rename to "main.css".
       .pipe(cleanCSS({ compatibility: 'ie8' }))
       // eslint-disable-next-line no-undef
       .pipe(gulp.dest(path.join(__dirname, 'public/css'))) // Output LTR stylesheets.
@@ -34,20 +34,20 @@ gulp.task('create-rtl-css', function () {
   ); // Output RTL stylesheets.;
 });
 
-gulp.task('sourcemap', () => {
-  return (
-    gulp
-      // eslint-disable-next-line no-undef
-      .src(path.join(__dirname, 'public/css/main.css'))
-      .pipe(sourcemaps.init())
-      // Perform other CSS processing here (e.g., autoprefixing, minification)
-      .pipe(sourcemaps.write('.'))
-      // eslint-disable-next-line no-undef
-      .pipe(gulp.dest(path.join(__dirname, 'public/css')))
-  );
-});
+// gulp.task('sourcemap', () => {
+//   return (
+//     gulp
+//       // eslint-disable-next-line no-undef
+//       .src(path.join(__dirname, 'public/css/main.css'))
+//       .pipe(sourcemaps.init())
+//       // Perform other CSS processing here (e.g., autoprefixing, minification)
+//       .pipe(sourcemaps.write('.'))
+//       // eslint-disable-next-line no-undef
+//       .pipe(gulp.dest(path.join(__dirname, 'public/css')))
+//   );
+// });
 
 gulp.task('convert-rsuit-less-to-css', function () {
   return gulp.src('./public/css/rsuit.less').pipe(less()).pipe(gulp.dest('./public/css'));
 });
-gulp.task('all', gulp.series('convert-rsuit-less-to-css', 'create-rtl-css', 'sourcemap'));
+gulp.task('all', gulp.series('convert-rsuit-less-to-css', 'create-rtl-css'));
