@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo } from 'react';
 import { Badge, Button, Rate } from 'rsuite';
-import person from '../../assets/images/person.png';
+import person from '../../assets/images/person.svg';
 import { GiWorld } from 'react-icons/gi';
 import { BsFlag } from 'react-icons/bs';
 import { SlCalender } from 'react-icons/sl';

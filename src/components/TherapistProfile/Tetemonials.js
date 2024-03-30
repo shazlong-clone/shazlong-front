@@ -4,7 +4,7 @@ import Card from '../Shared/Card';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import moment from 'moment';
-import person from '../../assets/images/person.png';
+import person from '../../assets/images/person.svg';
 
 const rowPerPage = 3;
 function Tetemonials() {

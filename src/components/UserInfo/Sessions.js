@@ -10,18 +10,19 @@ import { genders } from '../../assets/constants';
 import RemindIcon from '@rsuite/icons/legacy/Remind';
 import useSubmition from '../../hooks/useSubmit';
 import { cancelSession, getSessions } from '../../features/user/userActions';
+import CustomCell from '../Shared/CustomCell';
+import personIcon from '../../assets/images/person.svg';
 
-const { Column, HeaderCell, Cell } = Table;
+const { Column, HeaderCell } = Table;
 function Sessions({ sessions, type }) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const CustomCell = ({ rowData, dataKey, ...props }) => {
-    return <Cell {...props}>{rowData[dataKey] ?? props.render(rowData)}</Cell>;
-  };
-  const { prefixesList } = useSelector((state) => state?.shared);
 
+  const { prefixesList } = useSelector((state) => state?.shared);
+  
   const { t, i18n } = useTranslation();
+
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const submit = useSubmition();
@@ -32,9 +33,11 @@ function Sessions({ sessions, type }) {
     handleClose();
     dispatch(getSessions());
   };
+
   useEffect(() => {
     dispatch(getPrefix());
   }, []);
+
   return (
     <Table bordered autoHeight data={sessions} className="mt-5 text-sm">
       <Column minWidth={80} flexGrow={1} align="center">
@@ -61,7 +64,7 @@ function Sessions({ sessions, type }) {
                 speaker={
                   <Popover>
                     <div className="max-w-[100px]">
-                      <img src={row?.slot?.doctor?.photo} width="100%" height="75" className="rounded-md" />
+                      <img src={row?.slot?.doctor?.photo || personIcon} width="100%" height="75" className="rounded-md" />
                       <p>
                         <b>{t('Name')}:</b>{' '}
                         {i18n.resolvedLanguage === 'ar' ? row?.slot?.doctor?.fullArName : row?.slot?.doctor?.fullEnName}

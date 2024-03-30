@@ -10,6 +10,9 @@ import logoAr from '../../assets/images/shezlong-logo-ar.svg';
 import { appNavs } from '../../config/NavConfig';
 import { setActiveSideBar } from '../../features/theme/themeSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
+import { IoHome } from 'react-icons/io5';
+import { Icon } from '@rsuite/icons';
 
 const NavItem = (props) => {
   const { title, eventKey, ...rest } = props;
@@ -30,6 +33,8 @@ const NavItem = (props) => {
 
 const NavList = () => {
   const [activeKey, setActiveKey] = React.useState('1');
+  const { i18n } = useTranslation();
+  const loacle = i18n.resolvedLanguage;
   return (
     <Nav activeKey={activeKey} onSelect={setActiveKey} className="overflow-hidden">
       <Sidenav.Header className="text-center">
@@ -40,27 +45,31 @@ const NavList = () => {
         </div>
         <Divider className="my-0" />
       </Sidenav.Header>
+      <Nav.Item eventKey="Home" href='/' icon={<Icon as={IoHome} />}>
+        Home
+      </Nav.Item>
       {appNavs.map((item) => {
         const { children, ...rest } = item;
+        let newRest = { ...rest, to: `/${loacle}/doctor/${rest.to}` };
         if (children) {
           return (
-            <Nav.Menu key={item.eventKey} placement="rightStart" trigger="hover" {...rest}>
+            <Nav.Menu key={item.eventKey} placement="rightStart" trigger="hover" {...newRest}>
               {children.map((child) => {
                 return <NavItem key={child.eventKey} {...child} />;
               })}
             </Nav.Menu>
           );
         }
-
+        console.log(newRest)
         if (rest.target === '_blank') {
           return (
-            <Nav.Item key={item.eventKey} {...rest}>
+            <Nav.Item key={item.eventKey} {...newRest}>
               {item.title}
             </Nav.Item>
           );
         }
 
-        return <NavItem key={rest.eventKey} {...rest} />;
+        return <NavItem key={rest.eventKey} {...newRest} />;
       })}
     </Nav>
   );

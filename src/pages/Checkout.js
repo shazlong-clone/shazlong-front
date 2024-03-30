@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import InternalHeader from '../components/Shared/InternalHeader';
 import { Avatar, Button, Divider, Form, IconButton, Input, Message, toaster } from 'rsuite';
-import person from '../assets/images/person.png';
+import person from '../assets/images/person.svg';
 import Card from '../components/Shared/Card';
 import { LuAlarmClock, LuCopy } from 'react-icons/lu';
 import { GiCash } from 'react-icons/gi';

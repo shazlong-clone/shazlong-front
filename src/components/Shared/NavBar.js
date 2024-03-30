@@ -9,7 +9,7 @@ import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { Button, Drawer, Popover, Whisper } from 'rsuite';
 import { BsPersonBadgeFill, BsPersonCircle } from 'react-icons/bs';
 import { GoSignOut } from 'react-icons/go';
-import personIcon from '../../assets/images/person-icon-blue-7563.png';
+import personIcon from '../../assets/images/person.svg';
 import useMediaQuery from '../../hooks/useMediaQuery';
 import { useDispatch, useSelector } from 'react-redux';
 import { getMe, getMeAsDoctor } from '../../features/auth/authAction';

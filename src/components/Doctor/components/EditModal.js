@@ -19,15 +19,15 @@ import {
 } from 'rsuite';
 import { MdOutlineEdit } from 'react-icons/md';
 import { useTranslation } from 'react-i18next';
-import { genders, prefixList } from '../../../assets/constants';
+import { genders } from '../../../assets/constants';
 import { useDispatch, useSelector } from 'react-redux';
 import clsx from 'clsx';
-import { getCountries, getLangs } from '../../../features/shared/sharedActions';
+import { getCountries, getLangs, getPrefix } from '../../../features/shared/sharedActions';
 import { updateDoctorProfile } from '../../../features/doctor/doctorActions';
 import { getMeAsDoctor } from '../../../features/auth/authAction';
 
 function EditModal() {
-  const { languages } = useSelector((state) => state?.shared);
+  const { languages, prefixesList } = useSelector((state) => state?.shared);
 
   const {
     fullArName,
@@ -77,10 +77,10 @@ function EditModal() {
 
   const handleOpen = () => setOpen(true);
 
-  const prefixData = prefixList?.map((el) => {
+  const prefixData = prefixesList?.map((el) => {
     return {
-      label: el,
-      value: el,
+      label: el?.name,
+      value: el?.id,
     };
   });
 
@@ -152,7 +152,12 @@ function EditModal() {
   useEffect(() => {
     dispatch(getCountries());
     dispatch(getLangs());
+    dispatch(getPrefix());
   }, []);
+
+  useEffect(()=>{
+    setCountryCode(countries?.find((el) => el?.id === country)?.country_code);
+  },[countryCode])
 
   return (
     <>

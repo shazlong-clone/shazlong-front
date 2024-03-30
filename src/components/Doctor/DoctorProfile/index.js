@@ -19,11 +19,14 @@ import { CgFileDocument } from 'react-icons/cg';
 import { API_BASE_URL } from '../../../config/enviroment.config';
 import CameraRetroIcon from '@rsuite/icons/legacy/CameraRetro';
 import { useTranslation } from 'react-i18next';
+import { getPrefix } from '../../../features/shared/sharedActions';
 
 function DoctorProfile() {
   const { doctorToken } = useSelector((state) => state?.auth);
   const [uploading, setUploading] = React.useState(false);
   const { profile = {} } = useSelector((state) => state?.doctor);
+  const { prefixesList } = useSelector((state) => state?.shared);
+
   const { t } = useTranslation();
   function previewFile(file, callback) {
     const reader = new FileReader();
@@ -103,7 +106,7 @@ function DoctorProfile() {
     {
       id: 4,
       key: 'Prefix',
-      value: prefix,
+      value: prefixesList?.find(el => el?.id === prefix)?.name,
       icon: <LuSubtitles />,
     },
     {
@@ -136,6 +139,10 @@ function DoctorProfile() {
       icon: <CgFileDocument />,
     },
   ];
+  useEffect(()=>{
+    dispatch(getPrefix());
+
+  },[])
   return (
     <>
       <Breadcrumb>

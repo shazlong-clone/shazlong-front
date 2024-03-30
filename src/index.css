@@ -358,13 +358,13 @@ a:active {
 
 .custom-badge .rs-badge-content {
   top: 84%;
-  right: 15%;
+  right: 18%;
   border: 3px solid white;
   background: #999;
 }
 [dir='rtl'] .custom-badge .rs-badge-content {
   right: auto;
-  left: 75%;
+  left: 81%;
 }
 .custom-badge.green-bage .rs-badge-content {
   background: var(--rs-green-400);

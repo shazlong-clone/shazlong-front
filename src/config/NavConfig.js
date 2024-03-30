@@ -6,21 +6,21 @@ import { AiOutlineHome } from 'react-icons/ai';
 
 export const appNavs = [
   {
-    eventKey: 'Bookings',
+    eventKey: 'profile',
     icon: <Icon as={BsFillPersonFill} />,
-    title: 'Bookings',
-    to: 'bookings',
+    title: 'Profile',
+    to: 'profile',
   },
   {
-    eventKey: 'profile',
-    icon: <Icon as={MdDashboard} />,
-    title: 'Profile',
+    eventKey: 'slots',
+    icon: <Icon as={BsFillPersonFill} />,
+    title: 'Slots',
     to: 'slots',
   },
   {
-    eventKey: 'Home',
-    icon: <Icon as={AiOutlineHome} />,
-    title: 'Home',
-    to: '/',
+    eventKey: 'Bookings',
+    icon: <Icon as={MdDashboard} />,
+    title: 'Bookings',
+    to: 'bookings',
   },
 ];

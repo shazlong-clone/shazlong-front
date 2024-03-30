@@ -8,7 +8,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import moment from 'moment';
-import personImg from '../../assets/images/person.png';
+import personImg from '../../assets/images/person.svg';
 import clsx from 'clsx';
 import { IoMdMale } from 'react-icons/io';
 import { IoMdFemale } from 'react-icons/io';
