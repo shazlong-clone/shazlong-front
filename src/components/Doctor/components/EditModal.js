@@ -155,16 +155,16 @@ function EditModal() {
     dispatch(getPrefix());
   }, []);
 
-  useEffect(()=>{
+  useEffect(() => {
     setCountryCode(countries?.find((el) => el?.id === country)?.country_code);
-  },[countryCode])
+  }, [countryCode]);
 
   return (
     <>
       <IconButton onClick={handleOpen} size="lg" className="rounded-full" icon={<MdOutlineEdit />} />
       <Modal backdrop="static" open={open} onClose={handleClose}>
         <Modal.Header>
-          <Modal.Title>Edit Pernsonal Info</Modal.Title>
+          <Modal.Title>{t('Edit_Pernsonal_Info')}</Modal.Title>
         </Modal.Header>
         <Modal.Body style={{ paddingBottom: '0px', marginTop: '0px', padding: '0 5px' }}>
           <Form fluid model={model} formValue={formValue} onChange={setFormValue} ref={formRef}>
@@ -178,16 +178,16 @@ function EditModal() {
               <Form.Control placeholder="English Name" block={'true'} name="fullEnName" />
             </Form.Group>
             <Form.Group style={{ marginBottom: '5px' }} controlId="Email">
-              <Form.HelpText>Email</Form.HelpText>
-              <Form.Control placeholder="Enter Email" block={'true'} name="email" />
+              <Form.HelpText>{t('Email')}</Form.HelpText>
+              <Form.Control placeholder={t('Email')} block={'true'} name="email" />
             </Form.Group>
             <Form.Group style={{ marginBottom: '5px' }} controlId="country">
-              <Form.ControlLabel>Country</Form.ControlLabel>
+              <Form.ControlLabel>{t('Country')}</Form.ControlLabel>
               <Form.Control
                 onSelect={(id) => {
                   setCountryCode(countries?.find((el) => el?.id === id)?.country_code);
                 }}
-                placeholder="Country"
+                placeholder={t('Country')}
                 menuMaxHeight={300}
                 menuStyle={{ maxWidth: '10px' }}
                 block
@@ -198,50 +198,56 @@ function EditModal() {
               />
             </Form.Group>
             <Form.Group style={{ marginBottom: '5px' }} controlId="Phone">
-              <Form.HelpText>Phone</Form.HelpText>
+              <Form.HelpText>{t('Phone')}</Form.HelpText>
               <InputGroup>
                 <InputGroup.Addon>{countryCodeState ?? '-'}</InputGroup.Addon>
                 <Form.Control
                   accepter={MaskedInput}
                   mask={[/\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/]}
                   name="phone"
-                  placeholder="Phone"
+                  placeholder={t('Phone')}
                   size="lg"
                 />
               </InputGroup>
             </Form.Group>
             <Form.Group style={{ marginBottom: '5px' }} controlId="prefix">
-              <Form.HelpText>prefix</Form.HelpText>
-              <Form.Control data={prefixData} accepter={InputPicker} placeholder="Enter Prefix" block={'true'} name="prefix" />
+              <Form.HelpText>{t('Prefix')}</Form.HelpText>
+              <Form.Control data={prefixData} accepter={InputPicker} placeholder={t('Prefix')} block={'true'} name="prefix" />
             </Form.Group>
             <Form.Group style={{ marginBottom: '5px' }} controlId="languages">
-              <Form.HelpText>Languages</Form.HelpText>
-              <Form.Control data={languagesData} accepter={TagPicker} placeholder="Enter lang" block={'true'} name="languages" />
+              <Form.HelpText>{t('Languages')}</Form.HelpText>
+              <Form.Control
+                data={languagesData}
+                accepter={TagPicker}
+                placeholder={t('Languages')}
+                block={'true'}
+                name="languages"
+              />
             </Form.Group>
             <Form.Group style={{ marginBottom: '5px' }} controlId="Feez30">
-              <Form.HelpText>Feez Per 30 minutes</Form.HelpText>
+              <Form.HelpText>{t('Feez_Per_30_Minutes')}</Form.HelpText>
               <Form.Control
-                prefix="30 mins"
+                prefix={t('30_Mins')}
                 min={0}
                 accepter={InputNumber}
-                placeholder="Enter Feez Per 30 minutes"
+                placeholder={t('Feez_Per_30_Minutes')}
                 block={'true'}
                 name="feez_per_30_min"
               />
             </Form.Group>
             <Form.Group style={{ marginBottom: '5px' }} controlId="Feez60">
-              <Form.HelpText>Feez Per 60 minutes</Form.HelpText>
+              <Form.HelpText>{t('Feez_Per_60_Minutes')}</Form.HelpText>
               <Form.Control
-                prefix="60 mins"
+                prefix={t('60_Mins')}
                 min={0}
                 accepter={InputNumber}
-                placeholder="Enter Feez Per 60 minutes"
+                placeholder={t('Feez_Per_60_Minutes')}
                 block={'true'}
                 name="feez_per_60_min"
               />
             </Form.Group>
             <Form.Group>
-              <Form.HelpText>Gender</Form.HelpText>
+              <Form.HelpText>{t('Gender')}</Form.HelpText>
               <Form.Control name="gender" accepter={RadioGroup} inline>
                 {genders?.map((el) => (
                   <Radio key={Math.random()} value={el?.id}>
@@ -253,9 +259,9 @@ function EditModal() {
             <hr className="m-3 mx-0" />
             <FlexboxGrid justify="end">
               <Stack spacing={16}>
-                <Button onClick={handleClose}>Cancel</Button>
+                <Button onClick={handleClose}>{t('Cancel')}</Button>
                 <Button loading={loading} appearance="primary" onClick={handleSubmit} type="submit">
-                  Save
+                  {t('Save')}
                 </Button>
               </Stack>
             </FlexboxGrid>

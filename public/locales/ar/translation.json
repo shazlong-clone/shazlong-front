@@ -302,5 +302,10 @@
   "Edit_Specialization": "تعديل التخصص",
   "Add_Slot": "اضافة جلسة",
   "Update_Slot": "تعديل جلسة",
-  "Slot_Date":"معاد الجلسة"
+  "Slot_Date": "معاد الجلسة",
+  "Edit_Pernsonal_Info": "تعديل المعلومات الشخصية",
+  "Feez_Per_30_Minutes": "سعر الجلسة في 30 دقيقة",
+  "Feez_Per_60_Minutes": "سعر الجلسة في 60 دقيقة",
+  "30_Mins": "30 دقيقة",
+  "60_Mins": "60 دقيقة"
 }
