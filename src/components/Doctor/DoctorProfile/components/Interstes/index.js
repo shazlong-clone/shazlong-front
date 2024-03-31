@@ -76,27 +76,27 @@ function Interstes() {
       header={
         <FlexboxGrid justify="space-between" align="middle">
           <FlexboxGrid.Item>
-            <h5 className="capitalize text-gray/80">Specialization</h5>
+            <h5 className="capitalize text-gray/80">{t('Specialization')}</h5>
           </FlexboxGrid.Item>
           <FlexboxGrid.Item>
             <IconButton onClick={handleOpen} size="lg" className="rounded-full" icon={<MdOutlineEdit />} />
             <Modal backdrop="static" open={open} onClose={handleClose}>
               <Modal.Header>
-                <Modal.Title>Edit Specialization</Modal.Title>
+                <Modal.Title>{t('Edit_Specialization')}</Modal.Title>
               </Modal.Header>
               <Modal.Body style={{ overflow: 'visible', paddingBottom: '0px', marginTop: '0px' }}>
                 <Form fluid model={model} formValue={formValue} onChange={setFormValue} ref={formRef}>
-                  <hr className="m-2 mx-0" />
+                  <hr className="mx-0" />
                   <Form.Group controlId="specialization">
-                    <Form.HelpText>specialization</Form.HelpText>
+                    <Form.HelpText>{t('Specialization')}</Form.HelpText>
                     <Form.Control data={tagOptions} block name="specialization" accepter={TagPicker} />
                   </Form.Group>
                   <hr className="m-3 mx-0" />
                   <FlexboxGrid justify="end">
                     <Stack spacing={16}>
-                      <Button onClick={handleClose}>Cancel</Button>
+                      <Button onClick={handleClose}>{t('Cancel')}</Button>
                       <Button loading={loading} appearance="primary" onClick={handleSubmit} type="submit">
-                        Save
+                        {t('Save')}
                       </Button>
                     </Stack>
                   </FlexboxGrid>

@@ -8,7 +8,8 @@ import { doctorSignOut } from '../../../features/auth/authSlice';
 import { useNavigate } from 'react-router-dom';
 
 const WhisperComp = ({ placement }) => {
-  const { locale } = useSelector((state) => state?.theme);
+  const { t, i18n} = useTranslation();
+  const locale = i18n.resolvedLanguage;
   const triggerRef = useRef();
   const close = () => triggerRef.current.close();
   const dispatch = useDispatch();
@@ -19,7 +20,6 @@ const WhisperComp = ({ placement }) => {
     navigate('/');
   };
   const { doctor } = useSelector((state) => state?.auth);
-  const { i18n } = useTranslation();
   return (
     <Whisper
       trigger="click"
@@ -49,7 +49,7 @@ const WhisperComp = ({ placement }) => {
           </RadioGroup>
           <Divider className="my-0" />
           <div onClick={signOut} className="text-center text-red-500 font-bold pt-[10px] cursor-pointer">
-            Sign Out
+            {t('Sign_Out')}
           </div>
         </Popover>
       }

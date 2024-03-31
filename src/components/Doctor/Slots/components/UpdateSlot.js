@@ -121,13 +121,13 @@ const UpdateSlot = ({ date, slot }) => {
       </Button>
       <Modal open={open} onClose={handleClose}>
         <Modal.Header>
-          <Modal.Title>Add Slot</Modal.Title>
+          <Modal.Title>{t('Update_Slot')}</Modal.Title>
         </Modal.Header>
         <Modal.Body style={{ overflow: 'inherit' }}>
           <Form model={model} ref={formRef} formValue={formValue} onChange={setFormValue} fluid>
             <Form.Group controlId="slots">
               <Form.Control
-                placeholder="from ~ to"
+                placeholder={t('Slot_Date')}
                 name="from_to"
                 ranges={[]}
                 showMeridian

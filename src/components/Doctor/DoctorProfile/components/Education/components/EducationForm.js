@@ -7,6 +7,7 @@ import FlexboxGridItem from 'rsuite/esm/FlexboxGrid/FlexboxGridItem';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { getMeAsDoctor, updateDoctorProfile } from '../../../../../../features/doctor/doctorActions';
+import { t } from 'i18next';
 
 const { ArrayType, StringType, DateType, ObjectType } = Schema.Types;
 const model = Schema.Model({
@@ -44,19 +45,19 @@ const ProductItem = ({ rowValue = {}, onChange, rowIndex, rowError, handleMinus,
   return (
     <FlexboxGrid className="max-md:border max-md:border-solid max-md:border-gray/20 rounded-sm my-1 max-md:py-5 max-md:px-4">
       <FlexboxGrid.Item as={Col} xs={24} md={4} className="max-md:mb-1">
-        <Input dir='ltr' placeholder="Title" block value={rowValue.title} onChange={handleChangeTitle} />
+        <Input dir="ltr" placeholder="Title" block value={rowValue.title} onChange={handleChangeTitle} />
         {rowError ? <ErrorMessage>{rowError.title.errorMessage}</ErrorMessage> : null}
       </FlexboxGrid.Item>
       <FlexboxGrid.Item as={Col} xs={24} md={4} className="max-md:mb-1">
-        <Input dir='rtl' placeholder="Arabic Title" block value={rowValue.ar_title} onChange={handleChangeArTitle} />
+        <Input dir="rtl" placeholder="Arabic Title" block value={rowValue.ar_title} onChange={handleChangeArTitle} />
         {rowError ? <ErrorMessage>{rowError.ar_title.errorMessage}</ErrorMessage> : null}
       </FlexboxGrid.Item>
       <FlexboxGrid.Item as={Col} xs={24} md={4} className="max-md:mb-1">
-        <Input dir='ltr' placeholder="Place" block value={rowValue.place} onChange={handleChangePlace} />
+        <Input dir="ltr" placeholder="Place" block value={rowValue.place} onChange={handleChangePlace} />
         {rowError ? <ErrorMessage>{rowError.name.errorMessage}</ErrorMessage> : null}
       </FlexboxGrid.Item>
       <FlexboxGrid.Item as={Col} xs={24} md={4} className="max-md:mb-1">
-        <Input dir='rtl' placeholder="Arabic Place" block value={rowValue.ar_place} onChange={handleChangeArPlace} />
+        <Input dir="rtl" placeholder="Arabic Place" block value={rowValue.ar_place} onChange={handleChangeArPlace} />
         {rowError ? <ErrorMessage>{rowError.ar_place.errorMessage}</ErrorMessage> : null}
       </FlexboxGrid.Item>
       <FlexboxGrid.Item as={Col} xs={24} md={7} className="max-md:mb-1">
@@ -112,7 +113,7 @@ const ProductInputControl = ({ value = [], onChange, fieldError }) => {
       ))}
       <Button className="mt-5 flex gap-1" onClick={handleAdd}>
         <PlusIcon className="text-cyan" />
-        <span>Add Education</span>
+        <span>{t('Add')}</span>
       </Button>
     </div>
   );
@@ -186,9 +187,9 @@ const EducationForm = ({ handleClose }) => {
           <FlexboxGrid justify="end">
             <FlexboxGridItem>
               <Stack spacing={6}>
-                <Button onClick={handleClose}>Cancel</Button>
+                <Button onClick={handleClose}>{t('Cancel')}</Button>
                 <Button loading={loading} appearance="primary" onClick={handelSubmit}>
-                  Save
+                  {t('Save')}
                 </Button>
               </Stack>
             </FlexboxGridItem>

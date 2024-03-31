@@ -35,7 +35,7 @@ const NavList = () => {
   const navigate = useNavigate();
 
   const [activeKey, setActiveKey] = React.useState('1');
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
   const loacle = i18n.resolvedLanguage;
   return (
     <Nav activeKey={activeKey} onSelect={setActiveKey} className="overflow-hidden">
@@ -48,11 +48,11 @@ const NavList = () => {
         <Divider className="my-0" />
       </Sidenav.Header>
       <Nav.Item onClick={() => navigate('/')} eventKey="Home" icon={<Icon as={IoHome} />}>
-        Home
+        {t('Home')}
       </Nav.Item>
       {appNavs.map((item) => {
         const { children, ...rest } = item;
-        let newRest = { ...rest, to: `/${loacle}/doctor/${rest.to}` };
+        let newRest = { ...rest, to: `/${loacle}/doctor/${rest?.to}`, title: t(rest?.title) };
         if (children) {
           return (
             <Nav.Menu key={item.eventKey} placement="rightStart" trigger="hover" {...newRest}>

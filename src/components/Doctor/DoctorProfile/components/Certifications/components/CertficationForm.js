@@ -40,23 +40,24 @@ const ProductItem = ({ rowValue = {}, onChange, rowIndex, rowError, handleMinus,
   const handleChangeTime = (value) => {
     onChange(rowIndex, { ...rowValue, time: value });
   };
+  const { t } = useTranslation();
 
   return (
     <FlexboxGrid className="max-md:border max-md:border-solid max-md:border-gray/20 rounded-sm my-1 max-md:py-5">
       <FlexboxGrid.Item as={Col} xs={24} md={4} className="max-md:mb-1">
-        <Input dir='ltr' placeholder="Title" block value={rowValue.title} onChange={handleChangeTitle} />
+        <Input dir="ltr" placeholder={t('Title')} block value={rowValue.title} onChange={handleChangeTitle} />
         {rowError ? <ErrorMessage>{rowError.title.errorMessage}</ErrorMessage> : null}
       </FlexboxGrid.Item>
       <FlexboxGrid.Item as={Col} xs={24} md={4} className="max-md:mb-1">
-        <Input dir='rtl' placeholder="Arabic Title" block value={rowValue.ar_title} onChange={handleChangeArTitle} />
+        <Input dir="rtl" placeholder={t('Arabic_Title')} block value={rowValue.ar_title} onChange={handleChangeArTitle} />
         {rowError ? <ErrorMessage>{rowError.ar_title.errorMessage}</ErrorMessage> : null}
       </FlexboxGrid.Item>
       <FlexboxGrid.Item as={Col} xs={24} md={4} className="max-md:mb-1">
-        <Input dir='ltr' placeholder="Place" block value={rowValue.place} onChange={handleChangePlace} />
+        <Input dir="ltr" placeholder="Place" block value={rowValue.place} onChange={handleChangePlace} />
         {rowError ? <ErrorMessage>{rowError.place.errorMessage}</ErrorMessage> : null}
       </FlexboxGrid.Item>
       <FlexboxGrid.Item as={Col} xs={24} md={4} className="max-md:mb-1">
-        <Input dir='rtl' placeholder="Arabic Place" block value={rowValue.ar_place} onChange={handleChangeArPlace} />
+        <Input dir="rtl" placeholder="Arabic Place" block value={rowValue.ar_place} onChange={handleChangeArPlace} />
         {rowError ? <ErrorMessage>{rowError.ar_place.errorMessage}</ErrorMessage> : null}
       </FlexboxGrid.Item>
       <FlexboxGrid.Item as={Col} xs={24} md={7} className="max-md:mb-1">
@@ -92,6 +93,7 @@ const ProductInputControl = ({ value = [], onChange, fieldError }) => {
       handleChangeProducts(certifications);
     }
   };
+  const { t } = useTranslation();
   const handleAdd = () => {
     handleChangeProducts(certifications.concat([{ title: '', ar_title: '', place: '', ar_place: '', time: '' }]));
   };
@@ -112,7 +114,7 @@ const ProductInputControl = ({ value = [], onChange, fieldError }) => {
       ))}
       <Button className="mt-5 flex gap-1" onClick={handleAdd}>
         <PlusIcon className="text-cyan" />
-        <span>Add Certicate</span>
+        <span>{t('Add')}</span>
       </Button>
     </div>
   );
@@ -186,9 +188,9 @@ const CertficationForm = ({ handleClose }) => {
           <FlexboxGrid justify="end">
             <FlexboxGridItem>
               <Stack spacing={6}>
-                <Button onClick={handleClose}>Cancel</Button>
+                <Button onClick={handleClose}>{t('Cancel')}</Button>
                 <Button loading={loading} appearance="primary" onClick={handelSubmit}>
-                  Save
+                  {t('Save')}
                 </Button>
               </Stack>
             </FlexboxGridItem>

@@ -13,7 +13,8 @@ import { FaRegHospital } from 'react-icons/fa';
 function Experience() {
   const { profile } = useSelector((state) => state?.doctor);
   const toaster = useToaster();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const locale = i18n.resolvedLanguage;
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const hamdelDeleteExperience = async (id) => {
@@ -55,12 +56,12 @@ function Experience() {
         ref={ref}
         title={
           <div className="flex items-center">
-            <AiFillWarning className="text-yellow-500 text-2xl" /> warn
+            <AiFillWarning className="text-yellow-500 text-2xl" /> {t('Warn')}
           </div>
         }
         {...props}
       >
-        Are you sure to delete this task?
+        {t('Are_you_Sure_Delete')}
         <br />
         <div className="flex justify-end">
           <Button
@@ -71,7 +72,7 @@ function Experience() {
             color="red"
             appearance="primary"
           >
-            Delete
+            {t('Delete')}
           </Button>
         </div>
       </Popover>
@@ -89,7 +90,7 @@ function Experience() {
       header={
         <FlexboxGrid justify="space-between" align="middle">
           <FlexboxGrid.Item>
-            <h5 className="capitalize text-gray/80">Experience</h5>
+            <h5 className="capitalize text-gray/80">{t('Experience')}</h5>
           </FlexboxGrid.Item>
           <FlexboxGrid.Item>
             <EditModal />
@@ -114,13 +115,13 @@ function Experience() {
                 </section>
                 <section className="grow">
                   <h6 className="mb-2 flex justify-between items-center">
-                    <span>{el?.title}</span>
+                    <span>{locale === 'ar'? el?.ar_title : el?.title}</span>
                     <Stack spacing={6}>
                       <EditModal experience={el} />
                       <CustomComponent id={el?._id} />
                     </Stack>
                   </h6>
-                  <p className="text-sm">{el?.description}</p>
+                  <p className="text-sm">{locale === 'ar'? el?.ar_description : el?.description}</p>
                   <a className="text-sm">
                     {moment(el?.time?.at(0)).format('MMM YYYY')}-{moment(el?.time?.at(1)).format('MMM YYYY')}
                   </a>

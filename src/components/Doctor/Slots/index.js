@@ -7,8 +7,11 @@ import UpdateSlot from './components/UpdateSlot';
 
 import { getSlots } from '../../../features/doctor/doctorActions';
 import moment from 'moment';
+import { useTranslation } from 'react-i18next';
 function Slots() {
-  const { slots } = useSelector((state) => state?.doctor);
+  const { t, i18n } = useTranslation();
+  const locale = i18n.resolvedLanguage;
+  const { slots, profile } = useSelector((state) => state?.doctor);
   function renderCell(date) {
     return (
       <>
@@ -34,11 +37,11 @@ function Slots() {
   return (
     <>
       <Breadcrumb>
-        <Breadcrumb.Item as={Link} to="/doctor">
-          Doctor
+        <Breadcrumb.Item as={Link} to={`${locale}/doctor`}>
+          {locale === 'ar' ? profile?.fullArName : profile?.fullEnName}
         </Breadcrumb.Item>
         <Breadcrumb.Item active as={Link} to="slots">
-          Slots
+          {t('Slots')}
         </Breadcrumb.Item>
       </Breadcrumb>
       <Panel className="bg-[var(--rs-bg-card)]">

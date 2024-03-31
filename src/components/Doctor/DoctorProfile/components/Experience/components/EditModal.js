@@ -1,7 +1,7 @@
 import React, { forwardRef, useEffect, useRef, useState } from 'react';
 import { Button, DateRangePicker, FlexboxGrid, Form, IconButton, Message, Modal, Schema, Stack, Uploader, toaster } from 'rsuite';
 import { RiAddFill } from 'react-icons/ri';
-import AvatarIcon from '@rsuite/icons/legacy/Avatar';
+import CameraRetroIcon from '@rsuite/icons/legacy/CameraRetro';
 import { useDispatch } from 'react-redux';
 import { getMeAsDoctor, addOrUpdateDoctorExperience } from '../../../../../../features/doctor/doctorActions';
 import { useTranslation } from 'react-i18next';
@@ -87,7 +87,7 @@ function EditModal({ experience }) {
         }}
       >
         <button style={{ width: 150, height: 150 }}>
-          {fileInfo ? <img src={fileInfo} width="100%" height="100%" /> : <AvatarIcon style={{ fontSize: 80 }} />}
+          {fileInfo ? <img src={fileInfo} width="100%" height="100%" /> : <CameraRetroIcon style={{ fontSize: 80 }} />}
         </button>
       </Uploader>
     );
@@ -113,33 +113,33 @@ function EditModal({ experience }) {
 
       <Modal backdrop="static" open={open} onClose={handleClose}>
         <Modal.Header>
-          <Modal.Title>Add Experience</Modal.Title>
+          <Modal.Title>{experience ? t('Edit_Experience') : t('Add_Experience')}</Modal.Title>
         </Modal.Header>
         <Modal.Body style={{ overflow: 'visible', maxHeight: 'fit-content', paddingBottom: '0px', marginTop: '0px' }}>
           <Form fluid model={model} formValue={formValue} onChange={setFormValue} ref={formRef}>
-            <hr className="m-2 mx-0" />
+            <hr className="mx-0" />
             <Form.Group controlId="title">
-              <Form.HelpText>Title</Form.HelpText>
-              <Form.Control dir="ltr" placeholder="Enter Title" block name="title" />
+              <Form.HelpText>{t('Title')}</Form.HelpText>
+              <Form.Control dir="ltr" placeholder={t('Title')} block name="title" />
             </Form.Group>
             <Form.Group controlId="ar_title">
-              <Form.HelpText>Arabic Title</Form.HelpText>
-              <Form.Control dir="rtl" placeholder="Enter Arabic Title" block name="ar_title" />
+              <Form.HelpText>{t('Arabic_Title')}</Form.HelpText>
+              <Form.Control dir="rtl" placeholder={t('Arabic_Title')} block name="ar_title" />
             </Form.Group>
             <Form.Group controlId="description">
-              <Form.HelpText>Description</Form.HelpText>
-              <Form.Control dir="ltr" placeholder="Enter Description" block name="description" />
+              <Form.HelpText>{t('Description')}</Form.HelpText>
+              <Form.Control dir="ltr" placeholder={t('Description')} block name="description" />
             </Form.Group>
             <Form.Group controlId="ar_description">
-              <Form.HelpText>Arabic Description</Form.HelpText>
-              <Form.Control dir="rtl" placeholder="Enter Arabic Description" block name="ar_description" />
+              <Form.HelpText>{t('Arabic_Description')}</Form.HelpText>
+              <Form.Control dir="rtl" placeholder={t('Arabic_Description')} block name="ar_description" />
             </Form.Group>
             <Form.Group controlId="time">
-              <Form.HelpText>Time</Form.HelpText>
-              <Form.Control block name="time" accepter={DateRangePicker} />
+              <Form.HelpText>{t('Date')}</Form.HelpText>
+              <Form.Control block name="Date" accepter={DateRangePicker} />
             </Form.Group>
             <Form.Group controlId="uploader">
-              <Form.HelpText>Company Pic</Form.HelpText>
+              <Form.HelpText>{t('Company_Picture')}</Form.HelpText>
               <Form.Control
                 fileList={fileList}
                 onChange={(files) => {
@@ -152,9 +152,9 @@ function EditModal({ experience }) {
             <hr className="m-3 mx-0" />
             <FlexboxGrid justify="end">
               <Stack spacing={16}>
-                <Button onClick={handleClose}>Cancel</Button>
+                <Button onClick={handleClose}>{t('Cancel')}</Button>
                 <Button loading={loading} appearance="primary" onClick={handleSubmit} type="submit">
-                  Save
+                  {t('Save')}
                 </Button>
               </Stack>
             </FlexboxGrid>

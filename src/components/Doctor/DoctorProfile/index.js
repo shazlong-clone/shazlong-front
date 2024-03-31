@@ -27,7 +27,8 @@ function DoctorProfile() {
   const { profile = {} } = useSelector((state) => state?.doctor);
   const { prefixesList } = useSelector((state) => state?.shared);
 
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const locale = i18n.resolvedLanguage;
   function previewFile(file, callback) {
     const reader = new FileReader();
     reader.onloadend = () => {
@@ -86,70 +87,77 @@ function DoctorProfile() {
   const info = [
     {
       id: 1,
-      key: 'Email',
+      key: t('Email'),
       value: email ?? '-',
       icon: <AiOutlineMail />,
     },
     {
       id: 2,
-      key: 'Phone',
+      key: t('Phone'),
       value: phone ?? '-',
       icon: <BsTelephone />,
     },
 
     {
       id: 3,
-      key: 'Gender',
-      value: genders?.find((el) => el?.id === gender)?.name ?? '-',
+      key: t('Gender'),
+      value:
+        (locale === 'en' ? genders?.find((el) => el?.id === gender)?.name : genders?.find((el) => el?.id === gender)?.ar_name) ??
+        '-',
       icon: <AiOutlineHome />,
     },
     {
       id: 4,
-      key: 'Prefix',
-      value: prefixesList?.find(el => el?.id === prefix)?.name,
+      key: t('Prefix'),
+      value:
+        locale === 'en'
+          ? prefixesList?.find((el) => el?.id === prefix)?.name
+          : prefixesList?.find((el) => el?.id === prefix)?.ar_name,
       icon: <LuSubtitles />,
     },
     {
       id: 5,
-      key: 'Feez',
+      key: t('Feez'),
       value: feez?.at(0)?.amount ? `EGY ${feez?.at(0)?.amount}/30 mins | EGY ${feez?.at(1)?.amount}/60 mins` : '-',
       icon: <AiOutlineDollarCircle />,
     },
     {
       id: 6,
-      key: 'Country',
+      key: t('Country'),
       value: countries?.find((el) => el?.id === country)?.country_name,
       icon: <ImEarth />,
     },
     {
       id: 7,
-      key: 'Languages',
-      value: doctorLang?.map((langId) => languages?.find((el) => el?.id == langId)?.name)?.join(','),
+      key: t('Languages'),
+      value:
+        locale === 'en'
+          ? doctorLang?.map((langId) => languages?.find((el) => el?.id == langId)?.name)?.join(',')
+          : doctorLang?.map((langId) => languages?.find((el) => el?.id == langId)?.ar_name)?.join(','),
       icon: <LuLanguages />,
     },
 
     {
       id: 8,
-      key: 'CV',
+      key: t('CV'),
       value: (
         <a className="cursor-pointer" onClick={() => setVisible(true)}>
-          View
+          {t('View')}
         </a>
       ),
       icon: <CgFileDocument />,
     },
   ];
-  useEffect(()=>{
+  useEffect(() => {
     dispatch(getPrefix());
-
-  },[])
+  }, []);
   return (
     <>
       <Breadcrumb>
-        <Breadcrumb.Item as={Link} to="/doctor">
-          Doctor
+        <Breadcrumb.Item as={Link} to={`/${locale}/doctor`}>
+         {locale === 'ar' ? profile?.fullArName : profile?.fullEnName}
         </Breadcrumb.Item>
-        <Breadcrumb.Item active>Profile</Breadcrumb.Item>
+        <Breadcrumb.Item active>{t('Profile')}</Breadcrumb.Item>
       </Breadcrumb>
       <div className="relative">
         <section className="relative  mb-[24px]">

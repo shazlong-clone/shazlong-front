@@ -82,13 +82,13 @@ const CellAddModal = ({ date }) => {
       />
       <Modal open={open} onClose={handleClose}>
         <Modal.Header>
-          <Modal.Title>Add Slot</Modal.Title>
+          <Modal.Title>{t('Add_Slot')}</Modal.Title>
         </Modal.Header>
         <Modal.Body style={{ overflow: 'inherit' }}>
           <Form model={model} ref={formRef} formValue={formValue} onChange={setFormValue} fluid>
             <Form.Group controlId="slots">
               <Form.Control
-                placeholder="from ~ to"
+                placeholder={t('Slot_Date')}
                 name="from_to"
                 ranges={[]}
                 showMeridian
@@ -101,10 +101,10 @@ const CellAddModal = ({ date }) => {
         </Modal.Body>
         <Modal.Footer>
           <Button onClick={handleClose} appearance="subtle">
-            Cancel
+            {t('Cancel')}
           </Button>
           <Button loading={loading} onClick={handelSubmit} appearance="primary">
-            Save
+            {t('Save')}
           </Button>
         </Modal.Footer>
       </Modal>

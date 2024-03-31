@@ -168,7 +168,7 @@ function EditModal() {
         </Modal.Header>
         <Modal.Body style={{ paddingBottom: '0px', marginTop: '0px', padding: '0 5px' }}>
           <Form fluid model={model} formValue={formValue} onChange={setFormValue} ref={formRef}>
-            <hr className="m-2 mx-0" />
+            <hr className="mx-0" />
             <Form.Group style={{ marginBottom: '5px' }} dir="rtl" controlId="ArabicName">
               <Form.HelpText>الاسم بالغة العربية</Form.HelpText>
               <Form.Control placeholder="الاسم بالغة العربية" block={'true'} name="fullArName" />
