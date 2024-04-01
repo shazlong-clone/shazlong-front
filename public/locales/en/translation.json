@@ -293,5 +293,7 @@
   "Feez_Per_30_Minutes": "Feez Per 30 Minutes",
   "Feez_Per_60_Minutes": "Feez Per 60 Minutes",
   "30_Mins": "30 Mins",
-  "60_Mins": "60 Mins"
+  "60_Mins": "60 Mins",
+  "Reserved_Slot":"Reserved Slot",
+  "Free_Slot":"Free Slot"
 }

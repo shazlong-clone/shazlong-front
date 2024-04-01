@@ -80,7 +80,7 @@ function Bookings() {
   return (
     <>
       <Breadcrumb>
-        <Breadcrumb.Item as={Link} to={`${locale}/doctor`}>
+        <Breadcrumb.Item as={Link} to={`/${locale}/doctor`}>
         {locale === 'ar' ? profile?.fullArName : profile?.fullEnName}        </Breadcrumb.Item>
         <Breadcrumb.Item active>{t('Bookings')}</Breadcrumb.Item>
       </Breadcrumb>
