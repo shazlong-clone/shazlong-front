@@ -42,7 +42,7 @@ const UpdateSlot = ({ date, slot }) => {
       if (res.payload.status) {
         toaster.push(
           <Message type="success" closable showIcon>
-            {t('Updated_Succefuly')}
+            {t('updated_successfuly')}
           </Message>,
           { duration: 2000 },
         );
@@ -77,7 +77,7 @@ const UpdateSlot = ({ date, slot }) => {
       if (res.payload.status) {
         toaster.push(
           <Message type="success" closable showIcon>
-            {t('Updated_Succefuly')}
+            {t('updated_successfuly')}
           </Message>,
           { duration: 2000 },
         );

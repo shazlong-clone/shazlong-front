@@ -78,7 +78,7 @@ function PersonalInfo() {
       if (res?.payload?.status) {
         toaster.push(
           <Message closable showIcon type="success">
-            {t('update_successfuly')}
+            {t('updated_successfuly')}
           </Message>,
           {
             duration: 5000,

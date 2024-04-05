@@ -2,6 +2,7 @@ import React from 'react';
 import { Icon } from '@rsuite/icons';
 import { MdDashboard } from 'react-icons/md';
 import { BsFillPersonFill } from 'react-icons/bs';
+import { BiAlarm } from 'react-icons/bi';
 
 export const appNavs = [
   {
@@ -12,7 +13,7 @@ export const appNavs = [
   },
   {
     eventKey: 'slots',
-    icon: <Icon as={BsFillPersonFill} />,
+    icon: <Icon as={BiAlarm} />,
     title: 'Slots',
     to: 'slots',
   },

@@ -56,7 +56,7 @@ function DoctorProfile() {
     onSuccess: () => {
       setUploading(false);
       dispatch(getMeAsDoctor());
-      toaster.push(<Message type="success">{t('update_successfuly')}</Message>);
+      toaster.push(<Message type="success">{t('updated_successfuly')}</Message>);
     },
     onError: () => {
       setFileInfo(null);

@@ -1,26 +1,46 @@
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
-import { Message, useToaster } from 'rsuite';
+import { Loader, Message, toaster, useToaster } from 'rsuite';
 
 const useSubmition = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const toaster = useToaster();
+  const loadingTaoster = useToaster();
   return async (dispatcher, params, { showToast = true, showLoader = true } = {}) => {
+    let loadingTaostId;
     try {
       if (showLoader) {
-        toaster.push(t('loading'), { duration: 3000, type: 'info' });
+        loadingTaostId = loadingTaoster.push(
+          <Message type="info">{<Loader className="custom-loader" content={t('loading')} />}</Message>,
+          {
+            duration: 1000000,
+          },
+        );
       }
+
       const res = await dispatch(dispatcher(params));
+      if (loadingTaostId) {
+        loadingTaoster.remove(loadingTaostId);
+      }
       if (res?.payload?.status) {
         if (showToast) {
-          toaster.push(<Message type="success">{res?.message ?? t('success')}</Message>, { duration: 3000 });
+          toaster.push(
+            <Message type="success" closable showIcon>
+              {res?.payload?.message ?? t('success')}
+            </Message>,
+            { duration: 3000 },
+          );
         }
       } else {
         if (showToast) {
-          toaster.push(<Message type="error">{res?.message ?? t('internal_server_error')}</Message>, {
-            duration: 3000,
-          });
+          toaster.push(
+            <Message type="error" closable showIcon>
+              {res?.payload?.message ?? t('internal_server_error')}
+            </Message>,
+            {
+              duration: 3000,
+            },
+          );
         }
       }
       return res;

@@ -54,7 +54,7 @@ function VerifyEmailRegistration() {
       if (res.payload.status) {
         toaster.push(
           <Message type="success" showIcon={true} closable={true}>
-            {t('update_successfuly')}
+            {t('updated_successfuly')}
           </Message>,
           { duration: 5000 },
         );

@@ -416,3 +416,7 @@ a:active {
 .react-viewer-canvas {
   direction: ltr;
 }
+
+.custom-loader .rs-loader-spin::after{
+  border-color: var(--rs-color-blue) transparent transparent;
+}
