@@ -27,7 +27,7 @@ const formateSlots = (inputSlots, offset) => {
   const doctorSlots = [];
 
   // Group slots by date
-  const groupedSlots = inputSlots.reduce((result, slot) => {
+  const groupedSlots = inputSlots?.reduce((result, slot) => {
     const date = momentOffset(slot.from, offset).format('ddd DD');
     if (!result[date]) {
       result[date] = [];
@@ -45,7 +45,7 @@ const formateSlots = (inputSlots, offset) => {
   for (const date in groupedSlots) {
     const slots = groupedSlots[date];
 
-    doctorSlots.push({ date, slots });
+    doctorSlots?.push({ date, slots });
   }
   return doctorSlots;
 };
@@ -247,7 +247,7 @@ function Booking({ setBounceBg, bouncebg, ...props }) {
                 >
                   <section className="text-white bg-[var(--rs-primary-700)] rounded-t-lg py-1 font-bold">{day?.date}</section>
                   <section className="grid my-2 gap-2">
-                    {day?.slots.map((slot) => {
+                    {day?.slots?.map((slot) => {
                       return (
                         <aside key={Math.random()}>
                           <div

@@ -9,13 +9,14 @@ import { useTranslation } from 'react-i18next';
 import personIcon from '../../../assets/images/person.svg';
 import MoreIcon from '@rsuite/icons/legacy/More';
 import { Link } from 'react-router-dom';
-import { CANCELED, PATIENT_ATTEND, PATIENT_NOT_ATTEND, RESERVED, sessionsStatusList } from '../../../assets/constants';
+import { CANCELED, PATIENT_ATTEND, PATIENT_NOT_ATTEND, sessionsStatusList } from '../../../assets/constants';
 const { Column, HeaderCell, Cell } = Table;
 
 function Bookings() {
   const { t, i18n } = useTranslation();
   const submit = useSubmition();
-  const { bookings, profile } = useSelector((state) => state?.doctor);
+  const { profile } = useSelector((state) => state?.doctor);
+  const bookings = useSelector((state) => state?.doctor?.bookings?.data);
   const CheckCell = ({ rowData, onChange, checkedKeys, dataKey, ...props }) => (
     <Cell {...props} style={{ padding: 0 }}>
       <div style={{ lineHeight: '46px' }}>

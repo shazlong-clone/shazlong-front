@@ -11,7 +11,7 @@ function MyTherapy() {
   const [activeKey, setActiveKey] = React.useState(UPCOMING);
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const sessions = useSelector((state) => state?.user?.sessions);
+  const sessions = useSelector((state) => state?.user?.sessions?.data);
 
   const upComingSessions = useMemo(() => {
     return sessions?.filter((session) => moment(session?.slot?.from).isAfter(moment()) && session?.status !== 0);

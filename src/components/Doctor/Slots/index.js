@@ -4,13 +4,14 @@ import { Breadcrumb, Calendar, FlexboxGrid, Panel, Tag, TagGroup } from 'rsuite'
 import { useDispatch, useSelector } from 'react-redux';
 import AddSlot from './components/AddSlot';
 import UpdateSlot from './components/UpdateSlot';
-
 import { getSlots } from '../../../features/doctor/doctorActions';
 import moment from 'moment';
 import { useTranslation } from 'react-i18next';
+
 function Slots() {
   const { t, i18n } = useTranslation();
   const locale = i18n.resolvedLanguage;
+
   const { slots, profile } = useSelector((state) => state?.doctor);
   function renderCell(date) {
     return (
