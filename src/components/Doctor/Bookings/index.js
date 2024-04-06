@@ -1,5 +1,22 @@
-import React, { useEffect } from 'react';
-import { Breadcrumb, Checkbox, Dropdown, IconButton, Panel, Popover, Table, Whisper } from 'rsuite';
+import React, { useEffect, useState } from 'react';
+import {
+  Breadcrumb,
+  Button,
+  Checkbox,
+  DateRangePicker,
+  Dropdown,
+  Form,
+  IconButton,
+  Message,
+  Pagination,
+  Panel,
+  Popover,
+  SelectPicker,
+  Stack,
+  Table,
+  Whisper,
+  toaster,
+} from 'rsuite';
 import useSubmition from '../../../hooks/useSubmit';
 import { getDoctorBookings, updateDoctorBookings } from '../../../features/doctor/doctorActions';
 import { useSelector } from 'react-redux';
@@ -9,7 +26,7 @@ import { useTranslation } from 'react-i18next';
 import personIcon from '../../../assets/images/person.svg';
 import MoreIcon from '@rsuite/icons/legacy/More';
 import { Link } from 'react-router-dom';
-import { CANCELED, PATIENT_ATTEND, PATIENT_NOT_ATTEND, sessionsStatusList } from '../../../assets/constants';
+import { CANCELED, PATIENT_ATTEND, PATIENT_NOT_ATTEND, RESERVED, sessionsStatusList } from '../../../assets/constants';
 const { Column, HeaderCell, Cell } = Table;
 
 function Bookings() {
@@ -17,6 +34,10 @@ function Bookings() {
   const submit = useSubmition();
   const { profile } = useSelector((state) => state?.doctor);
   const bookings = useSelector((state) => state?.doctor?.bookings?.data);
+  const { total = 0, limit = 0, currentPage = 1 } = useSelector((state) => state?.doctor?.bookings) || {};
+  const statusOptions = sessionsStatusList
+    ?.filter((el) => [PATIENT_ATTEND, PATIENT_NOT_ATTEND, RESERVED].includes(el.id))
+    .map(({ id, translationKey }) => ({ value: id, label: t(translationKey) }));
   const CheckCell = ({ rowData, onChange, checkedKeys, dataKey, ...props }) => (
     <Cell {...props} style={{ padding: 0 }}>
       <div style={{ lineHeight: '46px' }}>
@@ -24,24 +45,32 @@ function Bookings() {
           value={rowData[dataKey]}
           inline
           onChange={onChange}
-          checked={checkedKeys.some((item) => item === rowData[dataKey])}
+          checked={checkedKeys?.some((item) => item === rowData[dataKey])}
         />
       </div>
     </Cell>
   );
 
-  
   // eslint-disable-next-line no-unused-vars
   const ActionCell = ({ rowData, dataKey, ...props }) => {
     const renderMenu = ({ onClose, left, top, className }, ref) => {
       const handleSelect = async (status) => {
         onClose();
+        if (!checkedKeys?.length && !rowData?._id) {
+          return toaster.push(
+            <Message closable showIcon type="error">
+              {t('Please_Select_Booking')}
+            </Message>,
+            { duration: 2000 },
+          );
+        }
         const params = {
           bookingIds: dataKey === 'all' ? checkedKeys : [rowData._id],
           status: status,
         };
         await submit(updateDoctorBookings, params);
         await submit(getDoctorBookings, null, { showToast: false, showLoader: false });
+        setCheckedKeys([]);
       };
       return (
         <Popover ref={ref} className={className} style={{ left, top }} full>
@@ -52,10 +81,12 @@ function Bookings() {
         </Popover>
       );
     };
-    if(dataKey=== 'all'){
-      return <Whisper  placement="autoVerticalStart" trigger="click" speaker={renderMenu}>
-      <IconButton appearance="subtle" icon={<MoreIcon />} />
-    </Whisper>
+    if (dataKey === 'all') {
+      return (
+        <Whisper placement="autoVerticalStart" trigger="click" speaker={renderMenu}>
+          <IconButton appearance="subtle" icon={<MoreIcon />} />
+        </Whisper>
+      );
     }
     return (
       <Cell {...props} className="link-group">
@@ -70,11 +101,11 @@ function Bookings() {
   let checked = false;
   let indeterminate = false;
 
-  if (checkedKeys.length === bookings.length) {
+  if (checkedKeys?.length === bookings?.length && bookings?.length > 0) {
     checked = true;
-  } else if (checkedKeys.length === 0) {
+  } else if (checkedKeys?.length === 0) {
     checked = false;
-  } else if (checkedKeys.length > 0 && checkedKeys.length < bookings.length) {
+  } else if (checkedKeys?.length > 0 && checkedKeys?.length < bookings?.length) {
     indeterminate = true;
   }
 
@@ -87,6 +118,25 @@ function Bookings() {
     setCheckedKeys(keys);
   };
   const locale = i18n.resolvedLanguage;
+  const [formValue, setFormValue] = useState({
+    date: null,
+    status: null,
+  });
+  const handelSubmit = async () => {
+    await submit(
+      getDoctorBookings,
+      {
+        ...formValue,
+        date: formValue.date
+          ? {
+              gte: formValue.date[0],
+              lte: formValue.date[1],
+            }
+          : undefined,
+      },
+      { showToast: true, showLoader: true },
+    );
+  };
   useEffect(() => {
     submit(getDoctorBookings, {}, { showToast: false, showLoader: false });
   }, []);
@@ -100,8 +150,35 @@ function Bookings() {
         <Breadcrumb.Item active>{t('Bookings')}</Breadcrumb.Item>
       </Breadcrumb>
 
-      <Panel bordered className="mt-3 bg-[var(--rs-bg-card)]">
-        <Table bordered autoHeight data={bookings} className="mt-5 text-sm">
+      <Panel bordered className="bg-[var(--rs-bg-card)]">
+        <Panel bordered className="mb-5 bg-[var(--rs-bg-card)]">
+          <h3 className="text-xl font-bold">{t('Search')}</h3>
+          <Form formValue={formValue} onChange={setFormValue} layout="inline" fluid>
+            <Form.Group block controlId="date-1">
+              <Form.ControlLabel>{t('Date')}</Form.ControlLabel>
+              <Form.Control editable={false} block placeholder={t('Date')} name="date" accepter={DateRangePicker} />
+            </Form.Group>
+            <Form.Group controlId="status-3">
+              <Form.ControlLabel>{t('Status')} </Form.ControlLabel>
+              <Form.Control
+                block
+                searchable={false}
+                placeholder={t('Status')}
+                name="status"
+                accepter={SelectPicker}
+                data={statusOptions}
+              />
+            </Form.Group>
+            <Form.Group>
+              <Stack spacing={6}>
+                <Button onClick={handelSubmit} appearance="primary" block type="submit">
+                  {t('Search')}
+                </Button>
+              </Stack>
+            </Form.Group>
+          </Form>
+        </Panel>
+        <Table bordered autoHeight data={bookings} className="mb-5 text-sm">
           <Column width={50} align="center">
             <HeaderCell style={{ padding: 0 }}>
               <div style={{ lineHeight: '40px' }}>
@@ -166,12 +243,28 @@ function Bookings() {
             />
           </Column>
           <Column width={120}>
-            <HeaderCell style={{paddingTop:1, paddingBottom:0 }}>
-              <ActionCell  dataKey="all" />
+            <HeaderCell style={{ paddingTop: 1, paddingBottom: 0 }}>
+              <ActionCell dataKey="all" />
             </HeaderCell>
             <ActionCell style={{ padding: 5 }} dataKey="id" />
           </Column>
         </Table>
+        <Pagination          
+          size='sm'
+          layout={['total', '-', 'limit', '|', 'pager']}
+          prev={true}
+          next={true}
+          first={true}
+          last={true}
+          total={total}
+          boundaryLinks={true}
+          limit={limit}
+          limitOptions={[30, 60, 100, 500]}
+          maxButtons={5}
+          activePage={currentPage || 1}
+          onChangePage={(page) => submit(getDoctorBookings, { page, size: limit }, { showToast: false, showLoader: false })}
+          onChangeLimit={(limit) => submit(getDoctorBookings, { size: limit, page: 1 }, { showToast: false, showLoader: false })}
+        />
       </Panel>
     </>
   );

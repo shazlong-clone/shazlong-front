@@ -280,7 +280,7 @@
   "Patient": "المريض",
   "Patent_Attend": "تم حضور المريض",
   "Patent_Not_Attend": "لم يحضر المريض",
-  "Bookings": "الحجوزات",
+  "Bookings": "الحجزات",
   "View": "عرض",
   "Are_you_Sure_Delete": "هل تريد الحذف ؟",
   "Warn": "تحذير",
@@ -308,5 +308,6 @@
   "30_Mins": "30 دقيقة",
   "60_Mins": "60 دقيقة",
   "Reserved_Slot":"جلسة محجوزة",
-  "Free_Slot":"جلسة متاحة"
+  "Free_Slot":"جلسة متاحة",
+  "Please_Select_Booking":"الرجاء تحديد الحجز"
 }

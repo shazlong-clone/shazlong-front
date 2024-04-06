@@ -35,8 +35,8 @@ export const deleteSlot = createAsyncThunk('deleteSlot', async (id) => {
   return res.data;
 });
 
-export const getDoctorBookings = createAsyncThunk('getDoctorBookings', async () => {
-  const res = await doctorService.get('/api/v1/doctors/bookings');
+export const getDoctorBookings = createAsyncThunk('getDoctorBookings', async (params) => {
+  const res = await doctorService.get('/api/v1/doctors/bookings', { params });
   return res.data;
 });
 
@@ -44,4 +44,3 @@ export const updateDoctorBookings = createAsyncThunk('updateDoctorBookings', asy
   const res = await doctorService.patch('/api/v1/doctors/bookings', params);
   return res.data;
 });
-

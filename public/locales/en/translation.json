@@ -294,5 +294,6 @@
   "30_Mins": "30 Mins",
   "60_Mins": "60 Mins",
   "Reserved_Slot":"Reserved Slot",
-  "Free_Slot":"Free Slot"
+  "Free_Slot":"Free Slot",
+  "Please_Select_Booking": "Please Select Booking"
 }
