@@ -27,6 +27,8 @@ import personIcon from '../../../assets/images/person.svg';
 import MoreIcon from '@rsuite/icons/legacy/More';
 import { Link } from 'react-router-dom';
 import { CANCELED, PATIENT_ATTEND, PATIENT_NOT_ATTEND, RESERVED, sessionsStatusList } from '../../../assets/constants';
+import useMediaQuery from '../../../hooks/useMediaQuery';
+
 const { Column, HeaderCell, Cell } = Table;
 
 function Bookings() {
@@ -141,6 +143,7 @@ function Bookings() {
     submit(getDoctorBookings, {}, { showToast: false, showLoader: false });
   }, []);
 
+  const smallScreen = useMediaQuery('md')
   return (
     <>
       <Breadcrumb>
@@ -153,7 +156,7 @@ function Bookings() {
       <Panel bordered className="bg-[var(--rs-bg-card)]">
         <Panel bordered className="mb-5 bg-[var(--rs-bg-card)]">
           <h3 className="text-xl font-bold">{t('Search')}</h3>
-          <Form formValue={formValue} onChange={setFormValue} layout="inline" fluid>
+          <Form formValue={formValue} onChange={setFormValue} layout={smallScreen ? 'inline' : 'vertical'} fluid>
             <Form.Group block controlId="date-1">
               <Form.ControlLabel>{t('Date')}</Form.ControlLabel>
               <Form.Control editable={false} block placeholder={t('Date')} name="date" accepter={DateRangePicker} />

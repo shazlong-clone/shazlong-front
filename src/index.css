@@ -177,13 +177,16 @@ object {
 }
 
 .slick-blog .slick-dots li.slick-active button:before {
-  @apply bg-[var(--rs-primary-400)];
+  @apply bg-[var(--rs-primary-600)];
 }
 
 .slick-blog .slick-next:before,
 .slick-prev:before {
   @apply hidden;
 }
+.slick-blog ul.slick-dots {
+  margin-bottom: 30px;
+} 
 
 .slick-container .slick-slider {
   width: 100%;
@@ -191,7 +194,7 @@ object {
 }
 
 .slick-articel .slick-dots {
-  @apply bottom-[-62px] xl:bottom-[-55px];
+  @apply bottom-[-62px] xl:bottom-[-68px];
 }
 .slick-articel .slick-dots li button:before {
   content: ' ';

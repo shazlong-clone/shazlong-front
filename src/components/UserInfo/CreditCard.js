@@ -86,7 +86,7 @@ function CreditCard() {
   return (
     <>
       <a className="cursor-pointer underline" onClick={() => setOpen(true)}>
-        {t('Add_New')}
+        {t('Add')}
       </a>
       <Modal
         dialogClassName="lg:w-[450px]"

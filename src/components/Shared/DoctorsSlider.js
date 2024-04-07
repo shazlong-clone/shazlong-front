@@ -25,7 +25,7 @@ function DoctorsSlider() {
               .fill('')
               .map(() => {
                 return (
-                  <div className="border-x-2 border-white border-solid" key={Math.random()}>
+                  <div className="border-x-2 border-white border-solid text-center" key={Math.random()}>
                     <article className="text-center">
                       <img
                         className="rounded-full m-auto border border-cyan border-solid p-1 bg-[var(--rs-primary-700)]/10"
@@ -37,20 +37,20 @@ function DoctorsSlider() {
                     <article className="text-center">
                       <h5 className="text-center text-cyan">Jone Doe</h5>
                       <aside className="text-center">
-                        <Rate color='yellow' allowHalf={true} size="sm" defaultValue={3.5} />
+                        <Rate color="yellow" allowHalf={true} size="sm" defaultValue={3.5} />
                         <small>(250 reviews)</small>
                       </aside>
                       <small>psychotherapist</small>
                       <aside className="flex items-center gap-5 justify-center">
                         <div className="flex items-center gap-2">
-                          <GiCash className="text-2xl text-cyan" /> <span>250 egy</span>
+                          <GiCash className="text-2xl text-cyan" /> <span className='text-sm'>250 egy</span>
                         </div>
                         <div className="flex items-center gap-2">
-                          <BsPlayFill className="text-3xl text-cyan" /> <span>250+ sessions</span>
+                          <BsPlayFill className="text-3xl text-cyan" /> <span className='text-sm'>250+ sessions</span>
                         </div>
                       </aside>
                     </article>
-                    <Button block appearance="primary" className="mt-5">
+                    <Button appearance="primary" className="mt-5">
                       View Profile
                     </Button>
                   </div>
