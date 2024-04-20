@@ -8,7 +8,7 @@ html {
 }
 
 .container {
-  @apply m-auto px-5 bg-opacity-0;
+  @apply m-auto px-5 bg-opacity-0 box-border;
 }
 
 .bg-hero {
@@ -186,7 +186,7 @@ object {
 }
 .slick-blog ul.slick-dots {
   margin-bottom: 30px;
-} 
+}
 
 .slick-container .slick-slider {
   width: 100%;
@@ -410,7 +410,8 @@ a:active {
   transform-origin: center;
 }
 
-[dir='rtl'] .rs-checkbox-wrapper, [dir='rtl'] .rs-checkbox-control {
+[dir='rtl'] .rs-checkbox-wrapper,
+[dir='rtl'] .rs-checkbox-control {
   transform: rotateY(180deg);
   transform-origin: center;
 }
@@ -420,6 +421,6 @@ a:active {
   direction: ltr;
 }
 
-.custom-loader .rs-loader-spin::after{
+.custom-loader .rs-loader-spin::after {
   border-color: var(--rs-color-blue) transparent transparent;
 }
