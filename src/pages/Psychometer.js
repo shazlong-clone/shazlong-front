@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import InternalHeader from '../components/Shared/InternalHeader';
 import psychometer from '../assets/images/psychometer.png';
 import { AiOutlineCheckCircle } from 'react-icons/ai';
@@ -9,7 +9,8 @@ import useMediaQuery from '../hooks/useMediaQuery';
 import DoctorsSlider from '../components/Shared/DoctorsSlider';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-
+import { getpsychoTests } from '../features/shared/sharedActions';
+import { useDispatch, useSelector } from 'react-redux';
 const { Column, HeaderCell, Cell } = Table;
 const rowKey = 'title';
 const ExpandCell = ({ rowData, expandedRowKeys, onChange, ...props }) => (
@@ -23,59 +24,15 @@ const ExpandCell = ({ rowData, expandedRowKeys, onChange, ...props }) => (
     />
   </Cell>
 );
-const data = [
-  {
-    title: 'Depression, Anxiety and stress scale',
-    description:
-      'This test is designed to measure your psychological state with\n            regards to the degree of depression, stress and anxiety. Please read\n            the test sentences and choose the best answer that fits you during\n            the last 2 weeks.\n            See More',
-    recomination: 'Every 2 weeks',
-    testPeriod: '1:30 Mins',
-  },
-  {
-    title: 'Anxiety scale',
-    description:
-      'This test is designed to measure your anxiety degree. Please read\n            the test sentences and choose the best answer that fits you during\n            the last 2 weeks.\n            See More',
-    recomination: 'Every 2 weeks',
-    testPeriod: '1:30 Mins',
-  },
-  {
-    title: 'Depression scale',
-    description:
-      'This test is designed to measure your depression degree. Please read\n            the test sentences and choose the best answer that fits you during\n            the last 2 weeks.\n            See More',
-    recomination: 'Every 2 weeks',
-    testPeriod: '1:30 Mins',
-  },
-  {
-    title: 'OCD scale',
-    description:
-      'Obsessions are unwelcome or distressing ideas, thoughts, images or\n            impulses that repeatedly enter your mind. They may seem to occur\n            against your will. They may be repugnant to you, are often\n            senseless, and may not fit your actual personality at all (for\n            example, the recurrent thought or impulse to harm to your children,\n            even though you never This test is designed to measure your\n            obsessive comupulsive symptoms. Obsessions are unwelcome or\n            distressing ideas, thoughts, images or impulses that repeatedly\n            enter your mind. They may seem to occur against your will. They may\n            be repugnant to you, are often senseless, and may not fit your\n            actual personality at all. Compulsions are behaviors or acts that\n            you feel driven to perform, even though you may recognize them as\n            senseless or excessive. At times, you may try to resist doing them,\n            but this may prove difficult. You may experience anxiety that does\n            not diminish until the behavior is completed. Please read the test\n            sentences and choose the best answer that fits you during the last 2\n            weeks. This test is designed to measure your obsessive comupulsive\n            symptoms. Obsessions are unwelcome or distressing ideas, thoughts,\n            images or impulses that repeatedly enter your mind. They may seem to\n            occur against your will. They may be repugnant to you, are often\n            senseless, and may not fit your actual personality at all.\n            Compulsions are behaviors or acts that you feel driven to perform,\n            even though you may recognize them as senseless or excessive. At\n            times, you may try to resist doing them, but this may prove\n            difficult. You may experience anxiety that does not diminish until\n            the behavior is completed. Please read the test sentences and choose\n            the best answer that fits you during the last 2 weeks.\n            See More',
-    recomination: 'Every 2 weeks',
-    testPeriod: '1:30 Mins',
-  },
-  {
-    title: 'PTSD',
-    description:
-      'This test assesses the psychological impact of stressful events\n            after its ends by few months. Below is a list of problems and\n            complaints that person sometimes have in response to stressful life\n            experiences. Please read each one carefully, choose the answer that\n            fits you mostly to indicate how much you have been bothered by that\n            problem in the last month\n            See More',
-    recomination: 'Every 2 weeks',
-    testPeriod: '1:30 Mins',
-  },
-  {
-    title: 'Adult ADHD Self-Report Scale',
-    description:
-      'Attention deficit hyperactivity disorder (ADHD) in adults is a\n            mental health related disorder and includes a set of persistent\n            problems, such as difficulty in attention, hyperactivity, and\n            impulsive behavior. Attention deficit disorder with hyperactivity in\n            adults may lead to unstable relationships, poor work or school\n            performance, decreased self-confidence, and other problems.\n            See More',
-    recomination: 'Every 2 weeks',
-    testPeriod: '1:30 Mins',
-  },
-];
 
 function Psychometer() {
   const [expandedRowKeys, setExpandedRowKeys] = React.useState([]);
-
+  const { t } = useTranslation();
   const renderRowExpanded = (rowData) => {
     return (
       <div className="px-5">
-        <h6 className="mb-2">Description:</h6>
-        <p className="text-gray/50 font-[500]">{rowData?.description}</p>
+        <h6 className="mb-2">{t('Description')}:</h6>
+        <p className="text-gray/50 font-[500]">{locale === 'ar' ? rowData?.ar_description : rowData?.description}</p>
       </div>
     );
   };
@@ -107,40 +64,35 @@ function Psychometer() {
       </Link>
     </Cell>
   );
+  const locale = i18n.resolvedLanguage ?? '';
+
+  const psychometerTests = useSelector((state) => state?.shared?.psychometerTests) ?? [];
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getpsychoTests());
+  }, []);
   return (
     <>
       <main className="bg-[var(--rs-primary-700)] text-white pt-5">
         <div className="container">
-          <InternalHeader iconClassName="text-white hover:text-white">Psycho meter</InternalHeader>
+          <InternalHeader iconClassName="text-white hover:text-white">{t('Psycho_Meter')}</InternalHeader>
           <section className="font-[500] text-base pt-5 relative xl:grid xl:grid-cols-[1fr_250px] xl:gap xl:items-end">
             <article className="xl:pt-5 xl:pb-10">
-              <p className="xl:mb-5">
-                How much do I know about myself, do I suffer from depression or anxiety? , Should I visit a therapist, do I need
-                psychiatric treatment? , In just a few minutes these tests will answer all your head questions to know more about
-                your psychological condition and take a step forward to a better life.
-              </p>
-              <p className="xl:mb-5">
-                All of the information contained on this platform, website, or app, including the results of any self-assessment
-                or questionnaire, should be discussed with a suitably qualified healthcare professional before drawing any
-                conclusions about your own mental health. Self-assessments are not intended to give a specific formal diagnosis or
-                provide medical advice. You are strongly encouraged to confirm any information obtained from- or through this
-                assessment (and any other information on this platform) and to review all information regarding your mental health
-                condition, life stage, or treatment with your treating professional. Never disregard professional healthcare
-                advice or delay seeking treatment because of something you have read on, or accessed through, this platform.
-              </p>
-              <p className="flex gap-3 flex-wrap">
-                All tests are
+              <p className="xl:mb-5">{t('Psycho_Meter_p1')}</p>
+              <p className="xl:mb-5">{t('Psycho_Meter_p2')}</p>
+              <p className="flex gap-3 flex-wrap items-center">
+                <span className=" pt-1 ">{t('All_Tests_Are')}</span>
                 <i className="flex items-center gap-1">
                   <AiOutlineCheckCircle />
-                  <span> Scientific</span>
+                  <span className="pt-1"> {t('Scientific')}</span>
                 </i>
                 <i className="flex items-center gap-1">
                   <AiOutlineCheckCircle />
-                  <span> Reliable</span>
+                  <span className="pt-1"> {t('Reliable')}</span>
                 </i>
                 <i className="flex items-center gap-1">
                   <AiOutlineCheckCircle />
-                  <span> Trusted</span>
+                  <span className="pt-1"> {t('Trusted')}</span>
                 </i>
               </p>
             </article>
@@ -158,8 +110,7 @@ function Psychometer() {
                 className="text-gray/90"
                 rowExpandedHeight={lg ? 200 : 200}
                 headerHeight={50}
-                rowHeight={70}
-                data={data}
+                data={psychometerTests}
                 autoHeight
                 rowKey={rowKey}
                 expandedRowKeys={expandedRowKeys}
@@ -169,17 +120,17 @@ function Psychometer() {
                   <HeaderCell className="text-cyan text-xl font-[500]">#</HeaderCell>
                   <ExpandCell expandedRowKeys={expandedRowKeys} onChange={handleExpanded} />
                 </Column>
-                <Column {...(lg ? { flexGrow: 1 } : { width: 320 })}>
-                  <HeaderCell className="text-cyan text-xl font-[500]">Title</HeaderCell>
-                  <TitleCell dataKey="title" />
+                <Column {...(lg ? { flexGrow: 3 } : { width: 320 })}>
+                  <HeaderCell className="text-cyan text-xl font-[500]">{t('Title')}</HeaderCell>
+                  <TitleCell dataKey={`${locale === 'ar' ? 'ar_title' : 'title'}`} />
                 </Column>
                 <Column {...(lg ? { flexGrow: 1 } : { width: 200 })}>
-                  <HeaderCell className="text-cyan text-xl font-[500]">Recomination</HeaderCell>
-                  <Cell dataKey="recomination" />
+                  <HeaderCell className="text-cyan text-xl font-[500]">{t('Recommendation')}</HeaderCell>
+                  <TitleCell dataKey={`${locale === 'ar' ? 'ar_recommendation' : 'recommendation'}`} />
                 </Column>
                 <Column {...(lg ? { flexGrow: 1 } : { width: 150 })}>
-                  <HeaderCell className="text-cyan text-xl font-[500]">Test Period</HeaderCell>
-                  <Cell dataKey="testPeriod" />
+                  <HeaderCell className="text-cyan text-xl font-[500]">{t('Test_Period')}</HeaderCell>
+                  <TitleCell dataKey={`${locale === 'ar' ? 'ar_testPeriod' : 'testPeriod'}`} />
                 </Column>
               </Table>
             </section>

@@ -95,7 +95,7 @@ function Review() {
           >
             <FormGroup>
               <Form.ControlLabel className="text-base">1.{t('How_would_you_rate_your_experience')}</Form.ControlLabel>
-              <FormControl name="rate" className="mt-2" size="sm" accepter={Rate} />
+              <FormControl color="yellow" name="rate" className="mt-2" size="sm" accepter={Rate} />
             </FormGroup>
             <FormGroup>
               <Form.ControlLabel className="text-base">2.{t('Write_something_about_your_experience')}</Form.ControlLabel>

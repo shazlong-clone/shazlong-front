@@ -44,7 +44,7 @@ function Footer() {
                   </Link>
                 </p>
                 <p>
-                  <Link className="text-[var(--rs-gray-100)] hover:text-[var(--rs-gray-100)]" to={`/${i18n.resolvedLanguage}`}>
+                  <Link className="text-[var(--rs-gray-100)] hover:text-[var(--rs-gray-100)]" to={`/${i18n.resolvedLanguage}/licence`}>
                     {' '}
                     {t('Privacy_And_Policy')}
                   </Link>
@@ -54,8 +54,8 @@ function Footer() {
                 <h4 className="mb-4 font-bold">{t('Resources')}</h4>
                 <p>
                   <Link
-                    className="text-[var(--rs-gray-100)] hover:text-[var(--rs-gray-100)]"
-                    to={`/${i18n.resolvedLanguage}/test`}
+                    className="text-[var(--rs-gray-100)] active:text-[var(--rs-gray-100)] hover:text-[var(--rs-gray-100)]"
+                    to={`/${i18n.resolvedLanguage}/psychometer`}
                   >
                     {t('Psychological_Tests')}
                   </Link>

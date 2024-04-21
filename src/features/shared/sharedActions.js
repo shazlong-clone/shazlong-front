@@ -19,6 +19,10 @@ export const getPrefix = createAsyncThunk('getPrefix', async () => {
   const res = await axios.get('/data/prefix.json');
   return res?.data;
 });
+export const getpsychoTests = createAsyncThunk('getpsychoTests', async () => {
+  const res = await axios.get('/data/psychometer.json');
+  return res?.data;
+});
 
 export const getAllDoctors = createAsyncThunk('getAllDoctors', async (params) => {
   const res = await service.post('/api/v1/doctors/getAllDoctors', params);
@@ -46,5 +50,9 @@ export const createReview = createAsyncThunk('createReview', async (params) => {
 
 export const serveSlots = createAsyncThunk('createBookings', async (params) => {
   const res = await service.post('/api/v1/users/bookings', params);
+  return res.data;
+});
+export const getFeaturedDoctor = createAsyncThunk('getFeaturedDoctor', async (params) => {
+  const res = await service.post('/api/v1/doctors/getAllDoctors', params);
   return res.data;
 });

@@ -19,13 +19,13 @@ export const initalSearchParams = {
   rate: null,
   name: '',
   sortBy: '',
-
 };
 
 function FilterForm() {
   const { i18n, t } = useTranslation();
-  const { countries, specializationList, languages, doctorSearchLoading, searchTherapistSideBarOpen } =
-    useSelector((state) => state?.shared);
+  const { countries, specializationList, languages, doctorSearchLoading, searchTherapistSideBarOpen } = useSelector(
+    (state) => state?.shared,
+  );
   const countriesOptions = countries.map((item) => ({
     label: (
       <div key={item?.id} className="flex gap-1">
@@ -49,7 +49,7 @@ function FilterForm() {
   });
   const formRef = useRef();
   const [searchParams] = useSearchParams();
-  
+
   const search = useMemo(() => {
     const amount = searchParams.getAll('amount')?.map((el) => Number(el));
     return {
@@ -65,7 +65,6 @@ function FilterForm() {
       sort: searchParams.get('sort') ?? 'ASC',
     };
   }, [searchParams]);
-
 
   const [formValues, setFormValues] = useState(search);
   const navigate = useNavigate();
@@ -153,7 +152,7 @@ function FilterForm() {
         </Form.Group>
         <Form.Group>
           <Form.ControlLabel className="font-bold text-lg text-cyan">{t('Rate')}</Form.ControlLabel>
-          <Form.Control name="rate" accepter={Rate} />
+          <Form.Control color="yellow" name="rate" accepter={Rate} />
         </Form.Group>
 
         <Form.Group controlId="slider">

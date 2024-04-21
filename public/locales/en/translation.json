@@ -293,7 +293,17 @@
   "Feez_Per_60_Minutes": "Feez Per 60 Minutes",
   "30_Mins": "30 Mins",
   "60_Mins": "60 Mins",
-  "Reserved_Slot":"Reserved Slot",
-  "Free_Slot":"Free Slot",
-  "Please_Select_Booking": "Please Select Booking"
+  "Reserved_Slot": "Reserved Slot",
+  "Free_Slot": "Free Slot",
+  "Please_Select_Booking": "Please Select Booking",
+  "Psycho_Meter": "Psycho Meter",
+  "Psycho_Meter_p1": "How much do I know about myself, do I suffer from depression or anxiety? , Should I visit a therapist, do I need psychiatric treatment? , In just a few minutes these tests will answer all your head questions to know more about your psychological condition and take a step forward to a better life.",
+  "Psycho_Meter_p2": "All of the information contained on this platform, website, or app, including the results of any self-assessment or questionnaire, should be discussed with a suitably qualified healthcare professional before drawing any conclusions about your own mental health. Self-assessments are not intended to give a specific formal diagnosis or provide medical advice. You are strongly encouraged to confirm any information obtained from- or through this assessment (and any other information on this platform) and to review all information regarding your mental health condition, life stage, or treatment with your treating professional. Never disregard professional healthcare advice or delay seeking treatment because of something you have read on, or accessed through, this platform.",
+  "All_Tests_Are": "All tests are",
+  "Scientific": "Scientific",
+  "Reliable": "Reliable",
+  "Trusted": "Reliable",
+  "Recommendation": "Recommendation",
+  "Test_Period": "Test Period",
+  "Get_Help": "Get Help"
 }
