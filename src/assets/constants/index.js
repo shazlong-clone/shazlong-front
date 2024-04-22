@@ -118,3 +118,16 @@ export const sessionsStatusList = [
 export const PERSONAL_INFO = 'PERSONAL_INFO';
 export const PAYMENT_INFO = 'PAYMENT_INFO';
 export const MY_THERAPY = 'MY_THERAPY';
+
+export const localizeNum = (lang, num) => {
+  switch (lang) {
+    case 'ar':
+      return String(num).replace(/\d/g, function (v) {
+        return String.fromCharCode(v.charCodeAt(0) + 0x0630);
+      });
+    case 'en':
+      return num;
+    default:
+      return num;
+  }
+};

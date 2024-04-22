@@ -4,8 +4,12 @@ import Card from '../components/Shared/Card';
 import clsx from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import { Progress } from 'rsuite';
+import { useTranslation } from 'react-i18next';
+import { localizeNum } from '../assets/constants';
 function Psychotest() {
   const [activeQuestion, setActiveQuestion] = useState(0);
+  const { i18n } = useTranslation();
+  const locale = i18n.resolvedLanguage;
   return (
     <>
       <main className="bg-[var(--rs-primary-700)] py-5">
@@ -36,13 +40,13 @@ function Psychotest() {
               Please read the test sentences and choose the best answer that fits you during the{' '}
             </h6>
             <Progress.Line percent={30} strokeColor="#3591a6" />
-            <article className="bg-[var(--rs-primary-700)] py-2">
+            <article className="bg-[var(--rs-primary-100)] py-2">
               {Array(5)
                 .fill('')
                 .map((question, index, arr) => {
                   return (
                     <div key={Math.random()} className={clsx(index === activeQuestion ? '' : 'hidden')}>
-                      <h6 className="text-center py-5 text-white text-xl font-bold">I found it hard to wind down</h6>
+                      <h6 className="text-center py-5 text-[var(--rs-gray-800)] text-3xl font-bold">I found it hard to wind down</h6>
                       <aside className="p-2 text-center flex flex-col">
                         {Array(5)
                           .fill('')
@@ -57,12 +61,13 @@ function Psychotest() {
                                   }}
                                   className={twMerge(
                                     clsx(
-                                      'rounded-sm shadow-md py-3 cursor-pointer  inline-block text-xl',
+                                      'rounded-md shadow-md py-3 cursor-pointer  inline-block text-xl text-[var(--rs-gray-700)]',
+                                      index === activeQuestion ? 'animate__animated animate__slideInLeft' : '',
                                     ),
                                   )}
                                   style={{ animationDuration: `${300 * (i + 1)}ms` }}
                                 >
-                                  Did not apply to me at all
+                                  Did not apply to me at all {index}
                                 </Card>
                               </div>
                             );
@@ -71,8 +76,8 @@ function Psychotest() {
                     </div>
                   );
                 })}
-              <aside className="flex gap-1 mx-2 justify-center text-white">
-                {Array(5)
+              <aside className="flex gap-1 mx-2 justify-center text-white flex-wrap">
+                {Array(50)
                   .fill('')
                   .map((el, i) => {
                     return (
@@ -81,12 +86,13 @@ function Psychotest() {
                         key={Math.random}
                         className={twMerge(
                           clsx(
-                            'cursor-pointer bg-[var(--rs-gray-100)] w-5 h-5 rounded-full text-center flex-wrap',
-                            i === activeQuestion && 'bg-[var(--rs-gray-100)]0',
+                            'cursor-pointer w-5 h-5 rounded-full text-center flex-wrap text-[var(--rs-gray-500)] font-bold',
+                            i <= activeQuestion && 'text-[var(--rs-green-500)]',
+                            i === activeQuestion && 'underline underline-offset-2',
                           ),
                         )}
                       >
-                        {i + 1}
+                        {localizeNum(locale, i + 1)}
                       </span>
                     );
                   })}
