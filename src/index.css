@@ -424,3 +424,10 @@ a:active {
 .custom-loader .rs-loader-spin::after {
   border-color: var(--rs-color-blue) transparent transparent;
 }
+
+.tests-table .rs-table-row-expanded {
+  overflow: auto;
+}
+.rs-placeholder-paragraph-rows p {
+  margin: auto;
+}

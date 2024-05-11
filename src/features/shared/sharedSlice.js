@@ -8,7 +8,6 @@ import {
   getSpecialization,
   getDoctorProfile,
   getSlotsByIds,
-  getpsychoTests,
   getFeaturedDoctor,
 } from './sharedActions';
 export const sharedSlice = createSlice({
@@ -25,7 +24,6 @@ export const sharedSlice = createSlice({
     onlineDoctors: [],
     doctorProfile: {},
     checkoutSlots: [],
-    psychometerTests: [],
     featuredDoctors: [],
   },
 
@@ -72,9 +70,6 @@ export const sharedSlice = createSlice({
     });
     builder.addCase(getSlotsByIds.fulfilled, (state, action) => {
       state.checkoutSlots = action.payload?.data;
-    });
-    builder.addCase(getpsychoTests.fulfilled, (state, action) => {
-      state.psychometerTests = action.payload;
     });
     builder.addCase(getFeaturedDoctor.fulfilled, (state, action) => {
       state.featuredDoctors = action.payload?.data.result ?? [];

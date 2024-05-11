@@ -2,17 +2,17 @@ import React, { useEffect } from 'react';
 import InternalHeader from '../components/Shared/InternalHeader';
 import psychometer from '../assets/images/psychometer.png';
 import { AiOutlineCheckCircle } from 'react-icons/ai';
-import { IconButton, Table } from 'rsuite';
+import { Button, IconButton, Table } from 'rsuite';
 import CollaspedOutlineIcon from '@rsuite/icons/CollaspedOutline';
 import ExpandOutlineIcon from '@rsuite/icons/ExpandOutline';
 import useMediaQuery from '../hooks/useMediaQuery';
 import DoctorsSlider from '../components/Shared/DoctorsSlider';
-import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { getpsychoTests } from '../features/shared/sharedActions';
+import { getpsychoTests } from '../features/test/testAction';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 const { Column, HeaderCell, Cell } = Table;
-const rowKey = 'title';
+const rowKey = '_id';
 const ExpandCell = ({ rowData, expandedRowKeys, onChange, ...props }) => (
   <Cell {...props} style={{ padding: 5 }}>
     <IconButton
@@ -57,16 +57,10 @@ function Psychometer() {
   const lg = useMediaQuery('lg');
   const { i18n } = useTranslation();
 
-  const TitleCell = ({ rowData, dataKey, ...props }) => (
-    <Cell {...props}>
-      <Link to={`/${i18n}/psychotest/55`} className="hover:no-underline">
-        {rowData[dataKey]}
-      </Link>
-    </Cell>
-  );
+  const DataCell = ({ rowData, dataKey, ...props }) => <Cell {...props}>{rowData[dataKey]}</Cell>;
   const locale = i18n.resolvedLanguage ?? '';
 
-  const psychometerTests = useSelector((state) => state?.shared?.psychometerTests) ?? [];
+  const tests = useSelector((state) => state?.test?.tests) ?? [];
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getpsychoTests());
@@ -107,10 +101,10 @@ function Psychometer() {
           <div className="xl:grid xl:grid-cols-[1fr_260px] xl:gap-3">
             <section className="bg-[var(--rs-bg-card)]">
               <Table
-                className="text-gray/90"
-                rowExpandedHeight={lg ? 200 : 200}
+                className="text-gray/90 tests-table"
+                rowExpandedHeight={lg ? 600 : 200}
                 headerHeight={50}
-                data={psychometerTests}
+                data={tests}
                 autoHeight
                 rowKey={rowKey}
                 expandedRowKeys={expandedRowKeys}
@@ -122,15 +116,21 @@ function Psychometer() {
                 </Column>
                 <Column {...(lg ? { flexGrow: 3 } : { width: 320 })}>
                   <HeaderCell className="text-cyan text-xl font-[500]">{t('Title')}</HeaderCell>
-                  <TitleCell dataKey={`${locale === 'ar' ? 'ar_title' : 'title'}`} />
+                  <DataCell dataKey={`${locale === 'ar' ? 'ar_name' : 'name'}`} />
                 </Column>
                 <Column {...(lg ? { flexGrow: 1 } : { width: 200 })}>
                   <HeaderCell className="text-cyan text-xl font-[500]">{t('Recommendation')}</HeaderCell>
-                  <TitleCell dataKey={`${locale === 'ar' ? 'ar_recommendation' : 'recommendation'}`} />
+                  <DataCell dataKey={`${locale === 'ar' ? 'ar_recommendation' : 'recommendation'}`} />
                 </Column>
                 <Column {...(lg ? { flexGrow: 1 } : { width: 150 })}>
                   <HeaderCell className="text-cyan text-xl font-[500]">{t('Test_Period')}</HeaderCell>
-                  <TitleCell dataKey={`${locale === 'ar' ? 'ar_testPeriod' : 'testPeriod'}`} />
+                  <DataCell dataKey={`${locale === 'ar' ? 'ar_duration' : 'duration'}`} />
+                </Column>
+                <Column {...(lg ? { flexGrow: 1 } : { width: 150 })}>
+                  <HeaderCell>...</HeaderCell>
+                  <Cell style={{ padding: '6px' }}>
+                    {(rowData) => <Link to={`/${i18n.resolvedLanguage}/psychotest/${rowData?._id}`}>{t('Take_Test')}</Link>}
+                  </Cell>
                 </Column>
               </Table>
             </section>

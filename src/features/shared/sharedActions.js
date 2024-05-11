@@ -19,10 +19,6 @@ export const getPrefix = createAsyncThunk('getPrefix', async () => {
   const res = await axios.get('/data/prefix.json');
   return res?.data;
 });
-export const getpsychoTests = createAsyncThunk('getpsychoTests', async () => {
-  const res = await axios.get('/data/psychometer.json');
-  return res?.data;
-});
 
 export const getAllDoctors = createAsyncThunk('getAllDoctors', async (params) => {
   const res = await service.post('/api/v1/doctors/getAllDoctors', params);

@@ -5,6 +5,7 @@ import paymentSlice from '../features/payment/paymentSlice';
 import sharedSlice from '../features/shared/sharedSlice';
 import doctorSlice from '../features/doctor/doctorSlice';
 import userSlice from '../features/user/userSlice';
+import testSlice from '../features/test/testSlice';
 import storage from 'redux-persist/lib/storage';
 import { persistReducer, persistStore } from 'redux-persist';
 
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   shared: sharedSlice,
   doctor: doctorSlice,
   user: userSlice,
+  test: testSlice,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
