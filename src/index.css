@@ -428,6 +428,3 @@ a:active {
 .tests-table .rs-table-row-expanded {
   overflow: auto;
 }
-.rs-placeholder-paragraph-rows p {
-  margin: auto;
-}
