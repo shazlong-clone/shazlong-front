@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import InternalHeader from '../components/Shared/InternalHeader';
 import psychometer from '../assets/images/psychometer.png';
 import { AiOutlineCheckCircle } from 'react-icons/ai';
-import { Button, IconButton, Table } from 'rsuite';
+import { IconButton, Table } from 'rsuite';
 import CollaspedOutlineIcon from '@rsuite/icons/CollaspedOutline';
 import ExpandOutlineIcon from '@rsuite/icons/ExpandOutline';
 import useMediaQuery from '../hooks/useMediaQuery';

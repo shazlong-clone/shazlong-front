@@ -42,7 +42,7 @@ function Psychotest() {
           );
         }
       })
-      .catch((err) => {
+      .catch(() => {
         setErr(true);
         return toaster.push(
           <Message type="error" closable showIcon>
