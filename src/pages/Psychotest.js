@@ -3,13 +3,13 @@ import InternalHeader from '../components/Shared/InternalHeader';
 import Card from '../components/Shared/Card';
 import clsx from 'clsx';
 import { twMerge } from 'tailwind-merge';
-import { Loader, Message, Placeholder, Progress, toaster } from 'rsuite';
+import { Button, Loader, Message, Placeholder, Progress, toaster } from 'rsuite';
 import { useTranslation } from 'react-i18next';
 import { localizeNum } from '../assets/constants';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { getTestById } from '../features/test/testAction';
-import { updateTest } from '../features/test/testSlice'
+import { updateTest } from '../features/test/testSlice';
 
 function Psychotest() {
   const [activeQuestion, setActiveQuestion] = useState(0);
@@ -20,15 +20,15 @@ function Psychotest() {
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState(false);
   const test = useSelector((state) => state?.test?.test);
-  const percent = useMemo(()=>{
+  const percent = useMemo(() => {
     const total = test?.questions?.length;
-    const answered = test?.questions?.filter(q => Boolean(q.userAnswer))?.length;
-    if(total > 0 && answered > 0){
-      return Math.ceil((answered / total)*100 )
-    }else {
+    const answered = test?.questions?.filter((q) => Boolean(q.userAnswer))?.length;
+    if (total > 0 && answered > 0) {
+      return Math.ceil((answered / total) * 100);
+    } else {
       return 0;
     }
-  },[test])
+  }, [test]);
   const handelGetTests = () => {
     setLoading(true);
     dispatch(getTestById(id))
@@ -95,7 +95,7 @@ function Psychotest() {
           <section className="border border-solid border-[var(--rs-gray-300)] my-5 max-w-3xl mx-auto">
             <h5 className="px-5 text-center my-5">{t('Test_Caution')}</h5>
             <Progress.Line percent={percent} strokeColor="#3591a6" />
-            <article className="bg-[var(--rs-primary-100)] py-2 min-h-[300px] relative">
+            <article className="bg-[var(--rs-primary-100)] py-2 min-h-[300px] relative px-3 pb-5">
               {loading ? (
                 <div className="flex justify-center items-center w-full h-[100%] absolute">
                   <Loader speed="low" size="lg" />
@@ -120,16 +120,18 @@ function Psychotest() {
                                   onClick={() => {
                                     if (index + 1 !== arr?.length) {
                                       setActiveQuestion(index + 1);
-                                    }else {
-                                      setActiveQuestion(0)
+                                    } else {
+                                      setActiveQuestion(0);
                                     }
-                                    dispatch(updateTest({question_id:question?._id,answer_id:answer?._id}))
+                                    dispatch(updateTest({ question_id: question?._id, answer_id: answer?._id }));
                                   }}
                                   className={twMerge(
                                     clsx(
                                       'rounded-md shadow-md py-3 cursor-pointer  inline-block text-xl text-[var(--rs-gray-700)]',
                                       index === activeQuestion && !loading ? 'animate__animated animate__slideInLeft' : '',
-                                      question?.userAnswer && (question?.userAnswer === answer?._id)? 'bg-[var(--rs-green-50)] ring-2 ring-[var(--rs-green-200)]' : 'hover:bg-[var(--rs-gray-100)] hover:ring-2 hover:ring-[var(--rs-gray-500)]' 
+                                      question?.userAnswer && question?.userAnswer === answer?._id
+                                        ? 'bg-[var(--rs-green-50)] ring-2 ring-[var(--rs-green-200)]'
+                                        : 'hover:bg-[var(--rs-gray-100)] hover:ring-2 hover:ring-[var(--rs-gray-500)]',
                                     ),
                                   )}
                                   style={{ animationDuration: `${300 * (i + 1)}ms` }}
@@ -168,6 +170,11 @@ function Psychotest() {
                   )}
                 </>
               )}
+              <aside className="mt-10 flex justify-center">
+                <Button color="green" disabled={!test?.questions?.every((q) => Boolean(q?.userAnswer))} appearance="primary">
+                  {t('View_Result')}
+                </Button>
+              </aside>
             </article>
           </section>
         </div>
