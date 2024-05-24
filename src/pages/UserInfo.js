@@ -16,10 +16,9 @@ import { MY_THERAPY, PAYMENT_INFO, PERSONAL_INFO } from '../assets/constants';
 function UserInfo() {
   const [searchParams, setSearchParams] = useSearchParams();
   const tab = searchParams.get('tab') ?? PERSONAL_INFO;
-
   const { user = {} } = useSelector((state) => state?.auth);
-
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const locale = i18n.resolvedLanguage;
   const toaster = useToaster();
 
   const [activeTabe, setActiveTabe] = useState(tab);
@@ -60,6 +59,7 @@ function UserInfo() {
     action: `${API_BASE_URL}/api/v1/users/uploadPhoto`,
     headers: {
       authorization: `Bearer ${token}`,
+      'Accept-Language': locale,
     },
     onUpload: (file) => {
       setUploading(true);
@@ -81,14 +81,14 @@ function UserInfo() {
   const onTabChange = (key) => {
     setActiveTabe(key);
     setSearchParams({ tab: key });
-  }
+  };
   return (
     <main className="bg-[var(--rs-gray-50)] py-5">
       <div className="container">
         <Grid className="lg:my-10">
           <Row gutter={24}>
             <Col xs={24} lg={8}>
-              <Card className="rounded-none text-center">
+              <Card className="roundeu-none text-center">
                 <div className="relative inline-block p-2 ">
                   <Uploader {...props}>
                     <button style={{ width: 100, height: 100, borderRadius: '50%' }}>

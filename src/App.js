@@ -14,7 +14,6 @@ const Therapists = lazy(() => import('./pages/Therapists'));
 const Checkout = lazy(() => import('./pages/Checkout'));
 const Error = lazy(() => import('./pages/Error'));
 const Instructions = lazy(() => import('./pages/Instructions'));
-const Online = lazy(() => import('./pages/Online'));
 const MyTherapy = lazy(() => import('./pages/MyTherapy'));
 const SignUp = lazy(() => import('./pages/SignUp'));
 const SignIn = lazy(() => import('./pages/SignIn'));
@@ -54,7 +53,6 @@ function App() {
               <Route path="thearpist-profile/:id" element={<ThearpistProfile />} />
               <Route path="checkout" element={<Checkout />} />
               <Route path="instructions" element={<Instructions />} />
-              <Route path="online" element={<Online />} />
               <Route path="my-therapy" element={<MyTherapy />} />
               <Route path="licence" element={<Licence />} />
               <Route path="blogs" element={<Blogs />} />
@@ -62,7 +60,7 @@ function App() {
               <Route path="psychometer" element={<Psychometer />} />
               <Route path="psychotest/:id" element={<Psychotest />} />
               <Route path="join-us" element={<JoinUs />} />
-              <Route path="user-info" element={<ProtectedRoute />}>
+              <Route path="user-info" element={<UserInfo />}>
                 <Route index element={<UserInfo />} />
               </Route>
               <Route path="test" element={<Test />} />

@@ -46,6 +46,7 @@ function DoctorProfile() {
     action: `${API_BASE_URL}/api/v1/doctors/update-photo`,
     headers: {
       authorization: `Bearer ${doctorToken}`,
+      'Accept-Language': locale,
     },
     onUpload: (file) => {
       setUploading(true);
@@ -155,7 +156,7 @@ function DoctorProfile() {
     <>
       <Breadcrumb>
         <Breadcrumb.Item as={Link} to={`/${locale}/doctor`}>
-         {locale === 'ar' ? profile?.fullArName : profile?.fullEnName}
+          {locale === 'ar' ? profile?.fullArName : profile?.fullEnName}
         </Breadcrumb.Item>
         <Breadcrumb.Item active>{t('Profile')}</Breadcrumb.Item>
       </Breadcrumb>

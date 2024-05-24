@@ -99,7 +99,7 @@ function FooterNav() {
             <Menu title={t('Online')} id={1} link={`/${locale}/therapists?availability=0`} icon={<BiVideoPlus />} />
           </div>
           <div>
-            <Menu title={t('My_Therapy')} id={2} link={`/${locale}/my-therapy`} icon={<RiPsychotherapyLine />} />
+            <Menu title={t('My_Therapy')} id={2} link={`/${locale}/user-info?tab=MY_THERAPY`} icon={<RiPsychotherapyLine />} />
           </div>
           <div onClick={() => dispatch(openChat())}>
             <Menu title={t('Support')} id={3} icon={<MdSupportAgent />} />

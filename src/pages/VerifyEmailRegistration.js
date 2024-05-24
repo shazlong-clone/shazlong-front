@@ -102,6 +102,7 @@ function VerifyEmailRegistration() {
       value: el?.id,
     };
   });
+  const locale = i18n.resolvedLanguage;
   const prefixData = prefixList.map((item) => {
     return {
       label: item,
@@ -118,6 +119,7 @@ function VerifyEmailRegistration() {
     action: `${API_BASE_URL}/api/v1/doctors/uploadCv`,
     headers: {
       'verification-code': doctorVerificationCode || '',
+      'Accept-Language': locale,
     },
   };
 
