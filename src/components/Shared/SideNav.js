@@ -96,7 +96,7 @@ function FooterNav() {
             <Menu title={t('Therapists')} id={0} link={`/${locale}/therapists`} icon={<BiGroup />} />
           </div>
           <div>
-            <Menu title={t('Online')} id={1} link={`/${locale}/online`} icon={<BiVideoPlus />} />
+            <Menu title={t('Online')} id={1} link={`/${locale}/therapists?availability=0`} icon={<BiVideoPlus />} />
           </div>
           <div>
             <Menu title={t('My_Therapy')} id={2} link={`/${locale}/my-therapy`} icon={<RiPsychotherapyLine />} />
