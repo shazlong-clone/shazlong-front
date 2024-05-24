@@ -4,11 +4,11 @@ import { BiVideoPlus } from 'react-icons/bi';
 import { MdSupportAgent } from 'react-icons/md';
 import { RiPsychotherapyLine } from 'react-icons/ri';
 import { FiMoreHorizontal } from 'react-icons/fi';
-import { Drawer } from 'rsuite';
+import { Drawer, Message, toaster } from 'rsuite';
 import { AiOutlineHome } from 'react-icons/ai';
 import { BiTestTube } from 'react-icons/bi';
 import { FaBlog } from 'react-icons/fa';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import clsx from 'clsx';
 import { useDispatch, useSelector } from 'react-redux';
 import { openChat } from '../../features/theme/themeSlice';
@@ -66,7 +66,7 @@ function FooterNav() {
   const Menu = ({ title, icon, link, id }) => {
     return (
       <section
-        className="pointer hover:text-[var(--rs-primary-500)] transition-all text-center"
+        className="pointer hover:text-[var(--rs-primary-500)] transition-all text-center active:text-[var(--rs-primary-200)]"
         onClick={() => setActiveTabe(id)}
       >
         <NavLink to={link} className={clsx(activeTabe === id ? 'text-[var(--rs-primary-500)]' : 'text-[var(--rs-gray-700)]')}>
@@ -87,6 +87,9 @@ function FooterNav() {
     },
     ...swiperConfig,
   });
+  const navigate = useNavigate();
+
+  const user = useSelector((state) => state?.auth?.user);
 
   return (
     <>
@@ -98,8 +101,21 @@ function FooterNav() {
           <div>
             <Menu title={t('Online')} id={1} link={`/${locale}/therapists?availability=0`} icon={<BiVideoPlus />} />
           </div>
-          <div>
-            <Menu title={t('My_Therapy')} id={2} link={`/${locale}/user-info?tab=MY_THERAPY`} icon={<RiPsychotherapyLine />} />
+          <div
+            onClick={() => {
+              if (user?._id) {
+                navigate('/' + locale + '/user-info?tab=MY_THERAPY');
+              } else {
+                toaster.push(
+                  <Message type="error" closable showIcon>
+                    {t('Sign_In_First')}
+                  </Message>,
+                  { placement: 'topCenter' },
+                );
+              }
+            }}
+          >
+            <Menu title={t('My_Therapy')} id={2} icon={<RiPsychotherapyLine />} />
           </div>
           <div onClick={() => dispatch(openChat())}>
             <Menu title={t('Support')} id={3} icon={<MdSupportAgent />} />
@@ -130,7 +146,7 @@ function FooterNav() {
                     className="text-[var(--rs-gray-700)] active:underline-none active:on-underline focus:no-underline"
                     onClick={() => setOpen(false)}
                   >
-                    <section className="flex items-center gap-3 py-3 px-2">
+                    <section className="flex items-center gap-3 py-3 px-2 active:text-[var(--rs-primary-200)]">
                       <i className="text-2xl flex items-center">{el?.icon}</i>
                       <span className="text-xl font-extralight">{t(el?.name)}</span>
                     </section>

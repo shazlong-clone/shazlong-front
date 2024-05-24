@@ -111,13 +111,19 @@ function CustomerService({ close, isMobile = false }) {
             </Card>
           </section>
           <section className="absolute bottom-0 py-6 shadow-[#00000024_0px_0px_25px] w-full border-t border-b-0 border-r-0 border-l-0  border-solid border-[var(--rs-gray-100)] flex justify-evenly text-3xl">
-            <aside onClick={() => setActiveTabe(1)} className="grid cursor-pointer text-center text-cyan">
+            <aside
+              onClick={() => setActiveTabe(1)}
+              className="grid cursor-pointer text-center text-cyan text-[var(--rs-primary-700)]"
+            >
               <span className=" flex justify-center h-[30px]">
                 <AiFillHome />
               </span>
               <strong className="text-sm">{t('Home')}</strong>
             </aside>
-            <aside className="grid cursor-pointer text-center" onClick={() => setActiveTabe(2)}>
+            <aside
+              className="grid cursor-pointer text-center active:text-[var(--rs-primary-400)]"
+              onClick={() => setActiveTabe(2)}
+            >
               <span className="flex justify-center h-[30px]">
                 <Badge content={1}>
                   <BiMessageAltDetail />

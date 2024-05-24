@@ -9,6 +9,8 @@ import { setDoctorSearchLoading, setDoctorSearchParams } from '../../features/sh
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllDoctors } from '../../features/shared/sharedActions';
 import { useTranslation } from 'react-i18next';
+import { createSearchParams, useNavigate, useSearchParams } from 'react-router-dom';
+import { RemoveNullKeys } from '../../utils/fn';
 
 function TherapistsComp() {
   const { t } = useTranslation();
@@ -17,11 +19,30 @@ function TherapistsComp() {
   const handelSortChange = async (id) => {
     const sortion = sortMenu?.find((el) => el?.id === id);
     const newParams = { ...doctorSearchParams, sortBy: sortion?.sortBy, sort: sortion?.sort };
+    navigate({
+      search: `?${createSearchParams(RemoveNullKeys(newParams))}`,
+    });
     dispatch(setDoctorSearchParams(newParams));
     dispatch(setDoctorSearchLoading(true));
     await dispatch(getAllDoctors({ ...newParams, page: 1 }));
     dispatch(setDoctorSearchLoading(false));
   };
+  const [searchParams] = useSearchParams();
+
+  const [name, setName] = React.useState(searchParams.get('name') || '');
+  const navigate = useNavigate();
+  const onPressEnter = async () => {
+    const params = { ...doctorSearchParams, name };
+    dispatch(setDoctorSearchLoading(true));
+    navigate({
+      search: `?${createSearchParams(RemoveNullKeys(params))}`,
+    });
+    await dispatch(getAllDoctors({ ...params, page: 1, size: pageSize }));
+    dispatch(setDoctorSearchParams({ ...params, page: 1, size: pageSize }));
+
+    dispatch(setDoctorSearchLoading(false));
+  };
+
   useEffect(() => {
     window.scrollTo({ top: 0 });
   }, []);
@@ -32,12 +53,14 @@ function TherapistsComp() {
           <section>
             <InputGroup size="lg" inside className="mb-10">
               <Input
-                onChange={(v) => dispatch(setDoctorSearchParams({ ...doctorSearchParams, name: v }))}
+                onChange={(v) => {
+                  setName(v);
+                }}
                 placeholder={t('Search_By_Therapist_Name')}
-                onPressEnter={() => dispatch(getAllDoctors({ ...doctorSearchParams, page: 1, size: pageSize }))}
-                value={doctorSearchParams?.name || ''}
+                onPressEnter={onPressEnter}
+                defaultValue={name}
               />
-              <InputGroup.Button onClick={() => dispatch(getAllDoctors({ ...doctorSearchParams, page: 1, size: pageSize }))}>
+              <InputGroup.Button onClick={onPressEnter}>
                 <SearchIcon />
               </InputGroup.Button>
             </InputGroup>
@@ -56,7 +79,7 @@ function TherapistsComp() {
                 return <div className={!item?.value ? 'text-red-500' : ''}>{label}</div>;
               }}
               value={
-                sortMenu?.find((el) => el.sortBy === doctorSearchParams?.sortBy && el?.sort === doctorSearchParams?.sort)?.id ||
+                sortMenu?.find((el) => el.sortBy === searchParams.get('sortBy') && el?.sort === searchParams.get('sort'))?.id ||
                 null
               }
             />

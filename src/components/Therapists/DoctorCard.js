@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, useMemo } from 'react';
 import { Avatar, Badge, Button, Rate, Stack } from 'rsuite';
 import useMediaQuery from '../../hooks/useMediaQuery';
 import { BsPersonSquare } from 'react-icons/bs';
@@ -14,7 +14,8 @@ import { IoMdMale } from 'react-icons/io';
 import { IoMdFemale } from 'react-icons/io';
 import { genders } from '../../assets/constants';
 
-function DoctorCard({ doctor }) {
+function DoctorCard(props) {
+  const doctor = useMemo(() => props.doctor, []);
   const { t } = useTranslation();
   const isMobile = useMediaQuery('md');
   const { specializationList, prefixesList, countries, languages } = useSelector((state) => state?.shared);
@@ -22,6 +23,7 @@ function DoctorCard({ doctor }) {
   const country = countries?.find((country) => country?.id === doctor?.country);
   const prefix = prefixesList?.find((pref) => pref?.id === doctor?.prefix);
   const navigate = useNavigate();
+
   return (
     <section key={Math.random()} className="bg-[var(--rs-bg-card)] rounded-3xl mt-3 p-6 text-sm lg:mb-5 lg:mt-0 overflow-hidden">
       <div className="flex gap-5">
