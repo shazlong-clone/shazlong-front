@@ -79,6 +79,7 @@ html {
 }
 .home-testimonial .slick-initialized .slick-slide {
   border: 8px solid rgba(244, 244, 244);
+  box-sizing: border-box;
 }
 .rs-rate-xs .rs-rate-character {
   width: 5px;

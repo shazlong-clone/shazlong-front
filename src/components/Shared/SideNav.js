@@ -10,17 +10,19 @@ import { BiTestTube } from 'react-icons/bi';
 import { FaBlog } from 'react-icons/fa';
 import { Link, NavLink } from 'react-router-dom';
 import clsx from 'clsx';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { openChat } from '../../features/theme/themeSlice';
 import { t } from 'i18next';
 import { RiGroupLine } from 'react-icons/ri';
 import { useTranslation } from 'react-i18next';
-
+import { useSwipeable } from 'react-swipeable';
+import { handelSideBar } from '../../features/shared/sharedSlice';
+import { swiperConfig } from '../../assets/constants';
 function FooterNav() {
   const [activeTabe, setActiveTabe] = useState('/');
-  const [open, setOpen] = React.useState(false);
+  const sideBarOpen = useSelector((state) => state?.shared?.sideBarOpen ?? false);
   const dispatch = useDispatch();
-  const {i18n} = useTranslation();
+  const { i18n } = useTranslation();
   const locale = i18n.resolvedLanguage;
   const menu = [
     {
@@ -44,8 +46,9 @@ function FooterNav() {
       link: `/${locale}/therapists`,
     },
   ];
-  
-
+  const setOpen = (v) => {
+    dispatch(handelSideBar(v));
+  };
   useEffect(() => {
     if (!open && activeTabe === 4) {
       setActiveTabe(null);
@@ -73,7 +76,17 @@ function FooterNav() {
       </section>
     );
   };
-
+  const handlers = useSwipeable({
+    onSwiped: (eventData) => {
+      if (
+        (i18n.resolvedLanguage === 'ar' && eventData.dir === 'Right') ||
+        (i18n.resolvedLanguage === 'en' && eventData.dir === 'Left')
+      ) {
+        setOpen(false);
+      }
+    },
+    ...swiperConfig,
+  });
 
   return (
     <>
@@ -95,7 +108,15 @@ function FooterNav() {
             <Menu title={t('More')} id={4} icon={<FiMoreHorizontal />} />
           </div>
         </article>
-        <Drawer size="full" placement="left" open={open} onClose={() => setOpen(false)} className="bg-gray">
+        <Drawer
+          {...handlers}
+          backdrop={true}
+          size={'calc(100% - 100px)'}
+          placement="left"
+          open={sideBarOpen}
+          onClose={() => setOpen(false)}
+          className="bg-gray"
+        >
           <Drawer.Header>
             <Drawer.Title className="text-center text-2xl text-cyan">{t('More')}</Drawer.Title>
           </Drawer.Header>

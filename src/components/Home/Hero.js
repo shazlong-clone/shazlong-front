@@ -13,7 +13,7 @@ function Hero() {
   return (
     <div
       className={clsx(
-        'py-5 bg-no-repeat bg-[length:68%] md:bg-[length:60%] lg:bg-[length:65%]',
+        'py-5 bg-no-repeat bg-[length:100%] md:bg-[length:90%] lg:bg-[length:65%]',
         currLang === 'ar' ? 'bg-hero-rtl bg-left-bottom' : 'bg-hero bg-right-bottom',
       )}
     >

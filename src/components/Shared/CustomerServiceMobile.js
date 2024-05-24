@@ -8,7 +8,7 @@ function CustomerServiceMobile() {
   if (isChatOpen) {
     return (
       <div className={clsx(isChatOpen ? 'block' : 'hidden')}>
-        <CustomerService />
+        <CustomerService isMobile={true} />
       </div>
     );
   }

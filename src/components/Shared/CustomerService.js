@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Avatar, AvatarGroup, Badge } from 'rsuite';
+import { Avatar, AvatarGroup, Badge, DOMHelper } from 'rsuite';
 import { IoMdSend } from 'react-icons/io';
 import { AiFillHome } from 'react-icons/ai';
 import { BiMessageAltDetail } from 'react-icons/bi';
@@ -12,7 +12,7 @@ import cs3 from '../../assets/images/cs3.jpg';
 import clsx from 'clsx';
 import { MdArrowBackIosNew } from 'react-icons/md';
 import { RxCross2 } from 'react-icons/rx';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { closeChat } from '../../features/theme/themeSlice';
 import shazlong from '../../assets/images/shazlong.png';
 import { Link } from 'react-router-dom';
@@ -20,7 +20,9 @@ import EmojiDropdown from './EmojiDropdown';
 import { useMediaQuery } from '@uidotdev/usehooks';
 import therapist from '../../assets/images/therapist.webp';
 import { useTranslation } from 'react-i18next';
-function CustomerService({ close }) {
+const { addClass, removeClass } = DOMHelper;
+
+function CustomerService({ close, isMobile= false }) {
   const dispatch = useDispatch();
   const [activeTabe, setActiveTabe] = useState(1);
   const {i18n} = useTranslation();
@@ -48,15 +50,28 @@ function CustomerService({ close }) {
       textAreaRef.current.style.height = scrollHeight + 'px';
     }
   }, [textAreaRef, message]);
-
+  const { isChatOpen } = useSelector((state) => state?.theme);
+  const ref = useRef();
   return (
     <>
       <div
-        className={clsx('fixed top-0 left-0 h-[100vh] w-full bg-[var(--rs-bg-card)] z-[51] lg:static lg:h-[60vh] lg:w-[400px] lg:rounded-md')}
+        ref={ref}
+        className={clsx('fixed top-0 left-0 h-[100vh] w-full bg-[var(--rs-bg-card)] z-[51] lg:static lg:h-[60vh] lg:w-[400px] lg:rounded-md animate__animated animate__faster', (isChatOpen&&isMobile)  && 'animate__backInUp' )}
       >
         <aside className={clsx(activeTabe === 1 ? 'block' : 'hidden')}>
           <section className="text-white bg-[var(--rs-primary-700)] px-5 p-10 lg:rounded-t-md xl:py-5">
-            <article onClick={() => dispatch(closeChat())} className="flex justify-between items-center">
+            <article onClick={() => {
+              if(isMobile){
+                removeClass(ref.current,'animate__backInUp');
+                addClass(ref.current,'animate__backOutDown');
+                setTimeout(()=>{
+                  dispatch(closeChat())
+                },[500])
+              }else {
+                dispatch(closeChat())
+              }
+
+            }} className="flex justify-between items-center">
               <img width="50px" height="50px" src={logo_white} alt="intercomcdn" />
               <span onClick={close} className="text-xl cursor-pointer">
                 <CgClose />

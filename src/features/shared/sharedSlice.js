@@ -9,7 +9,9 @@ import {
   getDoctorProfile,
   getSlotsByIds,
   getFeaturedDoctor,
+  getReviews,
 } from './sharedActions';
+import moment from 'moment';
 export const sharedSlice = createSlice({
   name: 'shared',
   initialState: {
@@ -25,6 +27,8 @@ export const sharedSlice = createSlice({
     doctorProfile: {},
     checkoutSlots: [],
     featuredDoctors: [],
+    reviews:{},
+    sideBarOpen:false
   },
 
   reducers: {
@@ -38,6 +42,9 @@ export const sharedSlice = createSlice({
     setSearchTherapistSideBarOpen: (state, action) => {
       state.searchTherapistSideBarOpen = action?.payload;
     },
+    handelSideBar: (state, action)=>{
+      state.sideBarOpen = action?.payload
+    }
   },
   extraReducers: (builder) => {
     builder.addCase(getCountries.fulfilled, (state, action) => {
@@ -74,10 +81,14 @@ export const sharedSlice = createSlice({
     builder.addCase(getFeaturedDoctor.fulfilled, (state, action) => {
       state.featuredDoctors = action.payload?.data.result ?? [];
     });
+    builder.addCase(getReviews.fulfilled, (state, action)=>{
+      state.reviews = action.payload?.data ?? {};
+
+    })
   },
 });
 
-export const { setDoctorSearchParams, setDoctorSearchLoading, setSearchTherapistSideBarOpen } = sharedSlice.actions;
+export const { setDoctorSearchParams, setDoctorSearchLoading, setSearchTherapistSideBarOpen, handelSideBar } = sharedSlice.actions;
 // Action creators are generated for each case reducer function
 
 export default sharedSlice.reducer;

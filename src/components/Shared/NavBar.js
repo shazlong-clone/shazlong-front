@@ -140,9 +140,9 @@ function NavBar() {
                 key={lngs[el]?.nativeName}
                 onClick={() => i18n.changeLanguage(el)}
                 className={clsx(
-                  'text-[var(--rs-gray-700)] cursor-pointer hover:underline flex',
+                  'text-[var(--rs-gray-700)] cursor-pointer hover:underline flex text-sm md:text-base lg:text-lg',
                   currLang === el ? 'hidden' : '',
-                  currLang === 'ar' ? 'pt-2' : '',
+                  currLang === 'ar' ? 'pt-1 xl:pt-2' : '',
                 )}
               >
                 {lngs[el]?.nativeName}
@@ -153,12 +153,12 @@ function NavBar() {
           {!user?._id ? (
             <>
               <Link className="text-inherit hover:no-underline hover:text-inherit" to={`/${i18n.resolvedLanguage}/sign-in`}>
-                <article className="text-[var(--rs-green-400)] border border-solid border-[var(--rs-green-400)] py-1 px-2 rounded-3xl cursor-pointer  lg:py-1 lg:px-5 text-[12px] text-center  xl:text-base">
+                <article className=" text-[var(--rs-green-400)] border border-solid border-[var(--rs-green-400)] py-1 px-2 rounded-3xl cursor-pointer  lg:py-1 lg:px-5 text-[9px] md:text-[12px] text-center  xl:text-base">
                   {t('Sign_In')}
                 </article>
               </Link>
               <Link className="text-inherit hover:no-underline hover:text-inherit" to={`/${i18n.resolvedLanguage}/sign-up`}>
-                <article className="text-white bg-[var(--rs-green-400)] py-1 px-2 rounded-3xl cursor-pointer lg:py-1 lg:px-5 text-[12px] text-center  xl:text-base flex rtl:pt-2">
+                <article className="text-white bg-[var(--rs-green-400)] py-1 px-2 rounded-3xl cursor-pointer lg:py-1 lg:px-5 text-[9px] md:text-[12px] text-center  xl:text-base flex rtl:pt-2">
                   {t('Sign_Up')}
                 </article>
               </Link>
