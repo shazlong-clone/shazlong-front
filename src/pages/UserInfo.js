@@ -98,7 +98,7 @@ function UserInfo() {
                   </Uploader>
                 </div>
                 <p className="mt-5 text-cyan capitalize">
-                  {user.name}
+                  {user?.name}
                   <br />
                   <span className="text-gray">{user.role === 1 ? `(${t('User')})` : `(${t('Doctor')})`}</span>
                 </p>

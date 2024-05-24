@@ -66,9 +66,9 @@ function Interstes() {
   useEffect(() => {
     dispatch(getSpecialization());
   }, []);
-  useEffect(()=>{
-    setFormValue({specialization: profile?.specialization ?? []})
-  },[profile])
+  useEffect(() => {
+    setFormValue({ specialization: profile?.specialization ?? [] });
+  }, [profile]);
 
   return (
     <Panel

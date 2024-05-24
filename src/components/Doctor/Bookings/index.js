@@ -143,7 +143,7 @@ function Bookings() {
     submit(getDoctorBookings, {}, { showToast: false, showLoader: false });
   }, []);
 
-  const smallScreen = useMediaQuery('md')
+  const smallScreen = useMediaQuery('md');
   return (
     <>
       <Breadcrumb>
@@ -252,8 +252,8 @@ function Bookings() {
             <ActionCell style={{ padding: 5 }} dataKey="id" />
           </Column>
         </Table>
-        <Pagination          
-          size='sm'
+        <Pagination
+          size="sm"
           layout={['total', '-', 'limit', '|', 'pager']}
           prev={true}
           next={true}

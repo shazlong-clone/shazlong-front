@@ -312,5 +312,11 @@
   "Instruction_Info": " Please read the scale items and choose the best answer that fits during the last 2 weeks. There are no right or wrong answers, and you do not need to spend too much time answering any of them.",
   "Disclaimer_Info": "This assessment does not indicate a confirmed diagnosis. To determine any potential diagnosis, discuss your results with your therapist. Your results will be shown to you only.",
   "Test_Caution": "Please read the test questions carefully and make sure that the choices apply to the previous week",
-  "By": "By"
+  "By": "By",
+  "Sign_In_First": "Please Sign In First",
+  "Hi": "Hi",
+  "How_We_Can_Help_You": "How We Can Help You",
+  "Send_Us_A_Message": "Send Us A Message",
+  "we_typically_reply_in_under_a_minute": "we typically reply in under a minute",
+  "Messages": "Messages"
 }

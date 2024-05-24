@@ -6,15 +6,15 @@ export const sharedSlice = createSlice({
     tests: [],
     test: {},
   },
-  reducers:{
-    updateTest: (state,action) => {
-      const newQustion = state.test?.questions?.map(q => {
-        if(action?.payload?.question_id === q._id){
-          return {...q, userAnswer: action?.payload?.answer_id}
-        }else return q
+  reducers: {
+    updateTest: (state, action) => {
+      const newQustion = state.test?.questions?.map((q) => {
+        if (action?.payload?.question_id === q._id) {
+          return { ...q, userAnswer: action?.payload?.answer_id };
+        } else return q;
       });
       state.test.questions = newQustion;
-    }
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(getpsychoTests.fulfilled, (state, action) => {

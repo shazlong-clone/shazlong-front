@@ -19,7 +19,17 @@ i18n
       escapeValue: false, // not needed for react as it escapes by default
     },
     detection: {
-      order: ['path', 'localStorage', 'cookie', 'localStorage', 'htmlTag', 'sessionStorage', 'navigator', 'querystring', 'subdomain'],
+      order: [
+        'path',
+        'localStorage',
+        'cookie',
+        'localStorage',
+        'htmlTag',
+        'sessionStorage',
+        'navigator',
+        'querystring',
+        'subdomain',
+      ],
       caches: ['localStorage', 'cookie'],
     },
     backend: {

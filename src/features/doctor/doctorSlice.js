@@ -5,7 +5,7 @@ import { getDoctorBookings, getSlots } from './doctorActions';
 const initialState = {
   profile: {},
   slots: [],
-  bookings:{}
+  bookings: {},
 };
 const doctorSlice = createSlice({
   name: 'doctor',

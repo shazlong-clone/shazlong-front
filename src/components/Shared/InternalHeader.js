@@ -7,9 +7,9 @@ import { twMerge } from 'tailwind-merge';
 function InternalHeader({ className, iconClassName, ...props }) {
   const { i18n } = useTranslation();
   const navigate = useNavigate();
-  const goBack = () =>{
-    navigate(-1)
-  }
+  const goBack = () => {
+    navigate(-1);
+  };
   return (
     <section className={twMerge('flex justify-between items-center lg:mb-10  lg:my-5', className)}>
       <h3>

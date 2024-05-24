@@ -44,7 +44,10 @@ function Footer() {
                   </Link>
                 </p>
                 <p>
-                  <Link className="text-[var(--rs-gray-100)] hover:text-[var(--rs-gray-100)]" to={`/${i18n.resolvedLanguage}/licence`}>
+                  <Link
+                    className="text-[var(--rs-gray-100)] hover:text-[var(--rs-gray-100)]"
+                    to={`/${i18n.resolvedLanguage}/licence`}
+                  >
                     {' '}
                     {t('Privacy_And_Policy')}
                   </Link>

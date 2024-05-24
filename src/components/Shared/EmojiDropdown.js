@@ -14,12 +14,7 @@ const EmojiDropdown = ({ onEmojiSelect }) => {
   return (
     <div className="relative flex items-center">
       <div className={clsx('absolute bottom-[60px] right-0', !showEmojiPicker && 'hidden')}>
-        <Picker
-          theme="dark"
-          onEmojiSelect={handleEmojiSelect}
-          data={data}
-          title="Pick your emoji"
-        />
+        <Picker theme="dark" onEmojiSelect={handleEmojiSelect} data={data} title="Pick your emoji" />
       </div>
       <button className="bg-transparent" onClick={() => setShowEmojiPicker(!showEmojiPicker)}>
         <BsEmojiSmile className={clsx('flex items-center cursor-pointer', showEmojiPicker && 'text-cyan')} />

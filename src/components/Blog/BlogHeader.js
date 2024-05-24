@@ -12,7 +12,9 @@ function BlogHeader() {
       <section className="xl:grid xl:grid-cols-2 gap-8 bg-[var(--rs-gray-100)] rounded-lg shadow-lg transition">
         <article className="relative max-h-[350px]">
           <img width="100%" className="object-cover rounded-t-lg xl:rounded-r-none xl:rounded-l-lg max-h-[350px]" src={blogimg} />
-          <span className=" text-cyan bg-[var(--rs-bg-card)] rounded-3xl font-bold px-3 py-2 absolute left-3 top-3 text-sm">wellness</span>
+          <span className=" text-cyan bg-[var(--rs-bg-card)] rounded-3xl font-bold px-3 py-2 absolute left-3 top-3 text-sm">
+            wellness
+          </span>
         </article>
         <article className="px-5  xl:px-10 py-2 text-gray/80 xl:relative">
           <aside>

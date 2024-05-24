@@ -22,12 +22,13 @@ import therapist from '../../assets/images/therapist.webp';
 import { useTranslation } from 'react-i18next';
 const { addClass, removeClass } = DOMHelper;
 
-function CustomerService({ close, isMobile= false }) {
+function CustomerService({ close, isMobile = false }) {
   const dispatch = useDispatch();
   const [activeTabe, setActiveTabe] = useState(1);
-  const {i18n} = useTranslation();
+  const { i18n, t } = useTranslation();
   const [message, setMessage] = useState('');
   const textAreaRef = useRef();
+  const { user } = useSelector((state) => state?.auth);
 
   const handleChange = (evt) => {
     const val = evt.target?.value;
@@ -56,28 +57,33 @@ function CustomerService({ close, isMobile= false }) {
     <>
       <div
         ref={ref}
-        className={clsx('fixed top-0 left-0 h-[100vh] w-full bg-[var(--rs-bg-card)] z-[51] lg:static lg:h-[60vh] lg:w-[400px] lg:rounded-md animate__animated animate__faster', (isChatOpen&&isMobile)  && 'animate__backInUp' )}
+        className={clsx(
+          'fixed top-0 left-0 h-[100vh] w-full bg-[var(--rs-bg-card)] z-[51] lg:static lg:h-[60vh] lg:w-[400px] lg:rounded-md animate__animated animate__faster',
+          isChatOpen && isMobile && 'animate__backInUp',
+        )}
       >
         <aside className={clsx(activeTabe === 1 ? 'block' : 'hidden')}>
           <section className="text-white bg-[var(--rs-primary-700)] px-5 p-10 lg:rounded-t-md xl:py-5">
-            <article onClick={() => {
-              if(isMobile){
-                removeClass(ref.current,'animate__backInUp');
-                addClass(ref.current,'animate__backOutDown');
-                setTimeout(()=>{
-                  dispatch(closeChat())
-                },[500])
-              }else {
-                dispatch(closeChat())
-              }
-
-            }} className="flex justify-between items-center">
+            <article
+              onClick={() => {
+                if (isMobile) {
+                  removeClass(ref.current, 'animate__backInUp');
+                  addClass(ref.current, 'animate__backOutDown');
+                  setTimeout(() => {
+                    dispatch(closeChat());
+                  }, [500]);
+                } else {
+                  dispatch(closeChat());
+                }
+              }}
+              className="flex justify-between items-center"
+            >
               <img width="50px" height="50px" src={logo_white} alt="intercomcdn" />
               <span onClick={close} className="text-xl cursor-pointer">
                 <CgClose />
               </span>
             </article>
-            <article className="mt-10 mb-4">
+            <article className="mt-5 xl:mt-10 mb-4">
               <AvatarGroup stack>
                 <Avatar circle key={cs1} src={cs1} alt="cs1" />
                 <Avatar circle key={cs2} src={cs2} alt="cs2" />
@@ -85,16 +91,18 @@ function CustomerService({ close, isMobile= false }) {
               </AvatarGroup>
             </article>
             <article>
-              <h4 className="text-white/60">Hi Saeed !</h4>
-              <h4>How We Can Help You</h4>
+              <h3 className="text-white/60">
+                {t('Hi')} 👋 {i18n.resolvedLanguage === 'ar' ? user?.fullArName : user?.fullEnName}
+              </h3>
+              <h3>{t('How_We_Can_Help_You')}</h3>
             </article>
           </section>
           <section className="px-5 pt-1 pb-5 bg-gradient-to-b from-[var(--rs-primary-700)] to-white">
             <Card className="text-gray rounded-[10px] py-4">
               <aside className="flex justify-between items-center">
                 <div>
-                  <strong className="text-[14px]">Send Us a message</strong>
-                  <p className="text-gray/60 text-[14px]">We typically reply in under a minute</p>
+                  <strong className="text-[16px] font-extrabold">{t('Send_Us_A_Message')}</strong>
+                  <p className="text-gray/60 text-[14px]">{t('we_typically_reply_in_under_a_minute')}</p>
                 </div>
                 <div className="text-cyan flex items-center text-xl cursor-pointer rtl:rotate-180">
                   <IoMdSend />
@@ -107,7 +115,7 @@ function CustomerService({ close, isMobile= false }) {
               <span className=" flex justify-center h-[30px]">
                 <AiFillHome />
               </span>
-              <strong className="text-sm">Home</strong>
+              <strong className="text-sm">{t('Home')}</strong>
             </aside>
             <aside className="grid cursor-pointer text-center" onClick={() => setActiveTabe(2)}>
               <span className="flex justify-center h-[30px]">
@@ -115,7 +123,7 @@ function CustomerService({ close, isMobile= false }) {
                   <BiMessageAltDetail />
                 </Badge>
               </span>
-              <strong className="text-sm">messages</strong>
+              <strong className="text-sm">{t('Messages')}</strong>
             </aside>
           </section>
         </aside>

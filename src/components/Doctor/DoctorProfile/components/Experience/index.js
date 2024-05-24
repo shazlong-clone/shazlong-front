@@ -115,13 +115,13 @@ function Experience() {
                 </section>
                 <section className="grow">
                   <h6 className="mb-2 flex justify-between items-center">
-                    <span>{locale === 'ar'? el?.ar_title : el?.title}</span>
+                    <span>{locale === 'ar' ? el?.ar_title : el?.title}</span>
                     <Stack spacing={6}>
                       <EditModal experience={el} />
                       <CustomComponent id={el?._id} />
                     </Stack>
                   </h6>
-                  <p className="text-sm">{locale === 'ar'? el?.ar_description : el?.description}</p>
+                  <p className="text-sm">{locale === 'ar' ? el?.ar_description : el?.description}</p>
                   <a className="text-sm">
                     {moment(el?.time?.at(0)).format('MMM YYYY')}-{moment(el?.time?.at(1)).format('MMM YYYY')}
                   </a>

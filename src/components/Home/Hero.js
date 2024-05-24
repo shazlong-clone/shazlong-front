@@ -33,9 +33,13 @@ function Hero() {
               {t('Explore_Our_Therapists')}
             </Button>
           </Link>
-          <Button onClick={()=>{
-            dispatch(openChat())
-          }} appearance="ghost" className="w-[200px] lg:w-[400px] text-sm lg:text-xl">
+          <Button
+            onClick={() => {
+              dispatch(openChat());
+            }}
+            appearance="ghost"
+            className="w-[200px] lg:w-[400px] text-sm lg:text-xl"
+          >
             {t('Contact')}
           </Button>
         </section>

@@ -45,11 +45,15 @@ function Slots() {
           {t('Slots')}
         </Breadcrumb.Item>
       </Breadcrumb>
-      <FlexboxGrid justify="center" className='mb-5'>
+      <FlexboxGrid justify="center" className="mb-5">
         <FlexboxGrid.Item>
           <TagGroup>
-            <Tag size='lg' color="green">{t('Reserved_Slot')}</Tag>
-            <Tag size='lg' className="bg-[var(--rs-btn-primary-bg)] text-white">{t('Free_Slot')}</Tag>
+            <Tag size="lg" color="green">
+              {t('Reserved_Slot')}
+            </Tag>
+            <Tag size="lg" className="bg-[var(--rs-btn-primary-bg)] text-white">
+              {t('Free_Slot')}
+            </Tag>
           </TagGroup>
         </FlexboxGrid.Item>
       </FlexboxGrid>

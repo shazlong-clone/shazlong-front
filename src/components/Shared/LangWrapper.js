@@ -27,12 +27,12 @@ function LangWrapper({ children }) {
     switcher({ theme: currLang === 'en' ? themes.ltr : themes.rtl });
   };
 
-  const changePath = () =>{
+  const changePath = () => {
     let locationPath = location.pathname?.split('/');
     locationPath[1] = currLang;
     locationPath = locationPath.join('/') + location.search ?? '';
     navigate(locationPath);
-  }
+  };
   const applyDomDirStyles = () => {
     const root = document.getElementById('root');
     if (!currLang) return;
@@ -48,7 +48,6 @@ function LangWrapper({ children }) {
       root.style.fontFamily = 'Montserrat';
     }
   };
-
 
   useEffect(() => {
     dispatch(changeLang(currLang));

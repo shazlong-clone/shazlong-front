@@ -63,7 +63,7 @@ function DoctorCard({ doctor }) {
               <span>+ {t('Sessions', { count: doctor?.sessions })}</span>
             </section>
           </div>
-          <Rate color='yellow' readOnly size="xs" defaultValue={doctor?.avgReviews} />
+          <Rate color="yellow" readOnly size="xs" defaultValue={doctor?.avgReviews} />
           <div className="text-xs">
             {doctor?.avgReviews?.toFixed(1)}({t('Reviews', { count: doctor?.nReviews })})
           </div>

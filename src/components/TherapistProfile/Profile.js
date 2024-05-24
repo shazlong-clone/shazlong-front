@@ -45,7 +45,7 @@ function Profile({ setBounceBg }) {
         <article className="grid gap-y-1">
           <h6 className="lg:text-xl">{i18n.resolvedLanguage === 'ar' ? doctorProfile?.fullArName : doctorProfile?.fullEnName}</h6>
           <h6 className="font-medium text-cyan lg:text-lg">{i18n.resolvedLanguage === 'ar' ? prefix?.ar_name : prefix?.name}</h6>
-          <Rate color='yellow' defaultValue={4} readOnly size="xs" />
+          <Rate color="yellow" defaultValue={4} readOnly size="xs" />
           <aside className="flex gap-2 items-center text-[1rem]">
             <span className="underline">({t('Reviews', { count: doctorProfile?.nReviews })})</span>
           </aside>

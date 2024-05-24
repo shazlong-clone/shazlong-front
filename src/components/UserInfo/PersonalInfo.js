@@ -109,16 +109,16 @@ function PersonalInfo() {
     }
   };
 
-  const handelCountryId = (id)=>{
+  const handelCountryId = (id) => {
     setCountryCode(countries?.find((el) => el?.id === id)?.country_code);
-  }
+  };
 
   useEffect(() => {
     dispatch(getCountries());
   }, []);
-  useEffect(()=>{
-    handelCountryId(user?.countryId)
-  },[user?.countryId])
+  useEffect(() => {
+    handelCountryId(user?.countryId);
+  }, [user?.countryId]);
   return (
     <article className="relative">
       {plainText ? (
@@ -143,7 +143,7 @@ function PersonalInfo() {
           <Form.ControlLabel>{t('Country')}</Form.ControlLabel>
           <Control
             onSelect={(id) => {
-              handelCountryId(id)
+              handelCountryId(id);
             }}
             placeholder={t('Country')}
             menuMaxHeight={300}
@@ -161,12 +161,14 @@ function PersonalInfo() {
         </Group>
         <Group controlId="phone">
           <Form.ControlLabel>{t('Phone')}</Form.ControlLabel>
-            
+
           {plainText ? (
             <>
-              <Stack alignItems='center'>
+              <Stack alignItems="center">
                 <Control name="phone" placeholder={t('Phone')} size="lg" />
-                <span dir='ltr' className='pe-2'>{countryCode}</span>
+                <span dir="ltr" className="pe-2">
+                  {countryCode}
+                </span>
               </Stack>
             </>
           ) : (

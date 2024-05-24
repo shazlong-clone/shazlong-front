@@ -34,40 +34,40 @@ const LangRedirect = () => {
 };
 function App() {
   return (
-        <Routes>
-          <Route path="/" element={<LangRedirect />} />
-          <Route path="/:lang" element={<Outlet />}>
-            <Route path="sign-up" element={<SignUp />} />
-            <Route path="sign-in" element={<SignIn />} />
-            <Route path="doctor-signup" element={<DoctorSignUp />} />
-            <Route path="therapist-verify-email-registration" element={<VerifyEmailRegistration />} />
-            <Route path="doctor" element={<ProtectDoctor />}>
-              <Route index element={<DoctorProfile />} />
-              <Route path="slots" element={<Slots />} />
-              <Route path="bookings" element={<Bookings />} />
-              <Route path='profile' element={ <DoctorProfile /> }/>        
-            </Route>
-            <Route element={<LayOut />}>
-              <Route index element={<Home />} />
-              <Route path="therapists" element={<Therapists />} />
-              <Route path="thearpist-profile/:id" element={<ThearpistProfile />} />
-              <Route path="checkout" element={<Checkout />} />
-              <Route path="instructions" element={<Instructions />} />
-              <Route path="my-therapy" element={<MyTherapy />} />
-              <Route path="licence" element={<Licence />} />
-              <Route path="blogs" element={<Blogs />} />
-              <Route path="blog/:id" element={<Blog />} />
-              <Route path="psychometer" element={<Psychometer />} />
-              <Route path="psychotest/:id" element={<Psychotest />} />
-              <Route path="join-us" element={<JoinUs />} />
-              <Route path="user-info" element={<UserInfo />}>
-                <Route index element={<UserInfo />} />
-              </Route>
-              <Route path="test" element={<Test />} />
-              <Route path="*" element={<Error />} />
-            </Route>
+    <Routes>
+      <Route path="/" element={<LangRedirect />} />
+      <Route path="/:lang" element={<Outlet />}>
+        <Route path="sign-up" element={<SignUp />} />
+        <Route path="sign-in" element={<SignIn />} />
+        <Route path="doctor-signup" element={<DoctorSignUp />} />
+        <Route path="therapist-verify-email-registration" element={<VerifyEmailRegistration />} />
+        <Route path="doctor" element={<ProtectDoctor />}>
+          <Route index element={<DoctorProfile />} />
+          <Route path="slots" element={<Slots />} />
+          <Route path="bookings" element={<Bookings />} />
+          <Route path="profile" element={<DoctorProfile />} />
+        </Route>
+        <Route element={<LayOut />}>
+          <Route index element={<Home />} />
+          <Route path="therapists" element={<Therapists />} />
+          <Route path="thearpist-profile/:id" element={<ThearpistProfile />} />
+          <Route path="checkout" element={<Checkout />} />
+          <Route path="instructions" element={<Instructions />} />
+          <Route path="my-therapy" element={<MyTherapy />} />
+          <Route path="licence" element={<Licence />} />
+          <Route path="blogs" element={<Blogs />} />
+          <Route path="blog/:id" element={<Blog />} />
+          <Route path="psychometer" element={<Psychometer />} />
+          <Route path="psychotest/:id" element={<Psychotest />} />
+          <Route path="join-us" element={<JoinUs />} />
+          <Route path="user-info" element={<ProtectedRoute />}>
+            <Route index element={<UserInfo />} />
           </Route>
-        </Routes>
+          <Route path="test" element={<Test />} />
+          <Route path="*" element={<Error />} />
+        </Route>
+      </Route>
+    </Routes>
   );
 }
 

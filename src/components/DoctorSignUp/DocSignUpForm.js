@@ -28,7 +28,7 @@ function DocSignUpForm() {
       }, 'password and password Confirm Not Equal'),
   });
   const formRef = useRef();
-  
+
   const [formValue, setFormValues] = useState({
     name: '',
     email: '',

@@ -26,11 +26,10 @@ function Sessions({ sessions, type }) {
   const dispatch = useDispatch();
   const submit = useSubmition();
 
-
   useEffect(() => {
     dispatch(getPrefix());
   }, []);
-  const Confirm = ({id}) => {
+  const Confirm = ({ id }) => {
     const [loading, setLoading] = useState(false);
     const handelCancel = async (id) => {
       setLoading(true);
@@ -39,27 +38,29 @@ function Sessions({ sessions, type }) {
       handleClose();
       dispatch(getSessions());
     };
-    return <>
-      <ButtonToolbar>
-        <Button onClick={handleOpen} appearance="link" color="red" className="p-0">
-          {t('Cancel')}
-        </Button>
-      </ButtonToolbar>
-      <Modal backdrop="static" role="alertdialog" open={open} onClose={handleClose} size="xs">
-        <Modal.Body>
-          <RemindIcon style={{ color: '#ffb300', fontSize: 24 }} />
-          {t('Are_you_sure_you_want_to_cancel_this_session')}
-        </Modal.Body>
-        <Modal.Footer>
-          <Button loading={loading} onClick={() => handelCancel(id)} appearance="primary">
-            {t('Yes')}
+    return (
+      <>
+        <ButtonToolbar>
+          <Button onClick={handleOpen} appearance="link" color="red" className="p-0">
+            {t('Cancel')}
           </Button>
-          <Button onClick={handleClose} appearance="subtle">
-            {t('No')}
-          </Button>
-        </Modal.Footer>
-      </Modal>
-    </>;
+        </ButtonToolbar>
+        <Modal backdrop="static" role="alertdialog" open={open} onClose={handleClose} size="xs">
+          <Modal.Body>
+            <RemindIcon style={{ color: '#ffb300', fontSize: 24 }} />
+            {t('Are_you_sure_you_want_to_cancel_this_session')}
+          </Modal.Body>
+          <Modal.Footer>
+            <Button loading={loading} onClick={() => handelCancel(id)} appearance="primary">
+              {t('Yes')}
+            </Button>
+            <Button onClick={handleClose} appearance="subtle">
+              {t('No')}
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      </>
+    );
   };
 
   return (

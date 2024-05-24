@@ -8,7 +8,7 @@ import { doctorSignOut } from '../../../features/auth/authSlice';
 import { useNavigate } from 'react-router-dom';
 
 const WhisperComp = ({ placement }) => {
-  const { t, i18n} = useTranslation();
+  const { t, i18n } = useTranslation();
   const locale = i18n.resolvedLanguage;
   const triggerRef = useRef();
   const close = () => triggerRef.current.close();
