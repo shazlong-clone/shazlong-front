@@ -12,6 +12,7 @@ import { getTestById } from '../features/test/testAction';
 import { updateTest } from '../features/test/testSlice';
 
 function Psychotest() {
+  const bol = true;
   const [activeQuestion, setActiveQuestion] = useState(0);
   const { i18n, t } = useTranslation();
   const locale = i18n.resolvedLanguage;
@@ -68,7 +69,7 @@ function Psychotest() {
             <article className="lg:flex lg:gap-24 lg:justify-center">
               <Card className="lg:max-w-[400px]">
                 {loading ? (
-                  <Placeholder.Paragraph active rows={6} className="min-w-[400px]" />
+                  <Placeholder.Paragraph active rows={6} className="min-w-[395px] px-5" />
                 ) : (
                   <>
                     <p className="text-[var(--rs-green-900)] font-[500] mb-3 capitalize">{t('Instructions')}</p>
@@ -78,7 +79,7 @@ function Psychotest() {
               </Card>
               <Card className="lg:max-w-[400px]">
                 {loading ? (
-                  <Placeholder.Paragraph active rows={6} className="min-w-[400px]" />
+                  <Placeholder.Paragraph active rows={6} className="min-w-[395px] px-5" />
                 ) : (
                   <>
                     <p className="text-red-500 font-[500] mb-3 capitalize">{t('Disclaimer')}</p>
@@ -106,14 +107,14 @@ function Psychotest() {
                 </div>
               ) : (
                 <>
-                  {test?.questions.map((question, index, arr) => {
+                  {test?.questions?.map((question, index, arr) => {
                     return (
                       <div key={question?._id} className={clsx(index === activeQuestion ? '' : 'hidden')}>
                         <h6 className="text-center py-5 text-[var(--rs-gray-800)] text-3xl font-bold">
                           {locale === 'ar' ? question?.ar_question : question?.question}
                         </h6>
                         <aside className="p-2 text-center flex flex-col">
-                          {test?.answers.map((answer, i) => {
+                          {test?.answers?.map((answer, i) => {
                             return (
                               <div key={answer?._id}>
                                 <Card
@@ -149,7 +150,7 @@ function Psychotest() {
                     ''
                   ) : (
                     <aside className="flex gap-1 mx-2 justify-center text-white flex-wrap">
-                      {test?.questions.map((question, i) => {
+                      {test?.questions?.map((question, i) => {
                         return (
                           <span
                             onClick={() => setActiveQuestion(i)}

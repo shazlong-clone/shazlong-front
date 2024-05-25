@@ -45,7 +45,7 @@ function DoctorCard(props) {
               {i18n.resolvedLanguage === 'ar' ? doctor?.fullArName : doctor?.fullEnName}
             </p>
             <p className="flex gap-1 mt-0 items-center">
-              <span className="max-w-[200px] whitespace-nowrap overflow-hidden text-ellipsis hover:whitespace-normal pt-[6px]">
+              <span className="max-w-[160px] whitespace-nowrap overflow-hidden text-ellipsis hover:whitespace-normal pt-[6px]">
                 {country?.country_name}
               </span>
               <span className={country?.country_flag} />

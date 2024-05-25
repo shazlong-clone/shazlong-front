@@ -144,9 +144,11 @@ function FooterNav() {
                     key={Math.random()}
                     to={el?.link}
                     className="text-[var(--rs-gray-700)] active:underline-none active:on-underline focus:no-underline"
-                    onClick={() => setOpen(false)}
                   >
-                    <section className="flex items-center gap-3 py-3 px-2 active:text-[var(--rs-primary-200)]">
+                    <section
+                      onClick={() => setOpen(false)}
+                      className="flex items-center gap-3 py-3 px-2 active:text-[var(--rs-primary-200)]"
+                    >
                       <i className="text-2xl flex items-center">{el?.icon}</i>
                       <span className="text-xl font-extralight">{t(el?.name)}</span>
                     </section>

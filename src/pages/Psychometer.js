@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import InternalHeader from '../components/Shared/InternalHeader';
 import psychometer from '../assets/images/psychometer.png';
 import { AiOutlineCheckCircle } from 'react-icons/ai';
-import { IconButton, Table } from 'rsuite';
+import { IconButton, Placeholder, Table } from 'rsuite';
 import CollaspedOutlineIcon from '@rsuite/icons/CollaspedOutline';
 import ExpandOutlineIcon from '@rsuite/icons/ExpandOutline';
 import useMediaQuery from '../hooks/useMediaQuery';
@@ -62,8 +62,10 @@ function Psychometer() {
 
   const tests = useSelector((state) => state?.test?.tests) ?? [];
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
-    dispatch(getpsychoTests());
+    setLoading(true);
+    dispatch(getpsychoTests()).finally(() => setLoading(false));
   }, []);
   return (
     <>
@@ -100,39 +102,43 @@ function Psychometer() {
         <div className="container">
           <div className="xl:grid xl:grid-cols-[1fr_260px] xl:gap-3">
             <section className="bg-[var(--rs-bg-card)]">
-              <Table
-                className="text-gray/90 tests-table"
-                rowExpandedHeight={lg ? 600 : 200}
-                headerHeight={50}
-                data={tests}
-                autoHeight
-                rowKey={rowKey}
-                expandedRowKeys={expandedRowKeys}
-                renderRowExpanded={renderRowExpanded}
-              >
-                <Column width={70} align="center">
-                  <HeaderCell className="text-cyan text-xl font-[500]">#</HeaderCell>
-                  <ExpandCell expandedRowKeys={expandedRowKeys} onChange={handleExpanded} />
-                </Column>
-                <Column {...(lg ? { flexGrow: 3 } : { width: 320 })}>
-                  <HeaderCell className="text-cyan text-xl font-[500]">{t('Title')}</HeaderCell>
-                  <DataCell dataKey={`${locale === 'ar' ? 'ar_name' : 'name'}`} />
-                </Column>
-                <Column {...(lg ? { flexGrow: 1 } : { width: 200 })}>
-                  <HeaderCell className="text-cyan text-xl font-[500]">{t('Recommendation')}</HeaderCell>
-                  <DataCell dataKey={`${locale === 'ar' ? 'ar_recommendation' : 'recommendation'}`} />
-                </Column>
-                <Column {...(lg ? { flexGrow: 1 } : { width: 150 })}>
-                  <HeaderCell className="text-cyan text-xl font-[500]">{t('Test_Period')}</HeaderCell>
-                  <DataCell dataKey={`${locale === 'ar' ? 'ar_duration' : 'duration'}`} />
-                </Column>
-                <Column {...(lg ? { flexGrow: 1 } : { width: 150 })}>
-                  <HeaderCell>...</HeaderCell>
-                  <Cell style={{ padding: '6px' }}>
-                    {(rowData) => <Link to={`/${i18n.resolvedLanguage}/psychotest/${rowData?._id}`}>{t('Take_Test')}</Link>}
-                  </Cell>
-                </Column>
-              </Table>
+              {loading ? (
+                <Placeholder.Paragraph rows={10} active />
+              ) : (
+                <Table
+                  className="text-gray/90 tests-table"
+                  rowExpandedHeight={lg ? 600 : 200}
+                  headerHeight={50}
+                  data={tests}
+                  autoHeight
+                  rowKey={rowKey}
+                  expandedRowKeys={expandedRowKeys}
+                  renderRowExpanded={renderRowExpanded}
+                >
+                  <Column width={70} align="center">
+                    <HeaderCell className="text-cyan text-xl font-[500]">#</HeaderCell>
+                    <ExpandCell expandedRowKeys={expandedRowKeys} onChange={handleExpanded} />
+                  </Column>
+                  <Column {...(lg ? { flexGrow: 3 } : { width: 320 })}>
+                    <HeaderCell className="text-cyan text-xl font-[500]">{t('Title')}</HeaderCell>
+                    <DataCell dataKey={`${locale === 'ar' ? 'ar_name' : 'name'}`} />
+                  </Column>
+                  <Column {...(lg ? { flexGrow: 1 } : { width: 200 })}>
+                    <HeaderCell className="text-cyan text-xl font-[500]">{t('Recommendation')}</HeaderCell>
+                    <DataCell dataKey={`${locale === 'ar' ? 'ar_recommendation' : 'recommendation'}`} />
+                  </Column>
+                  <Column {...(lg ? { flexGrow: 1 } : { width: 150 })}>
+                    <HeaderCell className="text-cyan text-xl font-[500]">{t('Test_Period')}</HeaderCell>
+                    <DataCell dataKey={`${locale === 'ar' ? 'ar_duration' : 'duration'}`} />
+                  </Column>
+                  <Column {...(lg ? { flexGrow: 1 } : { width: 150 })}>
+                    <HeaderCell>...</HeaderCell>
+                    <Cell style={{ padding: '6px' }}>
+                      {(rowData) => <Link to={`/${i18n.resolvedLanguage}/psychotest/${rowData?._id}`}>{t('Take_Test')}</Link>}
+                    </Cell>
+                  </Column>
+                </Table>
+              )}
             </section>
             <section>
               <DoctorsSlider />
