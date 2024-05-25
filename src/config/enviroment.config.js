@@ -11,7 +11,7 @@ export const TOKEN = 'token';
 
 const getEnv = () => {
   // eslint-disable-next-line no-undef
-  switch ('production') {
+  switch (process.env.NODE_ENV) {
     case 'development':
       return DEV_API;
     case 'production':

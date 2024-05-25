@@ -11,13 +11,13 @@ function InternalHeader({ className, iconClassName, ...props }) {
     navigate(-1);
   };
   return (
-    <section className={twMerge('flex justify-between items-center lg:mb-10  lg:my-5', className)}>
+    <section className={twMerge('flex justify-between items-center gap-3 lg:mb-10  lg:my-5', className)}>
       <h3>
         <Link onClick={goBack} className={twMerge('flex items-center text-gray', iconClassName ?? '')}>
           {i18n.resolvedLanguage === 'ar' ? <BsArrowRightCircle /> : <BsArrowLeftCircle />}
         </Link>
       </h3>
-      <h3 className="capitalize">{props?.children}</h3>
+      <h5 className="capitalize lg:text-[25px]">{props?.children}</h5>
       {props.icon ? <h3>{props.icon}</h3> : <h3>&nbsp; &nbsp;</h3>}
     </section>
   );

@@ -63,27 +63,27 @@ function Psychotest() {
       <main className="bg-[var(--rs-primary-700)] py-5">
         <div className="container">
           <section>
-            <InternalHeader className="text-white mb-5" iconClassName="text-white">
+            <InternalHeader className="text-white mb-5 text-[16px]" iconClassName="text-white">
               {locale === 'ar' ? test?.ar_name : test?.name}
             </InternalHeader>
             <article className="lg:flex lg:gap-24 lg:justify-center">
-              <Card className="lg:max-w-[400px]">
+              <Card className="lg:w-[400px]">
                 {loading ? (
-                  <Placeholder.Paragraph active rows={6} className="min-w-[395px] px-5" />
+                  <Placeholder.Paragraph active rows={6} />
                 ) : (
                   <>
-                    <p className="text-[var(--rs-green-900)] font-[500] mb-3 capitalize">{t('Instructions')}</p>
-                    {t('Instruction_Info')}
+                    <p className="text-[var(--rs-green-900)] font-[500] mb-3 capitalize max-sm:text-lg">{t('Instructions')}</p>
+                    <span className="text-base lg:text-lg">{t('Instruction_Info')}</span>
                   </>
                 )}
               </Card>
-              <Card className="lg:max-w-[400px]">
+              <Card className="lg:w-[400px]">
                 {loading ? (
-                  <Placeholder.Paragraph active rows={6} className="min-w-[395px] px-5" />
+                  <Placeholder.Paragraph active rows={6} />
                 ) : (
                   <>
-                    <p className="text-red-500 font-[500] mb-3 capitalize">{t('Disclaimer')}</p>
-                    {t('Disclaimer_Info')}
+                    <p className="text-red-500 font-[500] mb-3 capitalize max-sm:text-lg">{t('Disclaimer')}</p>
+                    <span className="text-base lg:text-lg">{t('Disclaimer_Info')}</span>
                   </>
                 )}
               </Card>
@@ -94,7 +94,7 @@ function Psychotest() {
       <main>
         <div className="container">
           <section className="border border-solid border-[var(--rs-gray-300)] my-5 max-w-3xl mx-auto">
-            <h5 className="px-5 text-center my-5">{t('Test_Caution')}</h5>
+            <h5 className="px-5 text-center my-5 text-[16px]">{t('Test_Caution')}</h5>
             <Progress.Line percent={percent} strokeColor="#3591a6" />
             <article className="bg-[var(--rs-primary-100)] py-2 min-h-[300px] relative px-3 pb-5">
               {loading ? (
@@ -110,10 +110,10 @@ function Psychotest() {
                   {test?.questions?.map((question, index, arr) => {
                     return (
                       <div key={question?._id} className={clsx(index === activeQuestion ? '' : 'hidden')}>
-                        <h6 className="text-center py-5 text-[var(--rs-gray-800)] text-3xl font-bold">
+                        <h6 className="text-center py-5 text-[var(--rs-gray-800)] lg:text-3xl font-bold">
                           {locale === 'ar' ? question?.ar_question : question?.question}
                         </h6>
-                        <aside className="p-2 text-center flex flex-col">
+                        <aside className="p-2 text-center flex flex-col text-sm">
                           {test?.answers?.map((answer, i) => {
                             return (
                               <div key={answer?._id}>
@@ -128,7 +128,7 @@ function Psychotest() {
                                   }}
                                   className={twMerge(
                                     clsx(
-                                      'rounded-md shadow-md py-3 cursor-pointer  inline-block text-xl text-[var(--rs-gray-700)]',
+                                      'rounded-md shadow-md py-3 cursor-pointer  inline-block text-base lg:text-xl text-[var(--rs-gray-700)]',
                                       index === activeQuestion && !loading ? 'animate__animated animate__slideInLeft' : '',
                                       question?.userAnswer && question?.userAnswer === answer?._id
                                         ? 'bg-[var(--rs-green-50)] ring-2 ring-[var(--rs-green-200)]'

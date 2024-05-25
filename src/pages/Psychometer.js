@@ -73,7 +73,7 @@ function Psychometer() {
         <div className="container">
           <InternalHeader iconClassName="text-white hover:text-white">{t('Psycho_Meter')}</InternalHeader>
           <section className="font-[500] text-base pt-5 relative xl:grid xl:grid-cols-[1fr_250px] xl:gap xl:items-end">
-            <article className="xl:pt-5 xl:pb-10">
+            <article className="xl:pt-5 xl:pb-10 text-sm lg:text-base">
               <p className="xl:mb-5">{t('Psycho_Meter_p1')}</p>
               <p className="xl:mb-5">{t('Psycho_Meter_p2')}</p>
               <p className="flex gap-3 flex-wrap items-center">
