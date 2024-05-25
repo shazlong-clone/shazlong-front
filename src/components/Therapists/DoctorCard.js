@@ -23,7 +23,6 @@ function DoctorCard(props) {
   const country = countries?.find((country) => country?.id === doctor?.country);
   const prefix = prefixesList?.find((pref) => pref?.id === doctor?.prefix);
   const navigate = useNavigate();
-
   return (
     <section key={Math.random()} className="bg-[var(--rs-bg-card)] rounded-3xl mt-3 p-6 text-sm lg:mb-5 lg:mt-0 overflow-hidden">
       <div className="flex gap-5">
@@ -35,7 +34,7 @@ function DoctorCard(props) {
                 size="lg"
                 circle={true}
                 src={doctor?.photo ? doctor?.photo : personImg}
-                alt="@superman66"
+                alt=""
               />
             </Badge>
           </span>
