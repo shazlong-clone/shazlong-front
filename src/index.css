@@ -429,3 +429,16 @@ a:active {
 .tests-table .rs-table-row-expanded {
   overflow: auto;
 }
+
+.disable-toobar-collape {
+  height: 100%;
+  position: fixed;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  background: 0 0;
+  -webkit-overflow-scrolling: touch;
+  overflow-x: auto;
+  overflow-y: scroll;
+}
