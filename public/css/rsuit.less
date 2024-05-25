@@ -6,4 +6,17 @@
 @screen-xl: 1280px;
 @screen-xxl: 1536px;
 
+// disable focus outline
+.rs-picker-toggle-active,
+.rs-picker.rs-picker-focused {
+  box-shadow: none;
+}
+.rs-input:focus {
+  outline: none;
+}
+.rs-input-group:focus-within,
+.rs-input-group:not(.rs-input-group-disabled).rs-input-group-focus {
+  outline: none;
+}
+
 // @enable-dark-mode: false;
