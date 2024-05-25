@@ -13,7 +13,7 @@ function Help() {
   const { t } = useTranslation();
   return (
     <main className=" lg:bg-[var(--rs-primary-100)] bg-[var(--rs-bg-card)]  rounded-lg lg:rounded-none ">
-      <div className={clsx('p-4 lg:p-10 lg:container m-auto')}>
+      <div className={clsx('p-4 lg:py-10 container m-auto')}>
         <h3 className="lg:text-center text-gray/80 text-[20px] lg:text-[30px] lg:mb-9">{t('Still_Need_Help')}</h3>
         <div className="lg:flex">
           <section className="lg:flex-[1_1_50%]">

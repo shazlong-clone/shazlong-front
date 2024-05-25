@@ -39,7 +39,6 @@ function CustomerService({ close, isMobile = false }) {
   const handleEmojiSelect = (emoji) => {
     setMessage((prevMessage) => prevMessage + emoji);
   };
-  const [open, setOpen] = useState(true);
   useEffect(() => {
     if (textAreaRef.current) {
       // We need to reset the height momentarily to get the correct scrollHeight for the textarea
@@ -104,7 +103,7 @@ function CustomerService({ close, isMobile = false }) {
                   <strong className="text-[16px] font-extrabold">{t('Send_Us_A_Message')}</strong>
                   <p className="text-gray/60 text-[14px]">{t('we_typically_reply_in_under_a_minute')}</p>
                 </div>
-                <div className="text-cyan flex items-center text-xl cursor-pointer rtl:rotate-180">
+                <div className="flex items-center text-xl cursor-pointer rtl:rotate-180">
                   <IoMdSend />
                 </div>
               </aside>
@@ -133,22 +132,14 @@ function CustomerService({ close, isMobile = false }) {
             </aside>
           </section>
         </aside>
-        <aside
-          className={clsx(
-            activeTabe === 2
-              ? open
-                ? 'grid grid-rows-[auto_auto_1fr_auto] h-full'
-                : 'grid grid-rows-[auto_1fr_auto] h-full'
-              : 'hidden',
-          )}
-        >
+        <aside className={clsx(activeTabe === 2 ? 'grid grid-rows-[auto_1fr_auto] h-full' : 'hidden')}>
           <section className="bg-[var(--rs-primary-700)] p-5 text-white lg:rounded-t-md">
-            <article className="flex items-center justify-between text-xl ">
-              <span className="cursor-pointer rtl:rotate-180" onClick={() => setActiveTabe(1)}>
+            <article className="flex items-center justify-between text-xl">
+              <span className="cursor-pointer rtl:rotate-180 flex items-center" onClick={() => setActiveTabe(1)}>
                 <MdArrowBackIosNew />
               </span>
-              <h4>Customer Suport</h4>
-              <span className="cursor-pointer" onClick={() => dispatch(closeChat())}>
+              <h4 className="pt-2">Customer Suport</h4>
+              <span className="cursor-pointer flex items-center" onClick={() => dispatch(closeChat())}>
                 <RxCross2 onClick={close} />
               </span>
             </article>
@@ -160,27 +151,8 @@ function CustomerService({ close, isMobile = false }) {
               <small>Giza, Egypt</small>
             </article>
           </section>
-          {open && (
-            <section className="px-5 py-2 mt-5">
-              <Card className="shadow-md relative border border-solid border-[var(--rs-gray-50)] rounded-md">
-                <span className="absolute top-3 right-3 cursor-pointer" onClick={() => setOpen(false)}>
-                  <RxCross2 />
-                </span>
-                <article className="flex items-center gap-3">
-                  <img className="rounded-full w-[30px]" src={shazlong} alt="s" />
-                  <small>Customer Support from Shazlong.</small>
-                </article>
-                <h5 className="text-cyan text-center mt-5">Need a session today.</h5>
-                <p className="mt-2 text-center">
-                  <strong className="text-[12px]">
-                    Click <Link to={`/${i18n.resolvedLanguage}/therapists`}>here</Link> to check out our Available therapists.
-                  </strong>
-                </p>
-              </Card>
-            </section>
-          )}
           <section className="overflow-y-scroll p-5">
-            <div className="flex max-w-[80%] items-end gap-1  mt-1 ml-auto justify-end">
+            <div className="flex max-w-[100%] items-end gap-1  mt-1 justify-end">
               <span className="bg-[var(--rs-primary-700)] rounded-md p-2 text-white">Hi</span>
               <img src={therapist} className="w-[20px] mb-1 h-[20px] rounded-full" alt="" />
             </div>
