@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Avatar, AvatarGroup, Badge, DOMHelper } from 'rsuite';
+import { Avatar, AvatarGroup, Badge, DOMHelper, IconButton } from 'rsuite';
 import { IoMdSend } from 'react-icons/io';
 import { AiFillHome } from 'react-icons/ai';
 import { BiMessageAltDetail } from 'react-icons/bi';
@@ -57,7 +57,7 @@ function CustomerService({ close, isMobile = false }) {
       <div
         ref={ref}
         className={clsx(
-          'fixed top-0 left-0 h-[100vh] w-full bg-[var(--rs-bg-card)] z-[51] lg:static lg:h-[60vh] lg:w-[400px] lg:rounded-md animate__animated animate__faster',
+          'fixed top-0 left-0 h-[100vh] overflow-hidden w-full bg-[var(--rs-bg-card)] z-[51] lg:static lg:h-[80vh] lg:w-[400px] lg:rounded-md animate__animated animate__faster',
           isChatOpen && isMobile && 'animate__backInUp',
         )}
       >
@@ -78,8 +78,10 @@ function CustomerService({ close, isMobile = false }) {
               className="flex justify-between items-center"
             >
               <img width="50px" height="50px" src={logo_white} alt="intercomcdn" />
-              <span onClick={close} className="text-xl cursor-pointer">
-                <CgClose />
+              <span onClick={close} className="cursor-pointer">
+                <IconButton style={{ padding: '10px' }} className="bg-transparent" appearance="primary">
+                  <CgClose className="text-[20px]" />
+                </IconButton>
               </span>
             </article>
             <article className="mt-5 xl:mt-10 mb-4">
@@ -104,15 +106,17 @@ function CustomerService({ close, isMobile = false }) {
                   <p className="text-gray/60 text-[14px]">{t('we_typically_reply_in_under_a_minute')}</p>
                 </div>
                 <div className="flex items-center text-xl cursor-pointer rtl:rotate-180">
-                  <IoMdSend />
+                  <IconButton onClick={() => setActiveTabe(2)} appearance="link" style={{ padding: '10px' }}>
+                    <IoMdSend className="text-[20px]" />
+                  </IconButton>
                 </div>
               </aside>
             </Card>
           </section>
-          <section className="absolute bottom-0 py-6 shadow-[#00000024_0px_0px_25px] w-full border-t border-b-0 border-r-0 border-l-0  border-solid border-[var(--rs-gray-100)] flex justify-evenly text-3xl">
+          <section className="absolute bottom-0 shadow-[#00000024_0px_0px_25px] w-full border-t border-b-0 border-r-0 border-l-0  border-solid border-[var(--rs-gray-100)] flex text-3xl">
             <aside
               onClick={() => setActiveTabe(1)}
-              className="grid cursor-pointer text-center text-cyan text-[var(--rs-primary-700)]"
+              className="grow grid cursor-pointer text-center text-cyan text-[var(--rs-primary-700)] hover:bg-[var(--rs-btn-subtle-hover-bg)]  active:bg-[var(--rs-btn-subtle-hover-bg)]  duration-300 p-6"
             >
               <span className=" flex justify-center h-[30px]">
                 <AiFillHome />
@@ -120,7 +124,7 @@ function CustomerService({ close, isMobile = false }) {
               <strong className="text-sm">{t('Home')}</strong>
             </aside>
             <aside
-              className="grid cursor-pointer text-center active:text-[var(--rs-primary-400)]"
+              className="grow grid cursor-pointer text-center active:text-[var(--rs-primary-400)] hover:bg-[var(--rs-btn-subtle-hover-bg)]  active:bg-[var(--rs-btn-subtle-hover-bg)]  duration-300 p-6"
               onClick={() => setActiveTabe(2)}
             >
               <span className="flex justify-center h-[30px]">
@@ -132,60 +136,76 @@ function CustomerService({ close, isMobile = false }) {
             </aside>
           </section>
         </aside>
-        <aside className={clsx(activeTabe === 2 ? 'grid grid-rows-[auto_1fr_auto] h-full' : 'hidden')}>
-          <section className="bg-[var(--rs-primary-700)] p-5 text-white lg:rounded-t-md">
-            <article className="flex items-center justify-between text-xl">
-              <span className="cursor-pointer rtl:rotate-180 flex items-center" onClick={() => setActiveTabe(1)}>
-                <MdArrowBackIosNew />
-              </span>
-              <h4 className="pt-2">Customer Suport</h4>
-              <span className="cursor-pointer flex items-center" onClick={() => dispatch(closeChat())}>
-                <RxCross2 onClick={close} />
-              </span>
-            </article>
-            <article className="text-center py-5">
-              <img className="rounded-full w-[60px] mb-3" src={shazlong} alt="s" />
-              <br />
-              <strong>Active over 1w ago</strong>
-              <br />
-              <small>Giza, Egypt</small>
-            </article>
-          </section>
-          <section className="overflow-y-scroll p-5">
-            <div className="flex max-w-[100%] items-end gap-1  mt-1 justify-end">
-              <span className="bg-[var(--rs-primary-700)] rounded-md p-2 text-white">Hi</span>
-              <img src={therapist} className="w-[20px] mb-1 h-[20px] rounded-full" alt="" />
-            </div>
-
-            <div className="flex items-end gap-1 max-w-[80%] mt-1">
-              <img src={therapist} className="w-[20px] mb-1 h-[20px] rounded-full opacity-0" alt="" />
-              <span className="bg-[var(--rs-gray-100)] rounded-md p-2 text-gray">Hi</span>
-            </div>
-            <div className="flex items-end gap-1 max-w-[80%] mt-1">
-              <img src={therapist} className="w-[20px] mb-1 h-[20px] rounded-full" alt="" />
-              <span className="bg-[var(--rs-gray-100)] rounded-md p-2 text-gray">
-                at the moment there are no group therapy, however we will inform you once there is dear
-              </span>
-            </div>
-          </section>
-          <section className={clsx('shadow-[0px_-17px_30px_0px_rgba(0,0,0,0.1)] pb-[50]', lg && 'mb-0')}>
-            <article className="flex py-3 items-center px-5 gap-5 bg-[var(--rs-gray-50)] border border-solid border-[var(--rs-gray-100)] border-t-1 border-b-0 border-r-0 border-l-0">
-              <textarea
-                id="review-text"
-                onChange={handleChange}
-                placeholder="Send us message..."
-                ref={textAreaRef}
-                rows={1}
-                value={message}
-                className="min-h-[27px] max-h-[100px]  resize-none grow bg-transparent active:border-none focus:outline-none border-none"
-              />
-              <div className="flex items-center gap-2">
-                {lg ? <EmojiDropdown onEmojiSelect={handleEmojiSelect} /> : ''}
-                <IoMdSend className="flex items-center cursor-pointer" />
+        {activeTabe && (
+          <aside
+            className={clsx(
+              activeTabe === 2
+                ? 'grid grid-rows-[auto_1fr_auto] h-full animate__animated animate__fadeInBottomRight animate__faster'
+                : 'hidden',
+            )}
+          >
+            <section className="bg-[var(--rs-primary-700)] p-5 text-white lg:rounded-t-md">
+              <article className="flex items-center justify-between text-xl">
+                <span className="cursor-pointer rtl:rotate-180 flex items-center" onClick={() => setActiveTabe(1)}>
+                  <IconButton onClick={close} style={{ padding: '10px' }} className="bg-transparent" appearance="primary">
+                    <MdArrowBackIosNew className="text-[20px]" />
+                  </IconButton>
+                </span>
+                <h4 className="pt-2">Customer Suport</h4>
+                <span className="cursor-pointer flex items-center" onClick={() => dispatch(closeChat())}>
+                  <IconButton onClick={close} style={{ padding: '10px' }} className="bg-transparent" appearance="primary">
+                    <RxCross2 className="text-[20px]" />
+                  </IconButton>
+                </span>
+              </article>
+              <article className="text-center py-5 text-[16px]">
+                <img className="rounded-full w-[60px] mb-3" src={shazlong} alt="s" />
+                <br />
+                <strong>Active over 1w ago</strong>
+                <br />
+                <small>Giza, Egypt</small>
+              </article>
+            </section>
+            <section className="overflow-y-auto p-5 text-base">
+              <div className="flex max-w-[80%] items-end gap-1  mt-1 justify-end ms-auto">
+                <span className="bg-[var(--rs-primary-700)] rounded-md p-2 text-white">Hi</span>
+                <img src={therapist} className="w-[20px] mb-1 h-[20px] rounded-full" alt="" />
               </div>
-            </article>
-          </section>
-        </aside>
+
+              <div className="flex items-end gap-1 max-w-[80%] mt-1">
+                <img src={therapist} className="w-[20px] mb-1 h-[20px] rounded-full opacity-0" alt="" />
+                <span className="bg-[var(--rs-gray-100)] rounded-md p-2 text-gray">Hi</span>
+              </div>
+              <div className="flex items-end gap-1 max-w-[80%] mt-1">
+                <img src={therapist} className="w-[20px] mb-1 h-[20px] rounded-full" alt="" />
+                <span className="bg-[var(--rs-gray-100)] rounded-md p-2 text-gray">
+                  at the moment there are no group therapy, however we will inform you once there is dear
+                </span>
+              </div>
+            </section>
+            <section className={clsx('shadow-[0px_-17px_30px_0px_rgba(0,0,0,0.1)] pb-[50]', lg && 'mb-0')}>
+              <article className="text-base flex py-3 items-end px-5 gap-1 bg-[var(--rs-gray-50)] border border-solid border-[var(--rs-gray-100)] border-t-1 border-b-0 border-r-0 border-l-0">
+                <textarea
+                  id="review-text"
+                  onChange={handleChange}
+                  placeholder="Send us message..."
+                  ref={textAreaRef}
+                  rows={1}
+                  value={message}
+                  className="min-h-[27px] max-h-[100px]  resize-none grow bg-transparent active:border-none focus:outline-none border-none"
+                />
+                <div className="flex items-center gap-1">
+                  <span className="hidden lg:block">
+                    <EmojiDropdown onEmojiSelect={handleEmojiSelect} />
+                  </span>
+                  <IconButton style={{ padding: '10px' }} circle appearance="primary">
+                    <IoMdSend className="flex items-center cursor-pointer rtl:rotate-180" />
+                  </IconButton>
+                </div>
+              </article>
+            </section>
+          </aside>
+        )}
       </div>
     </>
   );
