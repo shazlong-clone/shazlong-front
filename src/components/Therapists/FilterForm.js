@@ -21,7 +21,7 @@ export const initalSearchParams = {
   sortBy: '',
 };
 
-function FilterForm({setSideBarOpen,sideBarOpen}) {
+function FilterForm({setSideBarOpen}) {
   const { i18n, t } = useTranslation();
   const { countries, specializationList, languages, doctorSearchLoading } = useSelector(
     (state) => state?.shared,
@@ -69,6 +69,7 @@ function FilterForm({setSideBarOpen,sideBarOpen}) {
   const [formValues, setFormValues] = useState(search);
   const navigate = useNavigate();
   const onSubmit = async () => {
+    setSideBarOpen(false);
     if (!formRef.current.check()) return;
     dispatch(setDoctorSearchLoading(true));
     navigate({
@@ -78,9 +79,7 @@ function FilterForm({setSideBarOpen,sideBarOpen}) {
     dispatch(setDoctorSearchParams({ ...formValues, page: 1, size: pageSize }));
 
     dispatch(setDoctorSearchLoading(false));
-    if (sideBarOpen) {
-      setSideBarOpen(false);
-    }
+    
   };
 
   const onCancel = async () => {

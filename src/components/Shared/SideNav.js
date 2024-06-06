@@ -8,7 +8,7 @@ import { Drawer, Message, toaster } from 'rsuite';
 import { AiOutlineHome } from 'react-icons/ai';
 import { BiTestTube } from 'react-icons/bi';
 import { FaBlog } from 'react-icons/fa';
-import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import clsx from 'clsx';
 import { useDispatch, useSelector } from 'react-redux';
 import { openChat } from '../../features/theme/themeSlice';
@@ -16,7 +16,6 @@ import { t } from 'i18next';
 import { RiGroupLine } from 'react-icons/ri';
 import { useTranslation } from 'react-i18next';
 import { useSwipeable } from 'react-swipeable';
-import { handelSideBar } from '../../features/shared/sharedSlice';
 import { swiperConfig } from '../../assets/constants';
 function FooterNav() {
   const [activeTabe, setActiveTabe] = useState('/');
@@ -143,7 +142,9 @@ function FooterNav() {
                 return (
                   <div onClick={() => {
                     setOpen(false);
-                    navigate(el?.link)
+                    setTimeout(()=>{
+                      navigate(el?.link);
+                    },100)
                   }} key={i}>
                     <div
                       className="text-[var(--rs-gray-700)] active:underline-none active:on-underline focus:no-underline"

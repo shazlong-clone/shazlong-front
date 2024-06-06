@@ -56,7 +56,7 @@ function SearchTherapistSideBar({setSideBarOpen,sideBarOpen}) {
           <Drawer.Title className="text-2xl text-center text-gray">{t('Filter')}</Drawer.Title>
         </Drawer.Header>
         <Drawer.Body className="px-[30px]">
-          <FilterForm />
+          <FilterForm setSideBarOpen={setSideBarOpen}  />
         </Drawer.Body>
       </Drawer>
       <Drawer open={open} size="xs" placement="bottom" onClose={() => setOpen(false)}>
