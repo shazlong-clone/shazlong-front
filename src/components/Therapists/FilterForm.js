@@ -5,7 +5,7 @@ import { getAllDoctors, getCountries, getLangs } from '../../features/shared/sha
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import { availability, genders } from '../../assets/constants';
-import { setDoctorSearchParams, setDoctorSearchLoading, setSearchTherapistSideBarOpen } from '../../features/shared/sharedSlice';
+import { setDoctorSearchParams, setDoctorSearchLoading } from '../../features/shared/sharedSlice';
 import { pageSize } from './TherapistsCard';
 import { createSearchParams, useNavigate, useSearchParams } from 'react-router-dom';
 import { RemoveNullKeys } from '../../utils/fn';
@@ -21,9 +21,9 @@ export const initalSearchParams = {
   sortBy: '',
 };
 
-function FilterForm() {
+function FilterForm({setSideBarOpen,sideBarOpen}) {
   const { i18n, t } = useTranslation();
-  const { countries, specializationList, languages, doctorSearchLoading, searchTherapistSideBarOpen } = useSelector(
+  const { countries, specializationList, languages, doctorSearchLoading } = useSelector(
     (state) => state?.shared,
   );
   const countriesOptions = countries.map((item) => ({
@@ -78,8 +78,8 @@ function FilterForm() {
     dispatch(setDoctorSearchParams({ ...formValues, page: 1, size: pageSize }));
 
     dispatch(setDoctorSearchLoading(false));
-    if (searchTherapistSideBarOpen) {
-      dispatch(setSearchTherapistSideBarOpen(false));
+    if (sideBarOpen) {
+      setSideBarOpen(false);
     }
   };
 

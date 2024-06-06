@@ -20,7 +20,8 @@ import { handelSideBar } from '../../features/shared/sharedSlice';
 import { swiperConfig } from '../../assets/constants';
 function FooterNav() {
   const [activeTabe, setActiveTabe] = useState('/');
-  const sideBarOpen = useSelector((state) => state?.shared?.sideBarOpen ?? false);
+  // const sideBarOpen = useSelector((state) => state?.shared?.sideBarOpen ?? false);
+  const [sideBarOpen, setSidBarOpen] = useState();
   const dispatch = useDispatch();
   const { i18n } = useTranslation();
   const locale = i18n.resolvedLanguage;
@@ -47,7 +48,7 @@ function FooterNav() {
     },
   ];
   const setOpen = (v) => {
-    dispatch(handelSideBar(v));
+    setSidBarOpen(v);
   };
   useEffect(() => {
     if (!open && activeTabe === 4) {
@@ -138,22 +139,24 @@ function FooterNav() {
           </Drawer.Header>
           <Drawer.Body className="p-0">
             <div>
-              {menu?.map((el) => {
+              {menu?.map((el,i) => {
                 return (
-                  <Link
-                    key={Math.random()}
-                    to={el?.link}
-                    className="text-[var(--rs-gray-700)] active:underline-none active:on-underline focus:no-underline"
-                  >
-                    <section
-                      onClick={() => setOpen(false)}
-                      className="flex items-center gap-3 py-3 px-2 active:text-[var(--rs-primary-200)]"
+                  <div onClick={() => {
+                    setOpen(false);
+                    navigate(el?.link)
+                  }} key={i}>
+                    <div
+                      className="text-[var(--rs-gray-700)] active:underline-none active:on-underline focus:no-underline"
                     >
-                      <i className="text-2xl flex items-center">{el?.icon}</i>
-                      <span className="text-xl font-extralight">{t(el?.name)}</span>
-                    </section>
-                    <hr className="m-0" />
-                  </Link>
+                      <section
+                        className="flex items-center gap-3 py-3 px-2 active:text-[var(--rs-primary-200)]"
+                      >
+                        <i className="text-2xl flex items-center">{el?.icon}</i>
+                        <span className="text-xl font-extralight">{t(el?.name)}</span>
+                      </section>
+                      <hr className="m-0" />
+                    </div>
+                  </div>
                 );
               })}
             </div>

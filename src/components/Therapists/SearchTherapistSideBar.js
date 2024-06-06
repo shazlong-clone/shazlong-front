@@ -3,16 +3,16 @@ import { Button, Divider, Drawer } from 'rsuite';
 import { MdFilterList } from 'react-icons/md';
 import { TbArrowsSort } from 'react-icons/tb';
 import { sortMenu } from '../../assets/constants';
-import { setSearchTherapistSideBarOpen, setDoctorSearchLoading, setDoctorSearchParams } from '../../features/shared/sharedSlice';
+import { setDoctorSearchLoading, setDoctorSearchParams } from '../../features/shared/sharedSlice';
 import FilterForm from './FilterForm';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllDoctors } from '../../features/shared/sharedActions';
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 
-function SearchTherapistSideBar() {
+function SearchTherapistSideBar({setSideBarOpen,sideBarOpen}) {
   const [open, setOpen] = useState(false);
-  const { searchTherapistSideBarOpen, doctorSearchParams } = useSelector((state) => state?.shared);
+  const { doctorSearchParams } = useSelector((state) => state?.shared);
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const handelSortChange = async (id) => {
@@ -26,8 +26,8 @@ function SearchTherapistSideBar() {
   };
   useEffect(() => {
     window.addEventListener('resize', () => {
-      if (window.innerWidth >= 1024 && (open || searchTherapistSideBarOpen)) {
-        dispatch(setSearchTherapistSideBarOpen(false));
+      if (window.innerWidth >= 1024 && (open || sideBarOpen)) {
+        setSideBarOpen(false);
         setOpen(false);
       }
     });
@@ -37,7 +37,7 @@ function SearchTherapistSideBar() {
   return (
     <>
       <Button
-        onClick={() => dispatch(setSearchTherapistSideBarOpen(true))}
+        onClick={() => setSideBarOpen(true)}
         appearance="ghost"
         className="grow py-0 flex items-center gap-2"
       >
@@ -47,10 +47,10 @@ function SearchTherapistSideBar() {
         <TbArrowsSort /> <span>{t('Sorting')}</span>
       </Button>
       <Drawer
-        open={searchTherapistSideBarOpen}
+        open={sideBarOpen}
         size="full"
         backdrop="static"
-        onClose={() => dispatch(setSearchTherapistSideBarOpen(false))}
+        onClose={() => setSideBarOpen(false)}
       >
         <Drawer.Header>
           <Drawer.Title className="text-2xl text-center text-gray">{t('Filter')}</Drawer.Title>

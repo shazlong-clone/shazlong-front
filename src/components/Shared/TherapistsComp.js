@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Input, InputGroup, InputPicker } from 'rsuite';
 import SearchIcon from '@rsuite/icons/Search';
 import SearchTherapistSideBar from '../Therapists/SearchTherapistSideBar';
@@ -42,7 +42,7 @@ function TherapistsComp() {
 
     dispatch(setDoctorSearchLoading(false));
   };
-
+  const [sideBarOpen, setSideBarOpen] = useState(false);
   useEffect(() => {
     window.scrollTo({ top: 0 });
   }, []);
@@ -87,11 +87,11 @@ function TherapistsComp() {
         </div>
       </section>
       <section className="flex justify-between gap-3 lg:hidden">
-        <SearchTherapistSideBar />
+        <SearchTherapistSideBar setSideBarOpen={setSideBarOpen} sideBarOpen={sideBarOpen} />
       </section>
       <section className="lg:grid lg:grid-cols-[1fr_2.5fr] lg:gap-10">
         <article className="hidden lg:block">
-          <FilterForm />
+          <FilterForm setSideBarOpen={setSideBarOpen} sideBarOpen={sideBarOpen} />
         </article>
         <article>
           <TherapistsCard />
