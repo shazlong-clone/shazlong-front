@@ -21,11 +21,9 @@ export const initalSearchParams = {
   sortBy: '',
 };
 
-function FilterForm({setSideBarOpen}) {
+function FilterForm({ setSideBarOpen }) {
   const { i18n, t } = useTranslation();
-  const { countries, specializationList, languages, doctorSearchLoading } = useSelector(
-    (state) => state?.shared,
-  );
+  const { countries, specializationList, languages, doctorSearchLoading } = useSelector((state) => state?.shared);
   const countriesOptions = countries.map((item) => ({
     label: (
       <div key={item?.id} className="flex gap-1">
@@ -79,7 +77,6 @@ function FilterForm({setSideBarOpen}) {
     dispatch(setDoctorSearchParams({ ...formValues, page: 1, size: pageSize }));
 
     dispatch(setDoctorSearchLoading(false));
-    
   };
 
   const onCancel = async () => {
@@ -96,7 +93,7 @@ function FilterForm({setSideBarOpen}) {
   useEffect(() => {
     dispatch(getCountries());
     dispatch(getLangs());
-    dispatch(getAllDoctors(search));
+    dispatch(getAllDoctors({ ...search, page: 1, size: pageSize }));
     setDoctorSearchParams(search);
   }, []);
 

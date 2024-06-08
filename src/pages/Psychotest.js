@@ -12,7 +12,6 @@ import { getTestById } from '../features/test/testAction';
 import { updateTest } from '../features/test/testSlice';
 
 function Psychotest() {
-  const bol = true;
   const [activeQuestion, setActiveQuestion] = useState(0);
   const { i18n, t } = useTranslation();
   const locale = i18n.resolvedLanguage;

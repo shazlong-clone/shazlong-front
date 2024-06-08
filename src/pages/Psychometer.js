@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import InternalHeader from '../components/Shared/InternalHeader';
 import psychometer from '../assets/images/psychometer.png';
 import { AiOutlineCheckCircle } from 'react-icons/ai';
-import { IconButton, Placeholder, Table } from 'rsuite';
+import { IconButton, Panel, Placeholder, Table } from 'rsuite';
 import CollaspedOutlineIcon from '@rsuite/icons/CollaspedOutline';
 import ExpandOutlineIcon from '@rsuite/icons/ExpandOutline';
 import useMediaQuery from '../hooks/useMediaQuery';
@@ -11,6 +11,7 @@ import { useTranslation } from 'react-i18next';
 import { getpsychoTests } from '../features/test/testAction';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import clsx from 'clsx';
 const { Column, HeaderCell, Cell } = Table;
 const rowKey = '_id';
 const ExpandCell = ({ rowData, expandedRowKeys, onChange, ...props }) => (
@@ -28,6 +29,7 @@ const ExpandCell = ({ rowData, expandedRowKeys, onChange, ...props }) => (
 function Psychometer() {
   const [expandedRowKeys, setExpandedRowKeys] = React.useState([]);
   const { t } = useTranslation();
+
   const renderRowExpanded = (rowData) => {
     return (
       <div className="px-5">
@@ -67,6 +69,7 @@ function Psychometer() {
     setLoading(true);
     dispatch(getpsychoTests()).finally(() => setLoading(false));
   }, []);
+
   return (
     <>
       <main className="bg-[var(--rs-primary-700)] text-white pt-5">
@@ -104,7 +107,7 @@ function Psychometer() {
             <section className="bg-[var(--rs-bg-card)]">
               {loading ? (
                 <Placeholder.Paragraph rows={10} active />
-              ) : (
+              ) : lg ? (
                 <Table
                   className="text-gray/90 tests-table"
                   rowExpandedHeight={lg ? 600 : 200}
@@ -138,6 +141,47 @@ function Psychometer() {
                     </Cell>
                   </Column>
                 </Table>
+              ) : (
+                tests?.map((test) => {
+                  return (
+                    <Panel key={test?._id} className="bg-[var(--rs-gray-100)] mb-5 text-sm">
+                      <section>
+                        <div>
+                          {t('Title')}:
+                          <span className="ps-2 font-medium">
+                            <Link to={`/${i18n.resolvedLanguage}/psychotest/${test?._id}`}>
+                              {locale === 'ar' ? test?.ar_name : test?.name}
+                            </Link>
+                          </span>
+                        </div>
+                        <div>
+                          {t('Recommendation')}:
+                          <span className="ps-2 font-bold">{`${
+                            locale === 'ar' ? test?.ar_recommendation : test?.recommendation
+                          }`}</span>
+                        </div>
+                        <div className={clsx(expandedRowKeys?.includes(test?._id) ? '' : 'truncate')}>
+                          {t('Description')}:
+                          <span className="ps-2 text-[var(--rs-gray-600)]">
+                            {locale === 'ar' ? test?.ar_description : test?.description}
+                          </span>
+                        </div>
+                        <span onClick={() => handleExpanded(test)} className="text-sm text-[var(--rs-primary-500)]">
+                          {expandedRowKeys?.includes(test?._id) ? t('Read_Less') : t('Read_More')}
+                        </span>
+                        <div>
+                          {t('Test_Period')}:
+                          <span className="ps-2 font-bold">{locale === 'ar' ? test?.ar_duration : test?.duration}</span>
+                        </div>
+                        <div>
+                          <Link className="underline underline-offset-8" to={`/${i18n.resolvedLanguage}/psychotest/${test?._id}`}>
+                            {t('Take_Test')}
+                          </Link>
+                        </div>
+                      </section>
+                    </Panel>
+                  );
+                })
               )}
             </section>
             <section>
