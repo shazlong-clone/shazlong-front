@@ -48,7 +48,7 @@ function TherapistsCard() {
         <InfiniteScroll
           dataLength={doctors?.result?.length ?? pageSize} //This is important field to render the next data
           next={() => {
-            dispatch(getAllDoctors({ ...doctorSearchParams, page: (+doctors?.currentPage ?? 0) + 1 }));
+            dispatch(getAllDoctors({ ...doctorSearchParams, page: (+doctors?.currentPage ?? 0) + 1, size: pageSize }));
           }}
           hasMore={doctors?.totalPages !== doctors?.currentPage}
           loader={

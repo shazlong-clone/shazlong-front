@@ -58,7 +58,9 @@ function App() {
           <Route path="blogs" element={<Blogs />} />
           <Route path="blog/:id" element={<Blog />} />
           <Route path="psychometer" element={<Psychometer />} />
-          <Route path="psychotest/:id" element={<Psychotest />} />
+          <Route path="psychotest/:id" element={<ProtectedRoute />}>
+            <Route index element={<Psychotest />} />
+          </Route>
           <Route path="join-us" element={<JoinUs />} />
           <Route path="user-info" element={<ProtectedRoute />}>
             <Route index element={<UserInfo />} />

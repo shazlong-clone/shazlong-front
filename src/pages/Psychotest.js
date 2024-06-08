@@ -3,13 +3,14 @@ import InternalHeader from '../components/Shared/InternalHeader';
 import Card from '../components/Shared/Card';
 import clsx from 'clsx';
 import { twMerge } from 'tailwind-merge';
-import { Button, Loader, Message, Placeholder, Progress, toaster } from 'rsuite';
+import { Button, Loader, Message, Placeholder, Progress, Stack, toaster } from 'rsuite';
 import { useTranslation } from 'react-i18next';
 import { localizeNum } from '../assets/constants';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
-import { getTestById } from '../features/test/testAction';
+import { useNavigate, useParams } from 'react-router-dom';
+import { getTestById, storeUserTest } from '../features/test/testAction';
 import { updateTest } from '../features/test/testSlice';
+import useSubmition from '../hooks/useSubmit';
 
 function Psychotest() {
   const [activeQuestion, setActiveQuestion] = useState(0);
@@ -54,6 +55,33 @@ function Psychotest() {
         setLoading(false);
       });
   };
+  const { user } = useSelector((state) => state?.auth);
+  const submit = useSubmition();
+  const [testResult, setTestResult] = useState(null);
+  const repeatTest = () => {
+    setTestResult(null);
+    handelGetTests();
+  };
+  const handelStorTest = async () => {
+    const params = {
+      user_id: user?._id,
+      test_id: test?._id,
+      answers: test?.questions?.map((q) => {
+        return {
+          question_id: q?._id,
+          answer_id: q?.userAnswer,
+        };
+      }),
+      result: test?.questions?.reduce((prev, curr) => {
+        return prev + test?.answers?.find((ans) => ans?._id === curr?.userAnswer)?.weight;
+      }, 0),
+    };
+    const res = await submit(storeUserTest, params);
+    if (res?.payload?.status) {
+      setTestResult(res?.payload?.data?.result);
+    }
+  };
+  const navigate = useNavigate();
   useEffect(() => {
     handelGetTests();
   }, []);
@@ -93,8 +121,15 @@ function Psychotest() {
       <main>
         <div className="container">
           <section className="border border-solid border-[var(--rs-gray-300)] my-5 max-w-3xl mx-auto">
-            <h5 className="px-5 text-center my-5 text-[16px]">{t('Test_Caution')}</h5>
-            <Progress.Line percent={percent} strokeColor="#3591a6" />
+            {testResult ? (
+              ''
+            ) : (
+              <>
+                <h5 className="px-5 text-center my-5 text-[16px]">{t('Test_Caution')}</h5>
+                <Progress.Line percent={percent} strokeColor="#3591a6" />
+              </>
+            )}
+
             <article className="bg-[var(--rs-primary-100)] py-2 min-h-[300px] relative px-3 pb-5">
               {loading ? (
                 <div className="flex justify-center items-center w-full h-[100%] absolute">
@@ -104,6 +139,14 @@ function Psychotest() {
                 <div className="flex justify-center items-center w-full h-[100%] absolute text-red-500">
                   {t('internal_server_error')}
                 </div>
+              ) : testResult ? (
+                <h2 className="text-center mt-10">
+                  {t('Test_Result')}
+                  <br />
+                  <span className="text-[var(--rs-green-500)]">
+                    {testResult} {t('Points')}
+                  </span>
+                </h2>
               ) : (
                 <>
                   {test?.questions?.map((question, index, arr) => {
@@ -121,7 +164,9 @@ function Psychotest() {
                                     if (index + 1 !== arr?.length) {
                                       setActiveQuestion(index + 1);
                                     } else {
-                                      setActiveQuestion(0);
+                                      if (!test?.questions?.every((q) => Boolean(q?.userAnswer))) {
+                                        setActiveQuestion(0);
+                                      }
                                     }
                                     dispatch(updateTest({ question_id: question?._id, answer_id: answer?._id }));
                                   }}
@@ -171,9 +216,25 @@ function Psychotest() {
                 </>
               )}
               <aside className="mt-10 flex justify-center">
-                <Button color="green" disabled={!test?.questions?.every((q) => Boolean(q?.userAnswer))} appearance="primary">
-                  {t('View_Result')}
-                </Button>
+                {testResult ? (
+                  <Stack spacing={5}>
+                    <Button onClick={repeatTest} appearance="primary">
+                      {t('Repeat_Test')}
+                    </Button>
+                    <Button onClick={() => navigate('/' + locale + '/psychometer')} appearance="ghost">
+                      {t('Take_Anthoer_Test')}
+                    </Button>
+                  </Stack>
+                ) : (
+                  <Button
+                    onClick={handelStorTest}
+                    color="green"
+                    disabled={!test?.questions?.every((q) => Boolean(q?.userAnswer))}
+                    appearance="primary"
+                  >
+                    {t('View_Result')}
+                  </Button>
+                )}
               </aside>
             </article>
           </section>

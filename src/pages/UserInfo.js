@@ -12,6 +12,7 @@ import { getMe } from '../features/auth/authAction';
 import MyTherapy from '../components/UserInfo/MyTherapy';
 import { useSearchParams } from 'react-router-dom';
 import { MY_THERAPY, PAYMENT_INFO, PERSONAL_INFO } from '../assets/constants';
+import { TbCameraPlus } from 'react-icons/tb';
 
 function UserInfo() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -88,7 +89,7 @@ function UserInfo() {
         <Grid className="lg:my-10">
           <Row gutter={24}>
             <Col xs={24} lg={8}>
-              <Card className="roundeu-none text-center">
+              <Card className="rounded-md text-center">
                 <div className="relative inline-block p-2 ">
                   <Uploader {...props}>
                     <button style={{ width: 100, height: 100, borderRadius: '50%' }}>
@@ -96,6 +97,9 @@ function UserInfo() {
                       {fileInfo ? <img src={fileInfo} width="100%" height="100%" /> : <CameraRetroIcon />}
                     </button>
                   </Uploader>
+                  <span className="absolute size-6 flex justify-center items-center  bottom-[20px] start-[10px] bg-[var(--rs-gray-200)] rounded-full text-[var(--rs-gray-900)]">
+                    <TbCameraPlus />
+                  </span>
                 </div>
                 <p className="mt-5 text-cyan capitalize">
                   {user?.name}
@@ -105,14 +109,14 @@ function UserInfo() {
               </Card>
             </Col>
             <Col xs={24} lg={16}>
-              <Card className="rounded-none mt-5 p-0 pb-5 lg:mt-0 lg:w-[600px]">
+              <Card className="rounded-md mt-5 p-0 pb-5 lg:mt-0">
                 <article className="flex">
                   {tabs?.map((tab) => (
                     <div
                       key={tab.key}
                       onClick={() => onTabChange(tab.key)}
                       className={clsx(
-                        'grow px-5 py-4 capitalize border-solid border-t-0 border-r-0 border-l-0 font-semibold cursor-pointer text-sm lg:text-lg',
+                        'text-center grow px-5 py-4 capitalize border-solid border-t-0 border-r-0 border-l-0 font-semibold cursor-pointer text-sm lg:text-lg',
                         activeTabe === tab.key ? 'border-b-2 border-cyan text-cyan' : 'border-b border-gray',
                       )}
                     >

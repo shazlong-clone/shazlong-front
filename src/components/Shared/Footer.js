@@ -7,11 +7,12 @@ import SVLogoFill from '../../assets/images/SVLogoFill.svg';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
+import clsx from 'clsx';
 
 function Footer() {
   const { t, i18n } = useTranslation();
   const locale = i18n.resolvedLanguage;
-  const { user } = useSelector((state) => state?.auth);
+  const { user, doctor } = useSelector((state) => state?.auth);
   return (
     <div className="bg-[var(--rs-gray-800)] text-white py-10  md:px-10 md:py-16">
       <div className="container">
@@ -78,7 +79,7 @@ function Footer() {
                 </p>
               </section>
             </div>
-            <div className="text-center mt-10">
+            <div className={clsx('text-center mt-10', user?._id && doctor?._id ? 'hidden' : '')}>
               <h2 className="text-3xl lg:text-xl lg:text-start lg:mb-5">{t('Join_Us')}</h2>
               <div className="inline">
                 <article className="lg:flex items-center gap-2">
@@ -99,17 +100,20 @@ function Footer() {
                   ) : (
                     ''
                   )}
-
-                  <Link to={`/${i18n.resolvedLanguage}/doctor`} className="hover:no-underline active:no-underline grow">
-                    <button
-                      className="
+                  {!doctor?._id ? (
+                    <Link to={`/${i18n.resolvedLanguage}/doctor`} className="hover:no-underline active:no-underline grow">
+                      <button
+                        className="
                           min-w-[250px]
                         font-bold border lg:mt-0 rounded-lg border-white text-white bg-opacity-0
                         bg-transparent py-3 px-14  md:block md:w-full"
-                    >
-                      {t('Join_As_A_Therapist')}
-                    </button>
-                  </Link>
+                      >
+                        {t('Join_As_A_Therapist')}
+                      </button>
+                    </Link>
+                  ) : (
+                    ''
+                  )}
                 </article>
                 <div className="mt-5">
                   {t('Have_Account')}

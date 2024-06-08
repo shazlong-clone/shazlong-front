@@ -101,7 +101,7 @@ function Tetemonials() {
   const reviews = useSelector((state) => state?.shared?.reviews);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getReviews({ page: 1, size: 10, isActive: 1 }));
+    dispatch(getReviews({ page: 1, size: 4, isActive: 1 }));
   }, []);
   return (
     <div className="home-testimonial">

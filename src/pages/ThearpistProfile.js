@@ -53,7 +53,7 @@ function ThearpistProfile() {
         <section className="lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)] lg:gap-6 mb-5">
           <article>
             {loading ? (
-              <Panel className="bg-[var(--rs-bg-card)] rounded-3xl mt-5">
+              <Panel className="bg-[var(--rs-bg-card)] rounded-3xl my-5">
                 <Placeholder graph="circle" rows="3" />
                 <Placeholder rows="10" />
               </Panel>

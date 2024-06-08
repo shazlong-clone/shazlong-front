@@ -321,5 +321,9 @@
   "Messages": "Messages",
   "View_Result": "View Result",
   "Read_Less": "Read Less",
-  "Read_More": "Read More"
+  "Read_More": "Read More",
+  "Test_Result": "Test Result",
+  "Points": "Points",
+  "Repeat_Test": "Repeat Test",
+  "Take_Anthoer_Test": "Take Anthoer Test"
 }

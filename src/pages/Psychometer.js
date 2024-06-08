@@ -166,7 +166,10 @@ function Psychometer() {
                             {locale === 'ar' ? test?.ar_description : test?.description}
                           </span>
                         </div>
-                        <span onClick={() => handleExpanded(test)} className="text-sm text-[var(--rs-primary-500)]">
+                        <span
+                          onClick={() => handleExpanded(test)}
+                          className="text-sm text-[var(--rs-primary-500)] cursor-pointer"
+                        >
                           {expandedRowKeys?.includes(test?._id) ? t('Read_Less') : t('Read_More')}
                         </span>
                         <div>

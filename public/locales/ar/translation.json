@@ -334,6 +334,10 @@
   "we_typically_reply_in_under_a_minute": "نحن نقوم بالرد في اقل من دقيقة",
   "Messages": "الرسائل",
   "View_Result": "عرض النتيجة",
-  "Read_Less": "قراءة المزيد",
-  "Read_More": "قراءة اقل"
+  "Read_Less": "قراءة أقل",
+  "Read_More": "قراءة المزيد",
+  "Test_Result": "نتيجة الاختبار",
+  "Points": "نقطة",
+  "Repeat_Test": "اعادة الاختبار",
+  "Take_Anthoer_Test": "اخد اختبار اخر"
 }
