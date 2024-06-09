@@ -118,6 +118,7 @@ export const sessionsStatusList = [
 export const PERSONAL_INFO = 'PERSONAL_INFO';
 export const PAYMENT_INFO = 'PAYMENT_INFO';
 export const MY_THERAPY = 'MY_THERAPY';
+export const MY_TESTS = 'MY_TESTS';
 
 export const localizeNum = (lang, num) => {
   switch (lang) {

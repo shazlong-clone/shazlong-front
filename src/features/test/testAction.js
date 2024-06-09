@@ -13,3 +13,4 @@ export const storeUserTest = createAsyncThunk('storeUserTest', async (params) =>
   const res = await service.post('/api/v1/tests/user-test', params);
   return res?.data;
 });
+

@@ -339,5 +339,9 @@
   "Test_Result": "نتيجة الاختبار",
   "Points": "نقطة",
   "Repeat_Test": "اعادة الاختبار",
-  "Take_Anthoer_Test": "اخد اختبار اخر"
+  "Take_Anthoer_Test": "اخد اختبار اخر",
+  "My_Tests": "اختباراتي",
+  "Test_Title": "اسم الاختبار",
+  "View_My_Answers": "عرض اجاباتي",
+  "No_Sessions":"لايوجد جلسات"
 }

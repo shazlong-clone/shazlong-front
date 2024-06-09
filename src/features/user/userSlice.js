@@ -1,9 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getSessions } from './userActions';
+import { getSessions, getUserTest } from './userActions';
 export const sharedSlice = createSlice({
   name: 'shared',
   initialState: {
     sessions: [],
+    tests:{}
   },
 
   reducers: {
@@ -21,6 +22,9 @@ export const sharedSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(getSessions.fulfilled, (state, action) => {
       state.sessions = action.payload?.data;
+    });
+    builder.addCase(getUserTest.fulfilled, (state, action) => {
+      state.tests = action.payload?.data;
     });
   },
 });

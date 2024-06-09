@@ -9,3 +9,7 @@ export const cancelSession = createAsyncThunk('cancelSession', async (params) =>
   const res = await service.post('/api/v1/booking/cancel', params);
   return res.data;
 });
+export const getUserTest = createAsyncThunk('getUserTest', async (params) => {
+  const res = await service.get('/api/v1/tests/user-test', { params });
+  return res?.data;
+});

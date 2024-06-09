@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button, ButtonGroup } from 'rsuite';
 import Sessions from './Sessions';
@@ -8,6 +8,7 @@ import moment from 'moment';
 import { PREVIOUS, UPCOMING } from '../../assets/constants';
 
 function MyTherapy() {
+  const [loading, setLoading] = useState(false);
   const [activeKey, setActiveKey] = React.useState(UPCOMING);
   const { t } = useTranslation();
   const dispatch = useDispatch();
@@ -24,17 +25,19 @@ function MyTherapy() {
     {
       key: UPCOMING,
       label: t('Upcoming_Sessions'),
-      content: <Sessions type={UPCOMING} sessions={upComingSessions} />,
+      content: <Sessions loading={loading} type={UPCOMING} sessions={upComingSessions} />,
     },
     {
       key: PREVIOUS,
       label: t('Previous_Sessions'),
-      content: <Sessions type={PREVIOUS} sessions={previouseSessions} />,
+      content: <Sessions loading={loading} type={PREVIOUS} sessions={previouseSessions} />,
     },
   ];
-
   useEffect(() => {
-    dispatch(getSessions());
+    setLoading(true);
+    dispatch(getSessions()).finally(() => {
+      setLoading(false);
+    });
   }, []);
   return (
     <>

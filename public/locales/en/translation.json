@@ -325,5 +325,9 @@
   "Test_Result": "Test Result",
   "Points": "Points",
   "Repeat_Test": "Repeat Test",
-  "Take_Anthoer_Test": "Take Anthoer Test"
+  "Take_Anthoer_Test": "Take Anthoer Test",
+  "My_Tests": "My Tests",
+  "Test_Title": "Test Title",
+  "View_My_Answers": "View My Answers",
+  "No_Sessions":"No Sessions"
 }

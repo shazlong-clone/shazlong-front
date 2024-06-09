@@ -11,8 +11,9 @@ import PaymentInfo from '../components/UserInfo/PaymentInfo';
 import { getMe } from '../features/auth/authAction';
 import MyTherapy from '../components/UserInfo/MyTherapy';
 import { useSearchParams } from 'react-router-dom';
-import { MY_THERAPY, PAYMENT_INFO, PERSONAL_INFO } from '../assets/constants';
+import { MY_THERAPY, PAYMENT_INFO, PERSONAL_INFO, MY_TESTS } from '../assets/constants';
 import { TbCameraPlus } from 'react-icons/tb';
+import MyTests from '../components/UserInfo/MyTests';
 
 function UserInfo() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -38,6 +39,11 @@ function UserInfo() {
       label: t('My_Therapy'),
       key: MY_THERAPY,
       content: <MyTherapy />,
+    },
+    {
+      label: t('My_Tests'),
+      key: MY_TESTS,
+      content: <MyTests />,
     },
   ];
   function previewFile(file, callback) {
@@ -86,7 +92,7 @@ function UserInfo() {
   return (
     <main className="bg-[var(--rs-gray-50)] py-5">
       <div className="container">
-        <Grid className="lg:my-10">
+        <Grid className="lg:my-10 w-full">
           <Row gutter={24}>
             <Col xs={24} lg={8}>
               <Card className="rounded-md text-center">

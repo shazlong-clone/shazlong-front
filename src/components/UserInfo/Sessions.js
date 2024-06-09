@@ -14,7 +14,7 @@ import CustomCell from '../Shared/CustomCell';
 import personIcon from '../../assets/images/person.svg';
 
 const { Column, HeaderCell } = Table;
-function Sessions({ sessions, type }) {
+function Sessions({ sessions, type, loading: sessionLoading }) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -64,7 +64,11 @@ function Sessions({ sessions, type }) {
   };
 
   return (
-    <Table bordered autoHeight data={sessions} className="mt-5 text-sm">
+    <Table renderEmpty={()=> 
+      <div className='flex h-full justify-center items-center'>
+        {t('No_Sessions')}
+      </div>
+    } loading={sessionLoading} bordered autoHeight data={sessions} className="mt-5 text-sm">
       <Column minWidth={80} flexGrow={1} align="center">
         <HeaderCell>{t('Date')}</HeaderCell>
         <CustomCell render={(row) => <span>{moment(row?.slot.from).format('Do MMMM YYYY')}</span>} />

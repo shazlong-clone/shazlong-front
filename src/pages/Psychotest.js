@@ -64,8 +64,8 @@ function Psychotest() {
   };
   const handelStorTest = async () => {
     const params = {
-      user_id: user?._id,
-      test_id: test?._id,
+      user: user?._id,
+      test: test?._id,
       answers: test?.questions?.map((q) => {
         return {
           question_id: q?._id,
