@@ -13,3 +13,13 @@ export const getUserTest = createAsyncThunk('getUserTest', async (params) => {
   const res = await service.get('/api/v1/tests/user-test', { params });
   return res?.data;
 });
+export const deleteUserTest = createAsyncThunk('deleteUserTest', async (id) => {
+  const res = await service.delete(`/api/v1/tests/user-test/${id}`);
+  return res?.data;
+});
+
+export const getUserTestById = createAsyncThunk('deleteUserTest', async (id) => {
+  const res = await service.get(`/api/v1/tests/user-test/${id}`);
+  return res?.data;
+});
+ 

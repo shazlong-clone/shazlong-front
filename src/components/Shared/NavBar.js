@@ -68,18 +68,18 @@ function NavBar() {
           <img className="rounded-full" src={user?.photo ? user?.photo : personIcon} width="40px" height="40px" />
           <strong className="capitalize">{user?.name}</strong>
         </li>
-        <li className="text-base px-3 py-2 cursor-pointer hover:bg-[var(--rs-primary-50)]">
+        <li onClick={() => handleProfile(`/${currLang}/user-info`)} className="text-base px-3 py-2 cursor-pointer hover:bg-[var(--rs-primary-50)]">
           <a className="no-underline hover:no-underline">
-            <div onClick={() => handleProfile(`/${currLang}/user-info`)} className="flex gap-2 items-center">
+            <div className="flex gap-2 items-center">
               <img className="rounded-full" src={user?.photo ? user?.photo : personIcon} width="20px" height="20px" />
               <span className="capitalize">{t('my_profile')}</span>
             </div>
           </a>
         </li>
         {doctorToken && (
-          <li className="text-base px-3 py-2 cursor-pointer hover:bg-[var(--rs-primary-50)]">
+          <li onClick={() => handleProfile(`/${currLang}/doctor`)} className="text-base px-3 py-2 cursor-pointer hover:bg-[var(--rs-primary-50)]">
             <a className="no-underline hover:no-underline">
-              <div onClick={() => handleProfile(`/${currLang}/doctor`)} className="flex gap-2 items-center">
+              <div className="flex gap-2 items-center">
                 <img className="rounded-full" src={doctor?.photo ? doctor?.photo : personIcon} width="20px" height="20px" />
                 <span className="capitalize">{t('Doctor_Profile')}</span>
               </div>

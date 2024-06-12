@@ -27,6 +27,7 @@ const JoinUs = lazy(() => import('./pages/JoinUs'));
 const DoctorSignUp = lazy(() => import('./pages/DoctorSignUp'));
 const VerifyEmailRegistration = lazy(() => import('./pages/VerifyEmailRegistration'));
 const UserInfo = lazy(() => import('./pages/UserInfo'));
+const UserTest = lazy(() => import('./pages/UserTest'));
 
 const LangRedirect = () => {
   const lang = localStorage.getItem('i18nextLng');
@@ -64,6 +65,7 @@ function App() {
           <Route path="join-us" element={<JoinUs />} />
           <Route path="user-info" element={<ProtectedRoute />}>
             <Route index element={<UserInfo />} />
+            <Route path='user-test/:id' element={<UserTest />} />
           </Route>
           <Route path="test" element={<Test />} />
           <Route path="*" element={<Error />} />

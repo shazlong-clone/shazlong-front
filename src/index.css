@@ -442,3 +442,6 @@ a:active {
   overflow-x: auto;
   overflow-y: scroll;
 }
+.rs-table-body-wheel-area {
+  min-height: auto !important;
+}
