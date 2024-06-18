@@ -103,7 +103,7 @@ function Psychometer() {
       </main>
       <main className="py-10">
         <div className="container">
-          <div className="xl:grid xl:grid-cols-[1fr_260px] xl:gap-3">
+          <div className="xl:grid xl:grid-cols-[1fr_280px] xl:gap-3">
             <section className="bg-[var(--rs-bg-card)]">
               {loading ? (
                 <Placeholder.Paragraph rows={10} active />

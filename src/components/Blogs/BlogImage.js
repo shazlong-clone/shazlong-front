@@ -13,7 +13,7 @@ function BlogImage({ className, ...rest }) {
         alt="dd"
       />
       <div className="absolute bg-[var(--rs-gray-100)]0 top-0 left-0 w-full h-full text-white rounded-t-lg overflow-hidden">
-        <span className="bg-[var(--rs-bg-card)] text-cyan rounded-3xl font-bold px-3 py-2 absolute left-3 top-3 text-sm">
+        <span className="bg-[var(--rs-bg-card)] text-[var(--rs-primary-500)] rounded-3xl font-bold px-3 py-2 absolute left-3 top-3 text-sm">
           welness
         </span>
         <div className="absolute bottom-0 left-0 p-2 translate-y-[100%] group-hover:translate-y-[0%] transition">

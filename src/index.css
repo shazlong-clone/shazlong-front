@@ -189,6 +189,14 @@ object {
   margin-bottom: 30px;
 }
 
+.article-slider button{
+  margin-bottom: 50px;
+}
+.article-slider ul.slick-dots{
+  margin-bottom: 80px;
+}
+
+
 .slick-container .slick-slider {
   width: 100%;
   max-width: 870px;

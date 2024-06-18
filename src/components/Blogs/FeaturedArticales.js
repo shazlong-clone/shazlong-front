@@ -1,26 +1,13 @@
 import React from 'react';
 import { FaFacebookF, FaLinkedinIn, FaTwitter } from 'react-icons/fa';
 import BlogInfo from './BlogInfo';
-import Slider from 'react-slick';
-import Card from '../Shared/Card';
-import therapist from '../../assets/images/therapist.webp';
-import { GiCash } from 'react-icons/gi';
-import { BsPlayFill } from 'react-icons/bs';
-import { Button, Rate } from 'rsuite';
 import { Link } from 'react-router-dom';
 import { useHover } from '@uidotdev/usehooks';
 import clsx from 'clsx';
 import { twMerge } from 'tailwind-merge';
+import DoctorsSlider from '../Shared/DoctorsSlider';
 
 function FeaturedArticales() {
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    autoplay: true,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-  };
   const [ref, hovering] = useHover();
 
   return (
@@ -36,7 +23,7 @@ function FeaturedArticales() {
               alt="dd"
             />
             <div className="absolute bg-[var(--rs-gray-100)]0 top-0 left-0 w-full h-full text-white rounded-t-lg xl:rounded-l-lg xl:rounded-t-none overflow-hidden">
-              <span className="bg-[var(--rs-bg-card)] text-cyan rounded-3xl font-bold px-3 py-2 absolute left-3 top-3 text-sm">
+              <span className="bg-[var(--rs-bg-card)] text-[var(--rs-primary-500)] rounded-3xl font-bold px-3 py-2 absolute left-3 top-3 text-sm">
                 wellness
               </span>
               <div className="absolute bottom-0 left-0 p-2 xl:translate-y-[100%] group-hover:translate-y-[0%] transition">
@@ -70,48 +57,7 @@ function FeaturedArticales() {
           <BlogInfo />
         </article>
       </section>
-      <section className="slick-blog slick-container mt-10 xl:mt-0">
-        <Card className="pb-10 xl:mb-0 rounded-lg">
-          <h3 className="text-center mb-3">Get Help</h3>
-          <Slider {...settings}>
-            {Array(5)
-              .fill('')
-              .map(() => {
-                return (
-                  <div className="border-x-2 border-white border-solid" key={Math.random()}>
-                    <article className="text-center">
-                      <img
-                        className="rounded-full m-auto border border-cyan border-solid p-1 bg-[var(--rs-primary-700)]/10"
-                        width="100px"
-                        height="100px"
-                        src={therapist}
-                      />
-                    </article>
-                    <article className="text-center">
-                      <h5 className="text-center text-cyan">Jone Doe</h5>
-                      <aside className="text-center">
-                        <Rate color="yellow" allowHalf={true} size="sm" defaultValue={3.5} />
-                        <small>(250 reviews)</small>
-                      </aside>
-                      <small>psychotherapist</small>
-                      <aside className="flex items-center gap-5 justify-center">
-                        <div className="flex items-center gap-2">
-                          <GiCash className="text-2xl text-cyan" /> <span>250 egy</span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <BsPlayFill className="text-3xl text-cyan" /> <span>250+ sessions</span>
-                        </div>
-                      </aside>
-                    </article>
-                    <Button block appearance="primary" className="my-5">
-                      View Profile
-                    </Button>
-                  </div>
-                );
-              })}
-          </Slider>
-        </Card>
-      </section>
+      <DoctorsSlider className='border-0 p-0 article-slider' />
     </div>
   );
 }

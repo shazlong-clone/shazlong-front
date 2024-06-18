@@ -9,8 +9,10 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { getFeaturedDoctor, getPrefix } from '../../features/shared/sharedActions';
 import { Link } from 'react-router-dom';
+import { twMerge } from 'tailwind-merge';
+import clsx from 'clsx';
 
-function DoctorsSlider() {
+function DoctorsSlider({ className, ...props }) {
   const { t, i18n } = useTranslation();
   const locale = i18n.resolvedLanguage;
   const settings = {
@@ -37,7 +39,15 @@ function DoctorsSlider() {
   }, []);
   return (
     <>
-      <article className="slick-blog slick-container slick-articel mt-10 xl:mt-0 bg-[var(--rs-primary-700)]/30 border border-solid border-cyan py-5 px-1  pb-8 rounded-lg">
+      <article
+        {...props}
+        className={clsx(
+          twMerge(
+            'slick-blog slick-container slick-articel mt-10 xl:mt-0 bg-[var(--rs-primary-700)]/30 border border-solid border-cyan py-5 px-1  pb-8 rounded-lg',
+            className ?? '',
+          ),
+        )}
+      >
         <Card className="xl:mb-0 rounded-lg">
           <h3 className="text-center mb-3">{t('Get_Help')}</h3>
           <Slider {...settings}>
