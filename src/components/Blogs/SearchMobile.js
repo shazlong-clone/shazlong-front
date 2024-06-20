@@ -10,6 +10,7 @@ import { FaFacebookF } from 'react-icons/fa';
 import { GrLinkedinOption } from 'react-icons/gr';
 import { FiInstagram } from 'react-icons/fi';
 import { searckList } from '../../assets/constants';
+
 function SearchMobile() {
   const [show, setShow] = React.useState(false);
   const [open, setOpen] = React.useState(false);

@@ -1,58 +1,70 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import blogimg from '../../assets/images/blogimg.jpg';
-import therapist from '../../assets/images/therapist.webp';
+import person from '../../assets/images/person.svg';
 import { Link } from 'react-router-dom';
 import { FaFacebookF, FaLinkedinIn, FaTwitter } from 'react-icons/fa';
 import { AiFillEye } from 'react-icons/ai';
 import { VscBook } from 'react-icons/vsc';
-import i18n from '../../i18n';
-function BlogHeader() {
+import { useDispatch, useSelector } from 'react-redux';
+import { getSpecialization } from '../../features/shared/sharedActions';
+import { useTranslation } from 'react-i18next';
+import moment from 'moment';
+function BlogHeader({ blog = {} }) {
+  const { specializationList } = useSelector((state) => state?.shared);
+  const dispatch = useDispatch();
+  const { t, i18n } = useTranslation();
+  const locale = i18n.resolvedLanguage;
+  useEffect(() => {
+    dispatch(getSpecialization());
+  }, []);
   return (
     <>
       <section className="xl:grid xl:grid-cols-2 gap-8 bg-[var(--rs-gray-100)] rounded-lg shadow-lg transition">
         <article className="relative max-h-[350px]">
-          <img width="100%" className="object-cover rounded-t-lg xl:rounded-r-none xl:rounded-l-lg max-h-[350px]" src={blogimg} />
+          <img
+            width="100%"
+            className="object-cover rounded-t-lg xl:rounded-r-none xl:rounded-l-lg max-h-[350px]"
+            src={blog?.cover ?? blogimg}
+          />
           <span className=" text-cyan bg-[var(--rs-bg-card)] rounded-3xl font-bold px-3 py-2 absolute left-3 top-3 text-sm">
-            wellness
+            {locale === 'ar'
+              ? specializationList?.find((el) => el?.id === blog?.category)?.ar_name
+              : specializationList?.find((el) => el?.id === blog?.category)?.name}
           </span>
         </article>
         <article className="px-5  xl:px-10 py-2 text-gray/80 xl:relative">
           <aside>
-            <h4 className="text-[24px] font-['Roboto'] my-5 xl:text-4xl xl:mt-[25px]">
-              How to Stay Healthy and Safe While Fasting During Ramadan:
-            </h4>
+            <h4 className="text-[24px] font-['Roboto'] my-5 xl:text-4xl xl:mt-[25px]">{blog?.title}</h4>
           </aside>
           <aside className="flex gap-2 items-center">
-            <img src={therapist} alt="therapist" className="rounded-full w-[60px] h-[60px]" />
+            <img src={blog?.publisher?.photo ?? person} alt="therapist" className="rounded-full w-[60px] h-[60px]" />
             <span>
-              <i className="block">Published By:</i>
-              <Link to={`/${i18n.resolvedLanguage}thearpist-profile/555`}>
-                <small>John Doe</small>
+              <i className="block">{t('Published_By')}:</i>
+              <Link to={`/${locale}/thearpist-profile/${blog?.publisher?._id}`}>
+                <small>{locale === 'ar' ? blog?.publisher?.fullArName : blog?.publisher?.fullEnName}</small>
               </Link>
             </span>
           </aside>
           <aside className="flex gap-2 my-2 justify-between text-sm font-[500] mb-6">
-            <span>April 10, 2023</span>
+            <span>{moment(blog?.createdAt).isValid() ? moment(blog?.createdAt).format('MMMM D, YYYY') : ''}</span>
             <div className="flex gap-1">
-              <span className="flex items-center gap-1">
-                337 <AiFillEye className="text-xl" />
-              </span>
-              <span className="flex items-center gap-1">
-                5min <VscBook className="text-xl text-gray" />
-              </span>
+              <span className="pt-1">{blog?.numOfReader}</span>
+              <AiFillEye className="text-xl" />
+              <span className="pt-1">{blog?.durationOfReading}</span>
+              <VscBook className="text-xl text-gray" />
             </div>
           </aside>
           <aside className="flex items-center gap-2 [&>span]:cursor-pointer xl:absolute xl:bottom-3 mb-5">
             <strong>
-              <small>Share On:</small>
+              <small>{t('Share_On')}:</small>
             </strong>
-            <span className="hover:bg-blue-700 hover:text-white border border-solid border-gray/10 transition rounded-full w-[25px] h-[25px] flex items-center justify-center">
+            <span className="p-2 hover:bg-blue-700 hover:text-white border border-solid border-gray/10 transition rounded-full w-[25px] h-[25px] flex items-center justify-center">
               <FaFacebookF />
             </span>
-            <span className="hover:bg-[#006cb3] hover:text-white border border-solid border-gray/10 transition rounded-full w-[25px] h-[25px] flex items-center justify-center">
+            <span className="p-2 hover:bg-[#006cb3] hover:text-white border border-solid border-gray/10 transition rounded-full w-[25px] h-[25px] flex items-center justify-center">
               <FaLinkedinIn />
             </span>
-            <span className="hover:bg-sky-400 hover:text-white border border-solid border-gray/10 transition rounded-full w-[25px] h-[25px] flex items-center justify-center">
+            <span className="p-2 hover:bg-sky-400 hover:text-white border border-solid border-gray/10 transition rounded-full w-[25px] h-[25px] flex items-center justify-center">
               <FaTwitter />
             </span>
           </aside>

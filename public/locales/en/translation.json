@@ -329,13 +329,15 @@
   "My_Tests": "My Tests",
   "Test_Title": "Test Title",
   "View_My_Answers": "View My Answers",
-  "No_Sessions":"No Sessions",
-  "No_Tests":"No Tests",
-  "Test_Your_Health":"Test Your Health",
-  "Result":"Result",
-  "Test_Date":"Test Date",
-  "InValid_Date":"InValid Date",
-  "My_Answers":"My Answers"
-
-
+  "No_Sessions": "No Sessions",
+  "No_Tests": "No Tests",
+  "Test_Your_Health": "Test Your Health",
+  "Result": "Result",
+  "Test_Date": "Test Date",
+  "InValid_Date": "InValid Date",
+  "My_Answers": "My Answers",
+  "Most_Red": "Most Red",
+  "Latest_Articles": "Latest Articles",
+  "Published_By": "Published By",
+  "Share_On": "Share On"
 }

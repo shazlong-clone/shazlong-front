@@ -1,18 +1,26 @@
 import React, { Fragment } from 'react';
-import Blog from './BlogCard';
+import BlogCard from './BlogCard';
+import useMediaQuery from '../../hooks/useMediaQuery';
+import NoDataFound from '../Shared/NoDataFound';
 
-function BlogClollection({ title, blogs }) {
+function BlogClollection({ title, blogs, loading }) {
+  const lg = useMediaQuery('lg');
+  const newBlogs = loading ? (lg ? [1, 2, 3] : [1]) : blogs;
   return (
     <div className="container py-4">
       <h3 className="text-center my-8 xl:text-start xl:mb-4">{title}</h3>
       <section className="xl:grid xl:grid-cols-3 xl:gap-2">
-        {blogs?.map((blog) => {
-          return (
-            <Fragment key={Math.random()}>
-              <Blog blog={blog} />
-            </Fragment>
-          );
-        })}
+        {!blogs ? (
+          <NoDataFound />
+        ) : (
+          newBlogs?.map((blog) => {
+            return (
+              <Fragment key={Math.random()}>
+                <BlogCard blog={blog} loading={loading} />
+              </Fragment>
+            );
+          })
+        )}
       </section>
     </div>
   );

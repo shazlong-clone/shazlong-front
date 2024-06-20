@@ -343,11 +343,15 @@
   "My_Tests": "اختباراتي",
   "Test_Title": "اسم الاختبار",
   "View_My_Answers": "عرض اجاباتي",
-  "No_Sessions":"لايوجد جلسات",
-  "No_Tests":"لا يوجد اختبارات",
-  "Test_Your_Health":"اختبر صحتك",
-  "Result":"النتيجة",
-  "Test_Date":"تاريخ الاختبار",
-  "InValid_Date":"تاريخ غير صالح",
-  "My_Answers":"اجاباتي"
+  "No_Sessions": "لايوجد جلسات",
+  "No_Tests": "لا يوجد اختبارات",
+  "Test_Your_Health": "اختبر صحتك",
+  "Result": "النتيجة",
+  "Test_Date": "تاريخ الاختبار",
+  "InValid_Date": "تاريخ غير صالح",
+  "My_Answers": "اجاباتي",
+  "Most_Red": "الاكثر قراءة",
+  "Latest_Articles": "المنشور حديثا",
+  "Published_By": "تم النشر بواسطة",
+  "Share_On": "مشاركة في "
 }

@@ -1,4 +1,4 @@
-import React, { createContext } from 'react';
+import React from 'react';
 import Image from './Image';
 import SignLogo from '../Sign/SignLogo';
 import DocSignUpForm from './DocSignUpForm';
@@ -9,7 +9,6 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import i18next from 'i18next';
 import Back from '../Shared/Back';
-export const SignUpCompContext = createContext();
 function SignUpComp() {
   const { t, i18n } = useTranslation();
   const { doctorVerificationCode } = useSelector((state) => state?.auth);
