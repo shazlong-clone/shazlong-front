@@ -1,3 +1,5 @@
+import { API_BASE_URL } from '../../config/enviroment.config';
+
 export const lngs = {
   en: { nativeName: 'English' },
   ar: { nativeName: 'العربية' },
@@ -97,6 +99,7 @@ export const CANCELED = 0;
 export const RESERVED = 1;
 export const PATIENT_ATTEND = 2;
 export const PATIENT_NOT_ATTEND = 3;
+
 export const sessionsStatusList = [
   {
     id: CANCELED,
@@ -115,6 +118,25 @@ export const sessionsStatusList = [
     translationKey: 'Not_Attended',
   },
 ];
+export const ACCEPTED = 1;
+export const REJECTED = 2;
+export const PENDING = 3;
+
+export const blogStatusList = [
+  {
+    id: ACCEPTED,
+    translationKey: 'Accepted',
+  },
+  {
+    id: REJECTED,
+    translationKey: 'Rejected',
+  },
+  {
+    id: PENDING,
+    translationKey: 'Pending',
+  },
+];
+
 export const PERSONAL_INFO = 'PERSONAL_INFO';
 export const PAYMENT_INFO = 'PAYMENT_INFO';
 export const MY_THERAPY = 'MY_THERAPY';
@@ -142,3 +164,50 @@ export const swiperConfig = {
   swipeDuration: Infinity, // allowable duration of a swipe (ms). *See Notes*
   touchEventOptions: { passive: true }, // options for touch listeners (*See Details*)
 };
+
+const sunEditorOptions = {
+  buttonList: [
+    ['undo', 'redo'],
+    ['font', 'fontSize'],
+    // ['paragraphStyle', 'blockquote'],
+    ['bold', 'underline', 'italic', 'strike', 'subscript', 'superscript'],
+    ['fontColor', 'hiliteColor'],
+    ['align', 'list', 'lineHeight'],
+    ['outdent', 'indent'],
+
+    ['table', 'horizontalRule', 'link'],
+    // ['math'] //You must add the 'katex' library at options to use the 'math' plugin.
+    // ['imageGallery'], // You must add the "imageGalleryUrl".
+    // ["fullScreen", "showBlocks", "codeView"],
+    ['preview', 'print'],
+    ['removeFormat'],
+
+    // ['save', 'template'],
+    // '/', Line break
+  ], // Or Array of button list, eg. [['font', 'align'], ['image']]
+  defaultTag: 'div',
+  minHeight: '300px',
+  rtl: false,
+  showPathLabel: false,
+  imageGalleryUrl: `${API_BASE_URL}/images/image-gallary`,
+  font: [
+    'Logical',
+    'Salesforce Sans',
+    'Garamond',
+    'Sans-Serif',
+    'Serif',
+    'Times New Roman',
+    'Helvetica',
+    'Arial',
+    'Comic Sans MS',
+    'Courier New',
+    'Impact',
+    'Georgia',
+    'Tahoma',
+    'Trebuchet MS',
+    'Verdana',
+  ].sort(),
+};
+
+export const sunEditorArOptions = { ...sunEditorOptions, rtl: true, className: 'suneditor-rtl' };
+export const sunEditorEnOptions = { ...sunEditorOptions, className: 'suneditor-ltr' };

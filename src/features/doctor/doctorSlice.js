@@ -1,11 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { getMeAsDoctor } from '../auth/authAction';
-import { getDoctorBookings, getSlots } from './doctorActions';
+import { getDoctorBlogs, getDoctorBookings, getSlots } from './doctorActions';
 
 const initialState = {
   profile: {},
   slots: [],
   bookings: {},
+  blogs: {},
 };
 const doctorSlice = createSlice({
   name: 'doctor',
@@ -19,6 +20,9 @@ const doctorSlice = createSlice({
     });
     builder.addCase(getDoctorBookings.fulfilled, (state, action) => {
       state.bookings = action.payload?.data;
+    });
+    builder.addCase(getDoctorBlogs.fulfilled, (state, action) => {
+      state.blogs = action.payload?.data;
     });
   },
 });

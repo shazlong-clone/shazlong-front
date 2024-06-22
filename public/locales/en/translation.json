@@ -339,5 +339,17 @@
   "Most_Red": "Most Red",
   "Latest_Articles": "Latest Articles",
   "Published_By": "Published By",
-  "Share_On": "Share On"
+  "Share_On": "Share On",
+  "Articel_Content": "Articel Content",
+  "Category": "Category",
+  "DurationOfReading": "Duration Of Reading",
+  "Minutes": "Minutes",
+  "Body_Required": "Article Body Required",
+  "Cover_Required": "Cover Required",
+  "Write_Blog": "Write Blog",
+  "My_Blogs": "My Blogs",
+  "Accepted": "Accepted",
+  "Rejected": "Rejected",
+  "Pending": "Pending",
+  "Please_Select_Blog": "Please Select Blog"
 }

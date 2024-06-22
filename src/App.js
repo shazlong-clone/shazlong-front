@@ -7,6 +7,8 @@ import ProtectDoctor from './components/Shared/ProtectDoctor';
 import Slots from './components/Doctor/Slots';
 import Bookings from './components/Doctor/Bookings';
 import DoctorProfile from './components/Doctor/DoctorProfile';
+import WriteBlog from './components/Doctor/WriteBlog';
+import MyBlogs from './components/Doctor/MyBlogs';
 
 const Home = lazy(() => import('./pages/Home'));
 const ThearpistProfile = lazy(() => import('./pages/ThearpistProfile'));
@@ -47,6 +49,8 @@ function App() {
           <Route path="slots" element={<Slots />} />
           <Route path="bookings" element={<Bookings />} />
           <Route path="profile" element={<DoctorProfile />} />
+          <Route path="blog" element={<WriteBlog />} />
+          <Route path="my-blogs" element={<MyBlogs />} />
         </Route>
         <Route element={<LayOut />}>
           <Route index element={<Home />} />
@@ -65,7 +69,7 @@ function App() {
           <Route path="join-us" element={<JoinUs />} />
           <Route path="user-info" element={<ProtectedRoute />}>
             <Route index element={<UserInfo />} />
-            <Route path='user-test/:id' element={<UserTest />} />
+            <Route path="user-test/:id" element={<UserTest />} />
           </Route>
           <Route path="test" element={<Test />} />
           <Route path="*" element={<Error />} />

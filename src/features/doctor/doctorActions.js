@@ -44,3 +44,7 @@ export const updateDoctorBookings = createAsyncThunk('updateDoctorBookings', asy
   const res = await doctorService.patch('/api/v1/doctors/bookings', params);
   return res.data;
 });
+export const getDoctorBlogs = createAsyncThunk('getDoctorBlogs', async (params) => {
+  const res = await doctorService.get('/api/v1/doctors/blogs/my-blogs', { params });
+  return res.data;
+});

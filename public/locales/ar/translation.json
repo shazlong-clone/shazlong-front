@@ -353,5 +353,17 @@
   "Most_Red": "الاكثر قراءة",
   "Latest_Articles": "المنشور حديثا",
   "Published_By": "تم النشر بواسطة",
-  "Share_On": "مشاركة في "
+  "Share_On": "مشاركة في ",
+  "Articel_Content": "محتوي المقالة",
+  "Category": "التصنيف",
+  "DurationOfReading": "مدة القراءة",
+  "Minutes": "دقائق",
+  "Body_Required": "الرجاء اضافة محتوي المقال",
+  "Cover_Required": "الرجاء اختيار صورة للمقال",
+  "Write_Blog": "كتابة مقالة",
+  "My_Blogs": "مقالاتي",
+  "Accepted": "مقبول",
+  "Rejected": "مرفوض",
+  "Pending": "معلق",
+  "Please_Select_Blog": "الرجاء تحديد مقالة"
 }

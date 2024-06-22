@@ -189,13 +189,12 @@ object {
   margin-bottom: 30px;
 }
 
-.article-slider button{
+.article-slider button {
   margin-bottom: 50px;
 }
-.article-slider ul.slick-dots{
+.article-slider ul.slick-dots {
   margin-bottom: 80px;
 }
-
 
 .slick-container .slick-slider {
   width: 100%;
@@ -452,4 +451,21 @@ a:active {
 }
 .rs-table-body-wheel-area {
   min-height: auto !important;
+}
+
+.write-blog .rs-uploader-picture {
+  display: block;
+}
+.write-blog .rs-uploader-trigger-customize,
+.write-blog .rs-uploader-trigger-customize .rs-uploader-trigger-btn {
+  width: 100%;
+}
+.write-blog .rs-uploader-file-item,
+.write-blog .rs-uploader-picture .rs-uploader-file-item {
+  width: 100%;
+}
+.write-blog .rs-uploader-file-item.rs-uploader-file-item-picture,
+.write-blog .rs-uploader-file-item.rs-uploader-file-item-picture .rs-uploader-file-item-preview,
+.write-blog .rs-uploader-picture .rs-uploader-trigger-btn {
+  height: 300px;
 }
