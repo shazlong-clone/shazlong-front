@@ -7,7 +7,7 @@ import BlogSearch from '../components/Blogs/BlogSearch';
 function Blogs() {
   return (
     <>
-      <main className="bg-[var(--rs-gray-100)]">
+      <main className="bg-[var(--rs-gray-100)] blogs">
         <section>
           <BlogSearch />
         </section>

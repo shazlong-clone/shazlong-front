@@ -72,17 +72,7 @@ function SearchMobile() {
                   </span>
                 </section>
                 <Animation.Collapse in={open}>{(props, ref) => <Drop {...props} ref={ref} />}</Animation.Collapse>
-                <section className="flex divide-y-0 divide-x divide-solid [&>a]:px-10 [&>a]:grow text-center mt-10 text-2xl">
-                  <a href="https://www.facebook.com/ShezlongApp/">
-                    <FaFacebookF />
-                  </a>
-                  <a href="https://www.linkedin.com/company/shezlong/?originalSubdomain=ae">
-                    <GrLinkedinOption />
-                  </a>
-                  <a href="https://www.linkedin.com/company/shezlong/?originalSubdomain=ae">
-                    <FiInstagram />
-                  </a>
-                </section>
+
               </div>
             </main>
           )}

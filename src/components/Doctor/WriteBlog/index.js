@@ -63,7 +63,7 @@ function WriteBlog() {
     const params = {
       ...formValue,
       id: id,
-      durationOfReading: formValue?.durationOfReading + ' ' + 'mins',
+      durationOfReading: formValue?.durationOfReading,
       cover: fileList[0]?.blobFile,
       body: value,
     };
