@@ -3,7 +3,7 @@ import { Button, Modal, Schema, Form, Grid, Row, Col, MaskedInput, FlexboxGrid, 
 
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import withSubmit from './withSubmit';
+import withSubmit from '../../hooks/withSubmit';
 import { CARD_NUMBER_DEMO, CVC_DEMO, EXPIREDATE_DEMO } from '../../assets/constants';
 
 const { Group, Control } = Form;

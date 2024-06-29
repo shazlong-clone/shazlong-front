@@ -3,7 +3,7 @@ import { Button, Modal, Schema, Form, Grid, Row, Col, FlexboxGrid, ButtonToolbar
 
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import withSubmit from './withSubmit';
+import withSubmit from '../../hooks/withSubmit';
 import { EMAIL_DEMO, PHONE_DEMO } from '../../assets/constants';
 
 const { Group, Control } = Form;

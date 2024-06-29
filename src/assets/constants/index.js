@@ -90,8 +90,6 @@ export const sortMenu = [
   },
 ];
 
-export const searckList = ['Neuroscience(1)', 'Brain Science(2)', 'Psychotherapy(3)', 'COVID-19(6)', 'General Topics(9)'];
-
 export const UPCOMING = 1;
 export const PREVIOUS = 2;
 

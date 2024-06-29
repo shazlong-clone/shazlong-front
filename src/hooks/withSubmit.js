@@ -3,8 +3,8 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Message, toaster } from 'rsuite';
-import { getSlotsByIds, serveSlots } from '../../features/shared/sharedActions';
-import { MY_THERAPY } from '../../assets/constants';
+import { getSlotsByIds, serveSlots } from '../features/shared/sharedActions';
+import { MY_THERAPY } from '../assets/constants';
 
 function withSubmit(WrappedComponent) {
   return function (props) {
