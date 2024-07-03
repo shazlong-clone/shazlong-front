@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import InternalHeader from '../Shared/InternalHeader';
-import { Animation, Button } from 'rsuite';
+import { Animation, Button, IconButton, Input, InputGroup } from 'rsuite';
 import AlignJustifyIcon from '@rsuite/icons/legacy/AlignJustify';
 import CloseIcon from '@rsuite/icons/Close';
 import ArrowDownLineIcon from '@rsuite/icons/ArrowDownLine';
@@ -33,13 +33,20 @@ function SearchMobile(props) {
             return (
               <li
                 onClick={() => {
+                  let p = params?.category;
                   if (params?.category?.includes(spec?.id)) {
-                    setParams({ ...params, category: params?.category?.filter((categoryId) => categoryId !== spec?.id) });
+                    p = { ...params, category: params?.category?.filter((categoryId) => categoryId !== spec?.id) };
+                    setParams(p);
                   } else {
-                    setParams({ ...params, category: [...params.category, spec?.id] });
+                    p = { ...params, category: [...params.category, spec?.id] };
+                    setParams(p);
                   }
+                  getSearchedBlogs(p);
                 }}
-                className={clsx('cursor-pointer', params?.category?.includes(spec?.id) && 'bg-[var(--rs-gray-900)]')}
+                className={clsx(
+                  'cursor-pointer my-2 px-2',
+                  params?.category?.includes(spec?.id) && 'bg-[var(--rs-gray-500)] text-[var(--rs-gray-50)] ',
+                )}
                 key={Math.random()}
               >
                 {locale === 'ar' ? spec?.ar_name : spec?.name}
@@ -75,7 +82,7 @@ function SearchMobile(props) {
             </Button>
           }
         >
-          Blogs
+          {t('Blogs')}
         </InternalHeader>
       </div>
 
@@ -85,17 +92,29 @@ function SearchMobile(props) {
             <main {...props} ref={ref}>
               <div className="text-gray bg-[#EFF8FC] px-4 py-5">
                 <section className="flex items-center justify-between gap-2 mb-5 text-3xl">
-                  <input
-                    value={params?.name}
-                    onChange={(e) => setParams({ ...params, name: e.target.value })}
-                    ref={inputRef}
-                    className="input-unset text-base placeholder-opacity-5"
-                    placeholder="Search"
-                  />
-                  <SearchIcon className="font-normal cursor-pointer text-3xl" />
+                  <InputGroup>
+                    <Input
+                      onChange={(value) => setParams({ ...params, name: value })}
+                      value={params?.name}
+                      placeholder={t('Search')}
+                      size="lg"
+                      onKeyDown={(event) => {
+                        // If the user presses the "Enter" key on the keyboard
+                        if (event.key === 'Enter') {
+                          // Cancel the default action, if needed
+                          event.preventDefault();
+                          // Trigger the button element with a click
+                          getSearchedBlogs(params);
+                        }
+                      }}
+                    />
+                    <InputGroup.Button onClick={() => getSearchedBlogs(params)}>
+                      <SearchIcon />
+                    </InputGroup.Button>
+                  </InputGroup>
                 </section>
                 <section onClick={() => setOpen(!open)} className="flex justify-between cursor-pointer mb-5">
-                  <span>Seciality </span>
+                  <span>{t('Category')}</span>
                   <span>
                     <ArrowDownLineIcon className={clsx(open ? 'animate-rclock' : 'animate-raclock')} />
                   </span>

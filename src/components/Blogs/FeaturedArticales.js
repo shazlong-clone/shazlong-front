@@ -10,7 +10,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getBlogs } from '../../features/blog/blogAction';
 import { getSpecialization } from '../../features/shared/sharedActions';
 import { useTranslation } from 'react-i18next';
-import { Panel, Placeholder } from 'rsuite';
+import { Panel, Placeholder, Text } from 'rsuite';
+import parse from 'html-react-parser';
 
 function FeaturedArticles() {
   const { i18n } = useTranslation();
@@ -40,7 +41,7 @@ function FeaturedArticles() {
       ) : (
         <section className="xl:grid group xl:grid-cols-2 xl:gap-5 rounded-lg bg-[var(--rs-bg-card)] mt-5 xl:mt-0 hover:shadow-md transition">
           <article className="h-full relative">
-            <Link ref={ref}>
+            <Link ref={ref} to={`/${locale}/blog/${featuredBlog?._id}`}>
               <img
                 width="100%"
                 height="100%"
@@ -73,11 +74,16 @@ function FeaturedArticles() {
           </article>
           <article className="xl:grid xl:grid-rows-[auto_1fr_auto] p-2">
             <h3 className="leading-9 mt-3 lg:mb-5">
-              <Link className={twMerge(clsx('text-gray/80 hover:no-underline', hovering && 'text-cyan hover:text-cyan'))}>
+              <Link
+                to={`/${locale}/blog/${featuredBlog?._id}`}
+                className={twMerge(clsx('text-gray/80 hover:no-underline', hovering && 'text-cyan hover:text-cyan'))}
+              >
                 {featuredBlog?.title}
               </Link>
             </h3>
-            <p className="font-medium text-sm text-gray/50 lg:text-[16px] lg:leading-7">{featuredBlog?.body}</p>
+            <p className="font-medium text-sm text-gray/50 lg:text-[16px] lg:leading-7">
+              {<Text maxLines={8}>{parse(featuredBlog?.body ?? '')}</Text>}
+            </p>
             <BlogInfo blog={featuredBlog} />
           </article>
         </section>

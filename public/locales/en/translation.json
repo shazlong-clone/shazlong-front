@@ -351,5 +351,7 @@
   "Accepted": "Accepted",
   "Rejected": "Rejected",
   "Pending": "Pending",
-  "Please_Select_Blog": "Please Select Blog"
+  "Please_Select_Blog": "Please Select Blog",
+  "Search_Result": "Search Result",
+  "Reload": "Reload"
 }

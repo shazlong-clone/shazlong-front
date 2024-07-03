@@ -74,7 +74,7 @@ function MyBlogs() {
             )}
             <Dropdown.Item
               onClick={() => {
-                if (!checkedKeys?.length) {
+                if (!checkedKeys?.length && !rowData?._id) {
                   return toaster.push(
                     <Message showIcon type="warning" closable>
                       {t('Please_Select_Blog')}
@@ -254,7 +254,7 @@ function MyBlogs() {
             <HeaderCell>{t('Status')}</HeaderCell>
             <CustomCell
               render={(row) => {
-                const session = blogStatusList?.find((el) => el.id === row?.status);
+                const session = blogStatusList?.find((el) => el?.id === row?.status);
                 return (
                   <span
                     className={

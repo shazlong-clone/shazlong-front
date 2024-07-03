@@ -26,7 +26,7 @@ function Blog() {
   if (loading) {
     return (
       <div className="h-svh flex items-center justify-center">
-        <Loader size="lg" content={t('Loading')} vertical />
+        <Loader size="lg" content={t('loading')} vertical />
       </div>
     );
   }

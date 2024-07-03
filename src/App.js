@@ -8,6 +8,8 @@ import Slots from './components/Doctor/Slots';
 import Bookings from './components/Doctor/Bookings';
 import DoctorProfile from './components/Doctor/DoctorProfile';
 import WriteBlog from './components/Doctor/WriteBlog';
+import EditBlog from './components/Doctor/EditBlog';
+
 import MyBlogs from './components/Doctor/MyBlogs';
 
 const Home = lazy(() => import('./pages/Home'));
@@ -50,6 +52,7 @@ function App() {
           <Route path="bookings" element={<Bookings />} />
           <Route path="profile" element={<DoctorProfile />} />
           <Route path="blog" element={<WriteBlog />} />
+          <Route path="blog/:id" element={<EditBlog />} />
           <Route path="my-blogs" element={<MyBlogs />} />
         </Route>
         <Route element={<LayOut />}>

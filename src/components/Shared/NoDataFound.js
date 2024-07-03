@@ -9,7 +9,7 @@ function NoDataFound(props) {
   return (
     <div className={twMerge('text-center mt-20', className)} {...restProps}>
       <img src={noData} />
-      <p className="my-3">{props.children ?? t('NO_Data_Found')}</p>
+      <p className="py-3">{props.children ?? t('NO_Data_Found')}</p>
     </div>
   );
 }

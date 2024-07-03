@@ -22,17 +22,15 @@ import {
 import { Schema } from 'rsuite';
 import { useDispatch, useSelector } from 'react-redux';
 import { getSpecialization } from '../../../features/shared/sharedActions';
-import { Link, useSearchParams } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import CameraRetroIcon from '@rsuite/icons/legacy/CameraRetro';
 import useSubmition from '../../../hooks/useSubmit';
 import { addAricle, getBlog } from '../../../features/blog/blogAction';
 
-function WriteBlog() {
+function WriteBlog({id}) {
   const [value, setValue] = useState('');
   const { i18n, t } = useTranslation();
   const locale = i18n.resolvedLanguage;
-  const [searchParams] = useSearchParams();
-  const id = searchParams.get('id');
   const sunEditorOptions = useMemo(() => {
     return locale === 'ar' ? sunEditorArOptions : sunEditorEnOptions;
   }, [locale]);
@@ -48,6 +46,7 @@ function WriteBlog() {
     category: Schema.Types.NumberType().isRequired(t('required')),
     durationOfReading: Schema.Types.StringType().isRequired(t('required')),
   });
+  const navigate = useNavigate();
   const submit = useSubmition();
   const handleSubmit = async () => {
     if (!value?.replace(/<div><br><\/div>/g, '')?.trim()) {
@@ -64,7 +63,7 @@ function WriteBlog() {
       ...formValue,
       id: id,
       durationOfReading: formValue?.durationOfReading,
-      cover: fileList[0]?.blobFile,
+      cover: fileList[0]?.url || fileList[0]?.blobFile,
       body: value,
     };
     const formData = new FormData();
@@ -78,6 +77,7 @@ function WriteBlog() {
       setFormValue({});
       setValue('');
       setFileList([]);
+      navigate('/'+ locale + '/doctor/my-blogs')
     }
   };
   const [submitLoading, setSubmitLoading] = useState(false);

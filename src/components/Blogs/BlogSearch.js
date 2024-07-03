@@ -2,11 +2,12 @@ import { useState } from 'react';
 import SearchDeskTop from './SearchDeskTop';
 import SearchMobile from './SearchMobile';
 
-const BlogSearch = () => {
+const BlogSearch = ({ category, name }) => {
   const [params, setParams] = useState({
-    category: [],
-    name: '',
+    category: category ?? [],
+    name: name ?? '',
   });
+
   return (
     <>
       <section className="lg:hidden">

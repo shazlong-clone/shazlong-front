@@ -69,8 +69,17 @@ function SearchDeskTop(props) {
                 value={params?.name}
                 placeholder={t('Search')}
                 size="lg"
+                onKeyDown={(event) => {
+                  // If the user presses the "Enter" key on the keyboard
+                  if (event.key === 'Enter') {
+                    // Cancel the default action, if needed
+                    event.preventDefault();
+                    // Trigger the button element with a click
+                    getSearchedBlogs(params);
+                  }
+                }}
               />
-              <InputGroup.Button>
+              <InputGroup.Button onClick={() => getSearchedBlogs(params)}>
                 <SearchIcon />
               </InputGroup.Button>
             </InputGroup>
@@ -84,11 +93,15 @@ function SearchDeskTop(props) {
                   <div
                     key={i}
                     onClick={() => {
+                      let p = params?.category;
                       if (params?.category?.includes(spec?.id)) {
-                        setParams({ ...params, category: params?.category?.filter((categoryId) => categoryId !== spec?.id) });
+                        p = { ...params, category: params?.category?.filter((categoryId) => categoryId !== spec?.id) };
+                        setParams(p);
                       } else {
-                        setParams({ ...params, category: [...params.category, spec?.id] });
+                        p = { ...params, category: [...params.category, spec?.id] };
+                        setParams(p);
                       }
+                      getSearchedBlogs(p);
                     }}
                   >
                     <div
@@ -96,7 +109,7 @@ function SearchDeskTop(props) {
                       className={clsx(
                         'active:bg-[var(--rs-gray-50)] m-[2px] border border-[var(--rs-gray-500)] border-solid px-5 py-2 rounded-3xl cursor-pointer hover:outline-1 hover:outline',
                         params?.category?.includes(spec?.id)
-                          ? 'bg-[var(--rs-gray-500)] text-white active:bg-[var(--rs-gray-400)]'
+                          ? 'bg-[var(--rs-gray-500)] text-white active:bg-[var(--rs-gray-500)]'
                           : '',
                       )}
                     >

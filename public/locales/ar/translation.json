@@ -365,5 +365,7 @@
   "Accepted": "مقبول",
   "Rejected": "مرفوض",
   "Pending": "معلق",
-  "Please_Select_Blog": "الرجاء تحديد مقالة"
+  "Please_Select_Blog": "الرجاء تحديد مقالة",
+  "Search_Result": " نتائج البحث",
+  "Reload": "إعادة التحميل"
 }

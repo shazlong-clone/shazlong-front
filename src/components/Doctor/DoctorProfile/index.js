@@ -69,6 +69,7 @@ function DoctorProfile() {
   const { countries, languages } = useSelector((state) => state?.shared);
   const {
     fullEnName,
+    fullArName,
     prefix,
     email,
     gender,
@@ -175,9 +176,9 @@ function DoctorProfile() {
                 </div>
               </article>
               <article className="mt-[80px] lg:mt-0 grow relative">
-                <h4 className="max-lg:text-center">{fullEnName}</h4>
+                <h4 className="max-lg:text-center">{locale === 'ar' ? fullArName: fullEnName}</h4>
                 <div className="lg:flex gap-5">
-                  <section className="xl:grid xl:grid-cols-2 2xl:grid-cols-4 gap-x-10">
+                  <section className="xl:grid xl:grid-cols-2 2xl:grid-cols-3 gap-x-10">
                     {info?.map((el) => {
                       return (
                         <div key={el?.id} className="flex gap-2">

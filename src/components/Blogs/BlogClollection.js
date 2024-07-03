@@ -8,20 +8,20 @@ function BlogClollection({ title, blogs, loading }) {
   const newBlogs = loading ? (lg ? [1, 2, 3] : [1]) : blogs;
   return (
     <div className="container py-4">
-      <h3 className="text-center my-8 xl:text-start xl:mb-4">{title}</h3>
-      <section className="xl:grid xl:grid-cols-3 xl:gap-2">
-        {!blogs ? (
-          <NoDataFound />
-        ) : (
-          newBlogs?.map((blog) => {
+      <h3 className="text-center mb-8 xl:text-start xl:mb-4">{title}</h3>
+      {!blogs?.length && !loading ? (
+        <NoDataFound className="mt-0 mb-20" />
+      ) : (
+        <section className="xl:grid xl:grid-cols-3 xl:gap-2">
+          {newBlogs?.map((blog) => {
             return (
               <Fragment key={Math.random()}>
                 <BlogCard blog={blog} loading={loading} />
               </Fragment>
             );
-          })
-        )}
-      </section>
+          })}
+        </section>
+      )}
     </div>
   );
 }

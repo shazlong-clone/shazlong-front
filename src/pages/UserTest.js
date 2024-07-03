@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import React, { useEffect, useState } from 'react';
-import { Col, Grid, Header, Loader, Row, Text } from 'rsuite';
+import { Loader } from 'rsuite';
 import Card from '../components/Shared/Card';
 import { twMerge } from 'tailwind-merge';
 import { useTranslation } from 'react-i18next';
@@ -11,7 +11,6 @@ import useSubmition from '../hooks/useSubmit';
 import { getUserTestById } from '../features/user/userActions';
 import moment from 'moment';
 import InternalHeader from '../components/Shared/InternalHeader';
-const dd =true;
 function UserTest() {
   const { t, i18n } = useTranslation();
   const locale = i18n.resolvedLanguage;
@@ -38,9 +37,7 @@ function UserTest() {
   return (
     <main className="bg-[var(--rs-gray-50)] py-5">
       <div className="container">
-        <InternalHeader>
-          {t('My_Answers')}
-        </InternalHeader>
+        <InternalHeader>{t('My_Answers')}</InternalHeader>
         <section className="my-5 mx-auto">
           <div className="grid lg:grid-cols-[1fr_2fr] gap-2">
             <article>
