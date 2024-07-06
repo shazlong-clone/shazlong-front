@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import blogimg from '../../assets/images/blogimg.jpg';
 import person from '../../assets/images/person.svg';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { FaFacebookF, FaLinkedinIn, FaTwitter } from 'react-icons/fa';
 import { AiFillEye } from 'react-icons/ai';
 import { VscBook } from 'react-icons/vsc';
@@ -9,16 +9,32 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getSpecialization } from '../../features/shared/sharedActions';
 import { useTranslation } from 'react-i18next';
 import moment from 'moment';
+import { FacebookShareButton, LinkedinShareButton, TwitterShareButton } from 'react-share';
+import { Helmet } from 'react-helmet';
 function BlogHeader({ blog = {} }) {
   const { specializationList } = useSelector((state) => state?.shared);
   const dispatch = useDispatch();
   const { t, i18n } = useTranslation();
   const locale = i18n.resolvedLanguage;
+  const url = window.location.href;
   useEffect(() => {
     dispatch(getSpecialization());
   }, []);
   return (
     <>
+      <Helmet>
+        <title>{blog?.title}</title>
+        <meta property="og:title" content={blog?.title} />
+        <meta property="og:image" content={blog?.cover} />
+        <meta property="og:url" content={url} />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="Shezlong Clone" />
+        <meta property="og:locale" content={locale === 'ar' ? 'ar_EG' : ' en_US'} />
+
+        <meta name="twitter:title" content={blog?.title} />
+        <meta name="twitter:image" content={blog?.cover} />
+        <meta name="twitter:card" content="summary_large_image" />
+      </Helmet>
       <section className="xl:grid xl:grid-cols-2 gap-8 bg-[var(--rs-gray-100)] rounded-lg shadow-lg transition">
         <article className="relative max-h-[350px]">
           <img
@@ -58,15 +74,21 @@ function BlogHeader({ blog = {} }) {
             <strong>
               <small>{t('Share_On')}:</small>
             </strong>
-            <span className="p-2 hover:bg-blue-700 hover:text-white border border-solid border-gray/10 transition rounded-full w-[25px] h-[25px] flex items-center justify-center">
-              <FaFacebookF />
-            </span>
-            <span className="p-2 hover:bg-[#006cb3] hover:text-white border border-solid border-gray/10 transition rounded-full w-[25px] h-[25px] flex items-center justify-center">
-              <FaLinkedinIn />
-            </span>
-            <span className="p-2 hover:bg-sky-400 hover:text-white border border-solid border-gray/10 transition rounded-full w-[25px] h-[25px] flex items-center justify-center">
-              <FaTwitter />
-            </span>
+            <FacebookShareButton url={url}>
+              <span className="p-2 hover:bg-blue-700 hover:text-white border border-solid border-gray/10 transition rounded-full w-[25px] h-[25px] flex items-center justify-center">
+                <FaFacebookF />
+              </span>
+            </FacebookShareButton>
+            <LinkedinShareButton url={url}>
+              <span className="p-2 hover:bg-[#006cb3] hover:text-white border border-solid border-gray/10 transition rounded-full w-[25px] h-[25px] flex items-center justify-center">
+                <FaLinkedinIn />
+              </span>
+            </LinkedinShareButton>
+            <TwitterShareButton url={url}>
+              <span className="p-2 hover:bg-sky-400 hover:text-white border border-solid border-gray/10 transition rounded-full w-[25px] h-[25px] flex items-center justify-center">
+                <FaTwitter />
+              </span>
+            </TwitterShareButton>
           </aside>
         </article>
       </section>

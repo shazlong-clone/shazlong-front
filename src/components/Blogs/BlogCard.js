@@ -20,7 +20,7 @@ function BlogCard({ blog, loading }) {
         to={`/${i18n.resolvedLanguage}/blog/${blog?._id}`}
         className="text-gray/80 hover:no-underline hover:text-gray/80 active:no-underline no-underline"
       >
-        <BlogImage cover={blog?.cover} category={blog?.category} />
+        <BlogImage cover={blog?.cover} category={blog?.category} id={blog?._id}  />
         <div className="px-2 pt-3 pb-5">
           <h6 className="mt-2 mb-5 group-hover:text-cyan transition cursor-pointer">{blog?.title}</h6>
           <BlogInfo blog={blog} />
