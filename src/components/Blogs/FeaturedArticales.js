@@ -47,7 +47,7 @@ function FeaturedArticles() {
                 height="100%"
                 className="object-cover rounded-t-lg xl:rounded-l-lg xl:rounded-t-none"
                 src={featuredBlog?.cover}
-                alt="dd"
+                alt="cover"
               />
               <div className="absolute bg-[var(--rs-gray-100)]0 top-0 left-0 w-full h-full text-white rounded-t-lg xl:rounded-l-lg xl:rounded-t-none overflow-hidden">
                 <span className="bg-[var(--rs-bg-card)] text-[var(--rs-primary-500)] rounded-3xl font-bold px-3 py-2 absolute left-3 top-3 text-sm">
