@@ -72,7 +72,7 @@ function FeaturedArticles() {
               </div>
             </Link>
           </article>
-          <article className="xl:grid xl:grid-rows-[auto_1fr_auto] p-2">
+          <article className="xl:grid xl:grid-rows-[auto_1fr_auto]">
             <h3 className="leading-9 mt-3 lg:mb-5">
               <Link
                 to={`/${locale}/blog/${featuredBlog?._id}`}

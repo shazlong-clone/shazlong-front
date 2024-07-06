@@ -17,7 +17,7 @@ function Blogs() {
           ?.filter(Boolean)
           ?.map((el) => Number(el)) ?? [],
       page: searchParams.get('page') ? Number(searchParams.get('page')) : 1,
-      size: searchParams.get('size') ? Number(searchParams.get('size')) : 10,
+      size: searchParams.get('size') ? Number(searchParams.get('size')) : 9,
     };
   }, [searchParams]);
   return (

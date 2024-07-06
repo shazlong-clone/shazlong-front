@@ -3,31 +3,16 @@ import SunEditor from 'suneditor-react';
 import 'suneditor/dist/css/suneditor.min.css';
 import { sunEditorArOptions, sunEditorEnOptions } from '../../../assets/constants';
 import { useTranslation } from 'react-i18next';
-import {
-  Breadcrumb,
-  Button,
-  Col,
-  FlexboxGrid,
-  Form,
-  Grid,
-  Input,
-  InputGroup,
-  InputNumber,
-  Loader,
-  Panel,
-  Row,
-  SelectPicker,
-  Uploader,
-} from 'rsuite';
+import { Breadcrumb, Button, Col, Form, Grid, Input, InputGroup, InputNumber, Loader, Panel, Row, SelectPicker } from 'rsuite';
 import { Schema } from 'rsuite';
 import { useDispatch, useSelector } from 'react-redux';
 import { getSpecialization } from '../../../features/shared/sharedActions';
 import { Link, useNavigate } from 'react-router-dom';
-import CameraRetroIcon from '@rsuite/icons/legacy/CameraRetro';
 import useSubmition from '../../../hooks/useSubmit';
 import { addAricle, getBlog } from '../../../features/blog/blogAction';
+import empty from '../../../assets/images/empty.jpg';
 
-function WriteBlog({id}) {
+function WriteBlog({ id }) {
   const [value, setValue] = useState('');
   const { i18n, t } = useTranslation();
   const locale = i18n.resolvedLanguage;
@@ -52,7 +37,7 @@ function WriteBlog({id}) {
     if (!value?.replace(/<div><br><\/div>/g, '')?.trim()) {
       setBodyError(t('Body_Required'));
     }
-    if (!fileList?.length) {
+    if (!formValue?.cover) {
       setImgError(t('Cover_Required'));
     }
     if (!formRef.current.check()) {
@@ -62,29 +47,29 @@ function WriteBlog({id}) {
     const params = {
       ...formValue,
       id: id,
-      durationOfReading: formValue?.durationOfReading,
-      cover: fileList[0]?.url || fileList[0]?.blobFile,
       body: value,
     };
+
     const formData = new FormData();
     for (const key in params) {
-      formData.append(key, params[key]);
+      if (params[key]) {
+        formData.append(key, params[key]);
+      }
     }
+
     setSubmitLoading(true);
     const res = await submit(addAricle, formData, { showLoader: true, showToast: true });
     setSubmitLoading(false);
     if (res?.payload?.status) {
       setFormValue({});
       setValue('');
-      setFileList([]);
-      navigate('/'+ locale + '/doctor/my-blogs')
+      navigate('/' + locale + '/doctor/my-blogs');
     }
   };
   const [submitLoading, setSubmitLoading] = useState(false);
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const { specializationList } = useSelector((state) => state?.shared);
-  const [fileList, setFileList] = useState(null);
   useEffect(() => {
     dispatch(getSpecialization());
     if (id) {
@@ -95,14 +80,8 @@ function WriteBlog({id}) {
             durationOfReading: res?.payload?.result?.durationOfReading,
             title: res?.payload?.result?.title,
             category: res?.payload?.result?.category,
+            cover: res?.payload?.result?.cover,
           });
-          setFileList([
-            {
-              name: 'cover',
-              fileKey: 1,
-              url: res?.payload?.result?.cover,
-            },
-          ]);
           setValue(res?.payload?.result?.body);
         })
         .finally(() => setLoading(false));
@@ -118,30 +97,24 @@ function WriteBlog({id}) {
         <Breadcrumb.Item active>{t('Blog')}</Breadcrumb.Item>
       </Breadcrumb>
       <Panel className="bg-[var(--rs-bg-card)] overflow-hidden write-blog">
-        <FlexboxGrid style={{ marginBottom: '20px' }}>
-          <Col xs={24}>
-            <Uploader
-              listType="picture"
-              multiple={false}
-              fileList={fileList}
-              autoUpload={false}
-              onChange={(v) => {
-                setFileList(v);
-                setImgError(null);
-              }}
-              accept="image/png, image/jpeg"
-              className="write-blog-img"
-            >
-              <button style={fileList?.length >= 1 ? { display: 'none' } : {}}>
-                <CameraRetroIcon />
-              </button>
-            </Uploader>
-            <Form.ErrorMessage show={Boolean(imgError)}>{imgError}</Form.ErrorMessage>
-          </Col>
-        </FlexboxGrid>
         <Form className="mb-5" ref={formRef} onChange={setFormValue} formValue={formValue} fluid model={model}>
           <Grid fluid>
             <Row>
+              <Col xs={24}>
+                <Form.Group controlId="title">
+                  <Form.ControlLabel>{t('Cover')}</Form.ControlLabel>
+                  <Form.Control className='ltr' placeholder={t('Cover')} name="cover" accepter={Input} block />
+                </Form.Group>
+                <img
+                  src={formValue?.cover ?? empty}
+                  onError={() => {
+                    setFormValue({ ...formValue, cover: 'https://www.casele.ro/images/empty.jpg' });
+                  }}
+                  alt="cover"
+                  className="w-full rounded-xl mb-5 h-[240px] object-cover"
+                />
+                <Form.ErrorMessage show={Boolean(imgError)}>{imgError}</Form.ErrorMessage>
+              </Col>
               <Col xs={24} md={12} lg={8}>
                 <Form.Group controlId="title">
                   <Form.ControlLabel>{t('Title')}</Form.ControlLabel>
@@ -192,7 +165,7 @@ function WriteBlog({id}) {
           {t('Save')}
         </Button>
       </Panel>
-      {loading ? <Loader className="z-[1000000000] fixed" backdrop content="loading..." vertical /> : ''}
+      {loading ? <Loader className="z-[1000000000] fixed" backdrop content={t('Loading')} vertical /> : ''}
     </>
   );
 }

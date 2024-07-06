@@ -36,7 +36,6 @@ const { Column, HeaderCell, Cell } = Table;
 function MyBlogs() {
   const { t, i18n } = useTranslation();
   const [loading, setLoading] = useState(false);
-  const [err, setErr] = useState('');
   const submit = useSubmition();
   const { profile } = useSelector((state) => state?.doctor);
   const blogs = useSelector((state) => state?.doctor?.blogs?.data);
@@ -68,7 +67,7 @@ function MyBlogs() {
             {dataKey === 'all' ? (
               ''
             ) : (
-              <Dropdown.Item onClick={() => navigate('/' + locale + '/doctor/blog?id=' + rowData?._id)}>
+              <Dropdown.Item onClick={() => navigate('/' + locale + '/doctor/blog/' + rowData?._id)}>
                 {t('Edit')}
               </Dropdown.Item>
             )}
@@ -163,9 +162,8 @@ function MyBlogs() {
   };
   useEffect(() => {
     setLoading(true);
-    submit(getDoctorBlogs, {}, { showToast: false, showLoader: false })
+    submit(getDoctorBlogs, {page:1,size:5}, { showToast: false, showLoader: false })
       .catch((err) => {
-        setErr('internal_server_error');
       })
       .finally(() => {
         setLoading(false);
@@ -290,11 +288,21 @@ function MyBlogs() {
           total={total}
           boundaryLinks={true}
           limit={limit}
-          limitOptions={[30, 60, 100, 500]}
+          limitOptions={[5, 10, 15, 20]}
           maxButtons={5}
           activePage={currentPage || 1}
-          onChangePage={(page) => submit(getDoctorBlogs, { page, size: limit }, { showToast: false, showLoader: false })}
-          onChangeLimit={(limit) => submit(getDoctorBlogs, { size: limit, page: 1 }, { showToast: false, showLoader: false })}
+          onChangePage={(page) => {
+            setLoading(true)
+            submit(getDoctorBlogs, { page, size: limit }, { showToast: false, showLoader: false }).finally(()=>{
+              setLoading(false)
+            })
+          }}
+          onChangeLimit={(limit) => {
+            setLoading(true)
+            submit(getDoctorBlogs, { size: limit, page: 1 }, { showToast: false, showLoader: false }).finally(()=>{
+              setLoading(false)
+            })
+          }}
         />
       </Panel>
     </>

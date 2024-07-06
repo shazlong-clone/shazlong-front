@@ -10,7 +10,7 @@ import { RemoveNullKeys } from '../../utils/fn';
 import clsx from 'clsx';
 
 function SearchedArticles({ params }) {
-  const limitOptions = [5, 10, 20];
+  const limitOptions = [5, 10, 15];
   const {
     t,
     i18n: { resolvedLanguage: locale },
