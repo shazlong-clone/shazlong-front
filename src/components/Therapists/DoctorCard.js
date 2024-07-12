@@ -14,8 +14,10 @@ import { IoMdMale } from 'react-icons/io';
 import { IoMdFemale } from 'react-icons/io';
 import { genders } from '../../assets/constants';
 
-function DoctorCard(props) {
-  const doctor = useMemo(() => props.doctor, []);
+function DoctorCard({doctor}) {
+  if(doctor?._id === '6606c002208081afead0faa4'){
+    console.log(doctor)
+  }
   const { t } = useTranslation();
   const isMobile = useMediaQuery('md');
   const { specializationList, prefixesList, countries, languages } = useSelector((state) => state?.shared);
@@ -24,7 +26,7 @@ function DoctorCard(props) {
   const prefix = prefixesList?.find((pref) => pref?.id === doctor?.prefix);
   const navigate = useNavigate();
   return (
-    <section key={Math.random()} className="bg-[var(--rs-bg-card)] rounded-3xl mt-3 p-6 text-sm lg:mb-5 lg:mt-0 overflow-hidden">
+    <section className="bg-[var(--rs-bg-card)] rounded-3xl mt-3 p-6 text-sm lg:mb-5 lg:mt-0 overflow-hidden">
       <div className="flex gap-5">
         <Link to={`/${i18n.resolvedLanguage}/thearpist-profile/${doctor?._id}`}>
           <span className={clsx('custom-badge', doctor?.isOnline && 'green-bage')}>

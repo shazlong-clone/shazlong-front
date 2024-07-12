@@ -7,6 +7,7 @@ import DoctorCard from './DoctorCard';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import NoDataFound from '../Shared/NoDataFound';
 export const pageSize = 6;
+const cardContainerClassName = 'lg:grid lg:grid-cols-[1fr_1fr] lg:gap-2 font-[500] lg:mb-18';
 const LoadinCard = () => {
   return Array(2)
     .fill('')
@@ -29,19 +30,16 @@ function TherapistsCard() {
     dispatch(getPrefix());
     dispatch(getSpecialization());
   }, []);
-  const CardContainer = ({ children }) => {
-    return <main className="lg:grid lg:grid-cols-[1fr_1fr] lg:gap-2 font-[500] lg:mb-18">{children}</main>;
-  };
   const doctorSearchParams = useSelector((state) => state?.shared?.doctorSearchParams);
 
   return (
     <>
       {doctorSearchLoading ? (
-        <CardContainer>
+        <main className={cardContainerClassName}>
           <LoadinCard />
           <LoadinCard />
           <LoadinCard />
-        </CardContainer>
+        </main>
       ) : !doctors?.result?.length ? (
         <NoDataFound />
       ) : (
@@ -52,9 +50,9 @@ function TherapistsCard() {
           }}
           hasMore={doctors?.totalPages !== doctors?.currentPage}
           loader={
-            <CardContainer>
+            <main className={cardContainerClassName}>
               <LoadinCard />
-            </CardContainer>
+            </main>
           }
           endMessage={
             <p style={{ textAlign: 'center' }}>
@@ -62,15 +60,15 @@ function TherapistsCard() {
             </p>
           }
         >
-          <CardContainer>
-            {doctors?.result?.map((doctor, i) => {
+          <main className={cardContainerClassName}>
+            {doctors?.result?.map((doctor) => {
               return (
-                <Fragment key={i}>
+                <Fragment key={doctor?._id}>
                   <DoctorCard doctor={doctor} />
                 </Fragment>
               );
             })}
-          </CardContainer>
+          </main>
         </InfiniteScroll>
       )}
     </>
