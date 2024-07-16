@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { ButtonToolbar, Schema, Form, Button, Input, InputGroup } from 'rsuite';
 const { Group, HelpText, Control, ControlLabel } = Form;
 
 function BlogFooter() {
+  const { t } = useTranslation();
+
   const model = Schema.Model({
     message: Schema.Types.StringType().isRequired('This field is required.'),
   });
@@ -21,14 +24,13 @@ function BlogFooter() {
         <article className="mb-5">
           <Form fluid onChange={setFormValue} formValue={formValue} model={model}>
             <Group controlId="message">
-              <ControlLabel>Leave Message</ControlLabel>
-              <Control className="xl:min-w-[500px]" placeholder="message" rows={5} name="message" accepter={Textarea} />
-              <HelpText>*messae is required</HelpText>
+              <ControlLabel>{t('Leave_Comment')}</ControlLabel>
+              <Control className="xl:min-w-[500px]" placeholder={t('Comment')} rows={5} name="message" accepter={Textarea} />
             </Group>
             <Group>
               <ButtonToolbar>
                 <Button onClick={onSubmit} appearance="primary">
-                  Comment
+                  {t('Add')}
                 </Button>
               </ButtonToolbar>
             </Group>
@@ -39,11 +41,11 @@ function BlogFooter() {
           // eslint-disable-next-line quotes
           style={{ backgroundImage: "url('/img/news-letter-bg.png')", backgroundSize: 'cover' }}
         >
-          <strong className="mb-3 block">subscribe to our news letter</strong>
+          <strong className="mb-3 block">{t('subscribe_to_our_newsletter')}</strong>
           <InputGroup>
-            <Input placeholder="email" />
+            <Input placeholder={t('Email')} />
             <InputGroup.Button className="font-[500]" appearance="primary">
-              Subscribe
+              {t('Subscribe')}
             </InputGroup.Button>
           </InputGroup>
         </article>

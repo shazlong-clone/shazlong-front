@@ -60,7 +60,7 @@ function FeaturedArticles() {
                       : specializationList?.find((el) => el?.id === featuredBlog?.category)?.name}
                   </span>
                   <div className="absolute bottom-0 left-0 p-2 xl:translate-y-[100%] group-hover:translate-y-[0%] transition">
-                    <span className="text-sm">{t('shred_on')}:</span>
+                    <span className="text-sm">{t('Shred_On')}:</span>
                     <p className="flex items-center gap-2">
                       <FacebookShareButton url={url}>
                         <aside className="p-2 rounded-full border border-white border-solid w-[30px] h-[30px] flex justify-center items-center cursor-pointer  hover:bg-blue-700 hover:text-white">

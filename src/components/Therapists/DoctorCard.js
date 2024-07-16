@@ -14,8 +14,8 @@ import { IoMdMale } from 'react-icons/io';
 import { IoMdFemale } from 'react-icons/io';
 import { genders } from '../../assets/constants';
 
-function DoctorCard({doctor}) {
-  if(doctor?._id === '6606c002208081afead0faa4'){
+function DoctorCard({ doctor }) {
+  if (doctor?._id === '6606c002208081afead0faa4') {
     console.log(doctor)
   }
   const { t } = useTranslation();
@@ -47,7 +47,7 @@ function DoctorCard({doctor}) {
               {i18n.resolvedLanguage === 'ar' ? doctor?.fullArName : doctor?.fullEnName}
             </p>
             <p className="flex gap-1 mt-0 items-center">
-              <span className="max-w-[160px] whitespace-nowrap overflow-hidden text-ellipsis hover:whitespace-normal pt-[6px]">
+              <span className="max-w-[160px] whitespace-normal overflow-hidden text-ellipsis hover:whitespace-normal pt-[6px]">
                 {country?.country_name}
               </span>
               <span className={country?.country_flag} />
@@ -77,22 +77,22 @@ function DoctorCard({doctor}) {
         {!doctor?.specialization?.length
           ? 'no Interstes Found'
           : doctor?.specialization?.slice(0, 2)?.map((id) => {
-              return (
-                <section
-                  key={Math.random()}
-                  className="
+            return (
+              <section
+                key={Math.random()}
+                className="
                   bg-[var(--rs-green-50)] text-[var(--rs-green-800)] rounded-xl px-3 py-1 
                   whitespace-nowrap overflow-hidden text-ellipsis 
                   hover:whitespace-normal hover:overflow-visible cursor-pointer
                   text-[12px] lg:text-md
                   "
-                >
-                  {i18n.resolvedLanguage === 'ar'
-                    ? specializationList?.find((spec) => spec?.id === id)?.ar_name
-                    : specializationList?.find((spec) => spec?.id === id)?.name}
-                </section>
-              );
-            })}
+              >
+                {i18n.resolvedLanguage === 'ar'
+                  ? specializationList?.find((spec) => spec?.id === id)?.ar_name
+                  : specializationList?.find((spec) => spec?.id === id)?.name}
+              </section>
+            );
+          })}
       </div>
       <div className="mt-4">
         <section className="flex gap-2 flex-wrap mx-2 items-center">
@@ -125,13 +125,13 @@ function DoctorCard({doctor}) {
         {!doctor?.feez?.length
           ? 'no feez found'
           : doctor?.feez?.map((feezItem) => {
-              return (
-                <>
-                  <span className="text-cyan font-bold"> EGP {feezItem?.amount} </span>
-                  <span>/ {feezItem?.duration} mins </span>
-                </>
-              );
-            })}
+            return (
+              <>
+                <span className="text-cyan font-bold"> EGP {feezItem?.amount} </span>
+                <span>/ {feezItem?.duration} mins </span>
+              </>
+            );
+          })}
       </div>
       <div className="mt-5 lg:mt-10">
         <Stack justifyContent="flex-end" spacing={10}>

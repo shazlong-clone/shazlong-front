@@ -39,7 +39,7 @@ function BlogHeader({ blog = {} }) {
         <article className="relative max-h-[350px]">
           <img
             width="100%"
-            className="object-cover rounded-t-lg xl:rounded-r-none xl:rounded-l-lg max-h-[350px]"
+            className="object-cover rounded-t-lg xl:rounded-r-none xl:rounded-l-lg h-[350px]"
             src={blog?.cover ?? blogimg}
           />
           <span className=" text-cyan bg-[var(--rs-bg-card)] rounded-3xl font-bold px-3 py-2 absolute left-3 top-3 text-sm">

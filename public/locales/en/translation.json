@@ -354,5 +354,12 @@
   "Please_Select_Blog": "Please Select Blog",
   "Search_Result": "Search Result",
   "Reload": "Reload",
-  "Cover": "Cover"
+  "Cover": "Cover",
+  "Shred_On": "Shred On",
+  "Blog_NotFound": "Blog Not Found",
+  "Leave_Comment": "Leave Comment",
+  "Message": "Message",
+  "Comment": "Comment",
+  "subscribe_to_our_newsletter": "Subscribe to our newsletter",
+  "Subscribe": "Subscribe"
 }

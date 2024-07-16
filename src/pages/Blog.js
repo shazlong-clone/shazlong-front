@@ -5,16 +5,18 @@ import BlogSlider from '../components/Blog/BlogSlider';
 import BlogFooter from '../components/Blog/BlogFooter';
 import { t } from 'i18next';
 import { useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { getBlog } from '../features/blog/blogAction';
 import { Loader } from 'rsuite';
 
+import NoDataFound from '../components/Shared/NoDataFound';
+import { useTranslation } from 'react-i18next';
 function Blog() {
   const [blog, setBlog] = useState();
   const [loading, setLoading] = useState();
   const dispatch = useDispatch();
   const { id } = useParams();
-
+  const { i18n: { resolvedLanguage: locale } } = useTranslation();
   useEffect(() => {
     setLoading(true);
     dispatch(getBlog(id))
@@ -35,9 +37,23 @@ function Blog() {
       <div className="container">
         <InternalHeader>{t('Blog')}</InternalHeader>
         <div className="py-5">
-          <BlogHeader blog={blog} />
-          <BlogSlider blog={blog} />
-          <BlogFooter />
+          {
+            !blog?.title ?
+              <>
+                <NoDataFound>
+                  {t('Blog_NotFound')}
+                </NoDataFound>
+                <div className='text-center'>
+                  <Link to={'/' + locale + '/blogs'}>{t('Blog')}</Link>
+                </div>
+              </>
+              : <>
+                <BlogHeader blog={blog} />
+                <BlogSlider blog={blog} />
+                <BlogFooter />
+              </>
+          }
+
         </div>
       </div>
     </main>

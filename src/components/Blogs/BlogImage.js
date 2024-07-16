@@ -16,7 +16,7 @@ function BlogImage({ category, cover, className, id, ...rest }) {
       <img width="100%" height="100%" className="object-cover rounded-t-lg" src={cover} alt="cover" />
       <div className="absolute bg-[var(--rs-gray-100)]0 top-0 left-0 w-full h-full text-white rounded-t-lg overflow-hidden">
         <span className="bg-[var(--rs-bg-card)] text-[var(--rs-primary-500)] rounded-3xl font-bold px-3 py-2 absolute left-3 top-3 text-sm">
-          {locale === 'arurl'
+          {locale === 'ar'
             ? specializationList?.find((el) => el?.id === category)?.ar_name
             : specializationList?.find((el) => el?.id === category)?.name}
         </span>

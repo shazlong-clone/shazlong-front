@@ -3,7 +3,7 @@
   "Sign_In": "تسجيل الدخول",
   "Therapists_List": "الاطباء",
   "Psychometer": "مقياس الصحة",
-  "Blog": "مدونة",
+  "Blog": "المدونة",
   "Pre_Hero_Title": "تحدث معنا لنساعدك",
   "Talk": "تحدث",
   "_To_Your_Therapist_Online_Privately": " الي طبيبك النفسي بشكل خاص",
@@ -368,5 +368,11 @@
   "Please_Select_Blog": "الرجاء تحديد مقالة",
   "Search_Result": " نتائج البحث",
   "Reload": "إعادة التحميل",
-  "Cover": "صورة الغلاف"
+  "Cover": "صورة الغلاف",
+  "Shred_On": "مشاركة علي",
+  "Blog_NotFound": "عفوا المقال غير متاح حاليا",
+  "Leave_Comment": "اترك تعليق",
+  "Comment": "تعليق",
+  "subscribe_to_our_newsletter": "اشترك في نشرتنا الإخبارية",
+  "Subscribe": "اشترك"
 }
