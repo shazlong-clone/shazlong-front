@@ -361,5 +361,7 @@
   "Message": "Message",
   "Comment": "Comment",
   "subscribe_to_our_newsletter": "Subscribe to our newsletter",
-  "Subscribe": "Subscribe"
+  "Subscribe": "Subscribe",
+  "Reply": "Reply",
+  "Min":"Min"
 }

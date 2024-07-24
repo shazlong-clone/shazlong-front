@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import InternalHeader from '../components/Shared/InternalHeader';
 import BlogHeader from '../components/Blog/BlogHeader';
 import BlogSlider from '../components/Blog/BlogSlider';
-import BlogFooter from '../components/Blog/BlogFooter';
+import BlogComments from '../components/Blog/BlogComments.js';
 import { t } from 'i18next';
 import { useDispatch } from 'react-redux';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { getBlog } from '../features/blog/blogAction';
 import { Loader } from 'rsuite';
 
@@ -50,7 +50,7 @@ function Blog() {
               : <>
                 <BlogHeader blog={blog} />
                 <BlogSlider blog={blog} />
-                <BlogFooter />
+                <BlogComments />
               </>
           }
 

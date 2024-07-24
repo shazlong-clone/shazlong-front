@@ -18,3 +18,13 @@ export const deleteBlog = createAsyncThunk('deleteBlog', async (params) => {
   const res = await doctorService.delete('/api/v1/blogs', { params });
   return res.data;
 });
+export const creatComment = async (params, id) => {
+  const res = await service.post(`/api/v1/blogs/${id}/comments`, params);
+  return res.data;
+};
+
+export const getComments = async (id) => {
+  const res = await service.get(`/api/v1/blogs/${id}/comments`);
+  return res.data;
+};
+

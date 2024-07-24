@@ -468,3 +468,60 @@ a:active {
 .write-blog .rs-uploader-picture .rs-uploader-trigger-btn {
   height: 300px;
 }
+
+.comment::after {
+  content: '';
+  position: absolute;
+  left: 20px;
+  top: 40px;
+  bottom: 5px;
+  width: 2px;
+  background: var(--rs-gray-400);
+  z-index: 1;
+}
+[dir='rtl'] .comment::after {
+  right: 20px;
+}
+.reply::before {
+  content: '';
+  position: absolute;
+  inset-inline-start: 20px;
+  top: -2px;
+  height: 20px;
+  width: 30px;
+  border-inline-start: 2px solid var(--rs-gray-400);
+  border-bottom: 2px solid var(--rs-gray-400);
+  border-end-start-radius: 10px;
+  left: -20px;
+  z-index: 3;
+}
+[dir='rtl'] .reply::before {
+  right: -20px;
+}
+
+.last-comment::after {
+  content: '';
+  position: absolute;
+  left: -20px;
+  top: 20px;
+  bottom: 0;
+  width: 2px;
+  background: white;
+  z-index: 3;
+}
+[dir='rtl'] .last-comment::after {
+  right: -20px;
+}
+.last-comment::before {
+  content: '';
+  position: absolute;
+  left: -20px;
+  top: 5px;
+  bottom: 0px;
+  width: 2px;
+  background: white;
+  z-index: 2;
+}
+[dir='rtl'] .reply>div::before {
+  right: -20px;
+}

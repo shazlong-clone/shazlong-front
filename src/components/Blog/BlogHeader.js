@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import blogimg from '../../assets/images/blogimg.jpg';
 import person from '../../assets/images/person.svg';
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { FaFacebookF, FaLinkedinIn, FaTwitter } from 'react-icons/fa';
 import { AiFillEye } from 'react-icons/ai';
 import { VscBook } from 'react-icons/vsc';
@@ -63,10 +63,10 @@ function BlogHeader({ blog = {} }) {
           </aside>
           <aside className="flex gap-2 my-2 justify-between text-sm font-[500] mb-6">
             <span>{moment(blog?.createdAt).isValid() ? moment(blog?.createdAt).format('MMMM D, YYYY') : ''}</span>
-            <div className="flex gap-1">
+            <div className="flex gap-1 items-center">
               <span className="pt-1">{blog?.numOfReader}</span>
               <AiFillEye className="text-xl" />
-              <span className="pt-1">{blog?.durationOfReading}</span>
+              <span className="pt-1">{blog?.durationOfReading} {t('Min')}</span>
               <VscBook className="text-xl text-gray" />
             </div>
           </aside>
