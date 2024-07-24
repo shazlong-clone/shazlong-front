@@ -5,13 +5,14 @@ import { Button, ButtonToolbar, Form, Input, Loader, Message, Schema, toaster } 
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import { creatComment, getComments } from '../../features/blog/blogAction';
+import EditComment from './EditComment';
 const { Group, Control, ControlLabel } = Form;
 const Textarea = React.forwardRef((props, ref) => <Input style={{ wudth: '100%' }} {...props} as="textarea" ref={ref} />);
 
 function BlogComments() {
     const { t } = useTranslation();
     const { id } = useParams();
-    const [comments, setComments] = useState()
+    const [allComments, setComments] = useState()
     const [loading, setLoading] = useState();
     const [formValue, setFormValue] = useState({
         message: '',
@@ -39,10 +40,11 @@ function BlogComments() {
             );
         });
     };
-    const handelGetComments = async (id) => {
+    const handelGetComments = async (id, callBack) => {
         getComments(id).then((res) => {
             if (res.status) {
                 setComments(res?.data ?? []);
+                callBack();
             }
         }).catch(() => {
             toaster.push(
@@ -66,21 +68,27 @@ function BlogComments() {
         return <ul className={clsx('list-none [&>li]:mb-2 comments', isReply ? 'ps-[calc(40px + 0.5rem)' : 'ps-0')}>
             {
                 comments?.map((comment) => {
-                    if (comment?.replies?.length) {
-                        return <li key={comment?._id} className={clsx('relative', isReply && 'reply', 'comment')}>
-                            <div className={clsx(comment?.lastReply && 'last-comment')}>
-                                <Comment handelGetComments={handelGetComments} comment={comment} />
-                                {comment?.replies?.length ? renderComments(comment?.replies, true) : null}
-                            </div>
-                        </li>
-                    } else {
-                        return <li key={comment?._id} className={clsx(isReply ? 'reply relative' : '')}>
-                            <div className={clsx(comment?.lastReply && 'last-comment')}>
-                                <Comment handelGetComments={handelGetComments} comment={comment} />
-                            </div>
-                        </li>
-                    }
+                    return <li key={comment?._id} className={
+                        clsx('relative', isReply && 'reply', comment?.replies?.length && 'comment')
+                    }>
+                        <div className={clsx(comment?.lastReply && 'last-comment')}>
+                            {
+                                comment?.isEdited ?
+                                    <EditComment
+                                        handelGetComments={handelGetComments}
+                                        comment={comment}
+                                        allComments={allComments}
+                                        setComments={setComments} />
+                                    : <Comment
+                                        allComments={allComments}
+                                        setComments={setComments}
+                                        handelGetComments={handelGetComments}
+                                        comment={comment} />
+                            }
 
+                            {comment?.replies?.length ? renderComments(comment?.replies, true) : null}
+                        </div>
+                    </li>
                 })
             }
         </ul>
@@ -95,7 +103,7 @@ function BlogComments() {
             {
                 loading ?
                     <div className='flex justify-center'><Loader /></div>
-                    : comments?.length ? renderComments(comments, false)
+                    : allComments?.length ? renderComments(allComments, false)
                         : <h1></h1>
             }
 

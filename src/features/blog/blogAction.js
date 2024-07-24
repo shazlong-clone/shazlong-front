@@ -27,4 +27,7 @@ export const getComments = async (id) => {
   const res = await service.get(`/api/v1/blogs/${id}/comments`);
   return res.data;
 };
-
+export const editComment = async (params, id) => {
+  const res = await service.post(`/api/v1/comments/${id}`, params);
+  return res.data;
+};
