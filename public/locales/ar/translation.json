@@ -376,5 +376,13 @@
   "subscribe_to_our_newsletter": "اشترك في نشرتنا الإخبارية",
   "Subscribe": "اشترك",
   "Reply": "رد",
-  "Min":"دقيقة"
+  "Min": "دقيقة",
+  "Comments": "التعليقات",
+  "Load_More": "تحميل المزيد",
+  "View_Replies_zero": "لا يوجد ردور",
+  "View_Replies_one": "عرض رد واحد",
+  "View_Replies_two": "عرض ردان",
+  "View_Replies_few": "عرض {{count}} ردود",
+  "View_Replies_many": "عرض {{count}} رد",
+  "View_Replies_other": "عرض {{count}} رد"
 }

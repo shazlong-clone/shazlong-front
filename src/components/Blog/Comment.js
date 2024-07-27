@@ -7,7 +7,7 @@ import clsx from 'clsx';
 import Reply from './Reply';
 import { useSelector } from 'react-redux';
 
-const Comment = ({ comment, handelGetComments, allComments, setComments }) => {
+const Comment = ({ comment, allComments, setComments, replies }) => {
     const { t } = useTranslation();
     const [active, setActive] = useState(false);
     const { user } = useSelector(state => state?.auth);
@@ -26,12 +26,12 @@ const Comment = ({ comment, handelGetComments, allComments, setComments }) => {
             setComments(allComments);
         }
     }
-    return <section className={clsx('grid grid-cols-[40px_1fr] gap-2 relative')}>
+    return <section className={clsx('grid grid-cols-[40px_1fr] gap-2')}>
         <Avatar src={comment?.auther?.photo} circle className='z-10' />
         <article>
             <div className='bg-[var(--rs-gray-100)] rounded-xl p-2 block'>
                 <b>{comment?.auther?.name}</b>
-                <div className={clsx(comment?.isEdited && 'text-red-500')}>
+                <div>
                     {
                         comment?.text
                     }
@@ -40,17 +40,22 @@ const Comment = ({ comment, handelGetComments, allComments, setComments }) => {
             <div className='flex gap-5 [&>a]:text-[var(--rs-gray-500)] mt-2'>
                 <Link>{moment(comment?.date)?.fromNow()}</Link>
                 <Link onClick={() => {
+                    comment.replying = !comment.replying;
                     setActive(!active);
+                    setComments([...allComments])
                 }}>{t('Reply')}</Link>
                 {
                     user?._id === comment?.auther?._id ? <Link onClick={handelEdit}>{t('Edit')}</Link> : ''
                 }
             </div>
-            <div className={clsx(!active && 'hidden')}>
+            <div className={clsx(!active ? 'hidden' : 'relative')}>
                 <Reply
                     replyTo={comment?._id}
-                    handelGetComments={handelGetComments}
+                    replies={replies}
                     active={active}
+                    allComments={allComments}
+                    setComments={setComments}
+                    comment={comment}
                     setActive={setActive} />
             </div>
 

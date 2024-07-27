@@ -7,7 +7,7 @@ import { editComment } from '../../features/blog/blogAction';
 import { IoSend } from 'react-icons/io5';
 
 
-function EditComment({ handelGetComments, comment, setComments, allComments }) {
+function EditComment({ comment, setComments, allComments }) {
     const [commentText, setCommentText] = useState(comment?.text);
     const textArea = useRef(null);
     const { user } = useSelector(state => state?.auth);
@@ -19,15 +19,17 @@ function EditComment({ handelGetComments, comment, setComments, allComments }) {
         }
         setLoading(true)
         editComment(params, comment?._id).then((res) => {
-            if (res.status) {
-                handelGetComments(comment?.blog, ()=>setLoading(false));
-            }
+            comment.text = res?.comment?.text;
+            comment.isEdited = false;
+            setComments([...allComments]);
         }).catch(() => {
             toaster.push(
                 <Message type="error" closable showIcon>
                     {t('internal_server_error')}
                 </Message>,
             );
+        }).finally(() => {
+            setLoading(false)
         });
     }
     useEffect(() => {

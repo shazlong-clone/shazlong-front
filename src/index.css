@@ -522,6 +522,10 @@ a:active {
   background: white;
   z-index: 2;
 }
+[dir='rtl'] .last-comment::before {
+  right: -20px;
+}
+
 [dir='rtl'] .reply>div::before {
   right: -20px;
 }

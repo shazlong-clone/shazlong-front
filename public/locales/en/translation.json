@@ -363,5 +363,13 @@
   "subscribe_to_our_newsletter": "Subscribe to our newsletter",
   "Subscribe": "Subscribe",
   "Reply": "Reply",
-  "Min":"Min"
+  "Min": "Min",
+  "Comments": "Comments",
+  "Load_More": "Load More",
+  "View_Replies_zero": "No replies",
+  "View_Replies_one": "View one reply",
+  "View_Replies_two": "View two replies",
+  "View_Replies_few": "View {{count}} replies",
+  "View_Replies_many": "View {{count}} reply",
+  "View_Replies_other": "View {{count}} replies"
 }

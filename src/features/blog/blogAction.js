@@ -23,11 +23,16 @@ export const creatComment = async (params, id) => {
   return res.data;
 };
 
-export const getComments = async (id) => {
-  const res = await service.get(`/api/v1/blogs/${id}/comments`);
+export const getComments = async (id, params) => {
+  const res = await service.get(`/api/v1/blogs/${id}/comments`, { params });
   return res.data;
 };
 export const editComment = async (params, id) => {
   const res = await service.post(`/api/v1/comments/${id}`, params);
+  return res.data;
+};
+
+export const getCommentReplies = async (id) => {
+  const res = await service.get(`/api/v1/comments/${id}/replies`);
   return res.data;
 };
