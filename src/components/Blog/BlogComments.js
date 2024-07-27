@@ -29,7 +29,8 @@ function BlogComments() {
         setAddLoading(true);
         creatComment(params, id).then((res) => {
             if (res.status) {
-                handelGetComments(id);
+
+                allComments.unshift(res?.comment)
                 setFormValue({
                     message: ''
                 });
@@ -113,20 +114,6 @@ function BlogComments() {
 
     return (
         <div>
-            <Heading level={3}>{t('Comments')}</Heading>
-            <hr />
-            {
-                allComments?.length ? renderComments(allComments, false) : ''
-            }
-            {
-                loading ?
-                    <div className='flex justify-center'><Loader /></div> :
-                    currentPage === totalPages ? '' : <Link className='text-center block' onClick={() => {
-                        handelGetComments(id, { size: 5, page: currentPage + 1 })
-                    }}>
-                        {t('Load_More')}
-                    </Link>
-            }
             <>
                 <section className="mt-10">
                     <article className="mb-5">
@@ -146,6 +133,21 @@ function BlogComments() {
                     </article>
                 </section>
             </>
+            <Heading level={3}>{t('Comments')}</Heading>
+            <hr />
+            {
+                allComments?.length ? renderComments(allComments, false) : ''
+            }
+            {
+                loading ?
+                    <div className='flex justify-center'><Loader /></div> :
+                    currentPage === totalPages ? '' : <Link className='text-center block' onClick={() => {
+                        handelGetComments(id, { size: 5, page: currentPage + 1 })
+                    }}>
+                        {t('Load_More')}
+                    </Link>
+            }
+
         </div>
     );
 }
