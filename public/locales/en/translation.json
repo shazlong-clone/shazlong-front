@@ -371,5 +371,6 @@
   "View_Replies_two": "View two replies",
   "View_Replies_few": "View {{count}} replies",
   "View_Replies_many": "View {{count}} reply",
-  "View_Replies_other": "View {{count}} replies"
+  "View_Replies_other": "View {{count}} replies",
+  "Be_Firts_Commenter": "Be Firts Commenter"
 }

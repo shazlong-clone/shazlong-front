@@ -384,5 +384,6 @@
   "View_Replies_two": "عرض ردان",
   "View_Replies_few": "عرض {{count}} ردود",
   "View_Replies_many": "عرض {{count}} رد",
-  "View_Replies_other": "عرض {{count}} رد"
+  "View_Replies_other": "عرض {{count}} رد",
+  "Be_Firts_Commenter":"كن اول المعلقين"
 }

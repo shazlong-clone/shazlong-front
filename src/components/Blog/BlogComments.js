@@ -141,11 +141,15 @@ function BlogComments() {
             {
                 loading ?
                     <div className='flex justify-center'><Loader /></div> :
-                    currentPage === totalPages ? '' : <Link className='text-center block' onClick={() => {
+                    currentPage === totalPages ? '' : 
+                    
+                    allComments?.length ?
+                    <Link className='text-center block' onClick={() => {
                         handelGetComments(id, { size: 5, page: currentPage + 1 })
                     }}>
                         {t('Load_More')}
                     </Link>
+                        : <div className='text-center'>{t('Be_Firts_Commenter')}</div>
             }
 
         </div>
