@@ -39,7 +39,7 @@ function VerifyEmailRegistration() {
     gender: null,
     country: null,
     languages: [],
-    prefix: '',
+    prefix: null,
     birthDate: null,
   });
   const [countryCode, setCountryCode] = useState('+20');
@@ -103,10 +103,11 @@ function VerifyEmailRegistration() {
     };
   });
   const locale = i18n.resolvedLanguage;
-  const prefixData = prefixList.map((item) => {
+  const prefixesList = useSelector(state => state?.shared?.prefixesList)
+  const prefixData = prefixesList?.map((item) => {
     return {
-      label: item,
-      value: item,
+      label: i18n.resolvedLanguage === 'ar' ? item?.ar_name : item?.name,
+      value: item?.id,
     };
   });
   const props = {
