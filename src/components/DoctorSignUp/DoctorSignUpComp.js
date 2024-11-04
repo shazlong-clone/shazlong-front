@@ -21,7 +21,7 @@ function SignUpComp() {
             <SignLogo />
             <strong className="mt-8 block text-cyan text-center">
               {t('Registration_Step')}
-              {i18next.resolvedLanguage === 'ar' ? ` ${(3).toLocaleString('ar-EG')}/${(1).toLocaleString('ar-EG')}` : '1/3'}
+              {i18next.resolvedLanguage === 'ar' ? ` ${(3).toLocaleString('ar-EG')}/${(1).toLocaleString('ar-EG')}` : '1/2'}
             </strong>
             <strong className="mt-4 block text-center">{t('All_fields_marked_with_*_are_required')}</strong>
             <DocSignUpForm />

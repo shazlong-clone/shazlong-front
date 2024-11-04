@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import { Button, DateRangePicker, Form, IconButton, Message, Modal, Schema, useToaster } from 'rsuite';
 import { getSlots, createSlots } from '../../../../features/doctor/doctorActions';
 
-const CellAddModal = ({ date }) => {
+const CellAddModal = ({ date, slots }) => {
   const { t } = useTranslation();
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -15,10 +15,19 @@ const CellAddModal = ({ date }) => {
   const [formValue, setFormValue] = useState();
   const model = Schema.Model({
     from_to: Schema.Types.MixedType()
-      .isRequired('Required.')
+      .isRequired('required')
       .addRule((value) => {
         return moment(value[1]).isAfter(value[0]);
-      }, 'from_must_be_grater_than_to'),
+      }, t('from_must_be_grater_than_to'))
+      .addRule(value =>{
+       return slots?.some(slot =>{
+        const momFrom = moment(slot?.from)
+        const momTo = moment(slot?.to)
+          return (moment(value[0]).isAfter(momFrom) && moment(momTo).isAfter(momTo))
+          ||
+           (moment(slot?.from).isAfter() && moment(slot?.to).isAfter(value[0]))
+        })
+      }, t('Error'))
   });
   const [loading, setLoading] = useState(false);
   const toaster = useToaster();
@@ -28,7 +37,7 @@ const CellAddModal = ({ date }) => {
     if (!formRef.current.check()) return;
     const from = formValue?.from_to[0];
     const to = formValue?.from_to[1];
-
+    // here is the logic
     const params = {
       slots: [
         {
@@ -88,11 +97,14 @@ const CellAddModal = ({ date }) => {
           <Form model={model} ref={formRef} formValue={formValue} onChange={setFormValue} fluid>
             <Form.Group controlId="slots">
               <Form.Control
+                showHeader={false}
+                label={t('Session_Start_End_Date')}
                 placeholder={t('Slot_Date')}
                 name="from_to"
                 ranges={[]}
                 showMeridian
                 block
+                editable={false}
                 accepter={DateRangePicker}
                 format="hh:mm aa"
               />

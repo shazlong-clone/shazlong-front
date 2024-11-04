@@ -16,7 +16,7 @@ function Slots() {
   function renderCell(date) {
     return (
       <>
-        <AddSlot date={date} />
+        <AddSlot slots={slots?.filter(slot => moment(date?.toISOString()).isSame(slot?.from, 'day'))} date={date} />
         <div className="grid gap-2 mt-5">
           {slots
             ?.filter((slot) => !slot?.isDeleted)

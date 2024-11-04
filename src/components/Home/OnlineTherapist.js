@@ -45,7 +45,7 @@ function OnlineTherapist() {
           {onlineDoctors
             ?.filter((user, i) => i < max)
             ?.map((user) => (
-              <Avatar circle key={user.name} src={user.photo} alt="img" />
+              <Avatar circle key={user?.name} src={user?.photo} alt="img" />
             ))}
           {onlineDoctors?.length <= max ? (
             ''

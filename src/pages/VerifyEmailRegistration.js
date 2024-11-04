@@ -19,7 +19,7 @@ import logo from '../assets/images/shezlong-logo.svg';
 import { useTranslation } from 'react-i18next';
 import clsx from 'clsx';
 import { Link, useNavigate } from 'react-router-dom';
-import { genders, prefixList } from '../assets/constants';
+import { genders } from '../assets/constants';
 import { API_BASE_URL } from '../config/enviroment.config';
 import { useDispatch, useSelector } from 'react-redux';
 import { verificate } from '../features/auth/authAction';
@@ -60,7 +60,7 @@ function VerifyEmailRegistration() {
         );
         localStorage.setItem('doctorToken', res.payload.token);
         localStorage.setItem('doctorVerificationCode', '');
-        navigate('/doctor');
+        navigate(`/${locale}/doctor`);
       } else {
         toaster.push(
           <Message type="error" showIcon={true} closable={true}>
@@ -113,7 +113,7 @@ function VerifyEmailRegistration() {
   const props = {
     name: 'cv',
     accept: 'image/png, image/jpeg',
-    disabledFileItem: true,
+    disabledFileItem: false,
     maxPreviewFileSize: 1,
     fileListVisible: true,
     listType: 'picture-text',
@@ -138,9 +138,10 @@ function VerifyEmailRegistration() {
           </Link>
           <p className="font-[500] text-[20px] mt-5">
             {t('Registration')}
+            &nbsp;
             <span className="text-cyan">
               {t('Step')}
-              {i18n.resolvedLanguage === 'ar' ? ` ${(2).toLocaleString('ar-EG')} / ${(3).toLocaleString('ar-EG')}` : '2/3'}
+              {i18n.resolvedLanguage === 'ar' ? ` ${(2).toLocaleString('ar-EG')} / ${(3).toLocaleString('ar-EG')}` : '2/2'}
             </span>
           </p>
           <div className="w-[50px] h-[3px] bg-[var(--rs-primary-700)] m-auto mt-5" />

@@ -22,6 +22,9 @@ const authSlice = createSlice({
       state.doctor = {};
       localStorage.setItem('doctorToken', '');
     },
+    updateDoctorPhoto: (state, action) =>{
+      state.doctor.photo = action?.payload
+    }
   },
   extraReducers: (builder) => {
     builder.addCase(signUp.fulfilled, (state, action) => {
@@ -64,5 +67,5 @@ const authSlice = createSlice({
   },
 });
 
-export const { signOut, doctorSignOut } = authSlice.actions;
+export const { signOut, doctorSignOut, updateDoctorPhoto } = authSlice.actions;
 export default authSlice.reducer;

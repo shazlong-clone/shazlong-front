@@ -2,12 +2,12 @@ import moment from 'moment';
 import { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
-import { Button, DateRangePicker, FlexboxGrid, Form, Message, Modal, Schema, useToaster } from 'rsuite';
+import { Button, FlexboxGrid, Form, Message, Modal, Schema, useToaster } from 'rsuite';
 import { deleteSlot, getSlots, updateSlot } from '../../../../features/doctor/doctorActions';
-import { MdArrowRightAlt } from 'react-icons/md';
+import { MdArrowLeft, MdArrowRight } from 'react-icons/md';
 
 const UpdateSlot = ({ date, slot }) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -17,7 +17,7 @@ const UpdateSlot = ({ date, slot }) => {
   });
   const model = Schema.Model({
     from_to: Schema.Types.MixedType()
-      .isRequired('Required.')
+      .isRequired(t('required'))
       .addRule((value) => {
         return moment(value[1]).isAfter(value[0]);
       }, 'from_must_be_grater_yjat_to'),
@@ -114,9 +114,9 @@ const UpdateSlot = ({ date, slot }) => {
         color={moment(slot.from).isSameOrAfter(moment(slot.to)) ? 'red' : slot.reserved ? 'green' : ''}
       >
         <div className="flex items-center justify-between min-w-[140px]">
-          {moment(slot.from).format('hh:mm a')}
-          <MdArrowRightAlt className="text-xl" />
-          {moment(slot.to).format('hh mm a')}
+          {moment(slot?.from).format('hh:mm a')}
+          {i18n.resolvedLanguage === 'ar' ?  <MdArrowLeft className="text-xl" /> :<MdArrowRight className="text-xl" />}
+          {moment(slot?.to).format('hh:mm a')}
         </div>
       </Button>
       <Modal open={open} onClose={handleClose}>
@@ -127,13 +127,14 @@ const UpdateSlot = ({ date, slot }) => {
           <Form model={model} ref={formRef} formValue={formValue} onChange={setFormValue} fluid>
             <Form.Group controlId="slots">
               <Form.Control
+                editable={false}
                 placeholder={t('Slot_Date')}
                 name="from_to"
                 ranges={[]}
                 showMeridian
                 block
-                accepter={DateRangePicker}
-                format="hh:mm aa"
+                accepter={TimeRanges}
+                format="HH:mm aa"
               />
             </Form.Group>
           </Form>

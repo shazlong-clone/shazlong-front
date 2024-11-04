@@ -11,7 +11,6 @@ import Experience from './components/Experience';
 import EditModal from '../components/EditModal';
 import Viewer from 'react-viewer';
 import { useDispatch, useSelector } from 'react-redux';
-import { getMeAsDoctor } from '../../../features/auth/authAction';
 import { genders } from '../../../assets/constants';
 import { LuSubtitles, LuLanguages } from 'react-icons/lu';
 import { AiOutlineDollarCircle } from 'react-icons/ai';
@@ -20,6 +19,8 @@ import { API_BASE_URL } from '../../../config/enviroment.config';
 import CameraRetroIcon from '@rsuite/icons/legacy/CameraRetro';
 import { useTranslation } from 'react-i18next';
 import { getPrefix } from '../../../features/shared/sharedActions';
+import { getMeAsDoctor } from '../../../features/doctor/doctorActions';
+import { updateDoctorPhoto } from '../../../features/auth/authSlice';
 
 function DoctorProfile() {
   const { doctorToken } = useSelector((state) => state?.auth);
@@ -54,9 +55,12 @@ function DoctorProfile() {
         setFileInfo(value);
       });
     },
-    onSuccess: () => {
+    onSuccess: (res) => {
       setUploading(false);
-      dispatch(getMeAsDoctor());
+      if(res?.status){
+      dispatch(updateDoctorPhoto(res?.data?.photo)) 
+      }
+
       toaster.push(<Message type="success">{t('updated_successfuly')}</Message>);
     },
     onError: () => {

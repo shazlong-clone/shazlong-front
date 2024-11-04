@@ -13,6 +13,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { IoHome } from 'react-icons/io5';
 import { Icon } from '@rsuite/icons';
+import doct from '../../assets/images/user-2.svg';
+
 
 const NavItem = (props) => {
   const { title, eventKey, ...rest } = props;
@@ -113,7 +115,7 @@ function DoctorLayout() {
                 <article>
                   <div className="flex items-center gap-5">
                     <SettingWhisper placement="bottomEnd" />
-                    <Avatar className="cursor-pointer" circle src={profile?.photo} alt="@SevenOutman" />
+                    <Avatar className="cursor-pointer" circle src={profile?.photo ?? doct} alt="img" />
                   </div>
                 </article>
               </section>

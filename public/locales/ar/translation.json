@@ -301,7 +301,7 @@
   "Edit_Specialization": "تعديل التخصص",
   "Add_Slot": "اضافة جلسة",
   "Update_Slot": "تعديل جلسة",
-  "Slot_Date": "معاد الجلسة",
+  "Slot_Date": "من : الي ",
   "Edit_Pernsonal_Info": "تعديل المعلومات الشخصية",
   "Feez_Per_30_Minutes": "سعر الجلسة في 30 دقيقة",
   "Feez_Per_60_Minutes": "سعر الجلسة في 60 دقيقة",
@@ -385,5 +385,8 @@
   "View_Replies_few": "عرض {{count}} ردود",
   "View_Replies_many": "عرض {{count}} رد",
   "View_Replies_other": "عرض {{count}} رد",
-  "Be_Firts_Commenter":"كن اول المعلقين"
+  "Be_Firts_Commenter":"كن اول المعلقين",
+  "from_must_be_grater_than_to":"تاريخ بداية الجلسة يجب ان يكون اكبر من النهاية",
+  "Session_Start_End_Date": "بداية ونهاية الجلسة" ,
+  "Ovelaped_Slot_Period":"تدخل الفترات"
 }
