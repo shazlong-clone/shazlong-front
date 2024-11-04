@@ -90,8 +90,8 @@ The Shazlong app, is a digital mental health platform that offers online therapy
 
    Create `.env` and update the variables.
    
-   REACT_APP_DEV_BASE_API = your backend server api for dev
-   REACT_APP_PROD_BASE_API = your backend server api for prod
+   - REACT_APP_DEV_BASE_API = your backend server api for dev
+   - REACT_APP_PROD_BASE_API = your backend server api for prod
 
 ### Usage
 
