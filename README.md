@@ -2,7 +2,7 @@
 
 A Reverse engineering of shezlong web application.
 
-![alt text](https://saeedkhal.github.io/saeed-khaled-portfolio/assets/img/shezlong-clone/main.png)
+![alt text](demo.png)
 ---
 
 ## Table of Contents
