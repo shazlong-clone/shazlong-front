@@ -62,7 +62,6 @@ The Shazlong app, is a digital mental health platform that offers online therapy
 - [Express](https://expressjs.com/)
 - [MongoDB](https://www.mongodb.com/)
 
-
 ---
 
 ## Getting Started
