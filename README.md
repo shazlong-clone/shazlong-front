@@ -2,11 +2,12 @@
 
 A Reverse engineering of shezlong web application.
 
+![alt text](https://saeedkhal.github.io/saeed-khaled-portfolio/assets/img/shezlong-clone/main.png)
 ---
 
 ## Table of Contents
 
-- [About the Project](#about-the-Project)
+- [About Shezlong](#about-shezlong)
 - [Demo](#demo)
 - [Features](#features)
 - [Built With](#built-with)
@@ -20,7 +21,7 @@ A Reverse engineering of shezlong web application.
 
 ---
 
-## About the project
+## About Shezlong
 
 The Shazlong app, is a digital mental health platform that offers online therapy services across the MENA region and beyond. It provides users with access to licensed mental health professionals, allowing them to book sessions via video calls. The platform includes various therapeutic specializations such as treatment for depression, anxiety, addiction, and psychotic disorders. Shazlong's therapists are vetted professionals, and the platform supports options for both individual and corporate clients.
 
