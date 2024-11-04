@@ -1,70 +1,101 @@
-# Getting Started with Create React App
+# Shazlong Clone
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A Reverse engineering of shezlong web application.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## Table of Contents
 
-### `npm start`
+- [About the Project](#about-the-Project)
+- [Demo](#demo)
+- [Features](#features)
+- [Built With](#built-with)
+- [Getting Started](#getting-started)
+- [Installation](#installation)
+- [Usage](#usage)
+- [API Documentation](#api-documentation)
+- [Contributing](#contributing)
+- [License](#license)
+- [Contact](#contact)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 📜 About the project
 
-### `npm test`
+The Shazlong app, is a digital mental health platform that offers online therapy services across the MENA region and beyond. It provides users with access to licensed mental health professionals, allowing them to book sessions via video calls. The platform includes various therapeutic specializations such as treatment for depression, anxiety, addiction, and psychotic disorders. Shazlong's therapists are vetted professionals, and the platform supports options for both individual and corporate clients.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+#### User Account Features
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- **Online Therapy Booking System**: Users can easily schedule therapy sessions by selecting available time slots that fit their schedules.
+- **Multi-Language Support**: The platform is accessible in English and Arabic, catering to a diverse user base.
+- **User Feedback System**: After sessions, users provide feedback to help maintain high standards of care and improve therapist quality.
+- **Session Rescheduling and Cancellation**: Users have the flexibility to reschedule or cancel appointments as needed.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+#### Shazlong Doctor Account Features
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- **Profile Management**: Doctors can create and manage their profiles, showcasing their qualifications, specialties, and languages spoken to attract potential clients.
 
-### `npm run eject`
+- **Appointment Dashboard**: They have access to a personalized dashboard where they can view and manage upcoming appointments, access client histories, and prepare for sessions.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- **Feedback Mechanism**: Therapists can receive feedback and ratings from clients after sessions, allowing them to improve their services and increase visibility on the platform.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+#### Shezlong Admin Features
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- **User Management**: Admins oversee user accounts for both therapists and clients, ensuring proper credential verification and support.
+- **Appointment Management**: Admins control the booking system, managing scheduled sessions, cancellations, and user requests efficiently.
+- **Customer Support Tools**: Admins address user feedback and complaints to enhance the overall platform experience.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### ⚙️ Demo
 
-## Learn More
+[Demo](https://shazlong-clone.netlify.app/)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+---
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 🛠️ Built With
 
-### Code Splitting
+- [React](https://reactjs.org/)
+- [ReduxToolKit](https://redux-toolkit.js.org/)
+- [React Suite](https://rsuitejs.com/)
+- [Node.js](https://nodejs.org/)
+- [Express](https://expressjs.com/)
+- [MongoDB](https://www.mongodb.com/)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## 🏃🏻‍♂️ Getting Started
 
-### Making a Progressive Web App
+###  Prerequisites
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-### Advanced Configuration
+- Node.js >= 16.x
+- npm >= 8.x
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### Installation
 
-### Deployment
+1. Clone the repository:
+    ```bash
+    git clone https://github.com/shazlong-clone/shazlong-front.git
+    cd shazlong-front
+    ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+2. Install dependencies:
+    ```bash
+    npm install
+    ```
 
-### `npm run build` fails to minify
+3. Set up environment variables:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+   Create `.env` and update the variables.
+   
+   REACT_APP_DEV_BASE_API = your backend server api for dev
+   REACT_APP_PROD_BASE_API = your backend server api for prod
+
+### 🔨 Usage
+
+Instructions for running the app in development mode.
+
+```bash
+npm start
+```
