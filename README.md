@@ -20,7 +20,7 @@ A Reverse engineering of shezlong web application.
 
 ---
 
-## 📜 About the project
+## About the project
 
 The Shazlong app, is a digital mental health platform that offers online therapy services across the MENA region and beyond. It provides users with access to licensed mental health professionals, allowing them to book sessions via video calls. The platform includes various therapeutic specializations such as treatment for depression, anxiety, addiction, and psychotic disorders. Shazlong's therapists are vetted professionals, and the platform supports options for both individual and corporate clients.
 
@@ -46,13 +46,13 @@ The Shazlong app, is a digital mental health platform that offers online therapy
 - **Appointment Management**: Admins control the booking system, managing scheduled sessions, cancellations, and user requests efficiently.
 - **Customer Support Tools**: Admins address user feedback and complaints to enhance the overall platform experience.
 
-### ⚙️ Demo
+### Demo
 
 [Demo](https://shazlong-clone.netlify.app/)
 
 ---
 
-## 🛠️ Built With
+## Built With
 
 - [React](https://reactjs.org/)
 - [ReduxToolKit](https://redux-toolkit.js.org/)
@@ -64,7 +64,7 @@ The Shazlong app, is a digital mental health platform that offers online therapy
 
 ---
 
-## 🏃🏻‍♂️ Getting Started
+## Getting Started
 
 ###  Prerequisites
 
@@ -92,7 +92,7 @@ The Shazlong app, is a digital mental health platform that offers online therapy
    REACT_APP_DEV_BASE_API = your backend server api for dev
    REACT_APP_PROD_BASE_API = your backend server api for prod
 
-### 🔨 Usage
+### Usage
 
 Instructions for running the app in development mode.
 
