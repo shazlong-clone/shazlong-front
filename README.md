@@ -15,9 +15,6 @@ A Reverse engineering of shezlong web application.
 - [Installation](#installation)
 - [Usage](#usage)
 - [API Documentation](#api-documentation)
-- [Contributing](#contributing)
-- [License](#license)
-- [Contact](#contact)
 
 ---
 
@@ -25,6 +22,8 @@ A Reverse engineering of shezlong web application.
 
 The Shazlong app, is a digital mental health platform that offers online therapy services across the MENA region and beyond. It provides users with access to licensed mental health professionals, allowing them to book sessions via video calls. The platform includes various therapeutic specializations such as treatment for depression, anxiety, addiction, and psychotic disorders. Shazlong's therapists are vetted professionals, and the platform supports options for both individual and corporate clients.
 
+
+## Features
 
 #### User Account Features
 
@@ -100,3 +99,6 @@ Instructions for running the app in development mode.
 ```bash
 npm start
 ```
+
+## Api Documentation
+[go to docs](https://documenter.getpostman.com/view/17475036/2sA3Bq3qq5)
