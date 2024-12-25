@@ -20,14 +20,14 @@ const CellAddModal = ({ date, slots }) => {
         return moment(value[1]).isAfter(value[0]);
       }, t('from_must_be_grater_than_to'))
       .addRule(value =>{
-       return slots?.some(slot =>{
-        const momFrom = moment(slot?.from)
-        const momTo = moment(slot?.to)
-          return (moment(value[0]).isAfter(momFrom) && moment(momTo).isAfter(momTo))
+       return slots?.length > 0 ? slots?.some(slot =>{
+        const momFrom = moment(slot?.from);
+        const momTo = moment(slot?.to);
+          return (moment(value[0]).isBetween(momFrom, momTo))
           ||
-           (moment(slot?.from).isAfter() && moment(slot?.to).isAfter(value[0]))
-        })
-      }, t('Error'))
+           (moment(value[1]).isBetween(momFrom, momTo))
+        }) : true
+      }, t('Ovelaped_Slot_Period'))
   });
   const [loading, setLoading] = useState(false);
   const toaster = useToaster();

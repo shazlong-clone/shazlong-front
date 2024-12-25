@@ -135,8 +135,8 @@ function SignUpForm() {
 
   return (
     <>
-      <Form ref={formRef} formValue={formValue} onChange={setFormValues} model={model} fluid className="mt-5 sign-form">
-        <Group controlId="name">
+      <Form ref={formRef} formValue={formValue} onChange={setFormValues} model={model} fluid className="sign-form">
+        <Group style={{marginBottom: '0px'}} controlId="name">
           <Control size="lg" placeholder={t('Name')} name="name" block="true" />
           <HelpText>{t('Name_Helper_Text')}</HelpText>
         </Group>
